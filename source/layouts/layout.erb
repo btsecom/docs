@@ -63,23 +63,20 @@ under the License.
           </ul>
         </span>
         <span class="nav_cell nav_tab">
-          <a href="/docs/spot/v1/en/" id="btn_spot">现货</a>
+          <a href="/docs/spot/v1/en/" id="btn_spot">Spot</a>
         </span>
         <span class="nav_cell nav_tab">
-          <a href="/docs/dm/v1/en/" id="btn_dm">交割合约</a>
+          <a href="/docs/dm/v1/en/" id="btn_dm">Futures</a>
         </span>
         <span class="nav_cell nav_tab">
-          <a href="/docs/coin_margined_swap/v1/en/" id="btn_coin_margined_swap">币本位永续合约</a>
+          <a href="/docs/coin_margined_swap/v1/en/" id="btn_coin_margined_swap">OTC</a>
         </span>
         <span class="nav_cell nav_tab">
-          <a href="/docs/usdt_swap/v1/en/" id="btn_usdt_swap">USDT本位永续合约</a>
+          <a href="/docs/usdt_swap/v1/en/" id="btn_usdt_swap">Wallet</a>
         </span>
         <span class="nav_cell nav_tab">
-          <a href="/docs/option/v1/en/" id="btn_option">期权合约</a>
+          <a href="/docs/option/v1/en/" id="btn_option">Merchant</a>
         </span>
-        <!-- <span class="nav_cell nav_tab">
-          <a href="/docs/swap/v1/en/" id="btn_swap">永续合约</a>
-        </span> -->
       </div>
     </div>
     <a href="/docs/spot/v1/cn/" class="lang" id="lang_box">简体中文</a>
@@ -175,10 +172,9 @@ under the License.
       lang_btn.innerHTML = '中文';
       btn_spot.innerHTML = 'Spot';
       btn_dm.innerHTML = 'Futures';
-      // btn_swap.innerHTML = 'SWAP API';
-      btn_coin_margined_swap.innerHTML = 'Coin Margined Swap';
-      btn_usdt_swap.innerHTML = 'USDT Margined Swap';
-      btn_option.innerHTML = 'Option';
+      btn_coin_margined_swap.innerHTML = 'OTC';
+      btn_usdt_swap.innerHTML = 'Wallet';
+      btn_option.innerHTML = 'Merchant';
       lang_btn.href = url.replace('en/', 'cn/');
       btn_spot.href = btn_spot.href.replace('cn/', 'en/');
       btn_dm.href = btn_dm.href.replace('cn/', 'en/');
