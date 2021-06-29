@@ -1,2421 +1,1250 @@
 ---
 title: BTSE Spot API
 language_tabs:
-  - shell: Shell
-  - java: Java
-  - python: Python
+  - json
 toc_footers: []
 includes: []
 search: true
 highlight_theme: darkula
+code_clipboard: true
 headingLevel: 2
 
 ---
 
-<!-- Generator: Widdershins v3.6.6 -->
+# Change Log
 
-<section>
-<h1 id="btse-spot-api">BTSE Spot API v2.1</h1>
+## Version 3.2.3 (2nd June 2021)
 
-> Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
+* Introduction of new notification topic. Refer to `notificationsApiV2` for details.
+
+
+## Version 3.2.2 (29th January 2021)
+
+* Websockets endpoint will be updated to the following:
+  * Spot: wss://ws.btse.com/ws/spot
+  * Futures: wss://ws.btse.com/ws/futures
+  
+  Existing endpoints will continue to be made available. 
+
+* Login topic will now respond with a JSON success / failure message {"event":"login","success":true}
+* When subscribing or unsubscribing to websocket topics, an acknowledgement will return indicating which topics are successfully subscribed / unsubscribed. Unsuccessful topics will not be returned in the response.
+* Websocket notifications will have in addition the following indicators:
+  * maker - Boolean indicating if an order is a maker / taker order
+  * remainingSize - Value indicating the remaining size on the order
+  * time_in_force - Value indicating the time in force set on the order
+
+## Version 3.2.1 (28th September 2020)
+
+* New Amend Order API. Allows users to edit price, size and trigger prices for pending orders
+
+## Version 3.2 (23rd June 2020)
+
+* Deprecated v1 API
+* Removed fees field for public API /api/v3.1/trades (not needed)
+* Added new wallet APIs to create address, get wallet addresses and withdrawals
+* Enhanced /user/wallet_historyAPI to return wallet details
+* Introduction of API permissions. All current API keys will have Read, Trading and Transfer permissions. Refer to the tags beside the titles to see which category they are classified under
+* Fixed incorrect messages returned on some APIs
 
 # Overview
+
 ## Generating API Key
+
 You will need to create an API key on the BTSE platform before you can use authenticated APIs. To create API keys, you can follow the steps below:
-1. Login with your username / email and password into the BTSE website
-2. Click on “Account” on the top right hand corner
-3. Select the API tab
-4. Click on “New API” button to create an API key and passphrase. (Note: the passphrase will only appear once)
-5. Use your API key and passphrase to construct a signature.
 
-Base URLs:
+* Login with your username / email and password into the BTSE website
+* Click on “Account” on the top right hand corner
+* Select the API tab
+* Click on “New API” button to create an API key and passphrase. (Note: the passphrase will only appear once)
+* Use your API key and passphrase to construct a signature.
 
-* undefined - <a href="https://api.btse.com/spot">https://api.btse.com/spot</a>
+## Endpoints
 
-* undefined - <a href="https://testapi.btse.io/spot">https://testapi.btse.io/spot</a>
+* Production
+  * HTTP
+     * `https://api.btse.com/spot`
+     * `https://aws-api.btse.com/spot`
+  * Websocket
+     * `wss://ws.btse.com/ws/spot`
+     * `wss://aws-ws.btse.com/ws/spot`
+* Testnet
+  * HTTP
+     * `https://testapi.btse.io/spot`
+  * Websocket
+     * `wss://testws.btse.io/ws/spot`
 
-</section>
-
-<section>
-
-# Authentication
-
-* API Key (btse-sign)
-    - Parameter Name: **btse-sign**, in: header. A composite signature produced based on the following algorithm: ```Signature=Sha384 (secretkey, (urlpath + btse-nonce + bodyStr))```
+## Authentication
 
 * API Key (btse-api)
-    - Parameter Name: **btse-api**, in: header. API key is obtained from BTSE platform as a string
+  * Parameter Name: `btse-api`, in: header. API key is obtained from BTSE platform as a string
 
 * API Key (btse-nonce)
-    - Parameter Name: **btse-nonce**, in: header. Representation of current timestamp in long format
+  * Parameter Name: `btse-nonce`, in: header. Representation of current timestamp in long format
 
-</section>
+* API Key (btse-sign)
+  * Parameter Name: `btse-sign`, in: header. A composite signature produced based on the following algorithm: Signature=HMAC.Sha384 (secretkey, (urlpath + btse-nonce + bodyStr)) (note: bodyStr = '' when no data):
 
-<section>
-<h1 id="btse-spot-api-public-endpoints">Public Endpoints</h1>
+### Example 1: Get Wallet
 
-<section>
-
-## High level market overview
-
-<a id="opIdgetMarketSummaryUsingGET_1"></a>
-
-> Code samples
+> **HMAC SHA384 Signature**
 
 ```shell
-# You can also use wget
-curl -X GET https://api.btse.com/spot/v2/market_summary \
-  -H 'Accept: application/json'
-
+$ echo -n "/api/v3.2/user/wallet1624984297330" | openssl dgst -sha384 -hmac "848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx"
+(stdin)= 14b986706a4368221e0af14a6725377161805e7a57d568220478cb3590ce532d4fad4ac68e6c02a14afced6a0619bfd3
 ```
 
-```java
-URL obj = new URL("https://api.btse.com/spot/v2/market_summary");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
+* Endpoint to get wallet is `https://api.btse.com/spot/api/v3.2/user/wallet`
+* Assume we have the values as follows: 
+  * btse-nonce: `1624984297330`
+  * btse-api: `4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x`
+  * secret: `848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx`
+  * Path: `/api/v3.2/user/wallet`
+* Generated signature will be: 
+  * btse-sign: `14b986706a4368221e0af14a6725377161805e7a57d568220478cb3590ce532d4fad4ac68e6c02a14afced6a0619bfd3`
 
-```
+### Example 2: Place an order
 
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://api.btse.com/spot/v2/market_summary', params={
-
-}, headers = headers)
-
-print r.json()
-
-```
-
-`GET /v2/market_summary`
-
-This API provides a high level overview of the market. Provides you with information such as the best bid/ask, price movements over the last day and volume information.
-
-> Example responses
-
-> 200 Response
-
-```json
-{
-  "symbol": {
-    "high24hr": "string",
-    "highest_bid": "string",
-    "last": "string",
-    "low24hr": "string",
-    "lowest_ask": "string",
-    "percent_change": "string",
-    "volume": "string"
-  }
-}
-```
-
-<section>
-<h3 id="high-level-market-overview-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request|Inline|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
-|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Internal Server Error|Inline|
-|503|[Service Unavailable](https://tools.ietf.org/html/rfc7231#section-6.6.4)|Service Unavailable|Inline|
-
-<h3 id="high-level-market-overview-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» symbol|[MarketSummary](#schemamarketsummary)|false|none|none|
-|»» high24hr|string|false|none|none|
-|»» highest_bid|string|false|none|none|
-|»» last|string|false|none|none|
-|»» low24hr|string|false|none|none|
-|»» lowest_ask|string|false|none|none|
-|»» percent_change|string|false|none|none|
-|»» volume|string|false|none|none|
-
-Status Code **400**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-Status Code **401**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-Status Code **403**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-Status Code **500**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-Status Code **503**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-</section>
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-</section>
-
-<section>
-
-## Market information
-
-<a id="opIdgetMarkets"></a>
-
-> Code samples
+> **HMAC SHA384 Signature**
 
 ```shell
-# You can also use wget
-curl -X GET https://api.btse.com/spot/v2/markets \
-  -H 'Accept: application/json'
-
+$ echo -n "/api/v3.2/order1624985375123{\"postOnly\":false,\"price\":8500.0,\"reduceOnly\":false,\"side\":\"BUY\",\"size\":0.002,\"stopPrice\":0.0,\"symbol\":\"BTC-USD\",\"time_in_force\":\"GTC\",\"trailValue\":0.0,\"triggerPrice\":0.0,\"txType\":\"LIMIT\",\"type\":\"LIMIT\"}" | openssl dgst -sha384 -hmac "848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx"
+(stdin)= 134c4a41c5451b88fb2955ec2b35814e4a5d432b85723edc90d6c1161118eb3bb6ffa730f2ac415c00a9f072c770a85f
 ```
 
-```java
-URL obj = new URL("https://api.btse.com/spot/v2/markets");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
+* Endpoint to place an order is `https://api.btse.com/spot/api/v3.2/order`
+* Assume we have the values as follows: 
+  * btse-nonce: `1624985375123`
+  * btse-api: `4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x`
+  * secret: `848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx`
+  * Path: `/api/v3.2/order`
+  * Body: `{"postOnly":false,"price":8500.0,"reduceOnly":false,"side":"BUY","size":0.002,"stopPrice":0.0,"symbol":"BTC-USD","time_in_force":"GTC","trailValue":0.0,"triggerPrice":0.0,"txType":"LIMIT","type":"LIMIT"}`
+  * Encrypted Text: `/api/v3.2/order1624985375123{"postOnly":false,"price":8500.0,"reduceOnly":false,"side":"BUY","size":0.002,"stopPrice":0.0,"symbol":"BTC-USD","time_in_force":"GTC","trailValue":0.0,"triggerPrice":0.0,"txType":"LIMIT","type":"LIMIT"}`
+* Generated signature will be:
+  * btse-sign: `134c4a41c5451b88fb2955ec2b35814e4a5d432b85723edc90d6c1161118eb3bb6ffa730f2ac415c00a9f072c770a85f`
 
-```
 
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
+## Rate Limits
 
-r = requests.get('https://api.btse.com/spot/v2/markets', params={
+* The following rate limits are enforced: 
 
-}, headers = headers)
+Rate limits for BTSE is as follows:
 
-print r.json()
+**Query**
 
-```
+* Per API: `15 requests/second`
+* Per User: `30 requests/second`
 
-`GET /v2/markets`
+**Orders**
 
-Gets information on the available markets
+* Per API: `75 requests/second`
+* Per User: `75 requests/second`
 
-> Example responses
+## API Status Codes
 
-> 200 Response
+Each API will return one of the following HTTP status:
+
+* 200 - API request was successful, refer to the specific API response for expected payload
+* 400 - Bad Request. Server will not process this request. This is usually due to invalid parameters sent in request
+* 401 - Unauthorized request. Server will not process this request as it does not have valid authentication credentials
+* 403 - Forbidden request. Credentials were provided but they were insufficient to perform the request
+* 404 - Not found. Indicates that the server understood the request but could not find a correct representation for the target resource
+* 405 - Method not allowed. Indicates that the request method is not known to the requested server
+* 408 - Request timeout. Indicates that the server did not complete the request. BTSE API timeouts are set at 30secs
+* 429 - Too many requests. Indicates that the client has exceeded the rates limits set by the server. Refer to Rate Limits for more details
+* 500 - Internal server error. Indicates that the server encountered an unexpected condition resulting in not being able to fulfill the request
+
+## API Enum
+
+When connecting up the BTSE API, you will come across number codes that represents different states or status types in BTSE. The following section provides a list of codes that you are expecting to see.
+
+* 1: MARKET_UNAVAILABLE = Futures market is unavailable
+* 2: ORDER_INSERTED = Order is inserted successfully
+* 4: ORDER_FULLY_TRANSACTED = Order is fully transacted
+* 5: ORDER_PARTIALLY_TRANSACTED = Order is partially transacted
+* 6: ORDER_CANCELLED = Order is cancelled successfully
+* 8: INSUFFICIENT_BALANCE = Insufficient balance in account
+* 9: TRIGGER_INSERTED = Trigger Order is inserted successfully
+* 10: TRIGGER_ACTIVATED = Trigger Order is activated successfully
+* 12: ERROR_UPDATE_RISK_LIMIT = Error in updating risk limit
+* 15: ORDER_REJECTED = Order is rejected
+* 16: ORDER_NOTFOUND = Order is not found with the order ID or clOrderID provided
+* 28: TRANSFER_UNSUCCESSFUL = Transfer funds between spot and futures is unsuccessful
+* 27: TRANSFER_SUCCESSFUL = Transfer funds between futures and spot is successful
+* 41: ERROR_INVALID_RISK_LIMIT = Invalid risk limit was specified
+* 64: STATUS_LIQUIDATION = Account is undergoing liquidation
+* 101: FUTURES_ORDER_PRICE_OUTSIDE_LIQUIDATION_PRICE = Futures order is outside of liquidation price
+* 1003: ORDER_LIQUIDATION = Order is undergoing liquidation
+* 1004: ORDER_ADL = Order is undergoing ADL
+
+
+
+
+
+# Public Endpoints
+
+## Market Summary
+
+> Response
 
 ```json
 [
   {
-    "base_currency": "string",
-    "base_increment_size": 0,
-    "base_max_size": 0,
-    "base_min_size": 0,
-    "id": "string",
-    "quote_currency": "string",
-    "quote_increment": 0,
-    "quote_min_price": 0,
-    "status": "string"
+    "symbol": "BTC-USD",
+    "last": 36365,
+    "lowestAsk": 36377,
+    "highestBid": 36376,
+    "percentageChange": 4.973731309,
+    "volume": 172418318.7575521,
+    "high24Hr": 36447,
+    "low24Hr": 33989.5,
+    "base": "BTC",
+    "quote": "USD",
+    "active": true,
+    "size": 4916.8266,
+    "minValidPrice": 0.5,
+    "minPriceIncrement": 0.5,
+    "minOrderSize": 0.00001,
+    "maxOrderSize": 2000,
+    "minSizeIncrement": 0.00001,
+    "openInterest": 0,
+    "openInterestUSD": 0,
+    "contractStart": 0,
+    "contractEnd": 0,
+    "timeBasedContract": false,
+    "openTime": 0,
+    "closeTime": 0,
+    "startMatching": 0,
+    "inactiveTime": 0,
+    "fundingRate": 0,
+    "contractSize": 0,
+    "maxPosition": 0,
+    "minRiskLimit": 0,
+    "maxRiskLimit": 0,
+    "availableSettlement": null,
+    "futures": false
   }
 ]
 ```
 
-<section>
-<h3 id="market-information-responses">Responses</h3>
+`GET /api/v3.2/market_summary`
 
-|Status|Meaning|Description|Schema|
+Gets market summary information. If no symbol parameter is sent, then all markets will be retrieved. 
+
+### Request Parameters
+
+|Name|Type|Required|Description|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request|Inline|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
-|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Internal Server Error|Inline|
-|503|[Service Unavailable](https://tools.ietf.org/html/rfc7231#section-6.6.4)|Service Unavailable|Inline|
+| symbol | string | No | Market symbol | 
 
-<h3 id="market-information-responseschema">Response Schema</h3>
+### Response Content
+|Name|Type|Required|Description|
+|---|---|---|---|
+| symbol | string | Yes | Market symbol |
+| last | double | Yes | Last price | 
+| lowestAsk | double | Yes | Lowest ask price in the orderbook | 
+| highestBid | double | Yes | Highest bid price in the orderbook |
+| percentageChange | double | Yes | Percentage change against the price within the last 24hours | 
+| volume | double | Yes | Transacted volume | 
+| high24Hr | double | Yes | Highest price over the last 24hours | 
+| low24Hr | double | Yes | Lowest price over the last 24hours | 
+| base | string | Yes | Base currency | 
+| quote | string | Yes | Quote currency | 
+| active | boolean | Yes | Indicator if market is active | 
+| size | double | Yes | Transacted size | 
+| minValidPrice | double | Yes | Minimum valid price | 
+| minPriceIncrement | double | Yes | Price increment | 
+| minOrderSize | double | Yes | Minimum tick size | 
+| minSizeIncrement | double | Yes | Tick size | 
+| maxOrderSize | double | Yes | Maximum order size |
+| openInterest | double | No | Not valid for spot | 
+| openInterestUSD | double | No | Not valid for spot | 
+| contractStart | date | No | Not valid for spot | 
+| contractEnd | date | No | Not valid for spot | 
+| timeBasedContract | boolean | No | Not valid for spot | 
+| openTime | date | Yes | Market opening time | 
+| closeTime | date | Yes | Market closing time | 
+| startMatching | date | Yes | Matching start time | 
+| inactiveTime | date | Yes | Time where market is inactive | 
+| fundingRate | double | No | Not valid for spot | 
+| contractSize | double | No | Not valid for spot | 
+| maxPosition | double | No | Not valid for spot | 
+| minRiskLimit | double | No | Not valid for spot | 
+| maxRiskLimit | double | No | Not valid for spot | 
+| availableSettlement | array | No | Not valid for spot | 
+| futures | boolean | Yes | Indicator if symbol is a futures contract | 
 
-Status Code **200**
+## Charting Data
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|*anonymous*|[[MarketModel](#schemamarketmodel)]|false|none|none|
-|» MarketModel|[MarketModel](#schemamarketmodel)|false|none|none|
-|»» base_currency|string|false|none|none|
-|»» base_increment_size|number(double)|false|none|none|
-|»» base_max_size|number(double)|false|none|none|
-|»» base_min_size|number(double)|false|none|none|
-|»» id|string|false|none|none|
-|»» quote_currency|string|false|none|none|
-|»» quote_increment|number(double)|false|none|none|
-|»» quote_min_price|number(double)|false|none|none|
-|»» status|string|false|none|none|
+> Response
 
-Status Code **400**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-Status Code **401**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-Status Code **403**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-Status Code **500**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-Status Code **503**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-</section>
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-</section>
-
-<section>
-
-## Gets Orderbook
-
-<a id="opIdgetOrderBookUsingGET_1"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET https://api.btse.com/spot/v2/orderbook/{symbol} \
-  -H 'Accept: application/json'
-
+```json
+[
+  [
+    1624987380,
+    36477,
+    36477,
+    36473.5,
+    36473.5,
+    693.049
+  ],
+  [
+    1624987320,
+    36476.5,
+    36481.5,
+    36466,
+    36466,
+    2370.8095
+  ],
 ```
 
-```java
-URL obj = new URL("https://api.btse.com/spot/v2/orderbook/{symbol}");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
+`GET /api/v3.2/ohlcv`
 
+Gets candle stick charting data. Default of 300 data points will be returned at any one time. 
+
+### Request Parameters
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| symbol | string | Yes | Market symbol | 
+| start | long | No | Starting time (eg. 1624987283000) | 
+| end | long | No | Ending time (eg. 1624987283000) | 
+| resolution | string | Yes | Supported resolutions are: <br/> 1: 1min<br/> 5: 5mins<br/> 15: 15mins<br/>30: 30mins<br/>60: 60mins<br/>360: 6hours<br/>1440: 1day| 
+
+
+### Response Content
+
+Returns a 2D array with the indexes described in the table below
+
+|Index|Type|Required|Description|
+|---|---|---|---|
+| 0 | long | Yes | Unix time |
+| 1 | double | Yes | Open price | 
+| 2 | double | Yes | High Price | 
+| 3 | double | Yes | Low price |
+| 4 | double | Yes | Closing price |
+| 5 | double | Yes | Volume |
+
+
+## Query Market price
+
+> Response
+
+```json
+[
+  {
+    "symbol": "BTC-USD",
+    "indexPrice": 36288.949684967,
+    "lastPrice": 36286.5,
+    "markPrice": 0
+  }
+]
 ```
 
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
+`GET /api/v3.2/price`
 
-r = requests.get('https://api.btse.com/spot/v2/orderbook/{symbol}', params={
+Retrieve current prices on the platform. If no symbol specified, all symbols will be returned.
 
-}, headers = headers)
+### Request Parameters
 
-print r.json()
+|Name|Type|Required|Description|
+|---|---|---|---|
+| symbol | string | Yes | Market symbol | 
 
-```
 
-`GET /v2/orderbook/{symbol}`
+### Response Content
 
-Gets Orderbook for a given symbol
+|Name|Type|Required|Description|
+|---|---|---|---|
+| symbol | double | Yes | Market symbol |
+| indexPrice | double | Yes | Index price |
+| lastPrice | double | Yes | Last transacted price | 
+| markPrice | double | Yes | Not valid for spot | 
 
-<section>
-<h3 id="gets-orderbook-parameters">Parameters</h3>
+## Orderbook (Level 1)
 
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|group|query|integer(int32)|false|Decimal grouping|
-|limit_asks|query|integer(int32)|false|Restricts the depth of orderbook to return|
-|limit_bids|query|integer(int32)|false|Restricts the depth of orderbook to return|
-|symbol|path|string|true|Symbol representing the market|
-
-</section>
-
-> Example responses
-
-> 200 Response
+> Response
 
 ```json
 {
   "buyQuote": [
     {
-      "price": "string",
-      "size": "string"
+      "price": "36371.0",
+      "size": "0.01485"
     }
   ],
   "sellQuote": [
     {
-      "price": "string",
-      "size": "string"
+      "price": "36380.5",
+      "size": "0.01782"
     }
   ],
-  "symbol": "string",
-  "timestamp": 0
+  "timestamp": 1624989459489,
+  "symbol": "BTC-USD"
 }
 ```
 
-<section>
-<h3 id="gets-orderbook-responses">Responses</h3>
+`GET /api/v3.2/orderbook`
 
-|Status|Meaning|Description|Schema|
+Retrieves a Level 1 snapshot of the orderbook
+
+### Request Parameters
+
+|Name|Type|Required|Description|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[OrderBookResponse](#schemaorderbookresponse)|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request|Inline|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
-|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Internal Server Error|Inline|
-|503|[Service Unavailable](https://tools.ietf.org/html/rfc7231#section-6.6.4)|Service Unavailable|Inline|
+| symbol | string | Yes | Market symbol | 
+| group | integer | No | Orderbook grouping. Valid values are: <br/>0-9 where 0 indicates level 0 grouping (eg. for BTC, it will be 0.5)<br/>Level 1 grouping for BTC would be 1<br/> | 
+| limit_bids | integer | No | Orderbook depth on the bid side | 
+| limit_asks | integer | No | Orderbook depth on the ask side | 
 
-<h3 id="gets-orderbook-responseschema">Response Schema</h3>
 
-Status Code **400**
+### Response Content
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
+#### Orderbook
 
-Status Code **401**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-Status Code **403**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-Status Code **500**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-Status Code **503**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-</section>
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-</section>
-
-<section>
-
-## Ticker Information
-
-<a id="opIdgetTicker"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET https://api.btse.com/spot/v2/ticker/{symbol} \
-  -H 'Accept: application/json'
-
-```
-
-```java
-URL obj = new URL("https://api.btse.com/spot/v2/ticker/{symbol}");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://api.btse.com/spot/v2/ticker/{symbol}', params={
-
-}, headers = headers)
-
-print r.json()
-
-```
-
-`GET /v2/ticker/{symbol}`
-
-Retrieves bid, asks, and other information of the ticker
-
-<section>
-<h3 id="ticker-information-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|symbol|path|string|true|symbol|
-
-</section>
-
-> Example responses
-
-> 200 Response
-
-```json
-{
-  "ask": "string",
-  "bid": "string",
-  "price": "string",
-  "size": "string",
-  "time": "string",
-  "volume": "string"
-}
-```
-
-<section>
-<h3 id="ticker-information-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
+|Name|Type|Required|Description|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[TickerModel](#schematickermodel)|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request|Inline|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
-|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Internal Server Error|Inline|
-|503|[Service Unavailable](https://tools.ietf.org/html/rfc7231#section-6.6.4)|Service Unavailable|Inline|
+| symbol | string | Yes | Market symbol |
+| buyQuote | Quote | Yes | Array of Buy quotes |
+| sellQuote | Quote | Yes | Array of Sell quotes | 
+| timestamp | double | Yes | Timestamp of orderbook | 
 
-<h3 id="ticker-information-responseschema">Response Schema</h3>
+#### Quote
 
-Status Code **400**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-Status Code **401**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-Status Code **403**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-Status Code **500**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-Status Code **503**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-</section>
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-</section>
-
-<section>
-
-## Gets market statistics
-
-<a id="opIdHour24StatsUsingGET_1"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET https://api.btse.com/spot/v2/stats/{symbol} \
-  -H 'Accept: application/json'
-
-```
-
-```java
-URL obj = new URL("https://api.btse.com/spot/v2/stats/{symbol}");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://api.btse.com/spot/v2/stats/{symbol}', params={
-
-}, headers = headers)
-
-print r.json()
-
-```
-
-`GET /v2/stats/{symbol}`
-
-Gets market statistics over the past 24hours
-
-<section>
-<h3 id="gets-market-statistics-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|symbol|path|string|true|symbol|
-
-</section>
-
-> Example responses
-
-> 200 Response
-
-```json
-{
-  "close": "string",
-  "high": "string",
-  "low": "string",
-  "open": "string",
-  "time": "string",
-  "volume": "string"
-}
-```
-
-<section>
-<h3 id="gets-market-statistics-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
+|Name|Type|Required|Description|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|[Hour24Stats](#schemahour24stats)|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request|Inline|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
-|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Internal Server Error|Inline|
-|503|[Service Unavailable](https://tools.ietf.org/html/rfc7231#section-6.6.4)|Service Unavailable|Inline|
+| price | double | Yes | order price |
+| size | double | Yes | order size |
 
-<h3 id="gets-market-statistics-responseschema">Response Schema</h3>
 
-Status Code **400**
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
+## Orderbook (Level 2)
 
-Status Code **401**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-Status Code **403**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-Status Code **500**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-Status Code **503**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-</section>
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-</section>
-
-<section>
-
-## Gets list of recent trades
-
-<a id="opIdapiTradeHistoryUsingGET_1"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET https://api.btse.com/spot/v2/trades/{symbol} \
-  -H 'Accept: application/json'
-
-```
-
-```java
-URL obj = new URL("https://api.btse.com/spot/v2/trades/{symbol}");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://api.btse.com/spot/v2/trades/{symbol}', params={
-
-}, headers = headers)
-
-print r.json()
-
-```
-
-`GET /v2/trades/{symbol}`
-
-Gets list of most recent trades for a given symbol
-
-<section>
-<h3 id="gets-list-of-recent-trades-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|symbol|path|string|true|Symbol representing the market|
-
-</section>
-
-> Example responses
-
-> 200 Response
-
-```json
-[
-  {
-    "amount": 0,
-    "price": 0,
-    "serial_id": "string",
-    "symbol": "string",
-    "time": "string",
-    "type": "string"
-  }
-]
-```
-
-<section>
-<h3 id="gets-list-of-recent-trades-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request|Inline|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
-|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Internal Server Error|Inline|
-|503|[Service Unavailable](https://tools.ietf.org/html/rfc7231#section-6.6.4)|Service Unavailable|Inline|
-
-<h3 id="gets-list-of-recent-trades-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|*anonymous*|[[TradeModel](#schematrademodel)]|false|none|none|
-|» TradeModel|[TradeModel](#schematrademodel)|false|none|none|
-|»» amount|number(double)|false|none|none|
-|»» price|number(double)|false|none|none|
-|»» serial_id|string|false|none|none|
-|»» symbol|string|false|none|none|
-|»» time|string|false|none|none|
-|»» type|string|false|none|none|
-
-Status Code **400**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-Status Code **401**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-Status Code **403**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-Status Code **500**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-Status Code **503**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-</section>
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-</section>
-
-<section>
-
-## Get Server time
-
-<a id="opIdgetServerTimeUsingGET_1"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET https://api.btse.com/spot/v2/time \
-  -H 'Accept: application/json'
-
-```
-
-```java
-URL obj = new URL("https://api.btse.com/spot/v2/time");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('https://api.btse.com/spot/v2/time', params={
-
-}, headers = headers)
-
-print r.json()
-
-```
-
-`GET /v2/time`
-
-Get Server time
-
-> Example responses
-
-> 200 Response
-
-```json
-{
-  "iso": "string",
-  "epoch": 0
-}
-```
-
-<section>
-<h3 id="get-server-time-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request|Inline|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
-|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Internal Server Error|Inline|
-|503|[Service Unavailable](https://tools.ietf.org/html/rfc7231#section-6.6.4)|Service Unavailable|Inline|
-
-<h3 id="get-server-time-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» iso|string|false|none|Date timestamp|
-|» epoch|number|false|none|Long timestamp|
-
-Status Code **400**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-Status Code **401**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-Status Code **403**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-Status Code **500**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-Status Code **503**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-</section>
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-</section>
-
-</section>
-
-<section>
-<h1 id="btse-spot-api-authenticated-endpoints">Authenticated Endpoints</h1>
-
-<section>
-
-## Get Account Information
-
-<a id="opIdgetAccountUsingGET_1"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET https://api.btse.com/spot/v2/account \
-  -H 'Accept: application/json' \
-  -H 'btse-api: API_KEY'
-
-```
-
-```java
-URL obj = new URL("https://api.btse.com/spot/v2/account");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json',
-  'btse-api': 'API_KEY'
-}
-
-r = requests.get('https://api.btse.com/spot/v2/account', params={
-
-}, headers = headers)
-
-print r.json()
-
-```
-
-`GET /v2/account`
-
-Get account information and balances
-
-> Example responses
-
-> 200 Response
-
-```json
-[
-  {
-    "available": "string",
-    "currency": "string",
-    "total": "string"
-  }
-]
-```
-
-<section>
-<h3 id="get-account-information-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request|Inline|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
-|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Internal Server Error|Inline|
-|503|[Service Unavailable](https://tools.ietf.org/html/rfc7231#section-6.6.4)|Service Unavailable|Inline|
-
-<h3 id="get-account-information-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|*anonymous*|[[ApiAccountModel](#schemaapiaccountmodel)]|false|none|none|
-|» ApiAccountModel|[ApiAccountModel](#schemaapiaccountmodel)|false|none|none|
-|»» available|string|false|none|none|
-|»» currency|string|false|none|none|
-|»» total|string|false|none|none|
-
-Status Code **400**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-Status Code **401**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-Status Code **403**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-Status Code **500**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-Status Code **503**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-</section>
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-btse-api, btse-sign, btse-nonce
-</aside>
-
-</section>
-
-<section>
-
-## Order Placement
-
-<a id="opIdplaceAnOrderUsingPOST_1"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X POST https://api.btse.com/spot/v2/order \
-  -H 'Content-Type: application/json' \
-  -H 'Accept: application/json' \
-  -H 'btse-api: API_KEY'
-
-```
-
-```java
-URL obj = new URL("https://api.btse.com/spot/v2/order");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/json',
-  'Accept': 'application/json',
-  'btse-api': 'API_KEY'
-}
-
-r = requests.post('https://api.btse.com/spot/v2/order', params={
-
-}, headers = headers)
-
-print r.json()
-
-```
-
-`POST /v2/order`
-
-Sends Limit orders to BTSE
-
-> Body parameter
-
-```json
-{
-  "amount": 0,
-  "client_oid": 0,
-  "created_at": 0,
-  "funds": 0,
-  "id": "string",
-  "post_only": true,
-  "price": 0,
-  "symbol": "string",
-  "side": "string",
-  "status": "string",
-  "stop": "string",
-  "stop_price": 0,
-  "stp": "string",
-  "tag": "string",
-  "time_in_force": "string",
-  "type": "string"
-}
-```
-
-<section>
-<h3 id="order-placement-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|body|body|[ApiOrderModel](#schemaapiordermodel)|true|apiOrderModel|
-
-</section>
-
-> Example responses
-
-> 200 Response
-
-```json
-{
-  "id": "string"
-}
-```
-
-<section>
-<h3 id="order-placement-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request|Inline|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
-|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Internal Server Error|Inline|
-|503|[Service Unavailable](https://tools.ietf.org/html/rfc7231#section-6.6.4)|Service Unavailable|Inline|
-
-<h3 id="order-placement-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» id|string|false|none|none|
-
-Status Code **400**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-Status Code **401**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-Status Code **403**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-Status Code **500**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-Status Code **503**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-</section>
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-btse-api, btse-sign, btse-nonce
-</aside>
-
-</section>
-
-<section>
-
-## Gets pending orders
-
-<a id="opIdgetPendingOrderUsingGET_1"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET https://api.btse.com/spot/v2/pending \
-  -H 'Accept: application/json' \
-  -H 'btse-api: API_KEY'
-
-```
-
-```java
-URL obj = new URL("https://api.btse.com/spot/v2/pending");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json',
-  'btse-api': 'API_KEY'
-}
-
-r = requests.get('https://api.btse.com/spot/v2/pending', params={
-
-}, headers = headers)
-
-print r.json()
-
-```
-
-`GET /v2/pending`
-
-Gets all pending orders for the market
-
-<section>
-<h3 id="gets-pending-orders-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|symbol|query|string|false|symbol|
-
-</section>
-
-> Example responses
-
-> 200 Response
-
-```json
-[
-  {
-    "amount": 0,
-    "created_at": "string",
-    "id": "string",
-    "price": 0,
-    "symbol": "string",
-    "side": 0,
-    "status": "string",
-    "tag": "string",
-    "type": 0
-  }
-]
-```
-
-<section>
-<h3 id="gets-pending-orders-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request|Inline|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
-|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Internal Server Error|Inline|
-|503|[Service Unavailable](https://tools.ietf.org/html/rfc7231#section-6.6.4)|Service Unavailable|Inline|
-
-<h3 id="gets-pending-orders-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|*anonymous*|[[PendingOrderModel](#schemapendingordermodel)]|false|none|none|
-|» PendingOrderModel|[PendingOrderModel](#schemapendingordermodel)|false|none|none|
-|»» amount|number(double)|false|none|none|
-|»» created_at|string|false|none|none|
-|»» id|string|false|none|none|
-|»» price|number(double)|false|none|none|
-|»» symbol|string|false|none|none|
-|»» side|integer(int32)|false|none|none|
-|»» status|string|false|none|none|
-|»» tag|string|false|none|none|
-|»» type|integer(int32)|false|none|none|
-
-Status Code **400**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-Status Code **401**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-Status Code **403**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-Status Code **500**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-Status Code **503**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-</section>
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-btse-api, btse-sign, btse-nonce
-</aside>
-
-</section>
-
-<section>
-
-## Get order fills
-
-<a id="opIdgetFillsUsingPOST"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X POST https://api.btse.com/spot/v2/fills \
-  -H 'Content-Type: application/json' \
-  -H 'Accept: application/json' \
-  -H 'btse-api: API_KEY'
-
-```
-
-```java
-URL obj = new URL("https://api.btse.com/spot/v2/fills");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/json',
-  'Accept': 'application/json',
-  'btse-api': 'API_KEY'
-}
-
-r = requests.post('https://api.btse.com/spot/v2/fills', params={
-
-}, headers = headers)
-
-print r.json()
-
-```
-
-`POST /v2/fills`
-
-Get order fills
-
-> Body parameter
-
-```json
-{
-  "after": 0,
-  "before": 0,
-  "limit": 0,
-  "order_id": "string",
-  "symbol": "string",
-  "username": "string"
-}
-```
-
-<section>
-<h3 id="get-order-fills-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|body|body|[FillQueryModel](#schemafillquerymodel)|true|fillQueryModel|
-
-</section>
-
-> Example responses
-
-> 200 Response
-
-```json
-[
-  {
-    "amount": 0,
-    "created_at": "yyyy-MM-dd HH:mm:ss",
-    "fee": 0,
-    "id": 0,
-    "order_id": "string",
-    "price": 0,
-    "symbol": "string",
-    "side": "string",
-    "tag": "string",
-    "trade_id": "string"
-  }
-]
-```
-
-<section>
-<h3 id="get-order-fills-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request|Inline|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
-|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Internal Server Error|Inline|
-|503|[Service Unavailable](https://tools.ietf.org/html/rfc7231#section-6.6.4)|Service Unavailable|Inline|
-
-<h3 id="get-order-fills-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|*anonymous*|[[FillModel](#schemafillmodel)]|false|none|none|
-|» FillModel|[FillModel](#schemafillmodel)|false|none|none|
-|»» amount|number(double)|false|none|none|
-|»» created_at|string|false|none|none|
-|»» fee|number(double)|false|none|none|
-|»» id|integer(int64)|false|none|none|
-|»» order_id|string|false|none|none|
-|»» price|number(double)|false|none|none|
-|»» symbol|string|false|none|none|
-|»» side|string|false|none|none|
-|»» tag|string|false|none|none|
-|»» trade_id|string|false|none|none|
-
-Status Code **400**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-Status Code **401**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-Status Code **403**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-Status Code **500**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-Status Code **503**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-</section>
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-btse-api, btse-sign, btse-nonce
-</aside>
-
-</section>
-
-<section>
-
-## Cancel order
-
-<a id="opIdcancelOrderUsingPOST"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X POST https://api.btse.com/spot/v2/deleteOrder \
-  -H 'Content-Type: application/json' \
-  -H 'Accept: application/json' \
-  -H 'btse-api: API_KEY'
-
-```
-
-```java
-URL obj = new URL("https://api.btse.com/spot/v2/deleteOrder");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/json',
-  'Accept': 'application/json',
-  'btse-api': 'API_KEY'
-}
-
-r = requests.post('https://api.btse.com/spot/v2/deleteOrder', params={
-
-}, headers = headers)
-
-print r.json()
-
-```
-
-`POST /v2/deleteOrder`
-
-Cancel order
-
-> Body parameter
-
-```json
-{
-  "coin_name": "string",
-  "order_id": "string",
-  "symbol": "string"
-}
-```
-
-<section>
-<h3 id="cancel-order-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|body|body|[CancelOrderModel](#schemacancelordermodel)|true|none|
-
-</section>
-
-> Example responses
-
-> 200 Response
-
-```json
-[
-  {
-    "code": 0,
-    "data": {},
-    "msg": "string",
-    "success": true,
-    "time": 0
-  }
-]
-```
-
-<section>
-<h3 id="cancel-order-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|OK|Inline|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request|Inline|
-|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Unauthorized|Inline|
-|403|[Forbidden](https://tools.ietf.org/html/rfc7231#section-6.5.3)|Forbidden|Inline|
-|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Internal Server Error|Inline|
-|503|[Service Unavailable](https://tools.ietf.org/html/rfc7231#section-6.6.4)|Service Unavailable|Inline|
-
-<h3 id="cancel-order-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|*anonymous*|[[ReturnResult](#schemareturnresult)]|false|none|none|
-|» ReturnResult|[ReturnResult](#schemareturnresult)|false|none|none|
-|»» code|integer(int32)|false|none|none|
-|»» data|object|false|none|none|
-|»» msg|string|false|none|none|
-|»» success|boolean|false|none|none|
-|»» time|integer(int64)|false|none|none|
-
-Status Code **400**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-Status Code **401**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-Status Code **403**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-Status Code **500**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-Status Code **503**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» code|integer(int32)|false|none|none|
-|» errorCode|integer(int32)|false|none|none|
-|» message|string|false|none|none|
-
-</section>
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-btse-api, btse-sign, btse-nonce
-</aside>
-
-</section>
-
-</section>
-
-<section>
-
-# Schemas
-
-<section>
-<h2 id="tocS_TickerModel">TickerModel</h2>
-<!-- backwards compatibility -->
-<a id="schematickermodel"></a>
-<a id="schema_TickerModel"></a>
-<a id="tocStickermodel"></a>
-<a id="tocstickermodel"></a>
-
-```json
-{
-  "ask": "string",
-  "bid": "string",
-  "price": "string",
-  "size": "string",
-  "time": "string",
-  "volume": "string"
-}
-
-```
-
-TickerModel
-
-<section>
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|ask|string|false|none|none|
-|bid|string|false|none|none|
-|price|string|false|none|none|
-|size|string|false|none|none|
-|time|string|false|none|none|
-|volume|string|false|none|none|
-
-</section>
-</section>
-
-<section>
-<h2 id="tocS_ApiAccountModel">ApiAccountModel</h2>
-<!-- backwards compatibility -->
-<a id="schemaapiaccountmodel"></a>
-<a id="schema_ApiAccountModel"></a>
-<a id="tocSapiaccountmodel"></a>
-<a id="tocsapiaccountmodel"></a>
-
-```json
-{
-  "available": "string",
-  "currency": "string",
-  "total": "string"
-}
-
-```
-
-ApiAccountModel
-
-<section>
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|available|string|false|none|none|
-|currency|string|false|none|none|
-|total|string|false|none|none|
-
-</section>
-</section>
-
-<section>
-<h2 id="tocS_ApiOrderModel">ApiOrderModel</h2>
-<!-- backwards compatibility -->
-<a id="schemaapiordermodel"></a>
-<a id="schema_ApiOrderModel"></a>
-<a id="tocSapiordermodel"></a>
-<a id="tocsapiordermodel"></a>
-
-```json
-{
-  "amount": 0,
-  "client_oid": 0,
-  "created_at": 0,
-  "funds": 0,
-  "id": "string",
-  "post_only": true,
-  "price": 0,
-  "symbol": "string",
-  "side": "string",
-  "status": "string",
-  "stop": "string",
-  "stop_price": 0,
-  "stp": "string",
-  "tag": "string",
-  "time_in_force": "string",
-  "type": "string"
-}
-
-```
-
-ApiOrderModel
-
-<section>
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|amount|number|false|none|none|
-|client_oid|integer(int64)|false|none|none|
-|created_at|integer(int64)|false|none|none|
-|funds|number|false|none|none|
-|id|string|false|none|none|
-|post_only|boolean|false|none|none|
-|price|number|false|none|none|
-|symbol|string|false|none|none|
-|side|string|false|none|none|
-|status|string|false|none|none|
-|stop|string|false|none|none|
-|stop_price|number|false|none|none|
-|stp|string|false|none|none|
-|tag|string|false|none|none|
-|time_in_force|string|false|none|none|
-|type|string|false|none|none|
-
-</section>
-</section>
-
-<section>
-<h2 id="tocS_FillModel">FillModel</h2>
-<!-- backwards compatibility -->
-<a id="schemafillmodel"></a>
-<a id="schema_FillModel"></a>
-<a id="tocSfillmodel"></a>
-<a id="tocsfillmodel"></a>
-
-```json
-{
-  "amount": 0,
-  "created_at": "yyyy-MM-dd HH:mm:ss",
-  "fee": 0,
-  "id": 0,
-  "order_id": "string",
-  "price": 0,
-  "symbol": "string",
-  "side": "string",
-  "tag": "string",
-  "trade_id": "string"
-}
-
-```
-
-FillModel
-
-<section>
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|amount|number(double)|false|none|none|
-|created_at|string|false|none|none|
-|fee|number(double)|false|none|none|
-|id|integer(int64)|false|none|none|
-|order_id|string|false|none|none|
-|price|number(double)|false|none|none|
-|symbol|string|false|none|none|
-|side|string|false|none|none|
-|tag|string|false|none|none|
-|trade_id|string|false|none|none|
-
-</section>
-</section>
-
-<section>
-<h2 id="tocS_Hour24Stats">Hour24Stats</h2>
-<!-- backwards compatibility -->
-<a id="schemahour24stats"></a>
-<a id="schema_Hour24Stats"></a>
-<a id="tocShour24stats"></a>
-<a id="tocshour24stats"></a>
-
-```json
-{
-  "close": "string",
-  "high": "string",
-  "low": "string",
-  "open": "string",
-  "time": "string",
-  "volume": "string"
-}
-
-```
-
-Hour24Stats
-
-<section>
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|close|string|false|none|none|
-|high|string|false|none|none|
-|low|string|false|none|none|
-|open|string|false|none|none|
-|time|string|false|none|none|
-|volume|string|false|none|none|
-
-</section>
-</section>
-
-<section>
-<h2 id="tocS_CancelOrderModel">CancelOrderModel</h2>
-<!-- backwards compatibility -->
-<a id="schemacancelordermodel"></a>
-<a id="schema_CancelOrderModel"></a>
-<a id="tocScancelordermodel"></a>
-<a id="tocscancelordermodel"></a>
-
-```json
-{
-  "coin_name": "string",
-  "order_id": "string",
-  "symbol": "string"
-}
-
-```
-
-CancelOrderModel
-
-<section>
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|coin_name|string|false|none|none|
-|order_id|string|false|none|none|
-|symbol|string|false|none|none|
-
-</section>
-</section>
-
-<section>
-<h2 id="tocS_FillQueryModel">FillQueryModel</h2>
-<!-- backwards compatibility -->
-<a id="schemafillquerymodel"></a>
-<a id="schema_FillQueryModel"></a>
-<a id="tocSfillquerymodel"></a>
-<a id="tocsfillquerymodel"></a>
-
-```json
-{
-  "after": 0,
-  "before": 0,
-  "limit": 0,
-  "order_id": "string",
-  "symbol": "string",
-  "username": "string"
-}
-
-```
-
-FillQueryModel
-
-<section>
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|after|integer(int64)|false|none|none|
-|before|integer(int64)|false|none|none|
-|limit|integer(int32)|false|none|none|
-|order_id|string|false|none|none|
-|symbol|string|false|none|none|
-|username|string|false|none|none|
-
-</section>
-</section>
-
-<section>
-<h2 id="tocS_PendingOrderModel">PendingOrderModel</h2>
-<!-- backwards compatibility -->
-<a id="schemapendingordermodel"></a>
-<a id="schema_PendingOrderModel"></a>
-<a id="tocSpendingordermodel"></a>
-<a id="tocspendingordermodel"></a>
-
-```json
-{
-  "amount": 0,
-  "created_at": "string",
-  "id": "string",
-  "price": 0,
-  "symbol": "string",
-  "side": 0,
-  "status": "string",
-  "tag": "string",
-  "type": 0
-}
-
-```
-
-PendingOrderModel
-
-<section>
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|amount|number(double)|false|none|none|
-|created_at|string|false|none|none|
-|id|string|false|none|none|
-|price|number(double)|false|none|none|
-|symbol|string|false|none|none|
-|side|integer(int32)|false|none|none|
-|status|string|false|none|none|
-|tag|string|false|none|none|
-|type|integer(int32)|false|none|none|
-
-</section>
-</section>
-
-<section>
-<h2 id="tocS_ReturnResult">ReturnResult</h2>
-<!-- backwards compatibility -->
-<a id="schemareturnresult"></a>
-<a id="schema_ReturnResult"></a>
-<a id="tocSreturnresult"></a>
-<a id="tocsreturnresult"></a>
-
-```json
-{
-  "code": 0,
-  "data": {},
-  "msg": "string",
-  "success": true,
-  "time": 0
-}
-
-```
-
-ReturnResult
-
-<section>
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|code|integer(int32)|false|none|none|
-|data|object|false|none|none|
-|msg|string|false|none|none|
-|success|boolean|false|none|none|
-|time|integer(int64)|false|none|none|
-
-</section>
-</section>
-
-<section>
-<h2 id="tocS_Quote">Quote</h2>
-<!-- backwards compatibility -->
-<a id="schemaquote"></a>
-<a id="schema_Quote"></a>
-<a id="tocSquote"></a>
-<a id="tocsquote"></a>
-
-```json
-{
-  "price": "string",
-  "size": "string"
-}
-
-```
-
-Quote
-
-<section>
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|price|string|false|none|none|
-|size|string|false|none|none|
-
-</section>
-</section>
-
-<section>
-<h2 id="tocS_OrderBookResponse">OrderBookResponse</h2>
-<!-- backwards compatibility -->
-<a id="schemaorderbookresponse"></a>
-<a id="schema_OrderBookResponse"></a>
-<a id="tocSorderbookresponse"></a>
-<a id="tocsorderbookresponse"></a>
+> Response
 
 ```json
 {
   "buyQuote": [
     {
-      "price": "string",
-      "size": "string"
+      "price": "36235.0",
+      "size": "7.67500"
     }
   ],
   "sellQuote": [
     {
-      "price": "string",
-      "size": "string"
+      "price": "36241.5",
+      "size": "0.60200"
     }
   ],
-  "symbol": "string",
-  "timestamp": 0
+  "timestamp": 1624989977940,
+  "symbol": "BTC-USD"
 }
-
 ```
 
-OrderBookResponse
+`GET /api/v3.2/orderbook/L2`
 
-<section>
+Retrieves a Level 2 snapshot of the orderbook
 
-### Properties
+### Request Parameters
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|buyQuote|[[Quote](#schemaquote)]|false|none|none|
-|sellQuote|[[Quote](#schemaquote)]|false|none|none|
-|symbol|string|false|none|none|
-|timestamp|integer(int64)|false|none|none|
+|Name|Type|Required|Description|
+|---|---|---|---|
+| symbol | string | Yes | Market symbol | 
+| depth | integer | No | Orderbook depth | 
 
-</section>
-</section>
+### Response Content
 
-<section>
-<h2 id="tocS_TradeModel">TradeModel</h2>
-<!-- backwards compatibility -->
-<a id="schematrademodel"></a>
-<a id="schema_TradeModel"></a>
-<a id="tocStrademodel"></a>
-<a id="tocstrademodel"></a>
+#### Orderbook
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| symbol | string | Yes | Market symbol |
+| buyQuote | Quote | Yes | Array of Buy quotes |
+| sellQuote | Quote | Yes | Array of Sell quotes | 
+| timestamp | double | Yes | Timestamp of orderbook | 
+
+#### Quote
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| price | double | Yes | order price |
+| size | double | Yes | order size |
+
+
+## Query Trades Fills
+
+> Response
+
+```json
+[
+  {
+    "price": 36164,
+    "size": 0.035,
+    "side": "SELL",
+    "symbol": "BTC-USD",
+    "serialId": 85997835,
+    "timestamp": 1624990097000
+  }
+]
+```
+
+`GET /api/v3.2/trades`
+
+Get trade fills for the market specified by `symbol`
+
+### Request Parameters
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| symbol | string | Yes | Market symbol | 
+| startTime | long | No | Starting time (eg. 1624987283000) | 
+| endTime | long | No | Ending time (eg. 1624987283000) | 
+| beforeSerialId | string | Yes | Condition to retrieve records before the specified serial Id. Used for pagination| 
+| afterSerialId | string | Yes | Condition to retrieve records after the specified serial Id. Used for pagination| 
+| count | integer | Yes | Number of records to return | 
+| includeOld | boolean | Yes | Retrieve trade  history records past 7 days | 
+
+
+### Response Content
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| symbol | string | Yes | Market symbol |
+| side | string | Yes | Trade side. Values are: [`Buy`, `SELL`] | 
+| price | double | Yes | Transacted price | 
+| size | double | Yes | Transacted size |
+| serialId | double | Yes | Serial Id, running sequence number |
+| timestamp | double | Yes | Transacted timestamp |
+
+## Query Server Time
+
+> Response
 
 ```json
 {
-  "amount": 0,
+  "iso": "2021-06-29T18:14:30.886Z",
+  "epoch": 1624990470
+}
+```
+
+`GET /api/v3.2/time`
+
+Gets server time
+
+### Response Content
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| iso | long | Yes | Time in YYYY-MM-DDTHH24:MI:SS.Z format |
+| epoch | long | Yes | Returns epoch timestamp | 
+
+
+# Trade Endpoints
+
+## Create new order
+
+> Request
+
+```json
+{
+  "clOrderID": "string",
+  "deviation": 0,
+  "postOnly": false,
+  "price": 7010,
+  "side": "BUY",
+  "size": 1,
+  "stealth": 0,
+  "stopPrice": 0,
+  "symbol": "BTC-USD",
+  "time_in_force": "GTC",
+  "trailValue": 0,
+  "triggerPrice": 0,
+  "txType": "LIMIT",
+  "type": "LIMIT"
+}
+```
+
+> Response
+
+```json
+{
+  "averageFillPrice": 0,
+  "clOrderID": "string",
+  "deviation": 0,
+  "fillSize": 0,
+  "message": "string",
+  "orderID": "string",
+  "orderType": 76,
   "price": 0,
-  "serial_id": "string",
-  "symbol": "string",
-  "time": "string",
-  "type": "string"
+  "side": "BUY",
+  "size": 4,
+  "status": 0,
+  "stealth": 0,
+  "stopPrice": 8300,
+  "symbol": "BTC-USD",
+  "timestamp": 1576812000872,
+  "trigger": true,
+  "triggerPrice": 8300
 }
-
 ```
 
-TradeModel
+`POST /api/v3.2/order`
 
-<section>
+Creates a new order. Requires `Trading` permission
 
-### Properties
+### Request Parameters
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|amount|number(double)|false|none|none|
-|price|number(double)|false|none|none|
-|serial_id|string|false|none|none|
-|symbol|string|false|none|none|
-|time|string|false|none|none|
-|type|string|false|none|none|
+|Name|Type|Required|Description| 
+|---|---|---|---|
+| symbol | string | Yes | Market symbol | 
+| price | double | Yes | Order price | 
+| size | double | Yes | Order size | 
+| time_in_force | string | No | Time validity of the order<br/>GTC: Good till Cancel<br/>IOC: Immediate or Cancel<br/>FOK: Fill or Kill<br/>FIVEMIN: Order valid for 5 mins<br/> HOUR: Order valid for an hour<br/>TWELVEHOUR: Order valid for 12 hours<br/>DAY: Order valid for a day<br/>WEEK: Order valid for a week<br/>MONTH: Order valid for a month | 
+| type | string | Yes | Order type<br/>LIMIT: Limit Orders<br/>MARKET: Market Orders<br/>OCO: One cancel the other| 
+| txType | string | Yes | Used for Stop orders or trigger orders<br/>STOP: Stop Order, `stopPrice` is mandatory<br/>TRIGGER: Trigger order, `triggerPrice` is mandatory<br/>LIMIT: Default, used when its not a Stop order nor Trigger order | 
+| stopPrice | double | No | Mandatory when creating a Stop or OCO order. Indicates the stop price | 
+| triggerPrice | double | Yes | Mandatory when creating a Trigger or OCO order. Indicates the trigger price | 
+| trailValue | double | Yes | Trail value | 
+| postOnly | boolean | Yes | Boolean to indicate if this is a post only order. For post only orders, traders are charged maker fees | 
+| clOrderID | string | Yes | Custom order Id | 
 
-</section>
-</section>
 
-<section>
-<h2 id="tocS_MarketModel">MarketModel</h2>
-<!-- backwards compatibility -->
-<a id="schemamarketmodel"></a>
-<a id="schema_MarketModel"></a>
-<a id="tocSmarketmodel"></a>
-<a id="tocsmarketmodel"></a>
+### Response Content
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| symbol | string | Yes | Market symbol |
+| clOrderID | string | Yes | Customer tag sent in by trader |
+| fillSize | string | Yes | Trade filled size |
+| orderID | string | Yes | Order ID |
+| orderType | string | Yes | Order type <br/>76: Limit Order<br/>77: Market order<br/>80: Algo order |
+| postOnly | boolean | Yes | Indicates if order is a post only order |
+| price | double | Yes | Order price |
+| side | string | Yes | Order side<br/>BUY or SELL |
+| size | double | Yes | Order size |
+| status | integer | Yes | Order status<br/>	2: Order Inserted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found |
+| stopPrice | string | Yes | Stop price |
+| time_in_force | string | Yes | Order validity |
+| timestamp | string | Yes | Order timestamp |
+| trigger | string | Yes | Indicator if order is a trigger order |
+| triggerPrice | string | Yes | Order trigger price, returns 0 if order is not a trigger order |
+| averageFillPrice | string | Yes | Average filled price. Returns the average filled price for partially transacted orders |
+| message | string | Yes | Trade messages |
+| stealth | string | Yes | Only valid for Algo orders |
+| deviation | string | Yes | Only valid for Algo orders |
+
+## Create new algo order
+
+> Request
 
 ```json
 {
-  "base_currency": "string",
-  "base_increment_size": 0,
-  "base_max_size": 0,
-  "base_min_size": 0,
-  "id": "string",
-  "quote_currency": "string",
-  "quote_increment": 0,
-  "quote_min_price": 0,
-  "status": "string"
+  "clOrderID": "string",
+  "deviation": 0,
+  "postOnly": false,
+  "price": 7010,
+  "side": "BUY",
+  "size": 1,
+  "stealth": 0,
+  "stopPrice": 0,
+  "symbol": "BTC-USD",
+  "time_in_force": "GTC",
+  "trailValue": 0,
+  "triggerPrice": 0,
+  "txType": "LIMIT",
+  "type": "LIMIT"
 }
-
 ```
 
-MarketModel
-
-<section>
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|base_currency|string|false|none|none|
-|base_increment_size|number(double)|false|none|none|
-|base_max_size|number(double)|false|none|none|
-|base_min_size|number(double)|false|none|none|
-|id|string|false|none|none|
-|quote_currency|string|false|none|none|
-|quote_increment|number(double)|false|none|none|
-|quote_min_price|number(double)|false|none|none|
-|status|string|false|none|none|
-
-</section>
-</section>
-
-<section>
-<h2 id="tocS_MarketSummary">MarketSummary</h2>
-<!-- backwards compatibility -->
-<a id="schemamarketsummary"></a>
-<a id="schema_MarketSummary"></a>
-<a id="tocSmarketsummary"></a>
-<a id="tocsmarketsummary"></a>
+> Response
 
 ```json
 {
-  "high24hr": "string",
-  "highest_bid": "string",
-  "last": "string",
-  "low24hr": "string",
-  "lowest_ask": "string",
-  "percent_change": "string",
-  "volume": "string"
+  "averageFillPrice": 0,
+  "clOrderID": "string",
+  "deviation": 0,
+  "fillSize": 0,
+  "message": "string",
+  "orderID": "string",
+  "orderType": 76,
+  "price": 0,
+  "side": "BUY",
+  "size": 4,
+  "status": 0,
+  "stealth": 0,
+  "stopPrice": 8300,
+  "symbol": "BTC-USD",
+  "timestamp": 1576812000872,
+  "trigger": true,
+  "triggerPrice": 8300
 }
-
 ```
 
-MarketSummary
+`POST /api/v3.2/order/peg`
 
-<section>
+Creates a new algo order. Algo order is an order that price will change according to market price. To create an algo order, user will need to enter additional parameters: 
 
-### Properties
+* `price`: What is the min price (for a sell order) or maximum price (for a buy order) that a user will be willing to list his order at
+* `size`: Total size of order
+* `deviation`: How much should the order price deviate from index price. Value is in percentage and can range from `-10` to `10`
+* `stealth`: How many percent of the order is to be displayed on the orderbook. 
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|high24hr|string|false|none|none|
-|highest_bid|string|false|none|none|
-|last|string|false|none|none|
-|low24hr|string|false|none|none|
-|lowest_ask|string|false|none|none|
-|percent_change|string|false|none|none|
-|volume|string|false|none|none|
+This API Requires `Trading` permission
+
+### Request Parameters
+
+|Name|Type|Required|Description| 
+|---|---|---|---|
+| symbol | string | Yes | Market symbol | 
+| price | double | Yes | Minimum price for a sell order, this is the lowest price that a user is willing to sell at. Maximum price for a buy order, this is the maximum price a user is willing to buy at.  | 
+| size | double | Yes | Order size | 
+| time_in_force | string | No | Time validity of the order<br/>GTC: Good till Cancel<br/>IOC: Immediate or Cancel<br/>FOK: Fill or Kill<br/>FIVEMIN: Order valid for 5 mins<br/> HOUR: Order valid for an hour<br/>TWELVEHOUR: Order valid for 12 hours<br/>DAY: Order valid for a day<br/>WEEK: Order valid for a week<br/>MONTH: Order valid for a month | 
+| type | string | Yes | Order type<br/>LIMIT: Limit Orders<br/>MARKET: Market Orders<br/>OCO: One cancel the other| 
+| txType | string | Yes | Used for Stop orders or trigger orders<br/>STOP: Stop Order, `stopPrice` is mandatory<br/>TRIGGER: Trigger order, `triggerPrice` is mandatory<br/>LIMIT: Default, used when its not a Stop order nor Trigger order | 
+| stopPrice | double | No | Mandatory when creating a Stop or OCO order. Indicates the stop price | 
+| triggerPrice | double | Yes | Mandatory when creating a Trigger or OCO order. Indicates the trigger price | 
+| trailValue | double | Yes | Trail value | 
+| postOnly | boolean | Yes | Boolean to indicate if this is a post only order. For post only orders, traders are charged maker fees | 
+| clOrderID | string | Yes | Custom order Id | 
+| deviation | double | Yes | How many percent of the order is to be displayed on the orderbook.  | 
+| stealth | double | Yes | How much should the order price deviate from index price. Value is in percentage and can range from `-10` to `10` | 
+
+
+### Response Content
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| symbol | string | Yes | Market symbol |
+| clOrderID | string | Yes | Customer tag sent in by trader |
+| fillSize | string | Yes | Trade filled size |
+| orderID | string | Yes | Order ID |
+| orderType | string | Yes | Order type <br/>76: Limit Order<br/>77: Market order<br/>80: Algo order |
+| postOnly | boolean | Yes | Indicates if order is a post only order |
+| price | double | Yes | Order price |
+| side | string | Yes | Order side<br/>BUY or SELL |
+| size | double | Yes | Order size |
+| status | integer | Yes | Order status<br/>	2: Order Inserted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found |
+| stopPrice | string | Yes | Stop price |
+| time_in_force | string | Yes | Order validity |
+| timestamp | string | Yes | Order timestamp |
+| trigger | string | Yes | Indicator if order is a trigger order |
+| triggerPrice | string | Yes | Order trigger price, returns 0 if order is not a trigger order |
+| averageFillPrice | string | Yes | Average filled price. Returns the average filled price for partially transacted orders |
+| message | string | Yes | Trade messages |
+| stealth | string | Yes | Stealth value of order |
+| deviation | string | Yes | Deviation value of order |
+
+## Amend Order
+
+> Response
+
+```json
+[
+  {
+    "price": 36164,
+    "size": 0.035,
+    "side": "SELL",
+    "symbol": "BTC-USD",
+    "serialId": 85997835,
+    "timestamp": 1624990097000
+  }
+]
+```
+
+`GET /api/v3.2/trades`
+
+Get trade fills for the market specified by `symbol`
+
+### Request Parameters
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| symbol | string | Yes | Market symbol | 
+| startTime | long | No | Starting time (eg. 1624987283000) | 
+| endTime | long | No | Ending time (eg. 1624987283000) | 
+| beforeSerialId | string | Yes | Condition to retrieve records before the specified serial Id. Used for pagination| 
+| afterSerialId | string | Yes | Condition to retrieve records after the specified serial Id. Used for pagination| 
+| count | integer | Yes | Number of records to return | 
+| includeOld | boolean | Yes | Retrieve trade  history records past 7 days | 
+
+
+### Response Content
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| symbol | long | Yes | Market symbol |
+| side | string | Yes | Trade side. Values are: [`Buy`, `SELL`] | 
+| price | double | Yes | Transacted price | 
+| size | double | Yes | Transacted size |
+| serialId | double | Yes | Serial Id, running sequence number |
+| timestamp | double | Yes | Transacted timestamp |
+
+
+## Cancel Order
+
+> Response
+
+```json
+[
+  {
+    "price": 36164,
+    "size": 0.035,
+    "side": "SELL",
+    "symbol": "BTC-USD",
+    "serialId": 85997835,
+    "timestamp": 1624990097000
+  }
+]
+```
+
+`GET /api/v3.2/trades`
+
+Get trade fills for the market specified by `symbol`
+
+### Request Parameters
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| symbol | string | Yes | Market symbol | 
+| startTime | long | No | Starting time (eg. 1624987283000) | 
+| endTime | long | No | Ending time (eg. 1624987283000) | 
+| beforeSerialId | string | Yes | Condition to retrieve records before the specified serial Id. Used for pagination| 
+| afterSerialId | string | Yes | Condition to retrieve records after the specified serial Id. Used for pagination| 
+| count | integer | Yes | Number of records to return | 
+| includeOld | boolean | Yes | Retrieve trade  history records past 7 days | 
+
+
+### Response Content
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| symbol | long | Yes | Market symbol |
+| side | string | Yes | Trade side. Values are: [`Buy`, `SELL`] | 
+| price | double | Yes | Transacted price | 
+| size | double | Yes | Transacted size |
+| serialId | double | Yes | Serial Id, running sequence number |
+| timestamp | double | Yes | Transacted timestamp |
+
+## Dead man's switch (Cancel all after)
+
+> Response
+
+```json
+[
+  {
+    "price": 36164,
+    "size": 0.035,
+    "side": "SELL",
+    "symbol": "BTC-USD",
+    "serialId": 85997835,
+    "timestamp": 1624990097000
+  }
+]
+```
+
+`GET /api/v3.2/trades`
+
+Get trade fills for the market specified by `symbol`
+
+### Request Parameters
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| symbol | string | Yes | Market symbol | 
+| startTime | long | No | Starting time (eg. 1624987283000) | 
+| endTime | long | No | Ending time (eg. 1624987283000) | 
+| beforeSerialId | string | Yes | Condition to retrieve records before the specified serial Id. Used for pagination| 
+| afterSerialId | string | Yes | Condition to retrieve records after the specified serial Id. Used for pagination| 
+| count | integer | Yes | Number of records to return | 
+| includeOld | boolean | Yes | Retrieve trade  history records past 7 days | 
+
+
+### Response Content
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| symbol | long | Yes | Market symbol |
+| side | string | Yes | Trade side. Values are: [`Buy`, `SELL`] | 
+| price | double | Yes | Transacted price | 
+| size | double | Yes | Transacted size |
+| serialId | double | Yes | Serial Id, running sequence number |
+| timestamp | double | Yes | Transacted timestamp |
+
+## Query Open Orders
+
+> Response
+
+```json
+[
+  {
+    "price": 36164,
+    "size": 0.035,
+    "side": "SELL",
+    "symbol": "BTC-USD",
+    "serialId": 85997835,
+    "timestamp": 1624990097000
+  }
+]
+```
+
+`GET /api/v3.2/trades`
+
+Get trade fills for the market specified by `symbol`
+
+### Request Parameters
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| symbol | string | Yes | Market symbol | 
+| startTime | long | No | Starting time (eg. 1624987283000) | 
+| endTime | long | No | Ending time (eg. 1624987283000) | 
+| beforeSerialId | string | Yes | Condition to retrieve records before the specified serial Id. Used for pagination| 
+| afterSerialId | string | Yes | Condition to retrieve records after the specified serial Id. Used for pagination| 
+| count | integer | Yes | Number of records to return | 
+| includeOld | boolean | Yes | Retrieve trade  history records past 7 days | 
+
+
+### Response Content
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| symbol | long | Yes | Market symbol |
+| side | string | Yes | Trade side. Values are: [`Buy`, `SELL`] | 
+| price | double | Yes | Transacted price | 
+| size | double | Yes | Transacted size |
+| serialId | double | Yes | Serial Id, running sequence number |
+| timestamp | double | Yes | Transacted timestamp |
+
+## Query Trades Fills
+
+> Response
+
+```json
+[
+  {
+    "price": 36164,
+    "size": 0.035,
+    "side": "SELL",
+    "symbol": "BTC-USD",
+    "serialId": 85997835,
+    "timestamp": 1624990097000
+  }
+]
+```
+
+`GET /api/v3.2/trades`
+
+Get trade fills for the market specified by `symbol`
+
+### Request Parameters
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| symbol | string | Yes | Market symbol | 
+| startTime | long | No | Starting time (eg. 1624987283000) | 
+| endTime | long | No | Ending time (eg. 1624987283000) | 
+| beforeSerialId | string | Yes | Condition to retrieve records before the specified serial Id. Used for pagination| 
+| afterSerialId | string | Yes | Condition to retrieve records after the specified serial Id. Used for pagination| 
+| count | integer | Yes | Number of records to return | 
+| includeOld | boolean | Yes | Retrieve trade  history records past 7 days | 
+
+
+### Response Content
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| symbol | long | Yes | Market symbol |
+| side | string | Yes | Trade side. Values are: [`Buy`, `SELL`] | 
+| price | double | Yes | Transacted price | 
+| size | double | Yes | Transacted size |
+| serialId | double | Yes | Serial Id, running sequence number |
+| timestamp | double | Yes | Transacted timestamp |
+
+## Query Account Fees
+
+> Response
+
+```json
+[
+  {
+    "price": 36164,
+    "size": 0.035,
+    "side": "SELL",
+    "symbol": "BTC-USD",
+    "serialId": 85997835,
+    "timestamp": 1624990097000
+  }
+]
+```
+
+`GET /api/v3.2/trades`
+
+Get trade fills for the market specified by `symbol`
+
+### Request Parameters
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| symbol | string | Yes | Market symbol | 
+| startTime | long | No | Starting time (eg. 1624987283000) | 
+| endTime | long | No | Ending time (eg. 1624987283000) | 
+| beforeSerialId | string | Yes | Condition to retrieve records before the specified serial Id. Used for pagination| 
+| afterSerialId | string | Yes | Condition to retrieve records after the specified serial Id. Used for pagination| 
+| count | integer | Yes | Number of records to return | 
+| includeOld | boolean | Yes | Retrieve trade  history records past 7 days | 
+
+
+### Response Content
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| symbol | long | Yes | Market symbol |
+| side | string | Yes | Trade side. Values are: [`Buy`, `SELL`] | 
+| price | double | Yes | Transacted price | 
+| size | double | Yes | Transacted size |
+| serialId | double | Yes | Serial Id, running sequence number |
+| timestamp | double | Yes | Transacted timestamp |
+
+# Wallet Endpoints
+
+## Query Wallet Balance
+
+> Response
+
+```json
+[
+  {
+    "price": 36164,
+    "size": 0.035,
+    "side": "SELL",
+    "symbol": "BTC-USD",
+    "serialId": 85997835,
+    "timestamp": 1624990097000
+  }
+]
+```
+
+`GET /api/v3.2/trades`
+
+Get trade fills for the market specified by `symbol`
+
+### Request Parameters
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| symbol | string | Yes | Market symbol | 
+| startTime | long | No | Starting time (eg. 1624987283000) | 
+| endTime | long | No | Ending time (eg. 1624987283000) | 
+| beforeSerialId | string | Yes | Condition to retrieve records before the specified serial Id. Used for pagination| 
+| afterSerialId | string | Yes | Condition to retrieve records after the specified serial Id. Used for pagination| 
+| count | integer | Yes | Number of records to return | 
+| includeOld | boolean | Yes | Retrieve trade  history records past 7 days | 
+
+
+### Response Content
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| symbol | long | Yes | Market symbol |
+| side | string | Yes | Trade side. Values are: [`Buy`, `SELL`] | 
+| price | double | Yes | Transacted price | 
+| size | double | Yes | Transacted size |
+| serialId | double | Yes | Serial Id, running sequence number |
+| timestamp | double | Yes | Transacted timestamp |
+
+## Query Wallet History
+
+> Response
+
+```json
+[
+  {
+    "price": 36164,
+    "size": 0.035,
+    "side": "SELL",
+    "symbol": "BTC-USD",
+    "serialId": 85997835,
+    "timestamp": 1624990097000
+  }
+]
+```
+
+`GET /api/v3.2/trades`
+
+Get trade fills for the market specified by `symbol`
+
+### Request Parameters
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| symbol | string | Yes | Market symbol | 
+| startTime | long | No | Starting time (eg. 1624987283000) | 
+| endTime | long | No | Ending time (eg. 1624987283000) | 
+| beforeSerialId | string | Yes | Condition to retrieve records before the specified serial Id. Used for pagination| 
+| afterSerialId | string | Yes | Condition to retrieve records after the specified serial Id. Used for pagination| 
+| count | integer | Yes | Number of records to return | 
+| includeOld | boolean | Yes | Retrieve trade  history records past 7 days | 
+
+
+### Response Content
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| symbol | long | Yes | Market symbol |
+| side | string | Yes | Trade side. Values are: [`Buy`, `SELL`] | 
+| price | double | Yes | Transacted price | 
+| size | double | Yes | Transacted size |
+| serialId | double | Yes | Serial Id, running sequence number |
+| timestamp | double | Yes | Transacted timestamp |
+
+## Create Wallet Address
+
+> Response
+
+```json
+[
+  {
+    "price": 36164,
+    "size": 0.035,
+    "side": "SELL",
+    "symbol": "BTC-USD",
+    "serialId": 85997835,
+    "timestamp": 1624990097000
+  }
+]
+```
+
+`GET /api/v3.2/trades`
+
+Get trade fills for the market specified by `symbol`
+
+### Request Parameters
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| symbol | string | Yes | Market symbol | 
+| startTime | long | No | Starting time (eg. 1624987283000) | 
+| endTime | long | No | Ending time (eg. 1624987283000) | 
+| beforeSerialId | string | Yes | Condition to retrieve records before the specified serial Id. Used for pagination| 
+| afterSerialId | string | Yes | Condition to retrieve records after the specified serial Id. Used for pagination| 
+| count | integer | Yes | Number of records to return | 
+| includeOld | boolean | Yes | Retrieve trade  history records past 7 days | 
+
+
+### Response Content
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| symbol | long | Yes | Market symbol |
+| side | string | Yes | Trade side. Values are: [`Buy`, `SELL`] | 
+| price | double | Yes | Transacted price | 
+| size | double | Yes | Transacted size |
+| serialId | double | Yes | Serial Id, running sequence number |
+| timestamp | double | Yes | Transacted timestamp |
+
+## Get Wallet Address
+
+> Response
+
+```json
+[
+  {
+    "price": 36164,
+    "size": 0.035,
+    "side": "SELL",
+    "symbol": "BTC-USD",
+    "serialId": 85997835,
+    "timestamp": 1624990097000
+  }
+]
+```
+
+`GET /api/v3.2/trades`
+
+Get trade fills for the market specified by `symbol`
+
+### Request Parameters
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| symbol | string | Yes | Market symbol | 
+| startTime | long | No | Starting time (eg. 1624987283000) | 
+| endTime | long | No | Ending time (eg. 1624987283000) | 
+| beforeSerialId | string | Yes | Condition to retrieve records before the specified serial Id. Used for pagination| 
+| afterSerialId | string | Yes | Condition to retrieve records after the specified serial Id. Used for pagination| 
+| count | integer | Yes | Number of records to return | 
+| includeOld | boolean | Yes | Retrieve trade  history records past 7 days | 
+
+
+### Response Content
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| symbol | long | Yes | Market symbol |
+| side | string | Yes | Trade side. Values are: [`Buy`, `SELL`] | 
+| price | double | Yes | Transacted price | 
+| size | double | Yes | Transacted size |
+| serialId | double | Yes | Serial Id, running sequence number |
+| timestamp | double | Yes | Transacted timestamp |
+
+## Withdraw Funds
+
+> Response
+
+```json
+[
+  {
+    "price": 36164,
+    "size": 0.035,
+    "side": "SELL",
+    "symbol": "BTC-USD",
+    "serialId": 85997835,
+    "timestamp": 1624990097000
+  }
+]
+```
+
+`GET /api/v3.2/trades`
+
+Get trade fills for the market specified by `symbol`
+
+### Request Parameters
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| symbol | string | Yes | Market symbol | 
+| startTime | long | No | Starting time (eg. 1624987283000) | 
+| endTime | long | No | Ending time (eg. 1624987283000) | 
+| beforeSerialId | string | Yes | Condition to retrieve records before the specified serial Id. Used for pagination| 
+| afterSerialId | string | Yes | Condition to retrieve records after the specified serial Id. Used for pagination| 
+| count | integer | Yes | Number of records to return | 
+| includeOld | boolean | Yes | Retrieve trade  history records past 7 days | 
+
+
+### Response Content
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| symbol | long | Yes | Market symbol |
+| side | string | Yes | Trade side. Values are: [`Buy`, `SELL`] | 
+| price | double | Yes | Transacted price | 
+| size | double | Yes | Transacted size |
+| serialId | double | Yes | Serial Id, running sequence number |
+| timestamp | double | Yes | Transacted timestamp |
+
+# Websocket Streams
+
+## Subscription 
+
+## L1 Orderbook Snapshot
+
+## L2 Orderbook Snapshot
+
+## Public Trade Fills
+
+## Authentication
+
+## Notifications
+
+## User Trade Fills
 
 </section>
-</section>
-
