@@ -97,8 +97,6 @@ Each API will return one of the following HTTP status:
 
 # Workflow
 
-![OTC Workflow](https://btsecom.github.io/docs/images/otcworkflow.png)
-
 * Request for Quote to get an OTC quote from BTSE
 * BTSE responds with a quote based on the request
 * If users chooses to accept the quote, quote is sent to BTSE (Quote Accepted)
@@ -154,188 +152,272 @@ Gets OTC market information
 | minOrderValues | Double Array | Yes | Minimum order notional value | 
 | supportQuoteCurrencies | string Array | Yes | Supported quote currencies | 
 
-## Market Summary
+## Request for Quote
+
+> Request
+
+```json
+{
+  "baseCurrency": "BTC, USDT",
+  "clientOrderId": "BTCUSD0304",
+  "orderAmountInOrderCurrency": 2350,
+  "orderCurrency": "USD, EUR",
+  "orderSizeInBaseCurrency": 20.05,
+  "side": "buy, sell"
+}
+```
 
 > Response
 
 ```json
 {
-  "assetName": "BTC",
-  "maxOrderSizes": [
-    5000,
-    5000,
-    5000
+  "markets": [
+    {
+      "assetName": "string",
+      "id": 0,
+      "maxOrderSizes": [
+        0
+      ],
+      "maxOrderValues": [
+        0
+      ],
+      "minOrderSizes": [
+        0
+      ],
+      "minOrderValues": [
+        0
+      ],
+      "originTimestamp": 0,
+      "packetID": 0,
+      "packetTimestamp": 0,
+      "parametersMap": {
+        "property1": {},
+        "property2": {}
+      },
+      "processingTimestamp": 0,
+      "requestId": 0,
+      "supportQuoteCurrencies": [
+        "string"
+      ],
+      "trackingID": 0
+    }
   ],
-  "maxOrderValues": [
-    100000,
-    100000,
-    100000
-  ],
-  "minOrderSizes": [
-    0.05,
-    0.05,
-    0.05
-  ],
-  "minOrderValues": [
-    0.0025,
-    0.0025,
-    0.0025
-  ],
-  "supportQuoteCurrencies": [
-  ]
+  "quoteAmountToDeduct": 21563.143,
+  "quoteAmountToReceive": 0.311,
+  "quoteCurrencyToDeductIn": "EUR",
+  "quoteCurrencyToReceiveIn": "BTC",
+  "quoteId": "1e5e9ec8-dfb1-****-****-99e20d476c21",
+  "quotePriceInOrderCurrency": 6431,
+  "quotePriceInUSD": 6431,
+  "quoteTimestamp": 1586225934778,
+  "quoteValidDurationMs": 10000,
+  "status": 30001
 }
 ```
 
-`GET /api/v1/getMarket`
+`POST /api/v1/quote`
 
-Gets OTC market information
+Request for a quote
+
+### Request Parameters
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| baseCurrency | string | Yes | Base currency (eg. BTC) | 
+| orderCurrency | string | Yes | Order currency | 
+| orderSizeInBaseCurrency | Double Array | Yes | Size of order in base currency | 
+| orderAmountInOrderCurrency | Double Array | Yes | Order amount in order currency | 
+| clientOrderId | Double Array | Yes | Custom client order ID | 
+| side | string | Yes | Order side, BUY or SELL | 
+
 
 ### Response Content
 |Name|Type|Required|Description|
 |---|---|---|---|
-| assetName | string | Yes | Asset name | 
-| maxOrderSizes | Double Array | Yes | Maximum order size | 
-| maxOrderValues | Double Array | Yes | Maximum order notional value | 
-| minOrderSizes | Double Array | Yes | Minimum order size | 
-| minOrderValues | Double Array | Yes | Minimum order notional value | 
-| supportQuoteCurrencies | string Array | Yes | Supported quote currencies | 
+| markets | Asset | Yes | Asset information | 
+| quoteAmountToDeduct | double | Yes | Quote amount to deduct | 
+| quoteAmountToReceive | double | Yes | Quote amount to receive | 
+| quoteCurrencyToDeductIn | string | Yes | Quote currency to deduct in | 
+| quoteCurrencyToReceiveIn | string | Yes | Quote currency to receive | 
+| quoteId | string | Yes | Quote ID | 
+| quotePriceInOrderCurrency | double | Yes | Quote price in order currency | 
+| quotePriceInUSD | long | Yes | Quote price in USD | 
+| quoteTimestamp | long | Yes | Quote timestamp | 
+| quoteValidDurationMs | long | Yes | Quote validity | 
+| status | integer | Yes | Order status with values: <br/>8: Insufficient Balance<br/>30001: Order Quote<br/>30008: OTC Order Requote<br/>30007: OTC Order completed successfully<br/>40001: Service Unavailable<br/>40003: Rejected |
 
-## Market Summary
+## Accept Quote
 
 > Response
 
 ```json
 {
-  "assetName": "BTC",
-  "maxOrderSizes": [
-    5000,
-    5000,
-    5000
+  "markets": [
+    {
+      "assetName": "string",
+      "id": 0,
+      "maxOrderSizes": [
+        0
+      ],
+      "maxOrderValues": [
+        0
+      ],
+      "minOrderSizes": [
+        0
+      ],
+      "minOrderValues": [
+        0
+      ],
+      "originTimestamp": 0,
+      "packetID": 0,
+      "packetTimestamp": 0,
+      "parametersMap": {
+        "property1": {},
+        "property2": {}
+      },
+      "processingTimestamp": 0,
+      "requestId": 0,
+      "supportQuoteCurrencies": [
+        "string"
+      ],
+      "trackingID": 0
+    }
   ],
-  "maxOrderValues": [
-    100000,
-    100000,
-    100000
-  ],
-  "minOrderSizes": [
-    0.05,
-    0.05,
-    0.05
-  ],
-  "minOrderValues": [
-    0.0025,
-    0.0025,
-    0.0025
-  ],
-  "supportQuoteCurrencies": [
-  ]
+  "quoteAmountToDeduct": 21563.143,
+  "quoteAmountToReceive": 0.311,
+  "quoteCurrencyToDeductIn": "EUR",
+  "quoteCurrencyToReceiveIn": "BTC",
+  "quoteId": "1e5e9ec8-dfb1-****-****-99e20d476c21",
+  "quotePriceInOrderCurrency": 6431,
+  "quotePriceInUSD": 6431,
+  "quoteTimestamp": 1586225934778,
+  "quoteValidDurationMs": 10000,
+  "status": 30001
 }
 ```
 
-`GET /api/v1/getMarket`
+`POST /api/v1/accept/{quoteId}`
 
-Gets OTC market information
+Accepts a quote
+
+### Request Parameter
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| quoteId | string | Yes | Quote ID to supplied as a path parameter | 
 
 ### Response Content
 |Name|Type|Required|Description|
 |---|---|---|---|
-| assetName | string | Yes | Asset name | 
-| maxOrderSizes | Double Array | Yes | Maximum order size | 
-| maxOrderValues | Double Array | Yes | Maximum order notional value | 
-| minOrderSizes | Double Array | Yes | Minimum order size | 
-| minOrderValues | Double Array | Yes | Minimum order notional value | 
-| supportQuoteCurrencies | string Array | Yes | Supported quote currencies | 
+| markets | Asset | Yes | Asset information | 
+| quoteAmountToDeduct | double | Yes | Quote amount to deduct | 
+| quoteAmountToReceive | double | Yes | Quote amount to receive | 
+| quoteCurrencyToDeductIn | string | Yes | Quote currency to deduct in | 
+| quoteCurrencyToReceiveIn | string | Yes | Quote currency to receive | 
+| quoteId | string | Yes | Quote ID | 
+| quotePriceInOrderCurrency | double | Yes | Quote price in order currency | 
+| quotePriceInUSD | long | Yes | Quote price in USD | 
+| quoteTimestamp | long | Yes | Quote timestamp | 
+| quoteValidDurationMs | long | Yes | Quote validity | 
+| status | integer | Yes | Order status with values: <br/>8: Insufficient Balance<br/>30001: Order Quote<br/>30008: OTC Order Requote<br/>30007: OTC Order completed successfully<br/>40001: Service Unavailable<br/>40003: Rejected |
 
-## Market Summary
+
+## Reject Quote
 
 > Response
 
 ```json
 {
-  "assetName": "BTC",
-  "maxOrderSizes": [
-    5000,
-    5000,
-    5000
-  ],
-  "maxOrderValues": [
-    100000,
-    100000,
-    100000
-  ],
-  "minOrderSizes": [
-    0.05,
-    0.05,
-    0.05
-  ],
-  "minOrderValues": [
-    0.0025,
-    0.0025,
-    0.0025
-  ],
-  "supportQuoteCurrencies": [
-  ]
+  "errorCode": -1,
+  "message": "string",
+  "status": 0
 }
+
 ```
 
-`GET /api/v1/getMarket`
+`POST /otc/api/v1/reject/{quoteId}`
 
-Gets OTC market information
+Reject current quote
 
-### Response Content
+### Request Parameter
+
 |Name|Type|Required|Description|
 |---|---|---|---|
-| assetName | string | Yes | Asset name | 
-| maxOrderSizes | Double Array | Yes | Maximum order size | 
-| maxOrderValues | Double Array | Yes | Maximum order notional value | 
-| minOrderSizes | Double Array | Yes | Minimum order size | 
-| minOrderValues | Double Array | Yes | Minimum order notional value | 
-| supportQuoteCurrencies | string Array | Yes | Supported quote currencies | 
+| quoteId | string | Yes | Quote ID to supplied as a path parameter | 
 
-## Market Summary
+## Query Order
 
 > Response
 
 ```json
 {
-  "assetName": "BTC",
-  "maxOrderSizes": [
-    5000,
-    5000,
-    5000
+  "markets": [
+    {
+      "assetName": "string",
+      "id": 0,
+      "maxOrderSizes": [
+        0
+      ],
+      "maxOrderValues": [
+        0
+      ],
+      "minOrderSizes": [
+        0
+      ],
+      "minOrderValues": [
+        0
+      ],
+      "originTimestamp": 0,
+      "packetID": 0,
+      "packetTimestamp": 0,
+      "parametersMap": {
+        "property1": {},
+        "property2": {}
+      },
+      "processingTimestamp": 0,
+      "requestId": 0,
+      "supportQuoteCurrencies": [
+        "string"
+      ],
+      "trackingID": 0
+    }
   ],
-  "maxOrderValues": [
-    100000,
-    100000,
-    100000
-  ],
-  "minOrderSizes": [
-    0.05,
-    0.05,
-    0.05
-  ],
-  "minOrderValues": [
-    0.0025,
-    0.0025,
-    0.0025
-  ],
-  "supportQuoteCurrencies": [
-  ]
+  "quoteAmountToDeduct": 21563.143,
+  "quoteAmountToReceive": 0.311,
+  "quoteCurrencyToDeductIn": "EUR",
+  "quoteCurrencyToReceiveIn": "BTC",
+  "quoteId": "1e5e9ec8-dfb1-****-****-99e20d476c21",
+  "quotePriceInOrderCurrency": 6431,
+  "quotePriceInUSD": 6431,
+  "quoteTimestamp": 1586225934778,
+  "quoteValidDurationMs": 10000,
+  "status": 30001
 }
 ```
 
-`GET /api/v1/getMarket`
+`POST /api/v1/queryOrder/{quoteId}`
 
-Gets OTC market information
+Query order information
+
+### Request Parameter
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| quoteId | string | Yes | Quote ID to supplied as a path parameter | 
 
 ### Response Content
 |Name|Type|Required|Description|
 |---|---|---|---|
-| assetName | string | Yes | Asset name | 
-| maxOrderSizes | Double Array | Yes | Maximum order size | 
-| maxOrderValues | Double Array | Yes | Maximum order notional value | 
-| minOrderSizes | Double Array | Yes | Minimum order size | 
-| minOrderValues | Double Array | Yes | Minimum order notional value | 
-| supportQuoteCurrencies | string Array | Yes | Supported quote currencies | 
+| markets | Asset | Yes | Asset information | 
+| quoteAmountToDeduct | double | Yes | Quote amount to deduct | 
+| quoteAmountToReceive | double | Yes | Quote amount to receive | 
+| quoteCurrencyToDeductIn | string | Yes | Quote currency to deduct in | 
+| quoteCurrencyToReceiveIn | string | Yes | Quote currency to receive | 
+| quoteId | string | Yes | Quote ID | 
+| quotePriceInOrderCurrency | double | Yes | Quote price in order currency | 
+| quotePriceInUSD | long | Yes | Quote price in USD | 
+| quoteTimestamp | long | Yes | Quote timestamp | 
+| quoteValidDurationMs | long | Yes | Quote validity | 
+| status | integer | Yes | Order status with values: <br/>8: Insufficient Balance<br/>30001: Order Quote<br/>30008: OTC Order Requote<br/>30007: OTC Order completed successfully<br/>40001: Service Unavailable<br/>40003: Rejected |
 
 </section>

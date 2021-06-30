@@ -69,7 +69,7 @@ under the License.
           <a href="/docs/futures/en/" id="btn_futures">Futures</a>
         </span>
         <span class="nav_cell nav_tab">
-          <a href="https://www.btse.com/apiexplorer/otc/" id="btn_otc">OTC</a>
+          <a href="/docs/otc/en/" id="btn_otc">OTC</a>
         </span>
       </div>
     </div>
@@ -183,7 +183,8 @@ under the License.
       btn_spot.className = 'current';
       btn_futures.className = '';
       btn_otc.className = '';
-    } else if(location.href.indexOf('docs/otc/v') > 0){
+    } 
+    else if(location.href.indexOf('docs/otc') > 0){
       btn_spot.className = '';
       btn_futures.className = '';
       btn_otc.className = 'current';
