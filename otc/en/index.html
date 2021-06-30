@@ -272,16 +272,16 @@
                     <a href="#market-summary" class="toc-h2 toc-link" data-title="Market Summary">Market Summary</a>
                   </li>
                   <li>
-                    <a href="#market-summary-2" class="toc-h2 toc-link" data-title="Market Summary">Market Summary</a>
+                    <a href="#request-for-quote" class="toc-h2 toc-link" data-title="Request for Quote">Request for Quote</a>
                   </li>
                   <li>
-                    <a href="#market-summary-3" class="toc-h2 toc-link" data-title="Market Summary">Market Summary</a>
+                    <a href="#accept-quote" class="toc-h2 toc-link" data-title="Accept Quote">Accept Quote</a>
                   </li>
                   <li>
-                    <a href="#market-summary-4" class="toc-h2 toc-link" data-title="Market Summary">Market Summary</a>
+                    <a href="#reject-quote" class="toc-h2 toc-link" data-title="Reject Quote">Reject Quote</a>
                   </li>
                   <li>
-                    <a href="#market-summary-5" class="toc-h2 toc-link" data-title="Market Summary">Market Summary</a>
+                    <a href="#query-order" class="toc-h2 toc-link" data-title="Query Order">Query Order</a>
                   </li>
               </ul>
           </li>
@@ -491,39 +491,69 @@
 <td>Supported quote currencies</td>
 </tr>
 </tbody></table>
-<h2 id='market-summary-2'>Market Summary</h2>
+<h2 id='request-for-quote'>Request for Quote</h2>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"baseCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC, USDT"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"clientOrderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCUSD0304"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderAmountInOrderCurrency"</span><span class="p">:</span><span class="w"> </span><span class="mi">2350</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD, EUR"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderSizeInBaseCurrency"</span><span class="p">:</span><span class="w"> </span><span class="mf">20.05</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"buy, sell"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
 <blockquote>
 <p>Response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"assetName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"maxOrderSizes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="mi">5000</span><span class="p">,</span><span class="w">
-    </span><span class="mi">5000</span><span class="p">,</span><span class="w">
-    </span><span class="mi">5000</span><span class="w">
+  </span><span class="nl">"markets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"assetName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"maxOrderSizes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="mi">0</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"maxOrderValues"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="mi">0</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"minOrderSizes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="mi">0</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"minOrderValues"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="mi">0</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"originTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"packetID"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"packetTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"parametersMap"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"property1"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+        </span><span class="nl">"property2"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"processingTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"requestId"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"supportQuoteCurrencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"string"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"trackingID"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"maxOrderValues"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="mi">100000</span><span class="p">,</span><span class="w">
-    </span><span class="mi">100000</span><span class="p">,</span><span class="w">
-    </span><span class="mi">100000</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"minOrderSizes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="mf">0.05</span><span class="p">,</span><span class="w">
-    </span><span class="mf">0.05</span><span class="p">,</span><span class="w">
-    </span><span class="mf">0.05</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"minOrderValues"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="mf">0.0025</span><span class="p">,</span><span class="w">
-    </span><span class="mf">0.0025</span><span class="p">,</span><span class="w">
-    </span><span class="mf">0.0025</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"supportQuoteCurrencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+  </span><span class="nl">"quoteAmountToDeduct"</span><span class="p">:</span><span class="w"> </span><span class="mf">21563.143</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"quoteAmountToReceive"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.311</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"quoteCurrencyToDeductIn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"quoteCurrencyToReceiveIn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"quoteId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1e5e9ec8-dfb1-****-****-99e20d476c21"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"quotePriceInOrderCurrency"</span><span class="p">:</span><span class="w"> </span><span class="mi">6431</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"quotePriceInUSD"</span><span class="p">:</span><span class="w"> </span><span class="mi">6431</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"quoteTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1586225934778</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"quoteValidDurationMs"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">30001</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p><code>GET /api/v1/getMarket</code></p>
+<p><code>POST /api/v1/quote</code></p>
 
-<p>Gets OTC market information</p>
+<p>Request for a quote</p>
 <h3 id='response-content-2'>Response Content</h3>
 <table><thead>
 <tr>
@@ -570,37 +600,55 @@
 <td>Supported quote currencies</td>
 </tr>
 </tbody></table>
-<h2 id='market-summary-3'>Market Summary</h2>
+<h2 id='accept-quote'>Accept Quote</h2>
 <blockquote>
 <p>Response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"assetName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"maxOrderSizes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="mi">5000</span><span class="p">,</span><span class="w">
-    </span><span class="mi">5000</span><span class="p">,</span><span class="w">
-    </span><span class="mi">5000</span><span class="w">
+  </span><span class="nl">"markets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"assetName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"maxOrderSizes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="mi">0</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"maxOrderValues"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="mi">0</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"minOrderSizes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="mi">0</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"minOrderValues"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="mi">0</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"originTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"packetID"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"packetTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"parametersMap"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"property1"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+        </span><span class="nl">"property2"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"processingTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"requestId"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"supportQuoteCurrencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"string"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"trackingID"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"maxOrderValues"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="mi">100000</span><span class="p">,</span><span class="w">
-    </span><span class="mi">100000</span><span class="p">,</span><span class="w">
-    </span><span class="mi">100000</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"minOrderSizes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="mf">0.05</span><span class="p">,</span><span class="w">
-    </span><span class="mf">0.05</span><span class="p">,</span><span class="w">
-    </span><span class="mf">0.05</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"minOrderValues"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="mf">0.0025</span><span class="p">,</span><span class="w">
-    </span><span class="mf">0.0025</span><span class="p">,</span><span class="w">
-    </span><span class="mf">0.0025</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"supportQuoteCurrencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+  </span><span class="nl">"quoteAmountToDeduct"</span><span class="p">:</span><span class="w"> </span><span class="mf">21563.143</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"quoteAmountToReceive"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.311</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"quoteCurrencyToDeductIn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"quoteCurrencyToReceiveIn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"quoteId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1e5e9ec8-dfb1-****-****-99e20d476c21"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"quotePriceInOrderCurrency"</span><span class="p">:</span><span class="w"> </span><span class="mi">6431</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"quotePriceInUSD"</span><span class="p">:</span><span class="w"> </span><span class="mi">6431</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"quoteTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1586225934778</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"quoteValidDurationMs"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">30001</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p><code>GET /api/v1/getMarket</code></p>
+<p><code>POST /api/v1/accept/{quoteId}</code></p>
 
 <p>Gets OTC market information</p>
 <h3 id='response-content-3'>Response Content</h3>
@@ -649,7 +697,7 @@
 <td>Supported quote currencies</td>
 </tr>
 </tbody></table>
-<h2 id='market-summary-4'>Market Summary</h2>
+<h2 id='reject-quote'>Reject Quote</h2>
 <blockquote>
 <p>Response</p>
 </blockquote>
@@ -679,9 +727,9 @@
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p><code>GET /api/v1/getMarket</code></p>
+<p><code>POST /otc/api/v1/reject/{quoteId}</code></p>
 
-<p>Gets OTC market information</p>
+<p>Reject current quote</p>
 <h3 id='response-content-4'>Response Content</h3>
 <table><thead>
 <tr>
@@ -728,39 +776,57 @@
 <td>Supported quote currencies</td>
 </tr>
 </tbody></table>
-<h2 id='market-summary-5'>Market Summary</h2>
+<h2 id='query-order'>Query Order</h2>
 <blockquote>
 <p>Response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"assetName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"maxOrderSizes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="mi">5000</span><span class="p">,</span><span class="w">
-    </span><span class="mi">5000</span><span class="p">,</span><span class="w">
-    </span><span class="mi">5000</span><span class="w">
+  </span><span class="nl">"markets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"assetName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"maxOrderSizes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="mi">0</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"maxOrderValues"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="mi">0</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"minOrderSizes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="mi">0</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"minOrderValues"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="mi">0</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"originTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"packetID"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"packetTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"parametersMap"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"property1"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+        </span><span class="nl">"property2"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"processingTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"requestId"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"supportQuoteCurrencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"string"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"trackingID"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"maxOrderValues"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="mi">100000</span><span class="p">,</span><span class="w">
-    </span><span class="mi">100000</span><span class="p">,</span><span class="w">
-    </span><span class="mi">100000</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"minOrderSizes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="mf">0.05</span><span class="p">,</span><span class="w">
-    </span><span class="mf">0.05</span><span class="p">,</span><span class="w">
-    </span><span class="mf">0.05</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"minOrderValues"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="mf">0.0025</span><span class="p">,</span><span class="w">
-    </span><span class="mf">0.0025</span><span class="p">,</span><span class="w">
-    </span><span class="mf">0.0025</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"supportQuoteCurrencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+  </span><span class="nl">"quoteAmountToDeduct"</span><span class="p">:</span><span class="w"> </span><span class="mf">21563.143</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"quoteAmountToReceive"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.311</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"quoteCurrencyToDeductIn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"quoteCurrencyToReceiveIn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"quoteId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1e5e9ec8-dfb1-****-****-99e20d476c21"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"quotePriceInOrderCurrency"</span><span class="p">:</span><span class="w"> </span><span class="mi">6431</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"quotePriceInUSD"</span><span class="p">:</span><span class="w"> </span><span class="mi">6431</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"quoteTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1586225934778</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"quoteValidDurationMs"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">30001</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p><code>GET /api/v1/getMarket</code></p>
+<p><code>POST /api/v1/queryOrder/{quoteId}</code></p>
 
-<p>Gets OTC market information</p>
+<p>Query order information</p>
 <h3 id='response-content-5'>Response Content</h3>
 <table><thead>
 <tr>
