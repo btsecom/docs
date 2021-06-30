@@ -1,0 +1,341 @@
+---
+title: BTSE OTC API
+language_tabs:
+  - json
+toc_footers: []
+includes: []
+search: true
+highlight_theme: darkula
+code_clipboard: true
+headingLevel: 2
+
+---
+
+# Overview
+
+## Generating API Key
+
+You will need to create an API key on the BTSE platform before you can use authenticated APIs. To create API keys, you can follow the steps below:
+
+* Login with your username / email and password into the BTSE website
+* Click on “Account” on the top right hand corner
+* Select the API tab
+* Click on “New API” button to create an API key and passphrase. (Note: the passphrase will only appear once)
+* Use your API key and passphrase to construct a signature.
+
+## Endpoints
+
+* Production
+  * HTTP
+     * `https://api.btse.com/otc`
+     * `https://aws-api.btse.com/otc`
+* Testnet
+  * HTTP
+     * `https://testapi.btse.io/otc`
+  
+## Authentication
+
+* API Key (btse-api)
+  * Parameter Name: `btse-api`, in: header. API key is obtained from BTSE platform as a string
+
+* API Key (btse-nonce)
+  * Parameter Name: `btse-nonce`, in: header. Representation of current timestamp in long format
+
+* API Key (btse-sign)
+  * Parameter Name: `btse-sign`, in: header. A composite signature produced based on the following algorithm: Signature=HMAC.Sha384 (secretkey, (urlpath + btse-nonce + bodyStr)) (note: bodyStr = '' when no data):
+
+### Example 1: Query Quote
+
+> **HMAC SHA384 Signature**
+
+```shell
+$ echo -n "/api/v1/quote1624985375123{\"orderSizeInBaseCurrency\":1,\"orderAmountInOrderCurrency\":0,\"side\":\"buy\",\"baseCurrency\":\"BTC\",\"orderCurrency\":\"USD\"}" | openssl dgst -sha384 -hmac "848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx"
+(stdin)= 8ee43810606da581fb6ce03e10370f89125c2269a64de832a55cea219795e9ae0c3df86b51afbafdd28c03b16acd1427
+```
+
+* Endpoint to place an order is `https://api.btse.com/otc/api/v1/quote`
+* Assume we have the values as follows: 
+  * btse-nonce: `1624985375123`
+  * btse-api: `4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x`
+  * secret: `848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx`
+  * Path: `/api/v1/quote`
+  * Body: `{"orderSizeInBaseCurrency":1,"orderAmountInOrderCurrency":0,"side":"buy","baseCurrency":"BTC","orderCurrency":"USD"}`
+  * Encrypted Text: `"/api/v1/quote1624985375123{"orderSizeInBaseCurrency":1,"orderAmountInOrderCurrency":0,"side":"buy","baseCurrency":"BTC","orderCurrency":"USD"}"`
+* Generated signature will be:
+  * btse-sign: `8ee43810606da581fb6ce03e10370f89125c2269a64de832a55cea219795e9ae0c3df86b51afbafdd28c03b16acd1427`
+
+
+## Rate Limits
+
+* The following rate limits are enforced: 
+
+Rate limits for BTSE is as follows:
+
+**Query**
+
+* Per API: `15 requests/second`
+* Per User: `30 requests/second`
+
+**Orders**
+
+* Per API: `75 requests/second`
+* Per User: `75 requests/second`
+
+## API Status Codes
+
+Each API will return one of the following HTTP status:
+
+* 200 - API request was successful, refer to the specific API response for expected payload
+* 400 - Bad Request. Server will not process this request. This is usually due to invalid parameters sent in request
+* 401 - Unauthorized request. Server will not process this request as it does not have valid authentication credentials
+* 403 - Forbidden request. Credentials were provided but they were insufficient to perform the request
+* 404 - Not found. Indicates that the server understood the request but could not find a correct representation for the target resource
+* 405 - Method not allowed. Indicates that the request method is not known to the requested server
+* 408 - Request timeout. Indicates that the server did not complete the request. BTSE API timeouts are set at 30secs
+* 429 - Too many requests. Indicates that the client has exceeded the rates limits set by the server. Refer to Rate Limits for more details
+* 500 - Internal server error. Indicates that the server encountered an unexpected condition resulting in not being able to fulfill the request
+
+# Workflow
+
+![OTC Workflow](https://btsecom.github.io/docs/images/otcworkflow.png)
+
+* Request for Quote to get an OTC quote from BTSE
+* BTSE responds with a quote based on the request
+* If users chooses to accept the quote, quote is sent to BTSE (Quote Accepted)
+* If quote is accepted by BTSE, then transaction is completed (Transaction Completed)
+* If quote rejected by BTSE, then BTSE will respond with an updated quote with reason of the rejection
+* If quote is rejected by the user, then BTSE will respond if quote is rejected successfully (Quote Rejected)
+
+# OTC Endpoints
+
+## Market Summary
+
+> Response
+
+```json
+{
+  "assetName": "BTC",
+  "maxOrderSizes": [
+    5000,
+    5000,
+    5000
+  ],
+  "maxOrderValues": [
+    100000,
+    100000,
+    100000
+  ],
+  "minOrderSizes": [
+    0.05,
+    0.05,
+    0.05
+  ],
+  "minOrderValues": [
+    0.0025,
+    0.0025,
+    0.0025
+  ],
+  "supportQuoteCurrencies": [
+  ]
+}
+```
+
+`GET /api/v1/getMarket`
+
+Gets OTC market information
+
+### Response Content
+|Name|Type|Required|Description|
+|---|---|---|---|
+| assetName | string | Yes | Asset name | 
+| maxOrderSizes | Double Array | Yes | Maximum order size | 
+| maxOrderValues | Double Array | Yes | Maximum order notional value | 
+| minOrderSizes | Double Array | Yes | Minimum order size | 
+| minOrderValues | Double Array | Yes | Minimum order notional value | 
+| supportQuoteCurrencies | string Array | Yes | Supported quote currencies | 
+
+## Market Summary
+
+> Response
+
+```json
+{
+  "assetName": "BTC",
+  "maxOrderSizes": [
+    5000,
+    5000,
+    5000
+  ],
+  "maxOrderValues": [
+    100000,
+    100000,
+    100000
+  ],
+  "minOrderSizes": [
+    0.05,
+    0.05,
+    0.05
+  ],
+  "minOrderValues": [
+    0.0025,
+    0.0025,
+    0.0025
+  ],
+  "supportQuoteCurrencies": [
+  ]
+}
+```
+
+`GET /api/v1/getMarket`
+
+Gets OTC market information
+
+### Response Content
+|Name|Type|Required|Description|
+|---|---|---|---|
+| assetName | string | Yes | Asset name | 
+| maxOrderSizes | Double Array | Yes | Maximum order size | 
+| maxOrderValues | Double Array | Yes | Maximum order notional value | 
+| minOrderSizes | Double Array | Yes | Minimum order size | 
+| minOrderValues | Double Array | Yes | Minimum order notional value | 
+| supportQuoteCurrencies | string Array | Yes | Supported quote currencies | 
+
+## Market Summary
+
+> Response
+
+```json
+{
+  "assetName": "BTC",
+  "maxOrderSizes": [
+    5000,
+    5000,
+    5000
+  ],
+  "maxOrderValues": [
+    100000,
+    100000,
+    100000
+  ],
+  "minOrderSizes": [
+    0.05,
+    0.05,
+    0.05
+  ],
+  "minOrderValues": [
+    0.0025,
+    0.0025,
+    0.0025
+  ],
+  "supportQuoteCurrencies": [
+  ]
+}
+```
+
+`GET /api/v1/getMarket`
+
+Gets OTC market information
+
+### Response Content
+|Name|Type|Required|Description|
+|---|---|---|---|
+| assetName | string | Yes | Asset name | 
+| maxOrderSizes | Double Array | Yes | Maximum order size | 
+| maxOrderValues | Double Array | Yes | Maximum order notional value | 
+| minOrderSizes | Double Array | Yes | Minimum order size | 
+| minOrderValues | Double Array | Yes | Minimum order notional value | 
+| supportQuoteCurrencies | string Array | Yes | Supported quote currencies | 
+
+## Market Summary
+
+> Response
+
+```json
+{
+  "assetName": "BTC",
+  "maxOrderSizes": [
+    5000,
+    5000,
+    5000
+  ],
+  "maxOrderValues": [
+    100000,
+    100000,
+    100000
+  ],
+  "minOrderSizes": [
+    0.05,
+    0.05,
+    0.05
+  ],
+  "minOrderValues": [
+    0.0025,
+    0.0025,
+    0.0025
+  ],
+  "supportQuoteCurrencies": [
+  ]
+}
+```
+
+`GET /api/v1/getMarket`
+
+Gets OTC market information
+
+### Response Content
+|Name|Type|Required|Description|
+|---|---|---|---|
+| assetName | string | Yes | Asset name | 
+| maxOrderSizes | Double Array | Yes | Maximum order size | 
+| maxOrderValues | Double Array | Yes | Maximum order notional value | 
+| minOrderSizes | Double Array | Yes | Minimum order size | 
+| minOrderValues | Double Array | Yes | Minimum order notional value | 
+| supportQuoteCurrencies | string Array | Yes | Supported quote currencies | 
+
+## Market Summary
+
+> Response
+
+```json
+{
+  "assetName": "BTC",
+  "maxOrderSizes": [
+    5000,
+    5000,
+    5000
+  ],
+  "maxOrderValues": [
+    100000,
+    100000,
+    100000
+  ],
+  "minOrderSizes": [
+    0.05,
+    0.05,
+    0.05
+  ],
+  "minOrderValues": [
+    0.0025,
+    0.0025,
+    0.0025
+  ],
+  "supportQuoteCurrencies": [
+  ]
+}
+```
+
+`GET /api/v1/getMarket`
+
+Gets OTC market information
+
+### Response Content
+|Name|Type|Required|Description|
+|---|---|---|---|
+| assetName | string | Yes | Asset name | 
+| maxOrderSizes | Double Array | Yes | Maximum order size | 
+| maxOrderValues | Double Array | Yes | Maximum order notional value | 
+| minOrderSizes | Double Array | Yes | Minimum order size | 
+| minOrderValues | Double Array | Yes | Minimum order notional value | 
+| supportQuoteCurrencies | string Array | Yes | Supported quote currencies | 
+
+</section>
