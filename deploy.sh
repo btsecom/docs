@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+
+echo "Copy spot to spot page"
+cp source/index.html.md source/spot/en/
+
 set -o errexit #abort if any command fails
 me=$(basename "$0")
 
