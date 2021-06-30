@@ -1,5 +1,5 @@
 ---
-title: BTSE Futures API
+title: BTSE API Documentation
 language_tabs:
   - json
 toc_footers: []

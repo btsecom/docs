@@ -1,5 +1,5 @@
 ---
-title: BTSE Spot API
+title: BTSE API Documentation
 language_tabs:
   - json
 toc_footers: []
