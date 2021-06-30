@@ -31,7 +31,8 @@ html, body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   @extend %default-font;
-  background-color: $main-bg;
+  /*background-color: $main-bg;*/
+  background-color: #2E3336;
   height: 100%;
   -webkit-text-size-adjust: none; /* Never autoresize text */
 }
@@ -56,7 +57,7 @@ header{
   height: 60px;
   left: 0;
   top: 0;
-  background: #131625;
+  background: #2E3336;
   box-shadow: 0 1px 0 0 #000;
   z-index: 100;
   .flex_box{
@@ -67,7 +68,9 @@ header{
   // This is the logo at the top of the ToC
   .logo {
     display: block;
-    max-width: 100%;
+    width: 148px;
+    height: 30px;
+    // max-width: 100%;
   }
   .nav_box{
     position: relative;

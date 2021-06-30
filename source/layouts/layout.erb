@@ -30,7 +30,7 @@ under the License.
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title><%= current_page.data.title || "API Documentation" %></title>
-
+    <%= favicon_tag 'favicon.ico' %>
     <style>
       <%= Rouge::Themes::MonokaiSublimeSlate.render(:scope => '.highlight') %>
     </style>
@@ -52,20 +52,28 @@ under the License.
     </a>
     <header>
     <div class="flex_box">
-      <%= image_tag "logo.png", class: 'logo' %>
+      <%= image_tag "logo.svg", class: 'logo' %>
       <div class="nav_box">
-        <span class="nav_cell nav_tab">
-          <a href="docs/" id="btn_spot">Spot</a>
+        <span class="nav_cell" style="display: none">
+          <a href="javascript:;" class="nav_first">v1<i class="icon_nav"></i></a>
+          <ul class="nav_ul">
+            <li>
+              <a href="/docs/spot/en/" id="v1_url">v1</a>
+            </li>
+          </ul>
         </span>
         <span class="nav_cell nav_tab">
-          <a href="/docs/dm/v1/en/" id="btn_futures">Futures</a>
+          <a href="docs/spot/en/" id="btn_spot">Spot</a>
+        </span>
+        <span class="nav_cell nav_tab">
+          <a href="docs/futures/en/" id="btn_futures">Futures</a>
         </span>
         <span class="nav_cell nav_tab">
           <a href="https://www.btse.com/apiexplorer/otc/" id="btn_otc">OTC</a>
         </span>
       </div>
     </div>
-    # <a href="/docs/spot/v1/cn/" class="lang" id="lang_box">简体中文</a>
+    
   </header>
     <div class="toc-wrapper">
       <% if language_tabs.any? %>
@@ -129,75 +137,63 @@ under the License.
       </div>
     </div>
     <script>
-    const lang_btn = document.getElementById('lang_box');
+    // const lang_btn = document.getElementById('lang_box');
     const btn_spot = document.getElementById('btn_spot');
     const btn_futures = document.getElementById('btn_futures');
     const btn_otc = document.getElementById('btn_otc');
     const v1_url = document.getElementById('v1_url');
     const url = GetUrlRelativePath();
 
+    //english
     if(url.indexOf('cn') != -1){
       //如果是中文环境
-      lang_btn.innerHTML = 'English';
+      // lang_btn.innerHTML = 'English';
       btn_spot.innerHTML = '现货';
-      btn_futures.innerHTML = '交割合约';
-      btn_otc.innerHTML = '币本位永续合约';
+      btn_futures.innerHTML = '期货';
+      btn_otc.innerHTML = '场外交易';
       
-      lang_btn.href = url.replace('cn/', 'en/');
+      // lang_btn.href = url.replace('cn/', 'en/');
       btn_spot.href = btn_spot.href.replace('en/', 'cn/');
-      btn_futures.href = btn_dm.href.replace('en/', 'cn/');
-      //btn_otc.href = btn_coin_margined_swap.href.replace('en/', 'cn/');
+      btn_futures.href = btn_futures.href.replace('en/', 'cn/');
+      //btn_otc.href = btn_otc.href.replace('en/', 'cn/');
       
-      v1_url.href = '/docs/spot/v1/cn/';
-    }else{
+      v1_url.href = '/docs/spot/cn/';
+    }else{ //chinese
       //如果是英文环境
-      lang_btn.innerHTML = '中文';
+      // lang_btn.innerHTML = '中文';
       btn_spot.innerHTML = 'Spot';
       btn_futures.innerHTML = 'Futures';
       btn_otc.innerHTML = 'OTC';
-      lang_btn.href = url.replace('en/', 'cn/');
+      // lang_btn.href = url.replace('en/', 'cn/');
       
       btn_spot.href = btn_spot.href.replace('cn/', 'en/');
-      btn_futures.href = btn_dm.href.replace('cn/', 'en/');
-      btn_otc.href = btn_coin_margined_swap.href.replace('cn/', 'en/');
+      btn_futures.href = btn_futures.href.replace('cn/', 'en/');
+      btn_otc.href = btn_otc.href.replace('cn/', 'en/');
       
-      v1_url.href = '/docs/spot/v1/en/';
+      v1_url.href = '/docs/spot/en/';
     }
 
-    if(location.href.indexOf('docs/dm/v') > 0){
+    if(location.href.indexOf('docs/futures') > 0){
       btn_spot.className = '';
-      btn_dm.className = 'current';
-      btn_coin_margined_swap.className = '';
-      btn_usdt_swap.className = '';
-      btn_option.className = '';
+      btn_futures.className = 'current';
+      btn_otc.className = '';
+      
     } 
-    else if(location.href.indexOf('docs/coin_margined_swap/v') > 0){
+    else if(location.href.indexOf('docs/spot') > 0){
+      btn_spot.className = 'current';
+      btn_futures.className = '';
+      btn_otc.className = '';
+    } else if(location.href.indexOf('docs/otc/v') > 0){
       btn_spot.className = '';
-      btn_dm.className = '';
-      btn_coin_margined_swap.className = 'current';        
-      btn_usdt_swap.className = '';
-      btn_option.className = '';
-    } else if(location.href.indexOf('docs/usdt_swap/v') > 0){
-      btn_spot.className = '';        
-      btn_dm.className = '';
-      btn_coin_margined_swap.className = '';
-      btn_usdt_swap.className = 'current';
-      btn_option.className = '';
-    } else if(location.href.indexOf('docs/option/v') > 0){
-      btn_spot.className = '';
-      btn_coin_margined_swap.className = '';
-      btn_usdt_swap.className = '';
-      btn_dm.className = '';
-      btn_option.className = 'current';
+      btn_futures.className = '';
+      btn_otc.className = 'current';
     } else {
       btn_spot.className = 'current';
-      btn_coin_margined_swap.className = '';
-      btn_usdt_swap.className = '';
-      btn_dm.className = '';
-      btn_option.className = '';
+      btn_futures.className = '';
+      btn_otc.className = '';
     }
     //显示语言切换按钮
-    lang_btn.style.display = 'block';
+    // lang_btn.style.display = 'block';
     function GetUrlRelativePath(){
       let url = document.location.toString();
       let arrUrl = url.split("//");
