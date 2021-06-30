@@ -735,48 +735,82 @@ This API Requires `Trading` permission
 
 ## Amend Order
 
+> Request
+
+```json
+{
+  "symbol": "BTC-USD",
+  "type": "PRICE",
+  "orderID": "Order ID",
+  "clOrderID": "Custom Order ID",
+  "value": 0,
+  "slide": true
+}
+```
+
 > Response
 
 ```json
-[
-  {
-    "price": 36164,
-    "size": 0.035,
-    "side": "SELL",
-    "symbol": "BTC-USD",
-    "serialId": 85997835,
-    "timestamp": 1624990097000
-  }
-]
+{
+  "averageFillPrice": 0,
+  "clOrderID": "string",
+  "deviation": -5,
+  "fillSize": 0,
+  "message": "string",
+  "orderID": "string",
+  "orderType": 76,
+  "price": 0,
+  "side": "BUY",
+  "size": 4,
+  "status": 0,
+  "stealth": 10,
+  "stopPrice": 8300,
+  "symbol": "BTC-USD",
+  "timestamp": 1576812000872,
+  "trigger": true,
+  "triggerPrice": 8300
+}
 ```
 
-`GET /api/v3.2/trades`
+`PUT /api/v3.2/order`
 
-Get trade fills for the market specified by `symbol`
+Amend the price or size or trigger price of an order. For trigger orders, if the order has already been triggered, the trigger price cannot be further amended. If an order is a POST-ONLY order, and `slide` option is set to true, then price will set to be the best bid/ask price. Amend order _does not_ apply to algo orders
 
 ### Request Parameters
 
 |Name|Type|Required|Description|
 |---|---|---|---|
 | symbol | string | Yes | Market symbol | 
-| startTime | long | No | Starting time (eg. 1624987283000) | 
-| endTime | long | No | Ending time (eg. 1624987283000) | 
-| beforeSerialId | string | Yes | Condition to retrieve records before the specified serial Id. Used for pagination| 
-| afterSerialId | string | Yes | Condition to retrieve records after the specified serial Id. Used for pagination| 
-| count | integer | Yes | Number of records to return | 
-| includeOld | boolean | Yes | Retrieve trade  history records past 7 days | 
+| orderID | string | No | Internal order ID | 
+| clOrderID | string | No | Custom order ID | 
+| type | string | Yes | Type of amendmend<br/>`PRICE`: To amend order price<br/>`SIZE`: To amend order size<br/>TRIGGER: To amend trigger price| 
+| value | number | Yes | The value to be amended to. Value depends on the type being set.  | 
+| slide | boolean | No | Used for Post-Only orders. When set to true will set price to best bid/ask| 
 
 
 ### Response Content
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-| symbol | long | Yes | Market symbol |
-| side | string | Yes | Trade side. Values are: [`Buy`, `SELL`] | 
-| price | double | Yes | Transacted price | 
-| size | double | Yes | Transacted size |
-| serialId | double | Yes | Serial Id, running sequence number |
-| timestamp | double | Yes | Transacted timestamp |
+| symbol | string | Yes | Market symbol |
+| clOrderID | string | Yes | Customer tag sent in by trader |
+| fillSize | string | Yes | Trade filled size |
+| orderID | string | Yes | Order ID |
+| orderType | string | Yes | Order type <br/>76: Limit Order<br/>77: Market order<br/>80: Algo order |
+| postOnly | boolean | Yes | Indicates if order is a post only order |
+| price | double | Yes | Order price |
+| side | string | Yes | Order side<br/>BUY or SELL |
+| size | double | Yes | Order size |
+| status | integer | Yes | Order status<br/>	2: Order Inserted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found |
+| stopPrice | string | Yes | Stop price |
+| time_in_force | string | Yes | Order validity |
+| timestamp | string | Yes | Order timestamp |
+| trigger | string | Yes | Indicator if order is a trigger order |
+| triggerPrice | string | Yes | Order trigger price, returns 0 if order is not a trigger order |
+| averageFillPrice | string | Yes | Average filled price. Returns the average filled price for partially transacted orders |
+| message | string | Yes | Trade messages |
+| stealth | string | Yes | Stealth value of order |
+| deviation | string | Yes | Deviation value of order |
 
 
 ## Cancel Order
@@ -796,144 +830,174 @@ Get trade fills for the market specified by `symbol`
 ]
 ```
 
-`GET /api/v3.2/trades`
+`DELETE /api/v3.2/order`
 
-Get trade fills for the market specified by `symbol`
+CAncels pending orders that has not yet been transacted. The `orderID` is a unique identifier to cancel a particular order. `clOrderID` is a custom ID sent in by the trader. When cancel by `clOrderID`, all orders having the same ID will be cancelled. If `orderID` and `clOrderID` is not sent in, then cancellation will be for all orders in the current market.
 
 ### Request Parameters
 
 |Name|Type|Required|Description|
 |---|---|---|---|
 | symbol | string | Yes | Market symbol | 
-| startTime | long | No | Starting time (eg. 1624987283000) | 
-| endTime | long | No | Ending time (eg. 1624987283000) | 
-| beforeSerialId | string | Yes | Condition to retrieve records before the specified serial Id. Used for pagination| 
-| afterSerialId | string | Yes | Condition to retrieve records after the specified serial Id. Used for pagination| 
-| count | integer | Yes | Number of records to return | 
-| includeOld | boolean | Yes | Retrieve trade  history records past 7 days | 
+| orderID | string | No | Unique identifier for an order | 
+| clOrderID | string | No | Client custom order ID| 
 
 
 ### Response Content
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-| symbol | long | Yes | Market symbol |
-| side | string | Yes | Trade side. Values are: [`Buy`, `SELL`] | 
-| price | double | Yes | Transacted price | 
-| size | double | Yes | Transacted size |
-| serialId | double | Yes | Serial Id, running sequence number |
-| timestamp | double | Yes | Transacted timestamp |
+| symbol | string | Yes | Market symbol |
+| clOrderID | string | Yes | Customer tag sent in by trader |
+| fillSize | string | Yes | Trade filled size |
+| orderID | string | Yes | Order ID |
+| orderType | string | Yes | Order type <br/>76: Limit Order<br/>77: Market order<br/>80: Algo order |
+| postOnly | boolean | Yes | Indicates if order is a post only order |
+| price | double | Yes | Order price |
+| side | string | Yes | Order side<br/>BUY or SELL |
+| size | double | Yes | Cancelled size |
+| status | integer | Yes | Order status<br/>	2: Order Inserted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found |
+| stopPrice | string | Yes | Stop price |
+| time_in_force | string | Yes | Order validity |
+| timestamp | string | Yes | Order timestamp |
+| trigger | string | Yes | Indicator if order is a trigger order |
+| triggerPrice | string | Yes | Order trigger price, returns 0 if order is not a trigger order |
+| averageFillPrice | string | Yes | Average filled price. Returns the average filled price for partially transacted orders |
+| message | string | Yes | Trade messages |
+| stealth | string | Yes | Stealth value of order |
+| deviation | string | Yes | Deviation value of order |
 
 ## Dead man's switch (Cancel all after)
 
-> Response
+> Request
 
 ```json
-[
-  {
-    "price": 36164,
-    "size": 0.035,
-    "side": "SELL",
-    "symbol": "BTC-USD",
-    "serialId": 85997835,
-    "timestamp": 1624990097000
-  }
-]
+{
+  "timeout": 60000
+}
 ```
 
-`GET /api/v3.2/trades`
+`POST /api/v3.2/order/cancelAllAfter`
 
-Get trade fills for the market specified by `symbol`
+Dead-man's switch allows the trader to send in a timeout value which is a Time to live (TTL) value for an order. Extension of the timeout is done by sending another `cancelAllAfter` request. If the server does not receive another request before the timeout is reached, all orders will be cancelled.
 
 ### Request Parameters
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-| symbol | string | Yes | Market symbol | 
-| startTime | long | No | Starting time (eg. 1624987283000) | 
-| endTime | long | No | Ending time (eg. 1624987283000) | 
-| beforeSerialId | string | Yes | Condition to retrieve records before the specified serial Id. Used for pagination| 
-| afterSerialId | string | Yes | Condition to retrieve records after the specified serial Id. Used for pagination| 
-| count | integer | Yes | Number of records to return | 
-| includeOld | boolean | Yes | Retrieve trade  history records past 7 days | 
+| timeout | long | Yes | Timeout value in milliseconds | 
 
 
 ### Response Content
 
-|Name|Type|Required|Description|
-|---|---|---|---|
-| symbol | long | Yes | Market symbol |
-| side | string | Yes | Trade side. Values are: [`Buy`, `SELL`] | 
-| price | double | Yes | Transacted price | 
-| size | double | Yes | Transacted size |
-| serialId | double | Yes | Serial Id, running sequence number |
-| timestamp | double | Yes | Transacted timestamp |
+* If set correctly, a HTTP 200 response code will be returned
 
 ## Query Open Orders
 
 > Response
 
 ```json
-[
-  {
-    "price": 36164,
-    "size": 0.035,
-    "side": "SELL",
-    "symbol": "BTC-USD",
-    "serialId": 85997835,
-    "timestamp": 1624990097000
-  }
-]
+{
+  "averageFillPrice": 0,
+  "cancelDuration": 0,
+  "clOrderID": "string",
+  "fillSize": 0,
+  "filledSize": 3,
+  "orderID": "string",
+  "orderState": "STATUS_ACTIVE",
+  "orderType": 0,
+  "orderValue": 20.625,
+  "pegPriceDeviation": 3,
+  "pegPriceMax": 0,
+  "pegPriceMin": 0,
+  "price": 6875,
+  "side": "BUY",
+  "size": 4,
+  "symbol": "string",
+  "timestamp": 0,
+  "trailValue": 0,
+  "triggerOrder": false,
+  "triggerOrderType": 1001,
+  "triggerOriginalPrice": 0,
+  "triggerPrice": 0,
+  "triggerStopPrice": 0,
+  "triggerTrailingStopDeviation": 0,
+  "triggered": true
+}
 ```
 
-`GET /api/v3.2/trades`
+`GET /api/v3.2/user/open_orders`
 
-Get trade fills for the market specified by `symbol`
+Retrieves open orders that have not yet been matched. This is also used to check an order for its status. If an order has been cancelled or recently transacted, the `status` field will indicate the state of the order. 
 
 ### Request Parameters
 
 |Name|Type|Required|Description|
 |---|---|---|---|
 | symbol | string | Yes | Market symbol | 
-| startTime | long | No | Starting time (eg. 1624987283000) | 
-| endTime | long | No | Ending time (eg. 1624987283000) | 
-| beforeSerialId | string | Yes | Condition to retrieve records before the specified serial Id. Used for pagination| 
-| afterSerialId | string | Yes | Condition to retrieve records after the specified serial Id. Used for pagination| 
-| count | integer | Yes | Number of records to return | 
-| includeOld | boolean | Yes | Retrieve trade  history records past 7 days | 
+| orderID | string | No | Query using internal order ID | 
+| clOrderID | string | No | Query using custom order ID | 
 
 
 ### Response Content
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-| symbol | long | Yes | Market symbol |
-| side | string | Yes | Trade side. Values are: [`Buy`, `SELL`] | 
-| price | double | Yes | Transacted price | 
-| size | double | Yes | Transacted size |
-| serialId | double | Yes | Serial Id, running sequence number |
-| timestamp | double | Yes | Transacted timestamp |
+| symbol | string | Yes | Market symbol |
+| clOrderID | string | Yes | Customer tag sent in by trader |
+| fillSize | string | Yes | Trade filled size |
+| orderID | string | Yes | Order ID |
+| orderType | string | Yes | Order type <br/>76: Limit Order<br/>77: Market order<br/>80: Algo order |
+| postOnly | boolean | Yes | Indicates if order is a post only order |
+| price | double | Yes | Order price |
+| side | string | Yes | Order side<br/>BUY or SELL |
+| size | double | Yes | Cancelled size |
+| status | integer | Yes | Order status<br/>	2: Order Inserted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found |
+| stopPrice | string | Yes | Stop price |
+| time_in_force | string | Yes | Order validity |
+| timestamp | string | Yes | Order timestamp |
+| trigger | string | Yes | Indicator if order is a trigger order |
+| triggerPrice | string | Yes | Order trigger price, returns 0 if order is not a trigger order |
+| averageFillPrice | string | Yes | Average filled price. Returns the average filled price for partially transacted orders |
+| message | string | Yes | Trade messages |
+| stealth | string | Yes | Stealth value of order |
+| deviation | string | Yes | Deviation value of order |
+| orderState | string | Yes | `ORDER_INSERTED`: Order is inserted successfully<br/>`ORDER_CANCELLED`: Order is cancelled successfully<br/>`ORDER_FULLY_TRANSACTED`: Order is fully transacted<br/>`ORDER_PARTIALLY_TRANSACTED`: Order is partially transacted<br/>`STATUS_INACTIVE`: Order is no longer active | 
 
 ## Query Trades Fills
 
 > Response
 
 ```json
-[
-  {
-    "price": 36164,
-    "size": 0.035,
-    "side": "SELL",
-    "symbol": "BTC-USD",
-    "serialId": 85997835,
-    "timestamp": 1624990097000
-  }
-]
+{
+  "base": "string",
+  "clOrderID": "string",
+  "feeAmount": 0,
+  "feeCurrency": "string",
+  "filledPrice": 0,
+  "filledSize": 0,
+  "orderId": "string",
+  "orderType": 0,
+  "price": 0,
+  "quote": "string",
+  "realizedPnl": 0,
+  "serialId": 0,
+  "side": "string",
+  "size": 0,
+  "symbol": "string",
+  "timestamp": 0,
+  "total": 0,
+  "tradeId": "string",
+  "triggerPrice": 0,
+  "triggerType": 0,
+  "username": "string",
+  "wallet": "string"
+}
 ```
 
-`GET /api/v3.2/trades`
+`GET /api/v3.2/user/trade_history`
 
-Get trade fills for the market specified by `symbol`
+Retrieves a user's trade history
 
 ### Request Parameters
 
@@ -942,67 +1006,60 @@ Get trade fills for the market specified by `symbol`
 | symbol | string | Yes | Market symbol | 
 | startTime | long | No | Starting time (eg. 1624987283000) | 
 | endTime | long | No | Ending time (eg. 1624987283000) | 
-| beforeSerialId | string | Yes | Condition to retrieve records before the specified serial Id. Used for pagination| 
-| afterSerialId | string | Yes | Condition to retrieve records after the specified serial Id. Used for pagination| 
-| count | integer | Yes | Number of records to return | 
+| beforeSerialId | string | No | Condition to retrieve records before the specified serial Id. Used for pagination| 
+| afterSerialId | string | No | Condition to retrieve records after the specified serial Id. Used for pagination| 
+| count | integer | No | Number of records to return | 
 | includeOld | boolean | Yes | Retrieve trade  history records past 7 days | 
+| clOrderID | string | No | Query trade history by custom order ID | 
+| orderID | string | No | Query trade history by order ID | 
 
 
 ### Response Content
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-| symbol | long | Yes | Market symbol |
+| symbol | string | Yes | Market symbol |
 | side | string | Yes | Trade side. Values are: [`Buy`, `SELL`] | 
 | price | double | Yes | Transacted price | 
 | size | double | Yes | Transacted size |
-| serialId | double | Yes | Serial Id, running sequence number |
+| serialId | long | Yes | Serial Id, running sequence number |
+| tradeId | string | Yes | Trade identifier |
 | timestamp | double | Yes | Transacted timestamp |
+| base | long | Yes | Base currency |
+| quote | long | Yes | Quote currency |
+| clOrderID | long | Yes | Custom order ID |
+| orderID | long | Yes | Order ID |
+| feeAmount | long | Yes | Fee amount |
+| feeCurrency | long | Yes | Fee currency |
+| filledPrice | long | Yes | Filled price |
+| filledSize | long | Yes | Filled size |
+| orderType | long | Yes | Order Type |
+| realizedPnL | long | Yes | Not used in Spot |
+| total | long | Yes | Not used in Spot |
+
 
 ## Query Account Fees
 
 > Response
 
 ```json
-[
-  {
-    "price": 36164,
-    "size": 0.035,
-    "side": "SELL",
-    "symbol": "BTC-USD",
-    "serialId": 85997835,
-    "timestamp": 1624990097000
-  }
-]
+{
+  "makerFee": 0,
+  "symbol": "BTC-USD",
+  "takerFee": 0
+}
 ```
 
-`GET /api/v3.2/trades`
+`GET /api/v3.2/user/fees`
 
-Get trade fills for the market specified by `symbol`
-
-### Request Parameters
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-| symbol | string | Yes | Market symbol | 
-| startTime | long | No | Starting time (eg. 1624987283000) | 
-| endTime | long | No | Ending time (eg. 1624987283000) | 
-| beforeSerialId | string | Yes | Condition to retrieve records before the specified serial Id. Used for pagination| 
-| afterSerialId | string | Yes | Condition to retrieve records after the specified serial Id. Used for pagination| 
-| count | integer | Yes | Number of records to return | 
-| includeOld | boolean | Yes | Retrieve trade  history records past 7 days | 
-
-
+Retrieve user's trading fees
 ### Response Content
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-| symbol | long | Yes | Market symbol |
-| side | string | Yes | Trade side. Values are: [`Buy`, `SELL`] | 
-| price | double | Yes | Transacted price | 
-| size | double | Yes | Transacted size |
-| serialId | double | Yes | Serial Id, running sequence number |
-| timestamp | double | Yes | Transacted timestamp |
+| symbol | string | Yes | Market symbol |
+| makerFee | double | Yes | Maker fees | 
+| takerFee | double | Yes | Taker fees | 
 
 # Wallet Endpoints
 
@@ -1013,44 +1070,23 @@ Get trade fills for the market specified by `symbol`
 ```json
 [
   {
-    "price": 36164,
-    "size": 0.035,
-    "side": "SELL",
-    "symbol": "BTC-USD",
-    "serialId": 85997835,
-    "timestamp": 1624990097000
+    "available": 520.52,
+    "currency": "USD",
+    "total": 5566.5566
   }
 ]
 ```
 
-`GET /api/v3.2/trades`
+`GET /api/v3.2/user/wallet`
 
-Get trade fills for the market specified by `symbol`
-
-### Request Parameters
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-| symbol | string | Yes | Market symbol | 
-| startTime | long | No | Starting time (eg. 1624987283000) | 
-| endTime | long | No | Ending time (eg. 1624987283000) | 
-| beforeSerialId | string | Yes | Condition to retrieve records before the specified serial Id. Used for pagination| 
-| afterSerialId | string | Yes | Condition to retrieve records after the specified serial Id. Used for pagination| 
-| count | integer | Yes | Number of records to return | 
-| includeOld | boolean | Yes | Retrieve trade  history records past 7 days | 
-
-
+Query user's wallet balance. Requires `Read` permissions on the API key.
 ### Response Content
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-| symbol | long | Yes | Market symbol |
-| side | string | Yes | Trade side. Values are: [`Buy`, `SELL`] | 
-| price | double | Yes | Transacted price | 
-| size | double | Yes | Transacted size |
-| serialId | double | Yes | Serial Id, running sequence number |
-| timestamp | double | Yes | Transacted timestamp |
-
+| currency | string | Yes | Currency |
+| total | double | Yes | Total balance | 
+| available | double | Yes | Available balance | 
 ## Query Wallet History
 
 > Response
@@ -1058,193 +1094,561 @@ Get trade fills for the market specified by `symbol`
 ```json
 [
   {
-    "price": 36164,
-    "size": 0.035,
-    "side": "SELL",
-    "symbol": "BTC-USD",
-    "serialId": 85997835,
-    "timestamp": 1624990097000
+    "amount": 21.35823825,
+    "currency": "USD",
+    "description": "string",
+    "fees": 0.06,
+    "orderId": 20181213000239,
+    "status": 10,
+    "timestamp": 1571630174639,
+    "type": 1,
+    "username": "btseUser",
+    "wallet": "Wallet",
+    "txid": "<Blockchain Transaction ID>",
+    "currencyNetwork": "<Blockchain currency network>"
   }
 ]
 ```
 
-`GET /api/v3.2/trades`
+`GET /api/v3.2/user/wallet_history`
 
-Get trade fills for the market specified by `symbol`
+Get user's wallet history records on the spot wallet
 
 ### Request Parameters
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-| symbol | string | Yes | Market symbol | 
+| currency | string | No | Currency, if not specified will return all currencies | 
 | startTime | long | No | Starting time (eg. 1624987283000) | 
 | endTime | long | No | Ending time (eg. 1624987283000) | 
-| beforeSerialId | string | Yes | Condition to retrieve records before the specified serial Id. Used for pagination| 
-| afterSerialId | string | Yes | Condition to retrieve records after the specified serial Id. Used for pagination| 
-| count | integer | Yes | Number of records to return | 
-| includeOld | boolean | Yes | Retrieve trade  history records past 7 days | 
+| count | integer | No | Number of records to return | 
 
 
 ### Response Content
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-| symbol | long | Yes | Market symbol |
-| side | string | Yes | Trade side. Values are: [`Buy`, `SELL`] | 
-| price | double | Yes | Transacted price | 
-| size | double | Yes | Transacted size |
-| serialId | double | Yes | Serial Id, running sequence number |
-| timestamp | double | Yes | Transacted timestamp |
+| currency | string | Yes | Currency |
+| amount | double | Yes | Amount in the record | 
+| fees | double | Yes | Fees charged if any | 
+| orderId | string | Yes | Internal wallet order ID |
+| wallet | string | Yes | Wallet type. For spot will return `@SPOT` |
+| description | string | Yes | Description of the transaction |
+| status | integer | Yes | 1: PENDING<br/>2: PROCESSING<br/>10: COMPLETED<br/>16: CANCELLED |
+| type | integer | Yes | `Deposit`: Deposits into account<br/>`Withdraw`: Withdrawals from account<br/>`Transfer_In`: BTSE internal transfer where funds are transferred in<br/>`Transfer_Out`: BTSE internal transfer where funds are transferred out<br/>`ReferralEarning`: Referral Earnings |
 
 ## Create Wallet Address
 
+> Request
+
+```json
+{
+  "currency": "BTC"
+}
+```
+
 > Response
 
 ```json
 [
   {
-    "price": 36164,
-    "size": 0.035,
-    "side": "SELL",
-    "symbol": "BTC-USD",
-    "serialId": 85997835,
-    "timestamp": 1624990097000
+    "address": "Blockchain address",
+    "created": 1592627542
   }
 ]
 ```
 
-`GET /api/v3.2/trades`
+`POST /api/v3.2/user/wallet/address`
 
-Get trade fills for the market specified by `symbol`
+Creates a wallet address. If the address created has not been used before, a 400 error will return with the existing unused address. To use this API, `Wallet` permission is required. 
 
 ### Request Parameters
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-| symbol | string | Yes | Market symbol | 
-| startTime | long | No | Starting time (eg. 1624987283000) | 
-| endTime | long | No | Ending time (eg. 1624987283000) | 
-| beforeSerialId | string | Yes | Condition to retrieve records before the specified serial Id. Used for pagination| 
-| afterSerialId | string | Yes | Condition to retrieve records after the specified serial Id. Used for pagination| 
-| count | integer | Yes | Number of records to return | 
-| includeOld | boolean | Yes | Retrieve trade  history records past 7 days | 
-
+| currency | string | Yes | Currency to get address | 
 
 ### Response Content
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-| symbol | long | Yes | Market symbol |
-| side | string | Yes | Trade side. Values are: [`Buy`, `SELL`] | 
-| price | double | Yes | Transacted price | 
-| size | double | Yes | Transacted size |
-| serialId | double | Yes | Serial Id, running sequence number |
-| timestamp | double | Yes | Transacted timestamp |
+| address | string | Yes | Blockchain address |
+| created | long | Yes | Created timestamp | 
 
 ## Get Wallet Address
 
+> Request
+
+```json
+{
+  "currency": "BTC"
+}
+```
+
 > Response
 
 ```json
 [
   {
-    "price": 36164,
-    "size": 0.035,
-    "side": "SELL",
-    "symbol": "BTC-USD",
-    "serialId": 85997835,
-    "timestamp": 1624990097000
+    "address": "Blockchain address",
+    "created": 1592627542
   }
 ]
 ```
 
-`GET /api/v3.2/trades`
+`GET /api/v3.2/user/wallet/address`
 
-Get trade fills for the market specified by `symbol`
+Gets a wallet address. To use this API, `Wallet` permission is required. 
 
 ### Request Parameters
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-| symbol | string | Yes | Market symbol | 
-| startTime | long | No | Starting time (eg. 1624987283000) | 
-| endTime | long | No | Ending time (eg. 1624987283000) | 
-| beforeSerialId | string | Yes | Condition to retrieve records before the specified serial Id. Used for pagination| 
-| afterSerialId | string | Yes | Condition to retrieve records after the specified serial Id. Used for pagination| 
-| count | integer | Yes | Number of records to return | 
-| includeOld | boolean | Yes | Retrieve trade  history records past 7 days | 
-
+| currency | string | Yes | Currency to create address | 
 
 ### Response Content
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-| symbol | long | Yes | Market symbol |
-| side | string | Yes | Trade side. Values are: [`Buy`, `SELL`] | 
-| price | double | Yes | Transacted price | 
-| size | double | Yes | Transacted size |
-| serialId | double | Yes | Serial Id, running sequence number |
-| timestamp | double | Yes | Transacted timestamp |
-
+| address | string | Yes | Blockchain address |
+| created | long | Yes | Created timestamp | 
 ## Withdraw Funds
 
+> Request
+
+```json
+{
+  "currency": "BTC",
+  "address": "BTCAddress",
+  "tag": "Tag",
+  "amount": "0.001"
+}
+```
+
 > Response
 
 ```json
-[
-  {
-    "price": 36164,
-    "size": 0.035,
-    "side": "SELL",
-    "symbol": "BTC-USD",
-    "serialId": 85997835,
-    "timestamp": 1624990097000
-  }
-]
+{
+  "withdraw_id": "<withdrawal ID>"
+}
 ```
 
-`GET /api/v3.2/trades`
+`POST /api/v3.2/user/wallet/withdraw`
 
-Get trade fills for the market specified by `symbol`
+Performs a wallet withdrawal. To use this API, `Withdraw` permission is required. 
 
 ### Request Parameters
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-| symbol | string | Yes | Market symbol | 
-| startTime | long | No | Starting time (eg. 1624987283000) | 
-| endTime | long | No | Ending time (eg. 1624987283000) | 
-| beforeSerialId | string | Yes | Condition to retrieve records before the specified serial Id. Used for pagination| 
-| afterSerialId | string | Yes | Condition to retrieve records after the specified serial Id. Used for pagination| 
-| count | integer | Yes | Number of records to return | 
-| includeOld | boolean | Yes | Retrieve trade  history records past 7 days | 
-
+| currency | string | Yes | Currency | 
+| address | string | Yes | Blockchain address | 
+| tag | string | Yes | Tag, used only by some blockchain (eg. XRP) | 
+| amount | string | Yes | Amount to withdraw | 
 
 ### Response Content
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-| symbol | long | Yes | Market symbol |
-| side | string | Yes | Trade side. Values are: [`Buy`, `SELL`] | 
-| price | double | Yes | Transacted price | 
-| size | double | Yes | Transacted size |
-| serialId | double | Yes | Serial Id, running sequence number |
-| timestamp | double | Yes | Transacted timestamp |
+| withdraw_id | string | Yes | Internal withdrawal ID. References the `orderID` field in `wallet_history` API. As withdrawal will not be processed immediately. User can query the wallet history API to check on the status of the withdrawal |
+
 
 # Websocket Streams
 
 ## Subscription 
 
+> Request
+
+```json
+{
+  "op": "subscribe",
+  "args": [
+    "orderBookApi:BTC-USD_0"
+  ]
+}
+```
+
+> Response 
+
+```json
+{
+  "event": "subscribe",
+  "channel": [
+    "orderBookApi:BTC-USD_0"
+  ]
+}
+```
+
+To subscribe to a websocket feed
+
+### Request Parameters
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| op | string | Yes | Operation. `subscribe` will subscribe to the topics provided in `args`. `unsubscribe` will unsubscribe from the topics | 
+| args | array | Yes | Topics to subscribe to. | 
+
+### Response Content
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| event | string | Yes | Respond with the event type |
+| channel | array | Yes | Topics which have been sucessfully subscribed | 
+
+
 ## L1 Orderbook Snapshot
+
+> Request
+
+```json
+{
+  "op": "subscribe",
+  "args": [
+    "orderBookApi:BTC-USD_0"
+  ]
+}
+```
+
+> Response 
+
+```json
+{
+  "topic": "orderBookApi",
+  "data": {
+    "buyQuote": 
+    [
+      {
+        "price": 0,
+        "size": 0
+      }
+    ],
+    "sellQuote":
+    [
+      {
+        "price": 0,
+        "size": 0
+      }
+    ],
+    "symbol":"BTC-USD",
+    "timestamp":1565135165600
+  }
+}
+```
+
+Subscribe to the Level 1 Orderbook. The format to subscribe to will be `symbol_grouping`. 
+
+* `symbol` indicates the market symbol
+* `grouping` indicates the grouping granularity. Valid values are 0-9.
+
+### Response Content
+
+#### Orderbook Object
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| topic | string | Yes | Websocket topic |
+| data | Data Object | Yes | Refer to data object below | 
+
+#### Data Object
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| buyQuote | Quote Object | Yes | Bid quotes |
+| sellQuote | Quote Object | Yes | Asks quotes | 
+| symbol | string | Yes | Market symbol | 
+| timestamp | long | Yes | Orderbook timestamp | 
 
 ## L2 Orderbook Snapshot
 
+> Request
+
+```json
+{
+  "op": "subscribe",
+  "args": [
+    "orderBookL2Api:BTC-USD_0"
+  ]
+}
+```
+
+> Response 
+
+```json
+{
+  "topic": "orderBookL2Api",
+  "data": {
+    "buyQuote": 
+    [
+      {
+        "price": 0,
+        "size": 0
+      }
+    ],
+    "sellQuote":
+    [
+      {
+        "price": 0,
+        "size": 0
+      }
+    ],
+    "symbol":"BTC-USD",
+    "depth": 0,
+    "timestamp":1565135165600
+  }
+}
+```
+
+Subscribe to the Level 2 Orderbook. The format to subscribe to will be `symbol_depth`. 
+
+* `symbol` indicates the market symbol
+* `depth` indicates the levels of orderbook to retrieve. Value of 0 will retrieve the entire orderbook.
+
+### Response Content
+
+#### Orderbook Object
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| topic | string | Yes | Websocket topic |
+| data | Data Object | Yes | Refer to data object below | 
+
+#### Data Object
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| buyQuote | Quote Object | Yes | Bid quotes |
+| sellQuote | Quote Object | Yes | Asks quotes | 
+| symbol | string | Yes | Market symbol | 
+| depth | int | Yes | Orderbook depth | 
+| timestamp | long | Yes | Orderbook timestamp | 
+
 ## Public Trade Fills
+
+> Request
+
+```json
+{
+  "op": "subscribe",
+  "args": [
+    "tradeHistoryApi:BTC-USD"
+  ]
+}
+```
+
+> Response 
+
+```json
+{
+  "topic": "tradeHistoryApi:BTC-USD",
+  "data": [
+  {
+    "symbol": "BTC-USD",
+    "side": "SELL",
+    "size": 0.007,
+    "price": 5302.8,
+    "tradeId": 118974855,
+    "timestamp": 1584446020295
+  }
+  ]
+}
+```
+
+Subscribe to recent trade feed for a market. The topic will be `tradeHistoryApi:<market>` where `<market>` is the market symbol. 
+
+### Response Content
+
+#### TradeHistory Object
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| topic | string | Yes | Websocket topic |
+| data | Data Object | Yes | Refer to data object below | 
+
+#### Data Object
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| symbol | string | Yes | Market symbol |
+| side | string | Yes | Trade Side, BUY or SELL | 
+| size | double | Yes | Transacted size | 
+| price | double | Yes | Transacted price | 
+| tradeId | long | Yes | Trade sequence Id | 
+| timestamp | long | Yes | Trade timestamp | 
 
 ## Authentication
 
+> Request
+
+```json
+{
+  "op":"authKeyExpires",
+  "args":["APIKey", "nonce", "signature"]}
+}
+```
+
+Authenticate the websocket session to subscribe to authenticated websocket topics. Assume we have values as follows: 
+
+* `btse-nonce`: 1624985375123
+* `btse-api`: 4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x
+* `secret`: 848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx
+
+Our subscription request will be: 
+
+```
+{
+  "op":"authKeyExpires",
+  "args":["4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x", "1624985375123", "c410d38c681579adb335885800cff24c66171b7cc8376cfe43da1408c581748156b89bcc5a115bb496413bda481139fb"]}
+}
+```
+
+### Request Parameters
+
+Below details the arguments needed to be sent in.
+
+|Index|Type|Required|Description|
+|---|---|---|---|
+| 0 | string | Yes | First argument is the API key |
+| 1 | long | Yes | Nonce which is the current timestamp | 
+| 2 | string | Yes | Generated signature | 
+
+> Generating a signature
+
+```shell
+echo -n "/ws/spot1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx"
+(stdin)= c410d38c681579adb335885800cff24c66171b7cc8376cfe43da1408c581748156b89bcc5a115bb496413bda481139fb
+```
+
+
 ## Notifications
 
+> Request
+
+```json
+{
+  "op": "subscribe",
+  "args": [
+    "notificationApiV2"
+  ]
+}
+```
+
+> Response 
+
+```json
+{
+  "topic": "notificationApiV1",
+  "data": [
+    {
+      "symbol": "Market Symbol (eg. BTC-USD)",
+      "orderID": "BTSE internal order ID",
+      "side": "BUY",
+      "type": "76",
+      "price": "Order price or transacted price",
+      "size": "Order size or transacted size",
+      "originalSize": "Order size",
+      "avgFillPrice": 35000,
+      "fillSize": 0.001,
+      "status": "<Refer to Status description on the left>",
+      "clOrderID": "<Client order ID>",
+      "maker": "<Maker flag, if true indicates that trade is a maker trade>",
+      "stealth": 1,
+      "timestamp": 1624985375123,
+      "pegPriceDeviation": "Indicate the deviation percentage. Valid for only algo orders.",
+      "remainingSize": "<Remaining size on the order>",
+      "time_in_force": "<Time where this order is valid>",
+      "txType": "STOP | TAKE_PROFIT",
+      "triggerPrice": "Trade Trigger Price"
+    }
+  ]
+
+}
+  
+```
+
+Receive trade notifications by subscribing to the topic `notificationApiV2`. The websocket feed will push trade level notifications to the subscriber. If topic is subscribed without being authenticated, no messages will be sent.
+
+### Response Content
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| symbol | string | Yes | Market symbol |
+| orderID | string | Yes | Internal order ID | 
+| side | string | Yes | Trade side. BUY or SELL | 
+| type | int | Yes | Order type. Valid values are:<br/>76: Limit Order<br/>77: Market Order<br/>80: Algo orders | 
+| price | double | Yes | Order price or transcated price | 
+| size | double | Yes | Order size or transacted size | 
+| originalSize | double | Yes | Original order size | 
+| avgFilledPrice  | double | Yes | Average filled price | 
+| fillSize  | double | Yes | Filled size of order | 
+| status | integer | Yes | Status with values as follows:<br/>1: MARKET_UNAVAILABLE, Market is currently unavailable<br/>2: ORDER_INSERTED, Order is inserted successfully<br/>4: ORDER_FULLY_TRANSACTED, Order is fully transacted<br/>5: ORDER_PARTIALLY_TRANSACTED, Order is partially transacted<br/>6: ORDER_CANCELLED, Order is cancelled successfully<br/>8: INSUFFICIENT_BALANCE, Insufficient balance in account<br/>9: TRIGGER_INSERTED, Trigger Order is inserted successfully<br/>10: TRIGGER_ACTIVATED, Trigger Order is activated successfully<br/>12: ERROR_UPDATE_RISK_LIMIT, Error in updating risk limit<br/>28: TRANSFER_UNSUCCESSFUL, Transfer funds between spot and futures is unsuccessful<br/>27: TRANSFER_SUCCESSFUL, Transfer funds between futures and spot is successful<br/>41: ERROR_INVALID_RISK_LIMIT, Invalid risk limit was specified<br/>64: STATUS_LIQUIDATION, Account is undergoing liquidation<br/>101: FUTURES_ORDER_PRICE_OUTSIDE_LIQUIDATION_PRICE, Futures order is outside of liquidation price<br/>1003: ORDER_LIQUIDATION, Order is undergoing liquidation<br/>1004: ORDER_ADL, Order is undergoing ADL | 
+| clOrderID | string | Yes | Custom order ID | 
+| maker | boolean | Yes | Indicator to indicate if trade is a maker trade | 
+| remainingSize | double | Yes | Remaining size on the order | 
+| time_in_force | string | Yes | Validity of the order | 
+| timestamp | long | Yes | Order timestamp or transacted timestamp | 
+| txType | string | Yes | Used by trigger or OCO orders. STOP indicates its a Stop order, TAKEPROFIT indicates its a take profit order, and LIMIT is when its not any of the above | 
+| stealth | double | Yes | Percentage of orders to show on orderbook. Only for Algo orders | 
+| pegPriceDeviation | double | Yes | Deviation percentage. Only for Algo orders | 
+
 ## User Trade Fills
+
+> Request
+
+```json
+{
+    "op":"subscribe",
+    "args":["fills"]
+}
+
+```
+
+> Response 
+
+```json
+{
+  "topic": "fills", 
+  "data": [{
+    "orderId": "order id", //string
+    "serialId": "serial ID after insertion into DB", //integer / long
+    "clOrderId": "Client Order ID", //string
+    "type": "order type", //string
+    "symbol": "ex: BTC-USD", //string
+    "side": "BUY|SELL" //string
+    "price": "filled price", //double (need to make sure no scientific notation)
+    "size": "filled size", //double (no scientific notation)
+    "feeAmount": "Fees charged to user, value to be String on API", //double (no scientific notation)
+    "feeCurrency": "Fee currency, eg. Buy would be BTC, Sell would be USD" //string
+    "base": "Base currency, eg. BTC",  //string
+    "quote": "Quote currency eg. USD", //string
+    "maker": "maker or taker",  //boolean (if maker, return true, else return false)
+    "timestamp": "Time trade was matched in the engine" //long, field taken from DB,
+    "tradeId": "Trade Unique ID"
+  }]
+}
+
+  
+```
+
+When a trade has been transacted, this topic will send the trade information back to the subscriber. 
+
+### Response Content
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| symbol | string | Yes | Market symbol |
+| orderID | string | Yes | Internal order ID | 
+| clOrderID | string | Yes | Custom order ID | 
+| serialId | string | Yes | Trade sequence ID | 
+| tradeId | string | Yes | Trade unique identifier | 
+| type | int | Yes | Order type. Valid values are:<br/>76: Limit Order<br/>77: Market Order<br/>80: Algo orders | 
+| side | string | Yes | Trade side. BUY or SELL | 
+| price | double | Yes | Transcated price | 
+| size | double | Yes | Transacted size | 
+| feeAmount | double | Yes | Fee amount charged | 
+| feeCurrency | string | Yes | Fee currency | 
+| base | string | Yes | Base currency | 
+| quote | string | Yes | Quote currency | 
+| maker | boolean | Yes | Indicator to indicate if trade is a maker trade | 
+| timestamp | long | Yes | Order timestamp or transacted timestamp | 
 
 </section>
