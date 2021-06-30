@@ -1,5 +1,5 @@
 ---
-title: BTSE Spot API
+title: BTSE Futures API
 language_tabs:
   - json
 toc_footers: []
@@ -13,12 +13,12 @@ headingLevel: 2
 
 # Change Log
 
-## Version 3.2.3 (2nd June 2021)
+## Version 2.1.7 (4th February 2021)
 
-* Introduction of new notification topic. Refer to `notificationsApiV2` for details.
+* Addition of `avgFilledPrice` in open_orders AP
 
 
-## Version 3.2.2 (29th January 2021)
+## Version 2.1.6 (29th January 2021)
 
 * Websockets endpoint will be updated to the following:
   * Spot: wss://ws.btse.com/ws/spot
@@ -33,18 +33,19 @@ headingLevel: 2
   * remainingSize - Value indicating the remaining size on the order
   * time_in_force - Value indicating the time in force set on the order
 
-## Version 3.2.1 (28th September 2020)
+## Version 2.1.5 (28th September 2020)
 
 * New Amend Order API. Allows users to edit price, size and trigger prices for pending orders
 
-## Version 3.2 (23rd June 2020)
+## Version 2.1.4 (24th July 2020)
 
-* Deprecated v1 API
-* Removed fees field for public API /api/v3.1/trades (not needed)
-* Added new wallet APIs to create address, get wallet addresses and withdrawals
-* Enhanced /user/wallet_historyAPI to return wallet details
+* New Settle In API added, allows users to set the currency to settle the current position in via API
+
+## Version 2.1.3 (23rd June 2020)
+
+* Introduction of Spam Order detection mechanism
+* Websocket topic notificationApiV2 introduced. Topic is meant to standardize response codes returned. Notifications are returned as an Array
 * Introduction of API permissions. All current API keys will have Read, Trading and Transfer permissions. Refer to the tags beside the titles to see which category they are classified under
-* Fixed incorrect messages returned on some APIs
 
 # Overview
 
@@ -62,16 +63,16 @@ You will need to create an API key on the BTSE platform before you can use authe
 
 * Production
   * HTTP
-     * `https://api.btse.com/spot`
-     * `https://aws-api.btse.com/spot`
+     * `https://api.btse.com/futures`
+     * `https://aws-api.btse.com/futures`
   * Websocket
-     * `wss://ws.btse.com/ws/spot`
-     * `wss://aws-ws.btse.com/ws/spot`
+     * `wss://ws.btse.com/ws/futures`
+     * `wss://aws-ws.btse.com/ws/futures`
 * Testnet
   * HTTP
-     * `https://testapi.btse.io/spot`
+     * `https://testapi.btse.io/futures`
   * Websocket
-     * `wss://testws.btse.io/ws/spot`
+     * `wss://testws.btse.io/ws/futures`
 
 ## Authentication
 
@@ -89,16 +90,16 @@ You will need to create an API key on the BTSE platform before you can use authe
 > **HMAC SHA384 Signature**
 
 ```shell
-$ echo -n "/api/v3.2/user/wallet1624984297330" | openssl dgst -sha384 -hmac "848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx"
-(stdin)= 14b986706a4368221e0af14a6725377161805e7a57d568220478cb3590ce532d4fad4ac68e6c02a14afced6a0619bfd3
+$ echo -n "/api/v2.1/user/wallet1624984297330" | openssl dgst -sha384 -hmac "848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx"
+(stdin)= ea4f1f2b43a0f4d750ae560c5274d6214d140fcab3093da5f4a83e36828535bd2ba7b12160cd12199596f422c8883333
 ```
 
-* Endpoint to get wallet is `https://api.btse.com/spot/api/v3.2/user/wallet`
+* Endpoint to get wallet is `https://api.btse.com/futures/api/v2.1/user/wallet`
 * Assume we have the values as follows: 
   * btse-nonce: `1624984297330`
   * btse-api: `4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x`
   * secret: `848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx`
-  * Path: `/api/v3.2/user/wallet`
+  * Path: `/api/v2.1/user/wallet`
 * Generated signature will be: 
   * btse-sign: `14b986706a4368221e0af14a6725377161805e7a57d568220478cb3590ce532d4fad4ac68e6c02a14afced6a0619bfd3`
 
@@ -107,20 +108,20 @@ $ echo -n "/api/v3.2/user/wallet1624984297330" | openssl dgst -sha384 -hmac "848
 > **HMAC SHA384 Signature**
 
 ```shell
-$ echo -n "/api/v3.2/order1624985375123{\"postOnly\":false,\"price\":8500.0,\"reduceOnly\":false,\"side\":\"BUY\",\"size\":0.002,\"stopPrice\":0.0,\"symbol\":\"BTC-USD\",\"time_in_force\":\"GTC\",\"trailValue\":0.0,\"triggerPrice\":0.0,\"txType\":\"LIMIT\",\"type\":\"LIMIT\"}" | openssl dgst -sha384 -hmac "848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx"
-(stdin)= 134c4a41c5451b88fb2955ec2b35814e4a5d432b85723edc90d6c1161118eb3bb6ffa730f2ac415c00a9f072c770a85f
+$ echo -n "/api/v2.1/order1624985375123{\"postOnly\":false,\"price\":8500.0,\"reduceOnly\":false,\"side\":\"BUY\",\"size\":1,\"stopPrice\":0.0,\"symbol\":\"BTCPFC\",\"time_in_force\":\"GTC\",\"trailValue\":0.0,\"triggerPrice\":0.0,\"txType\":\"LIMIT\",\"type\":\"LIMIT\"}" | openssl dgst -sha384 -hmac "848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx"
+(stdin)= 943adfce43b609a28506274976b96e08cf4bdc4ea53ca0b4cac0eb2cf0773a7d0807efc0aeab779d47fadcd9a60eea13
 ```
 
-* Endpoint to place an order is `https://api.btse.com/spot/api/v3.2/order`
+* Endpoint to place an order is `https://api.btse.com/futures/api/v2.21/order`
 * Assume we have the values as follows: 
   * btse-nonce: `1624985375123`
   * btse-api: `4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x`
   * secret: `848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx`
-  * Path: `/api/v3.2/order`
-  * Body: `{"postOnly":false,"price":8500.0,"reduceOnly":false,"side":"BUY","size":0.002,"stopPrice":0.0,"symbol":"BTC-USD","time_in_force":"GTC","trailValue":0.0,"triggerPrice":0.0,"txType":"LIMIT","type":"LIMIT"}`
-  * Encrypted Text: `/api/v3.2/order1624985375123{"postOnly":false,"price":8500.0,"reduceOnly":false,"side":"BUY","size":0.002,"stopPrice":0.0,"symbol":"BTC-USD","time_in_force":"GTC","trailValue":0.0,"triggerPrice":0.0,"txType":"LIMIT","type":"LIMIT"}`
+  * Path: `/api/v2.1/order`
+  * Body: `{"postOnly":false,"price":8500.0,"reduceOnly":false,"side":"BUY","size":5,"stopPrice":0.0,"symbol":"BTCPFC","time_in_force":"GTC","trailValue":0.0,"triggerPrice":0.0,"txType":"LIMIT","type":"LIMIT"}`
+  * Encrypted Text: `/api/v2.1/order1624985375123{"postOnly":false,"price":8500.0,"reduceOnly":false,"side":"BUY","size":5,"stopPrice":0.0,"symbol":"BTCPFC","time_in_force":"GTC","trailValue":0.0,"triggerPrice":0.0,"txType":"LIMIT","type":"LIMIT"}`
 * Generated signature will be:
-  * btse-sign: `134c4a41c5451b88fb2955ec2b35814e4a5d432b85723edc90d6c1161118eb3bb6ffa730f2ac415c00a9f072c770a85f`
+  * btse-sign: `943adfce43b609a28506274976b96e08cf4bdc4ea53ca0b4cac0eb2cf0773a7d0807efc0aeab779d47fadcd9a60eea13`
 
 
 ## Rate Limits
@@ -176,7 +177,16 @@ When connecting up the BTSE API, you will come across number codes that represen
 * 1003: ORDER_LIQUIDATION = Order is undergoing liquidation
 * 1004: ORDER_ADL = Order is undergoing ADL
 
+## Spam Orders
 
+Spam orders are large number of small order sizes that is placed. In order to ensure that the platform and user's interests are protected from malicious players, we will apply the following for users placing small sized orders. 
+
+* Orders equal to or below 5 contracts will be marked as a spam order and will automatically become hidden orders.
+* Orders marked as spam always pay the taker fee.
+* Post-Only API orders marked as spam will be rejected instead of being hidden.
+* Too many spam orders may be grounds to temporarily ban an account from trading.
+* API accounts placing >= 4 resting orders, with total size less than 20 contracts are at risk of being marked as a spam account.
+* Accounts marked as spam may have limitations placed on the account, including order rate limits, position limits, or have API functions disabled. For questions regarding the new spam order mechanism, please email mm@btse.com.
 
 
 
@@ -189,7 +199,7 @@ When connecting up the BTSE API, you will come across number codes that represen
 ```json
 [
   {
-    "symbol": "BTC-USD",
+    "symbol": "BTCPFC",
     "last": 36365,
     "lowestAsk": 36377,
     "highestBid": 36376,
@@ -226,7 +236,7 @@ When connecting up the BTSE API, you will come across number codes that represen
 ]
 ```
 
-`GET /api/v3.2/market_summary`
+`GET /api/v2.1/market_summary`
 
 Gets market summary information. If no symbol parameter is sent, then all markets will be retrieved. 
 
@@ -256,21 +266,21 @@ Gets market summary information. If no symbol parameter is sent, then all market
 | minOrderSize | double | Yes | Minimum tick size | 
 | minSizeIncrement | double | Yes | Tick size | 
 | maxOrderSize | double | Yes | Maximum order size |
-| openInterest | double | No | Not valid for spot | 
-| openInterestUSD | double | No | Not valid for spot | 
-| contractStart | date | No | Not valid for spot | 
-| contractEnd | date | No | Not valid for spot | 
-| timeBasedContract | boolean | No | Not valid for spot | 
-| openTime | date | Yes | Market opening time | 
-| closeTime | date | Yes | Market closing time | 
-| startMatching | date | Yes | Matching start time | 
-| inactiveTime | date | Yes | Time where market is inactive | 
-| fundingRate | double | No | Not valid for spot | 
-| contractSize | double | No | Not valid for spot | 
-| maxPosition | double | No | Not valid for spot | 
-| minRiskLimit | double | No | Not valid for spot | 
-| maxRiskLimit | double | No | Not valid for spot | 
-| availableSettlement | array | No | Not valid for spot | 
+| openInterest | double | No | Number of open positions in the futures market | 
+| openInterestUSD | double | No | Number of open positions in the futures market in USD notional value | 
+| contractStart | long | No | Contract start time | 
+| contractEnd | long | No | Contract end time | 
+| timeBasedContract | boolean | No | Indicator to indicate if it is a time based contract | 
+| openTime | long | Yes | Market opening time | 
+| closeTime | long | Yes | Market closing time | 
+| startMatching | long | Yes | Matching start time | 
+| inactiveTime | long | Yes | Time where market is inactive | 
+| fundingRate | double | No | Funding rate calculated per hour | 
+| contractSize | double | No | Size of one contract | 
+| maxPosition | double | No | Maximum position a user is allowed to have | 
+| minRiskLimit | double | No | Minimum risk limit | 
+| maxRiskLimit | double | No | Maximum risk limit | 
+| availableSettlement | array | No | Currencies available for settlement | 
 | futures | boolean | Yes | Indicator if symbol is a futures contract | 
 
 ## Charting Data
@@ -297,7 +307,7 @@ Gets market summary information. If no symbol parameter is sent, then all market
   ],
 ```
 
-`GET /api/v3.2/ohlcv`
+`GET /api/v2.1/ohlcv`
 
 Gets candle stick charting data. Default of 300 data points will be returned at any one time. 
 
@@ -332,7 +342,7 @@ Returns a 2D array with the indexes described in the table below
 ```json
 [
   {
-    "symbol": "BTC-USD",
+    "symbol": "BTCPFC",
     "indexPrice": 36288.949684967,
     "lastPrice": 36286.5,
     "markPrice": 0
@@ -340,7 +350,7 @@ Returns a 2D array with the indexes described in the table below
 ]
 ```
 
-`GET /api/v3.2/price`
+`GET /api/v2.1/price`
 
 Retrieve current prices on the platform. If no symbol specified, all symbols will be returned.
 
@@ -358,7 +368,7 @@ Retrieve current prices on the platform. If no symbol specified, all symbols wil
 | symbol | double | Yes | Market symbol |
 | indexPrice | double | Yes | Index price |
 | lastPrice | double | Yes | Last transacted price | 
-| markPrice | double | Yes | Not valid for spot | 
+| markPrice | double | Yes | Mark price | 
 
 ## Orderbook (Level 1)
 
@@ -369,21 +379,21 @@ Retrieve current prices on the platform. If no symbol specified, all symbols wil
   "buyQuote": [
     {
       "price": "36371.0",
-      "size": "0.01485"
+      "size": "100"
     }
   ],
   "sellQuote": [
     {
       "price": "36380.5",
-      "size": "0.01782"
+      "size": "100"
     }
   ],
   "timestamp": 1624989459489,
-  "symbol": "BTC-USD"
+  "symbol": "BTCPFC"
 }
 ```
 
-`GET /api/v3.2/orderbook`
+`GET /api/v2.1/orderbook/{symbol}`
 
 Retrieves a Level 1 snapshot of the orderbook
 
@@ -391,10 +401,7 @@ Retrieves a Level 1 snapshot of the orderbook
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-| symbol | string | Yes | Market symbol | 
-| group | integer | No | Orderbook grouping. Valid values are: <br/>0-9 where 0 indicates level 0 grouping (eg. for BTC, it will be 0.5)<br/>Level 1 grouping for BTC would be 1<br/> | 
-| limit_bids | integer | No | Orderbook depth on the bid side | 
-| limit_asks | integer | No | Orderbook depth on the ask side | 
+| symbol | string | Yes | Market symbol, entered as a path variable | 
 
 
 ### Response Content
@@ -426,21 +433,21 @@ Retrieves a Level 1 snapshot of the orderbook
   "buyQuote": [
     {
       "price": "36235.0",
-      "size": "7.67500"
+      "size": "700"
     }
   ],
   "sellQuote": [
     {
       "price": "36241.5",
-      "size": "0.60200"
+      "size": "600"
     }
   ],
   "timestamp": 1624989977940,
-  "symbol": "BTC-USD"
+  "symbol": "BTCPFC"
 }
 ```
 
-`GET /api/v3.2/orderbook/L2`
+`GET /api/v2.1/orderbook/L2`
 
 Retrieves a Level 2 snapshot of the orderbook
 
@@ -478,16 +485,16 @@ Retrieves a Level 2 snapshot of the orderbook
 [
   {
     "price": 36164,
-    "size": 0.035,
+    "size": 100,
     "side": "SELL",
-    "symbol": "BTC-USD",
+    "symbol": "BTCPFC",
     "serialId": 85997835,
     "timestamp": 1624990097000
   }
 ]
 ```
 
-`GET /api/v3.2/trades`
+`GET /api/v2.1/trades`
 
 Get trade fills for the market specified by `symbol`
 
@@ -515,28 +522,6 @@ Get trade fills for the market specified by `symbol`
 | serialId | double | Yes | Serial Id, running sequence number |
 | timestamp | double | Yes | Transacted timestamp |
 
-## Query Server Time
-
-> Response
-
-```json
-{
-  "iso": "2021-06-29T18:14:30.886Z",
-  "epoch": 1624990470
-}
-```
-
-`GET /api/v3.2/time`
-
-Gets server time
-
-### Response Content
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-| iso | long | Yes | Time in YYYY-MM-DDTHH24:MI:SS.Z format |
-| epoch | long | Yes | Returns epoch timestamp | 
-
 
 # Trade Endpoints
 
@@ -549,12 +534,12 @@ Gets server time
   "clOrderID": "string",
   "deviation": 0,
   "postOnly": false,
-  "price": 7010,
+  "price": 8300,
   "side": "BUY",
   "size": 1,
   "stealth": 0,
   "stopPrice": 0,
-  "symbol": "BTC-USD",
+  "symbol": "BTCPFC",
   "time_in_force": "GTC",
   "trailValue": 0,
   "triggerPrice": 0,
@@ -580,14 +565,14 @@ Gets server time
   "status": 0,
   "stealth": 0,
   "stopPrice": 8300,
-  "symbol": "BTC-USD",
+  "symbol": "BTCPFC",
   "timestamp": 1576812000872,
   "trigger": true,
   "triggerPrice": 8300
 }
 ```
 
-`POST /api/v3.2/order`
+`POST /api/v2.1/order`
 
 Creates a new order. Requires `Trading` permission
 
@@ -641,12 +626,12 @@ Creates a new order. Requires `Trading` permission
   "clOrderID": "string",
   "deviation": 0,
   "postOnly": false,
-  "price": 7010,
+  "price": 8030,
   "side": "BUY",
   "size": 1,
   "stealth": 0,
   "stopPrice": 0,
-  "symbol": "BTC-USD",
+  "symbol": "BTCPFC",
   "time_in_force": "GTC",
   "trailValue": 0,
   "triggerPrice": 0,
@@ -671,8 +656,8 @@ Creates a new order. Requires `Trading` permission
   "size": 4,
   "status": 0,
   "stealth": 0,
-  "stopPrice": 8300,
-  "symbol": "BTC-USD",
+  "stopPrice": 8030,
+  "symbol": "BTCPFC",
   "timestamp": 1576812000872,
   "trigger": true,
   "triggerPrice": 8300
@@ -739,7 +724,7 @@ This API Requires `Trading` permission
 
 ```json
 {
-  "symbol": "BTC-USD",
+  "symbol": "BTCPFC",
   "type": "PRICE",
   "orderID": "Order ID",
   "clOrderID": "Custom Order ID",
@@ -765,14 +750,14 @@ This API Requires `Trading` permission
   "status": 0,
   "stealth": 10,
   "stopPrice": 8300,
-  "symbol": "BTC-USD",
+  "symbol": "BTCPFC",
   "timestamp": 1576812000872,
   "trigger": true,
   "triggerPrice": 8300
 }
 ```
 
-`PUT /api/v3.2/order`
+`PUT /api/v2.1/order`
 
 Amend the price or size or trigger price of an order. For trigger orders, if the order has already been triggered, the trigger price cannot be further amended. If an order is a POST-ONLY order, and `slide` option is set to true, then price will set to be the best bid/ask price. Amend order _does not_ apply to algo orders
 
@@ -820,19 +805,29 @@ Amend the price or size or trigger price of an order. For trigger orders, if the
 ```json
 [
   {
-    "price": 36164,
-    "size": 0.035,
-    "side": "SELL",
-    "symbol": "BTC-USD",
-    "serialId": 85997835,
-    "timestamp": 1624990097000
+    "status": 0,
+    "symbol": "BTCPFC",
+    "orderType": 76,
+    "price": 8300,
+    "side": "BUY",
+    "size": 1,
+    "orderID": "string",
+    "timestamp": 1576812000872,
+    "triggerPrice": 8300,
+    "trigger": false,
+    "deviation": 0,
+    "stealth": 0,
+    "message": "false",
+    "avgFillPrice": 0,
+    "fillSize": 0,
+    "clOrderID": "market001"
   }
 ]
 ```
 
-`DELETE /api/v3.2/order`
+`DELETE /api/v2.1/order`
 
-CAncels pending orders that has not yet been transacted. The `orderID` is a unique identifier to cancel a particular order. `clOrderID` is a custom ID sent in by the trader. When cancel by `clOrderID`, all orders having the same ID will be cancelled. If `orderID` and `clOrderID` is not sent in, then cancellation will be for all orders in the current market.
+Cancels pending orders that has not yet been transacted. The `orderID` is a unique identifier to cancel a particular order. `clOrderID` is a custom ID sent in by the trader. When cancel by `clOrderID`, all orders having the same ID will be cancelled. If `orderID` and `clOrderID` is not sent in, then cancellation will be for all orders in the current market.
 
 ### Request Parameters
 
@@ -877,7 +872,7 @@ CAncels pending orders that has not yet been transacted. The `orderID` is a uniq
 }
 ```
 
-`POST /api/v3.2/order/cancelAllAfter`
+`POST /api/v2.1/order/cancelAllAfter`
 
 Dead-man's switch allows the trader to send in a timeout value which is a Time to live (TTL) value for an order. Extension of the timeout is done by sending another `cancelAllAfter` request. If the server does not receive another request before the timeout is reached, all orders will be cancelled.
 
@@ -926,7 +921,7 @@ Dead-man's switch allows the trader to send in a timeout value which is a Time t
 }
 ```
 
-`GET /api/v3.2/user/open_orders`
+`GET /api/v2.1/user/open_orders`
 
 Retrieves open orders that have not yet been matched. This is also used to check an order for its status. If an order has been cancelled or recently transacted, the `status` field will indicate the state of the order. 
 
@@ -995,7 +990,7 @@ Retrieves open orders that have not yet been matched. This is also used to check
 }
 ```
 
-`GET /api/v3.2/user/trade_history`
+`GET /api/v2.1/user/trade_history`
 
 Retrieves a user's trade history
 
@@ -1038,6 +1033,287 @@ Retrieves a user's trade history
 | total | long | Yes | Not used in Spot |
 
 
+## Query Position
+
+> Response
+
+```json
+[
+  {
+    "marginType": 0,
+    "entryPrice": 0,
+    "markPrice": 71126.6,
+    "symbol": "BTCPFC",
+    "side": "BUY",
+    "orderValue": 441.8492,
+    "settleWithAsset": "BTC",
+    "unrealizedProfitLoss": -0.23538014,
+    "totalMaintenanceMargin": 2.366912551,
+    "size": 62,
+    "liquidationPrice": 0,
+    "isolatedLeverage": 25,
+    "adlScoreBucket": 2,
+    "liquidationInProgress": false,
+    "timestamp": 1576661434072,
+    "currentLeverage": 0
+  }
+]
+```
+
+`GET /api/v2.1/user/positions`
+
+Queries user's current position. When no symbol is specified, positions for all markets will be returned.
+
+### Request Parameters
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| symbol | string | No | Market symbol | 
+
+
+### Response Content
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| symbol | string | Yes | Market symbol |
+| side | string | Yes | Position side. Values are: [`Buy`, `SELL`] | 
+| size | double | Yes | Position size |
+| entryPrice | double | Yes | Entry price | 
+| markPrice | double | Yes | Mark price |
+| marginType | integer | Yes | Margin Type. Values as follows<br/>91: CROSS wallet<br/>92: Isolated wallet | 
+| orderValue | double | Yes | Notional value | 
+| settleWithAsset | string | Yes | Settlement currency | 
+| totalMaintenanceMargin | double | Yes | Maintenance margin | 
+| unrealizedProfitLoss | double | Yes | Unrealized profit and loss | 
+| liquidationPrice | double | Yes | Liquidation Price |
+| isolatedLeverage | double | Yes | Isolated leverage value | 
+| adlScoreBucket | integer | Yes | ADL Score probability | 
+| liquidationInProgress | boolean | Yes | Indicator if liquidation is in progress | 
+| currentLeverage | double | Yes | Current leverage | 
+| timestamp | long | Yes | Timestamp when position was queried |
+
+
+## Close Position
+
+> Request 
+
+```json
+{
+  "price": 0,
+  "symbol": "BTCPFC",
+  "type": "MARKET"
+}
+```
+
+> Response
+
+```json
+[
+  {
+    "status": 0,
+    "symbol": "BTCPFC",
+    "orderType": 76,
+    "price": 8300,
+    "side": "BUY",
+    "size": 1,
+    "orderID": "string",
+    "timestamp": 1576812000872,
+    "triggerPrice": 8300,
+    "trigger": false,
+    "deviation": 0,
+    "stealth": 0,
+    "message": "false",
+    "avgFillPrice": 0,
+    "fillSize": 0,
+    "clOrderID": "market001"
+  }
+]
+```
+
+`POST /api/v2.1/order/close_position`
+
+Closes a user's position for the particular market as specified by symbol. If type is specified as LIMIT, then price is mandatory. When type is MARKET, it closes the position at market price.
+
+### Request Parameters
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| symbol | string | Yes | Market symbol | 
+| type | string | Yes | Close position type with values:<br/>LIMIT: Close at `price`<br/>MARKET: Close at market price | 
+| price | double | No | Ending time (eg. 1624987283000) | 
+
+
+### Response Content
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| symbol | string | Yes | Market symbol |
+| clOrderID | string | Yes | Customer tag sent in by trader |
+| fillSize | string | Yes | Trade filled size |
+| orderID | string | Yes | Order ID |
+| orderType | string | Yes | Order type <br/>76: Limit Order<br/>77: Market order<br/>80: Algo order |
+| postOnly | boolean | Yes | Indicates if order is a post only order |
+| price | double | Yes | Order price |
+| side | string | Yes | Order side<br/>BUY or SELL |
+| size | double | Yes | Cancelled size |
+| status | integer | Yes | Order status<br/>	2: Order Inserted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found |
+| stopPrice | string | Yes | Stop price |
+| time_in_force | string | Yes | Order validity |
+| timestamp | string | Yes | Order timestamp |
+| trigger | string | Yes | Indicator if order is a trigger order |
+| triggerPrice | string | Yes | Order trigger price, returns 0 if order is not a trigger order |
+| averageFillPrice | string | Yes | Average filled price. Returns the average filled price for partially transacted orders |
+| message | string | Yes | Trade messages |
+| stealth | string | Yes | Stealth value of order |
+| deviation | string | Yes | Deviation value of order |
+
+## Set Risk Limits
+
+> Request
+
+```json
+{
+  "symbol": "BTCPFC",
+  "leverage": 0
+}
+```
+
+> Response
+
+```json
+{
+  "symbol": "BTCPFC",
+  "timestamp": 1577093486551,
+  "status": 20,
+  "type": 94,
+  "message": "false"
+}
+```
+
+`POST /api/v2.1/risk_limit`
+
+Changes risk limit for the specified market
+
+### Request Parameters
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| symbol | string | Yes | Market symbol | 
+| riskLimit | integer | Yes | Risk limit value  | 
+
+
+### Response Content
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| symbol | string | Yes | Market symbol |
+| status | integer | Yes | Status of the request. Values are: <br/>8: Insufficient Balance<br/>12: Error in updating risk limit<br/>20: Success<br/>41: Invalid risk limit | 
+| type | double | Yes | Value will be 94 indicating that type is `Risk Limit` | 
+| timestamp | double | Yes | Timestamp where risk limit was set |
+| message | long | Yes | Message |
+
+## Set Leverage
+
+> Request
+
+```json
+{
+  "symbol": "BTCPFC",
+  "leverage": 0
+}
+```
+
+> Response
+
+```json
+{
+  "base": "string",
+  "clOrderID": "string",
+  "feeAmount": 0,
+  "feeCurrency": "string",
+  "filledPrice": 0,
+  "filledSize": 0,
+  "orderId": "string",
+  "orderType": 0,
+  "price": 0,
+  "quote": "string",
+  "realizedPnl": 0,
+  "serialId": 0,
+  "side": "string",
+  "size": 0,
+  "symbol": "string",
+  "timestamp": 0,
+  "total": 0,
+  "tradeId": "string",
+  "triggerPrice": 0,
+  "triggerType": 0,
+  "username": "string",
+  "wallet": "string"
+}
+```
+
+`POST /api/v2.1/leverage`
+
+Change leverage values for the specified market
+
+### Request Parameters
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| symbol | string | Yes | Market symbol | 
+| leverage | integer | Yes | Leverage value  | 
+
+
+### Response Content
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| symbol | string | Yes | Market symbol |
+| status | integer | Yes | Status of the request. Values are: <br/>8: Insufficient Balance<br/>13: Invalid leverage<br/>20: Success<br/>64: Undergoing liquidation | 
+| type | double | Yes | Value will be 93 indicating that type is `Leverage` | 
+| timestamp | double | Yes | Timestamp where leverage was set |
+| message | long | Yes | Message |
+
+## Change contract settlement currency
+
+> Request 
+
+```json
+{
+  "symbol": "BTCPFC",
+  "currency": "BTC"
+}
+```
+
+> Response
+
+```json
+{
+  "status": 0,
+  "errorCode": 0,
+  "message": "string"
+}
+```
+
+`GET /api/v2.1/settle_in`
+
+Changes the settlement currency for the position in the current market
+
+### Request Parameters
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| symbol | string | Yes | Market symbol | 
+| currency | string | Yes | Settlement currency to set | 
+
+### Response Content
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| status | integer | Yes | Request status<br/>1: Success<br/>-2: Invalid parameters |
+| errorCode | integer | Yes | Error code | 
+| message | string | Yes | Response message | 
+
 ## Query Account Fees
 
 > Response
@@ -1045,12 +1321,12 @@ Retrieves a user's trade history
 ```json
 {
   "makerFee": 0,
-  "symbol": "BTC-USD",
+  "symbol": "BTCPFC",
   "takerFee": 0
 }
 ```
 
-`GET /api/v3.2/user/fees`
+`GET /api/v2.1/user/fees`
 
 Retrieve user's trading fees
 ### Response Content
@@ -1070,23 +1346,77 @@ Retrieve user's trading fees
 ```json
 [
   {
-    "available": 520.52,
-    "currency": "USD",
-    "total": 5566.5566
+    "trackingID": 0,
+    "queryType": 0,
+    "activeWalletName": "string",
+    "wallet": "CROSS@",
+    "username": "string",
+    "walletTotalValue": 0,
+    "totalValue": 100,
+    "marginBalance": 100,
+    "availableBalance": 100,
+    "unrealisedProfitLoss": 0,
+    "maintenanceMargin": 0,
+    "leverage": 0,
+    "openMargin": 0,
+    "assets": [
+      {
+        "balance": 0.20183537,
+        "assetPrice": 7158.844999999999,
+        "currency": "BTC"
+      }
+    ],
+    "assetsInUse": [
+      {
+        "balance": 0.01,
+        "assetPrice": 7158.844999999999,
+        "currency": "BTC"
+      }
+    ]
   }
 ]
 ```
 
-`GET /api/v3.2/user/wallet`
+`GET /api/v2.1/user/wallet`
 
 Query user's wallet balance. Requires `Read` permissions on the API key.
-### Response Content
+
+### Request Parameters
 
 |Name|Type|Required|Description|
 |---|---|---|---|
+| wallet | string | Yes | Wallet name<br/>`CROSS@`: Cross wallet<br/>`ISOLATED@market`: Market refers to the current symbol with `-USD` appended. Eg. BTCPFC isolated wallet would be `ISOLATED@BTCPFC-USD` | 
+
+### Response Content
+
+#### Wallet
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| wallet | string | Yes | Wallet name |
+| activeWalletName  | string | Yes | Active wallet name |
+| queryType  | integer | Yes | Query type |
+| trackingID | long | Yes | Internal tracking ID, not being used |
+| walletTotalValue | double | Yes | Wallet total value |
+| totalValue | double | Yes | Total value |
+| marginBalance | double | Yes | Margin balance |
+| availableBalance | double | Yes | Available Balance |
+| unrealisedProfitLoss | double | Yes | Unrealised Profit / Loss |
+| maintenanceMargin | double | Yes | Maintenance margin |
+| leverage | double | Yes | Leverage |
+| openMargin | double | Yes | Open margin |
+| assets | Asset object | Yes | Assets available |
+| assetsInUse | Asset object | Yes | Assets in use |
+
+#### Assets / Asset in Use
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| balance | double | Yes | Balance |
+| assetPrice | double | Yes | Asset price |
 | currency | string | Yes | Currency |
-| total | double | Yes | Total balance | 
-| available | double | Yes | Available balance | 
+
+
 ## Query Wallet History
 
 > Response
@@ -1110,15 +1440,15 @@ Query user's wallet balance. Requires `Read` permissions on the API key.
 ]
 ```
 
-`GET /api/v3.2/user/wallet_history`
+`GET /api/v2.1/user/wallet_history`
 
-Get user's wallet history records on the spot wallet
+Get user's wallet history records on the futures wallet
 
 ### Request Parameters
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-| currency | string | No | Currency, if not specified will return all currencies | 
+| wallet | string | No | Wallet, if not specified will return all wallets. Valid values are: <br/>`CROSS@`: Cross wallet<br/>`ISOLATED@BTCPFC-USD`: Isolated wallets | 
 | startTime | long | No | Starting time (eg. 1624987283000) | 
 | endTime | long | No | Ending time (eg. 1624987283000) | 
 | count | integer | No | Number of records to return | 
@@ -1132,18 +1462,112 @@ Get user's wallet history records on the spot wallet
 | amount | double | Yes | Amount in the record | 
 | fees | double | Yes | Fees charged if any | 
 | orderId | string | Yes | Internal wallet order ID |
-| wallet | string | Yes | Wallet type. For spot will return `@SPOT` |
+| wallet | string | Yes | Wallet type. For futures will return `CROSS@` or `ISOLATED@` |
 | description | string | Yes | Description of the transaction |
 | status | integer | Yes | 1: PENDING<br/>2: PROCESSING<br/>10: COMPLETED<br/>16: CANCELLED |
-| type | integer | Yes | `Deposit`: Deposits into account<br/>`Withdraw`: Withdrawals from account<br/>`Transfer_In`: BTSE internal transfer where funds are transferred in<br/>`Transfer_Out`: BTSE internal transfer where funds are transferred out<br/>`ReferralEarning`: Referral Earnings |
+| type | integer | Yes | 105: Wallet Transfer<br/>106: Wallet Liquidation<br/>108: Realized PnL<br/>110: Funding<br/>121: Asset Conversion |
 
-## Create Wallet Address
+## Query wallet margin
+
+> Response
+
+```json
+[
+  {
+    "trackingID": 0,
+    "queryType": 0,
+    "activeWalletName": "string",
+    "wallet": "CROSS@",
+    "username": "string",
+    "walletTotalValue": 0,
+    "totalValue": 100,
+    "marginBalance": 100,
+    "availableBalance": 100,
+    "unrealisedProfitLoss": 0,
+    "maintenanceMargin": 0,
+    "leverage": 0,
+    "openMargin": 0,
+    "assets": [
+      {
+        "balance": 0.20183537,
+        "assetPrice": 7158.844999999999,
+        "currency": "BTC"
+      }
+    ],
+    "assetsInUse": [
+      {
+        "balance": 0.01,
+        "assetPrice": 7158.844999999999,
+        "currency": "BTC"
+      }
+    ]
+  }
+]
+```
+
+`GET /api/v2.1/user/margin`
+
+Gets margin information for the specified wallet so that users can know which wallet they are currently using in the market.
+
+### Request Parameters
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| currency | string | No | Currency, if not specified will return all currencies | 
+| startTime | long | No | Starting time (eg. 1624987283000) | 
+| endTime | long | No | Ending time (eg. 1624987283000) | 
+| count | integer | No | Number of records to return | 
+
+
+### Response Content
+
+#### Wallet
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| wallet | string | Yes | Wallet name |
+| activeWalletName  | string | Yes | Active wallet name |
+| queryType  | integer | Yes | Query type |
+| trackingID | long | Yes | Internal tracking ID, not being used |
+| walletTotalValue | double | Yes | Wallet total value |
+| totalValue | double | Yes | Total value |
+| marginBalance | double | Yes | Margin balance |
+| availableBalance | double | Yes | Available Balance |
+| unrealisedProfitLoss | double | Yes | Unrealised Profit / Loss |
+| maintenanceMargin | double | Yes | Maintenance margin |
+| leverage | double | Yes | Leverage |
+| openMargin | double | Yes | Open margin |
+| assets | Asset object | Yes | Assets available |
+| assetsInUse | Asset object | Yes | Assets in use |
+
+#### Assets / Asset in Use
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| balance | double | Yes | Balance |
+| assetPrice | double | Yes | Asset price |
+| currency | string | Yes | Currency |
+
+## Transfer funds between Futures wallet
 
 > Request
 
 ```json
 {
-  "currency": "BTC"
+  "walletSrc": "string",
+  "walletSrcType": "SPOT",
+  "walletDest": "string",
+  "walletDestType": "CROSS",
+  "apiWallets": [
+    {
+      "currency": "USD",
+      "allBalance": true
+    },
+    {
+      "currency": "BTC",
+      "allBalance": true
+    }
+  ]
 }
 ```
 
@@ -1152,105 +1576,91 @@ Get user's wallet history records on the spot wallet
 ```json
 [
   {
-    "address": "Blockchain address",
-    "created": 1592627542
+    "trackingID": 0,
+    "queryType": 0,
+    "activeWalletName": "string",
+    "wallet": "CROSS@",
+    "username": "string",
+    "walletTotalValue": 0,
+    "totalValue": 100,
+    "marginBalance": 100,
+    "availableBalance": 100,
+    "unrealisedProfitLoss": 0,
+    "maintenanceMargin": 0,
+    "leverage": 0,
+    "openMargin": 0,
+    "assets": [
+      {
+        "balance": 0.20183537,
+        "assetPrice": 7158.844999999999,
+        "currency": "BTC"
+      }
+    ],
+    "assetsInUse": [
+      {
+        "balance": 0.01,
+        "assetPrice": 7158.844999999999,
+        "currency": "BTC"
+      }
+    ]
   }
 ]
 ```
 
-`POST /api/v3.2/user/wallet/address`
+`GET /api/v2.1/wallet/transfer`
 
-Creates a wallet address. If the address created has not been used before, a 400 error will return with the existing unused address. To use this API, `Wallet` permission is required. 
-
-### Request Parameters
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-| currency | string | Yes | Currency to get address | 
-
-### Response Content
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-| address | string | Yes | Blockchain address |
-| created | long | Yes | Created timestamp | 
-
-## Get Wallet Address
-
-> Request
-
-```json
-{
-  "currency": "BTC"
-}
-```
-
-> Response
-
-```json
-[
-  {
-    "address": "Blockchain address",
-    "created": 1592627542
-  }
-]
-```
-
-`GET /api/v3.2/user/wallet/address`
-
-Gets a wallet address. To use this API, `Wallet` permission is required. 
+Transfers funds between user's wallet. User can specify the source and target wallet to transfer funds
 
 ### Request Parameters
 
+#### Wallet Request
+
 |Name|Type|Required|Description|
 |---|---|---|---|
-| currency | string | Yes | Currency to create address | 
+| walletSrc | string | Yes | Source wallet | 
+| walletSrcType | string | Yes | Source type, valid values are:<br/>`SPOT@`: Spot Wallet<br/>`CROSS@`: Cross Wallet<br/>`ISOLATED@market`: Isolated wallet for the market where market the market symbol |
+| walletDest | string | Yes | Destination wallet | 
+| walletDestType  | string | Yes | Destination type, valid values are:<br/>`SPOT@`: Spot Wallet<br/>`CROSS@`: Cross Wallet<br/>`ISOLATED@market`: Isolated wallet for the market where market the market symbol |
+| apiWallets | Wallet Detail | Yes | Transfer details | 
+
+#### Wallet Detail Request
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| currency | string | Yes | Wallet Currency | 
+| allBalance | boolean | Yes | Indicator if all wallet balance is to be transferred | 
+
+
 
 ### Response Content
 
-|Name|Type|Required|Description|
-|---|---|---|---|
-| address | string | Yes | Blockchain address |
-| created | long | Yes | Created timestamp | 
-## Withdraw Funds
-
-> Request
-
-```json
-{
-  "currency": "BTC",
-  "address": "BTCAddress",
-  "tag": "Tag",
-  "amount": "0.001"
-}
-```
-
-> Response
-
-```json
-{
-  "withdraw_id": "<withdrawal ID>"
-}
-```
-
-`POST /api/v3.2/user/wallet/withdraw`
-
-Performs a wallet withdrawal. To use this API, `Withdraw` permission is required. 
-
-### Request Parameters
+#### Wallet
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-| currency | string | Yes | Currency | 
-| address | string | Yes | Blockchain address | 
-| tag | string | Yes | Tag, used only by some blockchain (eg. XRP) | 
-| amount | string | Yes | Amount to withdraw | 
+| wallet | string | Yes | Wallet name |
+| activeWalletName  | string | Yes | Active wallet name |
+| queryType  | integer | Yes | Query type |
+| trackingID | long | Yes | Internal tracking ID, not being used |
+| walletTotalValue | double | Yes | Wallet total value |
+| totalValue | double | Yes | Total value |
+| marginBalance | double | Yes | Margin balance |
+| availableBalance | double | Yes | Available Balance |
+| unrealisedProfitLoss | double | Yes | Unrealised Profit / Loss |
+| maintenanceMargin | double | Yes | Maintenance margin |
+| leverage | double | Yes | Leverage |
+| openMargin | double | Yes | Open margin |
+| assets | Asset object | Yes | Assets available |
+| assetsInUse | Asset object | Yes | Assets in use |
 
-### Response Content
+#### Assets / Asset in Use
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-| withdraw_id | string | Yes | Internal withdrawal ID. References the `orderID` field in `wallet_history` API. As withdrawal will not be processed immediately. User can query the wallet history API to check on the status of the withdrawal |
+| balance | double | Yes | Balance |
+| assetPrice | double | Yes | Asset price |
+| currency | string | Yes | Currency |
+
 
 
 # Websocket Streams
@@ -1263,7 +1673,7 @@ Performs a wallet withdrawal. To use this API, `Withdraw` permission is required
 {
   "op": "subscribe",
   "args": [
-    "orderBookApi:BTC-USD_0"
+    "orderBookApi:BTCPFC_0"
   ]
 }
 ```
@@ -1274,7 +1684,7 @@ Performs a wallet withdrawal. To use this API, `Withdraw` permission is required
 {
   "event": "subscribe",
   "channel": [
-    "orderBookApi:BTC-USD_0"
+    "orderBookApi:BTCPFC_0"
   ]
 }
 ```
@@ -1304,7 +1714,7 @@ To subscribe to a websocket feed
 {
   "op": "subscribe",
   "args": [
-    "orderBookApi:BTC-USD_0"
+    "orderBookApi:BTCPFC_0"
   ]
 }
 ```
@@ -1329,7 +1739,7 @@ To subscribe to a websocket feed
         "size": 0
       }
     ],
-    "symbol":"BTC-USD",
+    "symbol":"BTCPFC",
     "timestamp":1565135165600
   }
 }
@@ -1366,7 +1776,7 @@ Subscribe to the Level 1 Orderbook. The format to subscribe to will be `symbol_g
 {
   "op": "subscribe",
   "args": [
-    "orderBookL2Api:BTC-USD_0"
+    "orderBookL2Api:BTCPFC_0"
   ]
 }
 ```
@@ -1391,7 +1801,7 @@ Subscribe to the Level 1 Orderbook. The format to subscribe to will be `symbol_g
         "size": 0
       }
     ],
-    "symbol":"BTC-USD",
+    "symbol":"BTCPFC",
     "depth": 0,
     "timestamp":1565135165600
   }
@@ -1430,7 +1840,7 @@ Subscribe to the Level 2 Orderbook. The format to subscribe to will be `symbol_d
 {
   "op": "subscribe",
   "args": [
-    "tradeHistoryApi:BTC-USD"
+    "tradeHistoryApi:BTCPFC"
   ]
 }
 ```
@@ -1439,10 +1849,10 @@ Subscribe to the Level 2 Orderbook. The format to subscribe to will be `symbol_d
 
 ```json
 {
-  "topic": "tradeHistoryApi:BTC-USD",
+  "topic": "tradeHistoryApi:BTCPFC",
   "data": [
   {
-    "symbol": "BTC-USD",
+    "symbol": "BTCPFC",
     "side": "SELL",
     "size": 0.007,
     "price": 5302.8,
@@ -1514,8 +1924,8 @@ Below details the arguments needed to be sent in.
 > Generating a signature
 
 ```shell
-echo -n "/ws/spot1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx"
-(stdin)= c410d38c681579adb335885800cff24c66171b7cc8376cfe43da1408c581748156b89bcc5a115bb496413bda481139fb
+echo -n "/ws/futures1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx"
+(stdin)= bd8afb8bee58ba0a2c67f84dcfe6e64d0274f55d064bb26ea84a0fe6dd8c621b541b511982fb0c0b8c244e9521a80ea1
 ```
 
 
@@ -1539,7 +1949,7 @@ echo -n "/ws/spot1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6726
   "topic": "notificationApiV1",
   "data": [
     {
-      "symbol": "Market Symbol (eg. BTC-USD)",
+      "symbol": "Market Symbol (eg. BTCPFC)",
       "orderID": "BTSE internal order ID",
       "side": "BUY",
       "type": "76",
