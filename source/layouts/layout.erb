@@ -58,20 +58,14 @@ under the License.
           <a href="docs/" id="btn_spot">Spot</a>
         </span>
         <span class="nav_cell nav_tab">
-          <a href="/docs/dm/v1/en/" id="btn_dm">Futures</a>
+          <a href="/docs/dm/v1/en/" id="btn_futures">Futures</a>
         </span>
         <span class="nav_cell nav_tab">
-          <a href="/docs/coin_margined_swap/v1/en/" id="btn_coin_margined_swap">OTC</a>
-        </span>
-        <span class="nav_cell nav_tab">
-          <a href="/docs/usdt_swap/v1/en/" id="btn_usdt_swap">Wallet</a>
-        </span>
-        <span class="nav_cell nav_tab">
-          <a href="/docs/option/v1/en/" id="btn_option">Merchant</a>
+          <a href="https://www.btse.com/apiexplorer/otc/" id="btn_otc">OTC</a>
         </span>
       </div>
     </div>
-    <a href="/docs/spot/v1/cn/" class="lang" id="lang_box">简体中文</a>
+    # <a href="/docs/spot/v1/cn/" class="lang" id="lang_box">简体中文</a>
   </header>
     <div class="toc-wrapper">
       <% if language_tabs.any? %>
@@ -137,10 +131,8 @@ under the License.
     <script>
     const lang_btn = document.getElementById('lang_box');
     const btn_spot = document.getElementById('btn_spot');
-    const btn_dm = document.getElementById('btn_dm');
-    const btn_coin_margined_swap = document.getElementById('btn_coin_margined_swap');
-    const btn_usdt_swap = document.getElementById('btn_usdt_swap')
-    const btn_option = document.getElementById('btn_option');
+    const btn_futures = document.getElementById('btn_futures');
+    const btn_otc = document.getElementById('btn_otc');
     const v1_url = document.getElementById('v1_url');
     const url = GetUrlRelativePath();
 
@@ -148,32 +140,27 @@ under the License.
       //如果是中文环境
       lang_btn.innerHTML = 'English';
       btn_spot.innerHTML = '现货';
-      btn_dm.innerHTML = '交割合约';
-      btn_coin_margined_swap.innerHTML = '币本位永续合约';
-      btn_usdt_swap.innerHTML = 'USDT本位永续合约';
-      btn_option.innerHTML = '期权合约';
+      btn_futures.innerHTML = '交割合约';
+      btn_otc.innerHTML = '币本位永续合约';
+      
       lang_btn.href = url.replace('cn/', 'en/');
       btn_spot.href = btn_spot.href.replace('en/', 'cn/');
-      btn_dm.href = btn_dm.href.replace('en/', 'cn/');
-      btn_coin_margined_swap.href = btn_coin_margined_swap.href.replace('en/', 'cn/');
-      btn_usdt_swap.href = btn_usdt_swap.href.replace('en/', 'cn/');
-      btn_option.href = btn_option.href.replace('en/', 'cn/');
+      btn_futures.href = btn_dm.href.replace('en/', 'cn/');
+      //btn_otc.href = btn_coin_margined_swap.href.replace('en/', 'cn/');
+      
       v1_url.href = '/docs/spot/v1/cn/';
     }else{
       //如果是英文环境
       lang_btn.innerHTML = '中文';
       btn_spot.innerHTML = 'Spot';
-      btn_dm.innerHTML = 'Futures';
-      btn_coin_margined_swap.innerHTML = 'OTC';
-      btn_usdt_swap.innerHTML = 'Wallet';
-      btn_option.innerHTML = 'Merchant';
+      btn_futures.innerHTML = 'Futures';
+      btn_otc.innerHTML = 'OTC';
       lang_btn.href = url.replace('en/', 'cn/');
+      
       btn_spot.href = btn_spot.href.replace('cn/', 'en/');
-      btn_dm.href = btn_dm.href.replace('cn/', 'en/');
-      // btn_swap.href = btn_swap.href.replace('cn/', 'en/');
-      btn_coin_margined_swap.href = btn_coin_margined_swap.href.replace('cn/', 'en/');
-      btn_usdt_swap.href = btn_usdt_swap.href.replace('cn/', 'en/');
-      btn_option.href = btn_option.href.replace('cn/', 'en/');
+      btn_futures.href = btn_dm.href.replace('cn/', 'en/');
+      btn_otc.href = btn_coin_margined_swap.href.replace('cn/', 'en/');
+      
       v1_url.href = '/docs/spot/v1/en/';
     }
 
