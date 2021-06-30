@@ -402,8 +402,6 @@
 <li>500 - Internal server error. Indicates that the server encountered an unexpected condition resulting in not being able to fulfill the request</li>
 </ul>
 <h1 id='workflow'>Workflow</h1>
-<p><img src="https://btsecom.github.io/docs/images/otcworkflow.png" alt="OTC Workflow" /></p>
-
 <ul>
 <li>Request for Quote to get an OTC quote from BTSE</li>
 <li>BTSE responds with a quote based on the request</li>
@@ -554,6 +552,52 @@
 <p><code>POST /api/v1/quote</code></p>
 
 <p>Request for a quote</p>
+<h3 id='request-parameters'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>baseCurrency</td>
+<td>string</td>
+<td>Yes</td>
+<td>Base currency (eg. BTC)</td>
+</tr>
+<tr>
+<td>orderCurrency</td>
+<td>string</td>
+<td>Yes</td>
+<td>Order currency</td>
+</tr>
+<tr>
+<td>orderSizeInBaseCurrency</td>
+<td>Double Array</td>
+<td>Yes</td>
+<td>Size of order in base currency</td>
+</tr>
+<tr>
+<td>orderAmountInOrderCurrency</td>
+<td>Double Array</td>
+<td>Yes</td>
+<td>Order amount in order currency</td>
+</tr>
+<tr>
+<td>clientOrderId</td>
+<td>Double Array</td>
+<td>Yes</td>
+<td>Custom client order ID</td>
+</tr>
+<tr>
+<td>side</td>
+<td>string</td>
+<td>Yes</td>
+<td>Order side, BUY or SELL</td>
+</tr>
+</tbody></table>
 <h3 id='response-content-2'>Response Content</h3>
 <table><thead>
 <tr>
@@ -564,40 +608,70 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>assetName</td>
+<td>markets</td>
+<td>Asset</td>
+<td>Yes</td>
+<td>Asset information</td>
+</tr>
+<tr>
+<td>quoteAmountToDeduct</td>
+<td>double</td>
+<td>Yes</td>
+<td>Quote amount to deduct</td>
+</tr>
+<tr>
+<td>quoteAmountToReceive</td>
+<td>double</td>
+<td>Yes</td>
+<td>Quote amount to receive</td>
+</tr>
+<tr>
+<td>quoteCurrencyToDeductIn</td>
 <td>string</td>
 <td>Yes</td>
-<td>Asset name</td>
+<td>Quote currency to deduct in</td>
 </tr>
 <tr>
-<td>maxOrderSizes</td>
-<td>Double Array</td>
+<td>quoteCurrencyToReceiveIn</td>
+<td>string</td>
 <td>Yes</td>
-<td>Maximum order size</td>
+<td>Quote currency to receive</td>
 </tr>
 <tr>
-<td>maxOrderValues</td>
-<td>Double Array</td>
+<td>quoteId</td>
+<td>string</td>
 <td>Yes</td>
-<td>Maximum order notional value</td>
+<td>Quote ID</td>
 </tr>
 <tr>
-<td>minOrderSizes</td>
-<td>Double Array</td>
+<td>quotePriceInOrderCurrency</td>
+<td>double</td>
 <td>Yes</td>
-<td>Minimum order size</td>
+<td>Quote price in order currency</td>
 </tr>
 <tr>
-<td>minOrderValues</td>
-<td>Double Array</td>
+<td>quotePriceInUSD</td>
+<td>long</td>
 <td>Yes</td>
-<td>Minimum order notional value</td>
+<td>Quote price in USD</td>
 </tr>
 <tr>
-<td>supportQuoteCurrencies</td>
-<td>string Array</td>
+<td>quoteTimestamp</td>
+<td>long</td>
 <td>Yes</td>
-<td>Supported quote currencies</td>
+<td>Quote timestamp</td>
+</tr>
+<tr>
+<td>quoteValidDurationMs</td>
+<td>long</td>
+<td>Yes</td>
+<td>Quote validity</td>
+</tr>
+<tr>
+<td>status</td>
+<td>integer</td>
+<td>Yes</td>
+<td>Order status with values: <br/>8: Insufficient Balance<br/>30001: Order Quote<br/>30008: OTC Order Requote<br/>30007: OTC Order completed successfully<br/>40001: Service Unavailable<br/>40003: Rejected</td>
 </tr>
 </tbody></table>
 <h2 id='accept-quote'>Accept Quote</h2>
@@ -650,7 +724,23 @@
 </span></code></pre></div>
 <p><code>POST /api/v1/accept/{quoteId}</code></p>
 
-<p>Gets OTC market information</p>
+<p>Accepts a quote</p>
+<h3 id='request-parameter'>Request Parameter</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>quoteId</td>
+<td>string</td>
+<td>Yes</td>
+<td>Quote ID to supplied as a path parameter</td>
+</tr>
+</tbody></table>
 <h3 id='response-content-3'>Response Content</h3>
 <table><thead>
 <tr>
@@ -661,40 +751,70 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>assetName</td>
+<td>markets</td>
+<td>Asset</td>
+<td>Yes</td>
+<td>Asset information</td>
+</tr>
+<tr>
+<td>quoteAmountToDeduct</td>
+<td>double</td>
+<td>Yes</td>
+<td>Quote amount to deduct</td>
+</tr>
+<tr>
+<td>quoteAmountToReceive</td>
+<td>double</td>
+<td>Yes</td>
+<td>Quote amount to receive</td>
+</tr>
+<tr>
+<td>quoteCurrencyToDeductIn</td>
 <td>string</td>
 <td>Yes</td>
-<td>Asset name</td>
+<td>Quote currency to deduct in</td>
 </tr>
 <tr>
-<td>maxOrderSizes</td>
-<td>Double Array</td>
+<td>quoteCurrencyToReceiveIn</td>
+<td>string</td>
 <td>Yes</td>
-<td>Maximum order size</td>
+<td>Quote currency to receive</td>
 </tr>
 <tr>
-<td>maxOrderValues</td>
-<td>Double Array</td>
+<td>quoteId</td>
+<td>string</td>
 <td>Yes</td>
-<td>Maximum order notional value</td>
+<td>Quote ID</td>
 </tr>
 <tr>
-<td>minOrderSizes</td>
-<td>Double Array</td>
+<td>quotePriceInOrderCurrency</td>
+<td>double</td>
 <td>Yes</td>
-<td>Minimum order size</td>
+<td>Quote price in order currency</td>
 </tr>
 <tr>
-<td>minOrderValues</td>
-<td>Double Array</td>
+<td>quotePriceInUSD</td>
+<td>long</td>
 <td>Yes</td>
-<td>Minimum order notional value</td>
+<td>Quote price in USD</td>
 </tr>
 <tr>
-<td>supportQuoteCurrencies</td>
-<td>string Array</td>
+<td>quoteTimestamp</td>
+<td>long</td>
 <td>Yes</td>
-<td>Supported quote currencies</td>
+<td>Quote timestamp</td>
+</tr>
+<tr>
+<td>quoteValidDurationMs</td>
+<td>long</td>
+<td>Yes</td>
+<td>Quote validity</td>
+</tr>
+<tr>
+<td>status</td>
+<td>integer</td>
+<td>Yes</td>
+<td>Order status with values: <br/>8: Insufficient Balance<br/>30001: Order Quote<br/>30008: OTC Order Requote<br/>30007: OTC Order completed successfully<br/>40001: Service Unavailable<br/>40003: Rejected</td>
 </tr>
 </tbody></table>
 <h2 id='reject-quote'>Reject Quote</h2>
@@ -702,35 +822,16 @@
 <p>Response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"assetName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"maxOrderSizes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="mi">5000</span><span class="p">,</span><span class="w">
-    </span><span class="mi">5000</span><span class="p">,</span><span class="w">
-    </span><span class="mi">5000</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"maxOrderValues"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="mi">100000</span><span class="p">,</span><span class="w">
-    </span><span class="mi">100000</span><span class="p">,</span><span class="w">
-    </span><span class="mi">100000</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"minOrderSizes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="mf">0.05</span><span class="p">,</span><span class="w">
-    </span><span class="mf">0.05</span><span class="p">,</span><span class="w">
-    </span><span class="mf">0.05</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"minOrderValues"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="mf">0.0025</span><span class="p">,</span><span class="w">
-    </span><span class="mf">0.0025</span><span class="p">,</span><span class="w">
-    </span><span class="mf">0.0025</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"supportQuoteCurrencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+  </span><span class="nl">"errorCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w">
+
 </span></code></pre></div>
 <p><code>POST /otc/api/v1/reject/{quoteId}</code></p>
 
 <p>Reject current quote</p>
-<h3 id='response-content-4'>Response Content</h3>
+<h3 id='request-parameter-2'>Request Parameter</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -740,40 +841,10 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>assetName</td>
+<td>quoteId</td>
 <td>string</td>
 <td>Yes</td>
-<td>Asset name</td>
-</tr>
-<tr>
-<td>maxOrderSizes</td>
-<td>Double Array</td>
-<td>Yes</td>
-<td>Maximum order size</td>
-</tr>
-<tr>
-<td>maxOrderValues</td>
-<td>Double Array</td>
-<td>Yes</td>
-<td>Maximum order notional value</td>
-</tr>
-<tr>
-<td>minOrderSizes</td>
-<td>Double Array</td>
-<td>Yes</td>
-<td>Minimum order size</td>
-</tr>
-<tr>
-<td>minOrderValues</td>
-<td>Double Array</td>
-<td>Yes</td>
-<td>Minimum order notional value</td>
-</tr>
-<tr>
-<td>supportQuoteCurrencies</td>
-<td>string Array</td>
-<td>Yes</td>
-<td>Supported quote currencies</td>
+<td>Quote ID to supplied as a path parameter</td>
 </tr>
 </tbody></table>
 <h2 id='query-order'>Query Order</h2>
@@ -827,7 +898,7 @@
 <p><code>POST /api/v1/queryOrder/{quoteId}</code></p>
 
 <p>Query order information</p>
-<h3 id='response-content-5'>Response Content</h3>
+<h3 id='request-parameter-3'>Request Parameter</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -837,40 +908,86 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>assetName</td>
+<td>quoteId</td>
 <td>string</td>
 <td>Yes</td>
-<td>Asset name</td>
+<td>Quote ID to supplied as a path parameter</td>
+</tr>
+</tbody></table>
+<h3 id='response-content-4'>Response Content</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>markets</td>
+<td>Asset</td>
+<td>Yes</td>
+<td>Asset information</td>
 </tr>
 <tr>
-<td>maxOrderSizes</td>
-<td>Double Array</td>
+<td>quoteAmountToDeduct</td>
+<td>double</td>
 <td>Yes</td>
-<td>Maximum order size</td>
+<td>Quote amount to deduct</td>
 </tr>
 <tr>
-<td>maxOrderValues</td>
-<td>Double Array</td>
+<td>quoteAmountToReceive</td>
+<td>double</td>
 <td>Yes</td>
-<td>Maximum order notional value</td>
+<td>Quote amount to receive</td>
 </tr>
 <tr>
-<td>minOrderSizes</td>
-<td>Double Array</td>
+<td>quoteCurrencyToDeductIn</td>
+<td>string</td>
 <td>Yes</td>
-<td>Minimum order size</td>
+<td>Quote currency to deduct in</td>
 </tr>
 <tr>
-<td>minOrderValues</td>
-<td>Double Array</td>
+<td>quoteCurrencyToReceiveIn</td>
+<td>string</td>
 <td>Yes</td>
-<td>Minimum order notional value</td>
+<td>Quote currency to receive</td>
 </tr>
 <tr>
-<td>supportQuoteCurrencies</td>
-<td>string Array</td>
+<td>quoteId</td>
+<td>string</td>
 <td>Yes</td>
-<td>Supported quote currencies</td>
+<td>Quote ID</td>
+</tr>
+<tr>
+<td>quotePriceInOrderCurrency</td>
+<td>double</td>
+<td>Yes</td>
+<td>Quote price in order currency</td>
+</tr>
+<tr>
+<td>quotePriceInUSD</td>
+<td>long</td>
+<td>Yes</td>
+<td>Quote price in USD</td>
+</tr>
+<tr>
+<td>quoteTimestamp</td>
+<td>long</td>
+<td>Yes</td>
+<td>Quote timestamp</td>
+</tr>
+<tr>
+<td>quoteValidDurationMs</td>
+<td>long</td>
+<td>Yes</td>
+<td>Quote validity</td>
+</tr>
+<tr>
+<td>status</td>
+<td>integer</td>
+<td>Yes</td>
+<td>Order status with values: <br/>8: Insufficient Balance<br/>30001: Order Quote<br/>30008: OTC Order Requote<br/>30007: OTC Order completed successfully<br/>40001: Service Unavailable<br/>40003: Rejected</td>
 </tr>
 </tbody></table>
 
