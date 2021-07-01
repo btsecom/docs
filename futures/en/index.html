@@ -246,6 +246,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-2-1-8-1st-july-2021" class="toc-h2 toc-link" data-title="Version 2.1.8 (1st July 2021)">Version 2.1.8 (1st July 2021)</a>
+                  </li>
+                  <li>
                     <a href="#version-2-1-7-4th-february-2021" class="toc-h2 toc-link" data-title="Version 2.1.7 (4th February 2021)">Version 2.1.7 (4th February 2021)</a>
                   </li>
                   <li>
@@ -301,10 +304,10 @@
                     <a href="#query-market-price" class="toc-h2 toc-link" data-title="Query Market price">Query Market price</a>
                   </li>
                   <li>
-                    <a href="#orderbook-level-1" class="toc-h2 toc-link" data-title="Orderbook (Level 1)">Orderbook (Level 1)</a>
+                    <a href="#orderbook-by-grouping" class="toc-h2 toc-link" data-title="Orderbook (By grouping)">Orderbook (By grouping)</a>
                   </li>
                   <li>
-                    <a href="#orderbook-level-2" class="toc-h2 toc-link" data-title="Orderbook (Level 2)">Orderbook (Level 2)</a>
+                    <a href="#orderbook-2" class="toc-h2 toc-link" data-title="Orderbook">Orderbook</a>
                   </li>
                   <li>
                     <a href="#query-trades-fills" class="toc-h2 toc-link" data-title="Query Trades Fills">Query Trades Fills</a>
@@ -379,10 +382,10 @@
                     <a href="#subscription" class="toc-h2 toc-link" data-title="Subscription">Subscription</a>
                   </li>
                   <li>
-                    <a href="#l1-orderbook-snapshot" class="toc-h2 toc-link" data-title="L1 Orderbook Snapshot">L1 Orderbook Snapshot</a>
+                    <a href="#orderbook-snapshot-by-grouping" class="toc-h2 toc-link" data-title="Orderbook Snapshot (By grouping)">Orderbook Snapshot (By grouping)</a>
                   </li>
                   <li>
-                    <a href="#l2-orderbook-snapshot" class="toc-h2 toc-link" data-title="L2 Orderbook Snapshot">L2 Orderbook Snapshot</a>
+                    <a href="#orderbook-snapshot-by-depth" class="toc-h2 toc-link" data-title="Orderbook Snapshot (By depth)">Orderbook Snapshot (By depth)</a>
                   </li>
                   <li>
                     <a href="#public-trade-fills" class="toc-h2 toc-link" data-title="Public Trade Fills">Public Trade Fills</a>
@@ -405,9 +408,12 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-2-1-7-4th-february-2021'>Version 2.1.7 (4th February 2021)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-2-1-8-1st-july-2021'>Version 2.1.8 (1st July 2021)</h2>
 <ul>
-<li>Addition of <code>avgFilledPrice</code> in open_orders AP</li>
+<li>Addition of <code>fills</code> websocket topic to subscribe to <a href="#user-trade-fills">user trade fills</a></li>
+<li><p>Addition of attribute <code>depth</code> for <a href="#orderbook-snapshot-by-depth">Orderbook websocket feed</a></p>
+<h2 id='version-2-1-7-4th-february-2021'>Version 2.1.7 (4th February 2021)</h2></li>
+<li><p>Addition of <code>avgFilledPrice</code> in open_orders AP</p></li>
 </ul>
 <h2 id='version-2-1-6-29th-january-2021'>Version 2.1.6 (29th January 2021)</h2>
 <ul>
@@ -1065,7 +1071,7 @@
 <td>Mark price</td>
 </tr>
 </tbody></table>
-<h2 id='orderbook-level-1'>Orderbook (Level 1)</h2>
+<h2 id='orderbook-by-grouping'>Orderbook (By grouping)</h2>
 <blockquote>
 <p>Response</p>
 </blockquote>
@@ -1088,7 +1094,7 @@
 </span></code></pre></div>
 <p><code>GET /api/v2.1/orderbook/{symbol}</code></p>
 
-<p>Retrieves a Level 1 snapshot of the orderbook</p>
+<p>Retrieves a snapshot of the orderbook.</p>
 <h3 id='request-parameters-4'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -1161,7 +1167,7 @@
 <td>order size</td>
 </tr>
 </tbody></table>
-<h2 id='orderbook-level-2'>Orderbook (Level 2)</h2>
+<h2 id='orderbook-2'>Orderbook</h2>
 <blockquote>
 <p>Response</p>
 </blockquote>
@@ -1207,7 +1213,7 @@
 <td>Orderbook depth</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-5'>Response Content</h3><h4 id='orderbook-2'>Orderbook</h4>
+<h3 id='response-content-5'>Response Content</h3><h4 id='orderbook-3'>Orderbook</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4156,7 +4162,7 @@
 <td>Topics which have been sucessfully subscribed</td>
 </tr>
 </tbody></table>
-<h2 id='l1-orderbook-snapshot'>L1 Orderbook Snapshot</h2>
+<h2 id='orderbook-snapshot-by-grouping'>Orderbook Snapshot (By grouping)</h2>
 <blockquote>
 <p>Request</p>
 </blockquote>
@@ -4192,7 +4198,7 @@
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>Subscribe to the Level 1 Orderbook. The format to subscribe to will be <code>symbol_grouping</code>. </p>
+<p>Subscribe to the Orderbook in different groupings. The format to subscribe to will be <code>symbol_grouping</code>. </p>
 
 <ul>
 <li><code>symbol</code> indicates the market symbol</li>
@@ -4254,7 +4260,7 @@
 <td>Orderbook timestamp</td>
 </tr>
 </tbody></table>
-<h2 id='l2-orderbook-snapshot'>L2 Orderbook Snapshot</h2>
+<h2 id='orderbook-snapshot-by-depth'>Orderbook Snapshot (By depth)</h2>
 <blockquote>
 <p>Request</p>
 </blockquote>
