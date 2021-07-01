@@ -13,6 +13,10 @@ headingLevel: 2
 
 # Change Log
 
+## Version 2.1.8 (1st July 2021)
+
+* Addition of `fills` websocket topic to subscribe to [user trade fills](#user-trade-fills)
+* Addition of attribute `depth` for [Orderbook websocket feed](#orderbook-snapshot-by-depth)
 ## Version 2.1.7 (4th February 2021)
 
 * Addition of `avgFilledPrice` in open_orders AP
@@ -370,7 +374,7 @@ Retrieve current prices on the platform. If no symbol specified, all symbols wil
 | lastPrice | double | Yes | Last transacted price | 
 | markPrice | double | Yes | Mark price | 
 
-## Orderbook (Level 1)
+## Orderbook (By grouping)
 
 > Response
 
@@ -395,7 +399,7 @@ Retrieve current prices on the platform. If no symbol specified, all symbols wil
 
 `GET /api/v2.1/orderbook/{symbol}`
 
-Retrieves a Level 1 snapshot of the orderbook
+Retrieves a snapshot of the orderbook.
 
 ### Request Parameters
 
@@ -424,7 +428,7 @@ Retrieves a Level 1 snapshot of the orderbook
 
 
 
-## Orderbook (Level 2)
+## Orderbook
 
 > Response
 
@@ -1706,7 +1710,7 @@ To subscribe to a websocket feed
 | channel | array | Yes | Topics which have been sucessfully subscribed | 
 
 
-## L1 Orderbook Snapshot
+## Orderbook Snapshot (By grouping)
 
 > Request
 
@@ -1745,7 +1749,7 @@ To subscribe to a websocket feed
 }
 ```
 
-Subscribe to the Level 1 Orderbook. The format to subscribe to will be `symbol_grouping`. 
+Subscribe to the Orderbook in different groupings. The format to subscribe to will be `symbol_grouping`. 
 
 * `symbol` indicates the market symbol
 * `grouping` indicates the grouping granularity. Valid values are 0-9.
@@ -1768,7 +1772,7 @@ Subscribe to the Level 1 Orderbook. The format to subscribe to will be `symbol_g
 | symbol | string | Yes | Market symbol | 
 | timestamp | long | Yes | Orderbook timestamp | 
 
-## L2 Orderbook Snapshot
+## Orderbook Snapshot (By depth)
 
 > Request
 
