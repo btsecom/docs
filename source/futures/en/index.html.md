@@ -68,10 +68,10 @@ You will need to create an API key on the BTSE platform before you can use authe
 * Production
   * HTTP
      * `https://api.btse.com/futures`
-     * `https://aws-api.btse.com/futures`
+     * `https://aws-api.btse.com/futures` (Optimised for connection via AWS)
   * Websocket
      * `wss://ws.btse.com/ws/futures`
-     * `wss://aws-ws.btse.com/ws/futures`
+     * `wss://aws-ws.btse.com/ws/futures` (Optimised for connection via AWS)
 * Testnet
   * HTTP
      * `https://testapi.btse.io/futures`
