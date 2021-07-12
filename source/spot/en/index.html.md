@@ -68,10 +68,10 @@ You will need to create an API key on the BTSE platform before you can use authe
 * Production
   * HTTP
      * `https://api.btse.com/spot`
-     * `https://aws-api.btse.com/spot`
+     * `https://aws-api.btse.com/spot` (Optimised for connection via AWS)
   * Websocket
      * `wss://ws.btse.com/ws/spot`
-     * `wss://aws-ws.btse.com/ws/spot`
+     * `wss://aws-ws.btse.com/ws/spot` (Optimised for connection via AWS)
 * Testnet
   * HTTP
      * `https://testapi.btse.io/spot`
