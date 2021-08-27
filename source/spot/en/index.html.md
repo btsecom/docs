@@ -626,7 +626,7 @@ Creates a new order. Requires `Trading` permission
 | price | double | Yes | Order price |
 | side | string | Yes | Order side<br/>BUY or SELL |
 | size | double | Yes | Order size |
-| status | integer | Yes | Order status<br/>	2: Order Inserted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found |
+| status | integer | Yes | Order status<br/>	2: Order Inserted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found |
 | stopPrice | string | Yes | Stop price |
 | time_in_force | string | Yes | Order validity |
 | timestamp | string | Yes | Order timestamp |
@@ -727,7 +727,7 @@ This API Requires `Trading` permission
 | price | double | Yes | Order price |
 | side | string | Yes | Order side<br/>BUY or SELL |
 | size | double | Yes | Order size |
-| status | integer | Yes | Order status<br/>	2: Order Inserted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found |
+| status | integer | Yes | Order status<br/>	2: Order Inserted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found |
 | stopPrice | string | Yes | Stop price |
 | time_in_force | string | Yes | Order validity |
 | timestamp | string | Yes | Order timestamp |
@@ -806,7 +806,7 @@ Amend the price or size or trigger price of an order. For trigger orders, if the
 | price | double | Yes | Order price |
 | side | string | Yes | Order side<br/>BUY or SELL |
 | size | double | Yes | Order size |
-| status | integer | Yes | Order status<br/>	2: Order Inserted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found |
+| status | integer | Yes | Order status<br/>	2: Order Inserted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found |
 | stopPrice | string | Yes | Stop price |
 | time_in_force | string | Yes | Order validity |
 | timestamp | string | Yes | Order timestamp |
@@ -861,7 +861,7 @@ CAncels pending orders that has not yet been transacted. The `orderID` is a uniq
 | price | double | Yes | Order price |
 | side | string | Yes | Order side<br/>BUY or SELL |
 | size | double | Yes | Cancelled size |
-| status | integer | Yes | Order status<br/>	2: Order Inserted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found |
+| status | integer | Yes | Order status<br/>	2: Order Inserted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found |
 | stopPrice | string | Yes | Stop price |
 | time_in_force | string | Yes | Order validity |
 | timestamp | string | Yes | Order timestamp |
@@ -957,7 +957,7 @@ Retrieves open orders that have not yet been matched. This is also used to check
 | price | double | Yes | Order price |
 | side | string | Yes | Order side<br/>BUY or SELL |
 | size | double | Yes | Cancelled size |
-| status | integer | Yes | Order status<br/>	2: Order Inserted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found |
+| status | integer | Yes | Order status<br/>	2: Order Inserted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found |
 | stopPrice | string | Yes | Stop price |
 | time_in_force | string | Yes | Order validity |
 | timestamp | string | Yes | Order timestamp |
