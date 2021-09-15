@@ -11,6 +11,22 @@
 
 <p align="center"><em>The example above was created with Slate. Check it out at <a href="https://slatedocs.github.io/slate">slatedocs.github.io/slate</a>.</em></p>
 
+Quickstart
+------------
+* Build for local viewing: 
+
+1. Modify markdown files
+2. Execute local version to view output files (`bundle exec middleman build --clean`)
+3. Open file for viewing (file will be in `build/index.html`)
+
+* To deploy into Github
+
+1. Commit the file changes (`git commit -m "commit message"`)
+2. Push changes into master branch (`git push -U origin`)
+3. Deploy changes to gh-pages branch (`./deploy.sh`)
+
+
+
 Features
 ------------
 
