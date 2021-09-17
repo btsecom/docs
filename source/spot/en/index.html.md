@@ -710,8 +710,8 @@ This API Requires `Trading` permission
 | trailValue | double | Yes | Trail value | 
 | postOnly | boolean | Yes | Boolean to indicate if this is a post only order. For post only orders, traders are charged maker fees | 
 | clOrderID | string | Yes | Custom order Id | 
-| deviation | double | Yes | How many percent of the order is to be displayed on the orderbook.  | 
-| stealth | double | Yes | How much should the order price deviate from index price. Value is in percentage and can range from `-10` to `10` | 
+| stealth | double | Yes | How many percent of the order is to be displayed on the orderbook.  | 
+| deviation | double | Yes | How much should the order price deviate from index price. Value is in percentage and can range from `-10` to `10` | 
 
 
 ### Response Content
