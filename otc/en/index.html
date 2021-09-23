@@ -243,6 +243,14 @@
         <ul class="search-results"></ul>
       <ul id="toc" class="toc-list-h1">
           <li>
+            <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#version-1-1-17th-september-2021" class="toc-h2 toc-link" data-title="Version 1.1 (17th September 2021)">Version 1.1 (17th September 2021)</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#overview" class="toc-h1 toc-link" data-title="Overview">Overview</a>
               <ul class="toc-list-h2">
                   <li>
@@ -285,6 +293,17 @@
                   </li>
               </ul>
           </li>
+          <li>
+            <a href="#websocket-streams" class="toc-h1 toc-link" data-title="Websocket Streams">Websocket Streams</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#authentication-2" class="toc-h2 toc-link" data-title="Authentication">Authentication</a>
+                  </li>
+                  <li>
+                    <a href="#quote-stream" class="toc-h2 toc-link" data-title="Quote Stream">Quote Stream</a>
+                  </li>
+              </ul>
+          </li>
       </ul>
         <ul class="toc-footer">
         </ul>
@@ -292,7 +311,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='overview'>Overview</h1><h2 id='generating-api-key'>Generating API Key</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-1-1-17th-september-2021'>Version 1.1 (17th September 2021)</h2>
+<ul>
+<li>Addition of <a href="#quote-stream"><code>quote</code></a> websocket topic to subscribe to price streams on the OTC market</li>
+</ul>
+<h1 id='overview'>Overview</h1><h2 id='generating-api-key'>Generating API Key</h2>
 <p>You will need to create an API key on the BTSE platform before you can use authenticated APIs. To create API keys, you can follow the steps below:</p>
 
 <ul>
@@ -313,6 +336,12 @@
 <li><code>https://api.btse.com/otc</code></li>
 <li><code>https://aws-api.btse.com/otc</code></li>
 </ul></li>
+<li>Websocket
+
+<ul>
+<li><code>wss://ws.btse.com/ws/otc</code></li>
+<li><code>wss://aws-ws.btse.com/ws/otc</code> (Optimised for connection via AWS)</li>
+</ul></li>
 </ul></li>
 <li>Testnet
 
@@ -321,6 +350,11 @@
 
 <ul>
 <li><code>https://testapi.btse.io/otc</code></li>
+</ul></li>
+<li>Websocket
+
+<ul>
+<li><code>wss://testws.btse.io/ws/otc</code></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -988,6 +1022,220 @@
 <td>integer</td>
 <td>Yes</td>
 <td>Order status with values: <br/>8: Insufficient Balance<br/>30001: Order Quote<br/>30008: OTC Order Requote<br/>30007: OTC Order completed successfully<br/>40001: Service Unavailable<br/>40003: Rejected</td>
+</tr>
+</tbody></table>
+<h1 id='websocket-streams'>Websocket Streams</h1><h2 id='authentication-2'>Authentication</h2>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"op"</span><span class="p">:</span><span class="s2">"authKeyExpires"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"args"</span><span class="p">:[</span><span class="s2">"APIKey"</span><span class="p">,</span><span class="w"> </span><span class="s2">"nonce"</span><span class="p">,</span><span class="w"> </span><span class="s2">"signature"</span><span class="p">]}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>Authenticate the websocket session to subscribe to authenticated websocket topics. Assume we have values as follows: </p>
+
+<ul>
+<li><code>btse-nonce</code>: 1624985375123</li>
+<li><code>btse-api</code>: 4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x</li>
+<li><code>secret</code>: 848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx</li>
+</ul>
+
+<p>Our subscription request will be: </p>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+  "op":"authKeyExpires",
+  "args":["4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x", "1624985375123", "c410d38c681579adb335885800cff24c66171b7cc8376cfe43da1408c581748156b89bcc5a115bb496413bda481139fb"]}
+}
+</code></pre></div><h3 id='request-parameters-2'>Request Parameters</h3>
+<p>Below details the arguments needed to be sent in.</p>
+
+<table><thead>
+<tr>
+<th>Index</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>0</td>
+<td>string</td>
+<td>Yes</td>
+<td>First argument is the API key</td>
+</tr>
+<tr>
+<td>1</td>
+<td>long</td>
+<td>Yes</td>
+<td>Nonce which is the current timestamp</td>
+</tr>
+<tr>
+<td>2</td>
+<td>string</td>
+<td>Yes</td>
+<td>Generated signature</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Generating a signature</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="nb">echo</span> <span class="nt">-n</span> <span class="s2">"/ws/otc1624985375123"</span>  | openssl dgst <span class="nt">-sha384</span> <span class="nt">-hmac</span> <span class="s2">"848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx"</span>
+<span class="o">(</span>stdin<span class="o">)=</span> c410d38c681579adb335885800cff24c66171b7cc8376cfe43da1408c581748156b89bcc5a115bb496413bda481139fb
+</code></pre></div><h2 id='quote-stream'>Quote Stream</h2>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"op"</span><span class="p">:</span><span class="w"> </span><span class="s2">"quote"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USD"</span><span class="p">,</span><span class="w"> 
+  </span><span class="nl">"clOrderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ClientOrder1"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Response </p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"quote"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"buyQuoteId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"015f05ba-1d55-46d7-94d9-214229414ae7"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"sellQuoteId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0683a41a-a2ad-467b-99b3-241f3ab0cec4"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"clOrderId"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"buyQuantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"buyUnitPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">47865.580838</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"buyTotalAmount"</span><span class="p">:</span><span class="w"> </span><span class="mf">478655.80838</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"sellQuantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"sellUnitPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">47649.40351972</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"sellTotalAmount"</span><span class="p">:</span><span class="w"> </span><span class="mf">476494.0352</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"reason"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div>
+<p>Receive quote streams by subscribing to the <code>quote</code> websocket. The websocket topic will constantly push new prices to the subscriber. To accept the quote, indicate the buy or sell quote Id using the <code>/accept</code> API. </p>
+<h3 id='request-parameters-3'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>op</td>
+<td>string</td>
+<td>Yes</td>
+<td>Operation, in this case its <code>quote</code></td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Yes</td>
+<td>Market symbol, refer to <code>getMarkets</code> API</td>
+</tr>
+<tr>
+<td>clOrderId</td>
+<td>string</td>
+<td>No</td>
+<td>Client custom order Id</td>
+</tr>
+<tr>
+<td>quantity</td>
+<td>double</td>
+<td>Yes</td>
+<td>Order quantity</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>string</td>
+<td>Yes</td>
+<td>Can be either in the base or quote currency. If specified in the base currency, then the quote stream will respond with</td>
+</tr>
+</tbody></table>
+<h3 id='response-content-5'>Response Content</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>topic</td>
+<td>string</td>
+<td>Yes</td>
+<td>Websocket topic</td>
+</tr>
+<tr>
+<td>buyQuoteId</td>
+<td>string</td>
+<td>Yes</td>
+<td>Quote Id for the buy side. If the value is empty / null, it means that you websocket stream is not authenticated</td>
+</tr>
+<tr>
+<td>sellQuoteId</td>
+<td>string</td>
+<td>Yes</td>
+<td>Quote Id for the sell side. If the value is empty / null, it means that you websocket stream is not authenticated</td>
+</tr>
+<tr>
+<td>clOrderId</td>
+<td>string</td>
+<td>Yes</td>
+<td>User customer Order Id</td>
+</tr>
+<tr>
+<td>buyQuantity</td>
+<td>double</td>
+<td>Yes</td>
+<td>Quantity to purchase based on the quote request</td>
+</tr>
+<tr>
+<td>buyUnitPrice</td>
+<td>double</td>
+<td>Yes</td>
+<td>Unit price per unit of the base symbol</td>
+</tr>
+<tr>
+<td>buyTotalAmount</td>
+<td>double</td>
+<td>Yes</td>
+<td>Total price to pay in quote currency</td>
+</tr>
+<tr>
+<td>sellQuantity</td>
+<td>double</td>
+<td>Yes</td>
+<td>Quantity to sell based on the quote request</td>
+</tr>
+<tr>
+<td>sellUnitPrice</td>
+<td>double</td>
+<td>Yes</td>
+<td>Unit price per unit of the base symbol</td>
+</tr>
+<tr>
+<td>sellTotalAmount</td>
+<td>double</td>
+<td>Yes</td>
+<td>Total price to pay in quote currency</td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>No</td>
+<td>Status of the response</td>
+</tr>
+<tr>
+<td>reason</td>
+<td>string</td>
+<td>No</td>
+<td>If an error is returned, the reason field will contain the reasons for the error</td>
 </tr>
 </tbody></table>
 
