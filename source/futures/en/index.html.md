@@ -594,6 +594,7 @@ Creates a new order. Requires `Trading` permission
 | triggerPrice | double | Yes | Mandatory when creating a Trigger or OCO order. Indicates the trigger price | 
 | trailValue | double | Yes | Trail value | 
 | postOnly | boolean | Yes | Boolean to indicate if this is a post only order. For post only orders, traders are charged maker fees | 
+| reduceOnly | boolean | Yes | Boolean to indicate if this is a reduce only order. | 
 | clOrderID | string | Yes | Custom order Id | 
 
 
