@@ -373,6 +373,9 @@
                     <a href="#orderbook-snapshot-by-depth" class="toc-h2 toc-link" data-title="Orderbook Snapshot (By depth)">Orderbook Snapshot (By depth)</a>
                   </li>
                   <li>
+                    <a href="#orderbook-delta-updates" class="toc-h2 toc-link" data-title="Orderbook Delta Updates">Orderbook Delta Updates</a>
+                  </li>
+                  <li>
                     <a href="#public-trade-fills" class="toc-h2 toc-link" data-title="Public Trade Fills">Public Trade Fills</a>
                   </li>
                   <li>
@@ -3408,6 +3411,161 @@
 <td>Orderbook timestamp</td>
 </tr>
 </tbody></table>
+
+<p>================</p>
+<h2 id='orderbook-delta-updates'>Orderbook Delta Updates</h2>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"op"</span><span class="p">:</span><span class="w"> </span><span class="s2">"subscribe"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"update:BTC-USD"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Response </p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"update:BTC-USD"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"bids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"59252.5"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"0.06865"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"59249.0"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"0.24000"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"59235.5"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"0.16073"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"59235.0"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"0.26626"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"59233.0"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"0.50000"</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"asks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"59292.0"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"0.50000"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"59285.5"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"0.24000"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"59285.0"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"0.15598"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"59282.5"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"0.06829"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"59278.5"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"0.01472"</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"seqNum"</span><span class="p">:</span><span class="w"> </span><span class="mi">628282</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"prevSeqNum"</span><span class="p">:</span><span class="w"> </span><span class="mi">628281</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"snapshot"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><div class="highlight"><pre class="highlight plaintext"><code>{
+  "topic": "update:BTC-USD",
+  "data": {
+    "bids": [],
+    "asks": [
+      [
+        "59367.5",
+        "2.15622"
+      ],
+      [
+        "59325.5",
+        "0"
+      ]
+    ],
+    "seqNum": 628283,
+    "prevSeqNum": 628282,
+    "type": "delta"
+  }
+}
+</code></pre></div>
+<p>Subscribe to Orderbook delta updates. The topic to subscribe to will be <code>update</code> specifying the symbol (eg. <code>update:BTC-USD</code>). The first response received will be a snapshot of the current orderbook (this is indicated in the <code>type</code> field) and 50 levels will be returned. Incremental updates will be sent in subsequent packets with type <code>delta</code>. </p>
+
+<p>Bids and asks will be sent in <code>price</code> and <code>size</code> tuples. The size sent will be the new updated size for the price. If a value of <code>0</code> is sent, the price should be removed from the local copy of the orderbook. </p>
+
+<p>To ensure that the updates are received in sequence, <code>seqNum</code> indicates the current sequence and <code>prevSeqNum</code> refers to the packet before. <code>seqNum</code> will always be one after the <code>prevSeqNum</code>. If the sequence if out of order, you will need to unsubscribe and re-subscribe to the topic again. </p>
+<h3 id='response-content-24'>Response Content</h3><h4 id='orderbook-object-3'>Orderbook Object</h4>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>topic</td>
+<td>string</td>
+<td>Yes</td>
+<td>Websocket topic</td>
+</tr>
+<tr>
+<td>data</td>
+<td>Data Object</td>
+<td>Yes</td>
+<td>Refer to data object below</td>
+</tr>
+</tbody></table>
+<h4 id='data-object-3'>Data Object</h4>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>bids</td>
+<td>Quote Object</td>
+<td>Yes</td>
+<td>Bid quotes</td>
+</tr>
+<tr>
+<td>asks</td>
+<td>Quote Object</td>
+<td>Yes</td>
+<td>Asks quotes</td>
+</tr>
+<tr>
+<td>seqNum</td>
+<td>string</td>
+<td>Yes</td>
+<td>Market symbol</td>
+</tr>
+<tr>
+<td>prevSeqNum</td>
+<td>int</td>
+<td>Yes</td>
+<td>Orderbook depth</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>Yes</td>
+<td><code>snapshot</code> - Snapshot of the orderbook with a maximum of 50 levels<br/> <code>delta</code> -  Updates of the orderbook</td>
+</tr>
+</tbody></table>
 <h2 id='public-trade-fills'>Public Trade Fills</h2>
 <blockquote>
 <p>Request</p>
@@ -3437,7 +3595,7 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>Subscribe to recent trade feed for a market. The topic will be <code>tradeHistoryApi:&lt;market&gt;</code> where <code>&lt;market&gt;</code> is the market symbol. </p>
-<h3 id='response-content-24'>Response Content</h3><h4 id='tradehistory-object'>TradeHistory Object</h4>
+<h3 id='response-content-25'>Response Content</h3><h4 id='tradehistory-object'>TradeHistory Object</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3459,7 +3617,7 @@
 <td>Refer to data object below</td>
 </tr>
 </tbody></table>
-<h4 id='data-object-3'>Data Object</h4>
+<h4 id='data-object-4'>Data Object</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3607,7 +3765,7 @@
 
 </span></code></pre></div>
 <p>Receive trade notifications by subscribing to the topic <code>notificationApiV2</code>. The websocket feed will push trade level notifications to the subscriber. If topic is subscribed without being authenticated, no messages will be sent.</p>
-<h3 id='response-content-25'>Response Content</h3>
+<h3 id='response-content-26'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3762,7 +3920,7 @@
 
 </span></code></pre></div>
 <p>When a trade has been transacted, this topic will send the trade information back to the subscriber. </p>
-<h3 id='response-content-26'>Response Content</h3>
+<h3 id='response-content-27'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
