@@ -78,14 +78,14 @@ You will need to create an API key on the BTSE platform before you can use authe
      * `wss://ws.btse.com/ws/spot`
      * `wss://aws-ws.btse.com/ws/spot` (Optimised for connection via AWS)
   * Websocket (for orderbook stream)
-     * `wss://ws.btse.com/ws/spotoss` (Used for Orderbook incremental update stream)
+     * `wss://ws.btse.com/ws/oss/spot` (Used for Orderbook incremental update stream)
 * Testnet
   * HTTP
      * `https://testapi.btse.io/spot`
   * Websocket
      * `wss://testws.btse.io/ws/spot`
   * Websocket (for orderbook stream)
-    * `wss://testws.btse.io/ws/spotoss` (Used for Orderbook incremental update stream)
+    * `wss://testws.btse.io/ws/oss/spot` (Used for Orderbook incremental update stream)
 ## Authentication
 
 * API Key (btse-api)
@@ -1557,6 +1557,8 @@ To ensure that the updates are received in sequence, `seqNum` indicates the curr
 | seqNum | string | Yes | Market symbol | 
 | prevSeqNum | int | Yes | Orderbook depth | 
 | type | string | Yes | `snapshot` - Snapshot of the orderbook with a maximum of 50 levels<br/> `delta` -  Updates of the orderbook | 
+| timestamp | long | Yes | Timestamp of the orderbook | 
+| symbol | string | Yes | Orderbook symbol | 
 
 
 ## Public Trade Fills
