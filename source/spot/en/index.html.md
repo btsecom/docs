@@ -1428,9 +1428,7 @@ Subscribe to the Level 2 Orderbook. The format to subscribe to will be `symbol_d
 | depth | int | Yes | Orderbook depth | 
 | timestamp | long | Yes | Orderbook timestamp | 
 
-================
-
-## Orderbook Delta Updates
+## Orderbook Incremental Updates
 
 > Request
 
@@ -1500,7 +1498,7 @@ Subscribe to the Level 2 Orderbook. The format to subscribe to will be `symbol_d
 }
 ```
 
-```
+```json
 {
   "topic": "update:BTC-USD",
   "data": {
