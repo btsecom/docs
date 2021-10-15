@@ -1554,8 +1554,8 @@ To ensure that the updates are received in sequence, `seqNum` indicates the curr
 |---|---|---|---|
 | bids | Quote Object | Yes | Bid quotes |
 | asks | Quote Object | Yes | Asks quotes | 
-| seqNum | string | Yes | Market symbol | 
-| prevSeqNum | int | Yes | Orderbook depth | 
+| seqNum | int | Yes | Current sequence number | 
+| prevSeqNum | int | Yes | Previous sequence number | 
 | type | string | Yes | `snapshot` - Snapshot of the orderbook with a maximum of 50 levels<br/> `delta` -  Updates of the orderbook | 
 | timestamp | long | Yes | Timestamp of the orderbook | 
 | symbol | string | Yes | Orderbook symbol | 
