@@ -13,6 +13,11 @@ headingLevel: 2
 
 # Change Log
 
+## Version 3.2.5 (15th October 2021)
+
+* Addition of orderbook incremental updates [Orderbook websocket feed](#orderbook-incremental-updates)
+
+
 ## Version 3.2.4 (1st July 2021)
 
 * Addition of `fills` websocket topic to subscribe to [user trade fills](#user-trade-fills)
@@ -72,12 +77,15 @@ You will need to create an API key on the BTSE platform before you can use authe
   * Websocket
      * `wss://ws.btse.com/ws/spot`
      * `wss://aws-ws.btse.com/ws/spot` (Optimised for connection via AWS)
+  * Websocket (for orderbook stream)
+     * `wss://ws.btse.com/ws/spotoss` (Used for Orderbook incremental update stream)
 * Testnet
   * HTTP
      * `https://testapi.btse.io/spot`
   * Websocket
      * `wss://testws.btse.io/ws/spot`
-
+  * Websocket (for orderbook stream)
+    * `wss://testws.btse.io/ws/spotoss` (Used for Orderbook incremental update stream)
 ## Authentication
 
 * API Key (btse-api)
@@ -1493,7 +1501,9 @@ Subscribe to the Level 2 Orderbook. The format to subscribe to will be `symbol_d
     ],
     "seqNum": 628282,
     "prevSeqNum": 628281,
-    "type": "snapshot"
+    "type": "snapshot",
+    "timestamp": 1565135165600, 
+    "symbol": "BTC-USD"
   }
 }
 ```
@@ -1515,12 +1525,14 @@ Subscribe to the Level 2 Orderbook. The format to subscribe to will be `symbol_d
     ],
     "seqNum": 628283,
     "prevSeqNum": 628282,
-    "type": "delta"
+    "type": "delta",
+    "timestamp": 1565135165600, 
+    "symbol": "BTC-USD"
   }
 }
 ```
 
-Subscribe to Orderbook delta updates. The topic to subscribe to will be `update` specifying the symbol (eg. `update:BTC-USD`). The first response received will be a snapshot of the current orderbook (this is indicated in the `type` field) and 50 levels will be returned. Incremental updates will be sent in subsequent packets with type `delta`. 
+Subscribe to Orderbook incremental updates through the endpoint `wss://ws.btse.com/ws/spotoss`. The topic to subscribe to will be `update` specifying the symbol (eg. `update:BTC-USD`). The first response received will be a snapshot of the current orderbook (this is indicated in the `type` field) and 50 levels will be returned. Incremental updates will be sent in subsequent packets with type `delta`. 
 
 Bids and asks will be sent in `price` and `size` tuples. The size sent will be the new updated size for the price. If a value of `0` is sent, the price should be removed from the local copy of the orderbook. 
 
