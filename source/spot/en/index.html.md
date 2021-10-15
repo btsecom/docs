@@ -1428,6 +1428,127 @@ Subscribe to the Level 2 Orderbook. The format to subscribe to will be `symbol_d
 | depth | int | Yes | Orderbook depth | 
 | timestamp | long | Yes | Orderbook timestamp | 
 
+================
+
+## Orderbook Delta Updates
+
+> Request
+
+```json
+{
+  "op": "subscribe",
+  "args": [
+    "update:BTC-USD"
+  ]
+}
+```
+
+> Response 
+
+```json
+{
+  "topic": "update:BTC-USD",
+  "data": {
+    "bids": [
+      [
+        "59252.5",
+        "0.06865"
+      ],
+      [
+        "59249.0",
+        "0.24000"
+      ],
+      [
+        "59235.5",
+        "0.16073"
+      ],
+      [
+        "59235.0",
+        "0.26626"
+      ],
+      [
+        "59233.0",
+        "0.50000"
+      ]
+    ],
+    "asks": [
+      [
+        "59292.0",
+        "0.50000"
+      ],
+      [
+        "59285.5",
+        "0.24000"
+      ],
+      [
+        "59285.0",
+        "0.15598"
+      ],
+      [
+        "59282.5",
+        "0.06829"
+      ],
+      [
+        "59278.5",
+        "0.01472"
+      ]
+    ],
+    "seqNum": 628282,
+    "prevSeqNum": 628281,
+    "type": "snapshot"
+  }
+}
+```
+
+```
+{
+  "topic": "update:BTC-USD",
+  "data": {
+    "bids": [],
+    "asks": [
+      [
+        "59367.5",
+        "2.15622"
+      ],
+      [
+        "59325.5",
+        "0"
+      ]
+    ],
+    "seqNum": 628283,
+    "prevSeqNum": 628282,
+    "type": "delta"
+  }
+}
+```
+
+Subscribe to Orderbook delta updates. The topic to subscribe to will be `update` specifying the symbol (eg. `update:BTC-USD`). The first response received will be a snapshot of the current orderbook (this is indicated in the `type` field) and 50 levels will be returned. Incremental updates will be sent in subsequent packets with type `delta`. 
+
+Bids and asks will be sent in `price` and `size` tuples. The size sent will be the new updated size for the price. If a value of `0` is sent, the price should be removed from the local copy of the orderbook. 
+
+To ensure that the updates are received in sequence, `seqNum` indicates the current sequence and `prevSeqNum` refers to the packet before. `seqNum` will always be one after the `prevSeqNum`. If the sequence if out of order, you will need to unsubscribe and re-subscribe to the topic again. 
+
+
+### Response Content
+
+#### Orderbook Object
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| topic | string | Yes | Websocket topic |
+| data | Data Object | Yes | Refer to data object below | 
+
+#### Data Object
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| bids | Quote Object | Yes | Bid quotes |
+| asks | Quote Object | Yes | Asks quotes | 
+| seqNum | string | Yes | Market symbol | 
+| prevSeqNum | int | Yes | Orderbook depth | 
+| type | string | Yes | `snapshot` - Snapshot of the orderbook with a maximum of 50 levels<br/> `delta` -  Updates of the orderbook | 
+
+
 ## Public Trade Fills
 
 > Request
