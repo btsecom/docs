@@ -246,6 +246,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-3-2-5-15th-october-2021" class="toc-h2 toc-link" data-title="Version 3.2.5 (15th October 2021)">Version 3.2.5 (15th October 2021)</a>
+                  </li>
+                  <li>
                     <a href="#version-3-2-4-1st-july-2021" class="toc-h2 toc-link" data-title="Version 3.2.4 (1st July 2021)">Version 3.2.4 (1st July 2021)</a>
                   </li>
                   <li>
@@ -270,9 +273,6 @@
                   </li>
                   <li>
                     <a href="#endpoints" class="toc-h2 toc-link" data-title="Endpoints">Endpoints</a>
-                  </li>
-                  <li>
-                    <a href="#authentication" class="toc-h2 toc-link" data-title="Authentication">Authentication</a>
                   </li>
                   <li>
                     <a href="#rate-limits" class="toc-h2 toc-link" data-title="Rate Limits">Rate Limits</a>
@@ -373,13 +373,13 @@
                     <a href="#orderbook-snapshot-by-depth" class="toc-h2 toc-link" data-title="Orderbook Snapshot (By depth)">Orderbook Snapshot (By depth)</a>
                   </li>
                   <li>
-                    <a href="#orderbook-delta-updates" class="toc-h2 toc-link" data-title="Orderbook Delta Updates">Orderbook Delta Updates</a>
+                    <a href="#orderbook-incremental-updates" class="toc-h2 toc-link" data-title="Orderbook Incremental Updates">Orderbook Incremental Updates</a>
                   </li>
                   <li>
                     <a href="#public-trade-fills" class="toc-h2 toc-link" data-title="Public Trade Fills">Public Trade Fills</a>
                   </li>
                   <li>
-                    <a href="#authentication-2" class="toc-h2 toc-link" data-title="Authentication">Authentication</a>
+                    <a href="#authentication" class="toc-h2 toc-link" data-title="Authentication">Authentication</a>
                   </li>
                   <li>
                     <a href="#notifications" class="toc-h2 toc-link" data-title="Notifications">Notifications</a>
@@ -396,7 +396,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-3-2-4-1st-july-2021'>Version 3.2.4 (1st July 2021)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-3-2-5-15th-october-2021'>Version 3.2.5 (15th October 2021)</h2>
+<ul>
+<li>Addition of orderbook incremental updates <a href="#orderbook-incremental-updates">Orderbook websocket feed</a></li>
+</ul>
+<h2 id='version-3-2-4-1st-july-2021'>Version 3.2.4 (1st July 2021)</h2>
 <ul>
 <li>Addition of <code>fills</code> websocket topic to subscribe to <a href="#user-trade-fills">user trade fills</a></li>
 <li>Addition of attribute <code>depth</code> for <a href="#orderbook-snapshot-by-depth">Orderbook websocket feed</a></li>
@@ -468,8 +472,13 @@
 <li><code>wss://ws.btse.com/ws/spot</code></li>
 <li><code>wss://aws-ws.btse.com/ws/spot</code> (Optimised for connection via AWS)</li>
 </ul></li>
+<li>Websocket (for orderbook stream)
+
+<ul>
+<li><code>wss://ws.btse.com/ws/oss/spot</code> (Used for Orderbook incremental update stream)</li>
 </ul></li>
-<li>Testnet
+</ul></li>
+<li><p>Testnet</p>
 
 <ul>
 <li>HTTP
@@ -482,10 +491,10 @@
 <ul>
 <li><code>wss://testws.btse.io/ws/spot</code></li>
 </ul></li>
+<li>Websocket (for orderbook stream)</li>
+<li><code>wss://testws.btse.io/ws/oss/spot</code> (Used for Orderbook incremental update stream)
+## Authentication</li>
 </ul></li>
-</ul>
-<h2 id='authentication'>Authentication</h2>
-<ul>
 <li><p>API Key (btse-api)</p>
 
 <ul>
@@ -3411,9 +3420,7 @@
 <td>Orderbook timestamp</td>
 </tr>
 </tbody></table>
-
-<p>================</p>
-<h2 id='orderbook-delta-updates'>Orderbook Delta Updates</h2>
+<h2 id='orderbook-incremental-updates'>Orderbook Incremental Updates</h2>
 <blockquote>
 <p>Request</p>
 </blockquote>
@@ -3476,30 +3483,34 @@
     </span><span class="p">],</span><span class="w">
     </span><span class="nl">"seqNum"</span><span class="p">:</span><span class="w"> </span><span class="mi">628282</span><span class="p">,</span><span class="w">
     </span><span class="nl">"prevSeqNum"</span><span class="p">:</span><span class="w"> </span><span class="mi">628281</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"snapshot"</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"snapshot"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1565135165600</span><span class="p">,</span><span class="w"> 
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USD"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><div class="highlight"><pre class="highlight plaintext"><code>{
-  "topic": "update:BTC-USD",
-  "data": {
-    "bids": [],
-    "asks": [
-      [
-        "59367.5",
-        "2.15622"
-      ],
-      [
-        "59325.5",
-        "0"
-      ]
-    ],
-    "seqNum": 628283,
-    "prevSeqNum": 628282,
-    "type": "delta"
-  }
-}
-</code></pre></div>
-<p>Subscribe to Orderbook delta updates. The topic to subscribe to will be <code>update</code> specifying the symbol (eg. <code>update:BTC-USD</code>). The first response received will be a snapshot of the current orderbook (this is indicated in the <code>type</code> field) and 50 levels will be returned. Incremental updates will be sent in subsequent packets with type <code>delta</code>. </p>
+</span></code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"update:BTC-USD"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"bids"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="nl">"asks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"59367.5"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"2.15622"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"59325.5"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"0"</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"seqNum"</span><span class="p">:</span><span class="w"> </span><span class="mi">628283</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"prevSeqNum"</span><span class="p">:</span><span class="w"> </span><span class="mi">628282</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"delta"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1565135165600</span><span class="p">,</span><span class="w"> 
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USD"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>Subscribe to Orderbook incremental updates through the endpoint <code>wss://ws.btse.com/ws/oss/spot</code>. The topic to subscribe to will be <code>update</code> specifying the symbol (eg. <code>update:BTC-USD</code>). The first response received will be a snapshot of the current orderbook (this is indicated in the <code>type</code> field) and 50 levels will be returned. Incremental updates will be sent in subsequent packets with type <code>delta</code>. </p>
 
 <p>Bids and asks will be sent in <code>price</code> and <code>size</code> tuples. The size sent will be the new updated size for the price. If a value of <code>0</code> is sent, the price should be removed from the local copy of the orderbook. </p>
 
@@ -3549,21 +3560,33 @@
 </tr>
 <tr>
 <td>seqNum</td>
-<td>string</td>
+<td>int</td>
 <td>Yes</td>
-<td>Market symbol</td>
+<td>Current sequence number</td>
 </tr>
 <tr>
 <td>prevSeqNum</td>
 <td>int</td>
 <td>Yes</td>
-<td>Orderbook depth</td>
+<td>Previous sequence number</td>
 </tr>
 <tr>
 <td>type</td>
 <td>string</td>
 <td>Yes</td>
 <td><code>snapshot</code> - Snapshot of the orderbook with a maximum of 50 levels<br/> <code>delta</code> -  Updates of the orderbook</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>long</td>
+<td>Yes</td>
+<td>Timestamp of the orderbook</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Yes</td>
+<td>Orderbook symbol</td>
 </tr>
 </tbody></table>
 <h2 id='public-trade-fills'>Public Trade Fills</h2>
@@ -3663,7 +3686,7 @@
 <td>Trade timestamp</td>
 </tr>
 </tbody></table>
-<h2 id='authentication-2'>Authentication</h2>
+<h2 id='authentication'>Authentication</h2>
 <blockquote>
 <p>Request</p>
 </blockquote>
