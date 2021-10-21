@@ -419,7 +419,7 @@
 </ul></li>
 </ul>
 
-<p>Existing endpoints will continue to be made available. </p>
+<p>Existing endpoints will continue to be made available.</p>
 
 <ul>
 <li>Login topic will now respond with a JSON success / failure message {&quot;event&quot;:&quot;login&quot;,&quot;success&quot;:true}</li>
@@ -520,7 +520,7 @@
 </code></pre></div>
 <ul>
 <li>Endpoint to get wallet is <code>https://api.btse.com/spot/api/v3.2/user/wallet</code></li>
-<li>Assume we have the values as follows: 
+<li>Assume we have the values as follows:
 
 <ul>
 <li>btse-nonce: <code>1624984297330</code></li>
@@ -528,7 +528,7 @@
 <li>secret: <code>848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx</code></li>
 <li>Path: <code>/api/v3.2/user/wallet</code></li>
 </ul></li>
-<li>Generated signature will be: 
+<li>Generated signature will be:
 
 <ul>
 <li>btse-sign: <code>14b986706a4368221e0af14a6725377161805e7a57d568220478cb3590ce532d4fad4ac68e6c02a14afced6a0619bfd3</code></li>
@@ -543,7 +543,7 @@
 </code></pre></div>
 <ul>
 <li>Endpoint to place an order is <code>https://api.btse.com/spot/api/v3.2/order</code></li>
-<li>Assume we have the values as follows: 
+<li>Assume we have the values as follows:
 
 <ul>
 <li>btse-nonce: <code>1624985375123</code></li>
@@ -561,7 +561,7 @@
 </ul>
 <h2 id='rate-limits'>Rate Limits</h2>
 <ul>
-<li>The following rate limits are enforced: </li>
+<li>The following rate limits are enforced:</li>
 </ul>
 
 <p>Rate limits for BTSE is as follows:</p>
@@ -660,7 +660,7 @@
 </span></code></pre></div>
 <p><code>GET /api/v3.2/market_summary</code></p>
 
-<p>Gets market summary information. If no symbol parameter is sent, then all markets will be retrieved. </p>
+<p>Gets market summary information. If no symbol parameter is sent, then all markets will be retrieved.</p>
 <h3 id='request-parameters'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -909,7 +909,7 @@
 </span></code></pre></div>
 <p><code>GET /api/v3.2/ohlcv</code></p>
 
-<p>Gets candle stick charting data. Default of 300 data points will be returned at any one time. </p>
+<p>Gets candle stick charting data. Default of 300 data points will be returned at any one time.</p>
 <h3 id='request-parameters-2'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -1723,13 +1723,13 @@
 </span></code></pre></div>
 <p><code>POST /api/v3.2/order/peg</code></p>
 
-<p>Creates a new algo order. Algo order is an order that price will change according to market price. To create an algo order, user will need to enter additional parameters: </p>
+<p>Creates a new algo order. Algo order is an order that price will change according to market price. To create an algo order, user will need to enter additional parameters:</p>
 
 <ul>
 <li><code>price</code>: What is the min price (for a sell order) or maximum price (for a buy order) that a user will be willing to list his order at</li>
 <li><code>size</code>: Total size of order</li>
 <li><code>deviation</code>: How much should the order price deviate from index price. Value is in percentage and can range from <code>-10</code> to <code>10</code></li>
-<li><code>stealth</code>: How many percent of the order is to be displayed on the orderbook. </li>
+<li><code>stealth</code>: How many percent of the order is to be displayed on the orderbook.</li>
 </ul>
 
 <p>This API Requires <code>Trading</code> permission</p>
@@ -2389,7 +2389,7 @@
 </span></code></pre></div>
 <p><code>GET /api/v3.2/user/open_orders</code></p>
 
-<p>Retrieves open orders that have not yet been matched. This is also used to check an order for its status. If an order has been cancelled or recently transacted, the <code>status</code> field will indicate the state of the order. The state of an order returned in <code>status</code> field will only be made available for 30mins. After 30mins, this API will only return if the order is still active. If not it will return that the order is not found. </p>
+<p>Retrieves open orders that have not yet been matched. This is also used to check an order for its status. If an order has been cancelled or recently transacted, the <code>status</code> field will indicate the state of the order. The state of an order returned in <code>status</code> field will only be made available for 30mins. After 30mins, this API will only return if the order is still active. If not it will return that the order is not found.</p>
 <h3 id='request-parameters-12'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -2982,7 +2982,7 @@
 </span></code></pre></div>
 <p><code>POST /api/v3.2/user/wallet/address</code></p>
 
-<p>Creates a wallet address. If the address created has not been used before, a 400 error will return with the existing unused address. To use this API, <code>Wallet</code> permission is required. </p>
+<p>Creates a wallet address. If the address created has not been used before, a 400 error will return with the existing unused address. To use this API, <code>Wallet</code> permission is required.</p>
 <h3 id='request-parameters-15'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -3041,7 +3041,7 @@
 </span></code></pre></div>
 <p><code>GET /api/v3.2/user/wallet/address</code></p>
 
-<p>Gets a wallet address. To use this API, <code>Wallet</code> permission is required. </p>
+<p>Gets a wallet address. To use this API, <code>Wallet</code> permission is required.</p>
 <h3 id='request-parameters-16'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -3100,7 +3100,7 @@
 </span></code></pre></div>
 <p><code>POST /api/v3.2/user/wallet/withdraw</code></p>
 
-<p>Performs a wallet withdrawal. To use this API, <code>Withdraw</code> permission is required. </p>
+<p>Performs a wallet withdrawal. To use this API, <code>Withdraw</code> permission is required.</p>
 <h3 id='request-parameters-17'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -3163,7 +3163,7 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
-<p>Response </p>
+<p>Response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"subscribe"</span><span class="p">,</span><span class="w">
@@ -3229,12 +3229,12 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
-<p>Response </p>
+<p>Response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"orderBookApi"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"buyQuote"</span><span class="p">:</span><span class="w"> 
+    </span><span class="nl">"buyQuote"</span><span class="p">:</span><span class="w">
     </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
         </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -3253,7 +3253,7 @@
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>Subscribe to the Orderbook in different groupings. The format to subscribe to will be <code>symbol_grouping</code>. </p>
+<p>Subscribe to the Orderbook in different groupings. The format to subscribe to will be <code>symbol_grouping</code>.</p>
 
 <ul>
 <li><code>symbol</code> indicates the market symbol</li>
@@ -3327,12 +3327,12 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
-<p>Response </p>
+<p>Response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"orderBookL2Api"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"buyQuote"</span><span class="p">:</span><span class="w"> 
+    </span><span class="nl">"buyQuote"</span><span class="p">:</span><span class="w">
     </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
         </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -3352,7 +3352,7 @@
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>Subscribe to the Level 2 Orderbook. The format to subscribe to will be <code>symbol_depth</code>. </p>
+<p>Subscribe to the Level 2 Orderbook. The format to subscribe to will be <code>symbol_depth</code>.</p>
 
 <ul>
 <li><code>symbol</code> indicates the market symbol</li>
@@ -3432,7 +3432,7 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
-<p>Response </p>
+<p>Response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"update:BTC-USD"</span><span class="p">,</span><span class="w">
@@ -3484,7 +3484,7 @@
     </span><span class="nl">"seqNum"</span><span class="p">:</span><span class="w"> </span><span class="mi">628282</span><span class="p">,</span><span class="w">
     </span><span class="nl">"prevSeqNum"</span><span class="p">:</span><span class="w"> </span><span class="mi">628281</span><span class="p">,</span><span class="w">
     </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"snapshot"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1565135165600</span><span class="p">,</span><span class="w"> 
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1565135165600</span><span class="p">,</span><span class="w">
     </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USD"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -3505,16 +3505,16 @@
     </span><span class="nl">"seqNum"</span><span class="p">:</span><span class="w"> </span><span class="mi">628283</span><span class="p">,</span><span class="w">
     </span><span class="nl">"prevSeqNum"</span><span class="p">:</span><span class="w"> </span><span class="mi">628282</span><span class="p">,</span><span class="w">
     </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"delta"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1565135165600</span><span class="p">,</span><span class="w"> 
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1565135165600</span><span class="p">,</span><span class="w">
     </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USD"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>Subscribe to Orderbook incremental updates through the endpoint <code>wss://ws.btse.com/ws/oss/spot</code>. The topic to subscribe to will be <code>update</code> specifying the symbol (eg. <code>update:BTC-USD</code>). The first response received will be a snapshot of the current orderbook (this is indicated in the <code>type</code> field) and 50 levels will be returned. Incremental updates will be sent in subsequent packets with type <code>delta</code>. </p>
+<p>Subscribe to Orderbook incremental updates through the endpoint <code>wss://ws.btse.com/ws/oss/spot</code>. The topic to subscribe to will be <code>update</code> specifying the symbol (eg. <code>update:BTC-USD</code>). The first response received will be a snapshot of the current orderbook (this is indicated in the <code>type</code> field) and 50 levels will be returned. Incremental updates will be sent in subsequent packets with type <code>delta</code>.</p>
 
-<p>Bids and asks will be sent in <code>price</code> and <code>size</code> tuples. The size sent will be the new updated size for the price. If a value of <code>0</code> is sent, the price should be removed from the local copy of the orderbook. </p>
+<p>Bids and asks will be sent in <code>price</code> and <code>size</code> tuples. The size sent will be the new updated size for the price. If a value of <code>0</code> is sent, the price should be removed from the local copy of the orderbook.</p>
 
-<p>To ensure that the updates are received in sequence, <code>seqNum</code> indicates the current sequence and <code>prevSeqNum</code> refers to the packet before. <code>seqNum</code> will always be one after the <code>prevSeqNum</code>. If the sequence if out of order, you will need to unsubscribe and re-subscribe to the topic again. </p>
+<p>To ensure that the updates are received in sequence, <code>seqNum</code> indicates the current sequence and <code>prevSeqNum</code> refers to the packet before. <code>seqNum</code> will always be one after the <code>prevSeqNum</code>. If the sequence is out of order, you will need to unsubscribe and re-subscribe to the topic again.</p>
 <h3 id='response-content-24'>Response Content</h3><h4 id='orderbook-object-3'>Orderbook Object</h4>
 <table><thead>
 <tr>
@@ -3601,7 +3601,7 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
-<p>Response </p>
+<p>Response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tradeHistoryApi:BTC-USD"</span><span class="p">,</span><span class="w">
@@ -3617,7 +3617,7 @@
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>Subscribe to recent trade feed for a market. The topic will be <code>tradeHistoryApi:&lt;market&gt;</code> where <code>&lt;market&gt;</code> is the market symbol. </p>
+<p>Subscribe to recent trade feed for a market. The topic will be <code>tradeHistoryApi:&lt;market&gt;</code> where <code>&lt;market&gt;</code> is the market symbol.</p>
 <h3 id='response-content-25'>Response Content</h3><h4 id='tradehistory-object'>TradeHistory Object</h4>
 <table><thead>
 <tr>
@@ -3695,7 +3695,7 @@
   </span><span class="nl">"args"</span><span class="p">:[</span><span class="s2">"APIKey"</span><span class="p">,</span><span class="w"> </span><span class="s2">"nonce"</span><span class="p">,</span><span class="w"> </span><span class="s2">"signature"</span><span class="p">]}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>Authenticate the websocket session to subscribe to authenticated websocket topics. Assume we have values as follows: </p>
+<p>Authenticate the websocket session to subscribe to authenticated websocket topics. Assume we have values as follows:</p>
 
 <ul>
 <li><code>btse-nonce</code>: 1624985375123</li>
@@ -3703,7 +3703,7 @@
 <li><code>secret</code>: 848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx</li>
 </ul>
 
-<p>Our subscription request will be: </p>
+<p>Our subscription request will be:</p>
 <div class="highlight"><pre class="highlight plaintext"><code>{
   "op":"authKeyExpires",
   "args":["4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x", "1624985375123", "c410d38c681579adb335885800cff24c66171b7cc8376cfe43da1408c581748156b89bcc5a115bb496413bda481139fb"]}
@@ -3756,7 +3756,7 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
-<p>Response </p>
+<p>Response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"notificationApiV1"</span><span class="p">,</span><span class="w">
@@ -3917,10 +3917,10 @@
 
 </span></code></pre></div>
 <blockquote>
-<p>Response </p>
+<p>Response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fills"</span><span class="p">,</span><span class="w"> 
+  </span><span class="nl">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fills"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
     </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"order id"</span><span class="p">,</span><span class="w"> </span><span class="err">//string</span><span class="w">
     </span><span class="nl">"serialId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"serial ID after insertion into DB"</span><span class="p">,</span><span class="w"> </span><span class="err">//integer</span><span class="w"> </span><span class="err">/</span><span class="w"> </span><span class="err">long</span><span class="w">
@@ -3942,7 +3942,7 @@
 
 
 </span></code></pre></div>
-<p>When a trade has been transacted, this topic will send the trade information back to the subscriber. </p>
+<p>When a trade has been transacted, this topic will send the trade information back to the subscriber.</p>
 <h3 id='response-content-27'>Response Content</h3>
 <table><thead>
 <tr>
