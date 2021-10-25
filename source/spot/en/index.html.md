@@ -13,7 +13,7 @@ headingLevel: 2
 
 # Change Log
 
-## Version 3.2.5 (15th October 2021)
+## Version 3.2.5 (25th October 2021)
 
 * Addition of orderbook incremental updates [Orderbook websocket feed](#orderbook-incremental-updates)
 
