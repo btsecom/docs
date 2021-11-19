@@ -199,7 +199,7 @@
     <link href="stylesheets/screen-e481a7b6.css" rel="stylesheet" media="screen" />
     <link href="stylesheets/print-953e3353.css" rel="stylesheet" media="print" />
       <script src="javascripts/all-a9fde460.js"></script>
-    
+
   </head>
 
   <body class="index" data-languages="[&quot;json&quot;]">
@@ -229,9 +229,12 @@
         <span class="nav_cell nav_tab">
           <a href="/docs/otc/en/" id="btn_otc">OTC</a>
         </span>
+        <span class="nav_cell nav_tab">
+          <a href="/docs/streaming/en/" id="btn_streaming">Streaming</a>
+        </span>
       </div>
     </div>
-    
+
   </header>
     <div class="toc-wrapper">
         <div class="lang-selector">
@@ -4058,6 +4061,7 @@
     const btn_spot = document.getElementById('btn_spot');
     const btn_futures = document.getElementById('btn_futures');
     const btn_otc = document.getElementById('btn_otc');
+    const btn_streaming = document.getElementById('btn_streaming');
     const v1_url = document.getElementById('v1_url');
     const url = GetUrlRelativePath();
 
@@ -4068,12 +4072,14 @@
       btn_spot.innerHTML = '现货';
       btn_futures.innerHTML = '期货';
       btn_otc.innerHTML = '场外交易';
-      
+      btn_streaming.innerHTML = '串流';
+
       // lang_btn.href = url.replace('cn/', 'en/');
       btn_spot.href = btn_spot.href.replace('en/', 'cn/');
       btn_futures.href = btn_futures.href.replace('en/', 'cn/');
-      //btn_otc.href = btn_otc.href.replace('en/', 'cn/');
-      
+      btn_otc.href = btn_otc.href.replace('en/', 'cn/');
+      btn_streaming.href = btn_streaming.href.replace('en/', 'cn/');
+
       v1_url.href = '/docs/spot/cn/';
     }else{ //chinese
       //如果是英文环境
@@ -4081,12 +4087,14 @@
       btn_spot.innerHTML = 'Spot';
       btn_futures.innerHTML = 'Futures';
       btn_otc.innerHTML = 'OTC';
+      btn_streaming.innerHTML = 'Streaming';
+
       // lang_btn.href = url.replace('en/', 'cn/');
-      
       btn_spot.href = btn_spot.href.replace('cn/', 'en/');
       btn_futures.href = btn_futures.href.replace('cn/', 'en/');
       btn_otc.href = btn_otc.href.replace('cn/', 'en/');
-      
+      btn_streaming.href = btn_streaming.href.replace('cn/', 'en/');
+
       v1_url.href = '/docs/spot/en/';
     }
 
@@ -4094,21 +4102,29 @@
       btn_spot.className = '';
       btn_futures.className = 'current';
       btn_otc.className = '';
-      
-    } 
+      btn_streaming.className = '';
+    }
     else if(location.href.indexOf('docs/spot') > 0){
       btn_spot.className = 'current';
       btn_futures.className = '';
       btn_otc.className = '';
-    } 
+      btn_streaming.className = '';
+    }
     else if(location.href.indexOf('docs/otc') > 0){
       btn_spot.className = '';
       btn_futures.className = '';
       btn_otc.className = 'current';
+      btn_streaming.className = '';
+    else if(location.href.indexOf('docs/streaming') > 0){
+      btn_spot.className = '';
+      btn_futures.className = '';
+      btn_otc.className = '';
+      btn_streaming.className = 'current';
     } else {
       btn_spot.className = 'current';
       btn_futures.className = '';
       btn_otc.className = '';
+      btn_streaming.className = '';
     }
     //显示语言切换按钮
     // lang_btn.style.display = 'block';
