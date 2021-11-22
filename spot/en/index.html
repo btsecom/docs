@@ -249,6 +249,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-3-2-6-19th-november-2021" class="toc-h2 toc-link" data-title="Version 3.2.6 (19th November 2021)">Version 3.2.6 (19th November 2021)</a>
+                  </li>
+                  <li>
                     <a href="#version-3-2-5-25th-october-2021" class="toc-h2 toc-link" data-title="Version 3.2.5 (25th October 2021)">Version 3.2.5 (25th October 2021)</a>
                   </li>
                   <li>
@@ -399,7 +402,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-3-2-5-25th-october-2021'>Version 3.2.5 (25th October 2021)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-3-2-6-19th-november-2021'>Version 3.2.6 (19th November 2021)</h2>
+<ul>
+<li>Add <code>isMatchSymbol</code> parameter to <a href="#query-trades-fills-2">trade_history</a></li>
+</ul>
+<h2 id='version-3-2-5-25th-october-2021'>Version 3.2.5 (25th October 2021)</h2>
 <ul>
 <li>Addition of orderbook incremental updates <a href="#orderbook-incremental-updates">Orderbook websocket feed</a></li>
 </ul>
@@ -2645,6 +2652,12 @@
 <td>string</td>
 <td>No</td>
 <td>Query trade history by order ID</td>
+</tr>
+<tr>
+<td>isMatchSymbol</td>
+<td>boolean</td>
+<td>No</td>
+<td>Exact match on <code>symbol</code>. If this sets to true, will only match records for that symbol only</td>
 </tr>
 </tbody></table>
 <h3 id='response-content-14'>Response Content</h3>
