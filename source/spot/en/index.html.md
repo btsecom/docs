@@ -13,6 +13,10 @@ headingLevel: 2
 
 # Change Log
 
+## Version 3.2.6 (19th November 2021)
+
+* Add `isMatchSymbol` parameter to [trade_history](#query-trades-fills-2)
+
 ## Version 3.2.5 (25th October 2021)
 
 * Addition of orderbook incremental updates [Orderbook websocket feed](#orderbook-incremental-updates)
@@ -1026,6 +1030,7 @@ Retrieves a user's trade history
 | includeOld | boolean | Yes | Retrieve trade  history records past 7 days |
 | clOrderID | string | No | Query trade history by custom order ID |
 | orderID | string | No | Query trade history by order ID |
+| isMatchSymbol | boolean | No | Exact match on `symbol`. If this sets to true, will only match records for that symbol only |
 
 
 ### Response Content
