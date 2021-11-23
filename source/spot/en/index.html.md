@@ -13,14 +13,17 @@ headingLevel: 2
 
 # Change Log
 
+## Version 3.2.7 (23rd November 2021)
+
+* Update orderbook incremental updates decription [Orderbook websocket feed](#orderbook-incremental-updates)
+
 ## Version 3.2.6 (19th November 2021)
 
-* Add `isMatchSymbol` parameter to [trade_history](#query-trades-fills-2)
+* Addition of `isMatchSymbol` parameter to [trade_history](#query-trades-fills-2)
 
 ## Version 3.2.5 (25th October 2021)
 
 * Addition of orderbook incremental updates [Orderbook websocket feed](#orderbook-incremental-updates)
-
 
 ## Version 3.2.4 (1st July 2021)
 
@@ -1543,6 +1546,7 @@ Bids and asks will be sent in `price` and `size` tuples. The size sent will be t
 
 To ensure that the updates are received in sequence, `seqNum` indicates the current sequence and `prevSeqNum` refers to the packet before. `seqNum` will always be one after the `prevSeqNum`. If the sequence is out of order, you will need to unsubscribe and re-subscribe to the topic again.
 
+Also if [crossed orderbook](https://en.wikipedia.org/wiki/Order_book#Crossed_book) ever occurs when the best bid higher or equal to the best ask, please unsubscribe and re-subscribe to the topic again.
 
 ### Response Content
 
