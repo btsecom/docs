@@ -249,6 +249,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-3-2-7-23rd-november-2021" class="toc-h2 toc-link" data-title="Version 3.2.7 (23rd November 2021)">Version 3.2.7 (23rd November 2021)</a>
+                  </li>
+                  <li>
                     <a href="#version-3-2-6-19th-november-2021" class="toc-h2 toc-link" data-title="Version 3.2.6 (19th November 2021)">Version 3.2.6 (19th November 2021)</a>
                   </li>
                   <li>
@@ -402,9 +405,13 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-3-2-6-19th-november-2021'>Version 3.2.6 (19th November 2021)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-3-2-7-23rd-november-2021'>Version 3.2.7 (23rd November 2021)</h2>
 <ul>
-<li>Add <code>isMatchSymbol</code> parameter to <a href="#query-trades-fills-2">trade_history</a></li>
+<li>Update orderbook incremental updates decription <a href="#orderbook-incremental-updates">Orderbook websocket feed</a></li>
+</ul>
+<h2 id='version-3-2-6-19th-november-2021'>Version 3.2.6 (19th November 2021)</h2>
+<ul>
+<li>Addition of <code>isMatchSymbol</code> parameter to <a href="#query-trades-fills-2">trade_history</a></li>
 </ul>
 <h2 id='version-3-2-5-25th-october-2021'>Version 3.2.5 (25th October 2021)</h2>
 <ul>
@@ -3531,6 +3538,8 @@
 <p>Bids and asks will be sent in <code>price</code> and <code>size</code> tuples. The size sent will be the new updated size for the price. If a value of <code>0</code> is sent, the price should be removed from the local copy of the orderbook.</p>
 
 <p>To ensure that the updates are received in sequence, <code>seqNum</code> indicates the current sequence and <code>prevSeqNum</code> refers to the packet before. <code>seqNum</code> will always be one after the <code>prevSeqNum</code>. If the sequence is out of order, you will need to unsubscribe and re-subscribe to the topic again.</p>
+
+<p>Also if <a href="https://en.wikipedia.org/wiki/Order_book#Crossed_book">crossed orderbook</a> ever occurs when the best bid higher or equal to the best ask, please unsubscribe and re-subscribe to the topic again.</p>
 <h3 id='response-content-24'>Response Content</h3><h4 id='orderbook-object-3'>Orderbook Object</h4>
 <table><thead>
 <tr>
