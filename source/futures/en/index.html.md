@@ -1905,10 +1905,6 @@ Subscribe to the Level 2 Orderbook. The format to subscribe to will be `symbol_d
         "0.15598"
       ],
       [
-        "59282.5",
-        "0.06829"
-      ],
-      [
         "59278.5",
         "0.01472"
       ]
