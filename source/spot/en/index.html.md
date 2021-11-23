@@ -1457,6 +1457,15 @@ Subscribe to the Level 2 Orderbook. The format to subscribe to will be `symbol_d
 }
 ```
 
+```json
+{
+  "op": "unsubscribe",
+  "args": [
+    "update:BTC-USD"
+  ]
+}
+```
+
 > Response
 
 ```json
