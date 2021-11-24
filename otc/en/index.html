@@ -249,7 +249,10 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#version-1-1-17th-september-2021" class="toc-h2 toc-link" data-title="Version 1.1 (17th September 2021)">Version 1.1 (17th September 2021)</a>
+                    <a href="#version-1-1-1-24th-november-2021" class="toc-h2 toc-link" data-title="Version 1.1.1 (24th November 2021)">Version 1.1.1 (24th November 2021)</a>
+                  </li>
+                  <li>
+                    <a href="#version-1-1-0-17th-september-2021" class="toc-h2 toc-link" data-title="Version 1.1.0 (17th September 2021)">Version 1.1.0 (17th September 2021)</a>
                   </li>
               </ul>
           </li>
@@ -314,9 +317,13 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-1-1-17th-september-2021'>Version 1.1 (17th September 2021)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-1-1-1-24th-november-2021'>Version 1.1.1 (24th November 2021)</h2>
 <ul>
-<li>Addition of <a href="#quote-stream"><code>quote</code></a> websocket topic to subscribe to price streams on the OTC market</li>
+<li>Addition of <code>unsubcribe-quote</code> and <code>unsubscribe-quote-all</code> op code to unsubscribe streaming OTC quote.</li>
+</ul>
+<h2 id='version-1-1-0-17th-september-2021'>Version 1.1.0 (17th September 2021)</h2>
+<ul>
+<li>Addition of <a href="#quote-stream"><code>quote</code></a> websocket topic to subscribe to price streams on the OTC market.</li>
 </ul>
 <h1 id='overview'>Overview</h1><h2 id='generating-api-key'>Generating API Key</h2>
 <p>You will need to create an API key on the BTSE platform before you can use authenticated APIs. To create API keys, you can follow the steps below:</p>
@@ -388,7 +395,7 @@
 </code></pre></div>
 <ul>
 <li>Endpoint to place an order is <code>https://api.btse.com/otc/api/v1/quote</code></li>
-<li>Assume we have the values as follows: 
+<li>Assume we have the values as follows:
 
 <ul>
 <li>btse-nonce: <code>1624985375123</code></li>
@@ -406,7 +413,7 @@
 </ul>
 <h2 id='rate-limits'>Rate Limits</h2>
 <ul>
-<li>The following rate limits are enforced: </li>
+<li>The following rate limits are enforced:</li>
 </ul>
 
 <p>Rate limits for BTSE is as follows:</p>
@@ -1036,7 +1043,7 @@
   </span><span class="nl">"args"</span><span class="p">:[</span><span class="s2">"APIKey"</span><span class="p">,</span><span class="w"> </span><span class="s2">"nonce"</span><span class="p">,</span><span class="w"> </span><span class="s2">"signature"</span><span class="p">]}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>Authenticate the websocket session to subscribe to authenticated websocket topics. Assume we have values as follows: </p>
+<p>Authenticate the websocket session to subscribe to authenticated websocket topics. Assume we have values as follows:</p>
 
 <ul>
 <li><code>btse-nonce</code>: 1624985375123</li>
@@ -1044,7 +1051,7 @@
 <li><code>secret</code>: 848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx</li>
 </ul>
 
-<p>Our subscription request will be: </p>
+<p>Our subscription request will be:</p>
 <div class="highlight"><pre class="highlight plaintext"><code>{
   "op":"authKeyExpires",
   "args":["4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x", "1624985375123", "c410d38c681579adb335885800cff24c66171b7cc8376cfe43da1408c581748156b89bcc5a115bb496413bda481139fb"]}
@@ -1091,16 +1098,28 @@
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"op"</span><span class="p">:</span><span class="w"> </span><span class="s2">"quote"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USD"</span><span class="p">,</span><span class="w"> 
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USD"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"clOrderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ClientOrder1"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
+</span></code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"op"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unsubscribe-quote"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USD"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"clOrderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ClientOrder1"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"op"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unsubscribe-quote-all"</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
-<p>Response </p>
+<p>Response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"quote"</span><span class="p">,</span><span class="w">
@@ -1118,7 +1137,7 @@
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre></div>
-<p>Receive quote streams by subscribing to the <code>quote</code> websocket. The websocket topic will constantly push new prices to the subscriber. To accept the quote, indicate the buy or sell quote Id using the <code>/accept</code> API. </p>
+<p>Receive quote streams by subscribing to the <code>quote</code> websocket. The websocket topic will constantly push new prices to the subscriber. To accept the quote, indicate the buy or sell quote Id using the <code>/accept</code> API.</p>
 <h3 id='request-parameters-3'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -1132,7 +1151,7 @@
 <td>op</td>
 <td>string</td>
 <td>Yes</td>
-<td>Operation, in this case its <code>quote</code></td>
+<td>Operation, in this case it is <code>quote</code>, <code>unsubscribe-quote</code>, or <code>unsubscribe-quote-all</code></td>
 </tr>
 <tr>
 <td>symbol</td>
