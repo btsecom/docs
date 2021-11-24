@@ -13,9 +13,13 @@ headingLevel: 2
 
 # Change Log
 
-## Version 1.1 (17th September 2021)
+## Version 1.1.1 (24th November 2021)
 
-* Addition of [`quote`](#quote-stream) websocket topic to subscribe to price streams on the OTC market
+* Addition of `unsubcribe-quote` and `unsubscribe-quote-all` op code to unsubscribe streaming OTC quote.
+
+## Version 1.1.0 (17th September 2021)
+
+* Addition of [`quote`](#quote-stream) websocket topic to subscribe to price streams on the OTC market.
 
 
 # Overview
@@ -45,7 +49,7 @@ You will need to create an API key on the BTSE platform before you can use authe
   * Websocket
      * `wss://testws.btse.io/ws/otc`
 
-  
+
 ## Authentication
 
 * API Key (btse-api)
@@ -67,7 +71,7 @@ $ echo -n "/api/v1/quote1624985375123{\"orderSizeInBaseCurrency\":1,\"orderAmoun
 ```
 
 * Endpoint to place an order is `https://api.btse.com/otc/api/v1/quote`
-* Assume we have the values as follows: 
+* Assume we have the values as follows:
   * btse-nonce: `1624985375123`
   * btse-api: `4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x`
   * secret: `848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx`
@@ -80,7 +84,7 @@ $ echo -n "/api/v1/quote1624985375123{\"orderSizeInBaseCurrency\":1,\"orderAmoun
 
 ## Rate Limits
 
-* The following rate limits are enforced: 
+* The following rate limits are enforced:
 
 Rate limits for BTSE is as follows:
 
@@ -158,12 +162,12 @@ Gets OTC market information
 ### Response Content
 |Name|Type|Required|Description|
 |---|---|---|---|
-| assetName | string | Yes | Asset name | 
-| maxOrderSizes | Double Array | Yes | Maximum order size | 
-| maxOrderValues | Double Array | Yes | Maximum order notional value | 
-| minOrderSizes | Double Array | Yes | Minimum order size | 
-| minOrderValues | Double Array | Yes | Minimum order notional value | 
-| supportQuoteCurrencies | string Array | Yes | Supported quote currencies | 
+| assetName | string | Yes | Asset name |
+| maxOrderSizes | Double Array | Yes | Maximum order size |
+| maxOrderValues | Double Array | Yes | Maximum order notional value |
+| minOrderSizes | Double Array | Yes | Minimum order size |
+| minOrderValues | Double Array | Yes | Minimum order notional value |
+| supportQuoteCurrencies | string Array | Yes | Supported quote currencies |
 
 ## Request for Quote
 
@@ -236,27 +240,27 @@ Request for a quote
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-| baseCurrency | string | Yes | Base currency (eg. BTC) | 
-| orderCurrency | string | Yes | Order currency | 
-| orderSizeInBaseCurrency | Double Array | Yes | Size of order in base currency | 
-| orderAmountInOrderCurrency | Double Array | Yes | Order amount in order currency | 
-| clientOrderId | Double Array | Yes | Custom client order ID | 
-| side | string | Yes | Order side, BUY or SELL | 
+| baseCurrency | string | Yes | Base currency (eg. BTC) |
+| orderCurrency | string | Yes | Order currency |
+| orderSizeInBaseCurrency | Double Array | Yes | Size of order in base currency |
+| orderAmountInOrderCurrency | Double Array | Yes | Order amount in order currency |
+| clientOrderId | Double Array | Yes | Custom client order ID |
+| side | string | Yes | Order side, BUY or SELL |
 
 
 ### Response Content
 |Name|Type|Required|Description|
 |---|---|---|---|
-| markets | Asset | Yes | Asset information | 
-| quoteAmountToDeduct | double | Yes | Quote amount to deduct | 
-| quoteAmountToReceive | double | Yes | Quote amount to receive | 
-| quoteCurrencyToDeductIn | string | Yes | Quote currency to deduct in | 
-| quoteCurrencyToReceiveIn | string | Yes | Quote currency to receive | 
-| quoteId | string | Yes | Quote ID | 
-| quotePriceInOrderCurrency | double | Yes | Quote price in order currency | 
-| quotePriceInUSD | long | Yes | Quote price in USD | 
-| quoteTimestamp | long | Yes | Quote timestamp | 
-| quoteValidDurationMs | long | Yes | Quote validity | 
+| markets | Asset | Yes | Asset information |
+| quoteAmountToDeduct | double | Yes | Quote amount to deduct |
+| quoteAmountToReceive | double | Yes | Quote amount to receive |
+| quoteCurrencyToDeductIn | string | Yes | Quote currency to deduct in |
+| quoteCurrencyToReceiveIn | string | Yes | Quote currency to receive |
+| quoteId | string | Yes | Quote ID |
+| quotePriceInOrderCurrency | double | Yes | Quote price in order currency |
+| quotePriceInUSD | long | Yes | Quote price in USD |
+| quoteTimestamp | long | Yes | Quote timestamp |
+| quoteValidDurationMs | long | Yes | Quote validity |
 | status | integer | Yes | Order status with values: <br/>8: Insufficient Balance<br/>30001: Order Quote<br/>30008: OTC Order Requote<br/>30007: OTC Order completed successfully<br/>40001: Service Unavailable<br/>40003: Rejected |
 
 ## Accept Quote
@@ -317,21 +321,21 @@ Accepts a quote
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-| quoteId | string | Yes | Quote ID to supplied as a path parameter | 
+| quoteId | string | Yes | Quote ID to supplied as a path parameter |
 
 ### Response Content
 |Name|Type|Required|Description|
 |---|---|---|---|
-| markets | Asset | Yes | Asset information | 
-| quoteAmountToDeduct | double | Yes | Quote amount to deduct | 
-| quoteAmountToReceive | double | Yes | Quote amount to receive | 
-| quoteCurrencyToDeductIn | string | Yes | Quote currency to deduct in | 
-| quoteCurrencyToReceiveIn | string | Yes | Quote currency to receive | 
-| quoteId | string | Yes | Quote ID | 
-| quotePriceInOrderCurrency | double | Yes | Quote price in order currency | 
-| quotePriceInUSD | long | Yes | Quote price in USD | 
-| quoteTimestamp | long | Yes | Quote timestamp | 
-| quoteValidDurationMs | long | Yes | Quote validity | 
+| markets | Asset | Yes | Asset information |
+| quoteAmountToDeduct | double | Yes | Quote amount to deduct |
+| quoteAmountToReceive | double | Yes | Quote amount to receive |
+| quoteCurrencyToDeductIn | string | Yes | Quote currency to deduct in |
+| quoteCurrencyToReceiveIn | string | Yes | Quote currency to receive |
+| quoteId | string | Yes | Quote ID |
+| quotePriceInOrderCurrency | double | Yes | Quote price in order currency |
+| quotePriceInUSD | long | Yes | Quote price in USD |
+| quoteTimestamp | long | Yes | Quote timestamp |
+| quoteValidDurationMs | long | Yes | Quote validity |
 | status | integer | Yes | Order status with values: <br/>8: Insufficient Balance<br/>30001: Order Quote<br/>30008: OTC Order Requote<br/>30007: OTC Order completed successfully<br/>40001: Service Unavailable<br/>40003: Rejected |
 
 
@@ -356,7 +360,7 @@ Reject current quote
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-| quoteId | string | Yes | Quote ID to supplied as a path parameter | 
+| quoteId | string | Yes | Quote ID to supplied as a path parameter |
 
 ## Query Order
 
@@ -416,21 +420,21 @@ Query order information
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-| quoteId | string | Yes | Quote ID to supplied as a path parameter | 
+| quoteId | string | Yes | Quote ID to supplied as a path parameter |
 
 ### Response Content
 |Name|Type|Required|Description|
 |---|---|---|---|
-| markets | Asset | Yes | Asset information | 
-| quoteAmountToDeduct | double | Yes | Quote amount to deduct | 
-| quoteAmountToReceive | double | Yes | Quote amount to receive | 
-| quoteCurrencyToDeductIn | string | Yes | Quote currency to deduct in | 
-| quoteCurrencyToReceiveIn | string | Yes | Quote currency to receive | 
-| quoteId | string | Yes | Quote ID | 
-| quotePriceInOrderCurrency | double | Yes | Quote price in order currency | 
-| quotePriceInUSD | long | Yes | Quote price in USD | 
-| quoteTimestamp | long | Yes | Quote timestamp | 
-| quoteValidDurationMs | long | Yes | Quote validity | 
+| markets | Asset | Yes | Asset information |
+| quoteAmountToDeduct | double | Yes | Quote amount to deduct |
+| quoteAmountToReceive | double | Yes | Quote amount to receive |
+| quoteCurrencyToDeductIn | string | Yes | Quote currency to deduct in |
+| quoteCurrencyToReceiveIn | string | Yes | Quote currency to receive |
+| quoteId | string | Yes | Quote ID |
+| quotePriceInOrderCurrency | double | Yes | Quote price in order currency |
+| quotePriceInUSD | long | Yes | Quote price in USD |
+| quoteTimestamp | long | Yes | Quote timestamp |
+| quoteValidDurationMs | long | Yes | Quote validity |
 | status | integer | Yes | Order status with values: <br/>8: Insufficient Balance<br/>30001: Order Quote<br/>30008: OTC Order Requote<br/>30007: OTC Order completed successfully<br/>40001: Service Unavailable<br/>40003: Rejected |
 
 # Websocket Streams
@@ -446,13 +450,13 @@ Query order information
 }
 ```
 
-Authenticate the websocket session to subscribe to authenticated websocket topics. Assume we have values as follows: 
+Authenticate the websocket session to subscribe to authenticated websocket topics. Assume we have values as follows:
 
 * `btse-nonce`: 1624985375123
 * `btse-api`: 4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x
 * `secret`: 848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx
 
-Our subscription request will be: 
+Our subscription request will be:
 
 ```
 {
@@ -468,8 +472,8 @@ Below details the arguments needed to be sent in.
 |Index|Type|Required|Description|
 |---|---|---|---|
 | 0 | string | Yes | First argument is the API key |
-| 1 | long | Yes | Nonce which is the current timestamp | 
-| 2 | string | Yes | Generated signature | 
+| 1 | long | Yes | Nonce which is the current timestamp |
+| 2 | string | Yes | Generated signature |
 
 > Generating a signature
 
@@ -486,7 +490,7 @@ echo -n "/ws/otc1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6726e
 ```json
 {
   "op": "quote",
-  "symbol": "BTC-USD", 
+  "symbol": "BTC-USD",
   "clOrderId": "ClientOrder1",
   "quantity": {
     "quantity": 1,
@@ -495,7 +499,26 @@ echo -n "/ws/otc1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6726e
 }
 ```
 
-> Response 
+```json
+{
+  "op": "unsubscribe-quote",
+  "symbol": "BTC-USD",
+  "clOrderId": "ClientOrder1",
+  "quantity": {
+    "quantity": 1,
+    "currency": "BTC"
+  }
+}
+```
+
+```json
+{
+  "op": "unsubscribe-quote-all"
+}
+```
+
+
+> Response
 
 ```json
 {
@@ -512,20 +535,20 @@ echo -n "/ws/otc1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6726e
   "status": null,
   "reason": null
 }
-  
+
 ```
 
-Receive quote streams by subscribing to the `quote` websocket. The websocket topic will constantly push new prices to the subscriber. To accept the quote, indicate the buy or sell quote Id using the `/accept` API. 
+Receive quote streams by subscribing to the `quote` websocket. The websocket topic will constantly push new prices to the subscriber. To accept the quote, indicate the buy or sell quote Id using the `/accept` API.
 
 ### Request Parameters
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-| op | string | Yes | Operation, in this case its `quote` |
-| symbol | string | Yes | Market symbol, refer to `getMarkets` API | 
-| clOrderId | string | No | Client custom order Id | 
-| quantity | double | Yes | Order quantity | 
-| currency | string | Yes | Can be either in the base or quote currency. If specified in the base currency, then the quote stream will respond with  | 
+| op | string | Yes | Operation, in this case it is `quote`, `unsubscribe-quote`, or `unsubscribe-quote-all` |
+| symbol | string | Yes | Market symbol, refer to `getMarkets` API |
+| clOrderId | string | No | Client custom order Id |
+| quantity | double | Yes | Order quantity |
+| currency | string | Yes | Can be either in the base or quote currency. If specified in the base currency, then the quote stream will respond with  |
 
 ### Response Content
 
