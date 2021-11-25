@@ -13,6 +13,10 @@ headingLevel: 2
 
 # Change Log
 
+## Version 3.2.8 (3rd December 2021)
+
+* New investment API
+
 ## Version 3.2.7 (23rd November 2021)
 
 * Update orderbook incremental updates decription [Orderbook websocket feed](#orderbook-incremental-updates)
@@ -604,14 +608,20 @@ Get all investment products
 | type | string | Yes | Product type |
 | startDate | long | Yes | Inventment start date |
 | interestStartDate | long | Yes | Interest start date |
-| rates | object[] | Yes | Interest rate information |
-| rates.days | integer | Yes | Duration in days |
-| rates.rate | double | Yes | Interest rate |
+| rates | RateObject[] | Yes | Interest rate information |
 | compounding | double | Yes | is product compounding |
 | autoRenewSupported | double | Yes | is product supported renew automatically |
 | dailyLimit | double | Yes | Daily invent amount limit |
 | minSize | double | Yes | Minimum invest size |
 | incrementalSize | double | Yes | Invest step size |
+
+### RateObject
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| days | integer | Yes | Duration in days |
+| rate | double | Yes | Interest rate |
+
 
 
 # Trade Endpoints
@@ -1180,6 +1190,15 @@ Deposit an investment
 }
 ```
 
+> Response
+
+```json
+{
+    "orderId": 1,
+    "autoRenew": false
+}
+```
+
 `POST /api/v3.2/invest/renew`
 
 Renew an investment order
@@ -1190,6 +1209,13 @@ Renew an investment order
 |---|---|---|---|
 | orderId | integer | Yes | Investment order id |
 | autoRenew | boolean | Yes | renew automatically |
+
+### Response Content
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| orderId | integer | Yes | Investment order id |
+| autoRenew | boolean | Yes | status of autoRenew flag |
 
 
 ## Redeem Investment
