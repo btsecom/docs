@@ -249,7 +249,10 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#version-2-2-0-23-nov-2021" class="toc-h2 toc-link" data-title="Version 2.2.0 (23 Nov 2021)">Version 2.2.0 (23 Nov 2021)</a>
+                    <a href="#version-2-2-1-26th-nov-2021" class="toc-h2 toc-link" data-title="Version 2.2.1 (26th Nov 2021)">Version 2.2.1 (26th Nov 2021)</a>
+                  </li>
+                  <li>
+                    <a href="#version-2-2-0-23rd-nov-2021" class="toc-h2 toc-link" data-title="Version 2.2.0 (23rd Nov 2021)">Version 2.2.0 (23rd Nov 2021)</a>
                   </li>
                   <li>
                     <a href="#version-2-1-8-1st-july-2021" class="toc-h2 toc-link" data-title="Version 2.1.8 (1st July 2021)">Version 2.1.8 (1st July 2021)</a>
@@ -417,7 +420,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-2-2-0-23-nov-2021'>Version 2.2.0 (23 Nov 2021)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-2-2-1-26th-nov-2021'>Version 2.2.1 (26th Nov 2021)</h2>
+<ul>
+<li>Update market name for futures <a href="#orderbook-incremental-updates">Orderbook websocket feed</a></li>
+</ul>
+<h2 id='version-2-2-0-23rd-nov-2021'>Version 2.2.0 (23rd Nov 2021)</h2>
 <ul>
 <li>Addition of orderbook incremental updates <a href="#orderbook-incremental-updates">Orderbook websocket feed</a></li>
 </ul>
@@ -4393,13 +4400,13 @@
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"op"</span><span class="p">:</span><span class="w"> </span><span class="s2">"subscribe"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"update:BTCPFC-USD"</span><span class="w">
+    </span><span class="s2">"update:BTCPFC"</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"op"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unsubscribe"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"update:BTCPFC-USD"</span><span class="w">
+    </span><span class="s2">"update:BTCPFC"</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
@@ -4407,7 +4414,7 @@
 <p>Response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"update:BTCPFC-USD"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"update:BTCPFC"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"bids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">[</span><span class="w">
@@ -4453,11 +4460,11 @@
     </span><span class="nl">"prevSeqNum"</span><span class="p">:</span><span class="w"> </span><span class="mi">628281</span><span class="p">,</span><span class="w">
     </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"snapshot"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1565135165600</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC-USD"</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"update:BTCPFC-USD"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"update:BTCPFC"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"bids"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
     </span><span class="nl">"asks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -4474,11 +4481,11 @@
     </span><span class="nl">"prevSeqNum"</span><span class="p">:</span><span class="w"> </span><span class="mi">628282</span><span class="p">,</span><span class="w">
     </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"delta"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1565135165600</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC-USD"</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>Subscribe to Orderbook incremental updates through the endpoint <code>wss://ws.btse.com/ws/oss/futures</code>. The topic to subscribe to will be <code>update</code> specifying the symbol (eg. <code>update:BTCPFC-USD</code>). The first response received will be a snapshot of the current orderbook (this is indicated in the <code>type</code> field) and 50 levels will be returned. Incremental updates will be sent in subsequent packets with type <code>delta</code>.</p>
+<p>Subscribe to Orderbook incremental updates through the endpoint <code>wss://ws.btse.com/ws/oss/futures</code>. The topic to subscribe to will be <code>update</code> specifying the symbol (eg. <code>update:BTCPFC</code>). The first response received will be a snapshot of the current orderbook (this is indicated in the <code>type</code> field) and 50 levels will be returned. Incremental updates will be sent in subsequent packets with type <code>delta</code>.</p>
 
 <p>Bids and asks will be sent in <code>price</code> and <code>size</code> tuples. The size sent will be the new updated size for the price. If a value of <code>0</code> is sent, the price should be removed from the local copy of the orderbook.</p>
 
