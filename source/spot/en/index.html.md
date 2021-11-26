@@ -561,67 +561,6 @@ Gets server time
 | iso | long | Yes | Time in YYYY-MM-DDTHH24:MI:SS.Z format |
 | epoch | long | Yes | Returns epoch timestamp |
 
-## Query Investment Products
-
-> Response
-
-```json
-[
-  {
-    "id": "OPENETH00001",
-    "name": "ETH Flex Savings",
-    "currency": "ETH",
-    "type": "Flex",
-    "startDate": 1610685918000,
-    "interestStartDate": 1610719200000,
-    "rates":
-    [
-      {
-        "days": 1,
-        "rate": 1.15
-      }
-    ],
-    "compounding": true,
-    "autoRenewSupported": false,
-    "dailyLimit": 10.0,
-    "minSize": 1.00000000,
-    "incrementalSize": 1.00000000
-  }
-]
-```
-
-`GET /api/v3.2/invest/products`
-
-Get all investment products
-
-### Request Parameters
-
-(None)
-
-### Response Content
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-| id | string | Yes | Product id |
-| name | string | Yes | Product name |
-| currency | string | Yes | Currency |
-| type | string | Yes | Product type |
-| startDate | long | Yes | Inventment start date |
-| interestStartDate | long | Yes | Interest start date |
-| rates | RateObject[] | Yes | Interest rate information |
-| compounding | double | Yes | is product compounding |
-| autoRenewSupported | double | Yes | is product supported renew automatically |
-| dailyLimit | double | Yes | Daily invent amount limit |
-| minSize | double | Yes | Minimum invest size |
-| incrementalSize | double | Yes | Invest step size |
-
-### RateObject
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-| days | integer | Yes | Duration in days |
-| rate | double | Yes | Interest rate |
-
 
 
 # Trade Endpoints
@@ -1150,97 +1089,6 @@ Retrieve user's trading fees
 | takerFee | double | Yes | Taker fees |
 
 
-## Deposit Investment
-
-> Request
-
-```json
-{
-    "productId": "OPENUSDT0001",
-    "amount": 100.99,
-    "renew": true,
-    "rate": 6,
-    "day": 7
-}
-```
-
-`POST /api/v3.2/invest/deposit`
-
-Deposit an investment
-
-### Request Parameters
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-| productId | string | Yes | Invest product id |
-| amount | double | Yes | Invest amount |
-| renew | boolean | Yes | renew automatically |
-| rate | double | Yes | Interest rate |
-| day | integer | Yes | Duration in days |
-
-
-## Renew Investment
-
-> Request
-
-```json
-{
-    "orderId": 1,
-    "autoRenew": false
-}
-```
-
-> Response
-
-```json
-{
-    "orderId": 1,
-    "autoRenew": false
-}
-```
-
-`POST /api/v3.2/invest/renew`
-
-Renew an investment order
-
-### Request Parameters
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-| orderId | integer | Yes | Investment order id |
-| autoRenew | boolean | Yes | renew automatically |
-
-### Response Content
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-| orderId | integer | Yes | Investment order id |
-| autoRenew | boolean | Yes | status of autoRenew flag |
-
-
-## Redeem Investment
-
-> Request
-
-```json
-{
-    "orderId": 1,
-    "amount": 12.34
-}
-```
-
-`POST /api/v3.2/invest/redeem`
-
-Redeem an investment order
-
-### Request Parameters
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-| orderId | integer | Yes | Investment order id |
-| amount | double | Yes | Redeem amount |
-
-
 
 # Wallet Endpoints
 
@@ -1432,6 +1280,162 @@ Performs a wallet withdrawal. To use this API, `Withdraw` permission is required
 |Name|Type|Required|Description|
 |---|---|---|---|
 | withdraw_id | string | Yes | Internal withdrawal ID. References the `orderID` field in `wallet_history` API. As withdrawal will not be processed immediately. User can query the wallet history API to check on the status of the withdrawal |
+
+
+
+# Investment Endpoints
+
+## Query Investment Products
+
+> Response
+
+```json
+[
+  {
+    "id": "OPENETH00001",
+    "name": "ETH Flex Savings",
+    "currency": "ETH",
+    "type": "Flex",
+    "startDate": 1610685918000,
+    "interestStartDate": 1610719200000,
+    "rates":
+    [
+      {
+        "days": 1,
+        "rate": 1.15
+      }
+    ],
+    "compounding": true,
+    "autoRenewSupported": false,
+    "dailyLimit": 10.0,
+    "minSize": 1.00000000,
+    "incrementalSize": 1.00000000
+  }
+]
+```
+
+`GET /api/v3.2/invest/products`
+
+Get all investment products
+
+### Request Parameters
+
+(None)
+
+### Response Content
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| id | string | Yes | Product id |
+| name | string | Yes | Product name |
+| currency | string | Yes | Currency |
+| type | string | Yes | Product type |
+| startDate | long | Yes | Inventment start date |
+| interestStartDate | long | Yes | Interest start date |
+| rates | RateObject[] | Yes | Interest rate information |
+| compounding | double | Yes | is product compounding |
+| autoRenewSupported | double | Yes | is product supported renew automatically |
+| dailyLimit | double | Yes | Daily invent amount limit |
+| minSize | double | Yes | Minimum invest size |
+| incrementalSize | double | Yes | Invest step size |
+
+### RateObject
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| days | integer | Yes | Duration in days |
+| rate | double | Yes | Interest rate |
+
+
+## Deposit Investment
+
+> Request
+
+```json
+{
+    "productId": "OPENUSDT0001",
+    "amount": 100.99,
+    "renew": true,
+    "rate": 6,
+    "day": 7
+}
+```
+
+`POST /api/v3.2/invest/deposit`
+
+Deposit an investment
+
+### Request Parameters
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| productId | string | Yes | Invest product id |
+| amount | double | Yes | Invest amount |
+| renew | boolean | Yes | renew automatically |
+| rate | double | Yes | Interest rate |
+| day | integer | Yes | Duration in days |
+
+
+## Renew Investment
+
+> Request
+
+```json
+{
+    "orderId": 1,
+    "autoRenew": false
+}
+```
+
+> Response
+
+```json
+{
+    "orderId": 1,
+    "autoRenew": false
+}
+```
+
+`POST /api/v3.2/invest/renew`
+
+Renew an investment order
+
+### Request Parameters
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| orderId | integer | Yes | Investment order id |
+| autoRenew | boolean | Yes | renew automatically |
+
+### Response Content
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| orderId | integer | Yes | Investment order id |
+| autoRenew | boolean | Yes | status of autoRenew flag |
+
+
+## Redeem Investment
+
+> Request
+
+```json
+{
+    "orderId": 1,
+    "amount": 12.34
+}
+```
+
+`POST /api/v3.2/invest/redeem`
+
+Redeem an investment order
+
+### Request Parameters
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| orderId | integer | Yes | Investment order id |
+| amount | double | Yes | Redeem amount |
 
 
 ## Query Investment Orders
