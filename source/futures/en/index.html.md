@@ -13,7 +13,11 @@ headingLevel: 2
 
 # Change Log
 
-## Version 2.2.0 (23 Nov 2021)
+## Version 2.2.1 (26th Nov 2021)
+
+* Update market name for futures [Orderbook websocket feed](#orderbook-incremental-updates)
+
+## Version 2.2.0 (23rd Nov 2021)
 
 * Addition of orderbook incremental updates [Orderbook websocket feed](#orderbook-incremental-updates)
 
@@ -1849,7 +1853,7 @@ Subscribe to the Level 2 Orderbook. The format to subscribe to will be `symbol_d
 {
   "op": "subscribe",
   "args": [
-    "update:BTCPFC-USD"
+    "update:BTCPFC"
   ]
 }
 ```
@@ -1858,7 +1862,7 @@ Subscribe to the Level 2 Orderbook. The format to subscribe to will be `symbol_d
 {
   "op": "unsubscribe",
   "args": [
-    "update:BTCPFC-USD"
+    "update:BTCPFC"
   ]
 }
 ```
@@ -1867,7 +1871,7 @@ Subscribe to the Level 2 Orderbook. The format to subscribe to will be `symbol_d
 
 ```json
 {
-  "topic": "update:BTCPFC-USD",
+  "topic": "update:BTCPFC",
   "data": {
     "bids": [
       [
@@ -1913,14 +1917,14 @@ Subscribe to the Level 2 Orderbook. The format to subscribe to will be `symbol_d
     "prevSeqNum": 628281,
     "type": "snapshot",
     "timestamp": 1565135165600,
-    "symbol": "BTCPFC-USD"
+    "symbol": "BTCPFC"
   }
 }
 ```
 
 ```json
 {
-  "topic": "update:BTCPFC-USD",
+  "topic": "update:BTCPFC",
   "data": {
     "bids": [],
     "asks": [
@@ -1937,12 +1941,12 @@ Subscribe to the Level 2 Orderbook. The format to subscribe to will be `symbol_d
     "prevSeqNum": 628282,
     "type": "delta",
     "timestamp": 1565135165600,
-    "symbol": "BTCPFC-USD"
+    "symbol": "BTCPFC"
   }
 }
 ```
 
-Subscribe to Orderbook incremental updates through the endpoint `wss://ws.btse.com/ws/oss/futures`. The topic to subscribe to will be `update` specifying the symbol (eg. `update:BTCPFC-USD`). The first response received will be a snapshot of the current orderbook (this is indicated in the `type` field) and 50 levels will be returned. Incremental updates will be sent in subsequent packets with type `delta`.
+Subscribe to Orderbook incremental updates through the endpoint `wss://ws.btse.com/ws/oss/futures`. The topic to subscribe to will be `update` specifying the symbol (eg. `update:BTCPFC`). The first response received will be a snapshot of the current orderbook (this is indicated in the `type` field) and 50 levels will be returned. Incremental updates will be sent in subsequent packets with type `delta`.
 
 Bids and asks will be sent in `price` and `size` tuples. The size sent will be the new updated size for the price. If a value of `0` is sent, the price should be removed from the local copy of the orderbook.
 
