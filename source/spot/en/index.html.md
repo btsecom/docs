@@ -13,16 +13,11 @@ headingLevel: 2
 
 # Change Log
 
-## Version 3.2.9 (6th December 2021)
+## Version 3.2.8 (8th December 2021)
 
-* Addition of funds conversion [Convert funds](#convert-funds)
-* Addition of funds transfer [Transfer funds](#transfer-funds)
 * Addition of get currency list for wallet action [Available currency list for action](#query-available-currency-list-for-wallet-action)
 * Addition of get crypto network list for specific currency [Available network list for currency](#query-available-crypto-network-list-for-currency)
 * Update the description of field:currency in [Withdraw funds](#withdraw-funds)
-
-## Version 3.2.8 (3rd December 2021)
-
 * New investment API [Investment endpoints](#investment-endpoints)
 
 ## Version 3.2.7 (23rd November 2021)
@@ -573,7 +568,7 @@ Gets server time
 | iso | long | Yes | Time in YYYY-MM-DDTHH24:MI:SS.Z format |
 | epoch | long | Yes | Returns epoch timestamp |
 
-## Query available currency list for wallet action 
+## Query available currency list for wallet action
 
 > Response
 
@@ -603,7 +598,7 @@ Get available currency list for wallet action.
 |---|---|---|---|
 | $currencyName | string | Yes | Name of currency |
 
-## Query available crypto network list for currency 
+## Query available crypto network list for currency
 
 > Response
 
@@ -1349,98 +1344,6 @@ Performs a wallet withdrawal. To use this API, `Withdraw` permission is required
 |Name|Type|Required|Description|
 |---|---|---|---|
 | withdraw_id | string | Yes | Internal withdrawal ID. References the `orderID` field in `wallet_history` API. As withdrawal will not be processed immediately. User can query the wallet history API to check on the status of the withdrawal |
-
-## Convert funds
-
-> Request
-
-```json
-{
-  "amount": "1",
-  "fromAsset": "BTC",
-  "toAsset": "USD"
-}
-```
-
-> Response
-
-```json
-{
-    "amount": 1.0,
-    "settlementAmount": 66680.43282,
-    "amountCurrency": "BTC",
-    "settlementCurrency": "USD",
-    "rate": 66680.43282
-}
-```
-
-`POST /api/v3.2/user/wallet/convert`
-
-Performs a currency conversion from wallet. To use this API, `Wallet` permission is required. To get supported currency list please check [Available currency list for action](#query-available-currency-list-for-wallet-action)
-
-### Request Parameters
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-| amount | string | Yes | amount of currency to convert |
-| fromAsset | string | Yes | source currency to be converted |
-| toAsset | string | Yes | destination currency |
-
-### Response Content
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-| amount | float | Yes | amount of source currency to be converted |
-| settlementAmount | float | Yes | amount of converted destination currency |
-| amountCurrency | string | Yes | source currency |
-| settlementCurrency | string | Yes | destination currency |
-| rate | float | Yes | exchange rate |
-
-## Transfer funds
-
-> Request
-
-```json
-{
-  "amount": "1.0",
-  "asset": "BTC",
-  "toUser": "jamesbond",
-  "toUserMail": "james.bond@nogle.com"
-}
-```
-
-> Response
-
-```json
-{
-  "amount": "1",
-  "asset": "BTC",
-  "toUser": "jamesbond",
-  "toUserMail": "james.bond@nogle.com"
-}
-```
-
-`POST /api/v3.2/user/wallet/transfer`
-
-Performs a internal currency transfer to other user from wallet. To use this API, `Wallet` permission is required. To get supported currency list please check [Available currency list for action](#query-available-currency-list-for-wallet-action)
-
-### Request Parameters
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-| amount | string | Yes | amount of currency to transfer |
-| asset | string | Yes | currency to be transferred |
-| toUser | string | Yes | receiver account |
-| toUserMail | string | Yes | receiver email|
-
-### Response Content
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-| amount | string | Yes | amount of currency to transfer |
-| asset | string | Yes | currency to be transferred |
-| toUser | string | Yes | receiver account |
-| toUserMail | string | Yes | receiver email|
 
 
 # Investment Endpoints
