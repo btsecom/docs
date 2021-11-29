@@ -1,0 +1,377 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>BTSE API Documentation</title>
+    <link href="../../images/favicon-3eb77247.ico" rel="icon" type="image/ico" />
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cpf {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s, .highlight .sa, .highlight .dl {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf, .highlight .fm {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv, .highlight .vm {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #f92672;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <link href="../../stylesheets/screen-e481a7b6.css" rel="stylesheet" media="screen" />
+    <link href="../../stylesheets/print-953e3353.css" rel="stylesheet" media="print" />
+      <script src="../../javascripts/all-a9fde460.js"></script>
+
+  </head>
+
+  <body class="earn earn_en earn_en_index" data-languages="[&quot;json&quot;]">
+    <a href="#" id="nav-button">
+      <span>
+        <img src="../../images/navbar-cad8cdcb.png" alt="" />
+      </span>
+    </a>
+    <header>
+    <div class="flex_box">
+      <img src="../../images/logo-d7d2b532.svg" class="logo" alt="" />
+      <div class="nav_box">
+        <span class="nav_cell" style="display: none">
+          <a href="javascript:;" class="nav_first">v1<i class="icon_nav"></i></a>
+          <ul class="nav_ul">
+            <li>
+              <a href="/docs/spot/en/" id="v1_url">v1</a>
+            </li>
+          </ul>
+        </span>
+        <span class="nav_cell nav_tab">
+          <a href="/docs/spot/en/" id="btn_spot">Spot</a>
+        </span>
+        <span class="nav_cell nav_tab">
+          <a href="/docs/futures/en/" id="btn_futures">Futures</a>
+        </span>
+        <span class="nav_cell nav_tab">
+          <a href="/docs/otc/en/" id="btn_otc">OTC</a>
+        </span>
+        <span class="nav_cell nav_tab">
+          <a href="/docs/streaming/en/" id="btn_streaming">Streaming</a>
+        </span>
+      </div>
+    </div>
+
+  </header>
+    <div class="toc-wrapper">
+        <div class="lang-selector">
+              <a href="#" data-language-name="json">json</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <ul id="toc" class="toc-list-h1">
+          <li>
+            <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#version-0-1-29th-november-2021" class="toc-h2 toc-link" data-title="Version 0.1 (29th November 2021)">Version 0.1 (29th November 2021)</a>
+                  </li>
+              </ul>
+          </li>
+      </ul>
+        <ul class="toc-footer">
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id='change-log'>Change Log</h1><h2 id='version-0-1-29th-november-2021'>Version 0.1 (29th November 2021)</h2>
+<ul>
+<li>Earn API will be released shortly.</li>
+</ul>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="json">json</a>
+          </div>
+      </div>
+    </div>
+    <script>
+    // const lang_btn = document.getElementById('lang_box');
+    const btn_spot = document.getElementById('btn_spot');
+    const btn_futures = document.getElementById('btn_futures');
+    const btn_otc = document.getElementById('btn_otc');
+    const btn_streaming = document.getElementById('btn_streaming');
+    const v1_url = document.getElementById('v1_url');
+    const url = GetUrlRelativePath();
+
+    //english
+    if(url.indexOf('cn') != -1){
+      //如果是中文环境
+      // lang_btn.innerHTML = 'English';
+      btn_spot.innerHTML = '现货';
+      btn_futures.innerHTML = '期货';
+      btn_otc.innerHTML = '场外交易';
+      btn_streaming.innerHTML = '串流';
+      btn_earn.innerHTML = '賺幣';
+
+      // lang_btn.href = url.replace('cn/', 'en/');
+      btn_spot.href = btn_spot.href.replace('en/', 'cn/');
+      btn_futures.href = btn_futures.href.replace('en/', 'cn/');
+      btn_otc.href = btn_otc.href.replace('en/', 'cn/');
+      btn_streaming.href = btn_streaming.href.replace('en/', 'cn/');
+      btn_earn.href = btn_earn.href.replace('en/', 'cn/');
+
+      v1_url.href = '/docs/spot/cn/';
+    }else{ //chinese
+      //如果是英文环境
+      // lang_btn.innerHTML = '中文';
+      btn_spot.innerHTML = 'Spot';
+      btn_futures.innerHTML = 'Futures';
+      btn_otc.innerHTML = 'OTC';
+      btn_streaming.innerHTML = 'Streaming';
+      btn_earn.innerHTML = 'Earn';
+
+      // lang_btn.href = url.replace('en/', 'cn/');
+      btn_spot.href = btn_spot.href.replace('cn/', 'en/');
+      btn_futures.href = btn_futures.href.replace('cn/', 'en/');
+      btn_otc.href = btn_otc.href.replace('cn/', 'en/');
+      btn_streaming.href = btn_streaming.href.replace('cn/', 'en/');
+      btn_earn.href = btn_earn.href.replace('cn/', 'en/');
+
+      v1_url.href = '/docs/spot/en/';
+    }
+
+    if(location.href.indexOf('docs/futures') > 0){
+      btn_spot.className = '';
+      btn_futures.className = 'current';
+      btn_otc.className = '';
+      btn_streaming.className = '';
+      btn_earn.className = '';
+    }
+    else if(location.href.indexOf('docs/spot') > 0){
+      btn_spot.className = 'current';
+      btn_futures.className = '';
+      btn_otc.className = '';
+      btn_streaming.className = '';
+      btn_earn.className = '';
+    }
+    else if(location.href.indexOf('docs/otc') > 0){
+      btn_spot.className = '';
+      btn_futures.className = '';
+      btn_otc.className = 'current';
+      btn_streaming.className = '';
+      btn_earn.className = '';
+    else if(location.href.indexOf('docs/streaming') > 0){
+      btn_spot.className = '';
+      btn_futures.className = '';
+      btn_otc.className = '';
+      btn_streaming.className = 'current';
+      btn_earn.className = '';
+    else if(location.href.indexOf('docs/earn') > 0){
+      btn_spot.className = '';
+      btn_futures.className = '';
+      btn_otc.className = '';
+      btn_streaming.className = '';
+      btn_earn.className = 'current';
+    } else {
+      btn_spot.className = 'current';
+      btn_futures.className = '';
+      btn_otc.className = '';
+      btn_streaming.className = '';
+      btn_earn.className = '';
+    }
+    //显示语言切换按钮
+    // lang_btn.style.display = 'block';
+    function GetUrlRelativePath(){
+      let url = document.location.toString();
+      let arrUrl = url.split("//");
+      let start = arrUrl[1].indexOf("/");
+      let relUrl = arrUrl[1].substring(start);
+      if(relUrl.indexOf("?") != -1){
+        relUrl = relUrl.split("?")[0];
+      }
+      if(relUrl.indexOf("#") != -1){
+        relUrl = relUrl.split("#")[0];
+      }
+      return relUrl;
+　　}
+  </script>
+  </body>
+</html>

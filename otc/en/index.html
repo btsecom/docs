@@ -1287,12 +1287,14 @@
       btn_futures.innerHTML = '期货';
       btn_otc.innerHTML = '场外交易';
       btn_streaming.innerHTML = '串流';
+      btn_earn.innerHTML = '賺幣';
 
       // lang_btn.href = url.replace('cn/', 'en/');
       btn_spot.href = btn_spot.href.replace('en/', 'cn/');
       btn_futures.href = btn_futures.href.replace('en/', 'cn/');
       btn_otc.href = btn_otc.href.replace('en/', 'cn/');
       btn_streaming.href = btn_streaming.href.replace('en/', 'cn/');
+      btn_earn.href = btn_earn.href.replace('en/', 'cn/');
 
       v1_url.href = '/docs/spot/cn/';
     }else{ //chinese
@@ -1302,12 +1304,14 @@
       btn_futures.innerHTML = 'Futures';
       btn_otc.innerHTML = 'OTC';
       btn_streaming.innerHTML = 'Streaming';
+      btn_earn.innerHTML = 'Earn';
 
       // lang_btn.href = url.replace('en/', 'cn/');
       btn_spot.href = btn_spot.href.replace('cn/', 'en/');
       btn_futures.href = btn_futures.href.replace('cn/', 'en/');
       btn_otc.href = btn_otc.href.replace('cn/', 'en/');
       btn_streaming.href = btn_streaming.href.replace('cn/', 'en/');
+      btn_earn.href = btn_earn.href.replace('cn/', 'en/');
 
       v1_url.href = '/docs/spot/en/';
     }
@@ -1317,28 +1321,39 @@
       btn_futures.className = 'current';
       btn_otc.className = '';
       btn_streaming.className = '';
+      btn_earn.className = '';
     }
     else if(location.href.indexOf('docs/spot') > 0){
       btn_spot.className = 'current';
       btn_futures.className = '';
       btn_otc.className = '';
       btn_streaming.className = '';
+      btn_earn.className = '';
     }
     else if(location.href.indexOf('docs/otc') > 0){
       btn_spot.className = '';
       btn_futures.className = '';
       btn_otc.className = 'current';
       btn_streaming.className = '';
+      btn_earn.className = '';
     else if(location.href.indexOf('docs/streaming') > 0){
       btn_spot.className = '';
       btn_futures.className = '';
       btn_otc.className = '';
       btn_streaming.className = 'current';
+      btn_earn.className = '';
+    else if(location.href.indexOf('docs/earn') > 0){
+      btn_spot.className = '';
+      btn_futures.className = '';
+      btn_otc.className = '';
+      btn_streaming.className = '';
+      btn_earn.className = 'current';
     } else {
       btn_spot.className = 'current';
       btn_futures.className = '';
       btn_otc.className = '';
       btn_streaming.className = '';
+      btn_earn.className = '';
     }
     //显示语言切换按钮
     // lang_btn.style.display = 'block';
