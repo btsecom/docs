@@ -1390,11 +1390,11 @@ Performs a currency conversion from wallet. To use this API, `Wallet` permission
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-| amount | string | Yes | amount of source currency to be converted |
-| settlementAmount | string | Yes | amount of converted destination currency |
+| amount | float | Yes | amount of source currency to be converted |
+| settlementAmount | float | Yes | amount of converted destination currency |
 | amountCurrency | string | Yes | source currency |
 | settlementCurrency | string | Yes | destination currency |
-| rate | string | Yes | exchange rate |
+| rate | float | Yes | exchange rate |
 
 ## Transfer funds
 
