@@ -13,9 +13,17 @@ headingLevel: 2
 
 # Change Log
 
+## Version 3.2.9 (6th December 2021)
+
+* Addition of funds conversion [Convert funds](#convert-funds)
+* Addition of funds transfer [Transfer funds](#transfer-funds)
+* Addition of get currency list for wallet action [Available currency list for action](#query-available-currency-list-for-wallet-action)
+* Addition of get crypto network list for specific currency [Available network list for currency](#query-available-crypto-network-list-for-currency)
+* Update the description of field:currency in [Withdraw funds](#withdraw-funds)
+
 ## Version 3.2.8 (3rd December 2021)
 
-* New investment API
+* New investment API [Investment endpoints](#investment-endpoints)
 
 ## Version 3.2.7 (23rd November 2021)
 
@@ -162,6 +170,10 @@ Rate limits for BTSE is as follows:
 
 * Per API: `75 requests/second`
 * Per User: `75 requests/second`
+
+**Wallet operation**
+
+* Per User: `5 requests/second`
 
 ## API Status Codes
 
@@ -561,6 +573,62 @@ Gets server time
 | iso | long | Yes | Time in YYYY-MM-DDTHH24:MI:SS.Z format |
 | epoch | long | Yes | Returns epoch timestamp |
 
+## Query available currency list for wallet action 
+
+> Response
+
+```json
+[
+  "USD",
+  "JPY",
+  "GBP",
+  "HKD",
+  "SGD"
+]
+```
+
+`GET /api/v3.2/availableCurrencies`
+
+Get available currency list for wallet action.
+
+### Request Parameters
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| action | enum | Yes | CONVERT, WITHDRAW, SEND (transfer) |
+
+### Response Content
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| $currencyName | string | Yes | Name of currency |
+
+## Query available crypto network list for currency 
+
+> Response
+
+```json
+[
+  "Bitcoin",
+  "Liquid"
+]
+```
+
+`GET /api/v3.2/availableCurrencyNetworks`
+
+Get available crypto network list for currency.
+
+### Request Parameters
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| currency | string | Yes | Ex: BTC |
+
+### Response Content
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| $network | string | Yes | Name of network |
 
 
 # Trade Endpoints
@@ -1241,13 +1309,14 @@ Gets a wallet address. To use this API, `Wallet` permission is required.
 |---|---|---|---|
 | address | string | Yes | Blockchain address |
 | created | long | Yes | Created timestamp |
+
 ## Withdraw Funds
 
 > Request
 
 ```json
 {
-  "currency": "BTC",
+  "currency": "BTC-Bitcoin",
   "address": "BTCAddress",
   "tag": "Tag",
   "amount": "0.001"
@@ -1270,7 +1339,7 @@ Performs a wallet withdrawal. To use this API, `Withdraw` permission is required
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-| currency | string | Yes | Currency |
+| currency | string | Yes | Currency-Network pair <br> Currency list can be retrieved from [Available currency list for action](#query-available-currency-list-for-wallet-action) <br> Network list can be retrieved from [Available network list for currency](#query-available-crypto-network-list-for-currency)|
 | address | string | Yes | Blockchain address |
 | tag | string | Yes | Tag, used only by some blockchain (eg. XRP) |
 | amount | string | Yes | Amount to withdraw |
@@ -1281,6 +1350,97 @@ Performs a wallet withdrawal. To use this API, `Withdraw` permission is required
 |---|---|---|---|
 | withdraw_id | string | Yes | Internal withdrawal ID. References the `orderID` field in `wallet_history` API. As withdrawal will not be processed immediately. User can query the wallet history API to check on the status of the withdrawal |
 
+## Convert funds
+
+> Request
+
+```json
+{
+  "amount": "1",
+  "fromAsset": "BTC",
+  "toAsset": "USD"
+}
+```
+
+> Response
+
+```json
+{
+    "amount": 1.0,
+    "settlementAmount": 66680.43282,
+    "amountCurrency": "BTC",
+    "settlementCurrency": "USD",
+    "rate": 66680.43282
+}
+```
+
+`POST /api/v3.2/user/wallet/convert`
+
+Performs a currency conversion from wallet. To use this API, `Wallet` permission is required. To get supported currency list please check [Available currency list for action](#query-available-currency-list-for-wallet-action)
+
+### Request Parameters
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| amount | string | Yes | amount of currency to convert |
+| fromAsset | string | Yes | source currency to be converted |
+| toAsset | string | Yes | destination currency |
+
+### Response Content
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| amount | string | Yes | amount of source currency to be converted |
+| settlementAmount | string | Yes | amount of converted destination currency |
+| amountCurrency | string | Yes | source currency |
+| settlementCurrency | string | Yes | destination currency |
+| rate | string | Yes | exchange rate |
+
+## Transfer funds
+
+> Request
+
+```json
+{
+  "amount": "1.0",
+  "asset": "BTC",
+  "toUser": "jamesbond",
+  "toUserMail": "james.bond@nogle.com"
+}
+```
+
+> Response
+
+```json
+{
+  "amount": "1",
+  "asset": "BTC",
+  "toUser": "jamesbond",
+  "toUserMail": "james.bond@nogle.com"
+}
+```
+
+`POST /api/v3.2/user/wallet/transfer`
+
+Performs a internal currency transfer to other user from wallet. To use this API, `Wallet` permission is required. To get supported currency list please check [Available currency list for action](#query-available-currency-list-for-wallet-action)
+
+### Request Parameters
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| amount | string | Yes | amount of currency to transfer |
+| asset | string | Yes | currency to be transferred |
+| toUser | string | Yes | receiver account |
+| toUserMail | string | Yes | receiver email|
+
+### Response Content
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| amount | string | Yes | amount of currency to transfer |
+| asset | string | Yes | currency to be transferred |
+| toUser | string | Yes | receiver account |
+| toUserMail | string | Yes | receiver email|
 
 
 # Investment Endpoints
