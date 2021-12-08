@@ -252,6 +252,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-3-2-8-8th-december-2021" class="toc-h2 toc-link" data-title="Version 3.2.8 (8th December 2021)">Version 3.2.8 (8th December 2021)</a>
+                  </li>
+                  <li>
                     <a href="#version-3-2-7-23rd-november-2021" class="toc-h2 toc-link" data-title="Version 3.2.7 (23rd November 2021)">Version 3.2.7 (23rd November 2021)</a>
                   </li>
                   <li>
@@ -321,6 +324,12 @@
                   <li>
                     <a href="#query-server-time" class="toc-h2 toc-link" data-title="Query Server Time">Query Server Time</a>
                   </li>
+                  <li>
+                    <a href="#query-available-currency-list-for-wallet-action" class="toc-h2 toc-link" data-title="Query available currency list for wallet action">Query available currency list for wallet action</a>
+                  </li>
+                  <li>
+                    <a href="#query-available-crypto-network-list-for-currency" class="toc-h2 toc-link" data-title="Query available crypto network list for currency">Query available crypto network list for currency</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -373,6 +382,29 @@
               </ul>
           </li>
           <li>
+            <a href="#investment-endpoints" class="toc-h1 toc-link" data-title="Investment Endpoints">Investment Endpoints</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#query-investment-products" class="toc-h2 toc-link" data-title="Query Investment Products">Query Investment Products</a>
+                  </li>
+                  <li>
+                    <a href="#deposit-investment" class="toc-h2 toc-link" data-title="Deposit Investment">Deposit Investment</a>
+                  </li>
+                  <li>
+                    <a href="#renew-investment" class="toc-h2 toc-link" data-title="Renew Investment">Renew Investment</a>
+                  </li>
+                  <li>
+                    <a href="#redeem-investment" class="toc-h2 toc-link" data-title="Redeem Investment">Redeem Investment</a>
+                  </li>
+                  <li>
+                    <a href="#query-investment-orders" class="toc-h2 toc-link" data-title="Query Investment Orders">Query Investment Orders</a>
+                  </li>
+                  <li>
+                    <a href="#query-investment-history" class="toc-h2 toc-link" data-title="Query Investment History">Query Investment History</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
             <a href="#websocket-streams" class="toc-h1 toc-link" data-title="Websocket Streams">Websocket Streams</a>
               <ul class="toc-list-h2">
                   <li>
@@ -408,7 +440,14 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-3-2-7-23rd-november-2021'>Version 3.2.7 (23rd November 2021)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-3-2-8-8th-december-2021'>Version 3.2.8 (8th December 2021)</h2>
+<ul>
+<li>Addition of get currency list for wallet action <a href="#query-available-currency-list-for-wallet-action">Available currency list for action</a></li>
+<li>Addition of get crypto network list for specific currency <a href="#query-available-crypto-network-list-for-currency">Available network list for currency</a></li>
+<li>Update the description of field:currency in <a href="#withdraw-funds">Withdraw funds</a></li>
+<li>New investment API <a href="#investment-endpoints">Investment endpoints</a></li>
+</ul>
+<h2 id='version-3-2-7-23rd-november-2021'>Version 3.2.7 (23rd November 2021)</h2>
 <ul>
 <li>Update orderbook incremental updates decription <a href="#orderbook-incremental-updates">Orderbook websocket feed</a></li>
 </ul>
@@ -598,6 +637,12 @@
 <ul>
 <li>Per API: <code>75 requests/second</code></li>
 <li>Per User: <code>75 requests/second</code></li>
+</ul>
+
+<p><strong>Wallet operation</strong></p>
+
+<ul>
+<li>Per User: <code>5 requests/second</code></li>
 </ul>
 <h2 id='api-status-codes'>API Status Codes</h2>
 <p>Each API will return one of the following HTTP status:</p>
@@ -1444,6 +1489,97 @@
 <td>Returns epoch timestamp</td>
 </tr>
 </tbody></table>
+<h2 id='query-available-currency-list-for-wallet-action'>Query available currency list for wallet action</h2>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"JPY"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"GBP"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"HKD"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"SGD"</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<p><code>GET /api/v3.2/availableCurrencies</code></p>
+
+<p>Get available currency list for wallet action.</p>
+<h3 id='request-parameters-7'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>action</td>
+<td>enum</td>
+<td>Yes</td>
+<td>CONVERT, WITHDRAW, SEND (transfer)</td>
+</tr>
+</tbody></table>
+<h3 id='response-content-8'>Response Content</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$currencyName</td>
+<td>string</td>
+<td>Yes</td>
+<td>Name of currency</td>
+</tr>
+</tbody></table>
+<h2 id='query-available-crypto-network-list-for-currency'>Query available crypto network list for currency</h2>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="s2">"Bitcoin"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"Liquid"</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<p><code>GET /api/v3.2/availableCurrencyNetworks</code></p>
+
+<p>Get available crypto network list for currency.</p>
+<h3 id='request-parameters-8'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>currency</td>
+<td>string</td>
+<td>Yes</td>
+<td>Ex: BTC</td>
+</tr>
+</tbody></table>
+<h3 id='response-content-9'>Response Content</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$network</td>
+<td>string</td>
+<td>Yes</td>
+<td>Name of network</td>
+</tr>
+</tbody></table>
 <h1 id='trade-endpoints'>Trade Endpoints</h1><h2 id='create-new-order'>Create new order</h2>
 <blockquote>
 <p>Request</p>
@@ -1491,7 +1627,7 @@
 <p><code>POST /api/v3.2/order</code></p>
 
 <p>Creates a new order. Requires <code>Trading</code> permission</p>
-<h3 id='request-parameters-7'>Request Parameters</h3>
+<h3 id='request-parameters-9'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1573,7 +1709,7 @@
 <td>Custom order Id</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-8'>Response Content</h3>
+<h3 id='response-content-10'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1753,7 +1889,7 @@
 </ul>
 
 <p>This API Requires <code>Trading</code> permission</p>
-<h3 id='request-parameters-8'>Request Parameters</h3>
+<h3 id='request-parameters-10'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1841,7 +1977,7 @@
 <td>How much should the order price deviate from index price. Value is in percentage and can range from <code>-10</code> to <code>10</code></td>
 </tr>
 </tbody></table>
-<h3 id='response-content-9'>Response Content</h3>
+<h3 id='response-content-11'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2004,7 +2140,7 @@
 <p><code>PUT /api/v3.2/order</code></p>
 
 <p>Amend the price or size or trigger price of an order. For trigger orders, if the order has already been triggered, the trigger price cannot be further amended. If an order is a POST-ONLY order, and <code>slide</code> option is set to true, then price will set to be the best bid/ask price. Amend order <em>does not</em> apply to algo orders</p>
-<h3 id='request-parameters-9'>Request Parameters</h3>
+<h3 id='request-parameters-11'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2050,7 +2186,7 @@
 <td>Used for Post-Only orders. When set to true will set price to best bid/ask</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-10'>Response Content</h3>
+<h3 id='response-content-12'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2192,7 +2328,7 @@
 <p><code>DELETE /api/v3.2/order</code></p>
 
 <p>CAncels pending orders that has not yet been transacted. The <code>orderID</code> is a unique identifier to cancel a particular order. <code>clOrderID</code> is a custom ID sent in by the trader. When cancel by <code>clOrderID</code>, all orders having the same ID will be cancelled. If <code>orderID</code> and <code>clOrderID</code> is not sent in, then cancellation will be for all orders in the current market.</p>
-<h3 id='request-parameters-10'>Request Parameters</h3>
+<h3 id='request-parameters-12'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2220,7 +2356,7 @@
 <td>Client custom order ID</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-11'>Response Content</h3>
+<h3 id='response-content-13'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2355,7 +2491,7 @@
 <p><code>POST /api/v3.2/order/cancelAllAfter</code></p>
 
 <p>Dead-man&#39;s switch allows the trader to send in a timeout value which is a Time to live (TTL) value for an order. Extension of the timeout is done by sending another <code>cancelAllAfter</code> request. If the server does not receive another request before the timeout is reached, all orders will be cancelled.</p>
-<h3 id='request-parameters-11'>Request Parameters</h3>
+<h3 id='request-parameters-13'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2371,7 +2507,7 @@
 <td>Timeout value in milliseconds</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-12'>Response Content</h3>
+<h3 id='response-content-14'>Response Content</h3>
 <ul>
 <li>If set correctly, a HTTP 200 response code will be returned</li>
 </ul>
@@ -2410,7 +2546,7 @@
 <p><code>GET /api/v3.2/user/open_orders</code></p>
 
 <p>Retrieves open orders that have not yet been matched. This is also used to check an order for its status. If an order has been cancelled or recently transacted, the <code>status</code> field will indicate the state of the order. The state of an order returned in <code>status</code> field will only be made available for 30mins. After 30mins, this API will only return if the order is still active. If not it will return that the order is not found.</p>
-<h3 id='request-parameters-12'>Request Parameters</h3>
+<h3 id='request-parameters-14'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2438,7 +2574,7 @@
 <td>Query using custom order ID</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-13'>Response Content</h3>
+<h3 id='response-content-15'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2600,7 +2736,7 @@
 <p><code>GET /api/v3.2/user/trade_history</code></p>
 
 <p>Retrieves a user&#39;s trade history</p>
-<h3 id='request-parameters-13'>Request Parameters</h3>
+<h3 id='request-parameters-15'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2670,7 +2806,7 @@
 <td>Exact match on <code>symbol</code>. If this sets to true, will only match records for that symbol only</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-14'>Response Content</h3>
+<h3 id='response-content-16'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2801,7 +2937,7 @@
 <p><code>GET /api/v3.2/user/fees</code></p>
 
 <p>Retrieve user&#39;s trading fees</p>
-<h3 id='response-content-15'>Response Content</h3>
+<h3 id='response-content-17'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2844,7 +2980,7 @@
 <p><code>GET /api/v3.2/user/wallet</code></p>
 
 <p>Query user&#39;s wallet balance. Requires <code>Read</code> permissions on the API key.</p>
-<h3 id='response-content-16'>Response Content</h3>
+<h3 id='response-content-18'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2896,7 +3032,7 @@
 <p><code>GET /api/v3.2/user/wallet_history</code></p>
 
 <p>Get user&#39;s wallet history records on the spot wallet</p>
-<h3 id='request-parameters-14'>Request Parameters</h3>
+<h3 id='request-parameters-16'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2930,7 +3066,7 @@
 <td>Number of records to return</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-17'>Response Content</h3>
+<h3 id='response-content-19'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3009,7 +3145,7 @@
 <p><code>POST /api/v3.2/user/wallet/address</code></p>
 
 <p>Creates a wallet address. If the address created has not been used before, a 400 error will return with the existing unused address. To use this API, <code>Wallet</code> permission is required.</p>
-<h3 id='request-parameters-15'>Request Parameters</h3>
+<h3 id='request-parameters-17'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3025,7 +3161,7 @@
 <td>Currency to get address</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-18'>Response Content</h3>
+<h3 id='response-content-20'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3068,7 +3204,7 @@
 <p><code>GET /api/v3.2/user/wallet/address</code></p>
 
 <p>Gets a wallet address. To use this API, <code>Wallet</code> permission is required.</p>
-<h3 id='request-parameters-16'>Request Parameters</h3>
+<h3 id='request-parameters-18'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3084,7 +3220,7 @@
 <td>Currency to create address</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-19'>Response Content</h3>
+<h3 id='response-content-21'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3111,7 +3247,7 @@
 <p>Request</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-Bitcoin"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCAddress"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tag"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.001"</span><span class="w">
@@ -3127,7 +3263,7 @@
 <p><code>POST /api/v3.2/user/wallet/withdraw</code></p>
 
 <p>Performs a wallet withdrawal. To use this API, <code>Withdraw</code> permission is required.</p>
-<h3 id='request-parameters-17'>Request Parameters</h3>
+<h3 id='request-parameters-19'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3140,7 +3276,7 @@
 <td>currency</td>
 <td>string</td>
 <td>Yes</td>
-<td>Currency</td>
+<td>Currency-Network pair <br> Currency list can be retrieved from <a href="#query-available-currency-list-for-wallet-action">Available currency list for action</a> <br> Network list can be retrieved from <a href="#query-available-crypto-network-list-for-currency">Available network list for currency</a></td>
 </tr>
 <tr>
 <td>address</td>
@@ -3161,7 +3297,7 @@
 <td>Amount to withdraw</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-20'>Response Content</h3>
+<h3 id='response-content-22'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3175,6 +3311,522 @@
 <td>string</td>
 <td>Yes</td>
 <td>Internal withdrawal ID. References the <code>orderID</code> field in <code>wallet_history</code> API. As withdrawal will not be processed immediately. User can query the wallet history API to check on the status of the withdrawal</td>
+</tr>
+</tbody></table>
+<h1 id='investment-endpoints'>Investment Endpoints</h1><h2 id='query-investment-products'>Query Investment Products</h2>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPENETH00001"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH Flex Savings"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Flex"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"startDate"</span><span class="p">:</span><span class="w"> </span><span class="mi">1610685918000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"interestStartDate"</span><span class="p">:</span><span class="w"> </span><span class="mi">1610719200000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"rates"</span><span class="p">:</span><span class="w">
+    </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"days"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.15</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"compounding"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"autoRenewSupported"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"dailyLimit"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"minSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.00000000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"incrementalSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.00000000</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<p><code>GET /api/v3.2/invest/products</code></p>
+
+<p>Get all investment products</p>
+<h3 id='request-parameters-20'>Request Parameters</h3>
+<p>(None)</p>
+<h3 id='response-content-23'>Response Content</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>Yes</td>
+<td>Product id</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>Yes</td>
+<td>Product name</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>string</td>
+<td>Yes</td>
+<td>Currency</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>Yes</td>
+<td>Product type</td>
+</tr>
+<tr>
+<td>startDate</td>
+<td>long</td>
+<td>Yes</td>
+<td>Inventment start date</td>
+</tr>
+<tr>
+<td>interestStartDate</td>
+<td>long</td>
+<td>Yes</td>
+<td>Interest start date</td>
+</tr>
+<tr>
+<td>rates</td>
+<td>RateObject[]</td>
+<td>Yes</td>
+<td>Interest rate information</td>
+</tr>
+<tr>
+<td>compounding</td>
+<td>double</td>
+<td>Yes</td>
+<td>is product compounding</td>
+</tr>
+<tr>
+<td>autoRenewSupported</td>
+<td>double</td>
+<td>Yes</td>
+<td>is product supported renew automatically</td>
+</tr>
+<tr>
+<td>dailyLimit</td>
+<td>double</td>
+<td>Yes</td>
+<td>Daily invent amount limit</td>
+</tr>
+<tr>
+<td>minSize</td>
+<td>double</td>
+<td>Yes</td>
+<td>Minimum invest size</td>
+</tr>
+<tr>
+<td>incrementalSize</td>
+<td>double</td>
+<td>Yes</td>
+<td>Invest step size</td>
+</tr>
+</tbody></table>
+<h3 id='rateobject'>RateObject</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>days</td>
+<td>integer</td>
+<td>Yes</td>
+<td>Duration in days</td>
+</tr>
+<tr>
+<td>rate</td>
+<td>double</td>
+<td>Yes</td>
+<td>Interest rate</td>
+</tr>
+</tbody></table>
+<h2 id='deposit-investment'>Deposit Investment</h2>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"productId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPENUSDT0001"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">100.99</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"renew"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"rate"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"day"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><code>POST /api/v3.2/invest/deposit</code></p>
+
+<p>Deposit an investment</p>
+<h3 id='request-parameters-21'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>productId</td>
+<td>string</td>
+<td>Yes</td>
+<td>Invest product id</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>double</td>
+<td>Yes</td>
+<td>Invest amount</td>
+</tr>
+<tr>
+<td>renew</td>
+<td>boolean</td>
+<td>Yes</td>
+<td>renew automatically</td>
+</tr>
+<tr>
+<td>rate</td>
+<td>double</td>
+<td>Yes</td>
+<td>Interest rate</td>
+</tr>
+<tr>
+<td>day</td>
+<td>integer</td>
+<td>Yes</td>
+<td>Duration in days</td>
+</tr>
+</tbody></table>
+<h2 id='renew-investment'>Renew Investment</h2>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"autoRenew"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"autoRenew"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><code>POST /api/v3.2/invest/renew</code></p>
+
+<p>Renew an investment order</p>
+<h3 id='request-parameters-22'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>orderId</td>
+<td>integer</td>
+<td>Yes</td>
+<td>Investment order id</td>
+</tr>
+<tr>
+<td>autoRenew</td>
+<td>boolean</td>
+<td>Yes</td>
+<td>renew automatically</td>
+</tr>
+</tbody></table>
+<h3 id='response-content-24'>Response Content</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>orderId</td>
+<td>integer</td>
+<td>Yes</td>
+<td>Investment order id</td>
+</tr>
+<tr>
+<td>autoRenew</td>
+<td>boolean</td>
+<td>Yes</td>
+<td>status of autoRenew flag</td>
+</tr>
+</tbody></table>
+<h2 id='redeem-investment'>Redeem Investment</h2>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">12.34</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><code>POST /api/v3.2/invest/redeem</code></p>
+
+<p>Redeem an investment order</p>
+<h3 id='request-parameters-23'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>orderId</td>
+<td>integer</td>
+<td>Yes</td>
+<td>Investment order id</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>double</td>
+<td>Yes</td>
+<td>Redeem amount</td>
+</tr>
+</tbody></table>
+<h2 id='query-investment-orders'>Query Investment Orders</h2>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">456</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH Flex Savings"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Flex"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.15</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"investAmt"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.00000000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"interestEarned"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00031507</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"nextInterestPayoutTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1610632800000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"startTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"endTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"duration"</span><span class="p">:</span><span class="w"> </span><span class="mi">86400000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"payoutLockTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">300000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"autoRenew"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"compounding"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"autoRenewSupported"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"dailyLimit"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"redemptionProcessing"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<p><code>GET /api/v3.2/invest/orders</code></p>
+
+<p>Query investment orders</p>
+<h3 id='response-content-25'>Response Content</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>Yes</td>
+<td>Order id</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>Yes</td>
+<td>Product name</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>string</td>
+<td>Yes</td>
+<td>Currency</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>Yes</td>
+<td>Product type</td>
+</tr>
+<tr>
+<td>rate</td>
+<td>boolean</td>
+<td>Yes</td>
+<td>Interest rate</td>
+</tr>
+<tr>
+<td>investAmt</td>
+<td>boolean</td>
+<td>Yes</td>
+<td>Amount</td>
+</tr>
+<tr>
+<td>interestEarned</td>
+<td>boolean</td>
+<td>Yes</td>
+<td>Intereset earned</td>
+</tr>
+<tr>
+<td>nextInterestPayoutTime</td>
+<td>boolean</td>
+<td>Yes</td>
+<td>Next interest payout time</td>
+</tr>
+<tr>
+<td>startTime</td>
+<td>boolean</td>
+<td>Yes</td>
+<td>Start time</td>
+</tr>
+<tr>
+<td>endTime</td>
+<td>boolean</td>
+<td>Yes</td>
+<td>End time</td>
+</tr>
+<tr>
+<td>duration</td>
+<td>boolean</td>
+<td>Yes</td>
+<td>Duration</td>
+</tr>
+<tr>
+<td>payoutLockTime</td>
+<td>boolean</td>
+<td>Yes</td>
+<td>Lock time of payout</td>
+</tr>
+<tr>
+<td>autoRenew</td>
+<td>boolean</td>
+<td>Yes</td>
+<td>renew automatically</td>
+</tr>
+<tr>
+<td>compounding</td>
+<td>boolean</td>
+<td>Yes</td>
+<td>is compounding</td>
+</tr>
+<tr>
+<td>autoRenewSupported</td>
+<td>boolean</td>
+<td>Yes</td>
+<td>is renew automatically supported</td>
+</tr>
+<tr>
+<td>redemptionProcessing</td>
+<td>boolean</td>
+<td>Yes</td>
+<td>is redemption processing</td>
+</tr>
+</tbody></table>
+<h2 id='query-investment-history'>Query Investment History</h2>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"txnTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1598918400000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT Flex Savings"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Flex"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"txnType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INVEST_SERVICE_TYPE_DEPOSIT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalAmount"</span><span class="p">:</span><span class="w"> </span><span class="mi">2000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"interestEarned"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.22</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"duration"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<p><code>GET /api/v3.2/invest/history</code></p>
+
+<p>Query investment history</p>
+<h3 id='response-content-26'>Response Content</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>txnTime</td>
+<td>integer</td>
+<td>Yes</td>
+<td>Transaction time</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>Yes</td>
+<td>Product name</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>string</td>
+<td>Yes</td>
+<td>Currency</td>
+</tr>
+<tr>
+<td>rate</td>
+<td>string</td>
+<td>Yes</td>
+<td>Interest rate</td>
+</tr>
+<tr>
+<td>type</td>
+<td>boolean</td>
+<td>Yes</td>
+<td>Product type</td>
+</tr>
+<tr>
+<td>txnType</td>
+<td>boolean</td>
+<td>Yes</td>
+<td>Transaction type</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>boolean</td>
+<td>Yes</td>
+<td>Transaction amount</td>
+</tr>
+<tr>
+<td>totalAmount</td>
+<td>boolean</td>
+<td>Yes</td>
+<td>Total amount of the investment</td>
+</tr>
+<tr>
+<td>interestEarned</td>
+<td>boolean</td>
+<td>Yes</td>
+<td>Interest earned</td>
+</tr>
+<tr>
+<td>duration</td>
+<td>boolean</td>
+<td>Yes</td>
+<td>Duration</td>
 </tr>
 </tbody></table>
 <h1 id='websocket-streams'>Websocket Streams</h1><h2 id='subscription'>Subscription</h2>
@@ -3199,7 +3851,7 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>To subscribe to a websocket feed</p>
-<h3 id='request-parameters-18'>Request Parameters</h3>
+<h3 id='request-parameters-24'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3221,7 +3873,7 @@
 <td>Topics to subscribe to.</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-21'>Response Content</h3>
+<h3 id='response-content-27'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3285,7 +3937,7 @@
 <li><code>symbol</code> indicates the market symbol</li>
 <li><code>grouping</code> indicates the grouping granularity. Valid values are 0-9.</li>
 </ul>
-<h3 id='response-content-22'>Response Content</h3><h4 id='orderbook-object'>Orderbook Object</h4>
+<h3 id='response-content-28'>Response Content</h3><h4 id='orderbook-object'>Orderbook Object</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3384,7 +4036,7 @@
 <li><code>symbol</code> indicates the market symbol</li>
 <li><code>depth</code> indicates the levels of orderbook to retrieve. Value of 0 will retrieve the entire orderbook.</li>
 </ul>
-<h3 id='response-content-23'>Response Content</h3><h4 id='orderbook-object-2'>Orderbook Object</h4>
+<h3 id='response-content-29'>Response Content</h3><h4 id='orderbook-object-2'>Orderbook Object</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3549,7 +4201,7 @@
 <p>To ensure that the updates are received in sequence, <code>seqNum</code> indicates the current sequence and <code>prevSeqNum</code> refers to the packet before. <code>seqNum</code> will always be one after the <code>prevSeqNum</code>. If the sequence is out of order, you will need to unsubscribe and re-subscribe to the topic again.</p>
 
 <p>Also if <a href="https://en.wikipedia.org/wiki/Order_book#Crossed_book">crossed orderbook</a> ever occurs when the best bid higher or equal to the best ask, please unsubscribe and re-subscribe to the topic again.</p>
-<h3 id='response-content-24'>Response Content</h3><h4 id='orderbook-object-3'>Orderbook Object</h4>
+<h3 id='response-content-30'>Response Content</h3><h4 id='orderbook-object-3'>Orderbook Object</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3652,7 +4304,7 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>Subscribe to recent trade feed for a market. The topic will be <code>tradeHistoryApi:&lt;market&gt;</code> where <code>&lt;market&gt;</code> is the market symbol.</p>
-<h3 id='response-content-25'>Response Content</h3><h4 id='tradehistory-object'>TradeHistory Object</h4>
+<h3 id='response-content-31'>Response Content</h3><h4 id='tradehistory-object'>TradeHistory Object</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3742,7 +4394,7 @@
   "op":"authKeyExpires",
   "args":["4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x", "1624985375123", "c410d38c681579adb335885800cff24c66171b7cc8376cfe43da1408c581748156b89bcc5a115bb496413bda481139fb"]}
 }
-</code></pre></div><h3 id='request-parameters-19'>Request Parameters</h3>
+</code></pre></div><h3 id='request-parameters-25'>Request Parameters</h3>
 <p>Below details the arguments needed to be sent in.</p>
 
 <table><thead>
@@ -3822,7 +4474,7 @@
 
 </span></code></pre></div>
 <p>Receive trade notifications by subscribing to the topic <code>notificationApiV2</code>. The websocket feed will push trade level notifications to the subscriber. If topic is subscribed without being authenticated, no messages will be sent.</p>
-<h3 id='response-content-26'>Response Content</h3>
+<h3 id='response-content-32'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3977,7 +4629,7 @@
 
 </span></code></pre></div>
 <p>When a trade has been transacted, this topic will send the trade information back to the subscriber.</p>
-<h3 id='response-content-27'>Response Content</h3>
+<h3 id='response-content-33'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
