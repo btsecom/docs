@@ -17,6 +17,11 @@ headingLevel: 2
 
 * Initial release of the earn(invest) api
 
+## Version 1.1 (13th December 2021)
+
+* add missing pagination description in request and response from querying investment history
+* add processing result to response of deposit/redeem investment
+
 
 # Overview
 
@@ -125,8 +130,15 @@ Get all investment products
     "productId": "OPENUSDT0001",
     "amount": 100.99,
     "renew": true,
-    "rate": 6,
     "day": 7
+}
+```
+
+> Reponse
+
+```json
+{
+    "success": true
 }
 ```
 
@@ -141,8 +153,13 @@ Deposit an investment
 | productId | string | Yes | Invest product id |
 | amount | double | Yes | Invest amount |
 | renew | boolean | Yes | renew automatically |
-| rate | double | Yes | Interest rate |
 | day | integer | Yes | Duration in days |
+
+### Response Content
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| success | boolean | Yes | The processing result |
 
 
 ## Renew Investment
@@ -195,6 +212,14 @@ Renew an investment order
 }
 ```
 
+> Reponse
+
+```json
+{
+    "success": true
+}
+```
+
 `POST /api/v3.2/invest/redeem`
 
 Redeem an investment order
@@ -205,6 +230,12 @@ Redeem an investment order
 |---|---|---|---|
 | orderId | integer | Yes | Investment order id |
 | amount | double | Yes | Redeem amount |
+
+### Response Content
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| success | boolean | Yes | The processing result |
 
 
 ## Query Investment Orders
@@ -266,28 +297,49 @@ Query investment orders
 > Response
 
 ```json
-[
-  {
-    "txnTime": 1598918400000,
-    "name": "USDT Flex Savings",
-    "currency": "USDT",
-    "rate": 0.5,
-    "type": "Flex",
-    "txnType": "INVEST_SERVICE_TYPE_DEPOSIT",
-    "amount": 100,
-    "totalAmount": 2000,
-    "interestEarned": 1.22,
-    "duration": 0
-  }
-]
+{
+  "totalRows": 1,
+  "pageNumber": 1,
+  "pageSize": 10,
+  "data": [
+    {
+      "txnTime": 1598918400000,
+      "name": "USDT Flex Savings",
+      "currency": "USDT",
+      "rate": 0.5,
+      "type": "Flex",
+      "txnType": "INVEST_SERVICE_TYPE_DEPOSIT",
+      "amount": 100,
+      "totalAmount": 2000,
+      "interestEarned": 1.22,
+      "duration": 0
+    }
+  ]
+}
 ```
 
 `GET /api/v3.2/invest/history`
 
 Query investment history
 
+### Request Parameters
+
+|Name|Type|Required|Description|
+|---|---|---|---|
+| pageNumber | integer | No | Page number to query, default to 1 (1-based) |
+| pageSize | integer | No | Number of records in a page, default to 10, maximum 50 |
+
+
 ### Response Content
 
+|Name|Type|Required|Description|
+|---|---|---|---|
+| totalRows | string | Yes | Total records |
+| pageNumber | string | Yes | current page number |
+| pageSize | string | Yes | Number of records in a page |
+| data | InvestmentHistoryObject[] | Yes | Investment history object |
+
+### InvestmentHistoryObject
 |Name|Type|Required|Description|
 |---|---|---|---|
 | txnTime | integer | Yes | Transaction time |
