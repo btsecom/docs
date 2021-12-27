@@ -1387,25 +1387,25 @@
 <tr>
 <td>beforeSerialId</td>
 <td>string</td>
-<td>No</td>
+<td>Yes</td>
 <td>Condition to retrieve records before the specified serial Id. Used for pagination</td>
 </tr>
 <tr>
 <td>afterSerialId</td>
 <td>string</td>
-<td>No</td>
+<td>Yes</td>
 <td>Condition to retrieve records after the specified serial Id. Used for pagination</td>
 </tr>
 <tr>
 <td>count</td>
 <td>integer</td>
-<td>No</td>
+<td>Yes</td>
 <td>Number of records to return</td>
 </tr>
 <tr>
 <td>includeOld</td>
 <td>boolean</td>
-<td>No</td>
+<td>Yes</td>
 <td>Retrieve trade  history records past 7 days</td>
 </tr>
 </tbody></table>
@@ -1915,12 +1915,6 @@
 <td>double</td>
 <td>Yes</td>
 <td>Order size</td>
-</tr>
-<tr>
-<td>side</td>
-<td>string</td>
-<td>Yes</td>
-<td>&#39;BUY&#39; or &#39;SELL&#39;</td>
 </tr>
 <tr>
 <td>time_in_force</td>
@@ -2943,22 +2937,6 @@
 <p><code>GET /api/v3.2/user/fees</code></p>
 
 <p>Retrieve user&#39;s trading fees</p>
-<h3 id='request-parameters-16'>Request Parameters</h3>
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>symbol</td>
-<td>string</td>
-<td>No</td>
-<td>Market symbol to filter for specific market</td>
-</tr>
-</tbody></table>
 <h3 id='response-content-17'>Response Content</h3>
 <table><thead>
 <tr>
@@ -3054,7 +3032,7 @@
 <p><code>GET /api/v3.2/user/wallet_history</code></p>
 
 <p>Get user&#39;s wallet history records on the spot wallet</p>
-<h3 id='request-parameters-17'>Request Parameters</h3>
+<h3 id='request-parameters-16'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3167,7 +3145,7 @@
 <p><code>POST /api/v3.2/user/wallet/address</code></p>
 
 <p>Creates a wallet address. If the address created has not been used before, a 400 error will return with the existing unused address. To use this API, <code>Wallet</code> permission is required.</p>
-<h3 id='request-parameters-18'>Request Parameters</h3>
+<h3 id='request-parameters-17'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3226,7 +3204,7 @@
 <p><code>GET /api/v3.2/user/wallet/address</code></p>
 
 <p>Gets a wallet address. To use this API, <code>Wallet</code> permission is required.</p>
-<h3 id='request-parameters-19'>Request Parameters</h3>
+<h3 id='request-parameters-18'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3285,7 +3263,7 @@
 <p><code>POST /api/v3.2/user/wallet/withdraw</code></p>
 
 <p>Performs a wallet withdrawal. To use this API, <code>Withdraw</code> permission is required.</p>
-<h3 id='request-parameters-20'>Request Parameters</h3>
+<h3 id='request-parameters-19'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3365,7 +3343,7 @@
 <p><code>GET /api/v3.2/invest/products</code></p>
 
 <p>Get all investment products</p>
-<h3 id='request-parameters-21'>Request Parameters</h3>
+<h3 id='request-parameters-20'>Request Parameters</h3>
 <p>(None)</p>
 <h3 id='response-content-23'>Response Content</h3>
 <table><thead>
@@ -3486,7 +3464,7 @@
 <p><code>POST /api/v3.2/invest/deposit</code></p>
 
 <p>Deposit an investment</p>
-<h3 id='request-parameters-22'>Request Parameters</h3>
+<h3 id='request-parameters-21'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3546,7 +3524,7 @@
 <p><code>POST /api/v3.2/invest/renew</code></p>
 
 <p>Renew an investment order</p>
-<h3 id='request-parameters-23'>Request Parameters</h3>
+<h3 id='request-parameters-22'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3602,7 +3580,7 @@
 <p><code>POST /api/v3.2/invest/redeem</code></p>
 
 <p>Redeem an investment order</p>
-<h3 id='request-parameters-24'>Request Parameters</h3>
+<h3 id='request-parameters-23'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3873,7 +3851,7 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>To subscribe to a websocket feed</p>
-<h3 id='request-parameters-25'>Request Parameters</h3>
+<h3 id='request-parameters-24'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4416,7 +4394,7 @@
   "op":"authKeyExpires",
   "args":["4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x", "1624985375123", "c410d38c681579adb335885800cff24c66171b7cc8376cfe43da1408c581748156b89bcc5a115bb496413bda481139fb"]}
 }
-</code></pre></div><h3 id='request-parameters-26'>Request Parameters</h3>
+</code></pre></div><h3 id='request-parameters-25'>Request Parameters</h3>
 <p>Below details the arguments needed to be sent in.</p>
 
 <table><thead>
