@@ -1480,7 +1480,7 @@ Get user's wallet history records on the futures wallet
 | status | integer | Yes | 1: PENDING<br/>2: PROCESSING<br/>10: COMPLETED<br/>16: CANCELLED |
 | type | integer | Yes | 105: Wallet Transfer<br/>106: Wallet Liquidation<br/>108: Realized PnL<br/>110: Funding<br/>121: Asset Conversion |
 
-## Query wallet margin
+## Query wallet Margin
 
 > Response
 
@@ -1526,7 +1526,7 @@ Gets margin information for the specified wallet so that users can know which wa
 
 |Name|Type|Required|Description|
 |---|---|---|---|
-| currency | string | No | Currency, if not specified will return all currencies |
+| symbol | string | Yes | Currency, if not specified will return all currencies |
 | startTime | long | No | Starting time (eg. 1624987283000) |
 | endTime | long | No | Ending time (eg. 1624987283000) |
 | count | integer | No | Number of records to return |

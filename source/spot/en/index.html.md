@@ -529,10 +529,10 @@ Get trade fills for the market specified by `symbol`
 | symbol | string | Yes | Market symbol |
 | startTime | long | No | Starting time (eg. 1624987283000) |
 | endTime | long | No | Ending time (eg. 1624987283000) |
-| beforeSerialId | string | Yes | Condition to retrieve records before the specified serial Id. Used for pagination|
-| afterSerialId | string | Yes | Condition to retrieve records after the specified serial Id. Used for pagination|
-| count | integer | Yes | Number of records to return |
-| includeOld | boolean | Yes | Retrieve trade  history records past 7 days |
+| beforeSerialId | string | No | Condition to retrieve records before the specified serial Id. Used for pagination|
+| afterSerialId | string | No | Condition to retrieve records after the specified serial Id. Used for pagination|
+| count | integer | No | Number of records to return |
+| includeOld | boolean | No | Retrieve trade  history records past 7 days |
 
 
 ### Response Content
@@ -786,6 +786,7 @@ This API Requires `Trading` permission
 | symbol | string | Yes | Market symbol |
 | price | double | Yes | Minimum price for a sell order, this is the lowest price that a user is willing to sell at. Maximum price for a buy order, this is the maximum price a user is willing to buy at.  |
 | size | double | Yes | Order size |
+| side | string | Yes | 'BUY' or 'SELL' |
 | time_in_force | string | No | Time validity of the order<br/>GTC: Good till Cancel<br/>IOC: Immediate or Cancel<br/>FOK: Fill or Kill<br/>FIVEMIN: Order valid for 5 mins<br/> HOUR: Order valid for an hour<br/>TWELVEHOUR: Order valid for 12 hours<br/>DAY: Order valid for a day<br/>WEEK: Order valid for a week<br/>MONTH: Order valid for a month |
 | type | string | Yes | Order type<br/>LIMIT: Limit Orders<br/>MARKET: Market Orders<br/>OCO: One cancel the other|
 | txType | string | Yes | Used for Stop orders or trigger orders<br/>STOP: Stop Order, `stopPrice` is mandatory<br/>TRIGGER: Trigger order, `triggerPrice` is mandatory<br/>LIMIT: Default, used when its not a Stop order nor Trigger order |
@@ -1143,6 +1144,13 @@ Retrieves a user's trade history
 `GET /api/v3.2/user/fees`
 
 Retrieve user's trading fees
+
+### Request Parameters
+
+|Name    |Type    |Required|Description                                  |
+|--------|--------|--------|---------------------------------------------|
+| symbol | string | No     | Market symbol to filter for specific market |
+
 ### Response Content
 
 |Name|Type|Required|Description|
