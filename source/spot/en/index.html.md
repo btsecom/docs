@@ -17,6 +17,7 @@ headingLevel: 2
 
 * Addition of wallet convert api to convert between assets [Convert Funds](#convert-funds)
 * Addition of wallet tranfer api to transfer assets to other user [Transfer Funds](#transfer-funds)
+* Migrate wallet-related endpoints to `Wallet` section
 
 ## Version 3.2.8 (8th December 2021)
 
@@ -45,7 +46,6 @@ headingLevel: 2
 ## Version 3.2.3 (2nd June 2021)
 
 * Introduction of new notification topic. Refer to `notificationsApiV2` for details.
-
 
 ## Version 3.2.2 (29th January 2021)
 
@@ -116,25 +116,7 @@ You will need to create an API key on the BTSE platform before you can use authe
 * API Key (btse-sign)
   * Parameter Name: `btse-sign`, in: header. A composite signature produced based on the following algorithm: Signature=HMAC.Sha384 (secretkey, (urlpath + btse-nonce + bodyStr)) (note: bodyStr = '' when no data):
 
-### Example 1: Get Wallet
-
-> **HMAC SHA384 Signature**
-
-```shell
-$ echo -n "/api/v3.2/user/wallet1624984297330" | openssl dgst -sha384 -hmac "848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx"
-(stdin)= 14b986706a4368221e0af14a6725377161805e7a57d568220478cb3590ce532d4fad4ac68e6c02a14afced6a0619bfd3
-```
-
-* Endpoint to get wallet is `https://api.btse.com/spot/api/v3.2/user/wallet`
-* Assume we have the values as follows:
-  * btse-nonce: `1624984297330`
-  * btse-api: `4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x`
-  * secret: `848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx`
-  * Path: `/api/v3.2/user/wallet`
-* Generated signature will be:
-  * btse-sign: `14b986706a4368221e0af14a6725377161805e7a57d568220478cb3590ce532d4fad4ac68e6c02a14afced6a0619bfd3`
-
-### Example 2: Place an order
+### Example 1: Place an order
 
 > **HMAC SHA384 Signature**
 
@@ -170,10 +152,6 @@ Rate limits for BTSE is as follows:
 
 * Per API: `75 requests/second`
 * Per User: `75 requests/second`
-
-**Wallet operation**
-
-* Per User: `5 requests/second`
 
 ## API Status Codes
 
@@ -211,9 +189,6 @@ When connecting up the BTSE API, you will come across number codes that represen
 * 101: FUTURES_ORDER_PRICE_OUTSIDE_LIQUIDATION_PRICE = Futures order is outside of liquidation price
 * 1003: ORDER_LIQUIDATION = Order is undergoing liquidation
 * 1004: ORDER_ADL = Order is undergoing ADL
-
-
-
 
 
 # Public Endpoints
@@ -572,64 +547,6 @@ Gets server time
 |---|---|---|---|
 | iso | long | Yes | Time in YYYY-MM-DDTHH24:MI:SS.Z format |
 | epoch | long | Yes | Returns epoch timestamp |
-
-## Query available currency list for wallet action
-
-> Response
-
-```json
-[
-  "USD",
-  "JPY",
-  "GBP",
-  "HKD",
-  "SGD"
-]
-```
-
-`GET /api/v3.2/availableCurrencies`
-
-Get available currency list for wallet action.
-
-### Request Parameters
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-| action | enum | Yes | CONVERT, WITHDRAW, SEND (transfer) |
-
-### Response Content
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-| $currencyName | string | Yes | Name of currency |
-
-## Query available crypto network list for currency
-
-> Response
-
-```json
-[
-  "Bitcoin",
-  "Liquid"
-]
-```
-
-`GET /api/v3.2/availableCurrencyNetworks`
-
-Get available crypto network list for currency.
-
-### Request Parameters
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-| currency | string | Yes | Ex: BTC |
-
-### Response Content
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-| $network | string | Yes | Name of network |
-
 
 # Trade Endpoints
 
@@ -1163,293 +1080,6 @@ Retrieve user's trading fees
 | symbol | string | Yes | Market symbol |
 | makerFee | double | Yes | Maker fees |
 | takerFee | double | Yes | Taker fees |
-
-
-
-# Wallet Endpoints
-
-## Query Wallet Balance
-
-> Response
-
-```json
-[
-  {
-    "available": 520.52,
-    "currency": "USD",
-    "total": 5566.5566
-  }
-]
-```
-
-`GET /api/v3.2/user/wallet`
-
-Query user's wallet balance. Requires `Read` permissions on the API key.
-### Response Content
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-| currency | string | Yes | Currency |
-| total | double | Yes | Total balance |
-| available | double | Yes | Available balance |
-## Query Wallet History
-
-> Response
-
-```json
-[
-  {
-    "amount": 21.35823825,
-    "currency": "USD",
-    "description": "string",
-    "fees": 0.06,
-    "orderId": 20181213000239,
-    "status": 10,
-    "timestamp": 1571630174639,
-    "type": 1,
-    "username": "btseUser",
-    "wallet": "Wallet",
-    "txid": "<Blockchain Transaction ID>",
-    "currencyNetwork": "<Blockchain currency network>"
-  }
-]
-```
-
-`GET /api/v3.2/user/wallet_history`
-
-Get user's wallet history records on the spot wallet
-
-### Request Parameters
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-| currency | string | No | Currency, if not specified will return all currencies |
-| startTime | long | No | Starting time (eg. 1624987283000) |
-| endTime | long | No | Ending time (eg. 1624987283000) |
-| count | integer | No | Number of records to return |
-
-
-### Response Content
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-| currency | string | Yes | Currency |
-| amount | double | Yes | Amount in the record |
-| fees | double | Yes | Fees charged if any |
-| orderId | string | Yes | Internal wallet order ID |
-| wallet | string | Yes | Wallet type. For spot will return `@SPOT` |
-| description | string | Yes | Description of the transaction |
-| status | integer | Yes | 1: PENDING<br/>2: PROCESSING<br/>10: COMPLETED<br/>16: CANCELLED |
-| type | integer | Yes | `Deposit`: Deposits into account<br/>`Withdraw`: Withdrawals from account<br/>`Transfer_In`: BTSE internal transfer where funds are transferred in<br/>`Transfer_Out`: BTSE internal transfer where funds are transferred out<br/>`ReferralEarning`: Referral Earnings |
-
-## Create Wallet Address
-
-> Request
-
-```json
-{
-  "currency": "BTC"
-}
-```
-
-> Response
-
-```json
-[
-  {
-    "address": "Blockchain address",
-    "created": 1592627542
-  }
-]
-```
-
-`POST /api/v3.2/user/wallet/address`
-
-Creates a wallet address. If the address created has not been used before, a 400 error will return with the existing unused address. To use this API, `Wallet` permission is required.
-
-### Request Parameters
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-| currency | string | Yes | Currency to get address |
-
-### Response Content
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-| address | string | Yes | Blockchain address |
-| created | long | Yes | Created timestamp |
-
-## Get Wallet Address
-
-> Request
-
-```json
-{
-  "currency": "BTC"
-}
-```
-
-> Response
-
-```json
-[
-  {
-    "address": "Blockchain address",
-    "created": 1592627542
-  }
-]
-```
-
-`GET /api/v3.2/user/wallet/address`
-
-Gets a wallet address. To use this API, `Wallet` permission is required.
-
-### Request Parameters
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-| currency | string | Yes | Currency to create address |
-
-### Response Content
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-| address | string | Yes | Blockchain address |
-| created | long | Yes | Created timestamp |
-
-## Withdraw Funds
-
-> Request
-
-```json
-{
-  "currency": "BTC-Bitcoin",
-  "address": "BTCAddress",
-  "tag": "Tag",
-  "amount": "0.001"
-}
-```
-
-> Response
-
-```json
-{
-  "withdraw_id": "<withdrawal ID>"
-}
-```
-
-`POST /api/v3.2/user/wallet/withdraw`
-
-Performs a wallet withdrawal. To use this API, `Withdraw` permission is required.
-
-### Request Parameters
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-| currency | string | Yes | Currency-Network pair <br> Currency list can be retrieved from [Available currency list for action](#query-available-currency-list-for-wallet-action) <br> Network list can be retrieved from [Available network list for currency](#query-available-crypto-network-list-for-currency)|
-| address | string | Yes | Blockchain address |
-| tag | string | Yes | Tag, used only by some blockchain (eg. XRP) |
-| amount | string | Yes | Amount to withdraw |
-
-### Response Content
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-| withdraw_id | string | Yes | Internal withdrawal ID. References the `orderID` field in `wallet_history` API. As withdrawal will not be processed immediately. User can query the wallet history API to check on the status of the withdrawal |
-
-
-## Convert funds
-
-> Request
-
-```json
-{
-  "amount": "1",
-  "fromAsset": "BTC",
-  "toAsset": "USD"
-}
-```
-
-> Response
-
-```json
-{
-    "amount": 1.0,
-    "settlementAmount": 66680.43282,
-    "amountCurrency": "BTC",
-    "settlementCurrency": "USD",
-    "rate": 66680.43282
-}
-```
-
-`POST /api/v3.2/user/wallet/convert`
-
-Performs a currency conversion from wallet. To use this API, `Wallet` permission is required. To get supported currency list please check [Available currency list for action](#query-available-currency-list-for-wallet-action)
-
-### Request Parameters
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-| amount | string | Yes | amount of currency to convert |
-| fromAsset | string | Yes | source currency to be converted |
-| toAsset | string | Yes | destination currency |
-
-### Response Content
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-| amount | float | Yes | amount of source currency to be converted |
-| settlementAmount | float | Yes | amount of converted destination currency |
-| amountCurrency | string | Yes | source currency |
-| settlementCurrency | string | Yes | destination currency |
-| rate | float | Yes | exchange rate |
-
-## Transfer funds
-
-> Request
-
-```json
-{
-  "amount": "1.0",
-  "asset": "BTC",
-  "toUser": "jamesbond",
-  "toUserMail": "james.bond@nogle.com"
-}
-```
-
-> Response
-
-```json
-{
-  "amount": "1",
-  "asset": "BTC",
-  "toUser": "jamesbond",
-  "toUserMail": "james.bond@nogle.com"
-}
-```
-
-`POST /api/v3.2/user/wallet/transfer`
-
-Performs a internal currency transfer to other user from wallet. To use this API, `Wallet` permission is required. To get supported currency list please check [Available currency list for action](#query-available-currency-list-for-wallet-action)
-
-### Request Parameters
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-| amount | string | Yes | amount of currency to transfer |
-| asset | string | Yes | currency to be transferred |
-| toUser | string | Yes | receiver account |
-| toUserMail | string | Yes | receiver email|
-
-### Response Content
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-| amount | string | Yes | amount of currency to transfer |
-| asset | string | Yes | currency to be transferred |
-| toUser | string | Yes | receiver account |
-| toUserMail | string | Yes | receiver email|
 
 
 # Investment Endpoints
