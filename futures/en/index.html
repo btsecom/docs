@@ -230,6 +230,9 @@
           <a href="/docs/otc/en/" id="btn_otc">OTC</a>
         </span>
         <span class="nav_cell nav_tab">
+          <a href="/docs/wallet/en/" id="btn_wallet">Wallet/Convert/Transfer</a>
+        </span>
+        <span class="nav_cell nav_tab">
           <a href="/docs/streaming/en/" id="btn_streaming">Streaming</a>
         </span>
         <span class="nav_cell nav_tab">
@@ -5038,6 +5041,7 @@
     const btn_spot = document.getElementById('btn_spot');
     const btn_futures = document.getElementById('btn_futures');
     const btn_otc = document.getElementById('btn_otc');
+    const btn_wallet = document.getElementById('btn_wallet');
     const btn_streaming = document.getElementById('btn_streaming');
     const btn_earn = document.getElementById('btn_earn');
     const v1_url = document.getElementById('v1_url');
@@ -5050,6 +5054,7 @@
       btn_spot.innerHTML = '现货';
       btn_futures.innerHTML = '期货';
       btn_otc.innerHTML = '场外交易';
+      btn_wallet.innerHTML = '錢包';
       btn_streaming.innerHTML = '串流';
       btn_earn.innerHTML = '賺幣';
 
@@ -5057,6 +5062,7 @@
       btn_spot.href = btn_spot.href.replace('en/', 'cn/');
       btn_futures.href = btn_futures.href.replace('en/', 'cn/');
       btn_otc.href = btn_otc.href.replace('en/', 'cn/');
+      btn_wallet.href = btn_wallet.href.replace('en/', 'cn/');
       btn_streaming.href = btn_streaming.href.replace('en/', 'cn/');
       btn_earn.href = btn_earn.href.replace('en/', 'cn/');
 
@@ -5067,6 +5073,7 @@
       btn_spot.innerHTML = 'Spot';
       btn_futures.innerHTML = 'Futures';
       btn_otc.innerHTML = 'OTC';
+      btn_wallet.innerHTML = 'Wallet/Convert/Transfer';
       btn_streaming.innerHTML = 'Streaming';
       btn_earn.innerHTML = 'Earn';
 
@@ -5074,6 +5081,7 @@
       btn_spot.href = btn_spot.href.replace('cn/', 'en/');
       btn_futures.href = btn_futures.href.replace('cn/', 'en/');
       btn_otc.href = btn_otc.href.replace('cn/', 'en/');
+      btn_wallet.href = btn_wallet.href.replace('cn/', 'en/');
       btn_streaming.href = btn_streaming.href.replace('cn/', 'en/');
       btn_earn.href = btn_earn.href.replace('cn/', 'en/');
 
@@ -5084,6 +5092,7 @@
       btn_spot.className = '';
       btn_futures.className = 'current';
       btn_otc.className = '';
+      btn_wallet.className = '';
       btn_streaming.className = '';
       btn_earn.className = '';
     }
@@ -5091,6 +5100,7 @@
       btn_spot.className = 'current';
       btn_futures.className = '';
       btn_otc.className = '';
+      btn_wallet.className = '';
       btn_streaming.className = '';
       btn_earn.className = '';
     }
@@ -5098,24 +5108,35 @@
       btn_spot.className = '';
       btn_futures.className = '';
       btn_otc.className = 'current';
+      btn_wallet.className = '';
+      btn_streaming.className = '';
+      btn_earn.className = '';
+    else if(location.href.indexOf('docs/wallet') > 0){
+      btn_spot.className = '';
+      btn_futures.className = '';
+      btn_otc.className = '';
+      btn_wallet.className = 'current';
       btn_streaming.className = '';
       btn_earn.className = '';
     else if(location.href.indexOf('docs/streaming') > 0){
       btn_spot.className = '';
       btn_futures.className = '';
       btn_otc.className = '';
+      btn_wallet.className = '';
       btn_streaming.className = 'current';
       btn_earn.className = '';
     else if(location.href.indexOf('docs/earn') > 0){
       btn_spot.className = '';
       btn_futures.className = '';
       btn_otc.className = '';
+      btn_wallet.className = '';
       btn_streaming.className = '';
       btn_earn.className = 'current';
     } else {
       btn_spot.className = 'current';
       btn_futures.className = '';
       btn_otc.className = '';
+      btn_wallet.className = '';
       btn_streaming.className = '';
       btn_earn.className = '';
     }

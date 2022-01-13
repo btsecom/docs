@@ -1,0 +1,1262 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>BTSE API Documentation</title>
+    <link href="../../images/favicon-3eb77247.ico" rel="icon" type="image/ico" />
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cpf {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s, .highlight .sa, .highlight .dl {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf, .highlight .fm {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv, .highlight .vm {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #f92672;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <link href="../../stylesheets/screen-e481a7b6.css" rel="stylesheet" media="screen" />
+    <link href="../../stylesheets/print-953e3353.css" rel="stylesheet" media="print" />
+      <script src="../../javascripts/all-a9fde460.js"></script>
+
+  </head>
+
+  <body class="wallet wallet_en wallet_en_index" data-languages="[&quot;json&quot;]">
+    <a href="#" id="nav-button">
+      <span>
+        <img src="../../images/navbar-cad8cdcb.png" alt="" />
+      </span>
+    </a>
+    <header>
+    <div class="flex_box">
+      <img src="../../images/logo-d7d2b532.svg" class="logo" alt="" />
+      <div class="nav_box">
+        <span class="nav_cell" style="display: none">
+          <a href="javascript:;" class="nav_first">v1<i class="icon_nav"></i></a>
+          <ul class="nav_ul">
+            <li>
+              <a href="/docs/spot/en/" id="v1_url">v1</a>
+            </li>
+          </ul>
+        </span>
+        <span class="nav_cell nav_tab">
+          <a href="/docs/spot/en/" id="btn_spot">Spot</a>
+        </span>
+        <span class="nav_cell nav_tab">
+          <a href="/docs/futures/en/" id="btn_futures">Futures</a>
+        </span>
+        <span class="nav_cell nav_tab">
+          <a href="/docs/otc/en/" id="btn_otc">OTC</a>
+        </span>
+        <span class="nav_cell nav_tab">
+          <a href="/docs/wallet/en/" id="btn_wallet">Wallet/Convert/Transfer</a>
+        </span>
+        <span class="nav_cell nav_tab">
+          <a href="/docs/streaming/en/" id="btn_streaming">Streaming</a>
+        </span>
+        <span class="nav_cell nav_tab">
+          <a href="/docs/earn/en/" id="btn_earn">Earn</a>
+        </span>
+      </div>
+    </div>
+
+  </header>
+    <div class="toc-wrapper">
+        <div class="lang-selector">
+              <a href="#" data-language-name="json">json</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <ul id="toc" class="toc-list-h1">
+          <li>
+            <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#version-1-0-0-13th-january-2022" class="toc-h2 toc-link" data-title="Version 1.0.0 (13th January 2022)">Version 1.0.0 (13th January 2022)</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#overview" class="toc-h1 toc-link" data-title="Overview">Overview</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#generating-api-key" class="toc-h2 toc-link" data-title="Generating API Key">Generating API Key</a>
+                  </li>
+                  <li>
+                    <a href="#endpoints" class="toc-h2 toc-link" data-title="Endpoints">Endpoints</a>
+                  </li>
+                  <li>
+                    <a href="#authentication" class="toc-h2 toc-link" data-title="Authentication">Authentication</a>
+                  </li>
+                  <li>
+                    <a href="#rate-limits" class="toc-h2 toc-link" data-title="Rate Limits">Rate Limits</a>
+                  </li>
+                  <li>
+                    <a href="#api-status-codes" class="toc-h2 toc-link" data-title="API Status Codes">API Status Codes</a>
+                  </li>
+                  <li>
+                    <a href="#api-enum" class="toc-h2 toc-link" data-title="API Enum">API Enum</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#public-endpoints" class="toc-h1 toc-link" data-title="Public Endpoints">Public Endpoints</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#query-server-time" class="toc-h2 toc-link" data-title="Query Server Time">Query Server Time</a>
+                  </li>
+                  <li>
+                    <a href="#query-available-crypto-network-list-for-currency" class="toc-h2 toc-link" data-title="Query available crypto network list for currency">Query available crypto network list for currency</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#wallet-endpoints" class="toc-h1 toc-link" data-title="Wallet Endpoints">Wallet Endpoints</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#query-wallet-balance" class="toc-h2 toc-link" data-title="Query Wallet Balance">Query Wallet Balance</a>
+                  </li>
+                  <li>
+                    <a href="#query-wallet-history" class="toc-h2 toc-link" data-title="Query Wallet History">Query Wallet History</a>
+                  </li>
+                  <li>
+                    <a href="#create-wallet-address" class="toc-h2 toc-link" data-title="Create Wallet Address">Create Wallet Address</a>
+                  </li>
+                  <li>
+                    <a href="#get-wallet-address" class="toc-h2 toc-link" data-title="Get Wallet Address">Get Wallet Address</a>
+                  </li>
+                  <li>
+                    <a href="#withdraw-funds" class="toc-h2 toc-link" data-title="Withdraw Funds">Withdraw Funds</a>
+                  </li>
+                  <li>
+                    <a href="#query-available-currency-list-for-wallet-action" class="toc-h2 toc-link" data-title="Query available currency list for wallet action">Query available currency list for wallet action</a>
+                  </li>
+                  <li>
+                    <a href="#convert-funds" class="toc-h2 toc-link" data-title="Convert funds">Convert funds</a>
+                  </li>
+                  <li>
+                    <a href="#transfer-funds" class="toc-h2 toc-link" data-title="Transfer funds">Transfer funds</a>
+                  </li>
+              </ul>
+          </li>
+      </ul>
+        <ul class="toc-footer">
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id='change-log'>Change Log</h1><h2 id='version-1-0-0-13th-january-2022'>Version 1.0.0 (13th January 2022)</h2>
+<ul>
+<li>Migrate wallet related endpoints to this section</li>
+</ul>
+<h1 id='overview'>Overview</h1><h2 id='generating-api-key'>Generating API Key</h2>
+<p>You will need to create an API key on the BTSE platform before you can use authenticated APIs. To create API keys, you can follow the steps below:</p>
+
+<ul>
+<li>Login with your username / email and password into the BTSE website</li>
+<li>Click on “Account” on the top right hand corner</li>
+<li>Select the API tab</li>
+<li>Click on “New API” button to create an API key and passphrase. (Note: the passphrase will only appear once)</li>
+<li>Use your API key and passphrase to construct a signature.</li>
+</ul>
+<h2 id='endpoints'>Endpoints</h2>
+<ul>
+<li>Production
+
+<ul>
+<li>HTTP
+
+<ul>
+<li><code>https://api.btse.com/spot</code></li>
+<li><code>https://aws-api.btse.com/spot</code> (Optimised for connection via AWS)</li>
+</ul></li>
+<li>Websocket
+
+<ul>
+<li><code>wss://ws.btse.com/ws/spot</code></li>
+<li><code>wss://aws-ws.btse.com/ws/spot</code> (Optimised for connection via AWS)</li>
+</ul></li>
+<li>Websocket (for orderbook stream)
+
+<ul>
+<li><code>wss://ws.btse.com/ws/oss/spot</code> (Used for Orderbook incremental update stream)</li>
+</ul></li>
+</ul></li>
+<li>Testnet
+
+<ul>
+<li>HTTP
+
+<ul>
+<li><code>https://testapi.btse.io/spot</code></li>
+</ul></li>
+<li>Websocket
+
+<ul>
+<li><code>wss://testws.btse.io/ws/spot</code></li>
+</ul></li>
+<li>Websocket (for orderbook stream)</li>
+<li><code>wss://testws.btse.io/ws/oss/spot</code> (Used for Orderbook incremental update stream)</li>
+</ul></li>
+</ul>
+<h2 id='authentication'>Authentication</h2>
+<ul>
+<li><p>API Key (btse-api)</p>
+
+<ul>
+<li>Parameter Name: <code>btse-api</code>, in: header. API key is obtained from BTSE platform as a string</li>
+</ul></li>
+<li><p>API Key (btse-nonce)</p>
+
+<ul>
+<li>Parameter Name: <code>btse-nonce</code>, in: header. Representation of current timestamp in long format</li>
+</ul></li>
+<li><p>API Key (btse-sign)</p>
+
+<ul>
+<li>Parameter Name: <code>btse-sign</code>, in: header. A composite signature produced based on the following algorithm: Signature=HMAC.Sha384 (secretkey, (urlpath + btse-nonce + bodyStr)) (note: bodyStr = &#39;&#39; when no data):</li>
+</ul></li>
+</ul>
+<h3 id='example-1-get-wallet'>Example 1: Get Wallet</h3>
+<blockquote>
+<p><strong>HMAC SHA384 Signature</strong></p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="nv">$ </span><span class="nb">echo</span> <span class="nt">-n</span> <span class="s2">"/api/v3.2/user/wallet1624984297330"</span> | openssl dgst <span class="nt">-sha384</span> <span class="nt">-hmac</span> <span class="s2">"848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx"</span>
+<span class="o">(</span>stdin<span class="o">)=</span> 14b986706a4368221e0af14a6725377161805e7a57d568220478cb3590ce532d4fad4ac68e6c02a14afced6a0619bfd3
+</code></pre></div>
+<ul>
+<li>Endpoint to get wallet is <code>https://api.btse.com/spot/api/v3.2/user/wallet</code></li>
+<li>Assume we have the values as follows:
+
+<ul>
+<li>btse-nonce: <code>1624984297330</code></li>
+<li>btse-api: <code>4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x</code></li>
+<li>secret: <code>848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx</code></li>
+<li>Path: <code>/api/v3.2/user/wallet</code></li>
+</ul></li>
+<li>Generated signature will be:
+
+<ul>
+<li>btse-sign: <code>14b986706a4368221e0af14a6725377161805e7a57d568220478cb3590ce532d4fad4ac68e6c02a14afced6a0619bfd3</code></li>
+</ul></li>
+</ul>
+<h2 id='rate-limits'>Rate Limits</h2>
+<ul>
+<li>The following rate limits are enforced:</li>
+</ul>
+
+<p>Rate limits for BTSE is as follows:</p>
+
+<p><strong>Wallet operation</strong></p>
+
+<ul>
+<li>Per User: <code>5 requests/second</code></li>
+</ul>
+<h2 id='api-status-codes'>API Status Codes</h2>
+<p>Each API will return one of the following HTTP status:</p>
+
+<ul>
+<li>200 - API request was successful, refer to the specific API response for expected payload</li>
+<li>400 - Bad Request. Server will not process this request. This is usually due to invalid parameters sent in request</li>
+<li>401 - Unauthorized request. Server will not process this request as it does not have valid authentication credentials</li>
+<li>403 - Forbidden request. Credentials were provided but they were insufficient to perform the request</li>
+<li>404 - Not found. Indicates that the server understood the request but could not find a correct representation for the target resource</li>
+<li>405 - Method not allowed. Indicates that the request method is not known to the requested server</li>
+<li>408 - Request timeout. Indicates that the server did not complete the request. BTSE API timeouts are set at 30secs</li>
+<li>429 - Too many requests. Indicates that the client has exceeded the rates limits set by the server. Refer to Rate Limits for more details</li>
+<li>500 - Internal server error. Indicates that the server encountered an unexpected condition resulting in not being able to fulfill the request</li>
+</ul>
+<h2 id='api-enum'>API Enum</h2>
+<p>When connecting up the BTSE API, you will come across number codes that represents different states or status types in BTSE. The following section provides a list of codes that you are expecting to see.</p>
+
+<ul>
+<li>1: MARKET_UNAVAILABLE = Futures market is unavailable</li>
+<li>2: ORDER_INSERTED = Order is inserted successfully</li>
+<li>4: ORDER_FULLY_TRANSACTED = Order is fully transacted</li>
+<li>5: ORDER_PARTIALLY_TRANSACTED = Order is partially transacted</li>
+<li>6: ORDER_CANCELLED = Order is cancelled successfully</li>
+<li>8: INSUFFICIENT_BALANCE = Insufficient balance in account</li>
+<li>9: TRIGGER_INSERTED = Trigger Order is inserted successfully</li>
+<li>10: TRIGGER_ACTIVATED = Trigger Order is activated successfully</li>
+<li>12: ERROR_UPDATE_RISK_LIMIT = Error in updating risk limit</li>
+<li>15: ORDER_REJECTED = Order is rejected</li>
+<li>16: ORDER_NOTFOUND = Order is not found with the order ID or clOrderID provided</li>
+<li>28: TRANSFER_UNSUCCESSFUL = Transfer funds between spot and futures is unsuccessful</li>
+<li>27: TRANSFER_SUCCESSFUL = Transfer funds between futures and spot is successful</li>
+<li>41: ERROR_INVALID_RISK_LIMIT = Invalid risk limit was specified</li>
+<li>64: STATUS_LIQUIDATION = Account is undergoing liquidation</li>
+<li>101: FUTURES_ORDER_PRICE_OUTSIDE_LIQUIDATION_PRICE = Futures order is outside of liquidation price</li>
+<li>1003: ORDER_LIQUIDATION = Order is undergoing liquidation</li>
+<li>1004: ORDER_ADL = Order is undergoing ADL</li>
+</ul>
+<h1 id='public-endpoints'>Public Endpoints</h1><h2 id='query-server-time'>Query Server Time</h2>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"iso"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-06-29T18:14:30.886Z"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"epoch"</span><span class="p">:</span><span class="w"> </span><span class="mi">1624990470</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><code>GET /api/v3.2/time</code></p>
+
+<p>Gets server time</p>
+<h3 id='response-content'>Response Content</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>iso</td>
+<td>long</td>
+<td>Yes</td>
+<td>Time in YYYY-MM-DDTHH24:MI:SS.Z format</td>
+</tr>
+<tr>
+<td>epoch</td>
+<td>long</td>
+<td>Yes</td>
+<td>Returns epoch timestamp</td>
+</tr>
+</tbody></table>
+<h2 id='query-available-crypto-network-list-for-currency'>Query available crypto network list for currency</h2>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="s2">"Bitcoin"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"Liquid"</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<p><code>GET /api/v3.2/availableCurrencyNetworks</code></p>
+
+<p>Get available crypto network list for currency.</p>
+<h3 id='request-parameters'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>currency</td>
+<td>string</td>
+<td>Yes</td>
+<td>Ex: BTC</td>
+</tr>
+</tbody></table>
+<h3 id='response-content-2'>Response Content</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$network</td>
+<td>string</td>
+<td>Yes</td>
+<td>Name of network</td>
+</tr>
+</tbody></table>
+<h1 id='wallet-endpoints'>Wallet Endpoints</h1><h2 id='query-wallet-balance'>Query Wallet Balance</h2>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"available"</span><span class="p">:</span><span class="w"> </span><span class="mf">520.52</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mf">5566.5566</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<p><code>GET /api/v3.2/user/wallet</code></p>
+
+<p>Query user&#39;s wallet balance. Requires <code>Read</code> permissions on the API key.</p>
+<h3 id='response-content-3'>Response Content</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>currency</td>
+<td>string</td>
+<td>Yes</td>
+<td>Currency</td>
+</tr>
+<tr>
+<td>total</td>
+<td>double</td>
+<td>Yes</td>
+<td>Total balance</td>
+</tr>
+<tr>
+<td>available</td>
+<td>double</td>
+<td>Yes</td>
+<td>Available balance</td>
+</tr>
+</tbody></table>
+<h2 id='query-wallet-history'>Query Wallet History</h2>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">21.35823825</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"fees"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.06</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="mi">20181213000239</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1571630174639</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"btseUser"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"wallet"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wallet"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"txid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;Blockchain Transaction ID&gt;"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currencyNetwork"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;Blockchain currency network&gt;"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<p><code>GET /api/v3.2/user/wallet_history</code></p>
+
+<p>Get user&#39;s wallet history records on the spot wallet</p>
+<h3 id='request-parameters-2'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>currency</td>
+<td>string</td>
+<td>No</td>
+<td>Currency, if not specified will return all currencies</td>
+</tr>
+<tr>
+<td>startTime</td>
+<td>long</td>
+<td>No</td>
+<td>Starting time (eg. 1624987283000)</td>
+</tr>
+<tr>
+<td>endTime</td>
+<td>long</td>
+<td>No</td>
+<td>Ending time (eg. 1624987283000)</td>
+</tr>
+<tr>
+<td>count</td>
+<td>integer</td>
+<td>No</td>
+<td>Number of records to return</td>
+</tr>
+</tbody></table>
+<h3 id='response-content-4'>Response Content</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>currency</td>
+<td>string</td>
+<td>Yes</td>
+<td>Currency</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>double</td>
+<td>Yes</td>
+<td>Amount in the record</td>
+</tr>
+<tr>
+<td>fees</td>
+<td>double</td>
+<td>Yes</td>
+<td>Fees charged if any</td>
+</tr>
+<tr>
+<td>orderId</td>
+<td>string</td>
+<td>Yes</td>
+<td>Internal wallet order ID</td>
+</tr>
+<tr>
+<td>wallet</td>
+<td>string</td>
+<td>Yes</td>
+<td>Wallet type. For spot will return <code>@SPOT</code></td>
+</tr>
+<tr>
+<td>description</td>
+<td>string</td>
+<td>Yes</td>
+<td>Description of the transaction</td>
+</tr>
+<tr>
+<td>status</td>
+<td>integer</td>
+<td>Yes</td>
+<td>1: PENDING<br/>2: PROCESSING<br/>10: COMPLETED<br/>16: CANCELLED</td>
+</tr>
+<tr>
+<td>type</td>
+<td>integer</td>
+<td>Yes</td>
+<td><code>Deposit</code>: Deposits into account<br/><code>Withdraw</code>: Withdrawals from account<br/><code>Transfer_In</code>: BTSE internal transfer where funds are transferred in<br/><code>Transfer_Out</code>: BTSE internal transfer where funds are transferred out<br/><code>ReferralEarning</code>: Referral Earnings</td>
+</tr>
+</tbody></table>
+<h2 id='create-wallet-address'>Create Wallet Address</h2>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Blockchain address"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"created"</span><span class="p">:</span><span class="w"> </span><span class="mi">1592627542</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<p><code>POST /api/v3.2/user/wallet/address</code></p>
+
+<p>Creates a wallet address. If the address created has not been used before, a 400 error will return with the existing unused address. To use this API, <code>Wallet</code> permission is required.</p>
+<h3 id='request-parameters-3'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>currency</td>
+<td>string</td>
+<td>Yes</td>
+<td>Currency to get address</td>
+</tr>
+</tbody></table>
+<h3 id='response-content-5'>Response Content</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>address</td>
+<td>string</td>
+<td>Yes</td>
+<td>Blockchain address</td>
+</tr>
+<tr>
+<td>created</td>
+<td>long</td>
+<td>Yes</td>
+<td>Created timestamp</td>
+</tr>
+</tbody></table>
+<h2 id='get-wallet-address'>Get Wallet Address</h2>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Blockchain address"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"created"</span><span class="p">:</span><span class="w"> </span><span class="mi">1592627542</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<p><code>GET /api/v3.2/user/wallet/address</code></p>
+
+<p>Gets a wallet address. To use this API, <code>Wallet</code> permission is required.</p>
+<h3 id='request-parameters-4'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>currency</td>
+<td>string</td>
+<td>Yes</td>
+<td>Currency to create address</td>
+</tr>
+</tbody></table>
+<h3 id='response-content-6'>Response Content</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>address</td>
+<td>string</td>
+<td>Yes</td>
+<td>Blockchain address</td>
+</tr>
+<tr>
+<td>created</td>
+<td>long</td>
+<td>Yes</td>
+<td>Created timestamp</td>
+</tr>
+</tbody></table>
+<h2 id='withdraw-funds'>Withdraw Funds</h2>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-Bitcoin"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCAddress"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tag"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.001"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"withdraw_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;withdrawal ID&gt;"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><code>POST /api/v3.2/user/wallet/withdraw</code></p>
+
+<p>Performs a wallet withdrawal. To use this API, <code>Withdraw</code> permission is required.</p>
+<h3 id='request-parameters-5'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>currency</td>
+<td>string</td>
+<td>Yes</td>
+<td>Currency-Network pair <br> Currency list can be retrieved from <a href="#query-available-currency-list-for-wallet-action">Available currency list for action</a> <br> Network list can be retrieved from <a href="#query-available-crypto-network-list-for-currency">Available network list for currency</a></td>
+</tr>
+<tr>
+<td>address</td>
+<td>string</td>
+<td>Yes</td>
+<td>Blockchain address</td>
+</tr>
+<tr>
+<td>tag</td>
+<td>string</td>
+<td>Yes</td>
+<td>Tag, used only by some blockchain (eg. XRP)</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>string</td>
+<td>Yes</td>
+<td>Amount to withdraw</td>
+</tr>
+</tbody></table>
+<h3 id='response-content-7'>Response Content</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>withdraw_id</td>
+<td>string</td>
+<td>Yes</td>
+<td>Internal withdrawal ID. References the <code>orderID</code> field in <code>wallet_history</code> API. As withdrawal will not be processed immediately. User can query the wallet history API to check on the status of the withdrawal</td>
+</tr>
+</tbody></table>
+<h2 id='query-available-currency-list-for-wallet-action'>Query available currency list for wallet action</h2>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"JPY"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"GBP"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"HKD"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"SGD"</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<p><code>GET /api/v3.2/availableCurrencies</code></p>
+
+<p>Get available currency list for wallet action.</p>
+<h3 id='request-parameters-6'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>action</td>
+<td>enum</td>
+<td>Yes</td>
+<td>CONVERT, WITHDRAW, SEND (transfer)</td>
+</tr>
+</tbody></table>
+<h3 id='response-content-8'>Response Content</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$currencyName</td>
+<td>string</td>
+<td>Yes</td>
+<td>Name of currency</td>
+</tr>
+</tbody></table>
+<h2 id='convert-funds'>Convert funds</h2>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"fromAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"toAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"settlementAmount"</span><span class="p">:</span><span class="w"> </span><span class="mf">66680.43282</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"amountCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"settlementCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">66680.43282</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><code>POST /api/v3.2/user/wallet/convert</code></p>
+
+<p>Performs a currency conversion from wallet. To use this API, <code>Wallet</code> permission is required. To get supported currency list please check <a href="#query-available-currency-list-for-wallet-action">Available currency list for action</a></p>
+<h3 id='request-parameters-7'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>amount</td>
+<td>string</td>
+<td>Yes</td>
+<td>amount of currency to convert</td>
+</tr>
+<tr>
+<td>fromAsset</td>
+<td>string</td>
+<td>Yes</td>
+<td>source currency to be converted</td>
+</tr>
+<tr>
+<td>toAsset</td>
+<td>string</td>
+<td>Yes</td>
+<td>destination currency</td>
+</tr>
+</tbody></table>
+<h3 id='response-content-9'>Response Content</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>amount</td>
+<td>float</td>
+<td>Yes</td>
+<td>amount of source currency to be converted</td>
+</tr>
+<tr>
+<td>settlementAmount</td>
+<td>float</td>
+<td>Yes</td>
+<td>amount of converted destination currency</td>
+</tr>
+<tr>
+<td>amountCurrency</td>
+<td>string</td>
+<td>Yes</td>
+<td>source currency</td>
+</tr>
+<tr>
+<td>settlementCurrency</td>
+<td>string</td>
+<td>Yes</td>
+<td>destination currency</td>
+</tr>
+<tr>
+<td>rate</td>
+<td>float</td>
+<td>Yes</td>
+<td>exchange rate</td>
+</tr>
+</tbody></table>
+<h2 id='transfer-funds'>Transfer funds</h2>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"toUser"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jamesbond"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"toUserMail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"james.bond@nogle.com"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"toUser"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jamesbond"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"toUserMail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"james.bond@nogle.com"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><code>POST /api/v3.2/user/wallet/transfer</code></p>
+
+<p>Performs a internal currency transfer to other user from wallet. To use this API, <code>Wallet</code> permission is required. To get supported currency list please check <a href="#query-available-currency-list-for-wallet-action">Available currency list for action</a></p>
+<h3 id='request-parameters-8'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>amount</td>
+<td>string</td>
+<td>Yes</td>
+<td>amount of currency to transfer</td>
+</tr>
+<tr>
+<td>asset</td>
+<td>string</td>
+<td>Yes</td>
+<td>currency to be transferred</td>
+</tr>
+<tr>
+<td>toUser</td>
+<td>string</td>
+<td>Yes</td>
+<td>receiver account</td>
+</tr>
+<tr>
+<td>toUserMail</td>
+<td>string</td>
+<td>Yes</td>
+<td>receiver email</td>
+</tr>
+</tbody></table>
+<h3 id='response-content-10'>Response Content</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>amount</td>
+<td>string</td>
+<td>Yes</td>
+<td>amount of currency to transfer</td>
+</tr>
+<tr>
+<td>asset</td>
+<td>string</td>
+<td>Yes</td>
+<td>currency to be transferred</td>
+</tr>
+<tr>
+<td>toUser</td>
+<td>string</td>
+<td>Yes</td>
+<td>receiver account</td>
+</tr>
+<tr>
+<td>toUserMail</td>
+<td>string</td>
+<td>Yes</td>
+<td>receiver email</td>
+</tr>
+</tbody></table>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="json">json</a>
+          </div>
+      </div>
+    </div>
+    <script>
+    // const lang_btn = document.getElementById('lang_box');
+    const btn_spot = document.getElementById('btn_spot');
+    const btn_futures = document.getElementById('btn_futures');
+    const btn_otc = document.getElementById('btn_otc');
+    const btn_wallet = document.getElementById('btn_wallet');
+    const btn_streaming = document.getElementById('btn_streaming');
+    const btn_earn = document.getElementById('btn_earn');
+    const v1_url = document.getElementById('v1_url');
+    const url = GetUrlRelativePath();
+
+    //english
+    if(url.indexOf('cn') != -1){
+      //如果是中文环境
+      // lang_btn.innerHTML = 'English';
+      btn_spot.innerHTML = '现货';
+      btn_futures.innerHTML = '期货';
+      btn_otc.innerHTML = '场外交易';
+      btn_wallet.innerHTML = '錢包';
+      btn_streaming.innerHTML = '串流';
+      btn_earn.innerHTML = '賺幣';
+
+      // lang_btn.href = url.replace('cn/', 'en/');
+      btn_spot.href = btn_spot.href.replace('en/', 'cn/');
+      btn_futures.href = btn_futures.href.replace('en/', 'cn/');
+      btn_otc.href = btn_otc.href.replace('en/', 'cn/');
+      btn_wallet.href = btn_wallet.href.replace('en/', 'cn/');
+      btn_streaming.href = btn_streaming.href.replace('en/', 'cn/');
+      btn_earn.href = btn_earn.href.replace('en/', 'cn/');
+
+      v1_url.href = '/docs/spot/cn/';
+    }else{ //chinese
+      //如果是英文环境
+      // lang_btn.innerHTML = '中文';
+      btn_spot.innerHTML = 'Spot';
+      btn_futures.innerHTML = 'Futures';
+      btn_otc.innerHTML = 'OTC';
+      btn_wallet.innerHTML = 'Wallet/Convert/Transfer';
+      btn_streaming.innerHTML = 'Streaming';
+      btn_earn.innerHTML = 'Earn';
+
+      // lang_btn.href = url.replace('en/', 'cn/');
+      btn_spot.href = btn_spot.href.replace('cn/', 'en/');
+      btn_futures.href = btn_futures.href.replace('cn/', 'en/');
+      btn_otc.href = btn_otc.href.replace('cn/', 'en/');
+      btn_wallet.href = btn_wallet.href.replace('cn/', 'en/');
+      btn_streaming.href = btn_streaming.href.replace('cn/', 'en/');
+      btn_earn.href = btn_earn.href.replace('cn/', 'en/');
+
+      v1_url.href = '/docs/spot/en/';
+    }
+
+    if(location.href.indexOf('docs/futures') > 0){
+      btn_spot.className = '';
+      btn_futures.className = 'current';
+      btn_otc.className = '';
+      btn_wallet.className = '';
+      btn_streaming.className = '';
+      btn_earn.className = '';
+    }
+    else if(location.href.indexOf('docs/spot') > 0){
+      btn_spot.className = 'current';
+      btn_futures.className = '';
+      btn_otc.className = '';
+      btn_wallet.className = '';
+      btn_streaming.className = '';
+      btn_earn.className = '';
+    }
+    else if(location.href.indexOf('docs/otc') > 0){
+      btn_spot.className = '';
+      btn_futures.className = '';
+      btn_otc.className = 'current';
+      btn_wallet.className = '';
+      btn_streaming.className = '';
+      btn_earn.className = '';
+    else if(location.href.indexOf('docs/wallet') > 0){
+      btn_spot.className = '';
+      btn_futures.className = '';
+      btn_otc.className = '';
+      btn_wallet.className = 'current';
+      btn_streaming.className = '';
+      btn_earn.className = '';
+    else if(location.href.indexOf('docs/streaming') > 0){
+      btn_spot.className = '';
+      btn_futures.className = '';
+      btn_otc.className = '';
+      btn_wallet.className = '';
+      btn_streaming.className = 'current';
+      btn_earn.className = '';
+    else if(location.href.indexOf('docs/earn') > 0){
+      btn_spot.className = '';
+      btn_futures.className = '';
+      btn_otc.className = '';
+      btn_wallet.className = '';
+      btn_streaming.className = '';
+      btn_earn.className = 'current';
+    } else {
+      btn_spot.className = 'current';
+      btn_futures.className = '';
+      btn_otc.className = '';
+      btn_wallet.className = '';
+      btn_streaming.className = '';
+      btn_earn.className = '';
+    }
+    //显示语言切换按钮
+    // lang_btn.style.display = 'block';
+    function GetUrlRelativePath(){
+      let url = document.location.toString();
+      let arrUrl = url.split("//");
+      let start = arrUrl[1].indexOf("/");
+      let relUrl = arrUrl[1].substring(start);
+      if(relUrl.indexOf("?") != -1){
+        relUrl = relUrl.split("?")[0];
+      }
+      if(relUrl.indexOf("#") != -1){
+        relUrl = relUrl.split("#")[0];
+      }
+      return relUrl;
+　　}
+  </script>
+  </body>
+</html>
