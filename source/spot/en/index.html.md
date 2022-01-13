@@ -13,6 +13,11 @@ headingLevel: 2
 
 # Change Log
 
+## Version 3.2.9 (13th January 2022)
+
+* Addition of wallet convert api to convert between assets [Convert Funds](#convert-funds)
+* Addition of wallet tranfer api to transfer assets to other user [Transfer Funds](#transfer-funds)
+
 ## Version 3.2.8 (8th December 2021)
 
 * Addition of get currency list for wallet action [Available currency list for action](#query-available-currency-list-for-wallet-action)
