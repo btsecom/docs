@@ -196,7 +196,7 @@
   color: #f92672;
 }
     </style>
-    <link href="stylesheets/screen-e481a7b6.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/screen-a7292fd4.css" rel="stylesheet" media="screen" />
     <link href="stylesheets/print-953e3353.css" rel="stylesheet" media="print" />
       <script src="javascripts/all-a9fde460.js"></script>
 
@@ -211,33 +211,12 @@
     <header>
     <div class="flex_box">
       <img src="images/logo-d7d2b532.svg" class="logo" alt="" />
-      <div class="nav_box">
-        <span class="nav_cell" style="display: none">
-          <a href="javascript:;" class="nav_first">v1<i class="icon_nav"></i></a>
-          <ul class="nav_ul">
-            <li>
-              <a href="/docs/spot/en/" id="v1_url">v1</a>
-            </li>
-          </ul>
-        </span>
-        <span class="nav_cell nav_tab">
-          <a href="/docs/spot/en/" id="btn_spot">Spot</a>
-        </span>
-        <span class="nav_cell nav_tab">
-          <a href="/docs/futures/en/" id="btn_futures">Futures</a>
-        </span>
-        <span class="nav_cell nav_tab">
-          <a href="/docs/otc/en/" id="btn_otc">OTC</a>
-        </span>
-        <span class="nav_cell nav_tab">
-          <a href="/docs/wallet/en/" id="btn_wallet">Wallet/Convert/Transfer</a>
-        </span>
-        <span class="nav_cell nav_tab">
-          <a href="/docs/streaming/en/" id="btn_streaming">Streaming</a>
-        </span>
-        <span class="nav_cell nav_tab">
-          <a href="/docs/earn/en/" id="btn_earn">Earn</a>
-        </span>
+      <div class="nav-row-wrap">
+        <div id="navBox" class="nav_box"></div>
+        <div id="menuDropdownBtn" class="noselect menu-dropdown-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          <div id="menuDropdown" class="menu-dropdown hide"></div>
+        </div>
       </div>
     </div>
 
@@ -4280,124 +4259,94 @@
       </div>
     </div>
     <script>
-    // const lang_btn = document.getElementById('lang_box');
-    const btn_spot = document.getElementById('btn_spot');
-    const btn_futures = document.getElementById('btn_futures');
-    const btn_otc = document.getElementById('btn_otc');
-    const btn_wallet = document.getElementById('btn_wallet');
-    const btn_streaming = document.getElementById('btn_streaming');
-    const btn_earn = document.getElementById('btn_earn');
-    const v1_url = document.getElementById('v1_url');
-    const url = GetUrlRelativePath();
+const DEFAULT_LANG = 'en';
+const IS_DEV = false;
+const DOCS_PREFIX = IS_DEV ? '/' : '/docs/';
+const TAB_MAP = {
+  spot: {
+    cn: '现货'
+  },
+  futures: {
+    cn: '期货'
+  },
+  otc: {
+    en: 'OTC',
+    cn: '场外交易'
+  },
+  wallet: {
+    en: 'Wallet/Convert/Transfer',
+    cn: '錢包'
+  },
+  streaming: {
+    cn: '串流'
+  },
+  earn: {
+    cn: '賺幣'
+  }
+};
 
-    //english
-    if(url.indexOf('cn') != -1){
-      //如果是中文环境
-      // lang_btn.innerHTML = 'English';
-      btn_spot.innerHTML = '现货';
-      btn_futures.innerHTML = '期货';
-      btn_otc.innerHTML = '场外交易';
-      btn_wallet.innerHTML = '錢包';
-      btn_streaming.innerHTML = '串流';
-      btn_earn.innerHTML = '賺幣';
+function getUrlRelativePath() {
+  let url = document.location.toString();
+  let arrUrl = url.split('//');
+  let start = arrUrl[1].indexOf('/');
+  let relUrl = arrUrl[1].substring(start);
+  if (relUrl.indexOf('?') !== -1) {
+    relUrl = relUrl.split("?")[0];
+  }
+  if (relUrl.indexOf('#') !== -1) {
+    relUrl = relUrl.split('#')[0];
+  }
+  return relUrl;
+}
 
-      // lang_btn.href = url.replace('cn/', 'en/');
-      btn_spot.href = btn_spot.href.replace('en/', 'cn/');
-      btn_futures.href = btn_futures.href.replace('en/', 'cn/');
-      btn_otc.href = btn_otc.href.replace('en/', 'cn/');
-      btn_wallet.href = btn_wallet.href.replace('en/', 'cn/');
-      btn_streaming.href = btn_streaming.href.replace('en/', 'cn/');
-      btn_earn.href = btn_earn.href.replace('en/', 'cn/');
+function capitalizeFirstLetter(s) {
+  return s.charAt(0).toUpperCase() + s.slice(1);
+}
 
-      v1_url.href = '/docs/spot/cn/';
-    }else{ //chinese
-      //如果是英文环境
-      // lang_btn.innerHTML = '中文';
-      btn_spot.innerHTML = 'Spot';
-      btn_futures.innerHTML = 'Futures';
-      btn_otc.innerHTML = 'OTC';
-      btn_wallet.innerHTML = 'Wallet/Convert/Transfer';
-      btn_streaming.innerHTML = 'Streaming';
-      btn_earn.innerHTML = 'Earn';
+function getLang() {
+  const url = getUrlRelativePath();
+  const isEN = url.indexOf('cn') === -1;
+  return isEN ? 'en' : 'cn';
+}
 
-      // lang_btn.href = url.replace('en/', 'cn/');
-      btn_spot.href = btn_spot.href.replace('cn/', 'en/');
-      btn_futures.href = btn_futures.href.replace('cn/', 'en/');
-      btn_otc.href = btn_otc.href.replace('cn/', 'en/');
-      btn_wallet.href = btn_wallet.href.replace('cn/', 'en/');
-      btn_streaming.href = btn_streaming.href.replace('cn/', 'en/');
-      btn_earn.href = btn_earn.href.replace('cn/', 'en/');
+function getTabTemplate(isTab, href, tabKey, tabText) {
+  const classList = isTab ? 'nav_cell nav_tab' : 'menu-row'
+  const idPrefix = isTab ? 'nav_link_' : 'menu-link-'
+  const linkClass = isTab ? 'nav-link' : 'menu-link'
+  return `
+    <span class="${classList}">
+      <a href="${href}" id="${idPrefix}${tabKey}" class="${linkClass}">${tabText}</a>
+    </span>
+  `
+}
 
-      v1_url.href = '/docs/spot/en/';
+function generateNavHtml(lang, isTab) {
+  return Object.keys(TAB_MAP).map(tabKey => {
+    const tabText = TAB_MAP[tabKey][lang] || capitalizeFirstLetter(tabKey);
+    const href = `${DOCS_PREFIX}${tabKey}/${lang}/`;
+    return getTabTemplate(isTab, href, tabKey, tabText);
+  })
+}
+
+$(function() {
+  const lang = getLang();
+  $('#navBox').html(generateNavHtml(lang, true));
+  $('#menuDropdown').html(generateNavHtml(lang, false));
+  const tabList = Object.keys(TAB_MAP);
+  for (let i = 0; i < tabList.length; i ++) {
+    const tabKey = tabList[i];
+    if (location.href.indexOf(`/${tabKey}/`) > 0) {
+      $('.nav-link').removeClass('current');
+      $(`#nav_link_${tabKey}`).addClass('current');
+      $('.menu-link').removeClass('current');
+      $(`#menu-link-${tabKey}`).addClass('current');
+      break;
     }
-
-    if(location.href.indexOf('docs/futures') > 0){
-      btn_spot.className = '';
-      btn_futures.className = 'current';
-      btn_otc.className = '';
-      btn_wallet.className = '';
-      btn_streaming.className = '';
-      btn_earn.className = '';
-    }
-    else if(location.href.indexOf('docs/spot') > 0){
-      btn_spot.className = 'current';
-      btn_futures.className = '';
-      btn_otc.className = '';
-      btn_wallet.className = '';
-      btn_streaming.className = '';
-      btn_earn.className = '';
-    }
-    else if(location.href.indexOf('docs/otc') > 0){
-      btn_spot.className = '';
-      btn_futures.className = '';
-      btn_otc.className = 'current';
-      btn_wallet.className = '';
-      btn_streaming.className = '';
-      btn_earn.className = '';
-    else if(location.href.indexOf('docs/wallet') > 0){
-      btn_spot.className = '';
-      btn_futures.className = '';
-      btn_otc.className = '';
-      btn_wallet.className = 'current';
-      btn_streaming.className = '';
-      btn_earn.className = '';
-    else if(location.href.indexOf('docs/streaming') > 0){
-      btn_spot.className = '';
-      btn_futures.className = '';
-      btn_otc.className = '';
-      btn_wallet.className = '';
-      btn_streaming.className = 'current';
-      btn_earn.className = '';
-    else if(location.href.indexOf('docs/earn') > 0){
-      btn_spot.className = '';
-      btn_futures.className = '';
-      btn_otc.className = '';
-      btn_wallet.className = '';
-      btn_streaming.className = '';
-      btn_earn.className = 'current';
-    } else {
-      btn_spot.className = 'current';
-      btn_futures.className = '';
-      btn_otc.className = '';
-      btn_wallet.className = '';
-      btn_streaming.className = '';
-      btn_earn.className = '';
-    }
-    //显示语言切换按钮
-    // lang_btn.style.display = 'block';
-    function GetUrlRelativePath(){
-      let url = document.location.toString();
-      let arrUrl = url.split("//");
-      let start = arrUrl[1].indexOf("/");
-      let relUrl = arrUrl[1].substring(start);
-      if(relUrl.indexOf("?") != -1){
-        relUrl = relUrl.split("?")[0];
-      }
-      if(relUrl.indexOf("#") != -1){
-        relUrl = relUrl.split("#")[0];
-      }
-      return relUrl;
-　　}
+  }
+  $('#menuDropdownBtn').click(() => {
+    $('.menu-dropdown').toggleClass('hide');
+  });
+});
   </script>
   </body>
 </html>
