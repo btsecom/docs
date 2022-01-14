@@ -47,6 +47,17 @@ html, body {
   border-radius: 40px;
   width: 20px;
 }
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
 header{
   position: fixed;
   display: flex;
@@ -60,7 +71,7 @@ header{
   background: #2E3336;
   box-shadow: 0 1px 0 0 #000;
   z-index: 100;
-  .flex_box{
+  .flex_box {
     flex: 1;
     display: flex;
     align-items: center;
@@ -68,7 +79,6 @@ header{
   // This is the logo at the top of the ToC
   .logo {
     display: block;
-    width: 148px;
     height: 30px;
     // max-width: 100%;
   }
@@ -159,6 +169,43 @@ header{
         &.current {
           border-color: #357CE1;
         }
+      }
+    }
+  }
+
+  .menu-dropdown-btn {
+    display: none;
+    position: relative;
+    color: #B0B8DB;
+    cursor: pointer;
+    .menu-dropdown {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      transform: translateY(10px);
+      display: flex;
+      flex-direction: column;
+      background-color: #4a4a4a;
+      padding: 10px 20px;
+      border-radius: 10px;
+      cursor: default;
+      box-shadow: 0 0 7px 0 rgba(0, 0, 0, .5);
+      &.hide {
+        display: none;
+      }
+    }
+    .menu-row {
+      display: block;
+      padding: 5px 0;
+    }
+    .menu-link {
+      display: block;
+      text-decoration: none;
+      color: #B0B8DB;
+      font-size: 16px;
+      padding: 5px 0;
+      &.current {
+        color: white;
       }
     }
   }
@@ -454,6 +501,7 @@ header{
   // to place content above the dark box
   position: relative;
   z-index: 30;
+  overflow: hidden;
 
   &:after {
     content: '';
@@ -737,6 +785,33 @@ header{
   .toc-link {
     padding-top: 0.3em;
     padding-bottom: 0.3em;
+  }
+}
+
+@media (max-width: 1024px) {
+  .flex_box {
+    justify-content: space-between;
+  }
+  .nav-row-wrap {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  header {
+    padding-right: 20px;
+    .nav_box {
+      margin-left: 0;
+    }
+    .menu-dropdown-btn {
+      display: block;
+    }
+    .nav_box .nav_tab a {
+      padding: 0;
+      margin-right: 15px;
+    }
+  }
+  .nav_box .nav-link:not(.current) {
+    display: none;
   }
 }
 
