@@ -39,6 +39,12 @@ end
 activate :relative_assets
 set :relative_links, true
 
+# Development Configuration
+set :debug_mode, false
+configure :development do
+  set :debug_mode, true
+end
+
 # Build Configuration
 configure :build do
   # We do want to hash woff and woff2 as there's a bug where woff2 will use
