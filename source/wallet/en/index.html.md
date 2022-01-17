@@ -127,28 +127,6 @@ When connecting up the BTSE API, you will come across number codes that represen
 
 # Public Endpoints
 
-## Query Server Time
-
-> Response
-
-```json
-{
-  "iso": "2021-06-29T18:14:30.886Z",
-  "epoch": 1624990470
-}
-```
-
-`GET /api/v3.2/time`
-
-Gets server time
-
-### Response Content
-
-|Name|Type|Required|Description|
-|---|---|---|---|
-| iso | long | Yes | Time in YYYY-MM-DDTHH24:MI:SS.Z format |
-| epoch | long | Yes | Returns epoch timestamp |
-
 ## Query available crypto network list for currency
 
 > Response
