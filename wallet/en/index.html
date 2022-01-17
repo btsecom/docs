@@ -265,9 +265,6 @@
             <a href="#public-endpoints" class="toc-h1 toc-link" data-title="Public Endpoints">Public Endpoints</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#query-server-time" class="toc-h2 toc-link" data-title="Query Server Time">Query Server Time</a>
-                  </li>
-                  <li>
                     <a href="#query-available-crypto-network-list-for-currency" class="toc-h2 toc-link" data-title="Query available crypto network list for currency">Query available crypto network list for currency</a>
                   </li>
               </ul>
@@ -452,41 +449,7 @@
 <li>1003: ORDER_LIQUIDATION = Order is undergoing liquidation</li>
 <li>1004: ORDER_ADL = Order is undergoing ADL</li>
 </ul>
-<h1 id='public-endpoints'>Public Endpoints</h1><h2 id='query-server-time'>Query Server Time</h2>
-<blockquote>
-<p>Response</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"iso"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-06-29T18:14:30.886Z"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"epoch"</span><span class="p">:</span><span class="w"> </span><span class="mi">1624990470</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p><code>GET /api/v3.2/time</code></p>
-
-<p>Gets server time</p>
-<h3 id='response-content'>Response Content</h3>
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>iso</td>
-<td>long</td>
-<td>Yes</td>
-<td>Time in YYYY-MM-DDTHH24:MI:SS.Z format</td>
-</tr>
-<tr>
-<td>epoch</td>
-<td>long</td>
-<td>Yes</td>
-<td>Returns epoch timestamp</td>
-</tr>
-</tbody></table>
-<h2 id='query-available-crypto-network-list-for-currency'>Query available crypto network list for currency</h2>
+<h1 id='public-endpoints'>Public Endpoints</h1><h2 id='query-available-crypto-network-list-for-currency'>Query available crypto network list for currency</h2>
 <blockquote>
 <p>Response</p>
 </blockquote>
@@ -514,7 +477,7 @@
 <td>Ex: BTC</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-2'>Response Content</h3>
+<h3 id='response-content'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -545,7 +508,7 @@
 <p><code>GET /api/v3.2/user/wallet</code></p>
 
 <p>Query user&#39;s wallet balance. Requires <code>Read</code> permissions on the API key.</p>
-<h3 id='response-content-3'>Response Content</h3>
+<h3 id='response-content-2'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -631,7 +594,7 @@
 <td>Number of records to return</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-4'>Response Content</h3>
+<h3 id='response-content-3'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -726,7 +689,7 @@
 <td>Currency to get address</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-5'>Response Content</h3>
+<h3 id='response-content-4'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -785,7 +748,7 @@
 <td>Currency to create address</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-6'>Response Content</h3>
+<h3 id='response-content-5'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -862,7 +825,7 @@
 <td>Amount to withdraw</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-7'>Response Content</h3>
+<h3 id='response-content-6'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -909,7 +872,7 @@
 <td>CONVERT, WITHDRAW, SEND (transfer)</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-8'>Response Content</h3>
+<h3 id='response-content-7'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -977,7 +940,7 @@
 <td>destination currency</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-9'>Response Content</h3>
+<h3 id='response-content-8'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1075,7 +1038,7 @@
 <td>receiver email</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-10'>Response Content</h3>
+<h3 id='response-content-9'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
