@@ -13,6 +13,10 @@ headingLevel: 2
 
 # Change Log
 
+## Version 2.3.0 (21st Jan 2022)
+
+* Add new two new response fields `remainingSize` and `originalSize` in [Create new order](#create-new-order) and [Create new algo order](#create-new-algo-order)
+
 ## Version 2.2.1 (26th Nov 2021)
 
 * Update market name for futures [Orderbook websocket feed](#orderbook-incremental-updates)
@@ -549,7 +553,7 @@ Get trade fills for the market specified by `symbol`
   "postOnly": false,
   "price": 8300,
   "side": "BUY",
-  "size": 1,
+  "size": 4,
   "stealth": 0,
   "stopPrice": 0,
   "symbol": "BTCPFC",
@@ -581,7 +585,9 @@ Get trade fills for the market specified by `symbol`
   "symbol": "BTCPFC",
   "timestamp": 1576812000872,
   "trigger": true,
-  "triggerPrice": 8300
+  "triggerPrice": 8300,
+  "remainingSize": 2,
+  "orginialSize": 4
 }
 ```
 
@@ -630,6 +636,8 @@ Creates a new order. Requires `Trading` permission
 | message | string | Yes | Trade messages |
 | stealth | string | Yes | Only valid for Algo orders |
 | deviation | string | Yes | Only valid for Algo orders |
+| remainingSize | double | Yes | Size left to be transacted |
+| originalSize  | double | Yes | Original order size |
 
 ## Create new algo order
 
@@ -642,7 +650,7 @@ Creates a new order. Requires `Trading` permission
   "postOnly": false,
   "price": 8030,
   "side": "BUY",
-  "size": 1,
+  "size": 4,
   "stealth": 0,
   "stopPrice": 0,
   "symbol": "BTCPFC",
@@ -674,7 +682,9 @@ Creates a new order. Requires `Trading` permission
   "symbol": "BTCPFC",
   "timestamp": 1576812000872,
   "trigger": true,
-  "triggerPrice": 8300
+  "triggerPrice": 8300,
+  "remainingSize": 2,
+  "orginialSize": 4
 }
 ```
 
@@ -730,6 +740,8 @@ This API Requires `Trading` permission
 | message | string | Yes | Trade messages |
 | stealth | string | Yes | Stealth value of order |
 | deviation | string | Yes | Deviation value of order |
+| remainingSize | double | Yes | Size left to be transacted |
+| originalSize  | double | Yes | Original order size |
 
 ## Amend Order
 

@@ -13,18 +13,16 @@ headingLevel: 2
 
 # Change Log
 
+## Version 3.3.0 (21st January 2022)
+
+* Add new two new response fields `remainingSize` and `originalSize` in [Create new order](#create-new-order) and [Create new algo order](#create-new-algo-order)
+
 ## Version 3.2.9 (13th January 2022)
 
-* Addition of wallet convert api to convert between assets [Convert Funds](#convert-funds)
-* Addition of wallet tranfer api to transfer assets to other user [Transfer Funds](#transfer-funds)
 * Migrate wallet-related endpoints to `Wallet` section
+* Migrate wallet-investment endpoints to `Earn` section
 
 ## Version 3.2.8 (8th December 2021)
-
-* Addition of get currency list for wallet action [Available currency list for action](#query-available-currency-list-for-wallet-action)
-* Addition of get crypto network list for specific currency [Available network list for currency](#query-available-crypto-network-list-for-currency)
-* Update the description of field:currency in [Withdraw funds](#withdraw-funds)
-* New investment API [Investment endpoints](#investment-endpoints)
 
 ## Version 3.2.7 (23rd November 2021)
 
@@ -561,7 +559,7 @@ Gets server time
   "postOnly": false,
   "price": 7010,
   "side": "BUY",
-  "size": 1,
+  "size": 4,
   "stealth": 0,
   "stopPrice": 0,
   "symbol": "BTC-USD",
@@ -593,7 +591,9 @@ Gets server time
   "symbol": "BTC-USD",
   "timestamp": 1576812000872,
   "trigger": true,
-  "triggerPrice": 8300
+  "triggerPrice": 8300,
+  "remainingSize": 2,
+  "orginialSize": 4
 }
 ```
 
@@ -642,6 +642,8 @@ Creates a new order. Requires `Trading` permission
 | message | string | Yes | Trade messages |
 | stealth | string | Yes | Only valid for Algo orders |
 | deviation | string | Yes | Only valid for Algo orders |
+| remainingSize | double | Yes | Size left to be transacted |
+| originalSize  | double | Yes | Original order size |
 
 ## Create new algo order
 
@@ -654,7 +656,7 @@ Creates a new order. Requires `Trading` permission
   "postOnly": false,
   "price": 7010,
   "side": "BUY",
-  "size": 1,
+  "size": 4,
   "stealth": 0,
   "stopPrice": 0,
   "symbol": "BTC-USD",
@@ -686,7 +688,9 @@ Creates a new order. Requires `Trading` permission
   "symbol": "BTC-USD",
   "timestamp": 1576812000872,
   "trigger": true,
-  "triggerPrice": 8300
+  "triggerPrice": 8300,
+  "remainingSize": 2,
+  "orginialSize": 4
 }
 ```
 
@@ -744,6 +748,8 @@ This API Requires `Trading` permission
 | message | string | Yes | Trade messages |
 | stealth | string | Yes | Stealth value of order |
 | deviation | string | Yes | Deviation value of order |
+| remainingSize | double | Yes | Size left to be transacted |
+| originalSize  | double | Yes | Original order size |
 
 ## Amend Order
 
