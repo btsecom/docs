@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-2-3-0-21st-jan-2022" class="toc-h2 toc-link" data-title="Version 2.3.0 (21st Jan 2022)">Version 2.3.0 (21st Jan 2022)</a>
+                  </li>
+                  <li>
                     <a href="#version-2-2-1-26th-nov-2021" class="toc-h2 toc-link" data-title="Version 2.2.1 (26th Nov 2021)">Version 2.2.1 (26th Nov 2021)</a>
                   </li>
                   <li>
@@ -405,7 +408,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-2-2-1-26th-nov-2021'>Version 2.2.1 (26th Nov 2021)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-2-3-0-21st-jan-2022'>Version 2.3.0 (21st Jan 2022)</h2>
+<ul>
+<li>Add new two new response fields <code>remainingSize</code> and <code>originalSize</code> in <a href="#create-new-order">Create new order</a>, <a href="#create-new-algo-order">Create new algo order</a>, and <a href="#close-position">Close Position</a></li>
+</ul>
+<h2 id='version-2-2-1-26th-nov-2021'>Version 2.2.1 (26th Nov 2021)</h2>
 <ul>
 <li>Update market name for futures <a href="#orderbook-incremental-updates">Orderbook websocket feed</a></li>
 </ul>
@@ -1402,7 +1409,7 @@
   </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">8300</span><span class="p">,</span><span class="w">
   </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
   </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"stopPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="p">,</span><span class="w">
@@ -1433,7 +1440,9 @@
   </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1576812000872</span><span class="p">,</span><span class="w">
   </span><span class="nl">"trigger"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">8300</span><span class="w">
+  </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">8300</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"remainingSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orginialSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p><code>POST /api/v2.1/order</code></p>
@@ -1644,6 +1653,18 @@
 <td>Yes</td>
 <td>Only valid for Algo orders</td>
 </tr>
+<tr>
+<td>remainingSize</td>
+<td>double</td>
+<td>Yes</td>
+<td>Size left to be transacted</td>
+</tr>
+<tr>
+<td>originalSize</td>
+<td>double</td>
+<td>Yes</td>
+<td>Original order size</td>
+</tr>
 </tbody></table>
 <h2 id='create-new-algo-order'>Create new algo order</h2>
 <blockquote>
@@ -1655,7 +1676,7 @@
   </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">8030</span><span class="p">,</span><span class="w">
   </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
   </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"stopPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="p">,</span><span class="w">
@@ -1686,7 +1707,9 @@
   </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1576812000872</span><span class="p">,</span><span class="w">
   </span><span class="nl">"trigger"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">8300</span><span class="w">
+  </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">8300</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"remainingSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orginialSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p><code>POST /api/v3.2/order/peg</code></p>
@@ -1911,6 +1934,18 @@
 <td>string</td>
 <td>Yes</td>
 <td>Deviation value of order</td>
+</tr>
+<tr>
+<td>remainingSize</td>
+<td>double</td>
+<td>Yes</td>
+<td>Size left to be transacted</td>
+</tr>
+<tr>
+<td>originalSize</td>
+<td>double</td>
+<td>Yes</td>
+<td>Original order size</td>
 </tr>
 </tbody></table>
 <h2 id='amend-order'>Amend Order</h2>
@@ -2910,7 +2945,7 @@
     </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
     </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">8300</span><span class="p">,</span><span class="w">
     </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
     </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1576812000872</span><span class="p">,</span><span class="w">
     </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">8300</span><span class="p">,</span><span class="w">
@@ -2920,7 +2955,9 @@
     </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"avgFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"fillSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"market001"</span><span class="w">
+    </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"market001"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"remainingSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orginialSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
@@ -3077,6 +3114,18 @@
 <td>string</td>
 <td>Yes</td>
 <td>Deviation value of order</td>
+</tr>
+<tr>
+<td>remainingSize</td>
+<td>double</td>
+<td>Yes</td>
+<td>Size left to be transacted</td>
+</tr>
+<tr>
+<td>originalSize</td>
+<td>double</td>
+<td>Yes</td>
+<td>Original order size</td>
 </tr>
 </tbody></table>
 <h2 id='set-risk-limits'>Set Risk Limits</h2>
@@ -3286,7 +3335,7 @@
 </span></code></pre></div>
 <p><code>GET /api/v2.1/settle_in</code></p>
 
-<p>Changes the settlement currency for the position in the current market</p>
+<p>Changes the settlement currency for the position in the current markeP</p>
 <h3 id='request-parameters-18'>Request Parameters</h3>
 <table><thead>
 <tr>

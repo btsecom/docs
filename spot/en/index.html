@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-3-3-0-21st-january-2022" class="toc-h2 toc-link" data-title="Version 3.3.0 (21st January 2022)">Version 3.3.0 (21st January 2022)</a>
+                  </li>
+                  <li>
                     <a href="#version-3-2-9-13th-january-2022" class="toc-h2 toc-link" data-title="Version 3.2.9 (13th January 2022)">Version 3.2.9 (13th January 2022)</a>
                   </li>
                   <li>
@@ -399,20 +402,16 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-3-2-9-13th-january-2022'>Version 3.2.9 (13th January 2022)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-3-3-0-21st-january-2022'>Version 3.3.0 (21st January 2022)</h2>
 <ul>
-<li>Addition of wallet convert api to convert between assets <a href="#convert-funds">Convert Funds</a></li>
-<li>Addition of wallet tranfer api to transfer assets to other user <a href="#transfer-funds">Transfer Funds</a></li>
+<li>Add new two new response fields <code>remainingSize</code> and <code>originalSize</code> in <a href="#create-new-order">Create new order</a> and <a href="#create-new-algo-order">Create new algo order</a></li>
+</ul>
+<h2 id='version-3-2-9-13th-january-2022'>Version 3.2.9 (13th January 2022)</h2>
+<ul>
 <li>Migrate wallet-related endpoints to <code>Wallet</code> section</li>
+<li>Migrate wallet-investment endpoints to <code>Earn</code> section</li>
 </ul>
-<h2 id='version-3-2-8-8th-december-2021'>Version 3.2.8 (8th December 2021)</h2>
-<ul>
-<li>Addition of get currency list for wallet action <a href="#query-available-currency-list-for-wallet-action">Available currency list for action</a></li>
-<li>Addition of get crypto network list for specific currency <a href="#query-available-crypto-network-list-for-currency">Available network list for currency</a></li>
-<li>Update the description of field:currency in <a href="#withdraw-funds">Withdraw funds</a></li>
-<li>New investment API <a href="#investment-endpoints">Investment endpoints</a></li>
-</ul>
-<h2 id='version-3-2-7-23rd-november-2021'>Version 3.2.7 (23rd November 2021)</h2>
+<h2 id='version-3-2-8-8th-december-2021'>Version 3.2.8 (8th December 2021)</h2><h2 id='version-3-2-7-23rd-november-2021'>Version 3.2.7 (23rd November 2021)</h2>
 <ul>
 <li>Update orderbook incremental updates decription <a href="#orderbook-incremental-updates">Orderbook websocket feed</a></li>
 </ul>
@@ -1435,7 +1434,7 @@
   </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">7010</span><span class="p">,</span><span class="w">
   </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
   </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"stopPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USD"</span><span class="p">,</span><span class="w">
@@ -1466,7 +1465,9 @@
   </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USD"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1576812000872</span><span class="p">,</span><span class="w">
   </span><span class="nl">"trigger"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">8300</span><span class="w">
+  </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">8300</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"remainingSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orginialSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p><code>POST /api/v3.2/order</code></p>
@@ -1677,6 +1678,18 @@
 <td>Yes</td>
 <td>Only valid for Algo orders</td>
 </tr>
+<tr>
+<td>remainingSize</td>
+<td>double</td>
+<td>Yes</td>
+<td>Size left to be transacted</td>
+</tr>
+<tr>
+<td>originalSize</td>
+<td>double</td>
+<td>Yes</td>
+<td>Original order size</td>
+</tr>
 </tbody></table>
 <h2 id='create-new-algo-order'>Create new algo order</h2>
 <blockquote>
@@ -1688,7 +1701,7 @@
   </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">7010</span><span class="p">,</span><span class="w">
   </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
   </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"stopPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USD"</span><span class="p">,</span><span class="w">
@@ -1719,7 +1732,9 @@
   </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USD"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1576812000872</span><span class="p">,</span><span class="w">
   </span><span class="nl">"trigger"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">8300</span><span class="w">
+  </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">8300</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"remainingSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orginialSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p><code>POST /api/v3.2/order/peg</code></p>
@@ -1950,6 +1965,18 @@
 <td>string</td>
 <td>Yes</td>
 <td>Deviation value of order</td>
+</tr>
+<tr>
+<td>remainingSize</td>
+<td>double</td>
+<td>Yes</td>
+<td>Size left to be transacted</td>
+</tr>
+<tr>
+<td>originalSize</td>
+<td>double</td>
+<td>Yes</td>
+<td>Original order size</td>
 </tr>
 </tbody></table>
 <h2 id='amend-order'>Amend Order</h2>
