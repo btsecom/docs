@@ -15,7 +15,7 @@ headingLevel: 2
 
 ## Version 2.3.0 (21st Jan 2022)
 
-* Add new two new response fields `remainingSize` and `originalSize` in [Create new order](#create-new-order) and [Create new algo order](#create-new-algo-order)
+* Add new two new response fields `remainingSize` and `originalSize` in [Create new order](#create-new-order), [Create new algo order](#create-new-algo-order), and [Close Position](#close-position)
 
 ## Version 2.2.1 (26th Nov 2021)
 
@@ -1140,7 +1140,7 @@ Queries user's current position. When no symbol is specified, positions for all 
     "orderType": 76,
     "price": 8300,
     "side": "BUY",
-    "size": 1,
+    "size": 4,
     "orderID": "string",
     "timestamp": 1576812000872,
     "triggerPrice": 8300,
@@ -1150,7 +1150,9 @@ Queries user's current position. When no symbol is specified, positions for all 
     "message": "false",
     "avgFillPrice": 0,
     "fillSize": 0,
-    "clOrderID": "market001"
+    "clOrderID": "market001",
+    "remainingSize": 2,
+    "orginialSize": 4
   }
 ]
 ```
@@ -1191,6 +1193,8 @@ Closes a user's position for the particular market as specified by symbol. If ty
 | message | string | Yes | Trade messages |
 | stealth | string | Yes | Stealth value of order |
 | deviation | string | Yes | Deviation value of order |
+| remainingSize | double | Yes | Size left to be transacted |
+| originalSize  | double | Yes | Original order size |
 
 ## Set Risk Limits
 
@@ -1322,7 +1326,7 @@ Change leverage values for the specified market
 
 `GET /api/v2.1/settle_in`
 
-Changes the settlement currency for the position in the current market
+Changes the settlement currency for the position in the current markeP
 
 ### Request Parameters
 
