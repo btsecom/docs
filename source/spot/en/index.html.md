@@ -15,7 +15,7 @@ headingLevel: 2
 
 ## Version 3.3.0 (21st January 2022)
 
-* Add new two new response fields `remainingSize` and `originalSize` in [Create new order](#create-new-order) and [Create new algo order](#create-new-algo-order)
+* Add new two new response fields `remainingSize` and `originalSize` in [Create new order](#create-new-order) and [Create new algo order](#create-new-algo-order) **[NOTE]: This change will be effective on Jan 25th 2022 (UTC+0)**
 
 ## Version 3.2.9 (13th January 2022)
 
