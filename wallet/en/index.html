@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-1-0-1-25th-january-2022" class="toc-h2 toc-link" data-title="Version 1.0.1 (25th January 2022)">Version 1.0.1 (25th January 2022)</a>
+                  </li>
+                  <li>
                     <a href="#version-1-0-0-13th-january-2022" class="toc-h2 toc-link" data-title="Version 1.0.0 (13th January 2022)">Version 1.0.0 (13th January 2022)</a>
                   </li>
               </ul>
@@ -266,6 +269,9 @@
               <ul class="toc-list-h2">
                   <li>
                     <a href="#query-available-crypto-network-list-for-currency" class="toc-h2 toc-link" data-title="Query available crypto network list for currency">Query available crypto network list for currency</a>
+                  </li>
+                  <li>
+                    <a href="#query-exchange-rate-between-assets" class="toc-h2 toc-link" data-title="Query exchange rate between assets">Query exchange rate between assets</a>
                   </li>
               </ul>
           </li>
@@ -305,7 +311,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-1-0-0-13th-january-2022'>Version 1.0.0 (13th January 2022)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-1-0-1-25th-january-2022'>Version 1.0.1 (25th January 2022)</h2>
+<ul>
+<li>Addition of <a href="#query-exchange-rate-between-assets"><code>exchangeRate</code></a> api to get current exchange rate between assets</li>
+</ul>
+<h2 id='version-1-0-0-13th-january-2022'>Version 1.0.0 (13th January 2022)</h2>
 <ul>
 <li>Migrate wallet related endpoints to this section</li>
 </ul>
@@ -493,6 +503,83 @@
 <td>Name of network</td>
 </tr>
 </tbody></table>
+<h2 id='query-exchange-rate-between-assets'>Query exchange rate between assets</h2>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Success"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1643085970137</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="mf">36051.55950285</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><code>GET /api/v3.2/exchangeRate</code></p>
+
+<p>Get the exchange rate between assets.</p>
+<h3 id='request-parameters-2'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>srcCurrency</td>
+<td>string</td>
+<td>Yes</td>
+<td>Ex: BTC</td>
+</tr>
+<tr>
+<td>targetCurrency</td>
+<td>string</td>
+<td>Yes</td>
+<td>Ex: USD</td>
+</tr>
+</tbody></table>
+<h3 id='response-content-2'>Response Content</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>code</td>
+<td>integer</td>
+<td>Yes</td>
+<td>Return code</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Yes</td>
+<td>Return message</td>
+</tr>
+<tr>
+<td>time</td>
+<td>long</td>
+<td>Yes</td>
+<td>Unix timestamp</td>
+</tr>
+<tr>
+<td>data</td>
+<td>float</td>
+<td>Yes</td>
+<td>Exchange rate between assets</td>
+</tr>
+<tr>
+<td>success</td>
+<td>boolean</td>
+<td>Yes</td>
+<td>True or False</td>
+</tr>
+</tbody></table>
 <h1 id='wallet-endpoints'>Wallet Endpoints</h1><h2 id='query-wallet-balance'>Query Wallet Balance</h2>
 <blockquote>
 <p>Response</p>
@@ -508,7 +595,7 @@
 <p><code>GET /api/v3.2/user/wallet</code></p>
 
 <p>Query user&#39;s wallet balance. Requires <code>Read</code> permissions on the API key.</p>
-<h3 id='response-content-2'>Response Content</h3>
+<h3 id='response-content-3'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -560,7 +647,7 @@
 <p><code>GET /api/v3.2/user/wallet_history</code></p>
 
 <p>Get user&#39;s wallet history records on the spot wallet</p>
-<h3 id='request-parameters-2'>Request Parameters</h3>
+<h3 id='request-parameters-3'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -594,7 +681,7 @@
 <td>Number of records to return</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-3'>Response Content</h3>
+<h3 id='response-content-4'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -673,7 +760,7 @@
 <p><code>POST /api/v3.2/user/wallet/address</code></p>
 
 <p>Creates a wallet address. If the address created has not been used before, a 400 error will return with the existing unused address. To use this API, <code>Wallet</code> permission is required.</p>
-<h3 id='request-parameters-3'>Request Parameters</h3>
+<h3 id='request-parameters-4'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -689,7 +776,7 @@
 <td>Currency to get address</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-4'>Response Content</h3>
+<h3 id='response-content-5'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -732,7 +819,7 @@
 <p><code>GET /api/v3.2/user/wallet/address</code></p>
 
 <p>Gets a wallet address. To use this API, <code>Wallet</code> permission is required.</p>
-<h3 id='request-parameters-4'>Request Parameters</h3>
+<h3 id='request-parameters-5'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -748,7 +835,7 @@
 <td>Currency to create address</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-5'>Response Content</h3>
+<h3 id='response-content-6'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -791,7 +878,7 @@
 <p><code>POST /api/v3.2/user/wallet/withdraw</code></p>
 
 <p>Performs a wallet withdrawal. To use this API, <code>Withdraw</code> permission is required.</p>
-<h3 id='request-parameters-5'>Request Parameters</h3>
+<h3 id='request-parameters-6'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -825,7 +912,7 @@
 <td>Amount to withdraw</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-6'>Response Content</h3>
+<h3 id='response-content-7'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -856,7 +943,7 @@
 <p><code>GET /api/v3.2/availableCurrencies</code></p>
 
 <p>Get available currency list for wallet action.</p>
-<h3 id='request-parameters-6'>Request Parameters</h3>
+<h3 id='request-parameters-7'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -872,7 +959,7 @@
 <td>CONVERT, WITHDRAW, SEND (transfer)</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-7'>Response Content</h3>
+<h3 id='response-content-8'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -912,7 +999,7 @@
 <p><code>POST /api/v3.2/user/wallet/convert</code></p>
 
 <p>Performs a currency conversion from wallet. To use this API, <code>Wallet</code> permission is required. To get supported currency list please check <a href="#query-available-currency-list-for-wallet-action">Available currency list for action</a></p>
-<h3 id='request-parameters-7'>Request Parameters</h3>
+<h3 id='request-parameters-8'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -940,7 +1027,7 @@
 <td>destination currency</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-8'>Response Content</h3>
+<h3 id='response-content-9'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1004,7 +1091,7 @@
 <p><code>POST /api/v3.2/user/wallet/transfer</code></p>
 
 <p>Performs a internal currency transfer to other user from wallet. To use this API, <code>Wallet</code> permission is required. To get supported currency list please check <a href="#query-available-currency-list-for-wallet-action">Available currency list for action</a></p>
-<h3 id='request-parameters-8'>Request Parameters</h3>
+<h3 id='request-parameters-9'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1038,7 +1125,7 @@
 <td>receiver email</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-9'>Response Content</h3>
+<h3 id='response-content-10'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
