@@ -301,7 +301,7 @@ Request for a quote
 
 Accepts a quote.
 The quote is allowed to be **partially accepted** by taking `baseAmount` or `quoteAmount` in the request body,
-which corresponds to `orderSizeInBaseCurrency` and `orderAmountInOrderCurrency` in [`/quote`](#request-for-quote), respectively.
+which corresponds to `orderSizeInBaseCurrency` and `orderAmountInOrderCurrency` in [`quote`](#request-for-quote), respectively.
 Note that these two amounts cannot be both zero or null, and if the amount is larger than the the number you quote, only the quoted number will be accepted.
 
 ### Request Parameter

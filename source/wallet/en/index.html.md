@@ -15,7 +15,7 @@ headingLevel: 2
 
 ## Version 1.0.1 (25th January 2022)
 
-* Addition of [`/exchangeRate`](#query-exchange-rate-between-assets) api to get current exchange rate between assets
+* Addition of [`exchangeRate`](#query-exchange-rate-between-assets) api to get current exchange rate between assets
 
 ## Version 1.0.0 (13th January 2022)
 
