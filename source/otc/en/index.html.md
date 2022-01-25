@@ -13,6 +13,10 @@ headingLevel: 2
 
 # Change Log
 
+## Version 1.1.2 (25th January 2022)
+
+* Update [`accept`](#accept-quote) to allow partial accepting the OTC quote.
+
 ## Version 1.1.1 (24th November 2021)
 
 * Addition of `unsubcribe-quote` and `unsubscribe-quote-all` op code to unsubscribe streaming OTC quote.
@@ -265,78 +269,64 @@ Request for a quote
 
 ## Accept Quote
 
+> Request
+
+```json
+{
+  "quoteId": "1e5e9ec8-dfb1-****-****-99e20d476c21",
+  "baseAmount": 0,
+  "quoteAmount": 300
+}
+```
+
 > Response
 
 ```json
 {
-  "markets": [
-    {
-      "assetName": "string",
-      "id": 0,
-      "maxOrderSizes": [
-        0
-      ],
-      "maxOrderValues": [
-        0
-      ],
-      "minOrderSizes": [
-        0
-      ],
-      "minOrderValues": [
-        0
-      ],
-      "originTimestamp": 0,
-      "packetID": 0,
-      "packetTimestamp": 0,
-      "parametersMap": {
-        "property1": {},
-        "property2": {}
-      },
-      "processingTimestamp": 0,
-      "requestId": 0,
-      "supportQuoteCurrencies": [
-        "string"
-      ],
-      "trackingID": 0
-    }
-  ],
-  "quoteAmountToDeduct": 21563.143,
-  "quoteAmountToReceive": 0.311,
-  "quoteCurrencyToDeductIn": "EUR",
-  "quoteCurrencyToReceiveIn": "BTC",
+  "status": 30007,
   "quoteId": "1e5e9ec8-dfb1-****-****-99e20d476c21",
-  "quotePriceInOrderCurrency": 6431,
-  "quotePriceInUSD": 6431,
-  "quoteTimestamp": 1586225934778,
-  "quoteValidDurationMs": 10000,
-  "status": 30001
+  "quoteValidDurationMs": 60000,
+  "quoteAmountToReceive": 0.00823598,
+  "quoteCurrencyToReceiveIn": "BTC",
+  "quoteAmountToDeduct": 300.000102,
+  "quoteCurrencyToDeductIn": "USD",
+  "quoteTimestamp": 1643084422836,
+  "quotePriceInOrderCurrency": 36290.47533,
+  "quotePriceInUSD": 36290.4753,
+  "side": "BUY"
 }
 ```
 
 `POST /api/v1/accept/{quoteId}`
 
-Accepts a quote
+Accepts a quote.
+The quote is allowed to be **partially accepted** by taking `baseAmount` or `quoteAmount` in the request body,
+which corresponds to `orderSizeInBaseCurrency` and `orderAmountInOrderCurrency` in [`/quote`](#request-for-quote), respectively.
+Note that these two amounts cannot be both zero or null, and if the amount is larger than the the number you quote, only the quoted number will be accepted.
 
 ### Request Parameter
 
-|Name|Type|Required|Description|
-|---|---|---|---|
-| quoteId | string | Yes | Quote ID to supplied as a path parameter |
+| Name        | Type   | Required | Description                              |
+|-------------|--------|----------|------------------------------------------|
+| quoteId     | string | Yes      | Quote ID to supplied as a path parameter |
+| baseAmount  | double | No       | The partial amount to accept the quote   |
+| quoteAmount | double | No       | The partial amount to accept the quote   |
 
 ### Response Content
 |Name|Type|Required|Description|
 |---|---|---|---|
-| markets | Asset | Yes | Asset information |
-| quoteAmountToDeduct | double | Yes | Quote amount to deduct |
-| quoteAmountToReceive | double | Yes | Quote amount to receive |
-| quoteCurrencyToDeductIn | string | Yes | Quote currency to deduct in |
-| quoteCurrencyToReceiveIn | string | Yes | Quote currency to receive |
+| status | integer | Yes | Order status with values: <br/>8: Insufficient Balance<br/>30001: Order Quote<br/>30008: OTC Order Requote<br/>30007: OTC Order completed successfully<br/>40001: Service Unavailable<br/>40003: Rejected |
 | quoteId | string | Yes | Quote ID |
+| quoteValidDurationMs | long | Yes | Quote validity |
+| quoteAmountToReceive | double | Yes | Quote amount to receive |
+| quoteCurrencyToReceiveIn | string | Yes | Quote currency to receive |
+| quoteAmountToDeduct | double | Yes | Quote amount to deduct |
+| quoteCurrencyToDeductIn | string | Yes | Quote currency to deduct in |
+| quoteTimestamp | long | Yes | Quote timestamp |
 | quotePriceInOrderCurrency | double | Yes | Quote price in order currency |
 | quotePriceInUSD | long | Yes | Quote price in USD |
-| quoteTimestamp | long | Yes | Quote timestamp |
-| quoteValidDurationMs | long | Yes | Quote validity |
-| status | integer | Yes | Order status with values: <br/>8: Insufficient Balance<br/>30001: Order Quote<br/>30008: OTC Order Requote<br/>30007: OTC Order completed successfully<br/>40001: Service Unavailable<br/>40003: Rejected |
+| side | string | Yes | Buy or sell |
+
 
 
 ## Reject Quote

@@ -13,6 +13,10 @@ headingLevel: 2
 
 # Change Log
 
+## Version 1.0.1 (25th January 2022)
+
+* Addition of [`/exchangeRate`](#query-exchange-rate-between-assets) api to get current exchange rate between assets
+
 ## Version 1.0.0 (13th January 2022)
 
 * Migrate wallet related endpoints to this section
@@ -154,6 +158,40 @@ Get available crypto network list for currency.
 |---|---|---|---|
 | $network | string | Yes | Name of network |
 
+## Query exchange rate between assets
+
+> Response
+
+```json
+{
+  "code": 1,
+  "msg": "Success",
+  "time": 1643085970137,
+  "data": 36051.55950285,
+  "success": true
+}
+```
+
+`GET /api/v3.2/exchangeRate`
+
+Get the exchange rate between assets.
+
+### Request Parameters
+
+| Name           | Type   | Required | Description |
+|----------------|--------|----------|-------------|
+| srcCurrency    | string | Yes      | Ex: BTC     |
+| targetCurrency | string | Yes      | Ex: USD     |
+
+### Response Content
+
+| Name           | Type    | Required | Description                  |
+|----------------|---------|----------|------------------------------|
+| code           | integer | Yes      | Return code                  |
+| msg            | string  | Yes      | Return message               |
+| time           | long    | Yes      | Unix timestamp               |
+| data           | float   | Yes      | Exchange rate between assets |
+| success        | boolean | Yes      | True or False                |
 
 # Wallet Endpoints
 
