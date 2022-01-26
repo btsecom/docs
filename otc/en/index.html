@@ -742,7 +742,7 @@
 <p>Accepts a quote.
 The quote is allowed to be <strong>partially accepted</strong> by taking <code>baseAmount</code> or <code>quoteAmount</code> in the request body,
 which corresponds to <code>orderSizeInBaseCurrency</code> and <code>orderAmountInOrderCurrency</code> in <a href="#request-for-quote"><code>quote</code></a>, respectively.
-Note that these two amounts cannot be both zero or null, and if the amount is larger than the the number you quote, only the quoted number will be accepted.</p>
+Note that if the amount is larger than the the number you quote, only the quoted number will be accepted.</p>
 <h3 id='request-parameter'>Request Parameter</h3>
 <table><thead>
 <tr>
