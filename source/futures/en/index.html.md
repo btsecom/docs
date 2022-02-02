@@ -1324,9 +1324,9 @@ Change leverage values for the specified market
 }
 ```
 
-`GET /api/v2.1/settle_in`
+`POST /api/v2.1/settle_in`
 
-Changes the settlement currency for the position in the current markeP
+Changes the settlement currency for the position in the current market
 
 ### Request Parameters
 
