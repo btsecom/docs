@@ -98,11 +98,11 @@ Our subscription request will be:
 
 Below details the arguments needed to be sent in.
 
-|Index|Type|Required|Description|
-|---|---|---|---|
-| 0 | string | Yes | First argument is the API key |
-| 1 | long | Yes | Nonce which is the current timestamp |
-| 2 | string | Yes | Generated signature |
+| Index | Type   | Required | Description                          |
+| ---   | ---    | ---      | ---                                  |
+| 0     | string | Yes      | First argument is the API key        |
+| 1     | long   | Yes      | Nonce which is the current timestamp |
+| 2     | string | Yes      | Generated signature                  |
 
 > Generating a signature
 
@@ -152,30 +152,30 @@ Receive quote streams by subscribing to the `quote` websocket. The websocket top
 
 ### Request Parameters
 
-|Name|Type|Required|Description|
-|---|---|---|---|
-| op | string | Yes | Operation, in this case its `quote` |
-| symbol | string | Yes | Market symbol, refer to `getMarkets` API |
-| clOrderId | string | No | Client custom order Id |
-| quantity | double | Yes | Order quantity |
-| currency | string | Yes | Can be either in the base or quote currency. If specified in the base currency, then the quote stream will respond with  |
+| Name      | Type   | Required | Description                                                                                                             |
+| ---       | ---    | ---      | ---                                                                                                                     |
+| op        | string | Yes      | Operation, in this case its `quote`                                                                                     |
+| symbol    | string | Yes      | Market symbol, refer to `getMarkets` API                                                                                |
+| clOrderId | string | No       | Client custom order Id                                                                                                  |
+| quantity  | double | Yes      | Order quantity                                                                                                          |
+| currency  | string | Yes      | Can be either in the base or quote currency. If specified in the base currency, then the quote stream will respond with |
 
 ### Response Content
 
-|Name|Type|Required|Description|
-|---|---|---|---|
-| topic | string | Yes | Websocket topic |
-| buyQuoteId | string | Yes | Quote Id for the buy side. If the value is empty / null, it means that you websocket stream is not authenticated |
-| sellQuoteId | string | Yes | Quote Id for the sell side. If the value is empty / null, it means that you websocket stream is not authenticated |
-| clOrderId | string | Yes | User customer Order Id |
-| buyQuantity | double | Yes | Quantity to purchase based on the quote request |
-| buyUnitPrice | double | Yes | Unit price per unit of the base symbol |
-| buyTotalAmount | double | Yes | Total price to pay in quote currency |
-| sellQuantity | double | Yes | Quantity to sell based on the quote request |
-| sellUnitPrice | double | Yes | Unit price per unit of the base symbol |
-| sellTotalAmount | double | Yes | Total price to pay in quote currency |
-| status | string | No | Status of the response |
-| reason | string | No | If an error is returned, the reason field will contain the reasons for the error |
+| Name            | Type   | Required | Description                                                                                                       |
+| ---             | ---    | ---      | ---                                                                                                               |
+| topic           | string | Yes      | Websocket topic                                                                                                   |
+| buyQuoteId      | string | Yes      | Quote Id for the buy side. If the value is empty / null, it means that you websocket stream is not authenticated  |
+| sellQuoteId     | string | Yes      | Quote Id for the sell side. If the value is empty / null, it means that you websocket stream is not authenticated |
+| clOrderId       | string | Yes      | User customer Order Id                                                                                            |
+| buyQuantity     | double | Yes      | Quantity to purchase based on the quote request                                                                   |
+| buyUnitPrice    | double | Yes      | Unit price per unit of the base symbol                                                                            |
+| buyTotalAmount  | double | Yes      | Total price to pay in quote currency                                                                              |
+| sellQuantity    | double | Yes      | Quantity to sell based on the quote request                                                                       |
+| sellUnitPrice   | double | Yes      | Unit price per unit of the base symbol                                                                            |
+| sellTotalAmount | double | Yes      | Total price to pay in quote currency                                                                              |
+| status          | string | No       | Status of the response                                                                                            |
+| reason          | string | No       | If an error is returned, the reason field will contain the reasons for the error                                  |
 
 
 </section>

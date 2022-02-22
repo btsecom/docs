@@ -148,15 +148,15 @@ Get available crypto network list for currency.
 
 ### Request Parameters
 
-|Name|Type|Required|Description|
-|---|---|---|---|
-| currency | string | Yes | Ex: BTC |
+| Name     | Type   | Required | Description |
+| ---      | ---    | ---      | ---         |
+| currency | string | Yes      | Ex: BTC     |
 
 ### Response Content
 
-|Name|Type|Required|Description|
-|---|---|---|---|
-| $network | string | Yes | Name of network |
+| Name     | Type   | Required | Description     |
+| ---      | ---    | ---      | ---             |
+| $network | string | Yes      | Name of network |
 
 ## Query exchange rate between assets
 
@@ -178,20 +178,20 @@ Get the exchange rate between assets.
 
 ### Request Parameters
 
-| Name           | Type   | Required | Description |
-|----------------|--------|----------|-------------|
-| srcCurrency    | string | Yes      | Ex: BTC     |
-| targetCurrency | string | Yes      | Ex: USD     |
+| Name             | Type     | Required   | Description   |
+| ---------------- | -------- | ---------- | ------------- |
+| srcCurrency      | string   | Yes        | Ex: BTC       |
+| targetCurrency   | string   | Yes        | Ex: USD       |
 
 ### Response Content
 
-| Name           | Type    | Required | Description                  |
-|----------------|---------|----------|------------------------------|
-| code           | integer | Yes      | Return code                  |
-| msg            | string  | Yes      | Return message               |
-| time           | long    | Yes      | Unix timestamp               |
-| data           | float   | Yes      | Exchange rate between assets |
-| success        | boolean | Yes      | True or False                |
+| Name             | Type      | Required   | Description                    |
+| ---------------- | --------- | ---------- | ------------------------------ |
+| code             | integer   | Yes        | Return code                    |
+| msg              | string    | Yes        | Return message                 |
+| time             | long      | Yes        | Unix timestamp                 |
+| data             | float     | Yes        | Exchange rate between assets   |
+| success          | boolean   | Yes        | True or False                  |
 
 # Wallet Endpoints
 
@@ -214,11 +214,11 @@ Get the exchange rate between assets.
 Query user's wallet balance. Requires `Read` permissions on the API key.
 ### Response Content
 
-|Name|Type|Required|Description|
-|---|---|---|---|
-| currency | string | Yes | Currency |
-| total | double | Yes | Total balance |
-| available | double | Yes | Available balance |
+| Name      | Type   | Required | Description       |
+| ---       | ---    | ---      | ---               |
+| currency  | string | Yes      | Currency          |
+| total     | double | Yes      | Total balance     |
+| available | double | Yes      | Available balance |
 ## Query Wallet History
 
 > Response
@@ -248,26 +248,26 @@ Get user's wallet history records on the spot wallet
 
 ### Request Parameters
 
-|Name|Type|Required|Description|
-|---|---|---|---|
-| currency | string | No | Currency, if not specified will return all currencies |
-| startTime | long | No | Starting time (eg. 1624987283000) |
-| endTime | long | No | Ending time (eg. 1624987283000) |
-| count | integer | No | Number of records to return |
+| Name      | Type    | Required | Description                                           |
+| ---       | ---     | ---      | ---                                                   |
+| currency  | string  | No       | Currency, if not specified will return all currencies |
+| startTime | long    | No       | Starting time (eg. 1624987283000)                     |
+| endTime   | long    | No       | Ending time (eg. 1624987283000)                       |
+| count     | integer | No       | Number of records to return                           |
 
 
 ### Response Content
 
-|Name|Type|Required|Description|
-|---|---|---|---|
-| currency | string | Yes | Currency |
-| amount | double | Yes | Amount in the record |
-| fees | double | Yes | Fees charged if any |
-| orderId | string | Yes | Internal wallet order ID |
-| wallet | string | Yes | Wallet type. For spot will return `@SPOT` |
-| description | string | Yes | Description of the transaction |
-| status | integer | Yes | 1: PENDING<br/>2: PROCESSING<br/>10: COMPLETED<br/>16: CANCELLED |
-| type | integer | Yes | `Deposit`: Deposits into account<br/>`Withdraw`: Withdrawals from account<br/>`Transfer_In`: BTSE internal transfer where funds are transferred in<br/>`Transfer_Out`: BTSE internal transfer where funds are transferred out<br/>`ReferralEarning`: Referral Earnings |
+| Name        | Type    | Required | Description                                                                                                                                                                                                                                                            |
+| ---         | ---     | ---      | ---                                                                                                                                                                                                                                                                    |
+| currency    | string  | Yes      | Currency                                                                                                                                                                                                                                                               |
+| amount      | double  | Yes      | Amount in the record                                                                                                                                                                                                                                                   |
+| fees        | double  | Yes      | Fees charged if any                                                                                                                                                                                                                                                    |
+| orderId     | string  | Yes      | Internal wallet order ID                                                                                                                                                                                                                                               |
+| wallet      | string  | Yes      | Wallet type. For spot will return `@SPOT`                                                                                                                                                                                                                              |
+| description | string  | Yes      | Description of the transaction                                                                                                                                                                                                                                         |
+| status      | integer | Yes      | 1: PENDING<br/>2: PROCESSING<br/>10: COMPLETED<br/>16: CANCELLED                                                                                                                                                                                                       |
+| type        | integer | Yes      | `Deposit`: Deposits into account<br/>`Withdraw`: Withdrawals from account<br/>`Transfer_In`: BTSE internal transfer where funds are transferred in<br/>`Transfer_Out`: BTSE internal transfer where funds are transferred out<br/>`ReferralEarning`: Referral Earnings |
 
 ## Create Wallet Address
 
@@ -296,16 +296,16 @@ Creates a wallet address. If the address created has not been used before, a 400
 
 ### Request Parameters
 
-|Name|Type|Required|Description|
-|---|---|---|---|
-| currency | string | Yes | Currency to get address |
+| Name     | Type   | Required | Description             |
+| ---      | ---    | ---      | ---                     |
+| currency | string | Yes      | Currency to get address |
 
 ### Response Content
 
-|Name|Type|Required|Description|
-|---|---|---|---|
-| address | string | Yes | Blockchain address |
-| created | long | Yes | Created timestamp |
+| Name    | Type   | Required | Description        |
+| ---     | ---    | ---      | ---                |
+| address | string | Yes      | Blockchain address |
+| created | long   | Yes      | Created timestamp  |
 
 ## Get Wallet Address
 
@@ -334,16 +334,16 @@ Gets a wallet address. To use this API, `Wallet` permission is required.
 
 ### Request Parameters
 
-|Name|Type|Required|Description|
-|---|---|---|---|
-| currency | string | Yes | Currency to create address |
+| Name     | Type   | Required | Description                |
+| ---      | ---    | ---      | ---                        |
+| currency | string | Yes      | Currency to create address |
 
 ### Response Content
 
-|Name|Type|Required|Description|
-|---|---|---|---|
-| address | string | Yes | Blockchain address |
-| created | long | Yes | Created timestamp |
+| Name    | Type   | Required | Description        |
+| ---     | ---    | ---      | ---                |
+| address | string | Yes      | Blockchain address |
+| created | long   | Yes      | Created timestamp  |
 
 ## Withdraw Funds
 
@@ -372,18 +372,18 @@ Performs a wallet withdrawal. To use this API, `Withdraw` permission is required
 
 ### Request Parameters
 
-|Name|Type|Required|Description|
-|---|---|---|---|
-| currency | string | Yes | Currency-Network pair <br> Currency list can be retrieved from [Available currency list for action](#query-available-currency-list-for-wallet-action) <br> Network list can be retrieved from [Available network list for currency](#query-available-crypto-network-list-for-currency)|
-| address | string | Yes | Blockchain address |
-| tag | string | Yes | Tag, used only by some blockchain (eg. XRP) |
-| amount | string | Yes | Amount to withdraw |
+| Name     | Type   | Required | Description                                                                                                                                                                                                                                                                            |
+| ---      | ---    | ---      | ---                                                                                                                                                                                                                                                                                    |
+| currency | string | Yes      | Currency-Network pair <br> Currency list can be retrieved from [Available currency list for action](#query-available-currency-list-for-wallet-action) <br> Network list can be retrieved from [Available network list for currency](#query-available-crypto-network-list-for-currency) |
+| address  | string | Yes      | Blockchain address                                                                                                                                                                                                                                                                     |
+| tag      | string | Yes      | Tag, used only by some blockchain (eg. XRP)                                                                                                                                                                                                                                            |
+| amount   | string | Yes      | Amount to withdraw                                                                                                                                                                                                                                                                     |
 
 ### Response Content
 
-|Name|Type|Required|Description|
-|---|---|---|---|
-| withdraw_id | string | Yes | Internal withdrawal ID. References the `orderID` field in `wallet_history` API. As withdrawal will not be processed immediately. User can query the wallet history API to check on the status of the withdrawal |
+| Name        | Type   | Required | Description                                                                                                                                                                                                     |
+| ---         | ---    | ---      | ---                                                                                                                                                                                                             |
+| withdraw_id | string | Yes      | Internal withdrawal ID. References the `orderID` field in `wallet_history` API. As withdrawal will not be processed immediately. User can query the wallet history API to check on the status of the withdrawal |
 
 
 ## Query available currency list for wallet action
@@ -406,15 +406,15 @@ Get available currency list for wallet action.
 
 ### Request Parameters
 
-|Name|Type|Required|Description|
-|---|---|---|---|
-| action | enum | Yes | CONVERT, WITHDRAW, SEND (transfer) |
+| Name   | Type | Required | Description                        |
+| ---    | ---  | ---      | ---                                |
+| action | enum | Yes      | CONVERT, WITHDRAW, SEND (transfer) |
 
 ### Response Content
 
-|Name|Type|Required|Description|
-|---|---|---|---|
-| $currencyName | string | Yes | Name of currency |
+| Name          | Type   | Required | Description      |
+| ---           | ---    | ---      | ---              |
+| $currencyName | string | Yes      | Name of currency |
 
 
 ## Convert funds
@@ -447,21 +447,21 @@ Performs a currency conversion from wallet. To use this API, `Wallet` permission
 
 ### Request Parameters
 
-|Name|Type|Required|Description|
-|---|---|---|---|
-| amount | string | Yes | amount of currency to convert |
-| fromAsset | string | Yes | source currency to be converted |
-| toAsset | string | Yes | destination currency |
+| Name      | Type   | Required | Description                     |
+| ---       | ---    | ---      | ---                             |
+| amount    | string | Yes      | amount of currency to convert   |
+| fromAsset | string | Yes      | source currency to be converted |
+| toAsset   | string | Yes      | destination currency            |
 
 ### Response Content
 
-|Name|Type|Required|Description|
-|---|---|---|---|
-| amount | float | Yes | amount of source currency to be converted |
-| settlementAmount | float | Yes | amount of converted destination currency |
-| amountCurrency | string | Yes | source currency |
-| settlementCurrency | string | Yes | destination currency |
-| rate | float | Yes | exchange rate |
+| Name               | Type   | Required | Description                               |
+| ---                | ---    | ---      | ---                                       |
+| amount             | float  | Yes      | amount of source currency to be converted |
+| settlementAmount   | float  | Yes      | amount of converted destination currency  |
+| amountCurrency     | string | Yes      | source currency                           |
+| settlementCurrency | string | Yes      | destination currency                      |
+| rate               | float  | Yes      | exchange rate                             |
 
 ## Transfer funds
 
@@ -493,18 +493,18 @@ Performs a internal currency transfer to other user from wallet. To use this API
 
 ### Request Parameters
 
-|Name|Type|Required|Description|
-|---|---|---|---|
-| amount | string | Yes | amount of currency to transfer |
-| asset | string | Yes | currency to be transferred |
-| toUser | string | Yes | receiver account |
-| toUserMail | string | Yes | receiver email|
+| Name       | Type   | Required | Description                    |
+| ---        | ---    | ---      | ---                            |
+| amount     | string | Yes      | amount of currency to transfer |
+| asset      | string | Yes      | currency to be transferred     |
+| toUser     | string | Yes      | receiver account               |
+| toUserMail | string | Yes      | receiver email                 |
 
 ### Response Content
 
-|Name|Type|Required|Description|
-|---|---|---|---|
-| amount | string | Yes | amount of currency to transfer |
-| asset | string | Yes | currency to be transferred |
-| toUser | string | Yes | receiver account |
-| toUserMail | string | Yes | receiver email|
+| Name       | Type   | Required | Description                    |
+| ---        | ---    | ---      | ---                            |
+| amount     | string | Yes      | amount of currency to transfer |
+| asset      | string | Yes      | currency to be transferred     |
+| toUser     | string | Yes      | receiver account               |
+| toUserMail | string | Yes      | receiver email                 |
