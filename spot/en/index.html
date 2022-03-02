@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-3-3-1-2nd-march-2022" class="toc-h2 toc-link" data-title="Version 3.3.1 (2nd March 2022)">Version 3.3.1 (2nd March 2022)</a>
+                  </li>
+                  <li>
                     <a href="#version-3-3-0-21st-january-2022" class="toc-h2 toc-link" data-title="Version 3.3.0 (21st January 2022)">Version 3.3.0 (21st January 2022)</a>
                   </li>
                   <li>
@@ -402,7 +405,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-3-3-0-21st-january-2022'>Version 3.3.0 (21st January 2022)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-3-3-1-2nd-march-2022'>Version 3.3.1 (2nd March 2022)</h2>
+<ul>
+<li>Remove unnecessary field <code>reduceOnly</code> in <a href="#create-new-order">Create new order</a></li>
+</ul>
+<h2 id='version-3-3-0-21st-january-2022'>Version 3.3.0 (21st January 2022)</h2>
 <ul>
 <li>Add new two new response fields <code>remainingSize</code> and <code>originalSize</code> in <a href="#create-new-order">Create new order</a> and <a href="#create-new-algo-order">Create new algo order</a> <strong>[NOTE]: This change will be effective on Jan 25th 2022 (UTC+0)</strong></li>
 </ul>
@@ -538,8 +545,8 @@
 <blockquote>
 <p><strong>HMAC SHA384 Signature</strong></p>
 </blockquote>
-<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="nv">$ </span><span class="nb">echo</span> <span class="nt">-n</span> <span class="s2">"/api/v3.2/order1624985375123{</span><span class="se">\"</span><span class="s2">postOnly</span><span class="se">\"</span><span class="s2">:false,</span><span class="se">\"</span><span class="s2">price</span><span class="se">\"</span><span class="s2">:8500.0,</span><span class="se">\"</span><span class="s2">reduceOnly</span><span class="se">\"</span><span class="s2">:false,</span><span class="se">\"</span><span class="s2">side</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">BUY</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">size</span><span class="se">\"</span><span class="s2">:0.002,</span><span class="se">\"</span><span class="s2">stopPrice</span><span class="se">\"</span><span class="s2">:0.0,</span><span class="se">\"</span><span class="s2">symbol</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">BTC-USD</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">time_in_force</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">GTC</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">trailValue</span><span class="se">\"</span><span class="s2">:0.0,</span><span class="se">\"</span><span class="s2">triggerPrice</span><span class="se">\"</span><span class="s2">:0.0,</span><span class="se">\"</span><span class="s2">txType</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">LIMIT</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">type</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">LIMIT</span><span class="se">\"</span><span class="s2">}"</span> | openssl dgst <span class="nt">-sha384</span> <span class="nt">-hmac</span> <span class="s2">"848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx"</span>
-<span class="o">(</span>stdin<span class="o">)=</span> 134c4a41c5451b88fb2955ec2b35814e4a5d432b85723edc90d6c1161118eb3bb6ffa730f2ac415c00a9f072c770a85f
+<div class="highlight"><pre class="highlight shell tab-shell"><code><span class="nv">$ </span><span class="nb">echo</span> <span class="nt">-n</span> <span class="s2">"/api/v3.2/order1624985375123{</span><span class="se">\"</span><span class="s2">postOnly</span><span class="se">\"</span><span class="s2">:false,</span><span class="se">\"</span><span class="s2">price</span><span class="se">\"</span><span class="s2">:8500.0,</span><span class="se">\"</span><span class="s2">side</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">BUY</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">size</span><span class="se">\"</span><span class="s2">:0.002,</span><span class="se">\"</span><span class="s2">stopPrice</span><span class="se">\"</span><span class="s2">:0.0,</span><span class="se">\"</span><span class="s2">symbol</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">BTC-USD</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">time_in_force</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">GTC</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">trailValue</span><span class="se">\"</span><span class="s2">:0.0,</span><span class="se">\"</span><span class="s2">triggerPrice</span><span class="se">\"</span><span class="s2">:0.0,</span><span class="se">\"</span><span class="s2">txType</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">LIMIT</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">type</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">LIMIT</span><span class="se">\"</span><span class="s2">}"</span> | openssl dgst <span class="nt">-sha384</span> <span class="nt">-hmac</span> <span class="s2">"848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx"</span>
+<span class="o">(</span>stdin<span class="o">)=</span> 81e2b8eeade393778dbae4f8001f1244d9ad014be256ab2bac25224d9ab23bc36886e29421506c71281df0cc83f23076
 </code></pre></div>
 <ul>
 <li>Endpoint to place an order is <code>https://api.btse.com/spot/api/v3.2/order</code></li>
@@ -550,13 +557,13 @@
 <li>btse-api: <code>4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x</code></li>
 <li>secret: <code>848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx</code></li>
 <li>Path: <code>/api/v3.2/order</code></li>
-<li>Body: <code>{&quot;postOnly&quot;:false,&quot;price&quot;:8500.0,&quot;reduceOnly&quot;:false,&quot;side&quot;:&quot;BUY&quot;,&quot;size&quot;:0.002,&quot;stopPrice&quot;:0.0,&quot;symbol&quot;:&quot;BTC-USD&quot;,&quot;time_in_force&quot;:&quot;GTC&quot;,&quot;trailValue&quot;:0.0,&quot;triggerPrice&quot;:0.0,&quot;txType&quot;:&quot;LIMIT&quot;,&quot;type&quot;:&quot;LIMIT&quot;}</code></li>
-<li>Encrypted Text: <code>/api/v3.2/order1624985375123{&quot;postOnly&quot;:false,&quot;price&quot;:8500.0,&quot;reduceOnly&quot;:false,&quot;side&quot;:&quot;BUY&quot;,&quot;size&quot;:0.002,&quot;stopPrice&quot;:0.0,&quot;symbol&quot;:&quot;BTC-USD&quot;,&quot;time_in_force&quot;:&quot;GTC&quot;,&quot;trailValue&quot;:0.0,&quot;triggerPrice&quot;:0.0,&quot;txType&quot;:&quot;LIMIT&quot;,&quot;type&quot;:&quot;LIMIT&quot;}</code></li>
+<li>Body: <code>{&quot;postOnly&quot;:false,&quot;price&quot;:8500.0,&quot;side&quot;:&quot;BUY&quot;,&quot;size&quot;:0.002,&quot;stopPrice&quot;:0.0,&quot;symbol&quot;:&quot;BTC-USD&quot;,&quot;time_in_force&quot;:&quot;GTC&quot;,&quot;trailValue&quot;:0.0,&quot;triggerPrice&quot;:0.0,&quot;txType&quot;:&quot;LIMIT&quot;,&quot;type&quot;:&quot;LIMIT&quot;}</code></li>
+<li>Encrypted Text: <code>/api/v3.2/order1624985375123{&quot;postOnly&quot;:false,&quot;price&quot;:8500.0,&quot;side&quot;:&quot;BUY&quot;,&quot;size&quot;:0.002,&quot;stopPrice&quot;:0.0,&quot;symbol&quot;:&quot;BTC-USD&quot;,&quot;time_in_force&quot;:&quot;GTC&quot;,&quot;trailValue&quot;:0.0,&quot;triggerPrice&quot;:0.0,&quot;txType&quot;:&quot;LIMIT&quot;,&quot;type&quot;:&quot;LIMIT&quot;}</code></li>
 </ul></li>
 <li>Generated signature will be:
 
 <ul>
-<li>btse-sign: <code>134c4a41c5451b88fb2955ec2b35814e4a5d432b85723edc90d6c1161118eb3bb6ffa730f2ac415c00a9f072c770a85f</code></li>
+<li>btse-sign: <code>81e2b8eeade393778dbae4f8001f1244d9ad014be256ab2bac25224d9ab23bc36886e29421506c71281df0cc83f23076</code></li>
 </ul></li>
 </ul>
 <h2 id='rate-limits'>Rate Limits</h2>
@@ -1541,12 +1548,6 @@
 <td>boolean</td>
 <td>Yes</td>
 <td>Boolean to indicate if this is a post only order. For post only orders, traders are charged maker fees</td>
-</tr>
-<tr>
-<td>reduceOnly</td>
-<td>boolean</td>
-<td>Yes</td>
-<td>Boolean to indicate if this is a reduce only order.</td>
 </tr>
 <tr>
 <td>clOrderID</td>
