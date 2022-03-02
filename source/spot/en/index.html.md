@@ -13,6 +13,10 @@ headingLevel: 2
 
 # Change Log
 
+## Version 3.3.1 (2nd March 2022)
+
+* Remove unnecessary field `reduceOnly` in [Create new order](#create-new-order)
+
 ## Version 3.3.0 (21st January 2022)
 
 * Add new two new response fields `remainingSize` and `originalSize` in [Create new order](#create-new-order) and [Create new algo order](#create-new-algo-order) **[NOTE]: This change will be effective on Jan 25th 2022 (UTC+0)**
@@ -119,8 +123,8 @@ You will need to create an API key on the BTSE platform before you can use authe
 > **HMAC SHA384 Signature**
 
 ```shell
-$ echo -n "/api/v3.2/order1624985375123{\"postOnly\":false,\"price\":8500.0,\"reduceOnly\":false,\"side\":\"BUY\",\"size\":0.002,\"stopPrice\":0.0,\"symbol\":\"BTC-USD\",\"time_in_force\":\"GTC\",\"trailValue\":0.0,\"triggerPrice\":0.0,\"txType\":\"LIMIT\",\"type\":\"LIMIT\"}" | openssl dgst -sha384 -hmac "848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx"
-(stdin)= 134c4a41c5451b88fb2955ec2b35814e4a5d432b85723edc90d6c1161118eb3bb6ffa730f2ac415c00a9f072c770a85f
+$ echo -n "/api/v3.2/order1624985375123{\"postOnly\":false,\"price\":8500.0,\"side\":\"BUY\",\"size\":0.002,\"stopPrice\":0.0,\"symbol\":\"BTC-USD\",\"time_in_force\":\"GTC\",\"trailValue\":0.0,\"triggerPrice\":0.0,\"txType\":\"LIMIT\",\"type\":\"LIMIT\"}" | openssl dgst -sha384 -hmac "848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx"
+(stdin)= 81e2b8eeade393778dbae4f8001f1244d9ad014be256ab2bac25224d9ab23bc36886e29421506c71281df0cc83f23076
 ```
 
 * Endpoint to place an order is `https://api.btse.com/spot/api/v3.2/order`
@@ -129,10 +133,10 @@ $ echo -n "/api/v3.2/order1624985375123{\"postOnly\":false,\"price\":8500.0,\"re
   * btse-api: `4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x`
   * secret: `848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx`
   * Path: `/api/v3.2/order`
-  * Body: `{"postOnly":false,"price":8500.0,"reduceOnly":false,"side":"BUY","size":0.002,"stopPrice":0.0,"symbol":"BTC-USD","time_in_force":"GTC","trailValue":0.0,"triggerPrice":0.0,"txType":"LIMIT","type":"LIMIT"}`
-  * Encrypted Text: `/api/v3.2/order1624985375123{"postOnly":false,"price":8500.0,"reduceOnly":false,"side":"BUY","size":0.002,"stopPrice":0.0,"symbol":"BTC-USD","time_in_force":"GTC","trailValue":0.0,"triggerPrice":0.0,"txType":"LIMIT","type":"LIMIT"}`
+  * Body: `{"postOnly":false,"price":8500.0,"side":"BUY","size":0.002,"stopPrice":0.0,"symbol":"BTC-USD","time_in_force":"GTC","trailValue":0.0,"triggerPrice":0.0,"txType":"LIMIT","type":"LIMIT"}`
+  * Encrypted Text: `/api/v3.2/order1624985375123{"postOnly":false,"price":8500.0,"side":"BUY","size":0.002,"stopPrice":0.0,"symbol":"BTC-USD","time_in_force":"GTC","trailValue":0.0,"triggerPrice":0.0,"txType":"LIMIT","type":"LIMIT"}`
 * Generated signature will be:
-  * btse-sign: `134c4a41c5451b88fb2955ec2b35814e4a5d432b85723edc90d6c1161118eb3bb6ffa730f2ac415c00a9f072c770a85f`
+  * btse-sign: `81e2b8eeade393778dbae4f8001f1244d9ad014be256ab2bac25224d9ab23bc36886e29421506c71281df0cc83f23076`
 
 
 ## Rate Limits
@@ -615,7 +619,6 @@ Creates a new order. Requires `Trading` permission
 | triggerPrice | double | Yes | Mandatory when creating a Trigger or OCO order. Indicates the trigger price |
 | trailValue | double | Yes | Trail value |
 | postOnly | boolean | Yes | Boolean to indicate if this is a post only order. For post only orders, traders are charged maker fees |
-| reduceOnly | boolean | Yes | Boolean to indicate if this is a reduce only order. |
 | clOrderID | string | Yes | Custom order Id |
 
 
