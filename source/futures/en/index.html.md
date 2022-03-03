@@ -118,7 +118,7 @@ $ echo -n "/api/v2.1/user/wallet1624984297330" | openssl dgst -sha384 -hmac "848
   * secret: `848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx`
   * Path: `/api/v2.1/user/wallet`
 * Generated signature will be:
-  * btse-sign: `14b986706a4368221e0af14a6725377161805e7a57d568220478cb3590ce532d4fad4ac68e6c02a14afced6a0619bfd3`
+  * btse-sign: `ea4f1f2b43a0f4d750ae560c5274d6214d140fcab3093da5f4a83e36828535bd2ba7b12160cd12199596f422c8883333`
 
 ### Example 2: Place an order
 

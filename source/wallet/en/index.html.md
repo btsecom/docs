@@ -30,7 +30,7 @@ You will need to create an API key on the BTSE platform before you can use authe
 * Login with your username / email and password into the BTSE website
 * Click on “Account” on the top right hand corner
 * Select the API tab
-* Click on “New API” button to create an API key and passphrase. (Note: the passphrase will only appear once)
+* Click on `New API` button to create an API key and passphrase. (Note: the passphrase will only appear once)
 * Use your API key and passphrase to construct a signature.
 
 ## Endpoints

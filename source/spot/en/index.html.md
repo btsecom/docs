@@ -124,7 +124,7 @@ You will need to create an API key on the BTSE platform before you can use authe
 
 ```shell
 $ echo -n "/api/v3.2/order1624985375123{\"postOnly\":false,\"price\":8500.0,\"side\":\"BUY\",\"size\":0.002,\"stopPrice\":0.0,\"symbol\":\"BTC-USD\",\"time_in_force\":\"GTC\",\"trailValue\":0.0,\"triggerPrice\":0.0,\"txType\":\"LIMIT\",\"type\":\"LIMIT\"}" | openssl dgst -sha384 -hmac "848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx"
-(stdin)= 81e2b8eeade393778dbae4f8001f1244d9ad014be256ab2bac25224d9ab23bc36886e29421506c71281df0cc83f23076
+(stdin)=e9cd0babdf497b536d1e48bc9cf1fadad3426b36406b5747d77ae4e3cdc9ab556863f2d0cf78e0228c39a064ad43afb7
 ```
 
 * Endpoint to place an order is `https://api.btse.com/spot/api/v3.2/order`
@@ -136,7 +136,7 @@ $ echo -n "/api/v3.2/order1624985375123{\"postOnly\":false,\"price\":8500.0,\"si
   * Body: `{"postOnly":false,"price":8500.0,"side":"BUY","size":0.002,"stopPrice":0.0,"symbol":"BTC-USD","time_in_force":"GTC","trailValue":0.0,"triggerPrice":0.0,"txType":"LIMIT","type":"LIMIT"}`
   * Encrypted Text: `/api/v3.2/order1624985375123{"postOnly":false,"price":8500.0,"side":"BUY","size":0.002,"stopPrice":0.0,"symbol":"BTC-USD","time_in_force":"GTC","trailValue":0.0,"triggerPrice":0.0,"txType":"LIMIT","type":"LIMIT"}`
 * Generated signature will be:
-  * btse-sign: `81e2b8eeade393778dbae4f8001f1244d9ad014be256ab2bac25224d9ab23bc36886e29421506c71281df0cc83f23076`
+  * btse-sign: `e9cd0babdf497b536d1e48bc9cf1fadad3426b36406b5747d77ae4e3cdc9ab556863f2d0cf78e0228c39a064ad43afb7`
 
 
 ## Rate Limits
