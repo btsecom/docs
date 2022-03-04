@@ -281,6 +281,9 @@
                     <a href="#endpoints" class="toc-h2 toc-link" data-title="Endpoints">Endpoints</a>
                   </li>
                   <li>
+                    <a href="#authentication" class="toc-h2 toc-link" data-title="Authentication">Authentication</a>
+                  </li>
+                  <li>
                     <a href="#rate-limits" class="toc-h2 toc-link" data-title="Rate Limits">Rate Limits</a>
                   </li>
                   <li>
@@ -342,38 +345,38 @@
                     <a href="#query-trades-fills-2" class="toc-h2 toc-link" data-title="Query Trades Fills">Query Trades Fills</a>
                   </li>
                   <li>
-                    <a href="#query-account-fees" class="toc-h2 toc-link" data-title="Query Account Fees">Query Account Fees</a>
+                    <a href="#query-account-fees" class="toc-h2 toc-link" data-title="query account fees">query account fees</a>
                   </li>
               </ul>
           </li>
           <li>
-            <a href="#investment-endpoints" class="toc-h1 toc-link" data-title="Investment Endpoints">Investment Endpoints</a>
+            <a href="#investment-endpoints" class="toc-h1 toc-link" data-title="investment endpoints">investment endpoints</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#query-investment-products" class="toc-h2 toc-link" data-title="Query Investment Products">Query Investment Products</a>
+                    <a href="#query-investment-products" class="toc-h2 toc-link" data-title="query investment products">query investment products</a>
                   </li>
                   <li>
-                    <a href="#deposit-investment" class="toc-h2 toc-link" data-title="Deposit Investment">Deposit Investment</a>
+                    <a href="#deposit-investment" class="toc-h2 toc-link" data-title="deposit investment">deposit investment</a>
                   </li>
                   <li>
-                    <a href="#renew-investment" class="toc-h2 toc-link" data-title="Renew Investment">Renew Investment</a>
+                    <a href="#renew-investment" class="toc-h2 toc-link" data-title="renew investment">renew investment</a>
                   </li>
                   <li>
-                    <a href="#redeem-investment" class="toc-h2 toc-link" data-title="Redeem Investment">Redeem Investment</a>
+                    <a href="#redeem-investment" class="toc-h2 toc-link" data-title="redeem investment">redeem investment</a>
                   </li>
                   <li>
-                    <a href="#query-investment-orders" class="toc-h2 toc-link" data-title="Query Investment Orders">Query Investment Orders</a>
+                    <a href="#query-investment-orders" class="toc-h2 toc-link" data-title="query investment orders">query investment orders</a>
                   </li>
                   <li>
-                    <a href="#query-investment-history" class="toc-h2 toc-link" data-title="Query Investment History">Query Investment History</a>
+                    <a href="#query-investment-history" class="toc-h2 toc-link" data-title="query investment history">query investment history</a>
                   </li>
               </ul>
           </li>
           <li>
-            <a href="#websocket-streams" class="toc-h1 toc-link" data-title="Websocket Streams">Websocket Streams</a>
+            <a href="#websocket-streams" class="toc-h1 toc-link" data-title="websocket streams">websocket streams</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#subscription" class="toc-h2 toc-link" data-title="Subscription">Subscription</a>
+                    <a href="#subscription" class="toc-h2 toc-link" data-title="subscription">subscription</a>
                   </li>
                   <li>
                     <a href="#orderbook-snapshot-by-grouping" class="toc-h2 toc-link" data-title="Orderbook Snapshot (By grouping)">Orderbook Snapshot (By grouping)</a>
@@ -388,7 +391,7 @@
                     <a href="#public-trade-fills" class="toc-h2 toc-link" data-title="Public Trade Fills">Public Trade Fills</a>
                   </li>
                   <li>
-                    <a href="#authentication" class="toc-h2 toc-link" data-title="Authentication">Authentication</a>
+                    <a href="#authentication-2" class="toc-h2 toc-link" data-title="Authentication">Authentication</a>
                   </li>
                   <li>
                     <a href="#notifications" class="toc-h2 toc-link" data-title="Notifications">Notifications</a>
@@ -411,7 +414,7 @@
 </ul>
 <h2 id='version-3-3-0-21st-january-2022'>Version 3.3.0 (21st January 2022)</h2>
 <ul>
-<li>Add new two new response fields <code>remainingSize</code> and <code>originalSize</code> in <a href="#create-new-order">Create new order</a> and <a href="#create-new-algo-order">Create new algo order</a> <strong>[NOTE]: This change will be effective on Jan 25th 2022 (UTC+0)</strong></li>
+<li>Add new two new response fields <code>remainingSize</code> and <code>originalSize</code> in <a href="#create-new-order">Create new order</a> and <a href="#create-new-algo-order">Create new algo order</a> *<em>[NOTE]: This change will be effective on Jan 25th 2022 (UTC+0)</em></li>
 </ul>
 <h2 id='version-3-2-9-13th-january-2022'>Version 3.2.9 (13th January 2022)</h2>
 <ul>
@@ -480,9 +483,9 @@
 
 <ul>
 <li>Login with your username / email and password into the BTSE website</li>
-<li>Click on “Account” on the top right hand corner</li>
+<li>Click on <code>Account</code> on the top right hand corner</li>
 <li>Select the API tab</li>
-<li>Click on “New API” button to create an API key and passphrase. (Note: the passphrase will only appear once)</li>
+<li>Click on <code>New API</code> button to create an API key and passphrase. (Note: the passphrase will only appear once)</li>
 <li>Use your API key and passphrase to construct a signature.</li>
 </ul>
 <h2 id='endpoints'>Endpoints</h2>
@@ -508,7 +511,7 @@
 <li><code>wss://ws.btse.com/ws/oss/spot</code> (Used for Orderbook incremental update stream)</li>
 </ul></li>
 </ul></li>
-<li><p>Testnet</p>
+<li>Testnet
 
 <ul>
 <li>HTTP
@@ -522,9 +525,11 @@
 <li><code>wss://testws.btse.io/ws/spot</code></li>
 </ul></li>
 <li>Websocket (for orderbook stream)</li>
-<li><code>wss://testws.btse.io/ws/oss/spot</code> (Used for Orderbook incremental update stream)
-## Authentication</li>
+<li><code>wss://testws.btse.io/ws/oss/spot</code> (Used for Orderbook incremental update stream)</li>
 </ul></li>
+</ul>
+<h2 id='authentication'>Authentication</h2>
+<ul>
 <li><p>API Key (btse-api)</p>
 
 <ul>
@@ -546,7 +551,7 @@
 <p><strong>HMAC SHA384 Signature</strong></p>
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="nv">$ </span><span class="nb">echo</span> <span class="nt">-n</span> <span class="s2">"/api/v3.2/order1624985375123{</span><span class="se">\"</span><span class="s2">postOnly</span><span class="se">\"</span><span class="s2">:false,</span><span class="se">\"</span><span class="s2">price</span><span class="se">\"</span><span class="s2">:8500.0,</span><span class="se">\"</span><span class="s2">side</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">BUY</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">size</span><span class="se">\"</span><span class="s2">:0.002,</span><span class="se">\"</span><span class="s2">stopPrice</span><span class="se">\"</span><span class="s2">:0.0,</span><span class="se">\"</span><span class="s2">symbol</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">BTC-USD</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">time_in_force</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">GTC</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">trailValue</span><span class="se">\"</span><span class="s2">:0.0,</span><span class="se">\"</span><span class="s2">triggerPrice</span><span class="se">\"</span><span class="s2">:0.0,</span><span class="se">\"</span><span class="s2">txType</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">LIMIT</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">type</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">LIMIT</span><span class="se">\"</span><span class="s2">}"</span> | openssl dgst <span class="nt">-sha384</span> <span class="nt">-hmac</span> <span class="s2">"848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx"</span>
-<span class="o">(</span>stdin<span class="o">)=</span> 81e2b8eeade393778dbae4f8001f1244d9ad014be256ab2bac25224d9ab23bc36886e29421506c71281df0cc83f23076
+<span class="o">(</span>stdin<span class="o">)=</span>e9cd0babdf497b536d1e48bc9cf1fadad3426b36406b5747d77ae4e3cdc9ab556863f2d0cf78e0228c39a064ad43afb7
 </code></pre></div>
 <ul>
 <li>Endpoint to place an order is <code>https://api.btse.com/spot/api/v3.2/order</code></li>
@@ -563,7 +568,7 @@
 <li>Generated signature will be:
 
 <ul>
-<li>btse-sign: <code>81e2b8eeade393778dbae4f8001f1244d9ad014be256ab2bac25224d9ab23bc36886e29421506c71281df0cc83f23076</code></li>
+<li>btse-sign: <code>e9cd0babdf497b536d1e48bc9cf1fadad3426b36406b5747d77ae4e3cdc9ab556863f2d0cf78e0228c39a064ad43afb7</code></li>
 </ul></li>
 </ul>
 <h2 id='rate-limits'>Rate Limits</h2>
@@ -619,7 +624,14 @@
 <li>27: TRANSFER_SUCCESSFUL = Transfer funds between futures and spot is successful</li>
 <li>41: ERROR_INVALID_RISK_LIMIT = Invalid risk limit was specified</li>
 <li>64: STATUS_LIQUIDATION = Account is undergoing liquidation</li>
+<li>65: ORDER_ACITVE = Order is active</li>
+<li>76: ORDER_TYPE_LIMIT = Limit order</li>
+<li>77: ORDER_TYPE_MARKET = Market order</li>
+<li>80: ORDER_TYPE_PEG = Peg/Algo order</li>
+<li>81: ORDER_TYPE_OTC = Otc order</li>
+<li>88: ORDER_INACTIVE = Order is inactive</li>
 <li>101: FUTURES_ORDER_PRICE_OUTSIDE_LIQUIDATION_PRICE = Futures order is outside of liquidation price</li>
+<li>123: AMEND_ORDER = Order amended</li>
 <li>1003: ORDER_LIQUIDATION = Order is undergoing liquidation</li>
 <li>1004: ORDER_ADL = Order is undergoing ADL</li>
 </ul>
@@ -630,17 +642,17 @@
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USD"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"last"</span><span class="p">:</span><span class="w"> </span><span class="mi">36365</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"lowestAsk"</span><span class="p">:</span><span class="w"> </span><span class="mi">36377</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"highestBid"</span><span class="p">:</span><span class="w"> </span><span class="mi">36376</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"percentageChange"</span><span class="p">:</span><span class="w"> </span><span class="mf">4.973731309</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"volume"</span><span class="p">:</span><span class="w"> </span><span class="mf">172418318.7575521</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"high24Hr"</span><span class="p">:</span><span class="w"> </span><span class="mi">36447</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"low24Hr"</span><span class="p">:</span><span class="w"> </span><span class="mf">33989.5</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"last"</span><span class="p">:</span><span class="w"> </span><span class="mi">36976</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"lowestAsk"</span><span class="p">:</span><span class="w"> </span><span class="mi">37012</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"highestBid"</span><span class="p">:</span><span class="w"> </span><span class="mi">36972</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"percentageChange"</span><span class="p">:</span><span class="w"> </span><span class="mf">-4.633438649</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"volume"</span><span class="p">:</span><span class="w"> </span><span class="mf">81456627.51106991</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"high24Hr"</span><span class="p">:</span><span class="w"> </span><span class="mf">39478.5</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"low24Hr"</span><span class="p">:</span><span class="w"> </span><span class="mf">36821.5</span><span class="p">,</span><span class="w">
     </span><span class="nl">"base"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"quote"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"active"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mf">4916.8266</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mf">2117.88522</span><span class="p">,</span><span class="w">
     </span><span class="nl">"minValidPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w">
     </span><span class="nl">"minPriceIncrement"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w">
     </span><span class="nl">"minOrderSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00001</span><span class="p">,</span><span class="w">
@@ -671,17 +683,17 @@
 <h3 id='request-parameters'>Request Parameters</h3>
 <table><thead>
 <tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
+<th>name</th>
+<th>type</th>
+<th>required</th>
+<th>description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>symbol</td>
 <td>string</td>
-<td>No</td>
-<td>Market symbol</td>
+<td>no</td>
+<td>market symbol</td>
 </tr>
 </tbody></table>
 <h3 id='response-content'>Response Content</h3>
@@ -920,35 +932,35 @@
 <h3 id='request-parameters-2'>Request Parameters</h3>
 <table><thead>
 <tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
+<th>name</th>
+<th>type</th>
+<th>required</th>
+<th>description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>symbol</td>
 <td>string</td>
-<td>Yes</td>
-<td>Market symbol</td>
+<td>yes</td>
+<td>market symbol</td>
 </tr>
 <tr>
 <td>start</td>
 <td>long</td>
-<td>No</td>
-<td>Starting time (eg. 1624987283000)</td>
+<td>no</td>
+<td>starting time (eg. 1624987283000)</td>
 </tr>
 <tr>
 <td>end</td>
 <td>long</td>
-<td>No</td>
-<td>Ending time (eg. 1624987283000)</td>
+<td>no</td>
+<td>ending time (eg. 1624987283000)</td>
 </tr>
 <tr>
 <td>resolution</td>
 <td>string</td>
-<td>Yes</td>
-<td>Supported resolutions are: <br/> 1: 1min<br/> 5: 5mins<br/> 15: 15mins<br/>30: 30mins<br/>60: 60mins<br/>360: 6hours<br/>1440: 1day</td>
+<td>yes</td>
+<td>supported resolutions are: <br/> 1: 1min<br/> 5: 5mins<br/> 15: 15mins<br/>30: 30mins<br/>60: 60mins<br/>360: 6hours<br/>1440: 1day</td>
 </tr>
 </tbody></table>
 <h3 id='response-content-2'>Response Content</h3>
@@ -1370,7 +1382,7 @@
 <td>side</td>
 <td>string</td>
 <td>Yes</td>
-<td>Trade side. Values are: [<code>Buy</code>, <code>SELL</code>]</td>
+<td>Trade side. Values are: [<code>BUY</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>price</td>
@@ -1623,7 +1635,7 @@
 <td>status</td>
 <td>integer</td>
 <td>Yes</td>
-<td>Order status<br/>    2: Order Inserted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found</td>
+<td>Order status<br/> 2: Order Inserted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>8: Insufficient Balance<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request Failed</td>
 </tr>
 <tr>
 <td>stopPrice</td>
@@ -1911,7 +1923,7 @@
 <td>status</td>
 <td>integer</td>
 <td>Yes</td>
-<td>Order status<br/>    2: Order Inserted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found</td>
+<td>Order status<br/> 2: Order Inserted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>8: Insufficient Balance<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request Failed</td>
 </tr>
 <tr>
 <td>stopPrice</td>
@@ -1990,7 +2002,9 @@
   </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Order ID"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Custom Order ID"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"slide"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="nl">"slide"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">40000</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
@@ -2050,7 +2064,7 @@
 <td>type</td>
 <td>string</td>
 <td>Yes</td>
-<td>Type of amendmend<br/><code>PRICE</code>: To amend order price<br/><code>SIZE</code>: To amend order size<br/>TRIGGER: To amend trigger price</td>
+<td>Type of amendmend<br/><code>PRICE</code>: To amend order price<br/><code>SIZE</code>: To amend order size<br/><code>TRIGGER</code>: To amend trigger price<br/><code>ALL</code>: to amend multiple fields</td>
 </tr>
 <tr>
 <td>value</td>
@@ -2063,6 +2077,24 @@
 <td>boolean</td>
 <td>No</td>
 <td>Used for Post-Only orders. When set to true will set price to best bid/ask</td>
+</tr>
+<tr>
+<td>orderPrice</td>
+<td>number</td>
+<td>No</td>
+<td>order price to be amended</td>
+</tr>
+<tr>
+<td>orderSize</td>
+<td>number</td>
+<td>No</td>
+<td>order size to be amended</td>
+</tr>
+<tr>
+<td>triggerPrice</td>
+<td>number</td>
+<td>No</td>
+<td>trigger price to be amended</td>
 </tr>
 </tbody></table>
 <h3 id='response-content-10'>Response Content</h3>
@@ -2132,7 +2164,7 @@
 <td>status</td>
 <td>integer</td>
 <td>Yes</td>
-<td>Order status<br/>    2: Order Inserted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found</td>
+<td>Order status<br/> 2: Order Inserted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>8: Insufficient Balance<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request Failed</td>
 </tr>
 <tr>
 <td>stopPrice</td>
@@ -2206,7 +2238,7 @@
 </span></code></pre></div>
 <p><code>DELETE /api/v3.2/order</code></p>
 
-<p>CAncels pending orders that has not yet been transacted. The <code>orderID</code> is a unique identifier to cancel a particular order. <code>clOrderID</code> is a custom ID sent in by the trader. When cancel by <code>clOrderID</code>, all orders having the same ID will be cancelled. If <code>orderID</code> and <code>clOrderID</code> is not sent in, then cancellation will be for all orders in the current market.</p>
+<p>Cancels pending orders that has not yet been transacted. The <code>orderID</code> is a unique identifier to cancel a particular order. <code>clOrderID</code> is a custom ID sent in by the trader. When cancel by <code>clOrderID</code>, all orders having the same ID will be cancelled. If <code>orderID</code> and <code>clOrderID</code> is not sent in, then cancellation will be for all orders in the current market.</p>
 <h3 id='request-parameters-10'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -2302,7 +2334,7 @@
 <td>status</td>
 <td>integer</td>
 <td>Yes</td>
-<td>Order status<br/>    2: Order Inserted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found</td>
+<td>Order status<br/> 2: Order Inserted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>8: Insufficient Balance<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request Failed</td>
 </tr>
 <tr>
 <td>stopPrice</td>
@@ -2395,36 +2427,36 @@
 <p>Response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"averageFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"cancelDuration"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"fillSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"filledSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"orderState"</span><span class="p">:</span><span class="w"> </span><span class="s2">"STATUS_ACTIVE"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"orderValue"</span><span class="p">:</span><span class="w"> </span><span class="mf">20.625</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"pegPriceDeviation"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"pegPriceMax"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"pegPriceMin"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">6875</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">2142.5</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.001</span><span class="p">,</span><span class="w">
   </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"trailValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderValue"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.1425</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"filledSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"pegPriceMin"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"pegPriceMax"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"pegPriceDeviation"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"cancelDuration"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1642992096246</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"946ec252-2a85-40a1-9707-6b737c75b394"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"triggerOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"triggerOrderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1001</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"triggerOriginalPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"triggerStopPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"triggerOriginalPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"triggerOrderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"triggerTrailingStopDeviation"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"triggered"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="nl">"triggerStopPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-USD"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"trailValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"averageFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"fillSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"_rtifs1642992095163"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderState"</span><span class="p">:</span><span class="w"> </span><span class="s2">"STATUS_ACTIVE"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"triggered"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p><code>GET /api/v3.2/user/open_orders</code></p>
 
-<p>Retrieves open orders that have not yet been matched. This is also used to check an order for its status. If an order has been cancelled or recently transacted, the <code>status</code> field will indicate the state of the order. The state of an order returned in <code>status</code> field will only be made available for 30mins. After 30mins, this API will only return if the order is still active. If not it will return that the order is not found.</p>
+<p>Retrieves open orders that have not yet been matched or matched recently.</p>
 <h3 id='request-parameters-12'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -2463,40 +2495,10 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>symbol</td>
-<td>string</td>
-<td>Yes</td>
-<td>Market symbol</td>
-</tr>
-<tr>
-<td>clOrderID</td>
-<td>string</td>
-<td>Yes</td>
-<td>Customer tag sent in by trader</td>
-</tr>
-<tr>
-<td>fillSize</td>
-<td>string</td>
-<td>Yes</td>
-<td>Trade filled size</td>
-</tr>
-<tr>
-<td>orderID</td>
-<td>string</td>
-<td>Yes</td>
-<td>Order ID</td>
-</tr>
-<tr>
 <td>orderType</td>
-<td>string</td>
+<td>double</td>
 <td>Yes</td>
 <td>Order type <br/>76: Limit Order<br/>77: Market order<br/>80: Algo order</td>
-</tr>
-<tr>
-<td>postOnly</td>
-<td>boolean</td>
-<td>Yes</td>
-<td>Indicates if order is a post only order</td>
 </tr>
 <tr>
 <td>price</td>
@@ -2505,52 +2507,112 @@
 <td>Order price</td>
 </tr>
 <tr>
-<td>side</td>
-<td>string</td>
-<td>Yes</td>
-<td>Order side<br/>BUY or SELL</td>
-</tr>
-<tr>
 <td>size</td>
 <td>double</td>
 <td>Yes</td>
-<td>Cancelled size</td>
+<td>Order size</td>
 </tr>
 <tr>
-<td>status</td>
-<td>integer</td>
-<td>Yes</td>
-<td>Order status<br/>    2: Order Inserted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found</td>
-</tr>
-<tr>
-<td>stopPrice</td>
+<td>side</td>
 <td>string</td>
 <td>Yes</td>
-<td>Stop price</td>
+<td>Order side<br/><code>BUY</code> or <code>SELL</code></td>
 </tr>
 <tr>
-<td>time_in_force</td>
-<td>string</td>
+<td>orderValue</td>
+<td>double</td>
 <td>Yes</td>
-<td>Order validity</td>
+<td>Total value of of this order</td>
+</tr>
+<tr>
+<td>filledSize</td>
+<td>double</td>
+<td>Yes</td>
+<td>Filled size</td>
+</tr>
+<tr>
+<td>pegPriceMin</td>
+<td>double</td>
+<td>Yes</td>
+<td>Minimum possible peg price this takes precedence over pegPriceDeviation</td>
+</tr>
+<tr>
+<td>pegPriceMax</td>
+<td>double</td>
+<td>Yes</td>
+<td>Maximum possible peg price this takes precedence over pegPriceDeviation</td>
+</tr>
+<tr>
+<td>pegPriceDeviation</td>
+<td>double</td>
+<td>Yes</td>
+<td>Percentage deviation from Index price</td>
+</tr>
+<tr>
+<td>cancelDuration</td>
+<td>double</td>
+<td>Yes</td>
+<td>Order expiration time if not 0</td>
 </tr>
 <tr>
 <td>timestamp</td>
-<td>string</td>
+<td>double</td>
 <td>Yes</td>
-<td>Order timestamp</td>
+<td>Order placement time</td>
 </tr>
 <tr>
-<td>trigger</td>
+<td>orderID</td>
 <td>string</td>
+<td>Yes</td>
+<td>Order Id</td>
+</tr>
+<tr>
+<td>triggerOrder</td>
+<td>bool</td>
 <td>Yes</td>
 <td>Indicator if order is a trigger order</td>
 </tr>
 <tr>
 <td>triggerPrice</td>
-<td>string</td>
+<td>double</td>
 <td>Yes</td>
 <td>Order trigger price, returns 0 if order is not a trigger order</td>
+</tr>
+<tr>
+<td>triggerOriginalPrice</td>
+<td>double</td>
+<td>Yes</td>
+<td>Price of the original order. Only valid if it&#39;s a triggered order</td>
+</tr>
+<tr>
+<td>triggerOrderType</td>
+<td>double</td>
+<td>Yes</td>
+<td>Order type <br/><code>76: Limit Order</code><br/><code>77: Market order</code><br/><code>80: Algo order</code></td>
+</tr>
+<tr>
+<td>triggerTrailingStopDeviation</td>
+<td>double</td>
+<td>Yes</td>
+<td>Percentage deviation from stop price</td>
+</tr>
+<tr>
+<td>triggerStopPrice</td>
+<td>double</td>
+<td>Yes</td>
+<td>Stop price, Algo Order only</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Yes</td>
+<td>Market name (e.g. BTC-USD)</td>
+</tr>
+<tr>
+<td>trailValue</td>
+<td>double</td>
+<td>Yes</td>
+<td>Trail value</td>
 </tr>
 <tr>
 <td>averageFillPrice</td>
@@ -2559,28 +2621,28 @@
 <td>Average filled price. Returns the average filled price for partially transacted orders</td>
 </tr>
 <tr>
-<td>message</td>
-<td>string</td>
+<td>filledSize</td>
+<td>double</td>
 <td>Yes</td>
-<td>Trade messages</td>
+<td>Filled size</td>
 </tr>
 <tr>
-<td>stealth</td>
+<td>clOrderID</td>
 <td>string</td>
 <td>Yes</td>
-<td>Stealth value of order</td>
-</tr>
-<tr>
-<td>deviation</td>
-<td>string</td>
-<td>Yes</td>
-<td>Deviation value of order</td>
+<td>Customer order ID</td>
 </tr>
 <tr>
 <td>orderState</td>
 <td>string</td>
 <td>Yes</td>
-<td><code>ORDER_INSERTED</code>: Order is inserted successfully<br/><code>ORDER_CANCELLED</code>: Order is cancelled successfully<br/><code>ORDER_FULLY_TRANSACTED</code>: Order is fully transacted<br/><code>ORDER_PARTIALLY_TRANSACTED</code>: Order is partially transacted<br/><code>STATUS_INACTIVE</code>: Order is no longer active</td>
+<td><code>STATUS_ACTIVE</code>, <code>STATUS_INACTIVE</code></td>
+</tr>
+<tr>
+<td>triggered</td>
+<td>bool</td>
+<td>Yes</td>
+<td>Indicate whether the order is triiggered</td>
 </tr>
 </tbody></table>
 <h2 id='query-trades-fills-2'>Query Trades Fills</h2>
@@ -2704,174 +2766,174 @@
 <td>side</td>
 <td>string</td>
 <td>Yes</td>
-<td>Trade side. Values are: [<code>Buy</code>, <code>SELL</code>]</td>
+<td>Trade side. Values are: [<code>BUY</code>, <code>sell</code>]</td>
 </tr>
 <tr>
 <td>price</td>
 <td>double</td>
-<td>Yes</td>
-<td>Transacted price</td>
+<td>yes</td>
+<td>transacted price</td>
 </tr>
 <tr>
 <td>size</td>
 <td>double</td>
-<td>Yes</td>
-<td>Transacted size</td>
+<td>yes</td>
+<td>transacted size</td>
 </tr>
 <tr>
-<td>serialId</td>
+<td>serialid</td>
 <td>long</td>
-<td>Yes</td>
-<td>Serial Id, running sequence number</td>
+<td>yes</td>
+<td>serial id, running sequence number</td>
 </tr>
 <tr>
-<td>tradeId</td>
+<td>tradeid</td>
 <td>string</td>
-<td>Yes</td>
-<td>Trade identifier</td>
+<td>yes</td>
+<td>trade identifier</td>
 </tr>
 <tr>
 <td>timestamp</td>
 <td>double</td>
-<td>Yes</td>
-<td>Transacted timestamp</td>
+<td>yes</td>
+<td>transacted timestamp</td>
 </tr>
 <tr>
 <td>base</td>
 <td>long</td>
-<td>Yes</td>
-<td>Base currency</td>
+<td>yes</td>
+<td>base currency</td>
 </tr>
 <tr>
 <td>quote</td>
 <td>long</td>
-<td>Yes</td>
-<td>Quote currency</td>
+<td>yes</td>
+<td>quote currency</td>
 </tr>
 <tr>
-<td>clOrderID</td>
+<td>clorderid</td>
 <td>long</td>
-<td>Yes</td>
-<td>Custom order ID</td>
+<td>yes</td>
+<td>custom order id</td>
 </tr>
 <tr>
-<td>orderID</td>
+<td>orderid</td>
 <td>long</td>
-<td>Yes</td>
-<td>Order ID</td>
+<td>yes</td>
+<td>order id</td>
 </tr>
 <tr>
-<td>feeAmount</td>
+<td>feeamount</td>
 <td>long</td>
-<td>Yes</td>
-<td>Fee amount</td>
+<td>yes</td>
+<td>fee amount</td>
 </tr>
 <tr>
-<td>feeCurrency</td>
+<td>feecurrency</td>
 <td>long</td>
-<td>Yes</td>
-<td>Fee currency</td>
+<td>yes</td>
+<td>fee currency</td>
 </tr>
 <tr>
-<td>filledPrice</td>
+<td>filledprice</td>
 <td>long</td>
-<td>Yes</td>
-<td>Filled price</td>
+<td>yes</td>
+<td>filled price</td>
 </tr>
 <tr>
-<td>filledSize</td>
+<td>filledsize</td>
 <td>long</td>
-<td>Yes</td>
-<td>Filled size</td>
+<td>yes</td>
+<td>filled size</td>
 </tr>
 <tr>
-<td>orderType</td>
+<td>ordertype</td>
 <td>long</td>
-<td>Yes</td>
-<td>Order Type</td>
+<td>yes</td>
+<td>order type</td>
 </tr>
 <tr>
-<td>realizedPnL</td>
+<td>realizedpnl</td>
 <td>long</td>
-<td>Yes</td>
-<td>Not used in Spot</td>
+<td>yes</td>
+<td>not used in spot</td>
 </tr>
 <tr>
 <td>total</td>
 <td>long</td>
-<td>Yes</td>
-<td>Not used in Spot</td>
+<td>yes</td>
+<td>not used in spot</td>
 </tr>
 </tbody></table>
-<h2 id='query-account-fees'>Query Account Fees</h2>
+<h2 id='query-account-fees'>query account fees</h2>
 <blockquote>
-<p>Response</p>
+<p>response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"makerFee"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USD"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"takerFee"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="nl">"makerfee"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"btc-usd"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"takerfee"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p><code>GET /api/v3.2/user/fees</code></p>
+<p><code>get /api/v3.2/user/fees</code></p>
 
-<p>Retrieve user&#39;s trading fees</p>
-<h3 id='request-parameters-14'>Request Parameters</h3>
+<p>retrieve user&#39;s trading fees</p>
+<h3 id='request-parameters-14'>request parameters</h3>
 <table><thead>
 <tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
+<th>name</th>
+<th>type</th>
+<th>required</th>
+<th>description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>symbol</td>
 <td>string</td>
-<td>No</td>
-<td>Market symbol to filter for specific market</td>
+<td>no</td>
+<td>market symbol to filter for specific market</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-15'>Response Content</h3>
+<h3 id='response-content-15'>response content</h3>
 <table><thead>
 <tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
+<th>name</th>
+<th>type</th>
+<th>required</th>
+<th>description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>symbol</td>
 <td>string</td>
-<td>Yes</td>
-<td>Market symbol</td>
+<td>yes</td>
+<td>market symbol</td>
 </tr>
 <tr>
-<td>makerFee</td>
+<td>makerfee</td>
 <td>double</td>
-<td>Yes</td>
-<td>Maker fees</td>
+<td>yes</td>
+<td>maker fees</td>
 </tr>
 <tr>
-<td>takerFee</td>
+<td>takerfee</td>
 <td>double</td>
-<td>Yes</td>
-<td>Taker fees</td>
+<td>yes</td>
+<td>taker fees</td>
 </tr>
 </tbody></table>
-<h1 id='investment-endpoints'>Investment Endpoints</h1><h2 id='query-investment-products'>Query Investment Products</h2>
+<h1 id='investment-endpoints'>investment endpoints</h1><h2 id='query-investment-products'>query investment products</h2>
 <blockquote>
-<p>Response</p>
+<p>response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPENETH00001"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH Flex Savings"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Flex"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"startDate"</span><span class="p">:</span><span class="w"> </span><span class="mi">1610685918000</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"interestStartDate"</span><span class="p">:</span><span class="w"> </span><span class="mi">1610719200000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"openeth00001"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eth flex savings"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eth"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"flex"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"startdate"</span><span class="p">:</span><span class="w"> </span><span class="mi">1610685918000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"intereststartdate"</span><span class="p">:</span><span class="w"> </span><span class="mi">1610719200000</span><span class="p">,</span><span class="w">
     </span><span class="nl">"rates"</span><span class="p">:</span><span class="w">
     </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
@@ -2880,547 +2942,547 @@
       </span><span class="p">}</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="nl">"compounding"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"autoRenewSupported"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"dailyLimit"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"minSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.00000000</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"incrementalSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.00000000</span><span class="w">
+    </span><span class="nl">"autorenewsupported"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"dailylimit"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"minsize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.00000000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"incrementalsize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.00000000</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
-<p><code>GET /api/v3.2/invest/products</code></p>
+<p><code>get /api/v3.2/invest/products</code></p>
 
-<p>Get all investment products</p>
-<h3 id='request-parameters-15'>Request Parameters</h3>
-<p>(None)</p>
-<h3 id='response-content-16'>Response Content</h3>
+<p>get all investment products</p>
+<h3 id='request-parameters-15'>request parameters</h3>
+<p>(none)</p>
+<h3 id='response-content-16'>response content</h3>
 <table><thead>
 <tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
+<th>name</th>
+<th>type</th>
+<th>required</th>
+<th>description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>id</td>
 <td>string</td>
-<td>Yes</td>
-<td>Product id</td>
+<td>yes</td>
+<td>product id</td>
 </tr>
 <tr>
 <td>name</td>
 <td>string</td>
-<td>Yes</td>
-<td>Product name</td>
+<td>yes</td>
+<td>product name</td>
 </tr>
 <tr>
 <td>currency</td>
 <td>string</td>
-<td>Yes</td>
-<td>Currency</td>
+<td>yes</td>
+<td>currency</td>
 </tr>
 <tr>
 <td>type</td>
 <td>string</td>
-<td>Yes</td>
-<td>Product type</td>
+<td>yes</td>
+<td>product type</td>
 </tr>
 <tr>
-<td>startDate</td>
+<td>startdate</td>
 <td>long</td>
-<td>Yes</td>
-<td>Inventment start date</td>
+<td>yes</td>
+<td>inventment start date</td>
 </tr>
 <tr>
-<td>interestStartDate</td>
+<td>intereststartdate</td>
 <td>long</td>
-<td>Yes</td>
-<td>Interest start date</td>
+<td>yes</td>
+<td>interest start date</td>
 </tr>
 <tr>
 <td>rates</td>
-<td>RateObject[]</td>
-<td>Yes</td>
-<td>Interest rate information</td>
+<td>rateobject[]</td>
+<td>yes</td>
+<td>interest rate information</td>
 </tr>
 <tr>
 <td>compounding</td>
 <td>double</td>
-<td>Yes</td>
+<td>yes</td>
 <td>is product compounding</td>
 </tr>
 <tr>
-<td>autoRenewSupported</td>
+<td>autorenewsupported</td>
 <td>double</td>
-<td>Yes</td>
+<td>yes</td>
 <td>is product supported renew automatically</td>
 </tr>
 <tr>
-<td>dailyLimit</td>
+<td>dailylimit</td>
 <td>double</td>
-<td>Yes</td>
-<td>Daily invent amount limit</td>
+<td>yes</td>
+<td>daily invent amount limit</td>
 </tr>
 <tr>
-<td>minSize</td>
+<td>minsize</td>
 <td>double</td>
-<td>Yes</td>
-<td>Minimum invest size</td>
+<td>yes</td>
+<td>minimum invest size</td>
 </tr>
 <tr>
-<td>incrementalSize</td>
+<td>incrementalsize</td>
 <td>double</td>
-<td>Yes</td>
-<td>Invest step size</td>
+<td>yes</td>
+<td>invest step size</td>
 </tr>
 </tbody></table>
-<h3 id='rateobject'>RateObject</h3>
+<h3 id='rateobject'>rateobject</h3>
 <table><thead>
 <tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
+<th>name</th>
+<th>type</th>
+<th>required</th>
+<th>description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>days</td>
 <td>integer</td>
-<td>Yes</td>
-<td>Duration in days</td>
+<td>yes</td>
+<td>duration in days</td>
 </tr>
 <tr>
 <td>rate</td>
 <td>double</td>
-<td>Yes</td>
-<td>Interest rate</td>
+<td>yes</td>
+<td>interest rate</td>
 </tr>
 </tbody></table>
-<h2 id='deposit-investment'>Deposit Investment</h2>
+<h2 id='deposit-investment'>deposit investment</h2>
 <blockquote>
-<p>Request</p>
+<p>request</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"productId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPENUSDT0001"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"productid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"openusdt0001"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">100.99</span><span class="p">,</span><span class="w">
     </span><span class="nl">"renew"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
     </span><span class="nl">"rate"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
     </span><span class="nl">"day"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p><code>POST /api/v3.2/invest/deposit</code></p>
+<p><code>post /api/v3.2/invest/deposit</code></p>
 
-<p>Deposit an investment</p>
-<h3 id='request-parameters-16'>Request Parameters</h3>
+<p>deposit an investment</p>
+<h3 id='request-parameters-16'>request parameters</h3>
 <table><thead>
 <tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
+<th>name</th>
+<th>type</th>
+<th>required</th>
+<th>description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>productId</td>
+<td>productid</td>
 <td>string</td>
-<td>Yes</td>
-<td>Invest product id</td>
+<td>yes</td>
+<td>invest product id</td>
 </tr>
 <tr>
 <td>amount</td>
 <td>double</td>
-<td>Yes</td>
-<td>Invest amount</td>
+<td>yes</td>
+<td>invest amount</td>
 </tr>
 <tr>
 <td>renew</td>
 <td>boolean</td>
-<td>Yes</td>
+<td>yes</td>
 <td>renew automatically</td>
 </tr>
 <tr>
 <td>rate</td>
 <td>double</td>
-<td>Yes</td>
-<td>Interest rate</td>
+<td>yes</td>
+<td>interest rate</td>
 </tr>
 <tr>
 <td>day</td>
 <td>integer</td>
-<td>Yes</td>
-<td>Duration in days</td>
+<td>yes</td>
+<td>duration in days</td>
 </tr>
 </tbody></table>
-<h2 id='renew-investment'>Renew Investment</h2>
+<h2 id='renew-investment'>renew investment</h2>
 <blockquote>
-<p>Request</p>
+<p>request</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"autoRenew"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="nl">"orderid"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"autorenew"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
-<p>Response</p>
+<p>response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"autoRenew"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="nl">"orderid"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"autorenew"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p><code>POST /api/v3.2/invest/renew</code></p>
+<p><code>post /api/v3.2/invest/renew</code></p>
 
-<p>Renew an investment order</p>
-<h3 id='request-parameters-17'>Request Parameters</h3>
+<p>renew an investment order</p>
+<h3 id='request-parameters-17'>request parameters</h3>
 <table><thead>
 <tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
+<th>name</th>
+<th>type</th>
+<th>required</th>
+<th>description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>orderId</td>
+<td>orderid</td>
 <td>integer</td>
-<td>Yes</td>
-<td>Investment order id</td>
+<td>yes</td>
+<td>investment order id</td>
 </tr>
 <tr>
-<td>autoRenew</td>
+<td>autorenew</td>
 <td>boolean</td>
-<td>Yes</td>
+<td>yes</td>
 <td>renew automatically</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-17'>Response Content</h3>
+<h3 id='response-content-17'>response content</h3>
 <table><thead>
 <tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
+<th>name</th>
+<th>type</th>
+<th>required</th>
+<th>description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>orderId</td>
+<td>orderid</td>
 <td>integer</td>
-<td>Yes</td>
-<td>Investment order id</td>
+<td>yes</td>
+<td>investment order id</td>
 </tr>
 <tr>
-<td>autoRenew</td>
+<td>autorenew</td>
 <td>boolean</td>
-<td>Yes</td>
-<td>status of autoRenew flag</td>
+<td>yes</td>
+<td>status of autorenew flag</td>
 </tr>
 </tbody></table>
-<h2 id='redeem-investment'>Redeem Investment</h2>
+<h2 id='redeem-investment'>redeem investment</h2>
 <blockquote>
-<p>Request</p>
+<p>request</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderid"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">12.34</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p><code>POST /api/v3.2/invest/redeem</code></p>
+<p><code>post /api/v3.2/invest/redeem</code></p>
 
-<p>Redeem an investment order</p>
-<h3 id='request-parameters-18'>Request Parameters</h3>
+<p>redeem an investment order</p>
+<h3 id='request-parameters-18'>request parameters</h3>
 <table><thead>
 <tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
+<th>name</th>
+<th>type</th>
+<th>required</th>
+<th>description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>orderId</td>
+<td>orderid</td>
 <td>integer</td>
-<td>Yes</td>
-<td>Investment order id</td>
+<td>yes</td>
+<td>investment order id</td>
 </tr>
 <tr>
 <td>amount</td>
 <td>double</td>
-<td>Yes</td>
-<td>Redeem amount</td>
+<td>yes</td>
+<td>redeem amount</td>
 </tr>
 </tbody></table>
-<h2 id='query-investment-orders'>Query Investment Orders</h2>
+<h2 id='query-investment-orders'>query investment orders</h2>
 <blockquote>
-<p>Response</p>
+<p>response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">456</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH Flex Savings"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Flex"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eth flex savings"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eth"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"flex"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.15</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"investAmt"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.00000000</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"interestEarned"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00031507</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"nextInterestPayoutTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1610632800000</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"startTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"endTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"investamt"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.00000000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"interestearned"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00031507</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"nextinterestpayouttime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1610632800000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"starttime"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"endtime"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"duration"</span><span class="p">:</span><span class="w"> </span><span class="mi">86400000</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"payoutLockTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">300000</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"autoRenew"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"payoutlocktime"</span><span class="p">:</span><span class="w"> </span><span class="mi">300000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"autorenew"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="nl">"compounding"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"autoRenewSupported"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"dailyLimit"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"redemptionProcessing"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="nl">"autorenewsupported"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"dailylimit"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"redemptionprocessing"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
-<p><code>GET /api/v3.2/invest/orders</code></p>
+<p><code>get /api/v3.2/invest/orders</code></p>
 
-<p>Query investment orders</p>
-<h3 id='response-content-18'>Response Content</h3>
+<p>query investment orders</p>
+<h3 id='response-content-18'>response content</h3>
 <table><thead>
 <tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
+<th>name</th>
+<th>type</th>
+<th>required</th>
+<th>description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>id</td>
 <td>integer</td>
-<td>Yes</td>
-<td>Order id</td>
+<td>yes</td>
+<td>order id</td>
 </tr>
 <tr>
 <td>name</td>
 <td>string</td>
-<td>Yes</td>
-<td>Product name</td>
+<td>yes</td>
+<td>product name</td>
 </tr>
 <tr>
 <td>currency</td>
 <td>string</td>
-<td>Yes</td>
-<td>Currency</td>
+<td>yes</td>
+<td>currency</td>
 </tr>
 <tr>
 <td>type</td>
 <td>string</td>
-<td>Yes</td>
-<td>Product type</td>
+<td>yes</td>
+<td>product type</td>
 </tr>
 <tr>
 <td>rate</td>
 <td>boolean</td>
-<td>Yes</td>
-<td>Interest rate</td>
+<td>yes</td>
+<td>interest rate</td>
 </tr>
 <tr>
-<td>investAmt</td>
+<td>investamt</td>
 <td>boolean</td>
-<td>Yes</td>
-<td>Amount</td>
+<td>yes</td>
+<td>amount</td>
 </tr>
 <tr>
-<td>interestEarned</td>
+<td>interestearned</td>
 <td>boolean</td>
-<td>Yes</td>
-<td>Intereset earned</td>
+<td>yes</td>
+<td>intereset earned</td>
 </tr>
 <tr>
-<td>nextInterestPayoutTime</td>
+<td>nextinterestpayouttime</td>
 <td>boolean</td>
-<td>Yes</td>
-<td>Next interest payout time</td>
+<td>yes</td>
+<td>next interest payout time</td>
 </tr>
 <tr>
-<td>startTime</td>
+<td>starttime</td>
 <td>boolean</td>
-<td>Yes</td>
-<td>Start time</td>
+<td>yes</td>
+<td>start time</td>
 </tr>
 <tr>
-<td>endTime</td>
+<td>endtime</td>
 <td>boolean</td>
-<td>Yes</td>
-<td>End time</td>
+<td>yes</td>
+<td>end time</td>
 </tr>
 <tr>
 <td>duration</td>
 <td>boolean</td>
-<td>Yes</td>
-<td>Duration</td>
+<td>yes</td>
+<td>duration</td>
 </tr>
 <tr>
-<td>payoutLockTime</td>
+<td>payoutlocktime</td>
 <td>boolean</td>
-<td>Yes</td>
-<td>Lock time of payout</td>
+<td>yes</td>
+<td>lock time of payout</td>
 </tr>
 <tr>
-<td>autoRenew</td>
+<td>autorenew</td>
 <td>boolean</td>
-<td>Yes</td>
+<td>yes</td>
 <td>renew automatically</td>
 </tr>
 <tr>
 <td>compounding</td>
 <td>boolean</td>
-<td>Yes</td>
+<td>yes</td>
 <td>is compounding</td>
 </tr>
 <tr>
-<td>autoRenewSupported</td>
+<td>autorenewsupported</td>
 <td>boolean</td>
-<td>Yes</td>
+<td>yes</td>
 <td>is renew automatically supported</td>
 </tr>
 <tr>
-<td>redemptionProcessing</td>
+<td>redemptionprocessing</td>
 <td>boolean</td>
-<td>Yes</td>
+<td>yes</td>
 <td>is redemption processing</td>
 </tr>
 </tbody></table>
-<h2 id='query-investment-history'>Query Investment History</h2>
+<h2 id='query-investment-history'>query investment history</h2>
 <blockquote>
-<p>Response</p>
+<p>response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"txnTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1598918400000</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT Flex Savings"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"txntime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1598918400000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"usdt flex savings"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"usdt"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Flex"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"txnType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INVEST_SERVICE_TYPE_DEPOSIT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"flex"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"txntype"</span><span class="p">:</span><span class="w"> </span><span class="s2">"invest_service_type_deposit"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"totalAmount"</span><span class="p">:</span><span class="w"> </span><span class="mi">2000</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"interestEarned"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.22</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalamount"</span><span class="p">:</span><span class="w"> </span><span class="mi">2000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"interestearned"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.22</span><span class="p">,</span><span class="w">
     </span><span class="nl">"duration"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
-<p><code>GET /api/v3.2/invest/history</code></p>
+<p><code>get /api/v3.2/invest/history</code></p>
 
-<p>Query investment history</p>
-<h3 id='response-content-19'>Response Content</h3>
+<p>query investment history</p>
+<h3 id='response-content-19'>response content</h3>
 <table><thead>
 <tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
+<th>name</th>
+<th>type</th>
+<th>required</th>
+<th>description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>txnTime</td>
+<td>txntime</td>
 <td>integer</td>
-<td>Yes</td>
-<td>Transaction time</td>
+<td>yes</td>
+<td>transaction time</td>
 </tr>
 <tr>
 <td>name</td>
 <td>string</td>
-<td>Yes</td>
-<td>Product name</td>
+<td>yes</td>
+<td>product name</td>
 </tr>
 <tr>
 <td>currency</td>
 <td>string</td>
-<td>Yes</td>
-<td>Currency</td>
+<td>yes</td>
+<td>currency</td>
 </tr>
 <tr>
 <td>rate</td>
 <td>string</td>
-<td>Yes</td>
-<td>Interest rate</td>
+<td>yes</td>
+<td>interest rate</td>
 </tr>
 <tr>
 <td>type</td>
 <td>boolean</td>
-<td>Yes</td>
-<td>Product type</td>
+<td>yes</td>
+<td>product type</td>
 </tr>
 <tr>
-<td>txnType</td>
+<td>txntype</td>
 <td>boolean</td>
-<td>Yes</td>
-<td>Transaction type</td>
+<td>yes</td>
+<td>transaction type</td>
 </tr>
 <tr>
 <td>amount</td>
 <td>boolean</td>
-<td>Yes</td>
-<td>Transaction amount</td>
+<td>yes</td>
+<td>transaction amount</td>
 </tr>
 <tr>
-<td>totalAmount</td>
+<td>totalamount</td>
 <td>boolean</td>
-<td>Yes</td>
-<td>Total amount of the investment</td>
+<td>yes</td>
+<td>total amount of the investment</td>
 </tr>
 <tr>
-<td>interestEarned</td>
+<td>interestearned</td>
 <td>boolean</td>
-<td>Yes</td>
-<td>Interest earned</td>
+<td>yes</td>
+<td>interest earned</td>
 </tr>
 <tr>
 <td>duration</td>
 <td>boolean</td>
-<td>Yes</td>
-<td>Duration</td>
+<td>yes</td>
+<td>duration</td>
 </tr>
 </tbody></table>
-<h1 id='websocket-streams'>Websocket Streams</h1><h2 id='subscription'>Subscription</h2>
+<h1 id='websocket-streams'>websocket streams</h1><h2 id='subscription'>subscription</h2>
 <blockquote>
-<p>Request</p>
+<p>request</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"op"</span><span class="p">:</span><span class="w"> </span><span class="s2">"subscribe"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"orderBookApi:BTC-USD_0"</span><span class="w">
+    </span><span class="s2">"orderbookapi:btc-usd_0"</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
-<p>Response</p>
+<p>response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"subscribe"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"channel"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"orderBookApi:BTC-USD_0"</span><span class="w">
+    </span><span class="s2">"orderbookapi:btc-usd_0"</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>To subscribe to a websocket feed</p>
-<h3 id='request-parameters-19'>Request Parameters</h3>
+<p>to subscribe to a websocket feed</p>
+<h3 id='request-parameters-19'>request parameters</h3>
 <table><thead>
 <tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
+<th>name</th>
+<th>type</th>
+<th>required</th>
+<th>description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>op</td>
 <td>string</td>
-<td>Yes</td>
-<td>Operation. <code>subscribe</code> will subscribe to the topics provided in <code>args</code>. <code>unsubscribe</code> will unsubscribe from the topics</td>
+<td>yes</td>
+<td>operation. <code>subscribe</code> will subscribe to the topics provided in <code>args</code>. <code>unsubscribe</code> will unsubscribe from the topics</td>
 </tr>
 <tr>
 <td>args</td>
 <td>array</td>
-<td>Yes</td>
-<td>Topics to subscribe to.</td>
+<td>yes</td>
+<td>topics to subscribe to.</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-20'>Response Content</h3>
+<h3 id='response-content-20'>response content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3919,7 +3981,7 @@
 <td>Trade timestamp</td>
 </tr>
 </tbody></table>
-<h2 id='authentication'>Authentication</h2>
+<h2 id='authentication-2'>Authentication</h2>
 <blockquote>
 <p>Request</p>
 </blockquote>

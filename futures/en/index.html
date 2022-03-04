@@ -547,7 +547,7 @@
 <li>Generated signature will be:
 
 <ul>
-<li>btse-sign: <code>14b986706a4368221e0af14a6725377161805e7a57d568220478cb3590ce532d4fad4ac68e6c02a14afced6a0619bfd3</code></li>
+<li>btse-sign: <code>ea4f1f2b43a0f4d750ae560c5274d6214d140fcab3093da5f4a83e36828535bd2ba7b12160cd12199596f422c8883333</code></li>
 </ul></li>
 </ul>
 <h3 id='example-2-place-an-order'>Example 2: Place an order</h3>
@@ -628,7 +628,14 @@
 <li>27: TRANSFER_SUCCESSFUL = Transfer funds between futures and spot is successful</li>
 <li>41: ERROR_INVALID_RISK_LIMIT = Invalid risk limit was specified</li>
 <li>64: STATUS_LIQUIDATION = Account is undergoing liquidation</li>
+<li>65: ORDER_ACITVE = Order is active</li>
+<li>76: ORDER_TYPE_LIMIT = Limit order</li>
+<li>77: ORDER_TYPE_MARKET = Market order</li>
+<li>80: ORDER_TYPE_PEG = Peg/Algo order</li>
+<li>81: ORDER_TYPE_OTC = Otc order</li>
+<li>88: ORDER_INACTIVE = Order is inactive</li>
 <li>101: FUTURES_ORDER_PRICE_OUTSIDE_LIQUIDATION_PRICE = Futures order is outside of liquidation price</li>
+<li>123: AMEND_ORDER = Order amended</li>
 <li>1003: ORDER_LIQUIDATION = Order is undergoing liquidation</li>
 <li>1004: ORDER_ADL = Order is undergoing ADL</li>
 </ul>
@@ -1597,7 +1604,7 @@
 <td>status</td>
 <td>integer</td>
 <td>Yes</td>
-<td>Order status<br/>    2: Order Inserted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found</td>
+<td>Order status<br/> 2: Order Inserted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found</td>
 </tr>
 <tr>
 <td>stopPrice</td>
@@ -1879,7 +1886,7 @@
 <td>status</td>
 <td>integer</td>
 <td>Yes</td>
-<td>Order status<br/>    2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found</td>
+<td>Order status<br/> 2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found</td>
 </tr>
 <tr>
 <td>stopPrice</td>
@@ -1958,7 +1965,9 @@
   </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Order ID"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Custom Order ID"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"slide"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="nl">"slide"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">40000</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
@@ -2018,7 +2027,7 @@
 <td>type</td>
 <td>string</td>
 <td>Yes</td>
-<td>Type of amendmend<br/><code>PRICE</code>: To amend order price<br/><code>SIZE</code>: To amend order size<br/>TRIGGER: To amend trigger price</td>
+<td>Type of amendmend<br/><code>PRICE</code>: To amend order price<br/><code>SIZE</code>: To amend order size<br/><code>TRIGGER</code>: To amend trigger price<br/><code>ALL</code>: to amend multiple fields</td>
 </tr>
 <tr>
 <td>value</td>
@@ -2031,6 +2040,24 @@
 <td>boolean</td>
 <td>No</td>
 <td>Used for Post-Only orders. When set to true will set price to best bid/ask</td>
+</tr>
+<tr>
+<td>orderPrice</td>
+<td>number</td>
+<td>No</td>
+<td>order price to be amended</td>
+</tr>
+<tr>
+<td>orderSize</td>
+<td>number</td>
+<td>No</td>
+<td>order size to be amended</td>
+</tr>
+<tr>
+<td>triggerPrice</td>
+<td>number</td>
+<td>No</td>
+<td>trigger price to be amended</td>
 </tr>
 </tbody></table>
 <h3 id='response-content-9'>Response Content</h3>
@@ -2100,7 +2127,7 @@
 <td>status</td>
 <td>integer</td>
 <td>Yes</td>
-<td>Order status<br/>    2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found</td>
+<td>Order status<br/> 2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found</td>
 </tr>
 <tr>
 <td>stopPrice</td>
@@ -2280,7 +2307,7 @@
 <td>status</td>
 <td>integer</td>
 <td>Yes</td>
-<td>Order status<br/>    2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found</td>
+<td>Order status<br/> 2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found</td>
 </tr>
 <tr>
 <td>stopPrice</td>
@@ -2466,13 +2493,13 @@
 </tr>
 <tr>
 <td>orderType</td>
-<td>string</td>
+<td>double</td>
 <td>Yes</td>
 <td>Order type <br/>76: Limit Order<br/>77: Market order<br/>80: Algo order</td>
 </tr>
 <tr>
 <td>postOnly</td>
-<td>boolean</td>
+<td>bool</td>
 <td>Yes</td>
 <td>Indicates if order is a post only order</td>
 </tr>
@@ -2495,14 +2522,8 @@
 <td>Cancelled size</td>
 </tr>
 <tr>
-<td>status</td>
-<td>integer</td>
-<td>Yes</td>
-<td>Order status<br/>    2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found</td>
-</tr>
-<tr>
 <td>stopPrice</td>
-<td>string</td>
+<td>double</td>
 <td>Yes</td>
 <td>Stop price</td>
 </tr>
@@ -2520,19 +2541,19 @@
 </tr>
 <tr>
 <td>trigger</td>
-<td>string</td>
+<td>bool</td>
 <td>Yes</td>
 <td>Indicator if order is a trigger order</td>
 </tr>
 <tr>
 <td>triggerPrice</td>
-<td>string</td>
+<td>double</td>
 <td>Yes</td>
 <td>Order trigger price, returns 0 if order is not a trigger order</td>
 </tr>
 <tr>
 <td>averageFillPrice</td>
-<td>string</td>
+<td>double</td>
 <td>Yes</td>
 <td>Average filled price. Returns the average filled price for partially transacted orders</td>
 </tr>
@@ -2544,13 +2565,13 @@
 </tr>
 <tr>
 <td>stealth</td>
-<td>string</td>
+<td>double</td>
 <td>Yes</td>
 <td>Stealth value of order</td>
 </tr>
 <tr>
 <td>deviation</td>
-<td>string</td>
+<td>double</td>
 <td>Yes</td>
 <td>Deviation value of order</td>
 </tr>
@@ -2558,7 +2579,7 @@
 <td>orderState</td>
 <td>string</td>
 <td>Yes</td>
-<td><code>ORDER_INSERTED</code>: Order is inserted successfully<br/><code>ORDER_CANCELLED</code>: Order is cancelled successfully<br/><code>ORDER_FULLY_TRANSACTED</code>: Order is fully transacted<br/><code>ORDER_PARTIALLY_TRANSACTED</code>: Order is partially transacted<br/><code>STATUS_INACTIVE</code>: Order is no longer active</td>
+<td><code>STATUS_ACTIVE</code>, <code>STATUS_INACTIVE</code></td>
 </tr>
 </tbody></table>
 <h2 id='query-trades-fills-2'>Query Trades Fills</h2>
@@ -2676,7 +2697,7 @@
 <td>side</td>
 <td>string</td>
 <td>Yes</td>
-<td>Trade side. Values are: [<code>Buy</code>, <code>SELL</code>]</td>
+<td>Trade side. Values are: [<code>BUY</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>price</td>
@@ -3059,7 +3080,7 @@
 <td>status</td>
 <td>integer</td>
 <td>Yes</td>
-<td>Order status<br/>    2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found</td>
+<td>Order status<br/> 2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found</td>
 </tr>
 <tr>
 <td>stopPrice</td>
