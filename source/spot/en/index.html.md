@@ -189,6 +189,12 @@ When connecting up the BTSE API, you will come across number codes that represen
 * 27: TRANSFER_SUCCESSFUL = Transfer funds between futures and spot is successful
 * 41: ERROR_INVALID_RISK_LIMIT = Invalid risk limit was specified
 * 64: STATUS_LIQUIDATION = Account is undergoing liquidation
+* 65: ORDER_ACITVE = Order is active
+* 76: ORDER_TYPE_LIMIT = Limit order
+* 77: ORDER_TYPE_MARKET = Market order
+* 80: ORDER_TYPE_PEG = Peg/Algo order
+* 81: ORDER_TYPE_OTC = Otc order
+* 88: ORDER_INACTIVE = Order is inactive
 * 101: FUTURES_ORDER_PRICE_OUTSIDE_LIQUIDATION_PRICE = Futures order is outside of liquidation price
 * 123: AMEND_ORDER = Order amended
 * 1003: ORDER_LIQUIDATION = Order is undergoing liquidation
@@ -922,37 +928,37 @@ Dead-man's switch allows the trader to send in a timeout value which is a Time t
 
 ```json
 {
-  "averageFillPrice": 0,
-  "cancelDuration": 0,
-  "clOrderID": "string",
-  "fillSize": 0,
-  "filledSize": 3,
-  "orderID": "string",
-  "orderState": "STATUS_ACTIVE",
-  "orderType": 0,
-  "orderValue": 20.625,
-  "pegPriceDeviation": 3,
-  "pegPriceMax": 0,
-  "pegPriceMin": 0,
-  "price": 6875,
+  "orderType": 76,
+  "price": 2142.5,
+  "size": 0.001,
   "side": "BUY",
-  "size": 4,
-  "symbol": "string",
-  "timestamp": 0,
-  "trailValue": 0,
+  "orderValue": 2.1425,
+  "filledSize": 0,
+  "pegPriceMin": 0,
+  "pegPriceMax": 0,
+  "pegPriceDeviation": 0,
+  "cancelDuration": 0,
+  "timestamp": 1642992096246,
+  "orderID": "946ec252-2a85-40a1-9707-6b737c75b394",
   "triggerOrder": false,
-  "triggerOrderType": 1001,
-  "triggerOriginalPrice": 0,
   "triggerPrice": 0,
-  "triggerStopPrice": 0,
+  "triggerOriginalPrice": 0,
+  "triggerOrderType": 0,
   "triggerTrailingStopDeviation": 0,
-  "triggered": true
+  "triggerStopPrice": 0,
+  "symbol": "ETH-USD",
+  "trailValue": 0,
+  "averageFillPrice": 0,
+  "fillSize": 0,
+  "clOrderID": "_rtifs1642992095163",
+  "orderState": "STATUS_ACTIVE",
+  "triggered": false
 }
 ```
 
 `GET /api/v3.2/user/open_orders`
 
-Retrieves open orders that have not yet been matched. This is also used to check an order for its status. If an order has been cancelled or recently transacted, the `status` field will indicate the state of the order. The state of an order returned in `status` field will only be made available for 30mins. After 30mins, this API will only return if the order is still active. If not it will return that the order is not found.
+Retrieves open orders that have not yet been matched or matched recently.
 
 ### Request Parameters
 
@@ -965,29 +971,33 @@ Retrieves open orders that have not yet been matched. This is also used to check
 
 ### Response Content
 
-| Name             | Type    | Required | Description                                                                                                                                                                                                                                                                                         |
-| ---              | ---     | ---      | ---                                                                                                                                                                                                                                                                                                 |
-| orderType        | string  | Yes      | Order type <br/>76: Limit Order<br/>77: Market order<br/>80: Algo order                                                                                                                                                                                                                             |
-| price            | double  | Yes      | Order price                                                                                                                                                                                                                                                                                         |
-| size             | double  | Yes      | Order size                                                                                                                                                                                                                                                                                          |
-| side             | string  | Yes      | Order side<br/>BUY or SELL                                                                                                                                                                                                                                                                          |
-| size             | double  | Yes      | Order size                                                                                                                                                                                                                                                                                          |
-| symbol           | string  | Yes      | Market symbol                                                                                                                                                                                                                                                                                       |
-| clOrderID        | string  | Yes      | Customer tag sent in by trader                                                                                                                                                                                                                                                                      |
-| fillSize         | string  | Yes      | Trade filled size                                                                                                                                                                                                                                                                                   |
-| orderID          | string  | Yes      | Order ID                                                                                                                                                                                                                                                                                            |
-| postOnly         | boolean | Yes      | Indicates if order is a post only order                                                                                                                                                                                                                                                             |
-| status           | integer | Yes      | Order status<br/>	2: Order Inserted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>8: Insufficient Balance<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request Failed |
-| stopPrice        | string  | Yes      | Stop price                                                                                                                                                                                                                                                                                          |
-| time_in_force    | string  | Yes      | Order validity                                                                                                                                                                                                                                                                                      |
-| timestamp        | string  | Yes      | Order timestamp                                                                                                                                                                                                                                                                                     |
-| trigger          | string  | Yes      | Indicator if order is a trigger order                                                                                                                                                                                                                                                               |
-| triggerPrice     | string  | Yes      | Order trigger price, returns 0 if order is not a trigger order                                                                                                                                                                                                                                      |
-| averageFillPrice | string  | Yes      | Average filled price. Returns the average filled price for partially transacted orders                                                                                                                                                                                                              |
-| message          | string  | Yes      | Trade messages                                                                                                                                                                                                                                                                                      |
-| stealth          | string  | Yes      | Stealth value of order                                                                                                                                                                                                                                                                              |
-| deviation        | string  | Yes      | Deviation value of order                                                                                                                                                                                                                                                                            |
-| orderState       | string  | Yes      | `ORDER_INSERTED`: Order is inserted successfully<br/>`ORDER_CANCELLED`: Order is cancelled successfully<br/>`ORDER_FULLY_TRANSACTED`: Order is fully transacted<br/>`ORDER_PARTIALLY_TRANSACTED`: Order is partially transacted<br/>`STATUS_INACTIVE`: Order is no longer active                    |
+| Name                         | Type   | Required | Description                                                                            |
+| ---                          | ---    | ---      | ---                                                                                    |
+| orderType                    | double | Yes      | Order type <br/>76: Limit Order<br/>77: Market order<br/>80: Algo order                |
+| price                        | double | Yes      | Order price                                                                            |
+| size                         | double | Yes      | Order size                                                                             |
+| side                         | string | Yes      | Order side<br/>`BUY` or `SELL`                                                         |
+| orderValue                   | double | Yes      | Total value of of this order                                                           |
+| filledSize                   | double | Yes      | Filled size                                                                            |
+| pegPriceMin                  | double | Yes      | Minimum possible peg price this takes precedence over pegPriceDeviation                |
+| pegPriceMax                  | double | Yes      | Maximum possible peg price this takes precedence over pegPriceDeviation                |
+| pegPriceDeviation            | double | Yes      | Percentage deviation from Index price                                                  |
+| cancelDuration               | double | Yes      | Order expiration time if not 0                                                         |
+| timestamp                    | double | Yes      | Order placement time                                                                   |
+| orderID                      | string | Yes      | Order Id                                                                               |
+| triggerOrder                 | bool   | Yes      | Indicator if order is a trigger order                                                  |
+| triggerPrice                 | double | Yes      | Order trigger price, returns 0 if order is not a trigger order                         |
+| triggerOriginalPrice         | double | Yes      | Price of the original order. Only valid if it's a triggered order                      |
+| triggerOrderType             | double | Yes      | Order type <br/>`76: Limit Order`<br/>`77: Market order`<br/>`80: Algo order`          |
+| triggerTrailingStopDeviation | double | Yes      | Percentage deviation from stop price                                                   |
+| triggerStopPrice             | double | Yes      | Stop price, Algo Order only                                                            |
+| symbol                       | string | Yes      | Market name (e.g. BTC-USD)                                                             |
+| trailValue                   | double | Yes      | Trail value                                                                            |
+| averageFillPrice             | string | Yes      | Average filled price. Returns the average filled price for partially transacted orders |
+| filledSize                   | double | Yes      | Filled size                                                                            |
+| clOrderID                    | string | Yes      | Customer order ID                                                                      |
+| orderState                   | string | Yes      | `STATUS_ACTIVE`, `STATUS_INACTIVE`                                                     |
+| triggered                    | bool   | Yes      | Indicate whether the order is triiggered                                               |
 
 ## Query Trades Fills
 
