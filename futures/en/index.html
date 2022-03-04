@@ -2429,7 +2429,7 @@
 </span></code></pre></div>
 <p><code>GET /api/v2.1/user/open_orders</code></p>
 
-<p>Retrieves open orders that have not yet been matched. This is also used to check an order for its status. If an order has been cancelled or recently transacted, the <code>status</code> field will indicate the state of the order. The state of an order returned in <code>status</code> field will only be made available for 30mins. After 30mins, this API will only return if the order is still active. If not it will return that the order is not found.</p>
+<p>Retrieves open orders that have not yet been matched or matched recently.</p>
 <h3 id='request-parameters-12'>Request Parameters</h3>
 <table><thead>
 <tr>
