@@ -961,7 +961,7 @@ Dead-man's switch allows the trader to send in a timeout value which is a Time t
 
 `GET /api/v2.1/user/open_orders`
 
-Retrieves open orders that have not yet been matched. This is also used to check an order for its status. If an order has been cancelled or recently transacted, the `status` field will indicate the state of the order. The state of an order returned in `status` field will only be made available for 30mins. After 30mins, this API will only return if the order is still active. If not it will return that the order is not found.
+Retrieves open orders that have not yet been matched or matched recently.
 
 ### Request Parameters
 
