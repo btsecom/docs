@@ -13,6 +13,11 @@ headingLevel: 2
 
 # Change Log
 
+## Version 1.1 (16th March 2022)
+
+* Addition of request parameter [`side`](#quote-stream) to allow return one side quote.
+
+
 ## Version 1.0 (19th November 2021)
 
 * Addition of [`quote`](#quote-stream) websocket topic to subscribe to price streams on the OTC market
@@ -111,7 +116,6 @@ echo -n "/ws/otc1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6726e
 (stdin)= c410d38c681579adb335885800cff24c66171b7cc8376cfe43da1408c581748156b89bcc5a115bb496413bda481139fb
 ```
 
-
 ## Quote Stream
 
 > Request
@@ -127,6 +131,26 @@ echo -n "/ws/otc1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6726e
   }
 }
 ```
+
+```json
+{
+  "op": "unsubscribe-quote",
+  "symbol": "BTC-USD",
+  "side": "buy",
+  "clOrderId": "ClientOrder1",
+  "quantity": {
+    "quantity": 1,
+    "currency": "BTC"
+  }
+}
+```
+
+```json
+{
+  "op": "unsubscribe-quote-all"
+}
+```
+
 
 > Response
 
@@ -154,28 +178,29 @@ Receive quote streams by subscribing to the `quote` websocket. The websocket top
 
 | Name      | Type   | Required | Description                                                                                                             |
 | ---       | ---    | ---      | ---                                                                                                                     |
-| op        | string | Yes      | Operation, in this case its `quote`                                                                                     |
+| op        | string | Yes      | Operation, in this case it is `quote`, `unsubscribe-quote`, or `unsubscribe-quote-all`                                  |
 | symbol    | string | Yes      | Market symbol, refer to `getMarkets` API                                                                                |
+| side      | string | No       | Quote side, `buy` or `sell`, case sensitive. Both sides will be returned when this field is empty/null                  |
 | clOrderId | string | No       | Client custom order Id                                                                                                  |
 | quantity  | double | Yes      | Order quantity                                                                                                          |
 | currency  | string | Yes      | Can be either in the base or quote currency. If specified in the base currency, then the quote stream will respond with |
 
 ### Response Content
 
-| Name            | Type   | Required | Description                                                                                                       |
-| ---             | ---    | ---      | ---                                                                                                               |
-| topic           | string | Yes      | Websocket topic                                                                                                   |
-| buyQuoteId      | string | Yes      | Quote Id for the buy side. If the value is empty / null, it means that you websocket stream is not authenticated  |
-| sellQuoteId     | string | Yes      | Quote Id for the sell side. If the value is empty / null, it means that you websocket stream is not authenticated |
-| clOrderId       | string | Yes      | User customer Order Id                                                                                            |
-| buyQuantity     | double | Yes      | Quantity to purchase based on the quote request                                                                   |
-| buyUnitPrice    | double | Yes      | Unit price per unit of the base symbol                                                                            |
-| buyTotalAmount  | double | Yes      | Total price to pay in quote currency                                                                              |
-| sellQuantity    | double | Yes      | Quantity to sell based on the quote request                                                                       |
-| sellUnitPrice   | double | Yes      | Unit price per unit of the base symbol                                                                            |
-| sellTotalAmount | double | Yes      | Total price to pay in quote currency                                                                              |
-| status          | string | No       | Status of the response                                                                                            |
-| reason          | string | No       | If an error is returned, the reason field will contain the reasons for the error                                  |
+| Name            | Type   | Required | Description                                                                                                                                         |
+| ---             | ---    | ---      | ---                                                                                                                                                 |
+| topic           | string | Yes      | Websocket topic                                                                                                                                     |
+| buyQuoteId      | string | No       | Quote Id for the buy side. If the value is empty / null, it means that you websocket stream is not authenticated or you doesn't subscribe this side |
+| sellQuoteId     | string | No       | Quote Id for the sell side. If the value is empty / null, it means that you websocket stream is not authenticated or you doesn't subscribe this side|
+| clOrderId       | string | Yes      | User customer Order Id                                                                                                                              |
+| buyQuantity     | double | No       | Quantity to purchase based on the quote request. If the value is null, it means that you doesn't subscribe this side                                |
+| buyUnitPrice    | double | No       | Unit price per unit of the base symbol. If the value is null, it means that you doesn't subscribe this side                                         |
+| buyTotalAmount  | double | No       | Total price to pay in quote currency. If the value is null, it means that you doesn't subscribe this side                                           |
+| sellQuantity    | double | No       | Quantity to sell based on the quote request. If the value is null, it means that you doesn't subscribe this side                                    |
+| sellUnitPrice   | double | No       | Unit price per unit of the base symbol. If the value is null, it means that you doesn't subscribe this side                                         |
+| sellTotalAmount | double | No       | Total price to pay in quote currency. If the value is null, it means that you doesn't subscribe this side                                           |
+| status          | string | No       | Status of the response. If the value is null, it means that you doesn't subscribe this side                                                         |
+| reason          | string | No       | If an error is returned, the reason field will contain the reasons for the error                                                                    |
 
 
 </section>

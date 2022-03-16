@@ -13,7 +13,7 @@ headingLevel: 2
 
 # Change Log
 
-## Version 1.1.3 ()
+## Version 1.1.3 (16th March 2022)
 
 * Addition of request parameter [`side`](#quote-stream) to allow return one side quote.
 
@@ -543,7 +543,7 @@ Receive quote streams by subscribing to the `quote` websocket. The websocket top
 | ---       | ---    | ---      | ---                                                                                                                     |
 | op        | string | Yes      | Operation, in this case it is `quote`, `unsubscribe-quote`, or `unsubscribe-quote-all`                                  |
 | symbol    | string | Yes      | Market symbol, refer to `getMarkets` API                                                                                |
-| side      | string | No       | Quote side, `buy` or `sell`, case sensitive. Both side will be returned when this field is empty/null                   |
+| side      | string | No       | Quote side, `buy` or `sell`, case sensitive. Both sides will be returned when this field is empty/null                  |
 | clOrderId | string | No       | Client custom order Id                                                                                                  |
 | quantity  | double | Yes      | Order quantity                                                                                                          |
 | currency  | string | Yes      | Can be either in the base or quote currency. If specified in the base currency, then the quote stream will respond with |

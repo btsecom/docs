@@ -13,6 +13,10 @@ headingLevel: 2
 
 # Change Log
 
+## Version 1.0.2 (16th March 2022)
+
+* Max decimal supported for [`withdraw funds`](#withdraw-funds) is 8, will return `CRYPTO_WITHDRAW_INVALID_AMOUNT (error code: 3506)` if exceeds
+
 ## Version 1.0.1 (25th January 2022)
 
 * Addition of [`exchangeRate`](#query-exchange-rate-between-assets) api to get current exchange rate between assets
@@ -127,6 +131,10 @@ When connecting up the BTSE API, you will come across number codes that represen
 * 101: FUTURES_ORDER_PRICE_OUTSIDE_LIQUIDATION_PRICE = Futures order is outside of liquidation price
 * 1003: ORDER_LIQUIDATION = Order is undergoing liquidation
 * 1004: ORDER_ADL = Order is undergoing ADL
+* 3505: Invalid protocol
+* 3506: Invalid withdraw amount
+* 3507: Invalid withdraw address
+* 3508: Withdraw failed
 
 
 # Public Endpoints
@@ -377,7 +385,7 @@ Performs a wallet withdrawal. To use this API, `Withdraw` permission is required
 | currency | string | Yes      | Currency-Network pair <br> Currency list can be retrieved from [Available currency list for action](#query-available-currency-list-for-wallet-action) <br> Network list can be retrieved from [Available network list for currency](#query-available-crypto-network-list-for-currency) |
 | address  | string | Yes      | Blockchain address                                                                                                                                                                                                                                                                     |
 | tag      | string | Yes      | Tag, used only by some blockchain (eg. XRP)                                                                                                                                                                                                                                            |
-| amount   | string | Yes      | Amount to withdraw                                                                                                                                                                                                                                                                     |
+| amount   | string | Yes      | Amount to withdraw (Max decimal supported is `8` for all currencies). Will return Invalid withdraw amount (code: 3506) if exceeds                                                                                                                                                      |
 
 ### Response Content
 
