@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-1-1-3-16th-march-2022" class="toc-h2 toc-link" data-title="Version 1.1.3 (16th March 2022)">Version 1.1.3 (16th March 2022)</a>
+                  </li>
+                  <li>
                     <a href="#version-1-1-2-25th-january-2022" class="toc-h2 toc-link" data-title="Version 1.1.2 (25th January 2022)">Version 1.1.2 (25th January 2022)</a>
                   </li>
                   <li>
@@ -305,7 +308,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-1-1-2-25th-january-2022'>Version 1.1.2 (25th January 2022)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-1-1-3-16th-march-2022'>Version 1.1.3 (16th March 2022)</h2>
+<ul>
+<li>Addition of request parameter <a href="#quote-stream"><code>side</code></a> to allow return one side quote.</li>
+</ul>
+<h2 id='version-1-1-2-25th-january-2022'>Version 1.1.2 (25th January 2022)</h2>
 <ul>
 <li>Update <a href="#accept-quote"><code>accept</code></a> to allow partial accepting the OTC quote.</li>
 </ul>
@@ -1094,6 +1101,7 @@ Note that if the amount is larger than the the number you quote, only the quoted
 </span></code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"op"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unsubscribe-quote"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USD"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"buy"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"clOrderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ClientOrder1"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
@@ -1146,6 +1154,12 @@ Note that if the amount is larger than the the number you quote, only the quoted
 <td>Market symbol, refer to <code>getMarkets</code> API</td>
 </tr>
 <tr>
+<td>side</td>
+<td>string</td>
+<td>No</td>
+<td>Quote side, <code>buy</code> or <code>sell</code>, case sensitive. Both sides will be returned when this field is empty/null</td>
+</tr>
+<tr>
 <td>clOrderId</td>
 <td>string</td>
 <td>No</td>
@@ -1182,14 +1196,14 @@ Note that if the amount is larger than the the number you quote, only the quoted
 <tr>
 <td>buyQuoteId</td>
 <td>string</td>
-<td>Yes</td>
-<td>Quote Id for the buy side. If the value is empty / null, it means that you websocket stream is not authenticated</td>
+<td>No</td>
+<td>Quote Id for the buy side. If the value is empty / null, it means that you websocket stream is not authenticated or you doesn&#39;t subscribe this side</td>
 </tr>
 <tr>
 <td>sellQuoteId</td>
 <td>string</td>
-<td>Yes</td>
-<td>Quote Id for the sell side. If the value is empty / null, it means that you websocket stream is not authenticated</td>
+<td>No</td>
+<td>Quote Id for the sell side. If the value is empty / null, it means that you websocket stream is not authenticated or you doesn&#39;t subscribe this side</td>
 </tr>
 <tr>
 <td>clOrderId</td>
@@ -1200,44 +1214,44 @@ Note that if the amount is larger than the the number you quote, only the quoted
 <tr>
 <td>buyQuantity</td>
 <td>double</td>
-<td>Yes</td>
-<td>Quantity to purchase based on the quote request</td>
+<td>No</td>
+<td>Quantity to purchase based on the quote request. If the value is null, it means that you doesn&#39;t subscribe this side</td>
 </tr>
 <tr>
 <td>buyUnitPrice</td>
 <td>double</td>
-<td>Yes</td>
-<td>Unit price per unit of the base symbol</td>
+<td>No</td>
+<td>Unit price per unit of the base symbol. If the value is null, it means that you doesn&#39;t subscribe this side</td>
 </tr>
 <tr>
 <td>buyTotalAmount</td>
 <td>double</td>
-<td>Yes</td>
-<td>Total price to pay in quote currency</td>
+<td>No</td>
+<td>Total price to pay in quote currency. If the value is null, it means that you doesn&#39;t subscribe this side</td>
 </tr>
 <tr>
 <td>sellQuantity</td>
 <td>double</td>
-<td>Yes</td>
-<td>Quantity to sell based on the quote request</td>
+<td>No</td>
+<td>Quantity to sell based on the quote request. If the value is null, it means that you doesn&#39;t subscribe this side</td>
 </tr>
 <tr>
 <td>sellUnitPrice</td>
 <td>double</td>
-<td>Yes</td>
-<td>Unit price per unit of the base symbol</td>
+<td>No</td>
+<td>Unit price per unit of the base symbol. If the value is null, it means that you doesn&#39;t subscribe this side</td>
 </tr>
 <tr>
 <td>sellTotalAmount</td>
 <td>double</td>
-<td>Yes</td>
-<td>Total price to pay in quote currency</td>
+<td>No</td>
+<td>Total price to pay in quote currency. If the value is null, it means that you doesn&#39;t subscribe this side</td>
 </tr>
 <tr>
 <td>status</td>
 <td>string</td>
 <td>No</td>
-<td>Status of the response</td>
+<td>Status of the response. If the value is null, it means that you doesn&#39;t subscribe this side</td>
 </tr>
 <tr>
 <td>reason</td>
