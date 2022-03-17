@@ -124,6 +124,7 @@ echo -n "/ws/otc1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6726e
 {
   "op": "quote",
   "symbol": "BTC-USD",
+  "side": "buy",
   "clOrderId": "ClientOrder1",
   "quantity": {
     "quantity": 1,
@@ -136,7 +137,6 @@ echo -n "/ws/otc1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6726e
 {
   "op": "unsubscribe-quote",
   "symbol": "BTC-USD",
-  "side": "buy",
   "clOrderId": "ClientOrder1",
   "quantity": {
     "quantity": 1,
