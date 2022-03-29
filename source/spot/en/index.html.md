@@ -13,6 +13,10 @@ headingLevel: 2
 
 # Change Log
 
+## Version 3.3.2 (29th March 2022)
+
+* Add new `HALFMIN` time_in_force option in [Create new order](#create-new-order)
+
 ## Version 3.3.1 (2nd March 2022)
 
 * Remove unnecessary field `reduceOnly` in [Create new order](#create-new-order)

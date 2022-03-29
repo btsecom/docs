@@ -13,6 +13,10 @@ headingLevel: 2
 
 # Change Log
 
+## Version 2.3.1 (29th March 2022)
+
+* Add new `HALFMIN` time_in_force option in [Create new order](#create-new-order)
+
 ## Version 2.3.0 (21st Jan 2022)
 
 * Add new two new response fields `remainingSize` and `originalSize` in [Create new order](#create-new-order), [Create new algo order](#create-new-algo-order), and [Close Position](#close-position) **[NOTE]: This change will be effective on Jan 25th 2022 (UTC+0)**
