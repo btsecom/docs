@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-2-4-0-30th-march-2022" class="toc-h2 toc-link" data-title="Version 2.4.0 (30th March 2022)">Version 2.4.0 (30th March 2022)</a>
+                  </li>
+                  <li>
                     <a href="#version-2-3-1-29th-march-2022" class="toc-h2 toc-link" data-title="Version 2.3.1 (29th March 2022)">Version 2.3.1 (29th March 2022)</a>
                   </li>
                   <li>
@@ -402,6 +405,9 @@
                   <li>
                     <a href="#user-trade-fills" class="toc-h2 toc-link" data-title="User Trade Fills">User Trade Fills</a>
                   </li>
+                  <li>
+                    <a href="#all-position" class="toc-h2 toc-link" data-title="All Position">All Position</a>
+                  </li>
               </ul>
           </li>
       </ul>
@@ -411,7 +417,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-2-3-1-29th-march-2022'>Version 2.3.1 (29th March 2022)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-2-4-0-30th-march-2022'>Version 2.4.0 (30th March 2022)</h2>
+<ul>
+<li>Add new websocket topic <code>allPosition</code> to get all open position <a href="#all-position">All Position</a></li>
+</ul>
+<h2 id='version-2-3-1-29th-march-2022'>Version 2.3.1 (29th March 2022)</h2>
 <ul>
 <li>Add new <code>HALFMIN</code> time_in_force option in <a href="#create-new-order">Create new order</a></li>
 </ul>
@@ -4957,10 +4967,9 @@
 <p>Request</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"op"</span><span class="p">:</span><span class="s2">"subscribe"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"args"</span><span class="p">:[</span><span class="s2">"fills"</span><span class="p">]</span><span class="w">
+  </span><span class="nl">"op"</span><span class="p">:</span><span class="s2">"subscribe"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"args"</span><span class="p">:[</span><span class="s2">"fills"</span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-
 </span></code></pre></div>
 <blockquote>
 <p>Response</p>
@@ -5087,6 +5096,259 @@
 <td>long</td>
 <td>Yes</td>
 <td>Order timestamp or transacted timestamp</td>
+</tr>
+</tbody></table>
+<h2 id='all-position'>All Position</h2>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"op"</span><span class="p">:</span><span class="s2">"subscribe"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"args"</span><span class="p">:[</span><span class="s2">"allPosition"</span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
+  "topic": "allPosition",
+  "data": [{
+    "requestId": 0,
+    "username": "btse",
+    "marketName": "BTCPFC-USD",
+    "orderType": 90,
+    "orderMode": 66,
+    "originalAmount": 0.001,
+    "maxPriceHeld": 0.0,
+    "pegPriceMin": 0.0,
+    "stealth": 1.0,
+    "orderID": null,
+    "maxStealthDisplayAmount": 0.0,
+    "sellexchangeRate": 0.0,
+    "triggerPrice": 0.0,
+    "closeOrder": false,
+    "liquidationInProgress": false,
+        "marginType": 91,
+        "entryPrice": 47303.404761929,
+        "liquidationPrice": 0.0,
+        "markedPrice": 47293.949862586,
+        "unrealizedProfitLoss": -0.13236859,
+        "totalMaintenanceMargin": 3.484381756,
+        "totalContracts": 14.0,
+        "isolatedLeverage": 0.0,
+        "totalFees": 0.0,
+        "totalValue": 662.115298076,
+        "adlScoreBucket": 2.0,
+        "orderTypeName": "TYPE_FUTURES_POSITION",
+        "orderModeName": "MODE_BUY",
+        "marginTypeName": "FUTURES_MARGIN_CROSS",
+        "currentLeverage": 0.02,
+        "averageFillPrice": 0.0,
+        "settleWithNonUSDAsset": "BTC"
+  }]
+}
+</code></pre></div>
+<p>All futures positions will be pushed periodically via this topic.</p>
+<h3 id='response-content-31'>Response Content</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>requestId</td>
+<td>integer</td>
+<td>Yes</td>
+<td>request id</td>
+</tr>
+<tr>
+<td>username</td>
+<td>string</td>
+<td>Yes</td>
+<td>btse username</td>
+</tr>
+<tr>
+<td>marketName</td>
+<td>string</td>
+<td>Yes</td>
+<td>market name</td>
+</tr>
+<tr>
+<td>orderType</td>
+<td>integer</td>
+<td>Yes</td>
+<td>90: Futures Position</td>
+</tr>
+<tr>
+<td>orderMode</td>
+<td>integer</td>
+<td>Yes</td>
+<td>66: BUY<br/>83: SELL</td>
+</tr>
+<tr>
+<td>orderModeName</td>
+<td>string</td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td>orderTypeName</td>
+<td>string</td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td>originalAmount</td>
+<td>double</td>
+<td>Yes</td>
+<td>order amount</td>
+</tr>
+<tr>
+<td>maxPriceHeld</td>
+<td>double</td>
+<td>Yes</td>
+<td>max price of all time</td>
+</tr>
+<tr>
+<td>pegPriceMin</td>
+<td>double</td>
+<td>Yes</td>
+<td>peg price min</td>
+</tr>
+<tr>
+<td>stealth</td>
+<td>double</td>
+<td>Yes</td>
+<td>used for peg order</td>
+</tr>
+<tr>
+<td>orderID</td>
+<td>string</td>
+<td>Yes</td>
+<td>order id</td>
+</tr>
+<tr>
+<td>maxStealthDisplayAmount</td>
+<td>double</td>
+<td>Yes</td>
+<td>used for peg order</td>
+</tr>
+<tr>
+<td>sellexchangeRate</td>
+<td>double</td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td>triggerPrice</td>
+<td>double</td>
+<td>Yes</td>
+<td>OCO order</td>
+</tr>
+<tr>
+<td>closeOrder</td>
+<td>boolean</td>
+<td>Yes</td>
+<td>is the order closed</td>
+</tr>
+<tr>
+<td>liquidationInProgress</td>
+<td>boolean</td>
+<td>Yes</td>
+<td>whether is in liquidation</td>
+</tr>
+<tr>
+<td>marginType</td>
+<td>integer</td>
+<td>Yes</td>
+<td>WALLET TYPE:<br/>91: CROSS<br/>92: ISOLDATED</td>
+</tr>
+<tr>
+<td>marginTypeName</td>
+<td>string</td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td>entryPrice</td>
+<td>double</td>
+<td>Yes</td>
+<td>entry price</td>
+</tr>
+<tr>
+<td>liquidationPrice</td>
+<td>double</td>
+<td>Yes</td>
+<td>liquidation price</td>
+</tr>
+<tr>
+<td>markPrice</td>
+<td>double</td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td>unrealizedProfitLoss</td>
+<td>double</td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td>totalMaintenanceMargin</td>
+<td>double</td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td>totalContract</td>
+<td>double</td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td>isolatedLeverage</td>
+<td>double</td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td>totalFees</td>
+<td>double</td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td>totalValue</td>
+<td>double</td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td>adlScoreBucket</td>
+<td>double</td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td>currentLeverage</td>
+<td>double</td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td>averageFillPrice</td>
+<td>double</td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td>settleWithNonUSDAsset</td>
+<td>string</td>
+<td>Yes</td>
+<td></td>
 </tr>
 </tbody></table>
 
