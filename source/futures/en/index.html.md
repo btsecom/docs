@@ -13,6 +13,10 @@ headingLevel: 2
 
 # Change Log
 
+## Version 2.4.0 (30th March 2022)
+
+* Add new websocket topic `allPosition` to get all open position [All Position](#all-position)
+
 ## Version 2.3.1 (29th March 2022)
 
 * Add new `HALFMIN` time_in_force option in [Create new order](#create-new-order)
@@ -2183,10 +2187,9 @@ Receive trade notifications by subscribing to the topic `notificationApiV2`. The
 
 ```json
 {
-    "op":"subscribe",
-    "args":["fills"]
+  "op":"subscribe",
+  "args":["fills"]
 }
-
 ```
 
 > Response
@@ -2237,5 +2240,97 @@ When a trade has been transacted, this topic will send the trade information bac
 | quote       | string  | Yes      | Quote currency                                                                             |
 | maker       | boolean | Yes      | Indicator to indicate if trade is a maker trade                                            |
 | timestamp   | long    | Yes      | Order timestamp or transacted timestamp                                                    |
+
+## All Position
+
+> Request
+
+```json
+{
+  "op":"subscribe",
+  "args":["allPosition"]
+}
+```
+
+> Response
+
+```
+{
+  "topic": "allPosition",
+  "data": [{
+    "requestId": 0,
+    "username": "btse",
+    "marketName": "BTCPFC-USD",
+    "orderType": 90,
+    "orderMode": 66,
+    "originalAmount": 0.001,
+    "maxPriceHeld": 0.0,
+    "pegPriceMin": 0.0,
+    "stealth": 1.0,
+    "orderID": null,
+    "maxStealthDisplayAmount": 0.0,
+    "sellexchangeRate": 0.0,
+    "triggerPrice": 0.0,
+    "closeOrder": false,
+    "liquidationInProgress": false,
+		"marginType": 91,
+		"entryPrice": 47303.404761929,
+		"liquidationPrice": 0.0,
+		"markedPrice": 47293.949862586,
+		"unrealizedProfitLoss": -0.13236859,
+		"totalMaintenanceMargin": 3.484381756,
+		"totalContracts": 14.0,
+		"isolatedLeverage": 0.0,
+		"totalFees": 0.0,
+		"totalValue": 662.115298076,
+		"adlScoreBucket": 2.0,
+		"orderTypeName": "TYPE_FUTURES_POSITION",
+		"orderModeName": "MODE_BUY",
+		"marginTypeName": "FUTURES_MARGIN_CROSS",
+		"currentLeverage": 0.02,
+		"averageFillPrice": 0.0,
+		"settleWithNonUSDAsset": "BTC"
+  }]
+}
+```
+
+All futures positions will be pushed periodically via this topic.
+
+### Response Content
+
+| Name                    | Type    | Required | Description                                  |
+| ---                     | ---     | ---      | ---                                          |
+| requestId               | integer | Yes      | request id                                   |
+| username                | string  | Yes      | btse username                                |
+| marketName              | string  | Yes      | market name                                  |
+| orderType               | integer | Yes      | 90: Futures Position                         |
+| orderMode               | integer | Yes      | 66: BUY<br/>83: SELL                         |
+| orderModeName           | string  | Yes      |                                              |
+| orderTypeName           | string  | Yes      |                                              |
+| originalAmount          | double  | Yes      | order amount                                 |
+| maxPriceHeld            | double  | Yes      | max price of all time                        |
+| pegPriceMin             | double  | Yes      | peg price min                                |
+| stealth                 | double  | Yes      | used for peg order                           |
+| orderID                 | string  | Yes      | order id                                     |
+| maxStealthDisplayAmount | double  | Yes      | used for peg order                           |
+| sellexchangeRate        | double  | Yes      |                                              |
+| triggerPrice            | double  | Yes      | OCO order                                    |
+| closeOrder              | boolean | Yes      | is the order closed                          |
+| liquidationInProgress   | boolean | Yes      | whether is in liquidation                    |
+| marginType              | integer | Yes      | WALLET TYPE:<br/>91: CROSS<br/>92: ISOLDATED |
+| marginTypeName          | string  | Yes      |                                              |
+| entryPrice              | double  | Yes      | entry price                                  |
+| liquidationPrice        | double  | Yes      | liquidation price                            |
+| markPrice               | double  | Yes      |                                              |
+| unrealizedProfitLoss    | double  | Yes      |                                              |
+| totalMaintenanceMargin  | double  | Yes      |                                              |
+| totalContract           | double  | Yes      |                                              |
+| isolatedLeverage        | double  | Yes      |                                              |
+| totalFees               | double  | Yes      |                                              |
+| totalValue              | double  | Yes      |                                              |
+| adlScoreBucket          | double  | Yes      |                                              |
+| currentLeverage         | double  | Yes      |                                              |
+| averageFillPrice        | double  | Yes      |                                              |
+| settleWithNonUSDAsset   | string  | Yes      |                                              |
 
 </section>
