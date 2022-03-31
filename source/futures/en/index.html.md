@@ -2304,9 +2304,9 @@ All futures positions will be pushed periodically via this topic.
 | username                | string  | Yes      | btse username                                |
 | marketName              | string  | Yes      | market name                                  |
 | orderType               | integer | Yes      | 90: Futures Position                         |
+| orderTypeName           | string  | Yes      | String representation of orderType           |
 | orderMode               | integer | Yes      | 66: BUY<br/>83: SELL                         |
-| orderModeName           | string  | Yes      |                                              |
-| orderTypeName           | string  | Yes      |                                              |
+| orderModeName           | string  | Yes      | String representation of orderModeName       |
 | originalAmount          | double  | Yes      | order amount                                 |
 | maxPriceHeld            | double  | Yes      | max price of all time                        |
 | pegPriceMin             | double  | Yes      | peg price min                                |
@@ -2318,13 +2318,13 @@ All futures positions will be pushed periodically via this topic.
 | closeOrder              | boolean | Yes      | is the order closed                          |
 | liquidationInProgress   | boolean | Yes      | whether is in liquidation                    |
 | marginType              | integer | Yes      | WALLET TYPE:<br/>91: CROSS<br/>92: ISOLDATED |
-| marginTypeName          | string  | Yes      |                                              |
+| marginTypeName          | string  | Yes      | String representation of marginType          |
 | entryPrice              | double  | Yes      | entry price                                  |
 | liquidationPrice        | double  | Yes      | liquidation price                            |
-| markPrice               | double  | Yes      |                                              |
-| unrealizedProfitLoss    | double  | Yes      |                                              |
-| totalMaintenanceMargin  | double  | Yes      |                                              |
-| totalContract           | double  | Yes      |                                              |
+| markPrice               | double  | Yes      | mark price                                   |
+| unrealizedProfitLoss    | double  | Yes      | unrealized pnl                               |
+| totalMaintenanceMargin  | double  | Yes      | maintenance margin                           |
+| totalContract           | double  | Yes      | size of the contract                         |
 | isolatedLeverage        | double  | Yes      |                                              |
 | totalFees               | double  | Yes      |                                              |
 | totalValue              | double  | Yes      |                                              |
