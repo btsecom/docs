@@ -852,6 +852,12 @@ Amend the price or size or trigger price of an order. For trigger orders, if the
 
 ## Cancel Order
 
+> Request
+
+```
+/api/v3.2/order?symbol=BTC-USD&clOrderID=my-order-id
+```
+
 > Response
 
 ```json

@@ -848,6 +848,12 @@ Amend the price or size or trigger price of an order. For trigger orders, if the
 
 ## Cancel Order
 
+> Request
+
+```
+/api/v2.1/order?symbol=BTC-USD&clOrderID=my-order-id
+```
+
 > Response
 
 ```json
@@ -873,7 +879,7 @@ Amend the price or size or trigger price of an order. For trigger orders, if the
 ]
 ```
 
-`DELETE /api/v2.1/order`
+DELETE /api/v2.1/order`
 
 Cancels pending orders that has not yet been transacted. The `orderID` is a unique identifier to cancel a particular order. `clOrderID` is a custom ID sent in by the trader. When cancel by `clOrderID`, all orders having the same ID will be cancelled. If `orderID` and `clOrderID` is not sent in, then cancellation will be for all orders in the current market.
 
