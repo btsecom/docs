@@ -2210,6 +2210,11 @@
 </tbody></table>
 <h2 id='cancel-order'>Cancel Order</h2>
 <blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>/api/v2.1/order?symbol=BTC-USD&amp;clOrderID=my-order-id
+</code></pre></div>
+<blockquote>
 <p>Response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
@@ -2233,7 +2238,7 @@
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
-<p><code>DELETE /api/v2.1/order</code></p>
+<p>DELETE /api/v2.1/order`</p>
 
 <p>Cancels pending orders that has not yet been transacted. The <code>orderID</code> is a unique identifier to cancel a particular order. <code>clOrderID</code> is a custom ID sent in by the trader. When cancel by <code>clOrderID</code>, all orders having the same ID will be cancelled. If <code>orderID</code> and <code>clOrderID</code> is not sent in, then cancellation will be for all orders in the current market.</p>
 <h3 id='request-parameters-10'>Request Parameters</h3>
