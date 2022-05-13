@@ -13,7 +13,7 @@ headingLevel: 2
 
 # Change Log
 
-## Version 1.0.3
+## Version 1.0.3 (13th, May 2022)
 
 * Addition of a parameter `includeWithdrawFee` for [`withdraw funds`](#withdraw-funds) to set the fee will be inclusive/extra added.
 ## Version 1.0.2 (16th March 2022)
