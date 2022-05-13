@@ -13,6 +13,9 @@ headingLevel: 2
 
 # Change Log
 
+## Version 1.0.3
+
+* Addition of a parameter `includeWithdrawFee` for [`withdraw funds`](#withdraw-funds) to set the fee will be inclusive/extra added.
 ## Version 1.0.2 (16th March 2022)
 
 * Max decimal supported for [`withdraw funds`](#withdraw-funds) is 8, will return `CRYPTO_WITHDRAW_INVALID_AMOUNT (error code: 3506)` if exceeds
@@ -380,17 +383,18 @@ Performs a wallet withdrawal. To use this API, `Withdraw` permission is required
 
 ### Request Parameters
 
-| Name     | Type   | Required | Description                                                                                                                                                                                                                                                                            |
-| ---      | ---    | ---      | ---                                                                                                                                                                                                                                                                                    |
-| currency | string | Yes      | Currency-Network pair <br> Currency list can be retrieved from [Available currency list for action](#query-available-currency-list-for-wallet-action) <br> Network list can be retrieved from [Available network list for currency](#query-available-crypto-network-list-for-currency) |
-| address  | string | Yes      | Blockchain address                                                                                                                                                                                                                                                                     |
-| tag      | string | Yes      | Tag, used only by some blockchain (eg. XRP)                                                                                                                                                                                                                                            |
-| amount   | string | Yes      | Amount to withdraw (Max decimal supported is `8` for all currencies). Will return Invalid withdraw amount (code: 3506) if exceeds                                                                                                                                                      |
+| Name               | Type    | Required | Description |
+| ---                | ---     | ---      | ---         |
+| currency           | string  | Yes      | Currency-Network pair <br> Currency list can be retrieved from [Available currency list for action](#query-available-currency-list-for-wallet-action) <br> Network list can be retrieved from [Available network list for currency](#query-available-crypto-network-list-for-currency) |
+| address            | string  | Yes      | Blockchain address |
+| tag                | string  | Yes      | Tag, used only by some blockchain (eg. XRP) |
+| amount             | string  | Yes      | Amount to withdraw (Max decimal supported is `8` for all currencies). Will return Invalid withdraw amount (code: 3506) if exceeds |
+| includeWithdrawFee | boolean | No       | If true or the field doesn't exist, the fee is included in amount. Otherwise, the fee is extra added and the deducted amount can be larger than the amount claimed |
 
 ### Response Content
 
-| Name        | Type   | Required | Description                                                                                                                                                                                                     |
-| ---         | ---    | ---      | ---                                                                                                                                                                                                             |
+| Name        | Type   | Required | Description |
+| ---         | ---    | ---      | --- |
 | withdraw_id | string | Yes      | Internal withdrawal ID. References the `orderID` field in `wallet_history` API. As withdrawal will not be processed immediately. User can query the wallet history API to check on the status of the withdrawal |
 
 
