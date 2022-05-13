@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-1-0-3-13th-may-2022" class="toc-h2 toc-link" data-title="Version 1.0.3 (13th, May 2022)">Version 1.0.3 (13th, May 2022)</a>
+                  </li>
+                  <li>
                     <a href="#version-1-0-2-16th-march-2022" class="toc-h2 toc-link" data-title="Version 1.0.2 (16th March 2022)">Version 1.0.2 (16th March 2022)</a>
                   </li>
                   <li>
@@ -314,9 +317,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-1-0-2-16th-march-2022'>Version 1.0.2 (16th March 2022)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-1-0-3-13th-may-2022'>Version 1.0.3 (13th, May 2022)</h2>
 <ul>
-<li>Max decimal supported for <a href="#withdraw-funds"><code>withdraw funds</code></a> is 8, will return <code>CRYPTO_WITHDRAW_INVALID_AMOUNT (error code: 3506)</code> if exceeds</li>
+<li><p>Addition of a parameter <code>includeWithdrawFee</code> for <a href="#withdraw-funds"><code>withdraw funds</code></a> to set the fee will be inclusive/extra added.</p>
+<h2 id='version-1-0-2-16th-march-2022'>Version 1.0.2 (16th March 2022)</h2></li>
+<li><p>Max decimal supported for <a href="#withdraw-funds"><code>withdraw funds</code></a> is 8, will return <code>CRYPTO_WITHDRAW_INVALID_AMOUNT (error code: 3506)</code> if exceeds</p></li>
 </ul>
 <h2 id='version-1-0-1-25th-january-2022'>Version 1.0.1 (25th January 2022)</h2>
 <ul>
@@ -921,6 +926,12 @@
 <td>string</td>
 <td>Yes</td>
 <td>Amount to withdraw (Max decimal supported is <code>8</code> for all currencies). Will return Invalid withdraw amount (code: 3506) if exceeds</td>
+</tr>
+<tr>
+<td>includeWithdrawFee</td>
+<td>boolean</td>
+<td>No</td>
+<td>If true or the field doesn&#39;t exist, the fee is included in amount. Otherwise, the fee is extra added and the deducted amount can be larger than the amount claimed</td>
 </tr>
 </tbody></table>
 <h3 id='response-content-7'>Response Content</h3>
