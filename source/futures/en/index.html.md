@@ -137,7 +137,7 @@ $ echo -n "/api/v2.1/order1624985375123{\"postOnly\":false,\"price\":8500.0,\"re
 (stdin)= 943adfce43b609a28506274976b96e08cf4bdc4ea53ca0b4cac0eb2cf0773a7d0807efc0aeab779d47fadcd9a60eea13
 ```
 
-* Endpoint to place an order is `https://api.btse.com/futures/api/v2.21/order`
+* Endpoint to place an order is `https://api.btse.com/futures/api/v2.1/order`
 * Assume we have the values as follows:
   * btse-nonce: `1624985375123`
   * btse-api: `4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x`
