@@ -194,12 +194,13 @@ When connecting up the BTSE API, you will come across number codes that represen
 * 27: TRANSFER_SUCCESSFUL = Transfer funds between futures and spot is successful
 * 41: ERROR_INVALID_RISK_LIMIT = Invalid risk limit was specified
 * 64: STATUS_LIQUIDATION = Account is undergoing liquidation
-* 65: ORDER_ACITVE = Order is active
+* 65: STATUS_ACITVE = Order is active
 * 76: ORDER_TYPE_LIMIT = Limit order
 * 77: ORDER_TYPE_MARKET = Market order
 * 80: ORDER_TYPE_PEG = Peg/Algo order
 * 81: ORDER_TYPE_OTC = Otc order
-* 88: ORDER_INACTIVE = Order is inactive
+* 85: STATUS_PROCESSING = Order is inactive
+* 88: STATUS_INACTIVE = Order is inactive
 * 101: FUTURES_ORDER_PRICE_OUTSIDE_LIQUIDATION_PRICE = Futures order is outside of liquidation price
 * 123: AMEND_ORDER = Order amended
 * 1003: ORDER_LIQUIDATION = Order is undergoing liquidation
