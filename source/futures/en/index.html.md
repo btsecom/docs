@@ -188,6 +188,7 @@ When connecting up the BTSE API, you will come across number codes that represen
 * 4: ORDER_FULLY_TRANSACTED = Order is fully transacted
 * 5: ORDER_PARTIALLY_TRANSACTED = Order is partially transacted
 * 6: ORDER_CANCELLED = Order is cancelled successfully
+* 7: ORDER_REFUNDED = Order is refunded
 * 8: INSUFFICIENT_BALANCE = Insufficient balance in account
 * 9: TRIGGER_INSERTED = Trigger Order is inserted successfully
 * 10: TRIGGER_ACTIVATED = Trigger Order is activated successfully
