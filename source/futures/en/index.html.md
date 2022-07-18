@@ -588,7 +588,7 @@ Get trade fills for the market specified by `symbol`
 
 ```json
 {
-  "averageFillPrice": 0,
+  "avgFillPrice": 0,
   "clOrderID": "string",
   "deviation": 0,
   "fillSize": 0,
@@ -652,7 +652,7 @@ Creates a new order. Requires `Trading` permission
 | timestamp        | string  | Yes      | Order timestamp                                                                                                                                                                                                                                                                                 |
 | trigger          | string  | Yes      | Indicator if order is a trigger order                                                                                                                                                                                                                                                           |
 | triggerPrice     | string  | Yes      | Order trigger price, returns 0 if order is not a trigger order                                                                                                                                                                                                                                  |
-| averageFillPrice | string  | Yes      | Average filled price. Returns the average filled price for partially transacted orders                                                                                                                                                                                                          |
+| avgFillPrice     | string  | Yes      | Average filled price. Returns the average filled price for partially transacted orders                                                                                                                                                                                                          |
 | message          | string  | Yes      | Trade messages                                                                                                                                                                                                                                                                                  |
 | stealth          | string  | Yes      | Only valid for Algo orders                                                                                                                                                                                                                                                                      |
 | deviation        | string  | Yes      | Only valid for Algo orders                                                                                                                                                                                                                                                                      |
@@ -686,7 +686,7 @@ Creates a new order. Requires `Trading` permission
 
 ```json
 {
-  "averageFillPrice": 0,
+  "avgFillPrice": 0,
   "clOrderID": "string",
   "deviation": 0,
   "fillSize": 0,
@@ -756,7 +756,7 @@ This API Requires `Trading` permission
 | timestamp        | string  | Yes      | Order timestamp                                                                                                                                                                                                                                                                                 |
 | trigger          | string  | Yes      | Indicator if order is a trigger order                                                                                                                                                                                                                                                           |
 | triggerPrice     | string  | Yes      | Order trigger price, returns 0 if order is not a trigger order                                                                                                                                                                                                                                  |
-| averageFillPrice | string  | Yes      | Average filled price. Returns the average filled price for partially transacted orders                                                                                                                                                                                                          |
+| avgFillPrice     | string  | Yes      | Average filled price. Returns the average filled price for partially transacted orders                                                                                                                                                                                                          |
 | message          | string  | Yes      | Trade messages                                                                                                                                                                                                                                                                                  |
 | stealth          | string  | Yes      | Stealth value of order                                                                                                                                                                                                                                                                          |
 | deviation        | string  | Yes      | Deviation value of order                                                                                                                                                                                                                                                                        |
@@ -784,7 +784,7 @@ This API Requires `Trading` permission
 
 ```json
 {
-  "averageFillPrice": 0,
+  "avgFillPrice": 0,
   "clOrderID": "string",
   "deviation": -5,
   "fillSize": 0,
@@ -842,7 +842,7 @@ Amend the price or size or trigger price of an order. For trigger orders, if the
 | timestamp        | string  | Yes      | Order timestamp                                                                                                                                                                                                                                                                                 |
 | trigger          | string  | Yes      | Indicator if order is a trigger order                                                                                                                                                                                                                                                           |
 | triggerPrice     | string  | Yes      | Order trigger price, returns 0 if order is not a trigger order                                                                                                                                                                                                                                  |
-| averageFillPrice | string  | Yes      | Average filled price. Returns the average filled price for partially transacted orders                                                                                                                                                                                                          |
+| avgFillPrice     | string  | Yes      | Average filled price. Returns the average filled price for partially transacted orders                                                                                                                                                                                                          |
 | message          | string  | Yes      | Trade messages                                                                                                                                                                                                                                                                                  |
 | stealth          | string  | Yes      | Stealth value of order                                                                                                                                                                                                                                                                          |
 | deviation        | string  | Yes      | Deviation value of order                                                                                                                                                                                                                                                                        |
@@ -913,7 +913,7 @@ Cancels pending orders that has not yet been transacted. The `orderID` is a uniq
 | timestamp        | string  | Yes      | Order timestamp                                                                                                                                                                                                                                                                                 |
 | trigger          | string  | Yes      | Indicator if order is a trigger order                                                                                                                                                                                                                                                           |
 | triggerPrice     | string  | Yes      | Order trigger price, returns 0 if order is not a trigger order                                                                                                                                                                                                                                  |
-| averageFillPrice | string  | Yes      | Average filled price. Returns the average filled price for partially transacted orders                                                                                                                                                                                                          |
+| avgFillPrice     | string  | Yes      | Average filled price. Returns the average filled price for partially transacted orders                                                                                                                                                                                                          |
 | message          | string  | Yes      | Trade messages                                                                                                                                                                                                                                                                                  |
 | stealth          | string  | Yes      | Stealth value of order                                                                                                                                                                                                                                                                          |
 | deviation        | string  | Yes      | Deviation value of order                                                                                                                                                                                                                                                                        |
@@ -949,7 +949,7 @@ Dead-man's switch allows the trader to send in a timeout value which is a Time t
 
 ```json
 {
-  "averageFillPrice": 0,
+  "avgFillPrice": 0,
   "cancelDuration": 0,
   "clOrderID": "string",
   "fillSize": 0,
@@ -1008,7 +1008,7 @@ Retrieves open orders that have not yet been matched or matched recently.
 | timestamp        | string | Yes      | Order timestamp                                                                        |
 | trigger          | bool   | Yes      | Indicator if order is a trigger order                                                  |
 | triggerPrice     | double | Yes      | Order trigger price, returns 0 if order is not a trigger order                         |
-| averageFillPrice | double | Yes      | Average filled price. Returns the average filled price for partially transacted orders |
+| avgFillPrice | double | Yes      | Average filled price. Returns the average filled price for partially transacted orders |
 | message          | string | Yes      | Trade messages                                                                         |
 | stealth          | double | Yes      | Stealth value of order                                                                 |
 | deviation        | double | Yes      | Deviation value of order                                                               |
@@ -1219,7 +1219,7 @@ Closes a user's position for the particular market as specified by symbol. If ty
 | timestamp        | string  | Yes      | Order timestamp                                                                                                                                                                                                                                                                                 |
 | trigger          | string  | Yes      | Indicator if order is a trigger order                                                                                                                                                                                                                                                           |
 | triggerPrice     | string  | Yes      | Order trigger price, returns 0 if order is not a trigger order                                                                                                                                                                                                                                  |
-| averageFillPrice | string  | Yes      | Average filled price. Returns the average filled price for partially transacted orders                                                                                                                                                                                                          |
+| avgFillPrice | string  | Yes      | Average filled price. Returns the average filled price for partially transacted orders                                                                                                                                                                                                          |
 | message          | string  | Yes      | Trade messages                                                                                                                                                                                                                                                                                  |
 | stealth          | string  | Yes      | Stealth value of order                                                                                                                                                                                                                                                                          |
 | deviation        | string  | Yes      | Deviation value of order                                                                                                                                                                                                                                                                        |
@@ -2296,7 +2296,7 @@ When a trade has been transacted, this topic will send the trade information bac
 		"orderModeName": "MODE_BUY",
 		"marginTypeName": "FUTURES_MARGIN_CROSS",
 		"currentLeverage": 0.02,
-		"averageFillPrice": 0.0,
+		"avgFillPrice": 0.0,
 		"settleWithNonUSDAsset": "BTC"
   }]
 }
@@ -2338,7 +2338,7 @@ All futures positions will be pushed periodically via this topic.
 | totalValue              | double  | Yes      |                                              |
 | adlScoreBucket          | double  | Yes      |                                              |
 | currentLeverage         | double  | Yes      |                                              |
-| averageFillPrice        | double  | Yes      |                                              |
+| avgFillPrice            | double  | Yes      |                                              |
 | settleWithNonUSDAsset   | string  | Yes      |                                              |
 
 </section>
