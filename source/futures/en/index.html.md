@@ -429,7 +429,7 @@ Retrieve current prices on the platform. If no symbol specified, all symbols wil
 }
 ```
 
-`GET /api/v2.1/orderbook/{symbol}`
+`GET /api/v2.1/orderbook`
 
 Retrieves a snapshot of the orderbook.
 
