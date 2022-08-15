@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>BTSE API Documentation</title>
+    <title>API Documentation</title>
     <link href="images/favicon-3eb77247.ico" rel="icon" type="image/ico" />
     <style>
       .highlight table td { padding: 5px; }
@@ -198,11 +198,11 @@
     </style>
     <link href="stylesheets/screen-a7292fd4.css" rel="stylesheet" media="screen" />
     <link href="stylesheets/print-953e3353.css" rel="stylesheet" media="print" />
-      <script src="javascripts/all-a9fde460.js"></script>
+      <script src="javascripts/all_nosearch-8f5ea5a5.js"></script>
 
   </head>
 
-  <body class="index" data-languages="[&quot;json&quot;]">
+  <body class="index" data-languages="[]">
     <a href="#" id="nav-button">
       <span>
         <img src="images/navbar-cad8cdcb.png" alt="" />
@@ -222,17 +222,13 @@
 
   </header>
     <div class="toc-wrapper">
-        <div class="lang-selector">
-              <a href="#" data-language-name="json">json</a>
-        </div>
-        <div class="search">
-          <input type="text" class="search" id="input-search" placeholder="Search">
-        </div>
-        <ul class="search-results"></ul>
       <ul id="toc" class="toc-list-h1">
           <li>
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
+                  <li>
+                    <a href="#version-3-3-3-15th-august-2022" class="toc-h2 toc-link" data-title="Version 3.3.3 (15th August 2022)">Version 3.3.3 (15th August 2022)</a>
+                  </li>
                   <li>
                     <a href="#version-3-3-2-29th-march-2022" class="toc-h2 toc-link" data-title="Version 3.3.2 (29th March 2022)">Version 3.3.2 (29th March 2022)</a>
                   </li>
@@ -330,9 +326,6 @@
                     <a href="#create-new-order" class="toc-h2 toc-link" data-title="Create new order">Create new order</a>
                   </li>
                   <li>
-                    <a href="#create-new-algo-order" class="toc-h2 toc-link" data-title="Create new algo order">Create new algo order</a>
-                  </li>
-                  <li>
                     <a href="#amend-order" class="toc-h2 toc-link" data-title="Amend Order">Amend Order</a>
                   </li>
                   <li>
@@ -405,13 +398,17 @@
               </ul>
           </li>
       </ul>
-        <ul class="toc-footer">
-        </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-3-3-2-29th-march-2022'>Version 3.3.2 (29th March 2022)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-3-3-3-15th-august-2022'>Version 3.3.3 (15th August 2022)</h2>
+<ul>
+<li>Merge document section <code>Create new algo order</code> into <a href="#create-new-order">Create new order</a></li>
+<li>Add more request / response samples in <a href="#trade-endpoints">Trade Endpoints</a></li>
+<li>Correct document for request <code>type</code> of <code>TRIGGER</code> to <code>TRIGGERPRICE</code> in <a href="#amend-order">Amend Order</a></li>
+</ul>
+<h2 id='version-3-3-2-29th-march-2022'>Version 3.3.2 (29th March 2022)</h2>
 <ul>
 <li>Add new <code>HALFMIN</code> time_in_force option in <a href="#create-new-order">Create new order</a></li>
 </ul>
@@ -500,37 +497,22 @@
 <li>Production
 
 <ul>
-<li>HTTP
-
-<ul>
+<li>HTTP</li>
 <li><code>https://api.btse.com/spot</code></li>
 <li><code>https://aws-api.btse.com/spot</code> (Optimised for connection via AWS)</li>
-</ul></li>
-<li>Websocket
-
-<ul>
+<li>Websocket</li>
 <li><code>wss://ws.btse.com/ws/spot</code></li>
 <li><code>wss://aws-ws.btse.com/ws/spot</code> (Optimised for connection via AWS)</li>
-</ul></li>
-<li>Websocket (for orderbook stream)
-
-<ul>
+<li>Websocket (for orderbook stream)</li>
 <li><code>wss://ws.btse.com/ws/oss/spot</code> (Used for Orderbook incremental update stream)</li>
-</ul></li>
 </ul></li>
 <li>Testnet
 
 <ul>
-<li>HTTP
-
-<ul>
+<li>HTTP</li>
 <li><code>https://testapi.btse.io/spot</code></li>
-</ul></li>
-<li>Websocket
-
-<ul>
+<li>Websocket</li>
 <li><code>wss://testws.btse.io/ws/spot</code></li>
-</ul></li>
 <li>Websocket (for orderbook stream)</li>
 <li><code>wss://testws.btse.io/ws/oss/spot</code> (Used for Orderbook incremental update stream)</li>
 </ul></li>
@@ -1455,53 +1437,137 @@
 </tbody></table>
 <h1 id='trade-endpoints'>Trade Endpoints</h1><h2 id='create-new-order'>Create new order</h2>
 <blockquote>
-<p>Request</p>
+<p>Request (create <code>MARKET</code> order)</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"deviation"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">7010</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"stopPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USD"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"trailValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"txType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LIMIT"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MARKET"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Request (create <code>LIMIT</code> order)</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USD"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">34000</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LIMIT"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
-<p>Response</p>
+<p>Request (create <code>OCO</code> order)</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"averageFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"deviation"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"fillSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"stopPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">8300</span><span class="p">,</span><span class="w">
   </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USD"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1576812000872</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"trigger"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">8300</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"remainingSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"orginialSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="w">
+  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">24000</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OCO"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"txType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LIMIT"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"stopPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">40010</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">40000</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p><code>POST /api/v3.2/order</code></p>
+<blockquote>
+<p>Request (create <code>PEG</code> order)</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USD"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">25000</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PEG"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"deviation"</span><span class="p">:</span><span class="w"> </span><span class="mi">-10</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Response (general)</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USD"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">22062.5</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"990db9b6-2ed4-4c68-b46e-827c88cc3884"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1660208800123</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stopPrice"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"trigger"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"averageFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"fillSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"deviation"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"originalSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"remainingSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Response (for <code>OCO</code> order)</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USD"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">24000.0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2b672b4b-77c1-4abf-ba30-df3e82a147b0"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1660211562864</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"stopPrice"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"trigger"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"averageFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"fillSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"deviation"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"originalSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"remainingSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USD"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">40010.0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7ccf5398-fddd-4d07-a89c-a4f2e72b64ce"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1660211562864</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">40000.0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"stopPrice"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"trigger"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"averageFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"fillSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"deviation"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"originalSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"remainingSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<p><code>POST /api/v3.2/order</code> or <code>POST /api/v3.2/order/peg</code> (The 2 endpoints work identically)</p>
 
-<p>Creates a new order. Requires <code>Trading</code> permission</p>
+<p>Creates a new order. Requires <code>Trading</code> permission.</p>
 <h3 id='request-parameters-7'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -1520,8 +1586,8 @@
 <tr>
 <td>price</td>
 <td>double</td>
-<td>Yes</td>
-<td>Order price</td>
+<td>No</td>
+<td>Mandatory unless creating a MARKET order. Minimum price for a sell order, this is the lowest price that a user is willing to sell at. Maximum price for a buy order, this is the maximum price a user is willing to buy at.</td>
 </tr>
 <tr>
 <td>size</td>
@@ -1545,12 +1611,12 @@
 <td>type</td>
 <td>string</td>
 <td>Yes</td>
-<td>Order type<br/>LIMIT: Limit Orders<br/>MARKET: Market Orders<br/>OCO: One cancel the other</td>
+<td>Order type<br/>LIMIT: Limit Orders<br/>MARKET: Market Orders<br/>OCO: One cancel the other<br/>PEG: price is according to a deviation to the Index price</td>
 </tr>
 <tr>
 <td>txType</td>
 <td>string</td>
-<td>Yes</td>
+<td>No</td>
 <td>Used for Stop orders or trigger orders<br/>STOP: Stop Order, <code>stopPrice</code> is mandatory<br/>TRIGGER: Trigger order, <code>triggerPrice</code> is mandatory<br/>LIMIT: Default, used when its not a Stop order nor Trigger order</td>
 </tr>
 <tr>
@@ -1562,26 +1628,38 @@
 <tr>
 <td>triggerPrice</td>
 <td>double</td>
-<td>Yes</td>
+<td>No</td>
 <td>Mandatory when creating a Trigger or OCO order. Indicates the trigger price</td>
 </tr>
 <tr>
 <td>trailValue</td>
 <td>double</td>
-<td>Yes</td>
+<td>No</td>
 <td>Trail value</td>
 </tr>
 <tr>
 <td>postOnly</td>
 <td>boolean</td>
-<td>Yes</td>
+<td>No</td>
 <td>Boolean to indicate if this is a post only order. For post only orders, traders are charged maker fees</td>
 </tr>
 <tr>
 <td>clOrderID</td>
 <td>string</td>
-<td>Yes</td>
+<td>No</td>
 <td>Custom order Id</td>
+</tr>
+<tr>
+<td>stealth</td>
+<td>double</td>
+<td>No</td>
+<td>Mandatory when creating a PEG order. How many percent of the order is to be displayed on the orderbook.</td>
+</tr>
+<tr>
+<td>deviation</td>
+<td>double</td>
+<td>No</td>
+<td>For PEG order. How much should the order price deviate from index price. Value is in percentage and can range from <code>-10</code> to <code>10</code></td>
 </tr>
 </tbody></table>
 <h3 id='response-content-8'>Response Content</h3>
@@ -1621,295 +1699,7 @@
 <td>orderType</td>
 <td>string</td>
 <td>Yes</td>
-<td>Order type <br/>76: Limit Order<br/>77: Market order<br/>80: Algo order</td>
-</tr>
-<tr>
-<td>postOnly</td>
-<td>boolean</td>
-<td>Yes</td>
-<td>Indicates if order is a post only order</td>
-</tr>
-<tr>
-<td>price</td>
-<td>double</td>
-<td>Yes</td>
-<td>Order price</td>
-</tr>
-<tr>
-<td>side</td>
-<td>string</td>
-<td>Yes</td>
-<td>Order side<br/>BUY or SELL</td>
-</tr>
-<tr>
-<td>size</td>
-<td>double</td>
-<td>Yes</td>
-<td>Order size</td>
-</tr>
-<tr>
-<td>status</td>
-<td>integer</td>
-<td>Yes</td>
-<td>Order status<br/> 2: Order Inserted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>8: Insufficient Balance<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request Failed</td>
-</tr>
-<tr>
-<td>stopPrice</td>
-<td>string</td>
-<td>Yes</td>
-<td>Stop price</td>
-</tr>
-<tr>
-<td>time_in_force</td>
-<td>string</td>
-<td>Yes</td>
-<td>Order validity</td>
-</tr>
-<tr>
-<td>timestamp</td>
-<td>string</td>
-<td>Yes</td>
-<td>Order timestamp</td>
-</tr>
-<tr>
-<td>trigger</td>
-<td>string</td>
-<td>Yes</td>
-<td>Indicator if order is a trigger order</td>
-</tr>
-<tr>
-<td>triggerPrice</td>
-<td>string</td>
-<td>Yes</td>
-<td>Order trigger price, returns 0 if order is not a trigger order</td>
-</tr>
-<tr>
-<td>averageFillPrice</td>
-<td>string</td>
-<td>Yes</td>
-<td>Average filled price. Returns the average filled price for partially transacted orders</td>
-</tr>
-<tr>
-<td>message</td>
-<td>string</td>
-<td>Yes</td>
-<td>Trade messages</td>
-</tr>
-<tr>
-<td>stealth</td>
-<td>string</td>
-<td>Yes</td>
-<td>Only valid for Algo orders</td>
-</tr>
-<tr>
-<td>deviation</td>
-<td>string</td>
-<td>Yes</td>
-<td>Only valid for Algo orders</td>
-</tr>
-<tr>
-<td>remainingSize</td>
-<td>double</td>
-<td>Yes</td>
-<td>Size left to be transacted</td>
-</tr>
-<tr>
-<td>originalSize</td>
-<td>double</td>
-<td>Yes</td>
-<td>Original order size</td>
-</tr>
-</tbody></table>
-<h2 id='create-new-algo-order'>Create new algo order</h2>
-<blockquote>
-<p>Request</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"deviation"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">7010</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"stopPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USD"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"trailValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"txType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LIMIT"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LIMIT"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<blockquote>
-<p>Response</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"averageFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"deviation"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"fillSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"stopPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">8300</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USD"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1576812000872</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"trigger"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">8300</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"remainingSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"orginialSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p><code>POST /api/v3.2/order/peg</code></p>
-
-<p>Creates a new algo order. Algo order is an order that price will change according to market price. To create an algo order, user will need to enter additional parameters:</p>
-
-<ul>
-<li><code>price</code>: What is the min price (for a sell order) or maximum price (for a buy order) that a user will be willing to list his order at</li>
-<li><code>size</code>: Total size of order</li>
-<li><code>deviation</code>: How much should the order price deviate from index price. Value is in percentage and can range from <code>-10</code> to <code>10</code></li>
-<li><code>stealth</code>: How many percent of the order is to be displayed on the orderbook.</li>
-</ul>
-
-<p>This API Requires <code>Trading</code> permission</p>
-<h3 id='request-parameters-8'>Request Parameters</h3>
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>symbol</td>
-<td>string</td>
-<td>Yes</td>
-<td>Market symbol</td>
-</tr>
-<tr>
-<td>price</td>
-<td>double</td>
-<td>Yes</td>
-<td>Minimum price for a sell order, this is the lowest price that a user is willing to sell at. Maximum price for a buy order, this is the maximum price a user is willing to buy at.</td>
-</tr>
-<tr>
-<td>size</td>
-<td>double</td>
-<td>Yes</td>
-<td>Order size</td>
-</tr>
-<tr>
-<td>side</td>
-<td>string</td>
-<td>Yes</td>
-<td>&#39;BUY&#39; or &#39;SELL&#39;</td>
-</tr>
-<tr>
-<td>time_in_force</td>
-<td>string</td>
-<td>No</td>
-<td>Time validity of the order<br/>GTC: Good till Cancel<br/>IOC: Immediate or Cancel<br/>FOK: Fill or Kill<br/>HALFMIN: Order valid for 30 seconds<br/>FIVEMIN: Order valid for 5 mins<br/> HOUR: Order valid for an hour<br/>TWELVEHOUR: Order valid for 12 hours<br/>DAY: Order valid for a day<br/>WEEK: Order valid for a week<br/>MONTH: Order valid for a month</td>
-</tr>
-<tr>
-<td>type</td>
-<td>string</td>
-<td>Yes</td>
-<td>Order type<br/>LIMIT: Limit Orders<br/>MARKET: Market Orders<br/>OCO: One cancel the other</td>
-</tr>
-<tr>
-<td>txType</td>
-<td>string</td>
-<td>Yes</td>
-<td>Used for Stop orders or trigger orders<br/>STOP: Stop Order, <code>stopPrice</code> is mandatory<br/>TRIGGER: Trigger order, <code>triggerPrice</code> is mandatory<br/>LIMIT: Default, used when its not a Stop order nor Trigger order</td>
-</tr>
-<tr>
-<td>stopPrice</td>
-<td>double</td>
-<td>No</td>
-<td>Mandatory when creating a Stop or OCO order. Indicates the stop price</td>
-</tr>
-<tr>
-<td>triggerPrice</td>
-<td>double</td>
-<td>Yes</td>
-<td>Mandatory when creating a Trigger or OCO order. Indicates the trigger price</td>
-</tr>
-<tr>
-<td>trailValue</td>
-<td>double</td>
-<td>Yes</td>
-<td>Trail value</td>
-</tr>
-<tr>
-<td>postOnly</td>
-<td>boolean</td>
-<td>Yes</td>
-<td>Boolean to indicate if this is a post only order. For post only orders, traders are charged maker fees</td>
-</tr>
-<tr>
-<td>clOrderID</td>
-<td>string</td>
-<td>Yes</td>
-<td>Custom order Id</td>
-</tr>
-<tr>
-<td>stealth</td>
-<td>double</td>
-<td>Yes</td>
-<td>How many percent of the order is to be displayed on the orderbook.</td>
-</tr>
-<tr>
-<td>deviation</td>
-<td>double</td>
-<td>Yes</td>
-<td>How much should the order price deviate from index price. Value is in percentage and can range from <code>-10</code> to <code>10</code></td>
-</tr>
-</tbody></table>
-<h3 id='response-content-9'>Response Content</h3>
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>symbol</td>
-<td>string</td>
-<td>Yes</td>
-<td>Market symbol</td>
-</tr>
-<tr>
-<td>clOrderID</td>
-<td>string</td>
-<td>Yes</td>
-<td>Customer tag sent in by trader</td>
-</tr>
-<tr>
-<td>fillSize</td>
-<td>string</td>
-<td>Yes</td>
-<td>Trade filled size</td>
-</tr>
-<tr>
-<td>orderID</td>
-<td>string</td>
-<td>Yes</td>
-<td>Order ID</td>
-</tr>
-<tr>
-<td>orderType</td>
-<td>string</td>
-<td>Yes</td>
-<td>Order type <br/>76: Limit Order<br/>77: Market order<br/>80: Algo order</td>
+<td>Order type <br/>76: Limit order<br/>77: Market order<br/>80: Peg/Algo order</td>
 </tr>
 <tr>
 <td>postOnly</td>
@@ -2010,46 +1800,81 @@
 </tbody></table>
 <h2 id='amend-order'>Amend Order</h2>
 <blockquote>
-<p>Request</p>
+<p>Request (amend price)</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USD"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"25248336-66d8-41ff-99fd-83489c4e6029"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PRICE"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Order ID"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Custom Order ID"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"slide"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"orderSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"orderPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">40000</span><span class="w">
+  </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">35000</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre></div>
+<blockquote>
+<p>Request (amend size)</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"689bf733-4879-4e32-8d1f-cb81f63d24d4"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SIZE"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.05</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USD"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Request (amend trigger price)</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cb2785b0-558e-4b30-bf1f-8a8c56174d0c"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TRIGGERPRICE"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">40020</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USD"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Request (amend multiple attributes)</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USD"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cb2785b0-558e-4b30-bf1f-8a8c56174d0c"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ALL"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">40010</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.05</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">40000</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
 <p>Response</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"averageFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"deviation"</span><span class="p">:</span><span class="w"> </span><span class="mi">-5</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"fillSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"stopPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">8300</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USD"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1576812000872</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"trigger"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">8300</span><span class="w">
-</span><span class="p">}</span><span class="w">
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-null"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"25248336-66d8-41ff-99fd-83489c4e6029"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1660277763249</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stopPrice"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"trigger"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"averageFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"fillSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"deviation"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"originalSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"remainingSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <p><code>PUT /api/v3.2/order</code></p>
 
 <p>Amend the price or size or trigger price of an order. For trigger orders, if the order has already been triggered, the trigger price cannot be further amended. If an order is a POST-ONLY order, and <code>slide</code> option is set to true, then price will set to be the best bid/ask price. Amend order <em>does not</em> apply to algo orders</p>
-<h3 id='request-parameters-9'>Request Parameters</h3>
+<h3 id='request-parameters-8'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2068,25 +1893,25 @@
 <td>orderID</td>
 <td>string</td>
 <td>No</td>
-<td>Internal order ID</td>
+<td>Internal order ID. Mandatory when <code>clOrderID</code> is not provided. If <code>orderID</code> is provided, <code>clOrderID</code> will be ignored.</td>
 </tr>
 <tr>
 <td>clOrderID</td>
 <td>string</td>
 <td>No</td>
-<td>Custom order ID</td>
+<td>Custom order ID. Mandatory when <code>orderID</code> is not provided.</td>
 </tr>
 <tr>
 <td>type</td>
 <td>string</td>
 <td>Yes</td>
-<td>Type of amendmend<br/><code>PRICE</code>: To amend order price<br/><code>SIZE</code>: To amend order size<br/><code>TRIGGER</code>: To amend trigger price<br/><code>ALL</code>: to amend multiple fields</td>
+<td>Type of amendment<br/><code>PRICE</code>: To amend order price<br/><code>SIZE</code>: To amend order size<br/><code>TRIGGERPRICE</code>: To amend trigger price<br/><code>ALL</code>: to amend multiple fields</td>
 </tr>
 <tr>
 <td>value</td>
 <td>number</td>
-<td>Yes</td>
-<td>The value to be amended to. Value depends on the type being set.</td>
+<td>No</td>
+<td>Mandatory for types: <code>PRICE</code>, <code>SIZE</code>, <code>TRIGGERPRICE</code>. The value to be amended to. Value depends on the type being set.</td>
 </tr>
 <tr>
 <td>slide</td>
@@ -2098,22 +1923,22 @@
 <td>orderPrice</td>
 <td>number</td>
 <td>No</td>
-<td>order price to be amended</td>
+<td>For type: <code>ALL</code>, order price to be amended</td>
 </tr>
 <tr>
 <td>orderSize</td>
 <td>number</td>
 <td>No</td>
-<td>order size to be amended</td>
+<td>For type: <code>ALL</code>, order size to be amended</td>
 </tr>
 <tr>
 <td>triggerPrice</td>
 <td>number</td>
 <td>No</td>
-<td>trigger price to be amended</td>
+<td>For type: <code>ALL</code>, trigger price to be amended</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-10'>Response Content</h3>
+<h3 id='response-content-9'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2150,7 +1975,7 @@
 <td>orderType</td>
 <td>string</td>
 <td>Yes</td>
-<td>Order type <br/>76: Limit Order<br/>77: Market order<br/>80: Algo order</td>
+<td>Order type <br/>76: Limit order<br/>77: Market order<br/>80: Peg/Algo order</td>
 </tr>
 <tr>
 <td>postOnly</td>
@@ -2244,23 +2069,90 @@
 <div class="highlight"><pre class="highlight plaintext"><code>/api/v3.2/order?symbol=BTC-USD&amp;clOrderID=my-order-id
 </code></pre></div>
 <blockquote>
-<p>Response</p>
+<p>Response (general)</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">36164</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.035</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SELL"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
     </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USD"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"serialId"</span><span class="p">:</span><span class="w"> </span><span class="mi">85997835</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1624990097000</span><span class="w">
+    </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">24000.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9be4a6bb-bf56-4a81-a105-2a22c9629a48"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1660278598333</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stopPrice"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"trigger"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"averageFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"fillSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jack-test-1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"deviation"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"originalSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"remainingSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Response (for <code>OCO</code> order)</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USD"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">23000.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e3806536-776c-4d8f-8436-bde12a79620b"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1660286055127</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stopPrice"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"trigger"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"averageFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"fillSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"deviation"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"originalSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"remainingSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USD"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ad4d0eeb-81a1-48f4-86c3-90436bb53718"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1660286055128</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">40010.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stopPrice"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"trigger"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"averageFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"fillSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"deviation"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"originalSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"remainingSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <p><code>DELETE /api/v3.2/order</code></p>
 
 <p>Cancels pending orders that has not yet been transacted. The <code>orderID</code> is a unique identifier to cancel a particular order. <code>clOrderID</code> is a custom ID sent in by the trader. When cancel by <code>clOrderID</code>, all orders having the same ID will be cancelled. If <code>orderID</code> and <code>clOrderID</code> is not sent in, then cancellation will be for all orders in the current market.</p>
-<h3 id='request-parameters-10'>Request Parameters</h3>
+<h3 id='request-parameters-9'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2279,16 +2171,16 @@
 <td>orderID</td>
 <td>string</td>
 <td>No</td>
-<td>Unique identifier for an order</td>
+<td>Unique identifier for an order. Mandatory when <code>clOrderID</code> is not provided. If <code>orderID</code> is provided, <code>clOrderID</code> will be ignored.</td>
 </tr>
 <tr>
 <td>clOrderID</td>
 <td>string</td>
 <td>No</td>
-<td>Client custom order ID</td>
+<td>Client custom order ID. Mandatory when <code>orderID</code> is not provided.</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-11'>Response Content</h3>
+<h3 id='response-content-10'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2325,7 +2217,7 @@
 <td>orderType</td>
 <td>string</td>
 <td>Yes</td>
-<td>Order type <br/>76: Limit Order<br/>77: Market order<br/>80: Algo order</td>
+<td>Order type <br/>76: Limit order<br/>77: Market order<br/>80: Peg/Algo order</td>
 </tr>
 <tr>
 <td>postOnly</td>
@@ -2423,7 +2315,7 @@
 <p><code>POST /api/v3.2/order/cancelAllAfter</code></p>
 
 <p>Dead-man&#39;s switch allows the trader to send in a timeout value which is a Time to live (TTL) value for an order. Extension of the timeout is done by sending another <code>cancelAllAfter</code> request. If the server does not receive another request before the timeout is reached, all orders will be cancelled.</p>
-<h3 id='request-parameters-11'>Request Parameters</h3>
+<h3 id='request-parameters-10'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2439,7 +2331,7 @@
 <td>Timeout value in milliseconds</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-12'>Response Content</h3>
+<h3 id='response-content-11'>Response Content</h3>
 <ul>
 <li>If set correctly, a HTTP 200 response code will be returned</li>
 </ul>
@@ -2447,38 +2339,41 @@
 <blockquote>
 <p>Response</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">2142.5</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.001</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"orderValue"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.1425</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"filledSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"pegPriceMin"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"pegPriceMax"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"pegPriceDeviation"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"cancelDuration"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1642992096246</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"946ec252-2a85-40a1-9707-6b737c75b394"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"triggerOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"triggerOriginalPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"triggerOrderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"triggerTrailingStopDeviation"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"triggerStopPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-USD"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"trailValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"averageFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"fillSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"_rtifs1642992095163"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"orderState"</span><span class="p">:</span><span class="w"> </span><span class="s2">"STATUS_ACTIVE"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"triggered"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
-</span><span class="p">}</span><span class="w">
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">35000.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.01</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderValue"</span><span class="p">:</span><span class="w"> </span><span class="mf">350.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"filledSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"pegPriceMin"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"pegPriceMax"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"pegPriceDeviation"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"cancelDuration"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1660291619263</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3c9c9c1f-8fef-43d0-82c7-ccef67435b14"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerOriginalPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerOrderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerTrailingStopDeviation"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerStopPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USD"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"trailValue"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"averageFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"fillSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"_yndef1660291619198"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderState"</span><span class="p">:</span><span class="w"> </span><span class="s2">"STATUS_ACTIVE"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timeInForce"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggered"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <p><code>GET /api/v3.2/user/open_orders</code></p>
 
 <p>Retrieves open orders that have not yet been matched or matched recently.</p>
-<h3 id='request-parameters-12'>Request Parameters</h3>
+<h3 id='request-parameters-11'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2503,10 +2398,10 @@
 <td>clOrderID</td>
 <td>string</td>
 <td>No</td>
-<td>Query using custom order ID</td>
+<td>Query using custom order ID. If <code>orderID</code> is provided, <code>clOrderID</code> will be ignored.</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-13'>Response Content</h3>
+<h3 id='response-content-12'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2519,7 +2414,7 @@
 <td>orderType</td>
 <td>double</td>
 <td>Yes</td>
-<td>Order type <br/>76: Limit Order<br/>77: Market order<br/>80: Algo order</td>
+<td>Order type <br/>76: Limit order<br/>77: Market order<br/>80: Peg/Algo order</td>
 </tr>
 <tr>
 <td>price</td>
@@ -2609,7 +2504,7 @@
 <td>triggerOrderType</td>
 <td>double</td>
 <td>Yes</td>
-<td>Order type <br/><code>76: Limit Order</code><br/><code>77: Market order</code><br/><code>80: Algo order</code></td>
+<td>Order type <br/><code>76: Limit order</code><br/><code>77: Market order</code><br/><code>80: Peg/Algo order</code></td>
 </tr>
 <tr>
 <td>triggerTrailingStopDeviation</td>
@@ -2642,10 +2537,10 @@
 <td>Average filled price. Returns the average filled price for partially transacted orders</td>
 </tr>
 <tr>
-<td>filledSize</td>
+<td>fillSize</td>
 <td>double</td>
 <td>Yes</td>
-<td>Filled size</td>
+<td>Fill size</td>
 </tr>
 <tr>
 <td>clOrderID</td>
@@ -2658,6 +2553,12 @@
 <td>string</td>
 <td>Yes</td>
 <td><code>STATUS_ACTIVE</code>, <code>STATUS_INACTIVE</code></td>
+</tr>
+<tr>
+<td>timeInForce</td>
+<td>string</td>
+<td>Yes</td>
+<td>Order validity</td>
 </tr>
 <tr>
 <td>triggered</td>
@@ -2698,7 +2599,7 @@
 <p><code>GET /api/v3.2/user/trade_history</code></p>
 
 <p>Retrieves a user&#39;s trade history</p>
-<h3 id='request-parameters-13'>Request Parameters</h3>
+<h3 id='request-parameters-12'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2768,7 +2669,7 @@
 <td>Exact match on <code>symbol</code>. If this sets to true, will only match records for that symbol only</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-14'>Response Content</h3>
+<h3 id='response-content-13'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2899,7 +2800,7 @@
 <p><code>get /api/v3.2/user/fees</code></p>
 
 <p>retrieve user&#39;s trading fees</p>
-<h3 id='request-parameters-14'>request parameters</h3>
+<h3 id='request-parameters-13'>request parameters</h3>
 <table><thead>
 <tr>
 <th>name</th>
@@ -2915,7 +2816,7 @@
 <td>market symbol to filter for specific market</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-15'>response content</h3>
+<h3 id='response-content-14'>response content</h3>
 <table><thead>
 <tr>
 <th>name</th>
@@ -2973,9 +2874,9 @@
 <p><code>get /api/v3.2/invest/products</code></p>
 
 <p>get all investment products</p>
-<h3 id='request-parameters-15'>request parameters</h3>
+<h3 id='request-parameters-14'>request parameters</h3>
 <p>(none)</p>
-<h3 id='response-content-16'>response content</h3>
+<h3 id='response-content-15'>response content</h3>
 <table><thead>
 <tr>
 <th>name</th>
@@ -3094,7 +2995,7 @@
 <p><code>post /api/v3.2/invest/deposit</code></p>
 
 <p>deposit an investment</p>
-<h3 id='request-parameters-16'>request parameters</h3>
+<h3 id='request-parameters-15'>request parameters</h3>
 <table><thead>
 <tr>
 <th>name</th>
@@ -3154,7 +3055,7 @@
 <p><code>post /api/v3.2/invest/renew</code></p>
 
 <p>renew an investment order</p>
-<h3 id='request-parameters-17'>request parameters</h3>
+<h3 id='request-parameters-16'>request parameters</h3>
 <table><thead>
 <tr>
 <th>name</th>
@@ -3176,7 +3077,7 @@
 <td>renew automatically</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-17'>response content</h3>
+<h3 id='response-content-16'>response content</h3>
 <table><thead>
 <tr>
 <th>name</th>
@@ -3210,7 +3111,7 @@
 <p><code>post /api/v3.2/invest/redeem</code></p>
 
 <p>redeem an investment order</p>
-<h3 id='request-parameters-18'>request parameters</h3>
+<h3 id='request-parameters-17'>request parameters</h3>
 <table><thead>
 <tr>
 <th>name</th>
@@ -3261,7 +3162,7 @@
 <p><code>get /api/v3.2/invest/orders</code></p>
 
 <p>query investment orders</p>
-<h3 id='response-content-18'>response content</h3>
+<h3 id='response-content-17'>response content</h3>
 <table><thead>
 <tr>
 <th>name</th>
@@ -3389,7 +3290,7 @@
 <p><code>get /api/v3.2/invest/history</code></p>
 
 <p>query investment history</p>
-<h3 id='response-content-19'>response content</h3>
+<h3 id='response-content-18'>response content</h3>
 <table><thead>
 <tr>
 <th>name</th>
@@ -3481,7 +3382,7 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>to subscribe to a websocket feed</p>
-<h3 id='request-parameters-19'>request parameters</h3>
+<h3 id='request-parameters-18'>request parameters</h3>
 <table><thead>
 <tr>
 <th>name</th>
@@ -3503,7 +3404,7 @@
 <td>topics to subscribe to.</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-20'>response content</h3>
+<h3 id='response-content-19'>response content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3567,7 +3468,7 @@
 <li><code>symbol</code> indicates the market symbol</li>
 <li><code>grouping</code> indicates the grouping granularity. Valid values are 0-9.</li>
 </ul>
-<h3 id='response-content-21'>Response Content</h3><h4 id='orderbook-object'>Orderbook Object</h4>
+<h3 id='response-content-20'>Response Content</h3><h4 id='orderbook-object'>Orderbook Object</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3666,7 +3567,7 @@
 <li><code>symbol</code> indicates the market symbol</li>
 <li><code>depth</code> indicates the levels of orderbook to retrieve. Value of 0 will retrieve the entire orderbook.</li>
 </ul>
-<h3 id='response-content-22'>Response Content</h3><h4 id='orderbook-object-2'>Orderbook Object</h4>
+<h3 id='response-content-21'>Response Content</h3><h4 id='orderbook-object-2'>Orderbook Object</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3831,7 +3732,7 @@
 <p>To ensure that the updates are received in sequence, <code>seqNum</code> indicates the current sequence and <code>prevSeqNum</code> refers to the packet before. <code>seqNum</code> will always be one after the <code>prevSeqNum</code>. If the sequence is out of order, you will need to unsubscribe and re-subscribe to the topic again.</p>
 
 <p>Also if <a href="https://en.wikipedia.org/wiki/Order_book#Crossed_book">crossed orderbook</a> ever occurs when the best bid higher or equal to the best ask, please unsubscribe and re-subscribe to the topic again.</p>
-<h3 id='response-content-23'>Response Content</h3><h4 id='orderbook-object-3'>Orderbook Object</h4>
+<h3 id='response-content-22'>Response Content</h3><h4 id='orderbook-object-3'>Orderbook Object</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3934,7 +3835,7 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>Subscribe to recent trade feed for a market. The topic will be <code>tradeHistoryApi:&lt;market&gt;</code> where <code>&lt;market&gt;</code> is the market symbol.</p>
-<h3 id='response-content-24'>Response Content</h3><h4 id='tradehistory-object'>TradeHistory Object</h4>
+<h3 id='response-content-23'>Response Content</h3><h4 id='tradehistory-object'>TradeHistory Object</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4024,7 +3925,7 @@
   "op":"authKeyExpires",
   "args":["4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x", "1624985375123", "c410d38c681579adb335885800cff24c66171b7cc8376cfe43da1408c581748156b89bcc5a115bb496413bda481139fb"]}
 }
-</code></pre></div><h3 id='request-parameters-20'>Request Parameters</h3>
+</code></pre></div><h3 id='request-parameters-19'>Request Parameters</h3>
 <p>Below details the arguments needed to be sent in.</p>
 
 <table><thead>
@@ -4104,7 +4005,7 @@
 
 </span></code></pre></div>
 <p>Receive trade notifications by subscribing to the topic <code>notificationApiV2</code>. The websocket feed will push trade level notifications to the subscriber. If topic is subscribed without being authenticated, no messages will be sent.</p>
-<h3 id='response-content-25'>Response Content</h3>
+<h3 id='response-content-24'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4135,7 +4036,7 @@
 <td>type</td>
 <td>int</td>
 <td>Yes</td>
-<td>Order type. Valid values are:<br/>76: Limit Order<br/>77: Market Order<br/>80: Algo orders</td>
+<td>Order type. Valid values are:<br/>76: Limit order<br/>77: Market order<br/>80: Peg/Algo order</td>
 </tr>
 <tr>
 <td>price</td>
@@ -4259,7 +4160,7 @@
 
 </span></code></pre></div>
 <p>When a trade has been transacted, this topic will send the trade information back to the subscriber.</p>
-<h3 id='response-content-26'>Response Content</h3>
+<h3 id='response-content-25'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4302,7 +4203,7 @@
 <td>type</td>
 <td>int</td>
 <td>Yes</td>
-<td>Order type. Valid values are:<br/>76: Limit Order<br/>77: Market Order<br/>80: Algo orders</td>
+<td>Order type. Valid values are:<br/>76: Limit order<br/>77: Market order<br/>80: Peg/Algo order</td>
 </tr>
 <tr>
 <td>side</td>
@@ -4364,9 +4265,6 @@
 
       </div>
       <div class="dark-box">
-          <div class="lang-selector">
-                <a href="#" data-language-name="json">json</a>
-          </div>
       </div>
     </div>
     <script>
