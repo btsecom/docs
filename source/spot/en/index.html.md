@@ -13,6 +13,12 @@ language_tabs:
 
 # Change Log
 
+## Version 3.3.3 (15th August 2022)
+
+* Merge document section `Create new algo order` into [Create new order](#create-new-order)
+* Add more request / response samples in [Trade Endpoints](#trade-endpoints)
+* Correct document for request `type` of `TRIGGER` to `TRIGGERPRICE` in [Amend Order](#amend-order)
+
 ## Version 3.3.2 (29th March 2022)
 
 * Add new `HALFMIN` time_in_force option in [Create new order](#create-new-order)
