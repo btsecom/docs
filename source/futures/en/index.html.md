@@ -563,51 +563,147 @@ Get trade fills for the market specified by `symbol`
 
 ## Create new order
 
-> Request
+> Request (create `MARKET` order)
 
 ```json
 {
-  "clOrderID": "string",
-  "deviation": 0,
-  "postOnly": false,
-  "price": 8300,
-  "side": "BUY",
-  "size": 4,
-  "stealth": 0,
-  "stopPrice": 0,
   "symbol": "BTCPFC",
-  "time_in_force": "GTC",
-  "trailValue": 0,
-  "triggerPrice": 0,
-  "txType": "LIMIT",
+  "size": 1,
+  "side": "BUY",
+  "type": "MARKET"
+}
+```
+> Request (create `LIMIT` order)
+
+```json
+{
+  "symbol": "BTCPFC",
+  "size": 1,
+  "price": 21000,
+  "side": "BUY",
   "type": "LIMIT"
 }
 ```
-
-> Response
+> Request (create `LIMIT` `TRIGGER` order)
 
 ```json
 {
-  "avgFillPrice": 0,
-  "clOrderID": "string",
-  "deviation": 0,
-  "fillSize": 0,
-  "message": "string",
-  "orderID": "string",
-  "orderType": 76,
-  "price": 0,
-  "side": "BUY",
-  "size": 4,
-  "status": 0,
-  "stealth": 0,
-  "stopPrice": 8300,
   "symbol": "BTCPFC",
-  "timestamp": 1576812000872,
-  "trigger": true,
-  "triggerPrice": 8300,
-  "remainingSize": 2,
-  "orginialSize": 4
+  "size": 1,
+  "price": 21000,
+  "side": "BUY",
+  "type": "LIMIT",
+  "txType": "TRIGGER",
+  "triggerPrice": 30000
 }
+```
+> Request (create `LIMIT` `STOP` order)
+
+```json
+{
+  "symbol": "BTCPFC",
+  "size": 1,
+  "price": 21000,
+  "side": "BUY",
+  "type": "LIMIT",
+  "txType": "STOP",
+  "triggerPrice": 30000
+}
+```
+> Request (create `OCO` order)
+
+```json
+{
+  "symbol": "BTCPFC",
+  "size": 1,
+  "price": 21000,
+  "side": "BUY",
+  "type": "OCO",
+  "txType": "LIMIT",
+  "trigger": "markPrice",
+  "stopPrice": 30010,
+  "triggerPrice": 30000
+}
+```
+
+> Response (general)
+
+```json
+[
+  {
+    "status": 4,
+    "symbol": "BTCPFC",
+    "orderType": 76,
+    "price": 21000.0,
+    "side": "BUY",
+    "size": 1,
+    "orderID": "abb3f457-fdc0-4bdb-a46b-8e4aa49a57c2",
+    "timestamp": 1660558270207,
+    "triggerPrice": 0.0,
+    "trigger": false,
+    "deviation": 100.0,
+    "stealth": 100.0,
+    "message": "",
+    "avgFillPrice": 21000.0,
+    "fillSize": 1.0,
+    "clOrderID": "",
+    "originalSize": 1.0,
+    "postOnly": false,
+    "remainingSize": 0.0,
+    "time_in_force": "GTC"
+  }
+]
+```
+
+> Response (for `OCO` order)
+
+```json
+[
+  {
+    "status": 9,
+    "symbol": "BTCPFC",
+    "orderType": 76,
+    "price": 23000.0,
+    "side": "BUY",
+    "size": 1,
+    "orderID": "4c9d16c1-9869-4734-bfb8-56318e961ef2",
+    "timestamp": 1660558185243,
+    "triggerPrice": 30000.0,
+    "trigger": true,
+    "deviation": 100.0,
+    "stealth": 100.0,
+    "message": "",
+    "avgFillPrice": 0.0,
+    "fillSize": 0.0,
+    "clOrderID": "",
+    "originalSize": 1.0,
+    "postOnly": false,
+    "remainingSize": 1.0,
+    "time_in_force": "GTC"
+  },
+  {
+    "status": 2,
+    "symbol": "BTCPFC",
+    "orderType": 76,
+    "price": 21000.0,
+    "side": "BUY",
+    "size": 1,
+    "orderID": "53749446-39d3-4b72-87c9-92e9fc7e4b8c",
+    "timestamp": 1660558185225,
+    "triggerPrice": 0.0,
+    "trigger": false,
+    "deviation": 100.0,
+    "stealth": 100.0,
+    "message": "",
+    "avgFillPrice": 0.0,
+    "fillSize": 0.0,
+    "clOrderID": "",
+    "originalSize": 1.0,
+    "postOnly": false,
+    "remainingSize": 1.0,
+    "time_in_force": "GTC"
+  }
+]
 ```
 
 `POST /api/v2.1/order`
@@ -616,21 +712,22 @@ Creates a new order. Requires `Trading` permission
 
 ### Request Parameters
 
-| Name          | Type    | Required | Description                                                                                                                                                                                                                                                                                                                                                        |
-| ---           | ---     | ---      | ---                                                                                                                                                                                                                                                                                                                                                                |
-| symbol        | string  | Yes      | Market symbol                                                                                                                                                                                                                                                                                                                                                      |
-| price         | double  | Yes      | Order price                                                                                                                                                                                                                                                                                                                                                        |
-| size          | double  | Yes      | Order size                                                                                                                                                                                                                                                                                                                                                         |
-| side          | string  | Yes      | 'BUY' or 'SELL'                                                                                                                                                                                                                                                                                                                                                    |
-| time_in_force | string  | No       | Time validity of the order<br/>GTC: Good till Cancel<br/>IOC: Immediate or Cancel<br/>FOK: Fill or Kill<br/>HALFMIN: Order valid for 30 seconds<br/>FIVEMIN: Order valid for 5 mins<br/> HOUR: Order valid for an hour<br/>TWELVEHOUR: Order valid for 12 hours<br/>DAY: Order valid for a day<br/>WEEK: Order valid for a week<br/>MONTH: Order valid for a month |
-| type          | string  | Yes      | Order type<br/>LIMIT: Limit Orders<br/>MARKET: Market Orders<br/>OCO: One cancel the other                                                                                                                                                                                                                                                                         |
-| txType        | string  | Yes      | Used for Stop orders or trigger orders<br/>STOP: Stop Order, `stopPrice` is mandatory<br/>TRIGGER: Trigger order, `triggerPrice` is mandatory<br/>LIMIT: Default, used when its not a Stop order nor Trigger order                                                                                                                                                 |
-| stopPrice     | double  | No       | Mandatory when creating a Stop or OCO order. Indicates the stop price                                                                                                                                                                                                                                                                                              |
-| triggerPrice  | double  | Yes      | Mandatory when creating a Trigger or OCO order. Indicates the trigger price                                                                                                                                                                                                                                                                                        |
-| trailValue    | double  | Yes      | Trail value                                                                                                                                                                                                                                                                                                                                                        |
-| postOnly      | boolean | Yes      | Boolean to indicate if this is a post only order. For post only orders, traders are charged maker fees                                                                                                                                                                                                                                                             |
-| reduceOnly    | boolean | Yes      | Boolean to indicate if this is a reduce only order.                                                                                                                                                                                                                                                                                                                |
-| clOrderID     | string  | Yes      | Custom order Id                                                                                                                                                                                                                                                                                                                                                    |
+| Name          | Type    | Required | Description         |
+|---------------| ---     | ---      | ---                 |
+| symbol        | string  | Yes      | Market symbol       |
+| price         | double  | No       | Mandatory unless creating a MARKET order. Order price |
+| size          | double  | Yes      | Order size          |
+| side          | string  | Yes      | 'BUY' or 'SELL'     |
+| time_in_force | string  | No       | Time validity of the order<br/>GTC: Good till Cancel<br/>IOC: Immediate or Cancel<br/>FOK: Fill or Kill<br/>HALFMIN: Order valid for 30 seconds<br/>FIVEMIN: Order valid for 5 mins<br/> HOUR: Order valid for an hour<br/>TWELVEHOUR: Order valid for 12 hours<br/>DAY: Order valid for a day<br/>WEEK: Order valid for a week<br/>MONTH: Order valid for a month                                                                                |
+| type          | string  | Yes      | Order type<br/>LIMIT: Limit Orders<br/>MARKET: Market Orders<br/>OCO: One cancel the other               |
+| txType        | string  | No       | Used for Stop orders or trigger orders<br/>STOP: Stop Order, `triggerPrice` is mandatory<br/>TRIGGER: Trigger order, `triggerPrice` is mandatory<br/>LIMIT: Default, used when its not a Stop order nor Trigger order |
+| stopPrice     | double  | No       | Mandatory when creating an OCO order. Indicates the stop price                                           |
+| triggerPrice  | double  | No       | Mandatory when creating a Stop, Trigger, OCO order. Indicates the trigger price                          |
+| trailValue    | double  | No       | Trail value         |
+| postOnly      | boolean | No       | Boolean to indicate if this is a post only order. For post only orders, traders are charged maker fees   |
+| reduceOnly    | boolean | No       | Boolean to indicate if this is a reduce only order.                                                      |
+| clOrderID     | string  | No       | Custom order Id     |
+| trigger       | string  | No       | For creating order with txType: `STOP` or `TRIGGER`. Valid options: `markPrice` (default) or `lastPrice` |
 
 
 ### Response Content
@@ -647,7 +744,6 @@ Creates a new order. Requires `Trading` permission
 | side             | string  | Yes      | Order side<br/>BUY or SELL                                                                                                                                                                                                                                                                      |
 | size             | double  | Yes      | Order size                                                                                                                                                                                                                                                                                      |
 | status           | integer | Yes      | Order status<br/>	2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed |
-| stopPrice        | string  | Yes      | Stop price                                                                                                                                                                                                                                                                                      |
 | time_in_force    | string  | Yes      | Order validity                                                                                                                                                                                                                                                                                  |
 | timestamp        | string  | Yes      | Order timestamp                                                                                                                                                                                                                                                                                 |
 | trigger          | string  | Yes      | Indicator if order is a trigger order                                                                                                                                                                                                                                                           |
