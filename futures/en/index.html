@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-2-4-1-17th-august-2022" class="toc-h2 toc-link" data-title="Version 2.4.1 (17th August 2022)">Version 2.4.1 (17th August 2022)</a>
+                  </li>
+                  <li>
                     <a href="#version-2-4-0-30th-march-2022" class="toc-h2 toc-link" data-title="Version 2.4.0 (30th March 2022)">Version 2.4.0 (30th March 2022)</a>
                   </li>
                   <li>
@@ -417,7 +420,12 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-2-4-0-30th-march-2022'>Version 2.4.0 (30th March 2022)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-2-4-1-17th-august-2022'>Version 2.4.1 (17th August 2022)</h2>
+<ul>
+<li>Add more request / response samples in <a href="#trade-endpoints">Trade Endpoints</a></li>
+<li>Correct document in <a href="#trade-endpoints">Trade Endpoints</a></li>
+</ul>
+<h2 id='version-2-4-0-30th-march-2022'>Version 2.4.0 (30th March 2022)</h2>
 <ul>
 <li>Add new websocket topic <code>allPosition</code> to get all open position <a href="#all-position">All Position</a></li>
 </ul>
@@ -1181,7 +1189,7 @@
 </tr>
 <tr>
 <td>timestamp</td>
-<td>double</td>
+<td>long</td>
 <td>Yes</td>
 <td>Timestamp of orderbook</td>
 </tr>
@@ -1249,7 +1257,7 @@
 </tr>
 <tr>
 <td>depth</td>
-<td>integer</td>
+<td>long</td>
 <td>No</td>
 <td>Orderbook depth</td>
 </tr>
@@ -1283,7 +1291,7 @@
 </tr>
 <tr>
 <td>timestamp</td>
-<td>double</td>
+<td>long</td>
 <td>Yes</td>
 <td>Timestamp of orderbook</td>
 </tr>
@@ -1369,7 +1377,7 @@
 </tr>
 <tr>
 <td>count</td>
-<td>integer</td>
+<td>long</td>
 <td>Yes</td>
 <td>Number of records to return</td>
 </tr>
@@ -1421,56 +1429,151 @@
 </tr>
 <tr>
 <td>timestamp</td>
-<td>double</td>
+<td>long</td>
 <td>Yes</td>
 <td>Transacted timestamp</td>
 </tr>
 </tbody></table>
 <h1 id='trade-endpoints'>Trade Endpoints</h1><h2 id='create-new-order'>Create new order</h2>
 <blockquote>
-<p>Request</p>
+<p>Request (create <code>MARKET</code> order)</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"deviation"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">8300</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"stopPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"trailValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"txType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LIMIT"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MARKET"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Request (create <code>LIMIT</code> order)</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">21000</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LIMIT"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
-<p>Response</p>
+<p>Request (create <code>LIMIT</code> <code>TRIGGER</code> order)</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"avgFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"deviation"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"fillSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"stopPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">8300</span><span class="p">,</span><span class="w">
   </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1576812000872</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"trigger"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">8300</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"remainingSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"orginialSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="w">
+  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">21000</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LIMIT"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"txType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TRIGGER"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">30000</span><span class="w">
 </span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Request (create <code>LIMIT</code> <code>STOP</code> order)</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">21000</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LIMIT"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"txType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"STOP"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">30000</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Request (create <code>OCO</code> order)</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">21000</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OCO"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"txType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LIMIT"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"trigger"</span><span class="p">:</span><span class="w"> </span><span class="s2">"markPrice"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"stopPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">30010</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">30000</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Response (general)</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">21000.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"abb3f457-fdc0-4bdb-a46b-8e4aa49a57c2"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1660558270207</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"trigger"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"deviation"</span><span class="p">:</span><span class="w"> </span><span class="mf">100.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mf">100.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"avgFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">21000.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"fillSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"originalSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"remainingSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Response (for <code>OCO</code> order)</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">23000.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4c9d16c1-9869-4734-bfb8-56318e961ef2"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1660558185243</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">30000.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"trigger"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"deviation"</span><span class="p">:</span><span class="w"> </span><span class="mf">100.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mf">100.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"avgFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"fillSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"originalSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"remainingSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">21000.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"53749446-39d3-4b72-87c9-92e9fc7e4b8c"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1660558185225</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"trigger"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"deviation"</span><span class="p">:</span><span class="w"> </span><span class="mf">100.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mf">100.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"avgFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"fillSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"originalSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"remainingSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <p><code>POST /api/v2.1/order</code></p>
 
@@ -1493,12 +1596,12 @@
 <tr>
 <td>price</td>
 <td>double</td>
-<td>Yes</td>
-<td>Order price</td>
+<td>No</td>
+<td>Mandatory unless creating a MARKET order. Order price</td>
 </tr>
 <tr>
 <td>size</td>
-<td>double</td>
+<td>long</td>
 <td>Yes</td>
 <td>Order size</td>
 </tr>
@@ -1523,44 +1626,50 @@
 <tr>
 <td>txType</td>
 <td>string</td>
-<td>Yes</td>
-<td>Used for Stop orders or trigger orders<br/>STOP: Stop Order, <code>stopPrice</code> is mandatory<br/>TRIGGER: Trigger order, <code>triggerPrice</code> is mandatory<br/>LIMIT: Default, used when its not a Stop order nor Trigger order</td>
+<td>No</td>
+<td>Used for Stop orders or trigger orders<br/>STOP: Stop Order, <code>triggerPrice</code> is mandatory<br/>TRIGGER: Trigger order, <code>triggerPrice</code> is mandatory<br/>LIMIT: Default, used when its not a Stop order nor Trigger order</td>
 </tr>
 <tr>
 <td>stopPrice</td>
 <td>double</td>
 <td>No</td>
-<td>Mandatory when creating a Stop or OCO order. Indicates the stop price</td>
+<td>Mandatory when creating an OCO order. Indicates the stop price</td>
 </tr>
 <tr>
 <td>triggerPrice</td>
 <td>double</td>
-<td>Yes</td>
-<td>Mandatory when creating a Trigger or OCO order. Indicates the trigger price</td>
+<td>No</td>
+<td>Mandatory when creating a Stop, Trigger, OCO order. Indicates the trigger price</td>
 </tr>
 <tr>
 <td>trailValue</td>
 <td>double</td>
-<td>Yes</td>
+<td>No</td>
 <td>Trail value</td>
 </tr>
 <tr>
 <td>postOnly</td>
 <td>boolean</td>
-<td>Yes</td>
+<td>No</td>
 <td>Boolean to indicate if this is a post only order. For post only orders, traders are charged maker fees</td>
 </tr>
 <tr>
 <td>reduceOnly</td>
 <td>boolean</td>
-<td>Yes</td>
+<td>No</td>
 <td>Boolean to indicate if this is a reduce only order.</td>
 </tr>
 <tr>
 <td>clOrderID</td>
 <td>string</td>
-<td>Yes</td>
+<td>No</td>
 <td>Custom order Id</td>
+</tr>
+<tr>
+<td>trigger</td>
+<td>string</td>
+<td>No</td>
+<td>For creating order with txType: <code>STOP</code> or <code>TRIGGER</code>. Valid options: <code>markPrice</code> (default) or <code>lastPrice</code></td>
 </tr>
 </tbody></table>
 <h3 id='response-content-7'>Response Content</h3>
@@ -1622,21 +1731,15 @@
 </tr>
 <tr>
 <td>size</td>
-<td>double</td>
+<td>long</td>
 <td>Yes</td>
 <td>Order size</td>
 </tr>
 <tr>
 <td>status</td>
-<td>integer</td>
+<td>long</td>
 <td>Yes</td>
 <td>Order status<br/> 2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed</td>
-</tr>
-<tr>
-<td>stopPrice</td>
-<td>string</td>
-<td>Yes</td>
-<td>Stop price</td>
 </tr>
 <tr>
 <td>time_in_force</td>
@@ -1646,25 +1749,25 @@
 </tr>
 <tr>
 <td>timestamp</td>
-<td>string</td>
+<td>long</td>
 <td>Yes</td>
 <td>Order timestamp</td>
 </tr>
 <tr>
 <td>trigger</td>
-<td>string</td>
+<td>boolean</td>
 <td>Yes</td>
 <td>Indicator if order is a trigger order</td>
 </tr>
 <tr>
 <td>triggerPrice</td>
-<td>string</td>
+<td>double</td>
 <td>Yes</td>
 <td>Order trigger price, returns 0 if order is not a trigger order</td>
 </tr>
 <tr>
 <td>avgFillPrice</td>
-<td>string</td>
+<td>double</td>
 <td>Yes</td>
 <td>Average filled price. Returns the average filled price for partially transacted orders</td>
 </tr>
@@ -1682,7 +1785,7 @@
 </tr>
 <tr>
 <td>deviation</td>
-<td>string</td>
+<td>double</td>
 <td>Yes</td>
 <td>Only valid for Algo orders</td>
 </tr>
@@ -1704,54 +1807,49 @@
 <p>Request</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"deviation"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">8030</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"stopPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"trailValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"txType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LIMIT"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LIMIT"</span><span class="w">
+  </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">21500</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"60a30188-f2a2-4498-b061-7d72126c18c2"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"deviation"</span><span class="p">:</span><span class="w"> </span><span class="mi">-10</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
 <p>Response</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"avgFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"deviation"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"fillSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"stopPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">8030</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1576812000872</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"trigger"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">8300</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"remainingSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"orginialSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="w">
-</span><span class="p">}</span><span class="w">
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">21500.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"de9f94bb-0ca0-470b-830e-9bc2e109c719"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1660554373317</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"trigger"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"deviation"</span><span class="p">:</span><span class="w"> </span><span class="mf">-10.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"avgFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"fillSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"60a30188-f2a2-4498-b061-7d72126c18c2"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"originalSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"remainingSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
 </span></code></pre></div>
-<p><code>POST /api/v3.2/order/peg</code></p>
+<p><code>POST /api/v2.1/order/peg</code></p>
 
 <p>Creates a new algo order. Algo order is an order that price will change according to market price. To create an algo order, user will need to enter additional parameters:</p>
 
 <ul>
 <li><code>price</code>: What is the min price (for a sell order) or maximum price (for a buy order) that a user will be willing to list his order at</li>
-<li><code>size</code>: Total size of order</li>
 <li><code>deviation</code>: How much should the order price deviate from index price. Value is in percentage and can range from <code>-10</code> to <code>10</code></li>
 <li><code>stealth</code>: How many percent of the order is to be displayed on the orderbook.</li>
 </ul>
@@ -1780,69 +1878,33 @@
 </tr>
 <tr>
 <td>size</td>
-<td>double</td>
+<td>long</td>
 <td>Yes</td>
 <td>Order size</td>
 </tr>
 <tr>
-<td>time_in_force</td>
-<td>string</td>
-<td>No</td>
-<td>Time validity of the order<br/>GTC: Good till Cancel<br/>IOC: Immediate or Cancel<br/>FOK: Fill or Kill<br/>HALFMIN: Order valid for 30 seconds<br/>FIVEMIN: Order valid for 5 mins<br/> HOUR: Order valid for an hour<br/>TWELVEHOUR: Order valid for 12 hours<br/>DAY: Order valid for a day<br/>WEEK: Order valid for a week<br/>MONTH: Order valid for a month</td>
-</tr>
-<tr>
-<td>type</td>
+<td>side</td>
 <td>string</td>
 <td>Yes</td>
-<td>Order type<br/>LIMIT: Limit Orders<br/>MARKET: Market Orders<br/>OCO: One cancel the other</td>
-</tr>
-<tr>
-<td>txType</td>
-<td>string</td>
-<td>Yes</td>
-<td>Used for Stop orders or trigger orders<br/>STOP: Stop Order, <code>stopPrice</code> is mandatory<br/>TRIGGER: Trigger order, <code>triggerPrice</code> is mandatory<br/>LIMIT: Default, used when its not a Stop order nor Trigger order</td>
-</tr>
-<tr>
-<td>stopPrice</td>
-<td>double</td>
-<td>No</td>
-<td>Mandatory when creating a Stop or OCO order. Indicates the stop price</td>
-</tr>
-<tr>
-<td>triggerPrice</td>
-<td>double</td>
-<td>Yes</td>
-<td>Mandatory when creating a Trigger or OCO order. Indicates the trigger price</td>
-</tr>
-<tr>
-<td>trailValue</td>
-<td>double</td>
-<td>Yes</td>
-<td>Trail value</td>
-</tr>
-<tr>
-<td>postOnly</td>
-<td>boolean</td>
-<td>Yes</td>
-<td>Boolean to indicate if this is a post only order. For post only orders, traders are charged maker fees</td>
+<td>Order side<br/>BUY or SELL</td>
 </tr>
 <tr>
 <td>clOrderID</td>
 <td>string</td>
-<td>Yes</td>
+<td>No</td>
 <td>Custom order Id</td>
-</tr>
-<tr>
-<td>stealth</td>
-<td>double</td>
-<td>Yes</td>
-<td>How many percent of the order is to be displayed on the orderbook.</td>
 </tr>
 <tr>
 <td>deviation</td>
 <td>double</td>
-<td>Yes</td>
+<td>No</td>
 <td>How much should the order price deviate from index price. Value is in percentage and can range from <code>-10</code> to <code>10</code></td>
+</tr>
+<tr>
+<td>stealth</td>
+<td>double</td>
+<td>No</td>
+<td>How many percent of the order is to be displayed on the orderbook.</td>
 </tr>
 </tbody></table>
 <h3 id='response-content-8'>Response Content</h3>
@@ -1904,21 +1966,15 @@
 </tr>
 <tr>
 <td>size</td>
-<td>double</td>
+<td>long</td>
 <td>Yes</td>
 <td>Order size</td>
 </tr>
 <tr>
 <td>status</td>
-<td>integer</td>
+<td>long</td>
 <td>Yes</td>
 <td>Order status<br/> 2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed</td>
-</tr>
-<tr>
-<td>stopPrice</td>
-<td>string</td>
-<td>Yes</td>
-<td>Stop price</td>
 </tr>
 <tr>
 <td>time_in_force</td>
@@ -1928,25 +1984,25 @@
 </tr>
 <tr>
 <td>timestamp</td>
-<td>string</td>
+<td>long</td>
 <td>Yes</td>
 <td>Order timestamp</td>
 </tr>
 <tr>
 <td>trigger</td>
-<td>string</td>
+<td>boolean</td>
 <td>Yes</td>
 <td>Indicator if order is a trigger order</td>
 </tr>
 <tr>
 <td>triggerPrice</td>
-<td>string</td>
+<td>double</td>
 <td>Yes</td>
 <td>Order trigger price, returns 0 if order is not a trigger order</td>
 </tr>
 <tr>
 <td>avgFillPrice</td>
-<td>string</td>
+<td>double</td>
 <td>Yes</td>
 <td>Average filled price. Returns the average filled price for partially transacted orders</td>
 </tr>
@@ -1958,13 +2014,13 @@
 </tr>
 <tr>
 <td>stealth</td>
-<td>string</td>
+<td>double</td>
 <td>Yes</td>
 <td>Stealth value of order</td>
 </tr>
 <tr>
 <td>deviation</td>
-<td>string</td>
+<td>double</td>
 <td>Yes</td>
 <td>Deviation value of order</td>
 </tr>
@@ -1983,41 +2039,54 @@
 </tbody></table>
 <h2 id='amend-order'>Amend Order</h2>
 <blockquote>
-<p>Request</p>
+<p>Request (amend price)</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"604c3ebf-d7fa-468d-9ff0-f6ad030221b4"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PRICE"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Order ID"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Custom Order ID"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"slide"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"orderSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"orderPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">40000</span><span class="w">
+  </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">22000</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Request (amend all)</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"604c3ebf-d7fa-468d-9ff0-f6ad030221b4"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ALL"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">30010</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">30000</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
 <p>Response</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"avgFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"deviation"</span><span class="p">:</span><span class="w"> </span><span class="mi">-5</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"fillSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"stopPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">8300</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1576812000872</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"trigger"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">8300</span><span class="w">
-</span><span class="p">}</span><span class="w">
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">20000.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"604c3ebf-d7fa-468d-9ff0-f6ad030221b4"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1660639762254</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"trigger"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"deviation"</span><span class="p">:</span><span class="w"> </span><span class="mf">100.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mf">100.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"avgFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"fillSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"originalSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"remainingSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <p><code>PUT /api/v2.1/order</code></p>
 
@@ -2041,19 +2110,19 @@
 <td>orderID</td>
 <td>string</td>
 <td>No</td>
-<td>Internal order ID</td>
+<td>Internal order ID. Mandatory when <code>clOrderID</code> is not provided. If <code>orderID</code> is provided, <code>clOrderID</code> will be ignored.</td>
 </tr>
 <tr>
 <td>clOrderID</td>
 <td>string</td>
 <td>No</td>
-<td>Custom order ID</td>
+<td>Custom order ID. Mandatory when <code>orderID</code> is not provided.</td>
 </tr>
 <tr>
 <td>type</td>
 <td>string</td>
 <td>Yes</td>
-<td>Type of amendmend<br/><code>PRICE</code>: To amend order price<br/><code>SIZE</code>: To amend order size<br/><code>TRIGGER</code>: To amend trigger price<br/><code>ALL</code>: to amend multiple fields</td>
+<td>Type of amendmend<br/><code>PRICE</code>: To amend order price<br/><code>SIZE</code>: To amend order size<br/><code>TRIGGERPRICE</code>: To amend trigger price<br/><code>ALL</code>: to amend multiple fields</td>
 </tr>
 <tr>
 <td>value</td>
@@ -2065,25 +2134,25 @@
 <td>slide</td>
 <td>boolean</td>
 <td>No</td>
-<td>Used for Post-Only orders. When set to true will set price to best bid/ask</td>
+<td>For type: <code>PRICE</code>. Used for Post-Only orders. When set to true will set price to best bid/ask</td>
 </tr>
 <tr>
 <td>orderPrice</td>
 <td>number</td>
 <td>No</td>
-<td>order price to be amended</td>
+<td>For type: <code>ALL</code>, order price to be amended</td>
 </tr>
 <tr>
 <td>orderSize</td>
 <td>number</td>
 <td>No</td>
-<td>order size to be amended</td>
+<td>For type: <code>ALL</code>, order size to be amended</td>
 </tr>
 <tr>
 <td>triggerPrice</td>
 <td>number</td>
 <td>No</td>
-<td>trigger price to be amended</td>
+<td>For type: <code>ALL</code>, trigger price to be amended</td>
 </tr>
 </tbody></table>
 <h3 id='response-content-9'>Response Content</h3>
@@ -2145,21 +2214,15 @@
 </tr>
 <tr>
 <td>size</td>
-<td>double</td>
+<td>long</td>
 <td>Yes</td>
 <td>Order size</td>
 </tr>
 <tr>
 <td>status</td>
-<td>integer</td>
+<td>long</td>
 <td>Yes</td>
 <td>Order status<br/> 2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed</td>
-</tr>
-<tr>
-<td>stopPrice</td>
-<td>string</td>
-<td>Yes</td>
-<td>Stop price</td>
 </tr>
 <tr>
 <td>time_in_force</td>
@@ -2169,7 +2232,7 @@
 </tr>
 <tr>
 <td>timestamp</td>
-<td>string</td>
+<td>long</td>
 <td>Yes</td>
 <td>Order timestamp</td>
 </tr>
@@ -2209,6 +2272,18 @@
 <td>Yes</td>
 <td>Deviation value of order</td>
 </tr>
+<tr>
+<td>remainingSize</td>
+<td>double</td>
+<td>Yes</td>
+<td>Size left to be transacted</td>
+</tr>
+<tr>
+<td>originalSize</td>
+<td>double</td>
+<td>Yes</td>
+<td>Original order size</td>
+</tr>
 </tbody></table>
 <h2 id='cancel-order'>Cancel Order</h2>
 <blockquote>
@@ -2221,26 +2296,30 @@
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
     </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">8300</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">19000.0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1576812000872</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">8300</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ae5b1b27-d5fe-41e2-89f8-f17b60fb3def"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1660640879996</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"trigger"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"deviation"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"avgFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"fillSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"market001"</span><span class="w">
+    </span><span class="nl">"deviation"</span><span class="p">:</span><span class="w"> </span><span class="mf">100.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mf">100.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"avgFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"fillSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"originalSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"remainingSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
-<p>DELETE /api/v2.1/order`</p>
+<p><code>DELETE /api/v2.1/order</code></p>
 
 <p>Cancels pending orders that has not yet been transacted. The <code>orderID</code> is a unique identifier to cancel a particular order. <code>clOrderID</code> is a custom ID sent in by the trader. When cancel by <code>clOrderID</code>, all orders having the same ID will be cancelled. If <code>orderID</code> and <code>clOrderID</code> is not sent in, then cancellation will be for all orders in the current market.</p>
 <h3 id='request-parameters-10'>Request Parameters</h3>
@@ -2262,13 +2341,13 @@
 <td>orderID</td>
 <td>string</td>
 <td>No</td>
-<td>Unique identifier for an order</td>
+<td>Unique identifier for an order. Mandatory when <code>clOrderID</code> is not provided. If <code>orderID</code> is provided, <code>clOrderID</code> will be ignored.</td>
 </tr>
 <tr>
 <td>clOrderID</td>
 <td>string</td>
 <td>No</td>
-<td>Client custom order ID</td>
+<td>Client custom order ID. Mandatory when <code>orderID</code> is not provided.</td>
 </tr>
 </tbody></table>
 <h3 id='response-content-10'>Response Content</h3>
@@ -2330,21 +2409,15 @@
 </tr>
 <tr>
 <td>size</td>
-<td>double</td>
+<td>long</td>
 <td>Yes</td>
 <td>Cancelled size</td>
 </tr>
 <tr>
 <td>status</td>
-<td>integer</td>
+<td>long</td>
 <td>Yes</td>
 <td>Order status<br/> 2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed</td>
-</tr>
-<tr>
-<td>stopPrice</td>
-<td>string</td>
-<td>Yes</td>
-<td>Stop price</td>
 </tr>
 <tr>
 <td>time_in_force</td>
@@ -2354,7 +2427,7 @@
 </tr>
 <tr>
 <td>timestamp</td>
-<td>string</td>
+<td>long</td>
 <td>Yes</td>
 <td>Order timestamp</td>
 </tr>
@@ -2393,6 +2466,18 @@
 <td>string</td>
 <td>Yes</td>
 <td>Deviation value of order</td>
+</tr>
+<tr>
+<td>remainingSize</td>
+<td>double</td>
+<td>Yes</td>
+<td>Size left to be transacted</td>
+</tr>
+<tr>
+<td>originalSize</td>
+<td>double</td>
+<td>Yes</td>
+<td>Original order size</td>
 </tr>
 </tbody></table>
 <h2 id='dead-man-39-s-switch-cancel-all-after'>Dead man&#39;s switch (Cancel all after)</h2>
@@ -2428,35 +2513,46 @@
 </ul>
 <h2 id='query-open-orders'>Query Open Orders</h2>
 <blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>/api/v2.1/user/open_orders?symbol=BTCPFC
+</code></pre></div>
+<blockquote>
 <p>Response</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"avgFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"cancelDuration"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"fillSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"filledSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"orderState"</span><span class="p">:</span><span class="w"> </span><span class="s2">"STATUS_ACTIVE"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"orderValue"</span><span class="p">:</span><span class="w"> </span><span class="mf">20.625</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"pegPriceDeviation"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"pegPriceMax"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"pegPriceMin"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">6875</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"trailValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"triggerOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"triggerOrderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1001</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"triggerOriginalPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"triggerStopPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"triggerTrailingStopDeviation"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"triggered"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span><span class="p">}</span><span class="w">
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">21000.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"filledSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderValue"</span><span class="p">:</span><span class="w"> </span><span class="mf">21.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"pegPriceMin"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"pegPriceMax"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"pegPriceDeviation"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"cancelDuration"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1660645487032</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2eb1c6f5-2ab2-4706-ab88-eea6b710a78b"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggered"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerOriginalPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerOrderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerTrailingStopDeviation"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerStopPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"trailValue"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"reduceOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderState"</span><span class="p">:</span><span class="w"> </span><span class="s2">"STATUS_ACTIVE"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerUseLastPrice"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"avgFilledPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timeInForce"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"averageFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <p><code>GET /api/v2.1/user/open_orders</code></p>
 
@@ -2473,7 +2569,7 @@
 <tr>
 <td>symbol</td>
 <td>string</td>
-<td>Yes</td>
+<td>No</td>
 <td>Market symbol</td>
 </tr>
 <tr>
@@ -2486,7 +2582,7 @@
 <td>clOrderID</td>
 <td>string</td>
 <td>No</td>
-<td>Query using custom order ID</td>
+<td>Query using custom order ID. If <code>orderID</code> is provided, <code>clOrderID</code> will be ignored.</td>
 </tr>
 </tbody></table>
 <h3 id='response-content-12'>Response Content</h3>
@@ -2511,10 +2607,40 @@
 <td>Customer tag sent in by trader</td>
 </tr>
 <tr>
-<td>fillSize</td>
-<td>string</td>
+<td>filledSize</td>
+<td>long</td>
 <td>Yes</td>
 <td>Trade filled size</td>
+</tr>
+<tr>
+<td>orderValue</td>
+<td>double</td>
+<td>Yes</td>
+<td>Notional value</td>
+</tr>
+<tr>
+<td>pegPriceMin</td>
+<td>double</td>
+<td>Yes</td>
+<td>peg price min</td>
+</tr>
+<tr>
+<td>pegPriceMax</td>
+<td>double</td>
+<td>Yes</td>
+<td>peg price max</td>
+</tr>
+<tr>
+<td>pegPriceDeviation</td>
+<td>double</td>
+<td>Yes</td>
+<td>Deviation percentage. Only for Algo orders</td>
+</tr>
+<tr>
+<td>cancelDuration</td>
+<td>long</td>
+<td>Yes</td>
+<td>Expire in milliseconds. <br/>0: GTC<br/>-1: IOC</td>
 </tr>
 <tr>
 <td>orderID</td>
@@ -2524,15 +2650,15 @@
 </tr>
 <tr>
 <td>orderType</td>
-<td>double</td>
+<td>long</td>
 <td>Yes</td>
 <td>Order type <br/>76: Limit Order<br/>77: Market order<br/>80: Algo order</td>
 </tr>
 <tr>
-<td>postOnly</td>
-<td>bool</td>
+<td>timeInForce</td>
+<td>string</td>
 <td>Yes</td>
-<td>Indicates if order is a post only order</td>
+<td>Order validity</td>
 </tr>
 <tr>
 <td>price</td>
@@ -2548,33 +2674,33 @@
 </tr>
 <tr>
 <td>size</td>
-<td>double</td>
+<td>long</td>
 <td>Yes</td>
-<td>Cancelled size</td>
-</tr>
-<tr>
-<td>stopPrice</td>
-<td>double</td>
-<td>Yes</td>
-<td>Stop price</td>
-</tr>
-<tr>
-<td>time_in_force</td>
-<td>string</td>
-<td>Yes</td>
-<td>Order validity</td>
+<td>Order size</td>
 </tr>
 <tr>
 <td>timestamp</td>
-<td>string</td>
+<td>long</td>
 <td>Yes</td>
 <td>Order timestamp</td>
 </tr>
 <tr>
-<td>trigger</td>
+<td>triggerOrder</td>
 <td>bool</td>
 <td>Yes</td>
-<td>Indicator if order is a trigger order</td>
+<td>Indicate if this is a trigger order</td>
+</tr>
+<tr>
+<td>triggered</td>
+<td>bool</td>
+<td>Yes</td>
+<td>Indicate if this order has been triggered</td>
+</tr>
+<tr>
+<td>triggerUseLastPrice</td>
+<td>bool</td>
+<td>Yes</td>
+<td>Indicate if this trigger order uses last price</td>
 </tr>
 <tr>
 <td>triggerPrice</td>
@@ -2583,28 +2709,58 @@
 <td>Order trigger price, returns 0 if order is not a trigger order</td>
 </tr>
 <tr>
-<td>avgFillPrice</td>
+<td>triggerOriginalPrice</td>
+<td>double</td>
+<td>Yes</td>
+<td>Original trigger price</td>
+</tr>
+<tr>
+<td>triggerOrderType</td>
+<td>string</td>
+<td>Yes</td>
+<td>Trigger order type <br/>1001: Trigger stop loss <br/>1002: Trigger take profit</td>
+</tr>
+<tr>
+<td>triggerTrailingStopDeviation</td>
+<td>double</td>
+<td>Yes</td>
+<td>Reserved attribute</td>
+</tr>
+<tr>
+<td>triggerStopPrice</td>
+<td>double</td>
+<td>Yes</td>
+<td>Reserved attribute</td>
+</tr>
+<tr>
+<td>trailValue</td>
+<td>double</td>
+<td>Yes</td>
+<td>Reserved attribute</td>
+</tr>
+<tr>
+<td>reduceOnly</td>
+<td>bool</td>
+<td>Yes</td>
+<td>Indicate if this order is reduce only</td>
+</tr>
+<tr>
+<td>avgFilledPrice</td>
 <td>double</td>
 <td>Yes</td>
 <td>Average filled price. Returns the average filled price for partially transacted orders</td>
 </tr>
 <tr>
-<td>message</td>
-<td>string</td>
+<td>averageFillPrice</td>
+<td>double</td>
 <td>Yes</td>
-<td>Trade messages</td>
+<td>Average fill price</td>
 </tr>
 <tr>
 <td>stealth</td>
 <td>double</td>
 <td>Yes</td>
 <td>Stealth value of order</td>
-</tr>
-<tr>
-<td>deviation</td>
-<td>double</td>
-<td>Yes</td>
-<td>Deviation value of order</td>
 </tr>
 <tr>
 <td>orderState</td>
@@ -2615,32 +2771,40 @@
 </tbody></table>
 <h2 id='query-trades-fills-2'>Query Trades Fills</h2>
 <blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>/api/v2.1/user/trade_history?symbol=BTCPFC
+</code></pre></div>
+<blockquote>
 <p>Response</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"base"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"feeAmount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"feeCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"filledPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"filledSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"quote"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"realizedPnl"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"serialId"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"tradeId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"triggerType"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"wallet"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
-</span><span class="p">}</span><span class="w">
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"base"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"feeAmount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"feeCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"filledPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"filledSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"averageFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"quote"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"realizedPnl"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"serialId"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"tradeId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerType"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"wallet"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <p><code>GET /api/v2.1/user/trade_history</code></p>
 
@@ -2657,7 +2821,7 @@
 <tr>
 <td>symbol</td>
 <td>string</td>
-<td>Yes</td>
+<td>No</td>
 <td>Market symbol</td>
 </tr>
 <tr>
@@ -2686,14 +2850,14 @@
 </tr>
 <tr>
 <td>count</td>
-<td>integer</td>
+<td>long</td>
 <td>No</td>
 <td>Number of records to return</td>
 </tr>
 <tr>
 <td>includeOld</td>
 <td>boolean</td>
-<td>Yes</td>
+<td>No</td>
 <td>Retrieve trade  history records past 7 days</td>
 </tr>
 <tr>
@@ -2701,12 +2865,6 @@
 <td>string</td>
 <td>No</td>
 <td>Query trade history by custom order ID</td>
-</tr>
-<tr>
-<td>orderID</td>
-<td>string</td>
-<td>No</td>
-<td>Query trade history by order ID</td>
 </tr>
 </tbody></table>
 <h3 id='response-content-13'>Response Content</h3>
@@ -2738,7 +2896,7 @@
 </tr>
 <tr>
 <td>size</td>
-<td>double</td>
+<td>long</td>
 <td>Yes</td>
 <td>Transacted size</td>
 </tr>
@@ -2756,33 +2914,51 @@
 </tr>
 <tr>
 <td>timestamp</td>
-<td>double</td>
+<td>long</td>
 <td>Yes</td>
 <td>Transacted timestamp</td>
 </tr>
 <tr>
 <td>base</td>
-<td>long</td>
+<td>string</td>
 <td>Yes</td>
 <td>Base currency</td>
 </tr>
 <tr>
 <td>quote</td>
-<td>long</td>
+<td>string</td>
 <td>Yes</td>
 <td>Quote currency</td>
 </tr>
 <tr>
+<td>wallet</td>
+<td>string</td>
+<td>Yes</td>
+<td>Wallet name<br/><code>CROSS@</code>: Cross wallet<br/><code>ISOLATED@market</code>: Market refers to the current symbol with <code>-USD</code> appended. Eg. BTCPFC isolated wallet would be <code>ISOLATED@BTCPFC-USD</code></td>
+</tr>
+<tr>
 <td>clOrderID</td>
-<td>long</td>
+<td>string</td>
 <td>Yes</td>
 <td>Custom order ID</td>
 </tr>
 <tr>
-<td>orderID</td>
-<td>long</td>
+<td>orderId</td>
+<td>string</td>
 <td>Yes</td>
 <td>Order ID</td>
+</tr>
+<tr>
+<td>username</td>
+<td>string</td>
+<td>Yes</td>
+<td>btse username</td>
+</tr>
+<tr>
+<td>triggerType</td>
+<td>long</td>
+<td>Yes</td>
+<td>Trigger type<br/>1001: Stop Loss<br/>1002: Take Profit</td>
 </tr>
 <tr>
 <td>feeAmount</td>
@@ -2798,9 +2974,21 @@
 </tr>
 <tr>
 <td>filledPrice</td>
-<td>long</td>
+<td>double</td>
 <td>Yes</td>
 <td>Filled price</td>
+</tr>
+<tr>
+<td>averageFillPrice</td>
+<td>double</td>
+<td>Yes</td>
+<td>Average filled price</td>
+</tr>
+<tr>
+<td>triggerPrice</td>
+<td>double</td>
+<td>Yes</td>
+<td>Trigger price</td>
 </tr>
 <tr>
 <td>filledSize</td>
@@ -2816,7 +3004,7 @@
 </tr>
 <tr>
 <td>realizedPnL</td>
-<td>long</td>
+<td>double</td>
 <td>Yes</td>
 <td>Not used in Spot</td>
 </tr>
@@ -2828,6 +3016,11 @@
 </tr>
 </tbody></table>
 <h2 id='query-position'>Query Position</h2>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>/api/v2.1/user/positions?symbol=BTCPFC
+</code></pre></div>
 <blockquote>
 <p>Response</p>
 </blockquote>
@@ -2894,7 +3087,7 @@
 </tr>
 <tr>
 <td>size</td>
-<td>double</td>
+<td>long</td>
 <td>Yes</td>
 <td>Position size</td>
 </tr>
@@ -2912,7 +3105,7 @@
 </tr>
 <tr>
 <td>marginType</td>
-<td>integer</td>
+<td>long</td>
 <td>Yes</td>
 <td>Margin Type. Values as follows<br/>91: CROSS wallet<br/>92: Isolated wallet</td>
 </tr>
@@ -2954,7 +3147,7 @@
 </tr>
 <tr>
 <td>adlScoreBucket</td>
-<td>integer</td>
+<td>double</td>
 <td>Yes</td>
 <td>ADL Score probability</td>
 </tr>
@@ -2992,24 +3185,26 @@
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
     </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">8300</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1576812000872</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">8300</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">24010.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SELL"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"93cf814a-595e-4b20-bba9-5c5340ca947d"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1660710188450</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"trigger"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"deviation"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"avgFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"fillSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"market001"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"remainingSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"orginialSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="w">
+    </span><span class="nl">"deviation"</span><span class="p">:</span><span class="w"> </span><span class="mf">100.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mf">100.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"avgFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">24010.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"fillSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"originalSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"remainingSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
@@ -3041,7 +3236,7 @@
 <td>price</td>
 <td>double</td>
 <td>No</td>
-<td>Ending time (eg. 1624987283000)</td>
+<td>Close price. Mandatory when type is <code>LIMIT</code></td>
 </tr>
 </tbody></table>
 <h3 id='response-content-15'>Response Content</h3>
@@ -3103,21 +3298,15 @@
 </tr>
 <tr>
 <td>size</td>
-<td>double</td>
+<td>long</td>
 <td>Yes</td>
 <td>Cancelled size</td>
 </tr>
 <tr>
 <td>status</td>
-<td>integer</td>
+<td>long</td>
 <td>Yes</td>
-<td>Order status<br/> 2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed</td>
-</tr>
-<tr>
-<td>stopPrice</td>
-<td>string</td>
-<td>Yes</td>
-<td>Stop price</td>
+<td>Order status<br/>    2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed</td>
 </tr>
 <tr>
 <td>time_in_force</td>
@@ -3127,7 +3316,7 @@
 </tr>
 <tr>
 <td>timestamp</td>
-<td>string</td>
+<td>long</td>
 <td>Yes</td>
 <td>Order timestamp</td>
 </tr>
@@ -3186,7 +3375,7 @@
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"leverage"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="nl">"riskLimit"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
@@ -3220,7 +3409,7 @@
 </tr>
 <tr>
 <td>riskLimit</td>
-<td>integer</td>
+<td>long</td>
 <td>Yes</td>
 <td>Risk limit value</td>
 </tr>
@@ -3242,7 +3431,7 @@
 </tr>
 <tr>
 <td>status</td>
-<td>integer</td>
+<td>long</td>
 <td>Yes</td>
 <td>Status of the request. Values are: <br/>8: Insufficient Balance<br/>12: Error in updating risk limit<br/>20: Success<br/>41: Invalid risk limit</td>
 </tr>
@@ -3254,7 +3443,7 @@
 </tr>
 <tr>
 <td>timestamp</td>
-<td>double</td>
+<td>long</td>
 <td>Yes</td>
 <td>Timestamp where risk limit was set</td>
 </tr>
@@ -3278,28 +3467,11 @@
 <p>Response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"base"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"feeAmount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"feeCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"filledPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"filledSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"quote"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"realizedPnl"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"serialId"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"tradeId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"triggerType"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"wallet"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1660711246942</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="mi">93</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p><code>POST /api/v2.1/leverage</code></p>
@@ -3322,7 +3494,7 @@
 </tr>
 <tr>
 <td>leverage</td>
-<td>integer</td>
+<td>long</td>
 <td>Yes</td>
 <td>Leverage value</td>
 </tr>
@@ -3344,7 +3516,7 @@
 </tr>
 <tr>
 <td>status</td>
-<td>integer</td>
+<td>long</td>
 <td>Yes</td>
 <td>Status of the request. Values are: <br/>8: Insufficient Balance<br/>13: Invalid leverage<br/>20: Success<br/>64: Undergoing liquidation</td>
 </tr>
@@ -3356,7 +3528,7 @@
 </tr>
 <tr>
 <td>timestamp</td>
-<td>double</td>
+<td>long</td>
 <td>Yes</td>
 <td>Timestamp where leverage was set</td>
 </tr>
@@ -3377,7 +3549,7 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
-<p>Response</p>
+<p>Response (only available when an error occurs)</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -3421,21 +3593,21 @@
 </thead><tbody>
 <tr>
 <td>status</td>
-<td>integer</td>
-<td>Yes</td>
-<td>Request status<br/>1: Success<br/>-2: Invalid parameters</td>
+<td>long</td>
+<td>No</td>
+<td>Status. Only available when an error occurs.</td>
 </tr>
 <tr>
 <td>errorCode</td>
-<td>integer</td>
-<td>Yes</td>
-<td>Error code</td>
+<td>long</td>
+<td>No</td>
+<td>Error code. Only available when an error occurs.</td>
 </tr>
 <tr>
 <td>message</td>
 <td>string</td>
-<td>Yes</td>
-<td>Response message</td>
+<td>No</td>
+<td>Response message. Only available when an error occurs.</td>
 </tr>
 </tbody></table>
 <h2 id='query-account-fees'>Query Account Fees</h2>
