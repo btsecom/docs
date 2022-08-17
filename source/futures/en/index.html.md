@@ -1141,6 +1141,12 @@ Retrieves open orders that have not yet been matched or matched recently.
 
 ## Query Trades Fills
 
+> Request
+
+```
+/api/v2.1/user/trade_history?symbol=BTCPFC
+```
+
 > Response
 
 ```json
@@ -1221,6 +1227,12 @@ Retrieves a user's trade history
 
 
 ## Query Position
+
+> Request
+
+```
+/api/v2.1/user/positions?symbol=BTCPFC
+```
 
 > Response
 
