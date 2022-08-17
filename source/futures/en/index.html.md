@@ -713,7 +713,7 @@ Creates a new order. Requires `Trading` permission
 ### Request Parameters
 
 | Name          | Type    | Required | Description         |
-|---------------|---------| ---      | ---                 |
+| ---           | ---     | ---      | ---                 |
 | symbol        | string  | Yes      | Market symbol       |
 | price         | double  | No       | Mandatory unless creating a MARKET order. Order price |
 | size          | integer | Yes      | Order size          |
@@ -746,12 +746,12 @@ Creates a new order. Requires `Trading` permission
 | status           | integer | Yes      | Order status<br/>	2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed |
 | time_in_force    | string  | Yes      | Order validity                                                                                                                                                                                                                                                                                  |
 | timestamp        | string  | Yes      | Order timestamp                                                                                                                                                                                                                                                                                 |
-| trigger          | string  | Yes      | Indicator if order is a trigger order                                                                                                                                                                                                                                                           |
-| triggerPrice     | string  | Yes      | Order trigger price, returns 0 if order is not a trigger order                                                                                                                                                                                                                                  |
-| avgFillPrice     | string  | Yes      | Average filled price. Returns the average filled price for partially transacted orders                                                                                                                                                                                                          |
+| trigger          | boolean | Yes      | Indicator if order is a trigger order                                                                                                                                                                                                                                                           |
+| triggerPrice     | double  | Yes      | Order trigger price, returns 0 if order is not a trigger order                                                                                                                                                                                                                                  |
+| avgFillPrice     | double  | Yes      | Average filled price. Returns the average filled price for partially transacted orders                                                                                                                                                                                                          |
 | message          | string  | Yes      | Trade messages                                                                                                                                                                                                                                                                                  |
 | stealth          | string  | Yes      | Only valid for Algo orders                                                                                                                                                                                                                                                                      |
-| deviation        | string  | Yes      | Only valid for Algo orders                                                                                                                                                                                                                                                                      |
+| deviation        | double  | Yes      | Only valid for Algo orders                                                                                                                                                                                                                                                                      |
 | remainingSize    | double  | Yes      | Size left to be transacted                                                                                                                                                                                                                                                                      |
 | originalSize     | double  | Yes      | Original order size                                                                                                                                                                                                                                                                             |
 
@@ -812,20 +812,20 @@ This API Requires `Trading` permission
 
 ### Request Parameters
 
-| Name          | Type    | Required | Description         |
-|---------------| ---     | -------  | ---                 |
-| symbol        | string  | Yes   | Market symbol          |
-| price         | double  | Yes   | Minimum price for a sell order, this is the lowest price that a user is willing to sell at. Maximum price for a buy order, this is the maximum price a user is willing to buy at. |
-| size          | integer | Yes   | Order size             |
-| side          | string  | Yes   | Order side<br/>BUY or SELL |
-| clOrderID     | string  | No    | Custom order Id        |
-| deviation     | double  | No    | How much should the order price deviate from index price. Value is in percentage and can range from `-10` to `10` |
-| stealth       | double  | No    | How many percent of the order is to be displayed on the orderbook.                                                |
+| Name          | Type    | Required | Description            |
+| ---           | ---     | ---      | ---                    |
+| symbol        | string  | Yes      | Market symbol          |
+| price         | double  | Yes      | Minimum price for a sell order, this is the lowest price that a user is willing to sell at. Maximum price for a buy order, this is the maximum price a user is willing to buy at. |
+| size          | integer | Yes      | Order size             |
+| side          | string  | Yes      | Order side<br/>BUY or SELL |
+| clOrderID     | string  | No       | Custom order Id        |
+| deviation     | double  | No       | How much should the order price deviate from index price. Value is in percentage and can range from `-10` to `10` |
+| stealth       | double  | No       | How many percent of the order is to be displayed on the orderbook.                                                |
 
 ### Response Content
 
 | Name             | Type    | Required | Description                                                                                                                                                                                                                                                                                     |
-| ---              | ---     |----------| ---                                                                                                                                                                                                                                                                                             |
+| ---              | ---     | ---      | ---                                                                                                                                                                                                                                                                                             |
 | symbol           | string  | Yes      | Market symbol                                                                                                                                                                                                                                                                                   |
 | clOrderID        | string  | Yes      | Customer tag sent in by trader                                                                                                                                                                                                                                                                  |
 | fillSize         | string  | Yes      | Trade filled size                                                                                                                                                                                                                                                                               |
@@ -838,12 +838,12 @@ This API Requires `Trading` permission
 | status           | integer | Yes      | Order status<br/>	2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed |
 | time_in_force    | string  | Yes      | Order validity                                                                                                                                                                                                                                                                                  |
 | timestamp        | string  | Yes      | Order timestamp                                                                                                                                                                                                                                                                                 |
-| trigger          | string  | Yes      | Indicator if order is a trigger order                                                                                                                                                                                                                                                           |
-| triggerPrice     | string  | Yes      | Order trigger price, returns 0 if order is not a trigger order                                                                                                                                                                                                                                  |
-| avgFillPrice     | string  | Yes      | Average filled price. Returns the average filled price for partially transacted orders                                                                                                                                                                                                          |
+| trigger          | boolean | Yes      | Indicator if order is a trigger order                                                                                                                                                                                                                                                           |
+| triggerPrice     | double  | Yes      | Order trigger price, returns 0 if order is not a trigger order                                                                                                                                                                                                                                  |
+| avgFillPrice     | double  | Yes      | Average filled price. Returns the average filled price for partially transacted orders                                                                                                                                                                                                          |
 | message          | string  | Yes      | Trade messages                                                                                                                                                                                                                                                                                  |
-| stealth          | string  | Yes      | Stealth value of order                                                                                                                                                                                                                                                                          |
-| deviation        | string  | Yes      | Deviation value of order                                                                                                                                                                                                                                                                        |
+| stealth          | double  | Yes      | Stealth value of order                                                                                                                                                                                                                                                                          |
+| deviation        | double  | Yes      | Deviation value of order                                                                                                                                                                                                                                                                        |
 | remainingSize    | double  | Yes      | Size left to be transacted                                                                                                                                                                                                                                                                      |
 | originalSize     | double  | Yes      | Original order size                                                                                                                                                                                                                                                                             |
 
