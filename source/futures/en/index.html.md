@@ -1351,7 +1351,7 @@ Closes a user's position for the particular market as specified by symbol. If ty
 ```json
 {
   "symbol": "BTCPFC",
-  "leverage": 0
+  "riskLimit": 0
 }
 ```
 
@@ -1404,28 +1404,11 @@ Changes risk limit for the specified market
 
 ```json
 {
-  "base": "string",
-  "clOrderID": "string",
-  "feeAmount": 0,
-  "feeCurrency": "string",
-  "filledPrice": 0,
-  "filledSize": 0,
-  "orderId": "string",
-  "orderType": 0,
-  "price": 0,
-  "quote": "string",
-  "realizedPnl": 0,
-  "serialId": 0,
-  "side": "string",
-  "size": 0,
-  "symbol": "string",
-  "timestamp": 0,
-  "total": 0,
-  "tradeId": "string",
-  "triggerPrice": 0,
-  "triggerType": 0,
-  "username": "string",
-  "wallet": "string"
+  "symbol": "BTCPFC",
+  "timestamp": 1660711246942,
+  "status": 20,
+  "type": 93,
+  "message": ""
 }
 ```
 
@@ -1462,7 +1445,7 @@ Change leverage values for the specified market
 }
 ```
 
-> Response
+> Response (only available when an error occurs)
 
 ```json
 {
@@ -1485,11 +1468,11 @@ Changes the settlement currency for the position in the current market
 
 ### Response Content
 
-| Name      | Type    | Required | Description                                              |
-| ---       | ---     | ---      | ---                                                      |
-| status    | integer | Yes      | Request status<br/>1: Success<br/>-2: Invalid parameters |
-| errorCode | integer | Yes      | Error code                                               |
-| message   | string  | Yes      | Response message                                         |
+| Name      | Type    | Required | Description                                            |
+| ---       | ---     | ---      | ---                                                    |
+| status    | integer | No       | Status. Only available when an error occurs.           |
+| errorCode | integer | No       | Error code. Only available when an error occurs.       |
+| message   | string  | No       | Response message. Only available when an error occurs. |
 
 ## Query Account Fees
 
