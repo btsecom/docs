@@ -497,7 +497,7 @@ Retrieves a Level 2 snapshot of the orderbook
 | Name   | Type    | Required | Description     |
 | ---    | ---     | ---      | ---             |
 | symbol | string  | Yes      | Market symbol   |
-| depth  | integer | No       | Orderbook depth |
+| depth  | long    | No       | Orderbook depth |
 
 ### Response Content
 
@@ -548,7 +548,7 @@ Get trade fills for the market specified by `symbol`
 | endTime        | long    | No       | Ending time (eg. 1624987283000)                                                   |
 | beforeSerialId | string  | Yes      | Condition to retrieve records before the specified serial Id. Used for pagination |
 | afterSerialId  | string  | Yes      | Condition to retrieve records after the specified serial Id. Used for pagination  |
-| count          | integer | Yes      | Number of records to return                                                       |
+| count          | long    | Yes      | Number of records to return                                                       |
 | includeOld     | boolean | Yes      | Retrieve trade  history records past 7 days                                       |
 
 
@@ -721,7 +721,7 @@ Creates a new order. Requires `Trading` permission
 | ---           | ---     | ---      | ---                 |
 | symbol        | string  | Yes      | Market symbol       |
 | price         | double  | No       | Mandatory unless creating a MARKET order. Order price |
-| size          | integer | Yes      | Order size          |
+| size          | long    | Yes      | Order size          |
 | side          | string  | Yes      | 'BUY' or 'SELL'     |
 | time_in_force | string  | No       | Time validity of the order<br/>GTC: Good till Cancel<br/>IOC: Immediate or Cancel<br/>FOK: Fill or Kill<br/>HALFMIN: Order valid for 30 seconds<br/>FIVEMIN: Order valid for 5 mins<br/> HOUR: Order valid for an hour<br/>TWELVEHOUR: Order valid for 12 hours<br/>DAY: Order valid for a day<br/>WEEK: Order valid for a week<br/>MONTH: Order valid for a month                                                                                |
 | type          | string  | Yes      | Order type<br/>LIMIT: Limit Orders<br/>MARKET: Market Orders<br/>OCO: One cancel the other               |
@@ -747,8 +747,8 @@ Creates a new order. Requires `Trading` permission
 | postOnly         | boolean | Yes      | Indicates if order is a post only order                                                                                                                                                                                                                                                         |
 | price            | double  | Yes      | Order price                                                                                                                                                                                                                                                                                     |
 | side             | string  | Yes      | Order side<br/>BUY or SELL                                                                                                                                                                                                                                                                      |
-| size             | integer | Yes      | Order size                                                                                                                                                                                                                                                                                      |
-| status           | integer | Yes      | Order status<br/>	2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed |
+| size             | long    | Yes      | Order size                                                                                                                                                                                                                                                                                      |
+| status           | long    | Yes      | Order status<br/>	2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed |
 | time_in_force    | string  | Yes      | Order validity                                                                                                                                                                                                                                                                                  |
 | timestamp        | long    | Yes      | Order timestamp                                                                                                                                                                                                                                                                                 |
 | trigger          | boolean | Yes      | Indicator if order is a trigger order                                                                                                                                                                                                                                                           |
@@ -821,7 +821,7 @@ This API Requires `Trading` permission
 | ---           | ---     | ---      | ---                    |
 | symbol        | string  | Yes      | Market symbol          |
 | price         | double  | Yes      | Minimum price for a sell order, this is the lowest price that a user is willing to sell at. Maximum price for a buy order, this is the maximum price a user is willing to buy at. |
-| size          | integer | Yes      | Order size             |
+| size          | long    | Yes      | Order size             |
 | side          | string  | Yes      | Order side<br/>BUY or SELL |
 | clOrderID     | string  | No       | Custom order Id        |
 | deviation     | double  | No       | How much should the order price deviate from index price. Value is in percentage and can range from `-10` to `10` |
@@ -839,8 +839,8 @@ This API Requires `Trading` permission
 | postOnly         | boolean | Yes      | Indicates if order is a post only order                                                                                                                                                                                                                                                         |
 | price            | double  | Yes      | Order price                                                                                                                                                                                                                                                                                     |
 | side             | string  | Yes      | Order side<br/>BUY or SELL                                                                                                                                                                                                                                                                      |
-| size             | integer | Yes      | Order size                                                                                                                                                                                                                                                                                      |
-| status           | integer | Yes      | Order status<br/>	2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed |
+| size             | long    | Yes      | Order size                                                                                                                                                                                                                                                                                      |
+| status           | long    | Yes      | Order status<br/>	2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed |
 | time_in_force    | string  | Yes      | Order validity                                                                                                                                                                                                                                                                                  |
 | timestamp        | long    | Yes      | Order timestamp                                                                                                                                                                                                                                                                                 |
 | trigger          | boolean | Yes      | Indicator if order is a trigger order                                                                                                                                                                                                                                                           |
@@ -938,8 +938,8 @@ Amend the price or size or trigger price of an order. For trigger orders, if the
 | postOnly         | boolean | Yes      | Indicates if order is a post only order                                                                                                                                                                                                                                                         |
 | price            | double  | Yes      | Order price                                                                                                                                                                                                                                                                                     |
 | side             | string  | Yes      | Order side<br/>BUY or SELL                                                                                                                                                                                                                                                                      |
-| size             | integer | Yes      | Order size                                                                                                                                                                                                                                                                                      |
-| status           | integer | Yes      | Order status<br/>	2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed |
+| size             | long    | Yes      | Order size                                                                                                                                                                                                                                                                                      |
+| status           | long    | Yes      | Order status<br/>	2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed |
 | time_in_force    | string  | Yes      | Order validity                                                                                                                                                                                                                                                                                  |
 | timestamp        | long    | Yes      | Order timestamp                                                                                                                                                                                                                                                                                 |
 | trigger          | string  | Yes      | Indicator if order is a trigger order                                                                                                                                                                                                                                                           |
@@ -1013,8 +1013,8 @@ Cancels pending orders that has not yet been transacted. The `orderID` is a uniq
 | postOnly         | boolean | Yes      | Indicates if order is a post only order                                                                                                                                                                                                                                                         |
 | price            | double  | Yes      | Order price                                                                                                                                                                                                                                                                                     |
 | side             | string  | Yes      | Order side<br/>BUY or SELL                                                                                                                                                                                                                                                                      |
-| size             | integer | Yes      | Cancelled size                                                                                                                                                                                                                                                                                  |
-| status           | integer | Yes      | Order status<br/>	2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed |
+| size             | long    | Yes      | Cancelled size                                                                                                                                                                                                                                                                                  |
+| status           | long    | Yes      | Order status<br/>	2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed |
 | time_in_force    | string  | Yes      | Order validity                                                                                                                                                                                                                                                                                  |
 | timestamp        | long    | Yes      | Order timestamp                                                                                                                                                                                                                                                                                 |
 | trigger          | string  | Yes      | Indicator if order is a trigger order                                                                                                                                                                                                                                                           |
@@ -1116,18 +1116,18 @@ Retrieves open orders that have not yet been matched or matched recently.
 | ---                          | ---     | ---      | ---                                                                                    |
 | symbol                       | string  | Yes      | Market symbol                                                                          |
 | clOrderID                    | string  | Yes      | Customer tag sent in by trader                                                         |
-| filledSize                   | integer | Yes      | Trade filled size                                                                      |
+| filledSize                   | long    | Yes      | Trade filled size                                                                      |
 | orderValue                   | double  | Yes      | Notional value                                                                         |
 | pegPriceMin                  | double  | Yes      | peg price min                                                                          |
 | pegPriceMax                  | double  | Yes      | peg price max                                                                          |
 | pegPriceDeviation            | double  | Yes      | Deviation percentage. Only for Algo orders                                             |
 | cancelDuration               | long    | Yes      | Expire in milliseconds. <br/>0: GTC<br/>-1: IOC                                        |
 | orderID                      | string  | Yes      | Order ID                                                                               |
-| orderType                    | integer | Yes      | Order type <br/>76: Limit Order<br/>77: Market order<br/>80: Algo order                |
+| orderType                    | long    | Yes      | Order type <br/>76: Limit Order<br/>77: Market order<br/>80: Algo order                |
 | timeInForce                  | string  | Yes      | Order validity                                                                         |
 | price                        | double  | Yes      | Order price                                                                            |
 | side                         | string  | Yes      | Order side<br/>BUY or SELL                                                             |
-| size                         | integer | Yes      | Order size                                                                             |
+| size                         | long    | Yes      | Order size                                                                             |
 | timestamp                    | long    | Yes      | Order timestamp                                                                        |
 | triggerOrder                 | bool    | Yes      | Indicate if this is a trigger order                                                    |
 | triggered                    | bool    | Yes      | Indicate if this order has been triggered                                              |
@@ -1197,7 +1197,7 @@ Retrieves a user's trade history
 | endTime        | long    | No       | Ending time (eg. 1624987283000)                                                   |
 | beforeSerialId | string  | No       | Condition to retrieve records before the specified serial Id. Used for pagination |
 | afterSerialId  | string  | No       | Condition to retrieve records after the specified serial Id. Used for pagination  |
-| count          | integer | No       | Number of records to return                                                       |
+| count          | long    | No       | Number of records to return                                                       |
 | includeOld     | boolean | No       | Retrieve trade  history records past 7 days                                       |
 | clOrderID      | string  | No       | Query trade history by custom order ID                                            |
 
@@ -1209,7 +1209,7 @@ Retrieves a user's trade history
 | symbol           | string  | Yes      | Market symbol                                                                                                                                                                     |
 | side             | string  | Yes      | Trade side. Values are: [`BUY`, `SELL`]                                                                                                                                           |
 | price            | double  | Yes      | Transacted price                                                                                                                                                                  |
-| size             | integer | Yes      | Transacted size                                                                                                                                                                   |
+| size             | long    | Yes      | Transacted size                                                                                                                                                                   |
 | serialId         | long    | Yes      | Serial Id, running sequence number                                                                                                                                                |
 | tradeId          | string  | Yes      | Trade identifier                                                                                                                                                                  |
 | timestamp        | long    | Yes      | Transacted timestamp                                                                                                                                                              |
@@ -1281,10 +1281,10 @@ Queries user's current position. When no symbol is specified, positions for all 
 | ---                    |---------| ---      | ---                                                                         |
 | symbol                 | string  | Yes      | Market symbol                                                               |
 | side                   | string  | Yes      | Position side. Values are: [`Buy`, `SELL`]                                  |
-| size                   | integer | Yes      | Position size                                                               |
+| size                   | long    | Yes      | Position size                                                               |
 | entryPrice             | double  | Yes      | Entry price                                                                 |
 | markPrice              | double  | Yes      | Mark price                                                                  |
-| marginType             | integer | Yes      | Margin Type. Values as follows<br/>91: CROSS wallet<br/>92: Isolated wallet |
+| marginType             | long    | Yes      | Margin Type. Values as follows<br/>91: CROSS wallet<br/>92: Isolated wallet |
 | orderValue             | double  | Yes      | Notional value                                                              |
 | settleWithAsset        | string  | Yes      | Settlement currency                                                         |
 | totalMaintenanceMargin | double  | Yes      | Maintenance margin                                                          |
@@ -1363,8 +1363,8 @@ Closes a user's position for the particular market as specified by symbol. If ty
 | postOnly      | boolean | Yes      | Indicates if order is a post only order                                                                                                                                                                                                                                                          |
 | price         | double  | Yes      | Order price                                                                                                                                                                                                                                                                                      |
 | side          | string  | Yes      | Order side<br/>BUY or SELL                                                                                                                                                                                                                                                                       |
-| size          | integer | Yes      | Cancelled size                                                                                                                                                                                                                                                                                   |
-| status        | integer | Yes      | Order status<br/>	2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed |
+| size          | long    | Yes      | Cancelled size                                                                                                                                                                                                                                                                                   |
+| status        | long    | Yes      | Order status<br/>	2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed |
 | time_in_force | string  | Yes      | Order validity                                                                                                                                                                                                                                                                                   |
 | timestamp     | long    | Yes      | Order timestamp                                                                                                                                                                                                                                                                                  |
 | trigger       | string  | Yes      | Indicator if order is a trigger order                                                                                                                                                                                                                                                            |
@@ -1408,7 +1408,7 @@ Changes risk limit for the specified market
 | Name      | Type    | Required | Description      |
 | ---       | ---     | ---      | ---              |
 | symbol    | string  | Yes      | Market symbol    |
-| riskLimit | integer | Yes      | Risk limit value |
+| riskLimit | long    | Yes      | Risk limit value |
 
 
 ### Response Content
@@ -1416,7 +1416,7 @@ Changes risk limit for the specified market
 | Name      | Type    | Required | Description                                                                                                                                     |
 | ---       | ---     | ---      | ---                                                                                                                                             |
 | symbol    | string  | Yes      | Market symbol                                                                                                                                   |
-| status    | integer | Yes      | Status of the request. Values are: <br/>8: Insufficient Balance<br/>12: Error in updating risk limit<br/>20: Success<br/>41: Invalid risk limit |
+| status    | long    | Yes      | Status of the request. Values are: <br/>8: Insufficient Balance<br/>12: Error in updating risk limit<br/>20: Success<br/>41: Invalid risk limit |
 | type      | double  | Yes      | Value will be 94 indicating that type is `Risk Limit`                                                                                           |
 | timestamp | long    | Yes      | Timestamp where risk limit was set                                                                                                              |
 | message   | long    | Yes      | Message                                                                                                                                         |
@@ -1453,7 +1453,7 @@ Change leverage values for the specified market
 | Name     | Type    | Required | Description    |
 | ---      | ---     | ---      | ---            |
 | symbol   | string  | Yes      | Market symbol  |
-| leverage | integer | Yes      | Leverage value |
+| leverage | long    | Yes      | Leverage value |
 
 
 ### Response Content
@@ -1461,7 +1461,7 @@ Change leverage values for the specified market
 | Name      | Type    | Required | Description                                                                                                                             |
 | ---       | ---     | ---      | ---                                                                                                                                     |
 | symbol    | string  | Yes      | Market symbol                                                                                                                           |
-| status    | integer | Yes      | Status of the request. Values are: <br/>8: Insufficient Balance<br/>13: Invalid leverage<br/>20: Success<br/>64: Undergoing liquidation |
+| status    | long    | Yes      | Status of the request. Values are: <br/>8: Insufficient Balance<br/>13: Invalid leverage<br/>20: Success<br/>64: Undergoing liquidation |
 | type      | double  | Yes      | Value will be 93 indicating that type is `Leverage`                                                                                     |
 | timestamp | long    | Yes      | Timestamp where leverage was set                                                                                                        |
 | message   | long    | Yes      | Message                                                                                                                                 |
@@ -1502,8 +1502,8 @@ Changes the settlement currency for the position in the current market
 
 | Name      | Type    | Required | Description                                            |
 | ---       | ---     | ---      | ---                                                    |
-| status    | integer | No       | Status. Only available when an error occurs.           |
-| errorCode | integer | No       | Error code. Only available when an error occurs.       |
+| status    | long    | No       | Status. Only available when an error occurs.           |
+| errorCode | long    | No       | Error code. Only available when an error occurs.       |
 | message   | string  | No       | Response message. Only available when an error occurs. |
 
 ## Query Account Fees
