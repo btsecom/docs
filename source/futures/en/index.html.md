@@ -849,18 +849,27 @@ This API Requires `Trading` permission
 
 ## Amend Order
 
-> Request
+> Request (amend price)
 
 ```json
 {
   "symbol": "BTCPFC",
+  "orderID": "604c3ebf-d7fa-468d-9ff0-f6ad030221b4",
   "type": "PRICE",
-  "orderID": "Order ID",
-  "clOrderID": "Custom Order ID",
-  "value": 0,
-  "slide": true,
-  "orderSize": 12,
-  "orderPrice": 40000
+  "value": 22000
+}
+```
+
+> Request (amend all)
+
+```json
+{
+  "symbol": "BTCPFC",
+  "orderID": "604c3ebf-d7fa-468d-9ff0-f6ad030221b4",
+  "type": "ALL",
+  "orderPrice": 30010,
+  "orderSize": 1,
+  "triggerPrice": 30000
 }
 ```
 
@@ -906,7 +915,7 @@ Amend the price or size or trigger price of an order. For trigger orders, if the
 | clOrderID    | string  | No       | Custom order ID. Mandatory when `orderID` is not provided.                                                                                                         |
 | type         | string  | Yes      | Type of amendmend<br/>`PRICE`: To amend order price<br/>`SIZE`: To amend order size<br/>`TRIGGERPRICE`: To amend trigger price<br/>`ALL`: to amend multiple fields |
 | value        | number  | Yes      | The value to be amended to. Value depends on the type being set.                                                                                                   |
-| slide        | boolean | No       | Used for Post-Only orders. When set to true will set price to best bid/ask                                                                                         |
+| slide        | boolean | No       | For type: `PRICE`. Used for Post-Only orders. When set to true will set price to best bid/ask                                                                      |
 | orderPrice   | number  | No       | For type: `ALL`, order price to be amended                                                                                                                         |
 | orderSize    | number  | No       | For type: `ALL`, order size to be amended                                                                                                                          |
 | triggerPrice | number  | No       | For type: `ALL`, trigger price to be amended                                                                                                                       |
@@ -974,7 +983,7 @@ Amend the price or size or trigger price of an order. For trigger orders, if the
 ]
 ```
 
-DELETE /api/v2.1/order`
+`DELETE /api/v2.1/order`
 
 Cancels pending orders that has not yet been transacted. The `orderID` is a unique identifier to cancel a particular order. `clOrderID` is a custom ID sent in by the trader. When cancel by `clOrderID`, all orders having the same ID will be cancelled. If `orderID` and `clOrderID` is not sent in, then cancellation will be for all orders in the current market.
 
@@ -1039,6 +1048,12 @@ Dead-man's switch allows the trader to send in a timeout value which is a Time t
 
 ## Query Open Orders
 
+> Request
+
+```
+/api/v2.1/user/open_orders?symbol=BTCPFC
+```
+
 > Response
 
 ```json
@@ -1085,7 +1100,7 @@ Retrieves open orders that have not yet been matched or matched recently.
 
 | Name      | Type   | Required | Description                                                                         |
 | ---       | ---    | ---      | ---                                                                                 |
-| symbol    | string | Yes      | Market symbol                                                                       |
+| symbol    | string | No       | Market symbol                                                                       |
 | orderID   | string | No       | Query using internal order ID                                                       |
 | clOrderID | string | No       | Query using custom order ID. If `orderID` is provided, `clOrderID` will be ignored. |
 
