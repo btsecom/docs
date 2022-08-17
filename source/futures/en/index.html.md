@@ -1129,30 +1129,33 @@ Retrieves open orders that have not yet been matched or matched recently.
 > Response
 
 ```json
-{
-  "base": "string",
-  "clOrderID": "string",
-  "feeAmount": 0,
-  "feeCurrency": "string",
-  "filledPrice": 0,
-  "filledSize": 0,
-  "orderId": "string",
-  "orderType": 0,
-  "price": 0,
-  "quote": "string",
-  "realizedPnl": 0,
-  "serialId": 0,
-  "side": "string",
-  "size": 0,
-  "symbol": "string",
-  "timestamp": 0,
-  "total": 0,
-  "tradeId": "string",
-  "triggerPrice": 0,
-  "triggerType": 0,
-  "username": "string",
-  "wallet": "string"
-}
+[
+  {
+    "base": "string",
+    "clOrderID": "string",
+    "feeAmount": 0,
+    "feeCurrency": "string",
+    "filledPrice": 0,
+    "filledSize": 0,
+    "averageFillPrice": 0,
+    "orderId": "string",
+    "orderType": 0,
+    "price": 0,
+    "quote": "string",
+    "realizedPnl": 0,
+    "serialId": 0,
+    "side": "string",
+    "size": 0,
+    "symbol": "string",
+    "timestamp": 0,
+    "total": 0,
+    "tradeId": "string",
+    "triggerPrice": 0,
+    "triggerType": 0,
+    "username": "string",
+    "wallet": "string"
+  }
+]
 ```
 
 `GET /api/v2.1/user/trade_history`
@@ -1163,39 +1166,43 @@ Retrieves a user's trade history
 
 | Name           | Type    | Required | Description                                                                       |
 | ---            | ---     | ---      | ---                                                                               |
-| symbol         | string  | Yes      | Market symbol                                                                     |
+| symbol         | string  | No       | Market symbol                                                                     |
 | startTime      | long    | No       | Starting time (eg. 1624987283000)                                                 |
 | endTime        | long    | No       | Ending time (eg. 1624987283000)                                                   |
 | beforeSerialId | string  | No       | Condition to retrieve records before the specified serial Id. Used for pagination |
 | afterSerialId  | string  | No       | Condition to retrieve records after the specified serial Id. Used for pagination  |
 | count          | integer | No       | Number of records to return                                                       |
-| includeOld     | boolean | Yes      | Retrieve trade  history records past 7 days                                       |
+| includeOld     | boolean | No       | Retrieve trade  history records past 7 days                                       |
 | clOrderID      | string  | No       | Query trade history by custom order ID                                            |
-| orderID        | string  | No       | Query trade history by order ID                                                   |
 
 
 ### Response Content
 
-| Name        | Type   | Required | Description                             |
-| ---         | ---    | ---      | ---                                     |
-| symbol      | string | Yes      | Market symbol                           |
-| side        | string | Yes      | Trade side. Values are: [`BUY`, `SELL`] |
-| price       | double | Yes      | Transacted price                        |
-| size        | double | Yes      | Transacted size                         |
-| serialId    | long   | Yes      | Serial Id, running sequence number      |
-| tradeId     | string | Yes      | Trade identifier                        |
-| timestamp   | double | Yes      | Transacted timestamp                    |
-| base        | long   | Yes      | Base currency                           |
-| quote       | long   | Yes      | Quote currency                          |
-| clOrderID   | long   | Yes      | Custom order ID                         |
-| orderID     | long   | Yes      | Order ID                                |
-| feeAmount   | long   | Yes      | Fee amount                              |
-| feeCurrency | long   | Yes      | Fee currency                            |
-| filledPrice | long   | Yes      | Filled price                            |
-| filledSize  | long   | Yes      | Filled size                             |
-| orderType   | long   | Yes      | Order Type                              |
-| realizedPnL | long   | Yes      | Not used in Spot                        |
-| total       | long   | Yes      | Not used in Spot                        |
+| Name             | Type   | Required | Description                                                                                                                                                                       |
+| ---              | ---    | ---      | ---                                                                                                                                                                               |
+| symbol           | string | Yes      | Market symbol                                                                                                                                                                     |
+| side             | string | Yes      | Trade side. Values are: [`BUY`, `SELL`]                                                                                                                                           |
+| price            | double | Yes      | Transacted price                                                                                                                                                                  |
+| size             | long   | Yes      | Transacted size                                                                                                                                                                   |
+| serialId         | long   | Yes      | Serial Id, running sequence number                                                                                                                                                |
+| tradeId          | string | Yes      | Trade identifier                                                                                                                                                                  |
+| timestamp        | double | Yes      | Transacted timestamp                                                                                                                                                              |
+| base             | string | Yes      | Base currency                                                                                                                                                                     |
+| quote            | string | Yes      | Quote currency                                                                                                                                                                    |
+| wallet           | string | Yes      | Wallet name<br/>`CROSS@`: Cross wallet<br/>`ISOLATED@market`: Market refers to the current symbol with `-USD` appended. Eg. BTCPFC isolated wallet would be `ISOLATED@BTCPFC-USD` |
+| clOrderID        | string | Yes      | Custom order ID                                                                                                                                                                   |
+| orderId          | string | Yes      | Order ID                                                                                                                                                                          |
+| username         | string | Yes      | btse username                                                                                                                                                                     |
+| triggerType      | long   | Yes      | Trigger type<br/>1001: Stop Loss<br/>1002: Take Profit                                                                                                                            |
+| feeAmount        | long   | Yes      | Fee amount                                                                                                                                                                        |
+| feeCurrency      | long   | Yes      | Fee currency                                                                                                                                                                      |
+| filledPrice      | double | Yes      | Filled price                                                                                                                                                                      |
+| averageFillPrice | double | Yes      | Average filled price                                                                                                                                                              |
+| triggerPrice     | double | Yes      | Trigger price                                                                                                                                                                     |
+| filledSize       | long   | Yes      | Filled size                                                                                                                                                                       |
+| orderType        | long   | Yes      | Order Type                                                                                                                                                                        |
+| realizedPnL      | double | Yes      | Not used in Spot                                                                                                                                                                  |
+| total            | long   | Yes      | Not used in Spot                                                                                                                                                                  |
 
 
 ## Query Position
