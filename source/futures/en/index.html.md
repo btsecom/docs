@@ -13,6 +13,11 @@ headingLevel: 2
 
 # Change Log
 
+## Version 2.4.1 (17th August 2022)
+
+* Add more request / response samples in [Trade Endpoints](#trade-endpoints)
+* Correct document in [Trade Endpoints](#trade-endpoints)
+
 ## Version 2.4.0 (30th March 2022)
 
 * Add new websocket topic `allPosition` to get all open position [All Position](#all-position)
