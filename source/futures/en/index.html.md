@@ -449,7 +449,7 @@ Retrieves a snapshot of the orderbook.
 | symbol    | string | Yes      | Market symbol          |
 | buyQuote  | Quote  | Yes      | Array of Buy quotes    |
 | sellQuote | Quote  | Yes      | Array of Sell quotes   |
-| timestamp | double | Yes      | Timestamp of orderbook |
+| timestamp | long   | Yes      | Timestamp of orderbook |
 
 #### Quote
 
@@ -503,7 +503,7 @@ Retrieves a Level 2 snapshot of the orderbook
 | symbol    | string | Yes      | Market symbol          |
 | buyQuote  | Quote  | Yes      | Array of Buy quotes    |
 | sellQuote | Quote  | Yes      | Array of Sell quotes   |
-| timestamp | double | Yes      | Timestamp of orderbook |
+| timestamp | long   | Yes      | Timestamp of orderbook |
 
 #### Quote
 
@@ -556,7 +556,7 @@ Get trade fills for the market specified by `symbol`
 | price     | double | Yes      | Transacted price                        |
 | size      | double | Yes      | Transacted size                         |
 | serialId  | double | Yes      | Serial Id, running sequence number      |
-| timestamp | double | Yes      | Transacted timestamp                    |
+| timestamp | long   | Yes      | Transacted timestamp                    |
 
 
 # Trade Endpoints
@@ -745,7 +745,7 @@ Creates a new order. Requires `Trading` permission
 | size             | integer | Yes      | Order size                                                                                                                                                                                                                                                                                      |
 | status           | integer | Yes      | Order status<br/>	2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed |
 | time_in_force    | string  | Yes      | Order validity                                                                                                                                                                                                                                                                                  |
-| timestamp        | string  | Yes      | Order timestamp                                                                                                                                                                                                                                                                                 |
+| timestamp        | long    | Yes      | Order timestamp                                                                                                                                                                                                                                                                                 |
 | trigger          | boolean | Yes      | Indicator if order is a trigger order                                                                                                                                                                                                                                                           |
 | triggerPrice     | double  | Yes      | Order trigger price, returns 0 if order is not a trigger order                                                                                                                                                                                                                                  |
 | avgFillPrice     | double  | Yes      | Average filled price. Returns the average filled price for partially transacted orders                                                                                                                                                                                                          |
@@ -837,7 +837,7 @@ This API Requires `Trading` permission
 | size             | integer | Yes      | Order size                                                                                                                                                                                                                                                                                      |
 | status           | integer | Yes      | Order status<br/>	2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed |
 | time_in_force    | string  | Yes      | Order validity                                                                                                                                                                                                                                                                                  |
-| timestamp        | string  | Yes      | Order timestamp                                                                                                                                                                                                                                                                                 |
+| timestamp        | long    | Yes      | Order timestamp                                                                                                                                                                                                                                                                                 |
 | trigger          | boolean | Yes      | Indicator if order is a trigger order                                                                                                                                                                                                                                                           |
 | triggerPrice     | double  | Yes      | Order trigger price, returns 0 if order is not a trigger order                                                                                                                                                                                                                                  |
 | avgFillPrice     | double  | Yes      | Average filled price. Returns the average filled price for partially transacted orders                                                                                                                                                                                                          |
@@ -936,7 +936,7 @@ Amend the price or size or trigger price of an order. For trigger orders, if the
 | size             | integer | Yes      | Order size                                                                                                                                                                                                                                                                                      |
 | status           | integer | Yes      | Order status<br/>	2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed |
 | time_in_force    | string  | Yes      | Order validity                                                                                                                                                                                                                                                                                  |
-| timestamp        | string  | Yes      | Order timestamp                                                                                                                                                                                                                                                                                 |
+| timestamp        | long    | Yes      | Order timestamp                                                                                                                                                                                                                                                                                 |
 | trigger          | string  | Yes      | Indicator if order is a trigger order                                                                                                                                                                                                                                                           |
 | triggerPrice     | string  | Yes      | Order trigger price, returns 0 if order is not a trigger order                                                                                                                                                                                                                                  |
 | avgFillPrice     | string  | Yes      | Average filled price. Returns the average filled price for partially transacted orders                                                                                                                                                                                                          |
@@ -1011,7 +1011,7 @@ Cancels pending orders that has not yet been transacted. The `orderID` is a uniq
 | size             | integer | Yes      | Cancelled size                                                                                                                                                                                                                                                                                  |
 | status           | integer | Yes      | Order status<br/>	2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed |
 | time_in_force    | string  | Yes      | Order validity                                                                                                                                                                                                                                                                                  |
-| timestamp        | string  | Yes      | Order timestamp                                                                                                                                                                                                                                                                                 |
+| timestamp        | long    | Yes      | Order timestamp                                                                                                                                                                                                                                                                                 |
 | trigger          | string  | Yes      | Indicator if order is a trigger order                                                                                                                                                                                                                                                           |
 | triggerPrice     | string  | Yes      | Order trigger price, returns 0 if order is not a trigger order                                                                                                                                                                                                                                  |
 | avgFillPrice     | string  | Yes      | Average filled price. Returns the average filled price for partially transacted orders                                                                                                                                                                                                          |
@@ -1107,37 +1107,37 @@ Retrieves open orders that have not yet been matched or matched recently.
 
 ### Response Content
 
-| Name                         | Type   | Required | Description                                                                            |
-|------------------------------|--------| ---      |----------------------------------------------------------------------------------------|
-| symbol                       | string | Yes      | Market symbol                                                                          |
-| clOrderID                    | string | Yes      | Customer tag sent in by trader                                                         |
-| filledSize                   | double | Yes      | Trade filled size                                                                      |
-| orderValue                   | double | Yes      | Notional value                                                                         |
-| pegPriceMin                  | double | Yes      | peg price min                                                                          |
-| pegPriceMax                  | double | Yes      | peg price max                                                                          |
-| pegPriceDeviation            | double | Yes      | Deviation percentage. Only for Algo orders                                             |
-| cancelDuration               | double | Yes      | Expire in milliseconds. <br/>0: GTC<br/>-1: IOC                                        |
-| orderID                      | string | Yes      | Order ID                                                                               |
-| orderType                    | double | Yes      | Order type <br/>76: Limit Order<br/>77: Market order<br/>80: Algo order                |
-| timeInForce                  | string | Yes      | Order validity                                                                         |
-| price                        | double | Yes      | Order price                                                                            |
-| side                         | string | Yes      | Order side<br/>BUY or SELL                                                             |
-| size                         | integer| Yes      | Order size                                                                             |
-| timestamp                    | string | Yes      | Order timestamp                                                                        |
-| triggerOrder                 | bool   | Yes      | Indicate if this is a trigger order                                                    |
-| triggered                    | bool   | Yes      | Indicate if this order has been triggered                                              |
-| triggerUseLastPrice          | bool   | Yes      | Indicate if this trigger order uses last price                                         |
-| triggerPrice                 | double | Yes      | Order trigger price, returns 0 if order is not a trigger order                         |
-| triggerOriginalPrice         | double | Yes      | Original trigger price                                                                 |
-| triggerOrderType             | string | Yes      | Trigger order type <br/>1001: Trigger stop loss <br/>1002: Trigger take profit         |
-| triggerTrailingStopDeviation | double | Yes      | Reserved attribute                                                                     |
-| triggerStopPrice             | double | Yes      | Reserved attribute                                                                     |
-| trailValue                   | double | Yes      | Reserved attribute                                                                     |
-| reduceOnly                   | bool   | Yes      | Indicate if this order is reduce only                                                  |
-| avgFilledPrice               | double | Yes      | Average filled price. Returns the average filled price for partially transacted orders |
-| averageFillPrice             | double | Yes      | Average fill price                                                                     |
-| stealth                      | double | Yes      | Stealth value of order                                                                 |
-| orderState                   | string | Yes      | `STATUS_ACTIVE`, `STATUS_INACTIVE`                                                     |
+| Name                         | Type    | Required | Description                                                                            |
+| ---                          | ---     | ---      | ---                                                                                    |
+| symbol                       | string  | Yes      | Market symbol                                                                          |
+| clOrderID                    | string  | Yes      | Customer tag sent in by trader                                                         |
+| filledSize                   | integer | Yes      | Trade filled size                                                                      |
+| orderValue                   | double  | Yes      | Notional value                                                                         |
+| pegPriceMin                  | double  | Yes      | peg price min                                                                          |
+| pegPriceMax                  | double  | Yes      | peg price max                                                                          |
+| pegPriceDeviation            | double  | Yes      | Deviation percentage. Only for Algo orders                                             |
+| cancelDuration               | long    | Yes      | Expire in milliseconds. <br/>0: GTC<br/>-1: IOC                                        |
+| orderID                      | string  | Yes      | Order ID                                                                               |
+| orderType                    | integer | Yes      | Order type <br/>76: Limit Order<br/>77: Market order<br/>80: Algo order                |
+| timeInForce                  | string  | Yes      | Order validity                                                                         |
+| price                        | double  | Yes      | Order price                                                                            |
+| side                         | string  | Yes      | Order side<br/>BUY or SELL                                                             |
+| size                         | integer | Yes      | Order size                                                                             |
+| timestamp                    | long    | Yes      | Order timestamp                                                                        |
+| triggerOrder                 | bool    | Yes      | Indicate if this is a trigger order                                                    |
+| triggered                    | bool    | Yes      | Indicate if this order has been triggered                                              |
+| triggerUseLastPrice          | bool    | Yes      | Indicate if this trigger order uses last price                                         |
+| triggerPrice                 | double  | Yes      | Order trigger price, returns 0 if order is not a trigger order                         |
+| triggerOriginalPrice         | double  | Yes      | Original trigger price                                                                 |
+| triggerOrderType             | string  | Yes      | Trigger order type <br/>1001: Trigger stop loss <br/>1002: Trigger take profit         |
+| triggerTrailingStopDeviation | double  | Yes      | Reserved attribute                                                                     |
+| triggerStopPrice             | double  | Yes      | Reserved attribute                                                                     |
+| trailValue                   | double  | Yes      | Reserved attribute                                                                     |
+| reduceOnly                   | bool    | Yes      | Indicate if this order is reduce only                                                  |
+| avgFilledPrice               | double  | Yes      | Average filled price. Returns the average filled price for partially transacted orders |
+| averageFillPrice             | double  | Yes      | Average fill price                                                                     |
+| stealth                      | double  | Yes      | Stealth value of order                                                                 |
+| orderState                   | string  | Yes      | `STATUS_ACTIVE`, `STATUS_INACTIVE`                                                     |
 
 ## Query Trades Fills
 
@@ -1193,31 +1193,31 @@ Retrieves a user's trade history
 
 ### Response Content
 
-| Name             | Type   | Required | Description                                                                                                                                                                       |
-| ---              | ---    | ---      | ---                                                                                                                                                                               |
-| symbol           | string | Yes      | Market symbol                                                                                                                                                                     |
-| side             | string | Yes      | Trade side. Values are: [`BUY`, `SELL`]                                                                                                                                           |
-| price            | double | Yes      | Transacted price                                                                                                                                                                  |
-| size             | integer| Yes      | Transacted size                                                                                                                                                                   |
-| serialId         | long   | Yes      | Serial Id, running sequence number                                                                                                                                                |
-| tradeId          | string | Yes      | Trade identifier                                                                                                                                                                  |
-| timestamp        | double | Yes      | Transacted timestamp                                                                                                                                                              |
-| base             | string | Yes      | Base currency                                                                                                                                                                     |
-| quote            | string | Yes      | Quote currency                                                                                                                                                                    |
-| wallet           | string | Yes      | Wallet name<br/>`CROSS@`: Cross wallet<br/>`ISOLATED@market`: Market refers to the current symbol with `-USD` appended. Eg. BTCPFC isolated wallet would be `ISOLATED@BTCPFC-USD` |
-| clOrderID        | string | Yes      | Custom order ID                                                                                                                                                                   |
-| orderId          | string | Yes      | Order ID                                                                                                                                                                          |
-| username         | string | Yes      | btse username                                                                                                                                                                     |
-| triggerType      | long   | Yes      | Trigger type<br/>1001: Stop Loss<br/>1002: Take Profit                                                                                                                            |
-| feeAmount        | long   | Yes      | Fee amount                                                                                                                                                                        |
-| feeCurrency      | long   | Yes      | Fee currency                                                                                                                                                                      |
-| filledPrice      | double | Yes      | Filled price                                                                                                                                                                      |
-| averageFillPrice | double | Yes      | Average filled price                                                                                                                                                              |
-| triggerPrice     | double | Yes      | Trigger price                                                                                                                                                                     |
-| filledSize       | long   | Yes      | Filled size                                                                                                                                                                       |
-| orderType        | long   | Yes      | Order Type                                                                                                                                                                        |
-| realizedPnL      | double | Yes      | Not used in Spot                                                                                                                                                                  |
-| total            | long   | Yes      | Not used in Spot                                                                                                                                                                  |
+| Name             | Type    | Required | Description                                                                                                                                                                       |
+| ---              | ---     | ---      | ---                                                                                                                                                                               |
+| symbol           | string  | Yes      | Market symbol                                                                                                                                                                     |
+| side             | string  | Yes      | Trade side. Values are: [`BUY`, `SELL`]                                                                                                                                           |
+| price            | double  | Yes      | Transacted price                                                                                                                                                                  |
+| size             | integer | Yes      | Transacted size                                                                                                                                                                   |
+| serialId         | long    | Yes      | Serial Id, running sequence number                                                                                                                                                |
+| tradeId          | string  | Yes      | Trade identifier                                                                                                                                                                  |
+| timestamp        | long    | Yes      | Transacted timestamp                                                                                                                                                              |
+| base             | string  | Yes      | Base currency                                                                                                                                                                     |
+| quote            | string  | Yes      | Quote currency                                                                                                                                                                    |
+| wallet           | string  | Yes      | Wallet name<br/>`CROSS@`: Cross wallet<br/>`ISOLATED@market`: Market refers to the current symbol with `-USD` appended. Eg. BTCPFC isolated wallet would be `ISOLATED@BTCPFC-USD` |
+| clOrderID        | string  | Yes      | Custom order ID                                                                                                                                                                   |
+| orderId          | string  | Yes      | Order ID                                                                                                                                                                          |
+| username         | string  | Yes      | btse username                                                                                                                                                                     |
+| triggerType      | long    | Yes      | Trigger type<br/>1001: Stop Loss<br/>1002: Take Profit                                                                                                                            |
+| feeAmount        | long    | Yes      | Fee amount                                                                                                                                                                        |
+| feeCurrency      | long    | Yes      | Fee currency                                                                                                                                                                      |
+| filledPrice      | double  | Yes      | Filled price                                                                                                                                                                      |
+| averageFillPrice | double  | Yes      | Average filled price                                                                                                                                                              |
+| triggerPrice     | double  | Yes      | Trigger price                                                                                                                                                                     |
+| filledSize       | long    | Yes      | Filled size                                                                                                                                                                       |
+| orderType        | long    | Yes      | Order Type                                                                                                                                                                        |
+| realizedPnL      | double  | Yes      | Not used in Spot                                                                                                                                                                  |
+| total            | long    | Yes      | Not used in Spot                                                                                                                                                                  |
 
 
 ## Query Position
@@ -1349,7 +1349,7 @@ Closes a user's position for the particular market as specified by symbol. If ty
 | size          | integer | Yes      | Cancelled size                                                                                                                                                                                                                                                                                   |
 | status        | integer | Yes      | Order status<br/>	2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed |
 | time_in_force | string  | Yes      | Order validity                                                                                                                                                                                                                                                                                   |
-| timestamp     | string  | Yes      | Order timestamp                                                                                                                                                                                                                                                                                  |
+| timestamp     | long    | Yes      | Order timestamp                                                                                                                                                                                                                                                                                  |
 | trigger       | string  | Yes      | Indicator if order is a trigger order                                                                                                                                                                                                                                                            |
 | triggerPrice  | string  | Yes      | Order trigger price, returns 0 if order is not a trigger order                                                                                                                                                                                                                                   |
 | avgFillPrice  | string  | Yes      | Average filled price. Returns the average filled price for partially transacted orders                                                                                                                                                                                                           |
@@ -1401,7 +1401,7 @@ Changes risk limit for the specified market
 | symbol    | string  | Yes      | Market symbol                                                                                                                                   |
 | status    | integer | Yes      | Status of the request. Values are: <br/>8: Insufficient Balance<br/>12: Error in updating risk limit<br/>20: Success<br/>41: Invalid risk limit |
 | type      | double  | Yes      | Value will be 94 indicating that type is `Risk Limit`                                                                                           |
-| timestamp | double  | Yes      | Timestamp where risk limit was set                                                                                                              |
+| timestamp | long    | Yes      | Timestamp where risk limit was set                                                                                                              |
 | message   | long    | Yes      | Message                                                                                                                                         |
 
 ## Set Leverage
@@ -1446,7 +1446,7 @@ Change leverage values for the specified market
 | symbol    | string  | Yes      | Market symbol                                                                                                                           |
 | status    | integer | Yes      | Status of the request. Values are: <br/>8: Insufficient Balance<br/>13: Invalid leverage<br/>20: Success<br/>64: Undergoing liquidation |
 | type      | double  | Yes      | Value will be 93 indicating that type is `Leverage`                                                                                     |
-| timestamp | double  | Yes      | Timestamp where leverage was set                                                                                                        |
+| timestamp | long    | Yes      | Timestamp where leverage was set                                                                                                        |
 | message   | long    | Yes      | Message                                                                                                                                 |
 
 ## Change contract settlement currency
