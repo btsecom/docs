@@ -13,9 +13,14 @@ headingLevel: 2
 
 # Change Log
 
+## Version 1.0.4 (25th, August 2022)
+
+* Adjust param description of currency in APIs: [`Get Wallet Address`](#get-wallet-address), [`Create Wallet Address`](#create-wallet-address).
+
 ## Version 1.0.3 (13th, May 2022)
 
 * Addition of a parameter `includeWithdrawFee` for [`withdraw funds`](#withdraw-funds) to set the fee will be inclusive/extra added.
+
 ## Version 1.0.2 (16th March 2022)
 
 * Max decimal supported for [`withdraw funds`](#withdraw-funds) is 8, will return `CRYPTO_WITHDRAW_INVALID_AMOUNT (error code: 3506)` if exceeds
@@ -286,7 +291,7 @@ Get user's wallet history records on the spot wallet
 
 ```json
 {
-  "currency": "BTC"
+  "currency": "BTC-LIQUID"
 }
 ```
 
@@ -307,9 +312,9 @@ Creates a wallet address. If the address created has not been used before, a 400
 
 ### Request Parameters
 
-| Name     | Type   | Required | Description             |
-| ---      | ---    | ---      | ---                     |
-| currency | string | Yes      | Currency to get address |
+| Name     | Type   | Required | Description                                                                 |
+| ---      | ---    | ---      | ---                                                                         |
+| currency | string | Yes      | Currency and protocol (optional, adding with separator: `-`) to get address |
 
 ### Response Content
 
@@ -324,7 +329,7 @@ Creates a wallet address. If the address created has not been used before, a 400
 
 ```json
 {
-  "currency": "BTC"
+  "currency": "BTC-LIQUID"
 }
 ```
 
@@ -345,9 +350,9 @@ Gets a wallet address. To use this API, `Wallet` permission is required.
 
 ### Request Parameters
 
-| Name     | Type   | Required | Description                |
-| ---      | ---    | ---      | ---                        |
-| currency | string | Yes      | Currency to create address |
+| Name     | Type   | Required | Description                                                                    |
+| ---      | ---    | ---      | ---                                                                            |
+| currency | string | Yes      | Currency and protocol (optional, adding with separator: `-`) to create address |
 
 ### Response Content
 
