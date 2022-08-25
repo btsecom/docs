@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-1-0-4-25th-august-2022" class="toc-h2 toc-link" data-title="Version 1.0.4 (25th, August 2022)">Version 1.0.4 (25th, August 2022)</a>
+                  </li>
+                  <li>
                     <a href="#version-1-0-3-13th-may-2022" class="toc-h2 toc-link" data-title="Version 1.0.3 (13th, May 2022)">Version 1.0.3 (13th, May 2022)</a>
                   </li>
                   <li>
@@ -317,11 +320,17 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-1-0-3-13th-may-2022'>Version 1.0.3 (13th, May 2022)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-1-0-4-25th-august-2022'>Version 1.0.4 (25th, August 2022)</h2>
 <ul>
-<li><p>Addition of a parameter <code>includeWithdrawFee</code> for <a href="#withdraw-funds"><code>withdraw funds</code></a> to set the fee will be inclusive/extra added.</p>
-<h2 id='version-1-0-2-16th-march-2022'>Version 1.0.2 (16th March 2022)</h2></li>
-<li><p>Max decimal supported for <a href="#withdraw-funds"><code>withdraw funds</code></a> is 8, will return <code>CRYPTO_WITHDRAW_INVALID_AMOUNT (error code: 3506)</code> if exceeds</p></li>
+<li>Adjust param description of currency in APIs: <a href="#get-wallet-address"><code>Get Wallet Address</code></a>, <a href="#create-wallet-address"><code>Create Wallet Address</code></a>.</li>
+</ul>
+<h2 id='version-1-0-3-13th-may-2022'>Version 1.0.3 (13th, May 2022)</h2>
+<ul>
+<li>Addition of a parameter <code>includeWithdrawFee</code> for <a href="#withdraw-funds"><code>withdraw funds</code></a> to set the fee will be inclusive/extra added.</li>
+</ul>
+<h2 id='version-1-0-2-16th-march-2022'>Version 1.0.2 (16th March 2022)</h2>
+<ul>
+<li>Max decimal supported for <a href="#withdraw-funds"><code>withdraw funds</code></a> is 8, will return <code>CRYPTO_WITHDRAW_INVALID_AMOUNT (error code: 3506)</code> if exceeds</li>
 </ul>
 <h2 id='version-1-0-1-25th-january-2022'>Version 1.0.1 (25th January 2022)</h2>
 <ul>
@@ -760,7 +769,7 @@
 <p>Request</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="w">
+  </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-LIQUID"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
@@ -789,7 +798,7 @@
 <td>currency</td>
 <td>string</td>
 <td>Yes</td>
-<td>Currency to get address</td>
+<td>Currency and protocol (optional, adding with separator: <code>-</code>) to get address</td>
 </tr>
 </tbody></table>
 <h3 id='response-content-5'>Response Content</h3>
@@ -819,7 +828,7 @@
 <p>Request</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="w">
+  </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-LIQUID"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
@@ -848,7 +857,7 @@
 <td>currency</td>
 <td>string</td>
 <td>Yes</td>
-<td>Currency to create address</td>
+<td>Currency and protocol (optional, adding with separator: <code>-</code>) to create address</td>
 </tr>
 </tbody></table>
 <h3 id='response-content-6'>Response Content</h3>
