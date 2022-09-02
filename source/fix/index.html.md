@@ -11,12 +11,6 @@ language_tabs:
 
 ---
 
-# Change Log
-
-## Version 0.0.1 (2nd September 2022)
-
-* Publish [FIX API](#fix-api)
-
 # FIX API
 
 FIX (Financial Information eXchange) is a standard electronic messaging protocol which can be used to place orders, receive order updates and executions, and cancel orders. Our FIX api is based on the FIX 4.2 specification and modeled after FIX implementations of other popular cryptocurrency exchanges.
@@ -26,6 +20,13 @@ FIX endpoint URL: tcp+ssl://fix.btse.com:4363 (todo)
 Clients should connect to the endpoint using SSL.
 
 Sequence numbers are reset for each connection. Resend request and sequence reset messages are not supported.
+
+
+# Change Log
+
+## Version 0.0.1 (2nd September 2022)
+
+* Publish [FIX API](#fix-api)
 
 
 ## Messages
@@ -50,7 +51,7 @@ Messages should also include a sequence number MsgSeqNum (34) and a timestamp Se
 
 ### New Order Single (D)
 
-Sent by the client to submit a new order. Only limit orders are currently supported by the FIX API.
+Sent by the client to submit a new order. Only Market, Limit orders are currently supported by the FIX API.
 
 
 | Tag |	Name | Value | Description |
