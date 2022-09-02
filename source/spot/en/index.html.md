@@ -14,8 +14,8 @@ language_tabs:
 # Change Log
 
 ## Version 3.3.4 (2nd September 2022)
-* Remove unnecessary parameter `includeOld` in [Query Trades Fills](#query-trades-fills) and [Query User’s Trades Fills](#query-trades-fills)
-* Remove inaccurate parameters `beforeSerialId` and `afterSerialId` in [Query Trades Fills](#query-trades-fills) and [Query User’s Trades Fills](#query-trades-fills) 
+* Remove unnecessary parameter `includeOld` in [Query Trades Fills](#query-trades-fills) and [Query User’s Trades Fills](https://btsecom.github.io/docs/spot/en/#query-trades-fills-2)
+* Remove inaccurate parameters `beforeSerialId` and `afterSerialId` in [Query Trades Fills](#query-trades-fills) and [Query User’s Trades Fills](https://btsecom.github.io/docs/spot/en/#query-trades-fills-2) 
 
 ## Version 3.3.3 (15th August 2022)
 
@@ -48,7 +48,7 @@ language_tabs:
 
 ## Version 3.2.6 (19th November 2021)
 
-* Addition of `isMatchSymbol` parameter to [trade_history](#query-trades-fills)
+* Addition of `isMatchSymbol` parameter to [trade_history](https://btsecom.github.io/docs/spot/en/#query-trades-fills-2)
 
 ## Version 3.2.5 (25th October 2021)
 
