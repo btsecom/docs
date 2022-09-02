@@ -13,6 +13,10 @@ language_tabs:
 
 # Change Log
 
+## Version 3.3.4
+* Remove unnecessary parameter `includeOld` in [Query Trades Fills](#query-trades-fills) and [Query User’s Trades Fills](#query-trades-fills)
+* Remove inaccurate parameters `beforeSerialId` and `afterSerialId` in [Query Trades Fills](#query-trades-fills) and [Query User’s Trades Fills](#query-trades-fills) 
+
 ## Version 3.3.3 (15th August 2022)
 
 * Merge document section `Create new algo order` into [Create new order](#create-new-order)
@@ -44,7 +48,7 @@ language_tabs:
 
 ## Version 3.2.6 (19th November 2021)
 
-* Addition of `isMatchSymbol` parameter to [trade_history](#query-trades-fills-2)
+* Addition of `isMatchSymbol` parameter to [trade_history](#query-trades-fills)
 
 ## Version 3.2.5 (25th October 2021)
 
@@ -531,10 +535,7 @@ Get trade fills for the market specified by `symbol`
 | symbol         | string  | Yes      | Market symbol                                                                     |
 | startTime      | long    | No       | Starting time (eg. 1624987283000)                                                 |
 | endTime        | long    | No       | Ending time (eg. 1624987283000)                                                   |
-| beforeSerialId | string  | No       | Condition to retrieve records before the specified serial Id. Used for pagination |
-| afterSerialId  | string  | No       | Condition to retrieve records after the specified serial Id. Used for pagination  |
 | count          | integer | No       | Number of records to return                                                       |
-| includeOld     | boolean | No       | Retrieve trade  history records past 7 days                                       |
 
 ### Response Content
 
@@ -1155,10 +1156,7 @@ Retrieves a user's trade history
 | symbol         | string  | Yes      | Market symbol                                                                               |
 | startTime      | long    | No       | Starting time (eg. 1624987283000)                                                           |
 | endTime        | long    | No       | Ending time (eg. 1624987283000)                                                             |
-| beforeSerialId | string  | No       | Condition to retrieve records before the specified serial Id. Used for pagination           |
-| afterSerialId  | string  | No       | Condition to retrieve records after the specified serial Id. Used for pagination            |
 | count          | integer | No       | Number of records to return                                                                 |
-| includeOld     | boolean | Yes      | Retrieve trade  history records past 7 days                                                 |
 | clOrderID      | string  | No       | Query trade history by custom order ID                                                      |
 | orderID        | string  | No       | Query trade history by order ID                                                             |
 | isMatchSymbol  | boolean | No       | Exact match on `symbol`. If this sets to true, will only match records for that symbol only |
