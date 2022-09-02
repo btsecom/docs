@@ -65,6 +65,6 @@ Sent by the client to submit a new order. Only Market, Limit orders are currentl
 | 44	| Price       | 18000    | Limit price (required in Limit order and Market buy order)                           |
 | 54	| Side        | 1        | "1": buy; "2": sell                                                                  |
 | 59	| TimeInForce | 1        | "1": Good Till Cancel; "3": Immediate or Cancel; "4": Fill or Kill (for Limit order) |
-| 18	| ExecInst    | E        | This parameter is optional. "E": reduce only, "6": post only, not supplied: standard |
+| 18	| ExecInst    | 6        | This parameter is optional. "E": reduce only, "6": post only, not supplied: standard |
 
 If the order is accepted, an ExecutionReport (8) will be returned with ExecType: 0 (New), 1 (Partial fill), 2 (Fill), 4 (Canceled), 7 (Stopped), 8 (Rejected).
