@@ -15,7 +15,7 @@ language_tabs:
 
 FIX (Financial Information eXchange) is a standard electronic messaging protocol which can be used to place orders, receive order updates and executions, and cancel orders. Our FIX api is based on the FIX 4.2 specification and modeled after FIX implementations of other popular cryptocurrency exchanges.
 
-FIX endpoint URL: tcp+ssl://fix.btse.com:4363 (todo)
+FIX endpoint URL: **tcp+ssl://fix.btse.com:4363**
 
 Clients should connect to the endpoint using SSL.
 
@@ -62,7 +62,7 @@ Sent by the client to submit a new order. Only Market, Limit orders are currentl
 | 55	| Symbol      | BTC-USD  | Symbol name                                                                          |
 | 40	| OrdType     | 2        | "1": Market; "2": Limit                                                              |
 | 38	| OrderQty    | 1.1      | Order size in base units (required in Limit order and Market sell order)             |
-| 44	| Price       | 8000     | Limit price (required in Limit order and Market buy order)                           |
+| 44	| Price       | 18000    | Limit price (required in Limit order and Market buy order)                           |
 | 54	| Side        | 1        | "1": buy; "2": sell                                                                  |
 | 59	| TimeInForce | 1        | "1": Good Till Cancel; "3": Immediate or Cancel; "4": Fill or Kill (for Limit order) |
 | 18	| ExecInst    | E        | This parameter is optional. "E": reduce only, "6": post only, not supplied: standard |
