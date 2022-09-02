@@ -13,7 +13,7 @@ language_tabs:
 
 # Change Log
 
-## Version 3.3.4
+## Version 3.3.4 (2nd September 2022)
 * Remove unnecessary parameter `includeOld` in [Query Trades Fills](#query-trades-fills) and [Query User’s Trades Fills](#query-trades-fills)
 * Remove inaccurate parameters `beforeSerialId` and `afterSerialId` in [Query Trades Fills](#query-trades-fills) and [Query User’s Trades Fills](#query-trades-fills) 
 
