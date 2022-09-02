@@ -1,0 +1,476 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Documentation</title>
+    <link href="../images/favicon-3eb77247.ico" rel="icon" type="image/ico" />
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cpf {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s, .highlight .sa, .highlight .dl {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf, .highlight .fm {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv, .highlight .vm {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #f92672;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <link href="../stylesheets/screen-a7292fd4.css" rel="stylesheet" media="screen" />
+    <link href="../stylesheets/print-953e3353.css" rel="stylesheet" media="print" />
+      <script src="../javascripts/all_nosearch-8f5ea5a5.js"></script>
+
+  </head>
+
+  <body class="fix fix_index" data-languages="[]">
+    <a href="#" id="nav-button">
+      <span>
+        <img src="../images/navbar-cad8cdcb.png" alt="" />
+      </span>
+    </a>
+    <header>
+    <div class="flex_box">
+      <img src="../images/logo-d7d2b532.svg" class="logo" alt="" />
+      <div class="nav-row-wrap">
+        <div id="navBox" class="nav_box"></div>
+        <div id="menuDropdownBtn" class="noselect menu-dropdown-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          <div id="menuDropdown" class="menu-dropdown hide"></div>
+        </div>
+      </div>
+    </div>
+
+  </header>
+    <div class="toc-wrapper">
+      <ul id="toc" class="toc-list-h1">
+          <li>
+            <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#version-0-0-1-2nd-september-2022" class="toc-h2 toc-link" data-title="Version 0.0.1 (2nd September 2022)">Version 0.0.1 (2nd September 2022)</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#fix-api" class="toc-h1 toc-link" data-title="FIX API">FIX API</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#messages" class="toc-h2 toc-link" data-title="Messages">Messages</a>
+                  </li>
+              </ul>
+          </li>
+      </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id='change-log'>Change Log</h1><h2 id='version-0-0-1-2nd-september-2022'>Version 0.0.1 (2nd September 2022)</h2>
+<ul>
+<li>Publish <a href="#fix-api">FIX API</a></li>
+</ul>
+<h1 id='fix-api'>FIX API</h1>
+<p>FIX (Financial Information eXchange) is a standard electronic messaging protocol which can be used to place orders, receive order updates and executions, and cancel orders. Our FIX api is based on the FIX 4.2 specification and modeled after FIX implementations of other popular cryptocurrency exchanges.</p>
+
+<p>FIX endpoint URL: tcp+ssl://fix.btse.com:4363 (todo)</p>
+
+<p>Clients should connect to the endpoint using SSL.</p>
+
+<p>Sequence numbers are reset for each connection. Resend request and sequence reset messages are not supported.</p>
+<h2 id='messages'>Messages</h2><div class="highlight"><pre class="highlight plaintext"><code>8=FIX.4.2|9=162|35=A|49=zyfvB4QPg0A3kkVgqUE9V1fOA-Y6jhdG3seqIIZx|56=BTSE
+</code></pre></div>
+<p>All messages should include the following header:</p>
+
+<p>This documentation uses | to represent the FIX field separator (byte 0x01). It should be replaced by 0x01 in actual messages.</p>
+
+<table><thead>
+<tr>
+<th>Tag</th>
+<th>Name</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>8</td>
+<td>BeginString</td>
+<td>FIX.4.2</td>
+<td>Must be set to &quot;FIX.4.2&quot;</td>
+</tr>
+<tr>
+<td>9</td>
+<td>BodyLength</td>
+<td>162</td>
+<td>Length of the message body in bytes</td>
+</tr>
+<tr>
+<td>35</td>
+<td>MsgType</td>
+<td>8</td>
+<td>Message type</td>
+</tr>
+<tr>
+<td>49</td>
+<td>SenderCompID</td>
+<td>zyfvB4QPg0A3kkVgqUE9V1fOA-Y6jhdG3seqIIZx</td>
+<td>Client API key (for messages from the client)</td>
+</tr>
+<tr>
+<td>56</td>
+<td>TargetCompID</td>
+<td>BTSE</td>
+<td>Must be set to &quot;BTSE&quot; (for messages from the client)</td>
+</tr>
+</tbody></table>
+
+<p>Messages should also include a sequence number MsgSeqNum (34) and a timestamp SendingTime (52). Sequence numbers start at 1 and must be incremented with every message. Messages with duplicate or out-of-order sequence numbers will be rejected. Sequence numbers are reset on new connections.</p>
+<h3 id='new-order-single-d'>New Order Single (D)</h3>
+<p>Sent by the client to submit a new order. Only limit orders are currently supported by the FIX API.</p>
+
+<table><thead>
+<tr>
+<th>Tag</th>
+<th>Name</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>35</td>
+<td>MsgType</td>
+<td>D</td>
+<td></td>
+</tr>
+<tr>
+<td>21</td>
+<td>HandlInst</td>
+<td>1</td>
+<td>Must be set to &quot;1&quot; (AutomatedExecutionNoIntervention)</td>
+</tr>
+<tr>
+<td>11</td>
+<td>ClOrdID</td>
+<td>order123</td>
+<td>Arbitrary client-selected string to identify the order; must be unique</td>
+</tr>
+<tr>
+<td>55</td>
+<td>Symbol</td>
+<td>BTC-USD</td>
+<td>Symbol name</td>
+</tr>
+<tr>
+<td>40</td>
+<td>OrdType</td>
+<td>2</td>
+<td>&quot;1&quot;: Market; &quot;2&quot;: Limit</td>
+</tr>
+<tr>
+<td>38</td>
+<td>OrderQty</td>
+<td>1.1</td>
+<td>Order size in base units (required in Limit order and Market sell order)</td>
+</tr>
+<tr>
+<td>44</td>
+<td>Price</td>
+<td>8000</td>
+<td>Limit price (required in Limit order and Market buy order)</td>
+</tr>
+<tr>
+<td>54</td>
+<td>Side</td>
+<td>1</td>
+<td>&quot;1&quot;: buy; &quot;2&quot;: sell</td>
+</tr>
+<tr>
+<td>59</td>
+<td>TimeInForce</td>
+<td>1</td>
+<td>&quot;1&quot;: Good Till Cancel; &quot;3&quot;: Immediate or Cancel; &quot;4&quot;: Fill or Kill (for Limit order)</td>
+</tr>
+<tr>
+<td>18</td>
+<td>ExecInst</td>
+<td>E</td>
+<td>This parameter is optional. &quot;E&quot;: reduce only, &quot;6&quot;: post only, not supplied: standard</td>
+</tr>
+</tbody></table>
+
+<p>If the order is accepted, an ExecutionReport (8) will be returned with ExecType: 0 (New), 1 (Partial fill), 2 (Fill), 4 (Canceled), 7 (Stopped), 8 (Rejected).</p>
+
+      </div>
+      <div class="dark-box">
+      </div>
+    </div>
+    <script>
+const DEFAULT_LANG = 'en';
+const IS_DEV = false;
+const DOCS_PREFIX = IS_DEV ? '/' : '/docs/';
+const TAB_MAP = {
+  spot: {
+    cn: '现货'
+  },
+  futures: {
+    cn: '期货'
+  },
+  otc: {
+    en: 'OTC',
+    cn: '场外交易'
+  },
+  wallet: {
+    en: 'Wallet/Convert/Transfer',
+    cn: '錢包'
+  },
+  streaming: {
+    cn: '串流'
+  },
+  earn: {
+    cn: '賺幣'
+  }
+};
+
+function getUrlRelativePath() {
+  let url = document.location.toString();
+  let arrUrl = url.split('//');
+  let start = arrUrl[1].indexOf('/');
+  let relUrl = arrUrl[1].substring(start);
+  if (relUrl.indexOf('?') !== -1) {
+    relUrl = relUrl.split("?")[0];
+  }
+  if (relUrl.indexOf('#') !== -1) {
+    relUrl = relUrl.split('#')[0];
+  }
+  return relUrl;
+}
+
+function capitalizeFirstLetter(s) {
+  return s.charAt(0).toUpperCase() + s.slice(1);
+}
+
+function getLang() {
+  const url = getUrlRelativePath();
+  const isEN = url.indexOf('cn') === -1;
+  return isEN ? 'en' : 'cn';
+}
+
+function getTabTemplate(isTab, href, tabKey, tabText) {
+  const classList = isTab ? 'nav_cell nav_tab' : 'menu-row'
+  const idPrefix = isTab ? 'nav_link_' : 'menu-link-'
+  const linkClass = isTab ? 'nav-link' : 'menu-link'
+  return `
+    <span class="${classList}">
+      <a href="${href}" id="${idPrefix}${tabKey}" class="${linkClass}">${tabText}</a>
+    </span>
+  `
+}
+
+function generateNavHtml(lang, isTab) {
+  return Object.keys(TAB_MAP).map(tabKey => {
+    const tabText = TAB_MAP[tabKey][lang] || capitalizeFirstLetter(tabKey);
+    const href = `${DOCS_PREFIX}${tabKey}/${lang}/`;
+    return getTabTemplate(isTab, href, tabKey, tabText);
+  })
+}
+
+$(function() {
+  const lang = getLang();
+  $('#navBox').html(generateNavHtml(lang, true));
+  $('#menuDropdown').html(generateNavHtml(lang, false));
+  const tabList = Object.keys(TAB_MAP);
+  for (let i = 0; i < tabList.length; i ++) {
+    const tabKey = tabList[i];
+    if (location.href.indexOf(`/${tabKey}/`) > 0) {
+      $('.nav-link').removeClass('current');
+      $(`#nav_link_${tabKey}`).addClass('current');
+      $('.menu-link').removeClass('current');
+      $(`#menu-link-${tabKey}`).addClass('current');
+      break;
+    }
+  }
+  $('#menuDropdownBtn').click(() => {
+    $('.menu-dropdown').toggleClass('hide');
+  });
+});
+  </script>
+  </body>
+</html>
