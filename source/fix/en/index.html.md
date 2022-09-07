@@ -29,7 +29,7 @@ Sequence numbers are reset for each connection. Resend request and sequence rese
 * Publish [FIX API](#fix-api)
 
 
-## Messages
+# Messages
 
 ```
 8=FIX.4.2|9=162|35=A|49=zyfvB4QPg0A3kkVgqUE9V1fOA-Y6jhdG3seqIIZx|56=BTSE
@@ -49,7 +49,7 @@ This documentation uses | to represent the FIX field separator (byte 0x01). It s
 
 Messages should also include a sequence number MsgSeqNum (34) and a timestamp SendingTime (52). Sequence numbers start at 1 and must be incremented with every message. Messages with duplicate or out-of-order sequence numbers will be rejected. Sequence numbers are reset on new connections.
 
-### New Order Single (D)
+## New Order Single (D)
 
 Sent by the client to submit a new order. Only Market, Limit orders are currently supported by the FIX API.
 
@@ -68,3 +68,19 @@ Sent by the client to submit a new order. Only Market, Limit orders are currentl
 | 18	| ExecInst    | 6        | This parameter is optional. "E": reduce only, "6": post only, not supplied: standard |
 
 If the order is accepted, an ExecutionReport (8) will be returned with ExecType: 0 (New), 1 (Partial fill), 2 (Fill), 4 (Canceled), 7 (Stopped), 8 (Rejected).
+
+
+## Order Cancel Request (F)
+
+Sent by the client to request to cancel an order.
+
+
+| Tag | Name | Value | Description |
+| --- | ---  | ---   | ---         |
+| 35  | MsgType     | F        |   |
+| 37  | OrderID     | order123 | System-assigned order ID of the order |
+| 41  | OrigClOrdID | order123 | Client-assigned order ID of the order |
+
+Only one of OrderID (37) and OrigClOrdID (41) should be provided.
+
+If the order is successfully cancelled, an ExecutionReport (8) will be returned. Otherwise, an OrderCancelReject (9) will be returned.
