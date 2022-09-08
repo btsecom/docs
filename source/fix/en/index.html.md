@@ -84,3 +84,18 @@ Sent by the client to request to cancel an order.
 Only one of OrderID (37) and OrigClOrdID (41) should be provided.
 
 If the order is successfully cancelled, an ExecutionReport (8) will be returned. Otherwise, an OrderCancelReject (9) will be returned.
+
+
+## Order Cancel Reject (9)
+
+Sent by the server to notify the client that an OrderCancelRequest (F) failed.
+
+
+| Tag | Name | Value | Description |
+| --- | ---  | ---   | ---         |
+| 35  | MsgType          | 9        |                                                      |
+| 37  | OrderID          | order123 | Copied from OrderCancelRequest, won't show up if not provided in OrderCancelRequest. |
+| 41  | OrigClOrdID      | order123 | Copied from OrderCancelRequest, won't show up if not provided in OrderCancelRequest. |
+| 39  | OrdStatus        | 4        | "4" (canceled) or "1" (NEW, for all other scenarios) |
+| 102 | CxlRejReason     | 0        | "0" (order already cancelled) or "1" (unknown order, for all other scenarios)        |
+| 434 | CxlRejResponseTo | 1        | Always set to "1"                                    |
