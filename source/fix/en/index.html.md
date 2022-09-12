@@ -97,5 +97,5 @@ Sent by the server to notify the client that an OrderCancelRequest (F) failed.
 | 37  | OrderID          | order123 | Copied from OrderCancelRequest, won't show up if not provided in OrderCancelRequest. |
 | 41  | OrigClOrdID      | order123 | Copied from OrderCancelRequest, won't show up if not provided in OrderCancelRequest. |
 | 39  | OrdStatus        | 0        | Currently only support: "0": new                     |
-| 102 | CxlRejReason     | 1        | Currently only support: "1": unknown order           |
+| 102 | CxlRejReason     | 1        | "1": unknown order, "99": others                     |
 | 434 | CxlRejResponseTo | 1        | Always set to "1"                                    |
