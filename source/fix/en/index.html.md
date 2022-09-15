@@ -29,6 +29,34 @@ Sequence numbers are reset for each connection. Resend request and sequence rese
 * Publish [FIX API](#fix-api)
 
 
+# Rate limit
+
+Rate limit constraints are described below:
+
+| Group    | Message Types included | Description |
+| ---      | ---                    | ---         |
+| Auth     | Logon (A), Logout (5)                              |  2 times in 1 second by group |
+| General  | All message types except: Logon (A) and Logout (5) | 30 times in 1 second by group |
+
+When rate limit rule is violated, client's request would be rejected and server returns a Business Message Reject (j).
+
+| Tag | Name | Example | Description |
+| --- | ---  | ---     | ---         |
+| 8   | BeginString          | FIX.4.2                                                          | FIX version                                    |
+| 9   | BodyLength           | 162                                                              | Length of the message body in bytes            |
+| 10  | CheckSum             | 118                                                              | CheckSum of the message                        |
+| 34  | MsgSeqNum            | 17                                                               | Sequence number of the message                 |
+| 35  | MsgType              | j                                                                | Always set to "j": business message reject     |
+| 45  | RefSeqNum            | 11                                                               | Sequence number of rejected message            |
+| 49  | SenderCompID         | BTSE                                                             | Always set to: "BTSE"                          |
+| 52  | SendingTime          | 20220914-10:27:55                                                | Sending time of the message                    |
+| 56  | TargetCompID         | c123456c98765d306fae4f90b25c27a07cd8be12345678912d7ead46f0d9505a | Client's API Key                               |
+| 57  | TargetSubID          | SPOT                                                             | "SPOT": spot market; "FUTURES": futures market |
+| 58  | Text                 | exceeding rate limit                                             | Detail information                             |
+| 372 | RefMsgType           | F                                                                | Message type of rejected message               |
+| 380 | BusinessRejectReason | 4                                                                | Always set to "4": application not available   |
+
+
 # Messages
 
 ```
