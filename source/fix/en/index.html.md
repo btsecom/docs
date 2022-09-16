@@ -49,10 +49,63 @@ This documentation uses | to represent the FIX field separator (byte 0x01). It s
 
 Messages should also include a sequence number MsgSeqNum (34) and a timestamp SendingTime (52). Sequence numbers start at 1 and must be incremented with every message. Messages with duplicate or out-of-order sequence numbers will be rejected. Sequence numbers are reset on new connections.
 
+## Logon (A)
+
+``` python
+from datetime import datetime
+import hmac
+
+api_key = 'YOUR_API_KEY'
+api_secret = 'YOUR_API_SECRET'
+
+sending_time = datetime.now().strftime('%Y%m%d-%H:%M:%S')
+
+sign_target = '\x01'.join([
+    sending_time,  # SendingTime
+    'A',  # MsgType
+    '1',  # MsgSeqNum
+    api_key,  # SenderCompID
+    'FTX',  # TargetCompID
+])
+
+signature = hmac.new(api_secret.encode(), sign_target.encode(), 'sha256').hexdigest()
+```
+
+Sent by the client to initiate a FIX session. Must be the first message sent after a connection is established. Only one session can be established per connection; additional Logon messages are rejected.
+
+| Tag | Name | Value | Description |
+| --- | ---  | ---   | ---         |
+|  35 | MsgType       | A           |   |
+|  98 | EncryptMethod | 0           | Must be set to "0" (None) |
+| 108 | HeartBInt     | 30          | Must be set to "30"       |
+|  96 | RawData       | 8f7e...4783 |	For security, the Logon message must be signed by the client. To compute the signature, concatenate the following fields, joined by the FIX field separator (byte 0x01), and compute the SHA256 HMAC using the API secret:<br/><br/> * SendingTime (52)<br/> * MsgType (35)<br/> * MsgSeqNum (34)<br/> * SenderCompID (49)<br/> * TargetCompID (56)<br/><br/>The resulting hash should be hex-encoded. |
+
+
+## Heartbeat (0)
+
+| Tag | Name | Value | Description |
+| --- | ---  | ---   | ---         |
+|  35 | MsgType   |   0 |          |
+| 112 | TestReqID | 123 | If this heartbeat is in response to a TestRequest, copied from the TestRequest. |
+
+## Test Request (1)
+
+| Tag | Name | Value | Description |
+| --- | ---  | ---   | ---         |
+|  35 | MsgType   |   1 |          |
+| 112 | TestReqID | 123 | Arbitrary string, to be echoed back by a Heartbeat. |
+
+## Logout (5)
+
+Sent by either side to terminate the session. The other side should respond with another Logout message to acknowledge session termination. The connection will be closed afterwards.			
+
+| Tag | Name    | Value | Description |
+| --- | ---     | ---   | ---         |
+|  35 | MsgType | 5     |             |
+
 ## New Order Single (D)
 
 Sent by the client to submit a new order. Only Market, Limit orders are currently supported by the FIX API.
-
 
 | Tag |	Name | Value | Description |
 | --- | ---  | ---   | ---         |
@@ -62,7 +115,7 @@ Sent by the client to submit a new order. Only Market, Limit orders are currentl
 | 55	| Symbol      | BTC-USD  | Symbol name                                                                          |
 | 40	| OrdType     | 2        | "1": Market; "2": Limit                                                              |
 | 38	| OrderQty    | 1.1      | Order size in base units (required in Limit order and Market sell order)             |
-| 44	| Price       | 18000    | Limit price (required in Limit order and Market buy order)                           |
+| 44	| Price       | 18000    | Limit price or Market buy price (required in Limit order and Market buy order)       |
 | 54	| Side        | 1        | "1": buy; "2": sell                                                                  |
 | 59	| TimeInForce | 1        | "1": Good Till Cancel; "3": Immediate or Cancel; "4": Fill or Kill (for Limit order) |
 | 18	| ExecInst    | 6        | This parameter is optional. "E": reduce only, "6": post only, not supplied: standard |
@@ -74,12 +127,12 @@ If the order is accepted, an ExecutionReport (8) will be returned with ExecType:
 
 Sent by the client to request to cancel an order.
 
-
 | Tag | Name | Value | Description |
 | --- | ---  | ---   | ---         |
 | 35  | MsgType     | F        |   |
 | 37  | OrderID     | order123 | System-assigned order ID of the order |
 | 41  | OrigClOrdID | order123 | Client-assigned order ID of the order |
+| 55  | Symbol      | BTC-USD  | Symbol name                           |
 
 Only one of OrderID (37) and OrigClOrdID (41) should be provided.
 
@@ -90,7 +143,6 @@ If the order is successfully cancelled, an ExecutionReport (8) will be returned.
 
 Sent by the server to notify the client that an OrderCancelRequest (F) failed.
 
-
 | Tag | Name | Value | Description |
 | --- | ---  | ---   | ---         |
 | 35  | MsgType          | 9        |                                                      |
@@ -99,3 +151,16 @@ Sent by the server to notify the client that an OrderCancelRequest (F) failed.
 | 39  | OrdStatus        | 0        | Currently only support: "0": new                     |
 | 102 | CxlRejReason     | 1        | "1": unknown order, "99": others                     |
 | 434 | CxlRejResponseTo | 1        | Always set to "1"                                    |
+
+## Reject (3)
+
+Sent by the server in response to an invalid message.
+
+| Tag | Name | Value | Description |
+| --- | ---  | ---   | ---         |
+| 35  | MsgType             | 3                |                                         |
+| 45  | RefSeqNum           | 2                | Sequence number of the rejected message |
+| 371 | RefTagID            | 38               | Tag number of the rejected field        |
+| 372 | RefMsgType          | D                | Message type of the rejected message    |
+| 58  | Text                | Missing quantity | Human-readable description of the reason for the rejection |
+| 373 | SessionRejectReason | 1                | Code to identify the rejection reason   |
