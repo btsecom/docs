@@ -42,30 +42,28 @@ When rate limit rule is violated, client's request would be rejected and server 
 
 | Tag | Name | Example | Description |
 | --- | ---  | ---     | ---         |
-| 8   | BeginString          | FIX.4.2                                                          | FIX version                                    |
-| 9   | BodyLength           | 162                                                              | Length of the message body in bytes            |
-| 10  | CheckSum             | 118                                                              | CheckSum of the message                        |
-| 34  | MsgSeqNum            | 17                                                               | Sequence number of the message                 |
-| 35  | MsgType              | j                                                                | Always set to "j": business message reject     |
-| 45  | RefSeqNum            | 11                                                               | Sequence number of rejected message            |
-| 49  | SenderCompID         | BTSE                                                             | Always set to: "BTSE"                          |
-| 52  | SendingTime          | 20220914-10:27:55                                                | Sending time of the message                    |
-| 56  | TargetCompID         | c123456c98765d306fae4f90b25c27a07cd8be12345678912d7ead46f0d9505a | Client's API Key                               |
-| 57  | TargetSubID          | SPOT                                                             | "SPOT": spot market; "FUTURES": futures market |
-| 58  | Text                 | exceeding rate limit                                             | Detail information                             |
-| 372 | RefMsgType           | F                                                                | Message type of rejected message               |
-| 380 | BusinessRejectReason | 4                                                                | Always set to "4": application not available   |
+| 8   | BeginString          | FIX.4.2              | FIX version                                    |
+| 9   | BodyLength           | 162                  | Length of the message body in bytes            |
+| 10  | CheckSum             | 118                  | CheckSum of the message                        |
+| 34  | MsgSeqNum            | 17                   | Sequence number of the message                 |
+| 35  | MsgType              | j                    | Always set to "j": business message reject     |
+| 45  | RefSeqNum            | 11                   | Sequence number of rejected message            |
+| 49  | SenderCompID         | BTSE                 | Always set to: "BTSE"                          |
+| 52  | SendingTime          | 20220914-10:27:55    | Sending time of the message                    |
+| 56  | TargetCompID         | c123...05a           | Client's API Key                               |
+| 57  | TargetSubID          | SPOT                 | "SPOT": spot market; "FUTURES": futures market |
+| 58  | Text                 | exceeding rate limit | Detail information                             |
+| 372 | RefMsgType           | F                    | Message type of rejected message               |
+| 380 | BusinessRejectReason | 4                    | Always set to "4": application not available   |
 
 
 # Messages
 
-```
-8=FIX.4.2|9=162|35=A|49=zyfvB4QPg0A3kkVgqUE9V1fOA-Y6jhdG3seqIIZx|56=BTSE
-```
+FIX protocol uses field separator (character: `0x01`) to separate attributes in messages.
 
-This documentation uses `|` to represent the FIX field separator (character: `0x01`). It should be replaced with `0x01` in actual messages.
+## Common request attributes
 
-Common attributes are required in every request message as below:
+Below attributes are required in every client's request message.
 
 | Tag |	Name | Example | Description |
 | --- | ---  | ---     | ---         |
