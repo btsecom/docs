@@ -82,24 +82,20 @@ Below attributes are required in every client's request message.
 
 ## Logon (A)
 
-``` python
-from datetime import datetime
-import hmac
+``` java
+import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.codec.digest.HmacAlgorithms;
+import org.apache.commons.codec.digest.HmacUtils;
 
-api_key = 'YOUR_API_KEY'
-api_secret = 'YOUR_API_SECRET'
+// initialize String parameters: apiSecret, sendingTime, messageType, messageSeqNum, senderCompID, targetCompID
 
-sending_time = datetime.now().strftime('%Y%m%d-%H:%M:%S')
 
-sign_target = '\x01'.join([
-    sending_time,  # SendingTime
-    'A',  # MsgType
-    '1',  # MsgSeqNum
-    api_key,  # SenderCompID
-    'BTSE',  # TargetCompID
-])
+// compute the SHA384 HMAC using the API secret
+final char SOH = 1;
+final CharSequence SEPARATOR = Character.toString(SOH);
 
-signature = hmac.new(api_secret.encode(), sign_target.encode(), 'sha256').hexdigest()
+final String DATARAW = String.join(SEPARATOR, sendingTime, messageType, messageSeqNum, senderCompID, targetCompID);
+final String SIGNATURE = Hex.encodeHexString(HmacUtils.getInitializedMac(HmacAlgorithms.HMAC_SHA_384, apiSecret.getBytes()).doFinal(dataRaw.getBytes()));
 ```
 
 Sent by the client to initiate a FIX session. Must be the first message sent after a connection is established. Only one session can be established per connection; additional Logon messages are rejected.
@@ -109,7 +105,7 @@ Client's API Key and secret can be generated from API page in BTSE portal. Creat
 | --- | ---  | ---   | ---         |
 |  35 | MsgType         | A                 |                           |
 |  95 | RawDataLength   | 96                | Length of RawData         |
-|  96 | RawData         | 8f7e...4783       | For security, the Logon message must be signed by the client. To compute the signature, concatenate the following fields, joined by the FIX field separator (byte 0x01), and compute the SHA256 HMAC using the API secret:<br/><br/> * SendingTime (52)<br/> * MsgType (35)<br/> * MsgSeqNum (34)<br/> * SenderCompID (49)<br/> * TargetCompID (56)<br/><br/>The resulting hash should be hex-encoded. |
+|  96 | RawData         | 8f7e...4783       | For security, the Logon message must be signed by the client. To compute the signature, concatenate the following fields, joined by the FIX field separator (byte 0x01), and compute the SHA384 HMAC using the API secret:<br/><br/> * SendingTime (52)<br/> * MsgType (35)<br/> * MsgSeqNum (34)<br/> * SenderCompID (49)<br/> * TargetCompID (56)<br/><br/>The resulting hash should be hex-encoded. |
 |  98 | EncryptMethod   | 0                 | Must be set to "0" (None) |
 | 108 | HeartBInt       | 30                | Must be set to "30"       |
 | 141 | ResetSeqNumFlag | Y                 | Must be set to "Y"        |
