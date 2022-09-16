@@ -35,19 +35,22 @@ Sequence numbers are reset for each connection. Resend request and sequence rese
 8=FIX.4.2|9=162|35=A|49=zyfvB4QPg0A3kkVgqUE9V1fOA-Y6jhdG3seqIIZx|56=BTSE
 ```
 
-All messages should include the following header:
+This documentation uses `|` to represent the FIX field separator (character: `0x01`). It should be replaced with `0x01` in actual messages.
 
-This documentation uses | to represent the FIX field separator (byte 0x01). It should be replaced by 0x01 in actual messages.
+Common attributes are required in every request message as below:
 
 | Tag |	Name | Example | Description |
 | --- | ---  | ---     | ---         |
-| 8  | BeginString  | FIX.4.2                                  | Must be set to "FIX.4.2"                             |
-| 9  | BodyLength   | 162                                      | Length of the message body in bytes                  |
-| 35 | MsgType      | 8                                        | Message type                                         |
-| 49 | SenderCompID | zyfvB4QPg0A3kkVgqUE9V1fOA-Y6jhdG3seqIIZx | Client API key (for messages from the client)        |
-| 56 | TargetCompID | BTSE                                     | Must be set to "BTSE" (for messages from the client) |
+| 8  | BeginString  | FIX.4.2   | Must be set to "FIX.4.2"                             |
+| 9  | BodyLength   | 162       | Length of the message body in bytes                  |
+| 34 | MsgSeqNum    | 1         | Sequence of message, starts from 1 and must be incremented with every message. Messages with duplicate or out-of-order sequence numbers will be rejected. Sequence numbers are reset on new connections. |
+| 35 | MsgType      | 8         | Message type                                         |
+| 49 | SenderCompID | zyf...IZx | Client API key                                       |
+| 50 | SenderSubID  | SPOT      | Currently only support: "SPOT": spot market          |
+| 52 | SendingTime  | 20220916-07:29:07 | Sending time of message                      |
+| 56 | TargetCompID | BTSE      | Must be set to "BTSE" (for messages from the client) |
+| 10 | CheckSum     | 145       | CheckSum of the message                              |
 
-Messages should also include a sequence number MsgSeqNum (34) and a timestamp SendingTime (52). Sequence numbers start at 1 and must be incremented with every message. Messages with duplicate or out-of-order sequence numbers will be rejected. Sequence numbers are reset on new connections.
 
 ## Logon (A)
 
@@ -65,20 +68,23 @@ sign_target = '\x01'.join([
     'A',  # MsgType
     '1',  # MsgSeqNum
     api_key,  # SenderCompID
-    'FTX',  # TargetCompID
+    'BTSE',  # TargetCompID
 ])
 
 signature = hmac.new(api_secret.encode(), sign_target.encode(), 'sha256').hexdigest()
 ```
 
 Sent by the client to initiate a FIX session. Must be the first message sent after a connection is established. Only one session can be established per connection; additional Logon messages are rejected.
+Client's API Key and secret can be generated from API page in BTSE portal. Create key with permissions to use FIX APIs.
 
 | Tag | Name | Value | Description |
 | --- | ---  | ---   | ---         |
-|  35 | MsgType       | A           |   |
-|  98 | EncryptMethod | 0           | Must be set to "0" (None) |
-| 108 | HeartBInt     | 30          | Must be set to "30"       |
-|  96 | RawData       | 8f7e...4783 |	For security, the Logon message must be signed by the client. To compute the signature, concatenate the following fields, joined by the FIX field separator (byte 0x01), and compute the SHA256 HMAC using the API secret:<br/><br/> * SendingTime (52)<br/> * MsgType (35)<br/> * MsgSeqNum (34)<br/> * SenderCompID (49)<br/> * TargetCompID (56)<br/><br/>The resulting hash should be hex-encoded. |
+|  35 | MsgType         | A                 |                           |
+|  95 | RawDataLength   | 96                | Length of RawData         |
+|  96 | RawData         | 8f7e...4783       | For security, the Logon message must be signed by the client. To compute the signature, concatenate the following fields, joined by the FIX field separator (byte 0x01), and compute the SHA256 HMAC using the API secret:<br/><br/> * SendingTime (52)<br/> * MsgType (35)<br/> * MsgSeqNum (34)<br/> * SenderCompID (49)<br/> * TargetCompID (56)<br/><br/>The resulting hash should be hex-encoded. |
+|  98 | EncryptMethod   | 0                 | Must be set to "0" (None) |
+| 108 | HeartBInt       | 30                | Must be set to "30"       |
+| 141 | ResetSeqNumFlag | Y                 | Must be set to "Y"        |
 
 
 ## Heartbeat (0)
@@ -151,6 +157,27 @@ Sent by the server to notify the client that an OrderCancelRequest (F) failed.
 | 39  | OrdStatus        | 0        | Currently only support: "0": new                     |
 | 102 | CxlRejReason     | 1        | "1": unknown order, "99": others                     |
 | 434 | CxlRejResponseTo | 1        | Always set to "1"                                    |
+
+## Order Status Request (H)
+
+Sent by the server to notify the client that an OrderCancelRequest (F) failed.
+
+| Tag | Name | Value | Description |
+| --- | ---  | ---   | ---         |
+| 35 | MsgType     | 9        |                                       |
+| 37 | OrderID     | order123 | System-assigned order ID of the order |
+| 41 | OrigClOrdID | order123 | Client-assigned order ID of the order |
+| 54 | Side        | 1        | "1": buy; "2": sell                   |
+| 55 | Symbol      | BTC-USD  | Symbol name                           |
+
+## Execution Report (8)
+
+Sent by the server whenever an order receives a fill, whenever the status of an order changes, or in response to a NewOrderSingle (D), OrderCancelRequest (F), or OrderStatusRequest (H) message from the client.			
+Work in progress.
+
+| Tag | Name | Value | Description |
+| --- | ---  | ---   | ---         |
+| 35  | MsgType | 8  |             |
 
 ## Reject (3)
 
