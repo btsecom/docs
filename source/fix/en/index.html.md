@@ -15,7 +15,7 @@ language_tabs:
 
 FIX (Financial Information eXchange) is a standard electronic messaging protocol which can be used to place orders, receive order updates and executions, and cancel orders. Our FIX api is based on the FIX 4.2 specification and modeled after FIX implementations of other popular cryptocurrency exchanges.
 
-FIX endpoints:
+FIX endpoints: tcp+ssl://fix.btse.com:9876
 
 | Environment | Endpoint         |
 | ---         | ---              |
@@ -194,13 +194,64 @@ Sent by the server to notify the client that an OrderCancelRequest (F) failed.
 | 54 | Side        | 1        | "1": buy; "2": sell                   |
 | 55 | Symbol      | BTC-USD  | Symbol name                           |
 
-## Execution Report (8) - work in progress
+## Execution Report (8)
 
 Sent by the server whenever an order receives a fill, whenever the status of an order changes, or in response to a NewOrderSingle (D), OrderCancelRequest (F), or OrderStatusRequest (H) message from the client.			
 
 | Tag | Name | Value | Description |
 | --- | ---  | ---   | ---         |
+| 11  | ClOrderId | order123 | Client-selected order ID. |
+| 12  | Commission | 0.002 | Fee for trade. Only present if this message was the result of a fill |
+| 13  | CommType | 3 | Always 3 |
+| 14  | CumQty | 0.4 | Quantity of order that has already been filled |
+| 17  | ExecID | d840c87b-ad98-47b1-95d3-4d41950fa776 | Order ID |
+| 31  | LastPx | 7999.25 | Fill price. Only present if this message was the result of a fill |
+| 32  | LastQty | 0.4 | Fill quantity. Only present if this message was the result of a fill |
 | 35  | MsgType | 8  |             |
+| 37  | OrderID | d840c87b-ad98-47b1-95d3-4d41950fa776 | Order ID |
+| 38  | OrderQty | 1.2 | Original order quantity |
+| 39  | OrdStatus | 0  | Order status (see below) |
+| 44  | Price | 8000 | Original order price |
+| 54  | Side | 1  | "1": buy; "2": sell |
+| 55  | Symbol | BTC-USD | Symbol name |
+| 58  | Text | text | Description of the reason the order was rejected |
+| 60  | TransactTime | 20190525-08:26:38.989 | Time of the order update. Only present on order updates |
+| 103  | OrdRejReason | 11 | "11": when request is failed (UNSUPPORTED_ORDER_CHARACTERISTIC). The rejected reason detail will be shown in Text(58) |
+| 150  | ExecType | 1 | Reason for this message (see below) |
+| 151  | LeavesQty | 0.8 | Quantity of order that is still open |
+| 1057 | AggressorIndicator | Y | "Y": taker fill; "N": maker fill. Only present if this message was the result of a fill |
+
+
+### ExecType values 
+
+The ExecType (150) field indicates the reason why this ExecutionReport was sent.
+
+| ExecType | Description |
+| --- | ---|
+| 0 | New order |
+| 1 | Partially filled order |
+| 3 | Fully filled order |
+| 4 | Order cancelled |
+| 5 | Order amended |
+| 7 | Order refund (self-trade) |
+| 8 | Response to a rejected NewOrderSingle (D) request |
+| I | Response to a OrderStatusRequest (H) request |
+
+Note that every order changed will send a execution report message.
+
+### OrdStatus values
+
+| OrdStatus | Description |
+| --- | --- |
+| A | Open Order |
+| 0 | New Order |
+| 1 | Partially filled order |
+| 3 | Fully filled order |
+| 4 | Cancelled order |
+| 5 | Amended order |
+| 7 | Refunded order |
+| 8 | Rejected order |
+
 
 ## Reject (3)
 
