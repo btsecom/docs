@@ -178,7 +178,7 @@ Sent by the server to notify the client that an OrderCancelRequest (F) failed.
 | 35  | MsgType          | 9        |                                                      |
 | 37  | OrderID          | order123 | Copied from OrderCancelRequest, won't show up if not provided in OrderCancelRequest. |
 | 41  | OrigClOrdID      | order123 | Copied from OrderCancelRequest, won't show up if not provided in OrderCancelRequest. |
-| 39  | OrdStatus        | 0        | Currently only support: "0": new                     |
+| 39  | OrdStatus        | 4        | "4" (Canceled) if the order was already cancelled                     |
 | 102 | CxlRejReason     | 1        | "1": unknown order, "99": others                     |
 | 434 | CxlRejResponseTo | 1        | Always set to "1"                                    |
 
@@ -188,7 +188,7 @@ Sent by the server to notify the client that an OrderCancelRequest (F) failed.
 
 | Tag | Name | Value | Description |
 | --- | ---  | ---   | ---         |
-| 35 | MsgType     | 9        |                                       |
+| 35 | MsgType     | H        |                                       |
 | 37 | OrderID     | order123 | System-assigned order ID of the order |
 | 41 | OrigClOrdID | order123 | Client-assigned order ID of the order |
 | 54 | Side        | 1        | "1": buy; "2": sell                   |
