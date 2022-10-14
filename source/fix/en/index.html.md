@@ -19,8 +19,8 @@ FIX endpoints: tcp+ssl://fix.btse.com:9876
 
 | Environment | Endpoint         |
 | ---         | ---              |
-| test        | work in progress |
-| production  | work in progress |
+| test        | tcp+ssl://fix.btse.io:9876 |
+| production  | tcp+ssl://fix.btse.com:9876 |
 
 
 
@@ -189,10 +189,12 @@ Sent by the server to notify the client that an OrderCancelRequest (F) failed.
 | Tag | Name | Value | Description |
 | --- | ---  | ---   | ---         |
 | 35 | MsgType     | H        |                                       |
-| 37 | OrderID     | order123 | System-assigned order ID of the order |
+| 37 | OrderID     | order123 | OrderID of the order to request, or "*" to request all pending orders |
 | 41 | OrigClOrdID | order123 | Client-assigned order ID of the order |
 | 54 | Side        | 1        | "1": buy; "2": sell                   |
 | 55 | Symbol      | BTC-USD  | Symbol name                           |
+
+The server will respond with an ExecutionReport (8) with ExecType=I (OrderStatus) with the requested order or orders. Only one of OrderID (37) and OrigClOrdID (41) should be provided. If both OrderId (37) and OrigClOrdID (41) are passed, only OrderId (37) would be applied. When there are no open orders, the server will include Text (58) of "No open orders".
 
 ## Execution Report (8)
 
