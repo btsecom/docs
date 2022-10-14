@@ -194,7 +194,7 @@ Sent by the server to notify the client that an OrderCancelRequest (F) failed.
 | 54 | Side        | 1        | "1": buy; "2": sell                   |
 | 55 | Symbol      | BTC-USD  | Symbol name                           |
 
-The server will respond with an ExecutionReport (8) with ExecType=I (OrderStatus) with the requested order or orders. Only one of OrderID (37) and OrigClOrdID (41) should be provided. If both OrderId (37) and OrigClOrdID (41) are passed, only OrderId (37) would be applied. When there are no open orders, the server will include Text (58) of "No open orders".
+The server will respond with an ExecutionReport (8) with ExecType=I (OrderStatus) with the requested order or orders. Only one of OrderID (37) and OrigClOrdID (41) should be provided. If both OrderId (37) and OrigClOrdID (41) are provided, only OrderId (37) would be applied. When there are no open orders, the server will include Text (58) of "No open orders".
 
 ## Execution Report (8)
 
