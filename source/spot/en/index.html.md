@@ -431,7 +431,7 @@ Retrieves a Level 2 snapshot of the orderbook and allows you to specify grouping
 | Name       | Type    | Required | Description                                                                                                                                                  |
 | ---        | ---     | ---      | ---                                                                                                                                                          |
 | symbol     | string  | Yes      | Market symbol                                                                                                                                                |
-| group      | integer | No       | Orderbook grouping. Valid values are: <br/>0-9 where 0 indicates level 0 grouping (eg. for BTC, it will be 0.5)<br/>Level 1 grouping for BTC would be 1<br/> |
+| group      | integer | No       | Orderbook grouping. Valid values are: <br/>0-8 where 0 indicates level 0 grouping (eg. for BTC, it will be 0.5)<br/>Level 1 grouping for BTC would be 1<br/> |
 | limit_bids | integer | No       | Orderbook depth on the bid side                                                                                                                              |
 | limit_asks | integer | No       | Orderbook depth on the ask side                                                                                                                              |
 
@@ -1287,11 +1287,8 @@ get all investment products
 
 ```json
 {
-    "productid": "openusdt0001",
-    "amount": 100.99,
-    "renew": true,
-    "rate": 6,
-    "day": 7
+    "productId": "openusdt0001",
+    "amount": 100.99
 }
 ```
 
@@ -1303,11 +1300,8 @@ deposit an investment
 
 | name      | type    | required | description         |
 | ---       | ---     | ---      | ---                 |
-| productid | string  | yes      | invest product id   |
+| productId | string  | yes      | invest product id   |
 | amount    | double  | yes      | invest amount       |
-| renew     | boolean | yes      | renew automatically |
-| rate      | double  | yes      | interest rate       |
-| day       | integer | yes      | duration in days    |
 
 
 ## renew investment
@@ -1316,8 +1310,8 @@ deposit an investment
 
 ```json
 {
-    "orderid": 1,
-    "autorenew": false
+    "orderId": 1,
+    "autoRenew": false
 }
 ```
 
@@ -1325,8 +1319,8 @@ deposit an investment
 
 ```json
 {
-    "orderid": 1,
-    "autorenew": false
+    "orderId": 1,
+    "autoRenew": false
 }
 ```
 
@@ -1338,15 +1332,15 @@ renew an investment order
 
 | name      | type    | required | description         |
 | ---       | ---     | ---      | ---                 |
-| orderid   | integer | yes      | investment order id |
-| autorenew | boolean | yes      | renew automatically |
+| orderId   | integer | yes      | investment order id |
+| autoRenew | boolean | yes      | renew automatically |
 
 ### response content
 
 | name      | type    | required | description              |
 | ---       | ---     | ---      | ---                      |
-| orderid   | integer | yes      | investment order id      |
-| autorenew | boolean | yes      | status of autorenew flag |
+| orderId   | integer | yes      | investment order id      |
+| autoRenew | boolean | yes      | status of autoRenew flag |
 
 
 ## redeem investment
@@ -1355,7 +1349,7 @@ renew an investment order
 
 ```json
 {
-    "orderid": 1,
+    "orderId": 1,
     "amount": 12.34
 }
 ```
@@ -1368,7 +1362,7 @@ redeem an investment order
 
 | name    | type    | required | description         |
 | ---     | ---     | ---      | ---                 |
-| orderid | integer | yes      | investment order id |
+| orderId | integer | yes      | investment order id |
 | amount  | double  | yes      | redeem amount       |
 
 
@@ -1553,7 +1547,7 @@ to subscribe to a websocket feed
 Subscribe to the Orderbook in different groupings. The format to subscribe to will be `symbol_grouping`.
 
 * `symbol` indicates the market symbol
-* `grouping` indicates the grouping granularity. Valid values are 0-9.
+* `grouping` indicates the grouping granularity. Valid values are 0-8.
 
 ### Response Content
 
@@ -1890,7 +1884,7 @@ echo -n "/ws/spot1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6726
   "data": [
     {
       "symbol": "Market Symbol (eg. BTC-USD)",
-      "orderID": "BTSE internal order ID",
+      "orderId": "BTSE internal order ID",
       "side": "BUY",
       "type": "76",
       "price": "Order price or transacted price",

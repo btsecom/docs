@@ -314,7 +314,8 @@ Creates a wallet address. If the address created has not been used before, a 400
 
 | Name     | Type   | Required | Description                                                                 |
 | ---      | ---    | ---      | ---                                                                         |
-| currency | string | Yes      | Currency and protocol (optional, adding with separator: `-`) to get address |
+| currency | string | Yes      | Ex: BTC  |
+| network  | string | Yes      | Ex: BITCOIN |
 
 ### Response Content
 
@@ -329,7 +330,8 @@ Creates a wallet address. If the address created has not been used before, a 400
 
 ```json
 {
-  "currency": "BTC-LIQUID"
+  "currency": "BTC",
+  "network": "LIQUID"
 }
 ```
 
@@ -352,7 +354,8 @@ Gets a wallet address. To use this API, `Wallet` permission is required.
 
 | Name     | Type   | Required | Description                                                                    |
 | ---      | ---    | ---      | ---                                                                            |
-| currency | string | Yes      | Currency and protocol (optional, adding with separator: `-`) to create address |
+| currency | string | Yes      | Ex: BTC  |
+| network  | string | Yes      | Ex: BITCOIN |
 
 ### Response Content
 
