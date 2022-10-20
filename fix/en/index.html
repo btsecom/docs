@@ -1,0 +1,1179 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Documentation</title>
+    <link href="../../images/favicon-3eb77247.ico" rel="icon" type="image/ico" />
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cpf {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s, .highlight .sa, .highlight .dl {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf, .highlight .fm {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv, .highlight .vm {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #f92672;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <link href="../../stylesheets/screen-a7292fd4.css" rel="stylesheet" media="screen" />
+    <link href="../../stylesheets/print-953e3353.css" rel="stylesheet" media="print" />
+      <script src="../../javascripts/all_nosearch-8f5ea5a5.js"></script>
+
+  </head>
+
+  <body class="fix fix_en fix_en_index" data-languages="[]">
+    <a href="#" id="nav-button">
+      <span>
+        <img src="../../images/navbar-cad8cdcb.png" alt="" />
+      </span>
+    </a>
+    <header>
+    <div class="flex_box">
+      <img src="../../images/logo-d7d2b532.svg" class="logo" alt="" />
+      <div class="nav-row-wrap">
+        <div id="navBox" class="nav_box"></div>
+        <div id="menuDropdownBtn" class="noselect menu-dropdown-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          <div id="menuDropdown" class="menu-dropdown hide"></div>
+        </div>
+      </div>
+    </div>
+
+  </header>
+    <div class="toc-wrapper">
+      <ul id="toc" class="toc-list-h1">
+          <li>
+            <a href="#fix-api" class="toc-h1 toc-link" data-title="FIX API">FIX API</a>
+          </li>
+          <li>
+            <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#version-1-0-0-18th-october-2022" class="toc-h2 toc-link" data-title="Version 1.0.0 (18th October 2022)">Version 1.0.0 (18th October 2022)</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#rate-limit" class="toc-h1 toc-link" data-title="Rate limit">Rate limit</a>
+          </li>
+          <li>
+            <a href="#messages" class="toc-h1 toc-link" data-title="Messages">Messages</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#common-request-attributes" class="toc-h2 toc-link" data-title="Common request attributes">Common request attributes</a>
+                  </li>
+                  <li>
+                    <a href="#logon-a" class="toc-h2 toc-link" data-title="Logon (A)">Logon (A)</a>
+                  </li>
+                  <li>
+                    <a href="#heartbeat-0" class="toc-h2 toc-link" data-title="Heartbeat (0)">Heartbeat (0)</a>
+                  </li>
+                  <li>
+                    <a href="#test-request-1" class="toc-h2 toc-link" data-title="Test Request (1)">Test Request (1)</a>
+                  </li>
+                  <li>
+                    <a href="#logout-5" class="toc-h2 toc-link" data-title="Logout (5)">Logout (5)</a>
+                  </li>
+                  <li>
+                    <a href="#new-order-single-d" class="toc-h2 toc-link" data-title="New Order Single (D)">New Order Single (D)</a>
+                  </li>
+                  <li>
+                    <a href="#order-cancel-request-f" class="toc-h2 toc-link" data-title="Order Cancel Request (F)">Order Cancel Request (F)</a>
+                  </li>
+                  <li>
+                    <a href="#order-cancel-reject-9" class="toc-h2 toc-link" data-title="Order Cancel Reject (9)">Order Cancel Reject (9)</a>
+                  </li>
+                  <li>
+                    <a href="#order-status-request-h" class="toc-h2 toc-link" data-title="Order Status Request (H)">Order Status Request (H)</a>
+                  </li>
+                  <li>
+                    <a href="#execution-report-8" class="toc-h2 toc-link" data-title="Execution Report (8)">Execution Report (8)</a>
+                  </li>
+                  <li>
+                    <a href="#reject-3" class="toc-h2 toc-link" data-title="Reject (3)">Reject (3)</a>
+                  </li>
+              </ul>
+          </li>
+      </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id='fix-api'>FIX API</h1>
+<p>FIX (Financial Information eXchange) is a standard electronic messaging protocol which can be used to place orders, receive order updates and executions, and cancel orders. Our FIX api is based on the FIX 4.2 specification and modeled after FIX implementations of other popular cryptocurrency exchanges.</p>
+
+<p>FIX endpoints: tcp+ssl://fix.btse.com:9876</p>
+
+<table><thead>
+<tr>
+<th>Environment</th>
+<th>Endpoint</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>test</td>
+<td>tcp+ssl://fix.btse.io:9876</td>
+</tr>
+<tr>
+<td>production</td>
+<td>tcp+ssl://fix.btse.com:9876</td>
+</tr>
+</tbody></table>
+<h1 id='change-log'>Change Log</h1><h2 id='version-1-0-0-18th-october-2022'>Version 1.0.0 (18th October 2022)</h2>
+<ul>
+<li>Release Spot market trading functions <a href="#fix-api">FIX API</a></li>
+</ul>
+<h1 id='rate-limit'>Rate limit</h1>
+<p>Rate limit constraints are described below:</p>
+
+<table><thead>
+<tr>
+<th>Group</th>
+<th>Message Types included</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Auth</td>
+<td>Logon (A), Logout (5)</td>
+<td>2 times in 1 second by group</td>
+</tr>
+<tr>
+<td>General</td>
+<td>All message types except: Logon (A) and Logout (5)</td>
+<td>30 times in 1 second by group</td>
+</tr>
+</tbody></table>
+
+<p>When rate limit rule is violated, client&#39;s request would be rejected and server returns a Business Message Reject (j).</p>
+
+<table><thead>
+<tr>
+<th>Tag</th>
+<th>Name</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>8</td>
+<td>BeginString</td>
+<td>FIX.4.2</td>
+<td>FIX version</td>
+</tr>
+<tr>
+<td>9</td>
+<td>BodyLength</td>
+<td>162</td>
+<td>Length of the message body in bytes</td>
+</tr>
+<tr>
+<td>10</td>
+<td>CheckSum</td>
+<td>118</td>
+<td>CheckSum of the message</td>
+</tr>
+<tr>
+<td>34</td>
+<td>MsgSeqNum</td>
+<td>17</td>
+<td>Sequence number of the message</td>
+</tr>
+<tr>
+<td>35</td>
+<td>MsgType</td>
+<td>j</td>
+<td>Always set to &quot;j&quot;: business message reject</td>
+</tr>
+<tr>
+<td>45</td>
+<td>RefSeqNum</td>
+<td>11</td>
+<td>Sequence number of rejected message</td>
+</tr>
+<tr>
+<td>49</td>
+<td>SenderCompID</td>
+<td>BTSE</td>
+<td>Always set to: &quot;BTSE&quot;</td>
+</tr>
+<tr>
+<td>52</td>
+<td>SendingTime</td>
+<td>20220914-10:27:55</td>
+<td>Sending time of the message</td>
+</tr>
+<tr>
+<td>56</td>
+<td>TargetCompID</td>
+<td>c123...05a</td>
+<td>Client&#39;s API Key</td>
+</tr>
+<tr>
+<td>57</td>
+<td>TargetSubID</td>
+<td>SPOT</td>
+<td>&quot;SPOT&quot;: spot market; &quot;FUTURES&quot;: futures market</td>
+</tr>
+<tr>
+<td>58</td>
+<td>Text</td>
+<td>exceeding rate limit</td>
+<td>Detail information</td>
+</tr>
+<tr>
+<td>372</td>
+<td>RefMsgType</td>
+<td>F</td>
+<td>Message type of rejected message</td>
+</tr>
+<tr>
+<td>380</td>
+<td>BusinessRejectReason</td>
+<td>4</td>
+<td>Always set to &quot;4&quot;: application not available</td>
+</tr>
+</tbody></table>
+<h1 id='messages'>Messages</h1>
+<p>FIX protocol uses field separator (character: <code>0x01</code>) to separate attributes in messages.</p>
+<h2 id='common-request-attributes'>Common request attributes</h2>
+<p>Below attributes are required in every client&#39;s request message.</p>
+
+<table><thead>
+<tr>
+<th>Tag</th>
+<th>Name</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>8</td>
+<td>BeginString</td>
+<td>FIX.4.2</td>
+<td>Must be set to &quot;FIX.4.2&quot;</td>
+</tr>
+<tr>
+<td>9</td>
+<td>BodyLength</td>
+<td>162</td>
+<td>Length of the message body in bytes</td>
+</tr>
+<tr>
+<td>34</td>
+<td>MsgSeqNum</td>
+<td>1</td>
+<td>Sequence of message, starts from 1 and must be incremented with every message. Messages with duplicate or out-of-order sequence numbers will be rejected. Sequence numbers are reset on new connections.</td>
+</tr>
+<tr>
+<td>35</td>
+<td>MsgType</td>
+<td>8</td>
+<td>Message type</td>
+</tr>
+<tr>
+<td>49</td>
+<td>SenderCompID</td>
+<td>zyf...IZx</td>
+<td>Client API key</td>
+</tr>
+<tr>
+<td>50</td>
+<td>SenderSubID</td>
+<td>SPOT</td>
+<td>Currently only support: &quot;SPOT&quot;: spot market</td>
+</tr>
+<tr>
+<td>52</td>
+<td>SendingTime</td>
+<td>20220916-07:29:07</td>
+<td>Sending time of message</td>
+</tr>
+<tr>
+<td>56</td>
+<td>TargetCompID</td>
+<td>BTSE</td>
+<td>Must be set to &quot;BTSE&quot; (for messages from the client)</td>
+</tr>
+<tr>
+<td>10</td>
+<td>CheckSum</td>
+<td>145</td>
+<td>CheckSum of the message</td>
+</tr>
+</tbody></table>
+<h2 id='logon-a'>Logon (A)</h2><div class="highlight"><pre class="highlight java tab-java"><code><span class="kn">import</span> <span class="nn">org.apache.commons.codec.binary.Hex</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.commons.codec.digest.HmacAlgorithms</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.commons.codec.digest.HmacUtils</span><span class="o">;</span>
+
+<span class="c1">// initialize String parameters: apiSecret, sendingTime, messageType, messageSeqNum, senderCompID, targetCompID</span>
+
+
+<span class="c1">// compute the SHA384 HMAC using the API secret</span>
+<span class="kd">final</span> <span class="kt">char</span> <span class="no">SOH</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+<span class="kd">final</span> <span class="nc">CharSequence</span> <span class="no">SEPARATOR</span> <span class="o">=</span> <span class="nc">Character</span><span class="o">.</span><span class="na">toString</span><span class="o">(</span><span class="no">SOH</span><span class="o">);</span>
+
+<span class="kd">final</span> <span class="nc">String</span> <span class="no">DATARAW</span> <span class="o">=</span> <span class="nc">String</span><span class="o">.</span><span class="na">join</span><span class="o">(</span><span class="no">SEPARATOR</span><span class="o">,</span> <span class="n">sendingTime</span><span class="o">,</span> <span class="n">messageType</span><span class="o">,</span> <span class="n">messageSeqNum</span><span class="o">,</span> <span class="n">senderCompID</span><span class="o">,</span> <span class="n">targetCompID</span><span class="o">);</span>
+<span class="kd">final</span> <span class="nc">String</span> <span class="no">SIGNATURE</span> <span class="o">=</span> <span class="nc">Hex</span><span class="o">.</span><span class="na">encodeHexString</span><span class="o">(</span><span class="nc">HmacUtils</span><span class="o">.</span><span class="na">getInitializedMac</span><span class="o">(</span><span class="nc">HmacAlgorithms</span><span class="o">.</span><span class="na">HMAC_SHA_384</span><span class="o">,</span> <span class="n">apiSecret</span><span class="o">.</span><span class="na">getBytes</span><span class="o">()).</span><span class="na">doFinal</span><span class="o">(</span><span class="n">dataRaw</span><span class="o">.</span><span class="na">getBytes</span><span class="o">()));</span>
+</code></pre></div>
+<p>Sent by the client to initiate a FIX session. Must be the first message sent after a connection is established. Only one session can be established per connection; additional Logon messages are rejected.
+Client&#39;s API Key and secret can be generated from API page in BTSE portal. Create key with permissions to use FIX APIs.</p>
+
+<table><thead>
+<tr>
+<th>Tag</th>
+<th>Name</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>35</td>
+<td>MsgType</td>
+<td>A</td>
+<td></td>
+</tr>
+<tr>
+<td>95</td>
+<td>RawDataLength</td>
+<td>96</td>
+<td>Length of RawData</td>
+</tr>
+<tr>
+<td>96</td>
+<td>RawData</td>
+<td>8f7e...4783</td>
+<td>For security, the Logon message must be signed by the client. To compute the signature, concatenate the following fields, joined by the FIX field separator (byte 0x01), and compute the SHA384 HMAC using the API secret:<br/><br/> * SendingTime (52)<br/> * MsgType (35)<br/> * MsgSeqNum (34)<br/> * SenderCompID (49)<br/> * TargetCompID (56)<br/><br/>The resulting hash should be hex-encoded.</td>
+</tr>
+<tr>
+<td>98</td>
+<td>EncryptMethod</td>
+<td>0</td>
+<td>Must be set to &quot;0&quot; (None)</td>
+</tr>
+<tr>
+<td>108</td>
+<td>HeartBInt</td>
+<td>30</td>
+<td>Must be set to &quot;30&quot;</td>
+</tr>
+<tr>
+<td>141</td>
+<td>ResetSeqNumFlag</td>
+<td>Y</td>
+<td>Must be set to &quot;Y&quot;</td>
+</tr>
+</tbody></table>
+<h2 id='heartbeat-0'>Heartbeat (0)</h2>
+<table><thead>
+<tr>
+<th>Tag</th>
+<th>Name</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>35</td>
+<td>MsgType</td>
+<td>0</td>
+<td></td>
+</tr>
+<tr>
+<td>112</td>
+<td>TestReqID</td>
+<td>123</td>
+<td>If this heartbeat is in response to a TestRequest, copied from the TestRequest.</td>
+</tr>
+</tbody></table>
+<h2 id='test-request-1'>Test Request (1)</h2>
+<table><thead>
+<tr>
+<th>Tag</th>
+<th>Name</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>35</td>
+<td>MsgType</td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td>112</td>
+<td>TestReqID</td>
+<td>123</td>
+<td>Arbitrary string, to be echoed back by a Heartbeat.</td>
+</tr>
+</tbody></table>
+<h2 id='logout-5'>Logout (5)</h2>
+<p>Sent by either side to terminate the session. The other side should respond with another Logout message to acknowledge session termination. The connection will be closed afterwards.           </p>
+
+<table><thead>
+<tr>
+<th>Tag</th>
+<th>Name</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>35</td>
+<td>MsgType</td>
+<td>5</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id='new-order-single-d'>New Order Single (D)</h2>
+<p>Sent by the client to submit a new order. Only Market, Limit orders are currently supported by the FIX API.</p>
+
+<table><thead>
+<tr>
+<th>Tag</th>
+<th>Name</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>35</td>
+<td>MsgType</td>
+<td>D</td>
+<td></td>
+</tr>
+<tr>
+<td>21</td>
+<td>HandlInst</td>
+<td>1</td>
+<td>Must be set to &quot;1&quot; (AutomatedExecutionNoIntervention)</td>
+</tr>
+<tr>
+<td>11</td>
+<td>ClOrdID</td>
+<td>order123</td>
+<td>Arbitrary client-selected string to identify the order; must be unique</td>
+</tr>
+<tr>
+<td>55</td>
+<td>Symbol</td>
+<td>BTC-USD</td>
+<td>Symbol name</td>
+</tr>
+<tr>
+<td>40</td>
+<td>OrdType</td>
+<td>2</td>
+<td>&quot;1&quot;: Market; &quot;2&quot;: Limit</td>
+</tr>
+<tr>
+<td>38</td>
+<td>OrderQty</td>
+<td>1.1</td>
+<td>Order size in base units (required in Limit order and Market sell order)</td>
+</tr>
+<tr>
+<td>44</td>
+<td>Price</td>
+<td>18000</td>
+<td>Limit price or Market buy price (required in Limit order and Market buy order)</td>
+</tr>
+<tr>
+<td>54</td>
+<td>Side</td>
+<td>1</td>
+<td>&quot;1&quot;: buy; &quot;2&quot;: sell</td>
+</tr>
+<tr>
+<td>59</td>
+<td>TimeInForce</td>
+<td>1</td>
+<td>&quot;1&quot;: Good Till Cancel; &quot;3&quot;: Immediate or Cancel; &quot;4&quot;: Fill or Kill (for Limit order)</td>
+</tr>
+<tr>
+<td>18</td>
+<td>ExecInst</td>
+<td>6</td>
+<td>This parameter is optional. &quot;E&quot;: reduce only, &quot;6&quot;: post only, not supplied: standard</td>
+</tr>
+</tbody></table>
+
+<p>If the order is accepted, an ExecutionReport (8) will be returned with ExecType: 0 (New), 1 (Partial fill), 2 (Fill), 4 (Canceled), 7 (Stopped), 8 (Rejected).</p>
+<h2 id='order-cancel-request-f'>Order Cancel Request (F)</h2>
+<p>Sent by the client to request to cancel an order.</p>
+
+<table><thead>
+<tr>
+<th>Tag</th>
+<th>Name</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>35</td>
+<td>MsgType</td>
+<td>F</td>
+<td></td>
+</tr>
+<tr>
+<td>37</td>
+<td>OrderID</td>
+<td>order123</td>
+<td>System-assigned order ID of the order</td>
+</tr>
+<tr>
+<td>41</td>
+<td>OrigClOrdID</td>
+<td>order123</td>
+<td>Client-assigned order ID of the order</td>
+</tr>
+<tr>
+<td>55</td>
+<td>Symbol</td>
+<td>BTC-USD</td>
+<td>Symbol name</td>
+</tr>
+</tbody></table>
+
+<p>Only one of OrderID (37) and OrigClOrdID (41) should be provided.</p>
+
+<p>If the order is successfully cancelled, an ExecutionReport (8) will be returned. Otherwise, an OrderCancelReject (9) will be returned.</p>
+<h2 id='order-cancel-reject-9'>Order Cancel Reject (9)</h2>
+<p>Sent by the server to notify the client that an OrderCancelRequest (F) failed.</p>
+
+<table><thead>
+<tr>
+<th>Tag</th>
+<th>Name</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>35</td>
+<td>MsgType</td>
+<td>9</td>
+<td></td>
+</tr>
+<tr>
+<td>37</td>
+<td>OrderID</td>
+<td>order123</td>
+<td>Copied from OrderCancelRequest, won&#39;t show up if not provided in OrderCancelRequest.</td>
+</tr>
+<tr>
+<td>41</td>
+<td>OrigClOrdID</td>
+<td>order123</td>
+<td>Copied from OrderCancelRequest, won&#39;t show up if not provided in OrderCancelRequest.</td>
+</tr>
+<tr>
+<td>39</td>
+<td>OrdStatus</td>
+<td>4</td>
+<td>&quot;4&quot; (Canceled) if the order was already cancelled</td>
+</tr>
+<tr>
+<td>102</td>
+<td>CxlRejReason</td>
+<td>1</td>
+<td>&quot;1&quot;: unknown order, &quot;99&quot;: others</td>
+</tr>
+<tr>
+<td>434</td>
+<td>CxlRejResponseTo</td>
+<td>1</td>
+<td>Always set to &quot;1&quot;</td>
+</tr>
+</tbody></table>
+<h2 id='order-status-request-h'>Order Status Request (H)</h2>
+<p>Sent by the server to notify the client that an OrderCancelRequest (F) failed.</p>
+
+<table><thead>
+<tr>
+<th>Tag</th>
+<th>Name</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>35</td>
+<td>MsgType</td>
+<td>H</td>
+<td></td>
+</tr>
+<tr>
+<td>37</td>
+<td>OrderID</td>
+<td>order123</td>
+<td>OrderID of the order to request, or &quot;*&quot; to request all pending orders</td>
+</tr>
+<tr>
+<td>41</td>
+<td>OrigClOrdID</td>
+<td>order123</td>
+<td>Client-assigned order ID of the order</td>
+</tr>
+<tr>
+<td>54</td>
+<td>Side</td>
+<td>1</td>
+<td>&quot;1&quot;: buy; &quot;2&quot;: sell</td>
+</tr>
+<tr>
+<td>55</td>
+<td>Symbol</td>
+<td>BTC-USD</td>
+<td>Symbol name</td>
+</tr>
+</tbody></table>
+
+<p>The server will respond with an ExecutionReport (8) with ExecType=I (OrderStatus) with the requested order or orders. Only one of OrderID (37) and OrigClOrdID (41) should be provided. If both OrderId (37) and OrigClOrdID (41) are provided, only OrderId (37) would be applied. When there are no open orders, the server will include Text (58) of &quot;No open orders&quot;.</p>
+<h2 id='execution-report-8'>Execution Report (8)</h2>
+<p>Sent by the server whenever an order receives a fill, whenever the status of an order changes, or in response to a NewOrderSingle (D), OrderCancelRequest (F), or OrderStatusRequest (H) message from the client.           </p>
+
+<table><thead>
+<tr>
+<th>Tag</th>
+<th>Name</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>11</td>
+<td>ClOrderId</td>
+<td>order123</td>
+<td>Client-selected order ID.</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Commission</td>
+<td>0.002</td>
+<td>Fee for trade. Only present if this message was the result of a fill</td>
+</tr>
+<tr>
+<td>13</td>
+<td>CommType</td>
+<td>3</td>
+<td>Always 3</td>
+</tr>
+<tr>
+<td>14</td>
+<td>CumQty</td>
+<td>0.4</td>
+<td>Quantity of order that has already been filled</td>
+</tr>
+<tr>
+<td>17</td>
+<td>ExecID</td>
+<td>d840c87b-ad98-47b1-95d3-4d41950fa776</td>
+<td>Order ID</td>
+</tr>
+<tr>
+<td>31</td>
+<td>LastPx</td>
+<td>7999.25</td>
+<td>Fill price. Only present if this message was the result of a fill</td>
+</tr>
+<tr>
+<td>32</td>
+<td>LastQty</td>
+<td>0.4</td>
+<td>Fill quantity. Only present if this message was the result of a fill</td>
+</tr>
+<tr>
+<td>35</td>
+<td>MsgType</td>
+<td>8</td>
+<td></td>
+</tr>
+<tr>
+<td>37</td>
+<td>OrderID</td>
+<td>d840c87b-ad98-47b1-95d3-4d41950fa776</td>
+<td>Order ID</td>
+</tr>
+<tr>
+<td>38</td>
+<td>OrderQty</td>
+<td>1.2</td>
+<td>Original order quantity</td>
+</tr>
+<tr>
+<td>39</td>
+<td>OrdStatus</td>
+<td>0</td>
+<td>Order status (see below)</td>
+</tr>
+<tr>
+<td>44</td>
+<td>Price</td>
+<td>8000</td>
+<td>Original order price</td>
+</tr>
+<tr>
+<td>54</td>
+<td>Side</td>
+<td>1</td>
+<td>&quot;1&quot;: buy; &quot;2&quot;: sell</td>
+</tr>
+<tr>
+<td>55</td>
+<td>Symbol</td>
+<td>BTC-USD</td>
+<td>Symbol name</td>
+</tr>
+<tr>
+<td>58</td>
+<td>Text</td>
+<td>text</td>
+<td>Description of the reason the order was rejected</td>
+</tr>
+<tr>
+<td>60</td>
+<td>TransactTime</td>
+<td>20190525-08:26:38.989</td>
+<td>Time of the order update. Only present on order updates</td>
+</tr>
+<tr>
+<td>103</td>
+<td>OrdRejReason</td>
+<td>11</td>
+<td>&quot;11&quot;: when request is failed (UNSUPPORTED_ORDER_CHARACTERISTIC). The rejected reason detail will be shown in Text(58)</td>
+</tr>
+<tr>
+<td>150</td>
+<td>ExecType</td>
+<td>1</td>
+<td>Reason for this message (see below)</td>
+</tr>
+<tr>
+<td>151</td>
+<td>LeavesQty</td>
+<td>0.8</td>
+<td>Quantity of order that is still open</td>
+</tr>
+<tr>
+<td>1057</td>
+<td>AggressorIndicator</td>
+<td>Y</td>
+<td>&quot;Y&quot;: taker fill; &quot;N&quot;: maker fill. Only present if this message was the result of a fill</td>
+</tr>
+</tbody></table>
+<h3 id='exectype-values'>ExecType values</h3>
+<p>The ExecType (150) field indicates the reason why this ExecutionReport was sent.</p>
+
+<table><thead>
+<tr>
+<th>ExecType</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>0</td>
+<td>New order</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Partially filled order</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Fully filled order</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Order cancelled</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Order amended</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Order refund (self-trade)</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Response to a rejected NewOrderSingle (D) request</td>
+</tr>
+<tr>
+<td>I</td>
+<td>Response to a OrderStatusRequest (H) request</td>
+</tr>
+</tbody></table>
+
+<p>Note that every order changed will send a execution report message.</p>
+<h3 id='ordstatus-values'>OrdStatus values</h3>
+<table><thead>
+<tr>
+<th>OrdStatus</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>A</td>
+<td>Open Order</td>
+</tr>
+<tr>
+<td>0</td>
+<td>New Order</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Partially filled order</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Fully filled order</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Cancelled order</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Amended order</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Refunded order</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Rejected order</td>
+</tr>
+</tbody></table>
+<h2 id='reject-3'>Reject (3)</h2>
+<p>Sent by the server in response to an invalid message.</p>
+
+<table><thead>
+<tr>
+<th>Tag</th>
+<th>Name</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>35</td>
+<td>MsgType</td>
+<td>3</td>
+<td></td>
+</tr>
+<tr>
+<td>45</td>
+<td>RefSeqNum</td>
+<td>2</td>
+<td>Sequence number of the rejected message</td>
+</tr>
+<tr>
+<td>371</td>
+<td>RefTagID</td>
+<td>38</td>
+<td>Tag number of the rejected field</td>
+</tr>
+<tr>
+<td>372</td>
+<td>RefMsgType</td>
+<td>D</td>
+<td>Message type of the rejected message</td>
+</tr>
+<tr>
+<td>58</td>
+<td>Text</td>
+<td>Missing quantity</td>
+<td>Human-readable description of the reason for the rejection</td>
+</tr>
+<tr>
+<td>373</td>
+<td>SessionRejectReason</td>
+<td>1</td>
+<td>Code to identify the rejection reason</td>
+</tr>
+</tbody></table>
+
+      </div>
+      <div class="dark-box">
+      </div>
+    </div>
+    <script>
+const DEFAULT_LANG = 'en';
+const IS_DEV = false;
+const DOCS_PREFIX = IS_DEV ? '/' : '/docs/';
+const TAB_MAP = {
+  spot: {
+    cn: '现货'
+  },
+  futures: {
+    cn: '期货'
+  },
+  otc: {
+    en: 'OTC',
+    cn: '场外交易'
+  },
+  wallet: {
+    en: 'Wallet/Convert/Transfer',
+    cn: '錢包'
+  },
+  streaming: {
+    cn: '串流'
+  },
+  fix: {
+    en: 'FIX'
+  },
+  earn: {
+    cn: '賺幣'
+  }
+};
+
+function getUrlRelativePath() {
+  let url = document.location.toString();
+  let arrUrl = url.split('//');
+  let start = arrUrl[1].indexOf('/');
+  let relUrl = arrUrl[1].substring(start);
+  if (relUrl.indexOf('?') !== -1) {
+    relUrl = relUrl.split("?")[0];
+  }
+  if (relUrl.indexOf('#') !== -1) {
+    relUrl = relUrl.split('#')[0];
+  }
+  return relUrl;
+}
+
+function capitalizeFirstLetter(s) {
+  return s.charAt(0).toUpperCase() + s.slice(1);
+}
+
+function getLang() {
+  const url = getUrlRelativePath();
+  const isEN = url.indexOf('cn') === -1;
+  return isEN ? 'en' : 'cn';
+}
+
+function getTabTemplate(isTab, href, tabKey, tabText) {
+  const classList = isTab ? 'nav_cell nav_tab' : 'menu-row'
+  const idPrefix = isTab ? 'nav_link_' : 'menu-link-'
+  const linkClass = isTab ? 'nav-link' : 'menu-link'
+  return `
+    <span class="${classList}">
+      <a href="${href}" id="${idPrefix}${tabKey}" class="${linkClass}">${tabText}</a>
+    </span>
+  `
+}
+
+function generateNavHtml(lang, isTab) {
+  return Object.keys(TAB_MAP).map(tabKey => {
+    const tabText = TAB_MAP[tabKey][lang] || capitalizeFirstLetter(tabKey);
+    const href = `${DOCS_PREFIX}${tabKey}/${lang}/`;
+    return getTabTemplate(isTab, href, tabKey, tabText);
+  })
+}
+
+$(function() {
+  const lang = getLang();
+  $('#navBox').html(generateNavHtml(lang, true));
+  $('#menuDropdown').html(generateNavHtml(lang, false));
+  const tabList = Object.keys(TAB_MAP);
+  for (let i = 0; i < tabList.length; i ++) {
+    const tabKey = tabList[i];
+    if (location.href.indexOf(`/${tabKey}/`) > 0) {
+      $('.nav-link').removeClass('current');
+      $(`#nav_link_${tabKey}`).addClass('current');
+      $('.menu-link').removeClass('current');
+      $(`#menu-link-${tabKey}`).addClass('current');
+      break;
+    }
+  }
+  $('#menuDropdownBtn').click(() => {
+    $('.menu-dropdown').toggleClass('hide');
+  });
+});
+  </script>
+  </body>
+</html>
