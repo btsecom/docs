@@ -201,8 +201,9 @@ When connecting up the BTSE API, you will come across number codes that represen
 * 15: ORDER_REJECTED = Order is rejected
 * 16: ORDER_NOTFOUND = Order is not found with the order ID or clOrderID provided
 * 17: REQUEST_FAILED = Failed to complete the request, please check order status
-* 28: TRANSFER_UNSUCCESSFUL = Transfer funds between spot and futures is unsuccessful
+* 20: SUCCESS = Action succeeded.
 * 27: TRANSFER_SUCCESSFUL = Transfer funds between futures and spot is successful
+* 28: TRANSFER_UNSUCCESSFUL = Transfer funds between spot and futures is unsuccessful
 * 41: ERROR_INVALID_RISK_LIMIT = Invalid risk limit was specified
 * 64: STATUS_LIQUIDATION = Account is undergoing liquidation
 * 65: STATUS_ACITVE = Order is active
