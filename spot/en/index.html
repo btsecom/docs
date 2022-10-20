@@ -1120,7 +1120,7 @@
 <td>group</td>
 <td>integer</td>
 <td>No</td>
-<td>Orderbook grouping. Valid values are: <br/>0-9 where 0 indicates level 0 grouping (eg. for BTC, it will be 0.5)<br/>Level 1 grouping for BTC would be 1<br/></td>
+<td>Orderbook grouping. Valid values are: <br/>0-8 where 0 indicates level 0 grouping (eg. for BTC, it will be 0.5)<br/>Level 1 grouping for BTC would be 1<br/></td>
 </tr>
 <tr>
 <td>limit_bids</td>
@@ -2957,11 +2957,8 @@
 <p>request</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"productid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"openusdt0001"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">100.99</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"renew"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"rate"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"day"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
+    </span><span class="nl">"productId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"openusdt0001"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">100.99</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p><code>post /api/v3.2/invest/deposit</code></p>
@@ -2977,7 +2974,7 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>productid</td>
+<td>productId</td>
 <td>string</td>
 <td>yes</td>
 <td>invest product id</td>
@@ -2988,40 +2985,22 @@
 <td>yes</td>
 <td>invest amount</td>
 </tr>
-<tr>
-<td>renew</td>
-<td>boolean</td>
-<td>yes</td>
-<td>renew automatically</td>
-</tr>
-<tr>
-<td>rate</td>
-<td>double</td>
-<td>yes</td>
-<td>interest rate</td>
-</tr>
-<tr>
-<td>day</td>
-<td>integer</td>
-<td>yes</td>
-<td>duration in days</td>
-</tr>
 </tbody></table>
 <h2 id='renew-investment'>renew investment</h2>
 <blockquote>
 <p>request</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"orderid"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"autorenew"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"autoRenew"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
 <p>response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"orderid"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"autorenew"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"autoRenew"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p><code>post /api/v3.2/invest/renew</code></p>
@@ -3037,13 +3016,13 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>orderid</td>
+<td>orderId</td>
 <td>integer</td>
 <td>yes</td>
 <td>investment order id</td>
 </tr>
 <tr>
-<td>autorenew</td>
+<td>autoRenew</td>
 <td>boolean</td>
 <td>yes</td>
 <td>renew automatically</td>
@@ -3059,16 +3038,16 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>orderid</td>
+<td>orderId</td>
 <td>integer</td>
 <td>yes</td>
 <td>investment order id</td>
 </tr>
 <tr>
-<td>autorenew</td>
+<td>autoRenew</td>
 <td>boolean</td>
 <td>yes</td>
-<td>status of autorenew flag</td>
+<td>status of autoRenew flag</td>
 </tr>
 </tbody></table>
 <h2 id='redeem-investment'>redeem investment</h2>
@@ -3076,7 +3055,7 @@
 <p>request</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"orderid"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">12.34</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
@@ -3093,7 +3072,7 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>orderid</td>
+<td>orderId</td>
 <td>integer</td>
 <td>yes</td>
 <td>investment order id</td>
@@ -3438,7 +3417,7 @@
 
 <ul>
 <li><code>symbol</code> indicates the market symbol</li>
-<li><code>grouping</code> indicates the grouping granularity. Valid values are 0-9.</li>
+<li><code>grouping</code> indicates the grouping granularity. Valid values are 0-8.</li>
 </ul>
 <h3 id='response-content-20'>Response Content</h3><h4 id='orderbook-object'>Orderbook Object</h4>
 <table><thead>
@@ -3952,7 +3931,7 @@
   </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Market Symbol (eg. BTC-USD)"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTSE internal order ID"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTSE internal order ID"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"76"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Order price or transacted price"</span><span class="p">,</span><span class="w">
