@@ -492,7 +492,7 @@ Performs a currency conversion from wallet. To use this API, `Wallet` permission
   "amount": "1.0",
   "asset": "BTC",
   "toUser": "jamesbond",
-  "toUserMail": "james.bond@nogle.com"
+  "toUserMail": "james.bond@google.com"
 }
 ```
 
@@ -503,7 +503,7 @@ Performs a currency conversion from wallet. To use this API, `Wallet` permission
   "amount": "1",
   "asset": "BTC",
   "toUser": "jamesbond",
-  "toUserMail": "james.bond@nogle.com"
+  "toUserMail": "james.bond@google.com"
 }
 ```
 
