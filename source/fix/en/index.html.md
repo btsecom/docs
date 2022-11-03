@@ -245,7 +245,6 @@ Note that every order changed will send a execution report message.
 
 | OrdStatus | Description |
 | --- | --- |
-| A | Open Order |
 | 0 | New Order |
 | 1 | Partially filled order |
 | 3 | Fully filled order |
