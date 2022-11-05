@@ -1800,7 +1800,7 @@ Gets margin information for the specified wallet so that users can know which wa
 ]
 ```
 
-`GET /api/v2.1/wallet/transfer`
+`POST /api/v2.1/wallet/transfer`
 
 Transfers funds between user's wallet. User can specify the source and target wallet to transfer funds
 
