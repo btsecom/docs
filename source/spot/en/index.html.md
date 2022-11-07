@@ -15,7 +15,7 @@ language_tabs:
 
 ## Version 3.3.4 (2nd September 2022)
 * Remove unnecessary parameter `includeOld` in [Query Trades Fills](#query-trades-fills) and [Query User’s Trades Fills](https://btsecom.github.io/docs/spot/en/#query-trades-fills-2)
-* Remove inaccurate parameters `beforeSerialId` and `afterSerialId` in [Query Trades Fills](#query-trades-fills) and [Query User’s Trades Fills](https://btsecom.github.io/docs/spot/en/#query-trades-fills-2) 
+* Remove inaccurate parameters `beforeSerialId` and `afterSerialId` in [Query Trades Fills](#query-trades-fills) and [Query User’s Trades Fills](https://btsecom.github.io/docs/spot/en/#query-trades-fills-2)
 
 ## Version 3.3.3 (15th August 2022)
 
@@ -109,10 +109,10 @@ You will need to create an API key on the BTSE platform before you can use authe
 * Production
   * HTTP
     * `https://api.btse.com/spot`
-    * `https://aws-api.btse.com/spot` (Optimised for connection via AWS)
+    * `https://aws-api.btse.com/spot` (Optimised for connection via AWS, enabled by request)
   * Websocket
     * `wss://ws.btse.com/ws/spot`
-    * `wss://aws-ws.btse.com/ws/spot` (Optimised for connection via AWS)
+    * `wss://aws-ws.btse.com/ws/spot` (Optimised for connection via AWS, enabled by request)
   * Websocket (for orderbook stream)
     * `wss://ws.btse.com/ws/oss/spot` (Used for Orderbook incremental update stream)
 * Testnet

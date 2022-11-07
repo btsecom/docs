@@ -42,7 +42,7 @@ You will need to create an API key on the BTSE platform before you can use authe
 * Production
   * Websocket
      * `wss://ws.btse.com/ws/otc`
-     * `wss://aws-ws.btse.com/ws/otc` (Optimised for connection via AWS)
+     * `wss://aws-ws.btse.com/ws/otc` (Optimised for connection via AWS, enabled by request)
 * Testnet
   * Websocket
      * `wss://testws.btse.io/ws/otc`
