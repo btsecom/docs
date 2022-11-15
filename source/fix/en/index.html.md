@@ -101,6 +101,8 @@ final String SIGNATURE = Hex.encodeHexString(HmacUtils.getInitializedMac(HmacAlg
 Sent by the client to initiate a FIX session. Must be the first message sent after a connection is established. Only one session can be established per connection; additional Logon messages are rejected.
 Client's API Key and secret can be generated from API page in BTSE portal. Create key with permissions to use FIX APIs.
 
+Please note that one api key only can establish one connection, spot and future market are treated as different connection. If client connect to both market with same api key, the last one will be rejected.
+
 | Tag | Name | Value | Description |
 | --- | ---  | ---   | ---         |
 |  35 | MsgType         | A                 |                           |
@@ -222,6 +224,7 @@ Sent by the server whenever an order receives a fill, whenever the status of an 
 | 150  | ExecType | 1 | Reason for this message (see below) |
 | 151  | LeavesQty | 0.8 | Quantity of order that is still open |
 | 1057 | AggressorIndicator | Y | "Y": taker fill; "N": maker fill. Only present if this message was the result of a fill |
+| 5000 | Liquidation | Y | "Y": messages corresponds to an on-market liquidation order. "N" or absent: it does not. |
 
 
 ### ExecType values 
