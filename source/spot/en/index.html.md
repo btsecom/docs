@@ -14,6 +14,7 @@ language_tabs:
 # Change Log
 
 ## Version 3.3.4 (2nd September 2022)
+
 * Remove unnecessary parameter `includeOld` in [Query Trades Fills](#query-trades-fills) and [Query User’s Trades Fills](https://btsecom.github.io/docs/spot/en/#query-trades-fills-2)
 * Remove inaccurate parameters `beforeSerialId` and `afterSerialId` in [Query Trades Fills](#query-trades-fills) and [Query User’s Trades Fills](https://btsecom.github.io/docs/spot/en/#query-trades-fills-2)
 
@@ -346,8 +347,8 @@ Gets candle stick charting data. Default of 300 data points will be returned at 
 | name       | type   | required | description                                                                                                                         |
 | ---        | ---    | ---      | ---                                                                                                                                 |
 | symbol     | string | yes      | market symbol                                                                                                                       |
-| start      | long   | no       | starting time (eg. 1624987283000)                                                                                                   |
-| end        | long   | no       | ending time (eg. 1624987283000)                                                                                                     |
+| start      | long   | no       | starting time in milliseconds (eg. 1624987283000)                                                                                   |
+| end        | long   | no       | ending time in milliseconds (eg. 1624987283000)                                                                                     |
 | resolution | string | yes      | supported resolutions are: <br/> 1: 1min<br/> 5: 5mins<br/> 15: 15mins<br/>30: 30mins<br/>60: 60mins<br/>360: 6hours<br/>1440: 1day |
 
 
@@ -531,12 +532,12 @@ Get trade fills for the market specified by `symbol`
 
 ### Request Parameters
 
-| Name           | Type    | Required | Description                                                                       |
-| ---            | ---     | ---      | ---                                                                               |
-| symbol         | string  | Yes      | Market symbol                                                                     |
-| startTime      | long    | No       | Starting time (eg. 1624987283000)                                                 |
-| endTime        | long    | No       | Ending time (eg. 1624987283000)                                                   |
-| count          | integer | No       | Number of records to return                                                       |
+| Name      | Type    | Required | Description                                       |
+| ---       | ---     | ---      | ---                                               |
+| symbol    | string  | Yes      | Market symbol                                     |
+| startTime | long    | No       | Starting time in milliseconds (eg. 1624987283000) |
+| endTime   | long    | No       | Ending time in milliseconds (eg. 1624987283000)   |
+| count     | integer | No       | Number of records to return                       |
 
 ### Response Content
 
@@ -718,49 +719,49 @@ Creates a new order. Requires `Trading` permission.
 
 ### Request Parameters
 
-| Name           | Type    | Required | Description                                             |
-| ---            | ---     | ---      | ---                                                     |
-| symbol         | string  | Yes      | Market symbol                                           |
-| price          | double  | No       | Mandatory unless creating a MARKET order. Minimum price for a sell order, this is the lowest price that a user is willing to sell at. Maximum price for a buy order, this is the maximum price a user is willing to buy at.  |
-| size           | double  | Yes      | Order size                                              |
-| side           | string  | Yes      | 'BUY' or 'SELL'                                         |
-| time_in_force  | string  | No       | Time validity of the order<br/>GTC: Good till Cancel<br/>IOC: Immediate or Cancel<br/>FOK: Fill or Kill<br/>HALFMIN: Order valid for 30 seconds<br/>FIVEMIN: Order valid for 5 mins<br/> HOUR: Order valid for an hour<br/>TWELVEHOUR: Order valid for 12 hours<br/>DAY: Order valid for a day<br/>WEEK: Order valid for a week<br/>MONTH: Order valid for a month |
-| type           | string  | Yes      | Order type<br/>LIMIT: Limit Orders<br/>MARKET: Market Orders<br/>OCO: One cancel the other<br/>PEG: price is according to a deviation to the Index price                                                                     |
-| txType         | string  | No       | Used for Stop orders or trigger orders<br/>STOP: Stop Order, `stopPrice` is mandatory<br/>TRIGGER: Trigger order, `triggerPrice` is mandatory<br/>LIMIT: Default, used when its not a Stop order nor Trigger order           |
-| stopPrice      | double  | No       | Mandatory when creating a Stop or OCO order. Indicates the stop price                                  |
-| triggerPrice   | double  | No       | Mandatory when creating a Trigger or OCO order. Indicates the trigger price                            |
-| trailValue     | double  | No       | Trail value                                             |
-| postOnly       | boolean | No       | Boolean to indicate if this is a post only order. For post only orders, traders are charged maker fees |
-| clOrderID      | string  | No       | Custom order Id                                         |
-| stealth        | double  | No       | Mandatory when creating a PEG order. How many percent of the order is to be displayed on the orderbook.|
-| deviation      | double  | No       | For PEG order. How much should the order price deviate from index price. Value is in percentage and can range from `-10` to `10`  |
+| Name          | Type    | Required | Description                                                                                                                                                                                                                                                                                                                                                        |
+| ---           | ---     | ---      | ---                                                                                                                                                                                                                                                                                                                                                                |
+| symbol        | string  | Yes      | Market symbol                                                                                                                                                                                                                                                                                                                                                      |
+| price         | double  | No       | Mandatory unless creating a MARKET order. Minimum price for a sell order, this is the lowest price that a user is willing to sell at. Maximum price for a buy order, this is the maximum price a user is willing to buy at.                                                                                                                                        |
+| size          | double  | Yes      | Order size                                                                                                                                                                                                                                                                                                                                                         |
+| side          | string  | Yes      | 'BUY' or 'SELL'                                                                                                                                                                                                                                                                                                                                                    |
+| time_in_force | string  | No       | Time validity of the order<br/>GTC: Good till Cancel<br/>IOC: Immediate or Cancel<br/>FOK: Fill or Kill<br/>HALFMIN: Order valid for 30 seconds<br/>FIVEMIN: Order valid for 5 mins<br/> HOUR: Order valid for an hour<br/>TWELVEHOUR: Order valid for 12 hours<br/>DAY: Order valid for a day<br/>WEEK: Order valid for a week<br/>MONTH: Order valid for a month |
+| type          | string  | Yes      | Order type<br/>LIMIT: Limit Orders<br/>MARKET: Market Orders<br/>OCO: One cancel the other<br/>PEG: price is according to a deviation to the Index price                                                                                                                                                                                                           |
+| txType        | string  | No       | Used for Stop orders or trigger orders<br/>STOP: Stop Order, `stopPrice` is mandatory<br/>TRIGGER: Trigger order, `triggerPrice` is mandatory<br/>LIMIT: Default, used when its not a Stop order nor Trigger order                                                                                                                                                 |
+| stopPrice     | double  | No       | Mandatory when creating a Stop or OCO order. Indicates the stop price                                                                                                                                                                                                                                                                                              |
+| triggerPrice  | double  | No       | Mandatory when creating a Trigger or OCO order. Indicates the trigger price                                                                                                                                                                                                                                                                                        |
+| trailValue    | double  | No       | Trail value                                                                                                                                                                                                                                                                                                                                                        |
+| postOnly      | boolean | No       | Boolean to indicate if this is a post only order. For post only orders, traders are charged maker fees                                                                                                                                                                                                                                                             |
+| clOrderID     | string  | No       | Custom order Id                                                                                                                                                                                                                                                                                                                                                    |
+| stealth       | double  | No       | Mandatory when creating a PEG order. How many percent of the order is to be displayed on the orderbook.                                                                                                                                                                                                                                                            |
+| deviation     | double  | No       | For PEG order. How much should the order price deviate from index price. Value is in percentage and can range from `-10` to `10`                                                                                                                                                                                                                                   |
 
 
 ### Response Content
 
-| Name             | Type    | Required | Description                                           |
-| ---              | ---     | ---      | ---                                                   |
-| symbol           | string  | Yes      | Market symbol                                         |
-| clOrderID        | string  | Yes      | Customer tag sent in by trader                        |
-| fillSize         | string  | Yes      | Trade filled size                                     |
-| orderID          | string  | Yes      | Order ID                                              |
-| orderType        | string  | Yes      | Order type <br/>76: Limit order<br/>77: Market order<br/>80: Peg/Algo order                          |
-| postOnly         | boolean | Yes      | Indicates if order is a post only order               |
-| price            | double  | Yes      | Order price                                           |
-| side             | string  | Yes      | Order side<br/>BUY or SELL                            |
-| size             | double  | Yes      | Order size                                            |
+| Name             | Type    | Required | Description                                                                                                                                                                                                                                                                                         |
+| ---              | ---     | ---      | ---                                                                                                                                                                                                                                                                                                 |
+| symbol           | string  | Yes      | Market symbol                                                                                                                                                                                                                                                                                       |
+| clOrderID        | string  | Yes      | Customer tag sent in by trader                                                                                                                                                                                                                                                                      |
+| fillSize         | string  | Yes      | Trade filled size                                                                                                                                                                                                                                                                                   |
+| orderID          | string  | Yes      | Order ID                                                                                                                                                                                                                                                                                            |
+| orderType        | string  | Yes      | Order type <br/>76: Limit order<br/>77: Market order<br/>80: Peg/Algo order                                                                                                                                                                                                                         |
+| postOnly         | boolean | Yes      | Indicates if order is a post only order                                                                                                                                                                                                                                                             |
+| price            | double  | Yes      | Order price                                                                                                                                                                                                                                                                                         |
+| side             | string  | Yes      | Order side<br/>BUY or SELL                                                                                                                                                                                                                                                                          |
+| size             | double  | Yes      | Order size                                                                                                                                                                                                                                                                                          |
 | status           | integer | Yes      | Order status<br/>	2: Order Inserted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>8: Insufficient Balance<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request Failed |
-| stopPrice        | string  | Yes      | Stop price                                            |
-| time_in_force    | string  | Yes      | Order validity                                        |
-| timestamp        | string  | Yes      | Order timestamp                                       |
-| trigger          | string  | Yes      | Indicator if order is a trigger order                 |
-| triggerPrice     | string  | Yes      | Order trigger price, returns 0 if order is not a trigger order                                       |
-| averageFillPrice | string  | Yes      | Average filled price. Returns the average filled price for partially transacted orders               |
-| message          | string  | Yes      | Trade messages                                        |
-| stealth          | string  | Yes      | Stealth value of order                                |
-| deviation        | string  | Yes      | Deviation value of order                              |
-| remainingSize    | double  | Yes      | Size left to be transacted                            |
-| originalSize     | double  | Yes      | Original order size                                   |
+| stopPrice        | string  | Yes      | Stop price                                                                                                                                                                                                                                                                                          |
+| time_in_force    | string  | Yes      | Order validity                                                                                                                                                                                                                                                                                      |
+| timestamp        | string  | Yes      | Order timestamp                                                                                                                                                                                                                                                                                     |
+| trigger          | string  | Yes      | Indicator if order is a trigger order                                                                                                                                                                                                                                                               |
+| triggerPrice     | string  | Yes      | Order trigger price, returns 0 if order is not a trigger order                                                                                                                                                                                                                                      |
+| averageFillPrice | string  | Yes      | Average filled price. Returns the average filled price for partially transacted orders                                                                                                                                                                                                              |
+| message          | string  | Yes      | Trade messages                                                                                                                                                                                                                                                                                      |
+| stealth          | string  | Yes      | Stealth value of order                                                                                                                                                                                                                                                                              |
+| deviation        | string  | Yes      | Deviation value of order                                                                                                                                                                                                                                                                            |
+| remainingSize    | double  | Yes      | Size left to be transacted                                                                                                                                                                                                                                                                          |
+| originalSize     | double  | Yes      | Original order size                                                                                                                                                                                                                                                                                 |
 
 ## Amend Order
 
@@ -1152,15 +1153,15 @@ Retrieves a user's trade history
 
 ### Request Parameters
 
-| Name           | Type    | Required | Description                                                                                 |
-| ---            | ---     | ---      | ---                                                                                         |
-| symbol         | string  | Yes      | Market symbol                                                                               |
-| startTime      | long    | No       | Starting time (eg. 1624987283000)                                                           |
-| endTime        | long    | No       | Ending time (eg. 1624987283000)                                                             |
-| count          | integer | No       | Number of records to return                                                                 |
-| clOrderID      | string  | No       | Query trade history by custom order ID                                                      |
-| orderID        | string  | No       | Query trade history by order ID                                                             |
-| isMatchSymbol  | boolean | No       | Exact match on `symbol`. If this sets to true, will only match records for that symbol only |
+| Name          | Type    | Required | Description                                                                                 |
+| ---           | ---     | ---      | ---                                                                                         |
+| symbol        | string  | Yes      | Market symbol                                                                               |
+| startTime     | long    | No       | Starting time in milliseconds (eg. 1624987283000)                                           |
+| endTime       | long    | No       | Ending time in milliseconds (eg. 1624987283000)                                             |
+| count         | integer | No       | Number of records to return                                                                 |
+| clOrderID     | string  | No       | Query trade history by custom order ID                                                      |
+| orderID       | string  | No       | Query trade history by order ID                                                             |
+| isMatchSymbol | boolean | No       | Exact match on `symbol`. If this sets to true, will only match records for that symbol only |
 
 
 ### Response Content
@@ -1407,16 +1408,16 @@ query investment orders
 | name                   | string  | yes      | product name                     |
 | currency               | string  | yes      | currency                         |
 | type                   | string  | yes      | product type                     |
-| rate                   | boolean | yes      | interest rate                    |
-| investamt              | boolean | yes      | amount                           |
-| interestearned         | boolean | yes      | intereset earned                 |
-| nextinterestpayouttime | boolean | yes      | next interest payout time        |
-| starttime              | boolean | yes      | start time                       |
-| endtime                | boolean | yes      | end time                         |
-| duration               | boolean | yes      | duration                         |
-| payoutlocktime         | boolean | yes      | lock time of payout              |
+| rate                   | number  | yes      | interest rate                    |
+| investment             | number  | yes      | amount                           |
+| interestearned         | number  | yes      | intereset earned                 |
+| nextinterestpayouttime | integer | yes      | next interest payout time        |
+| starttime              | integer | yes      | start time                       |
+| endtime                | integer | yes      | end time                         |
+| duration               | integer | yes      | duration                         |
+| payoutlocktime         | integer | yes      | lock time of payout              |
 | autorenew              | boolean | yes      | renew automatically              |
-| compounding            | boolean | yes      | is compounding                   |
+| compounding            | oolean  | yes      | is compounding                   |
 | autorenewsupported     | boolean | yes      | is renew automatically supported |
 | redemptionprocessing   | boolean | yes      | is redemption processing         |
 
@@ -1455,12 +1456,11 @@ query investment history
 | currency       | string  | yes      | currency                       |
 | rate           | string  | yes      | interest rate                  |
 | type           | boolean | yes      | product type                   |
-| txntype        | boolean | yes      | transaction type               |
-| amount         | boolean | yes      | transaction amount             |
-| totalamount    | boolean | yes      | total amount of the investment |
-| interestearned | boolean | yes      | interest earned                |
+| txntype        | string  | yes      | transaction type               |
+| amount         | number  | yes      | transaction amount             |
+| totalamount    | number  | yes      | total amount of the investment |
+| interestearned | number  | yes      | interest earned                |
 | duration       | boolean | yes      | duration                       |
-
 
 
 # websocket streams

@@ -13,6 +13,38 @@ headingLevel: 2
 
 # Change Log
 
+## Version 2.5.0 (16th November 2022)
+
+* [IMPORTANT] BTSE will change futures market naming convention in **December 2022** to provide more clarity to retail users and here are the rules:
+  - Change the suffix for perpetual markets from `PFC` to `PERP` (ex: BTCPFC -> BTC-PERP)
+  - Change the suffix for time-based markets from `delivery month + year` to `settlement date (YYMMDD)` (ex: BTCZ22 -> BTC-221230)
+  - Futures API updated (Generally added a new optional parameter `useNewSymbolNaming` to specify if the market name is in the new format):
+    - [`Market Summary`](#market-summary)
+    - [`Query Open Orders`](#query-open-orders)
+    - [`Orderbook by grouping`](#orderbook-by-grouping)
+    - [`Orderbook`](#orderbook)
+    - [`Charting Data`](#charting-data)
+    - [`Query Wallet History`](#query-wallet-history)
+    - [`Query Wallet Balance`](#query-wallet-balance)
+    - [`Set Leverage`](#set-leverage)
+    - [`Set Risk Limit`](#set-risk-limit)
+    - [`Query Market Price`](#query-market-price)
+    - [`Change Contract Settlement Currency`](#change-contract-settlement-currency)
+    - [`Query Account Fee`](#query-account-fee)
+    - [`Query Position`](#query-position)
+    - [`Close Position`](#close-position)
+    - [`Query Wallet Margin`](#query-wallet-margin)
+    - [`Create New Order`](#create-new-order)
+    - [`Query Trade Fills`](#query-trade-fills)
+  - Existing websocket topics will return data with the current market name (ex: BTCPFC) and new set of websocket topics are added for new market name (ex: BTC-PERP) where `the response fields will be the same` and here's the mapping table
+    - [tradeHistoryApi](#public-trade-fills) -> tradeHistoryApiV2
+    - [orderbookApi](#orderbook-snapshot-by-grouping) -> orderbookApiV2
+    - [orderbookL2Api](#orderbook-snapshot-by-depth) -> orderbookL2ApiV2
+    - [fills](#user-trade-fills) -> fillsV2
+    - [allPosition](#all-position) -> allPositionV2
+    - [notificationApiV2](#notifications) -> notificationApiV3
+
+
 ## Version 2.4.1 (17th August 2022)
 
 * Add more request / response samples in [Trade Endpoints](#trade-endpoints)
@@ -230,7 +262,6 @@ Spam orders are large number of small order sizes that is placed. In order to en
 * Accounts marked as spam may have limitations placed on the account, including order rate limits, position limits, or have API functions disabled. For questions regarding the new spam order mechanism, please email mm@btse.com.
 
 
-
 # Public Endpoints
 
 ## Market Summary
@@ -283,9 +314,10 @@ Gets market summary information. If no symbol parameter is sent, then all market
 
 ### Request Parameters
 
-| Name   | Type   | Required | Description   |
-| ---    | ---    | ---      | ---           |
-| symbol | string | No       | Market symbol |
+| Name               | Type    | Required | Description                                                            |
+| ---                | ---     | ---      | ---                                                                    |
+| symbol             | string  | No       | Market symbol                                                          |
+| useNewSymbolNaming | boolean | No       | True to return futures market name in the new format, default to False |
 
 ### Response Content
 
@@ -355,12 +387,13 @@ Gets candle stick charting data. Default of 300 data points will be returned at 
 
 ### Request Parameters
 
-| Name       | Type   | Required | Description                                                                                                                         |
-| ---        | ---    | ---      | ---                                                                                                                                 |
-| symbol     | string | Yes      | Market symbol                                                                                                                       |
-| start      | long   | No       | Starting time (eg. 1624987283000)                                                                                                   |
-| end        | long   | No       | Ending time (eg. 1624987283000)                                                                                                     |
-| resolution | string | Yes      | Supported resolutions are: <br/> 1: 1min<br/> 5: 5mins<br/> 15: 15mins<br/>30: 30mins<br/>60: 60mins<br/>360: 6hours<br/>1440: 1day |
+| Name               | Type    | Required | Description                                                                                                                         |
+| ---                | ---     | ---      | ---                                                                                                                                 |
+| symbol             | string  | Yes      | Market symbol                                                                                                                       |
+| start              | long    | No       | Starting time in milliseconds (eg. 1624987283000)                                                                                   |
+| end                | long    | No       | Ending time in millisecond (eg. 1624987283000)                                                                                      |
+| resolution         | string  | Yes      | Supported resolutions are: <br/> 1: 1min<br/> 5: 5mins<br/> 15: 15mins<br/>30: 30mins<br/>60: 60mins<br/>360: 6hours<br/>1440: 1day |
+| useNewSymbolNaming | boolean | No       | True to use new futures market name in symbol, default to False                                                                     |
 
 
 ### Response Content
@@ -398,10 +431,10 @@ Retrieve current prices on the platform. If no symbol specified, all symbols wil
 
 ### Request Parameters
 
-| Name   | Type   | Required | Description   |
-| ---    | ---    | ---      | ---           |
-| symbol | string | Yes      | Market symbol |
-
+| Name               | Type    | Required | Description                                                     |
+| ---                | ---     | ---      | ---                                                             |
+| symbol             | string  | Yes      | Market symbol                                                   |
+| useNewSymbolNaming | boolean | No       | True to use new futures market name in symbol, default to False |
 
 ### Response Content
 
@@ -441,10 +474,10 @@ Retrieves a snapshot of the orderbook.
 
 ### Request Parameters
 
-| Name   | Type   | Required | Description                               |
-| ---    | ---    | ---      | ---                                       |
-| symbol | string | Yes      | Market symbol, entered as a path variable |
-
+| Name               | Type    | Required | Description                                                     |
+| ---                | ---     | ---      | ---                                                             |
+| symbol             | string  | Yes      | Market symbol, entered as a path variable                       |
+| useNewSymbolNaming | boolean | No       | True to use new futures market name in symbol, default to False |
 
 ### Response Content
 
@@ -465,7 +498,6 @@ Retrieves a snapshot of the orderbook.
 | size  | double | Yes      | order size  |
 
 
-
 ## Orderbook
 
 > Response
@@ -480,7 +512,7 @@ Retrieves a snapshot of the orderbook.
   ],
   "sellQuote": [
     {
-      "price": "36241.5",
+     "price": "36241.5",
       "size": "600"
     }
   ],
@@ -495,10 +527,11 @@ Retrieves a Level 2 snapshot of the orderbook
 
 ### Request Parameters
 
-| Name   | Type    | Required | Description     |
-| ---    | ---     | ---      | ---             |
-| symbol | string  | Yes      | Market symbol   |
-| depth  | long    | No       | Orderbook depth |
+| Name               | Type    | Required | Description                                                            |
+| ---                | ---     | ---      | ---                                                                    |
+| symbol             | string  | Yes      | Market symbol                                                          |
+| depth              | long    | No       | Orderbook depth                                                        |
+| useNewSymbolNaming | boolean | No       | True to return futures market name in the new format, default to False |
 
 ### Response Content
 
@@ -542,16 +575,16 @@ Get trade fills for the market specified by `symbol`
 
 ### Request Parameters
 
-| Name           | Type    | Required | Description                                                                       |
-| ---            | ---     | ---      | ---                                                                               |
-| symbol         | string  | Yes      | Market symbol                                                                     |
-| startTime      | long    | No       | Starting time (eg. 1624987283000)                                                 |
-| endTime        | long    | No       | Ending time (eg. 1624987283000)                                                   |
-| beforeSerialId | string  | Yes      | Condition to retrieve records before the specified serial Id. Used for pagination |
-| afterSerialId  | string  | Yes      | Condition to retrieve records after the specified serial Id. Used for pagination  |
-| count          | long    | Yes      | Number of records to return                                                       |
-| includeOld     | boolean | Yes      | Retrieve trade  history records past 7 days                                       |
-
+| Name               | Type    | Required | Description                                                                       |
+| ---                | ---     | ---      | ---                                                                               |
+| symbol             | string  | Yes      | Market symbol                                                                     |
+| startTime          | long    | No       | Starting time in milliseconds (eg. 1624987283000)                                 |
+| endTime            | long    | No       | Ending time in milliseconds (eg. 1624987283000)                                   |
+| beforeSerialId     | string  | Yes      | Condition to retrieve records before the specified serial Id. Used for pagination |
+| afterSerialId      | string  | Yes      | Condition to retrieve records after the specified serial Id. Used for pagination  |
+| count              | long    | Yes      | Number of records to return                                                       |
+| includeOld         | boolean | Yes      | Retrieve trade  history records past 7 days                                       |
+| useNewSymbolNaming | boolean | No       | True to use new futures market name in symbol, default to False                   |
 
 ### Response Content
 
@@ -567,7 +600,7 @@ Get trade fills for the market specified by `symbol`
 
 # Trade Endpoints
 
-## Create new order
+## Create New Order
 
 > Request (create `MARKET` order)
 
@@ -718,22 +751,23 @@ Creates a new order. Requires `Trading` permission
 
 ### Request Parameters
 
-| Name          | Type    | Required | Description         |
-| ---           | ---     | ---      | ---                 |
-| symbol        | string  | Yes      | Market symbol       |
-| price         | double  | No       | Mandatory unless creating a MARKET order. Order price |
-| size          | long    | Yes      | Order size          |
-| side          | string  | Yes      | 'BUY' or 'SELL'     |
-| time_in_force | string  | No       | Time validity of the order<br/>GTC: Good till Cancel<br/>IOC: Immediate or Cancel<br/>FOK: Fill or Kill<br/>HALFMIN: Order valid for 30 seconds<br/>FIVEMIN: Order valid for 5 mins<br/> HOUR: Order valid for an hour<br/>TWELVEHOUR: Order valid for 12 hours<br/>DAY: Order valid for a day<br/>WEEK: Order valid for a week<br/>MONTH: Order valid for a month                                                                                |
-| type          | string  | Yes      | Order type<br/>LIMIT: Limit Orders<br/>MARKET: Market Orders<br/>OCO: One cancel the other               |
-| txType        | string  | No       | Used for Stop orders or trigger orders<br/>STOP: Stop Order, `triggerPrice` is mandatory<br/>TRIGGER: Trigger order, `triggerPrice` is mandatory<br/>LIMIT: Default, used when its not a Stop order nor Trigger order |
-| stopPrice     | double  | No       | Mandatory when creating an OCO order. Indicates the stop price                                           |
-| triggerPrice  | double  | No       | Mandatory when creating a Stop, Trigger, OCO order. Indicates the trigger price                          |
-| trailValue    | double  | No       | Trail value         |
-| postOnly      | boolean | No       | Boolean to indicate if this is a post only order. For post only orders, traders are charged maker fees   |
-| reduceOnly    | boolean | No       | Boolean to indicate if this is a reduce only order.                                                      |
-| clOrderID     | string  | No       | Custom order Id     |
-| trigger       | string  | No       | For creating order with txType: `STOP` or `TRIGGER`. Valid options: `markPrice` (default) or `lastPrice` |
+| Name               | Type    | Required | Description                                                                                                                                                                                                                                                                                                                                                        |
+| ---                | ---     | ---      | ---                                                                                                                                                                                                                                                                                                                                                                |
+| symbol             | string  | Yes      | Market symbol                                                                                                                                                                                                                                                                                                                                                      |
+| price              | double  | No       | Mandatory unless creating a MARKET order. Order price                                                                                                                                                                                                                                                                                                              |
+| size               | long    | Yes      | Order size                                                                                                                                                                                                                                                                                                                                                         |
+| side               | string  | Yes      | 'BUY' or 'SELL'                                                                                                                                                                                                                                                                                                                                                    |
+| time_in_force      | string  | No       | Time validity of the order<br/>GTC: Good till Cancel<br/>IOC: Immediate or Cancel<br/>FOK: Fill or Kill<br/>HALFMIN: Order valid for 30 seconds<br/>FIVEMIN: Order valid for 5 mins<br/> HOUR: Order valid for an hour<br/>TWELVEHOUR: Order valid for 12 hours<br/>DAY: Order valid for a day<br/>WEEK: Order valid for a week<br/>MONTH: Order valid for a month |
+| type               | string  | Yes      | Order type<br/>LIMIT: Limit Orders<br/>MARKET: Market Orders<br/>OCO: One cancel the other                                                                                                                                                                                                                                                                         |
+| txType             | string  | No       | Used for Stop orders or trigger orders<br/>STOP: Stop Order, `triggerPrice` is mandatory<br/>TRIGGER: Trigger order, `triggerPrice` is mandatory<br/>LIMIT: Default, used when its not a Stop order nor Trigger order                                                                                                                                              |
+| stopPrice          | double  | No       | Mandatory when creating an OCO order. Indicates the stop price                                                                                                                                                                                                                                                                                                     |
+| triggerPrice       | double  | No       | Mandatory when creating a Stop, Trigger, OCO order. Indicates the trigger price                                                                                                                                                                                                                                                                                    |
+| trailValue         | double  | No       | Trail value                                                                                                                                                                                                                                                                                                                                                        |
+| postOnly           | boolean | No       | Boolean to indicate if this is a post only order. For post only orders, traders are charged maker fees                                                                                                                                                                                                                                                             |
+| reduceOnly         | boolean | No       | Boolean to indicate if this is a reduce only order.                                                                                                                                                                                                                                                                                                                |
+| clOrderID          | string  | No       | Custom order Id                                                                                                                                                                                                                                                                                                                                                    |
+| trigger            | string  | No       | For creating order with txType: `STOP` or `TRIGGER`. Valid options: `markPrice` (default) or `lastPrice`                                                                                                                                                                                                                                                           |
+| useNewSymbolNaming | boolean | No       | True to use new futures market name in symbol, default to False                                                                                                                                                                                                                                                                                                    |
 
 
 ### Response Content
@@ -742,7 +776,7 @@ Creates a new order. Requires `Trading` permission
 | ---              | ---     | ---      | ---                                                                                                                                                                                                                                                                                             |
 | symbol           | string  | Yes      | Market symbol                                                                                                                                                                                                                                                                                   |
 | clOrderID        | string  | Yes      | Customer tag sent in by trader                                                                                                                                                                                                                                                                  |
-| fillSize         | string  | Yes      | Trade filled size                                                                                                                                                                                                                                                                               |
+| fillSize         | number  | Yes      | Trade filled size                                                                                                                                                                                                                                                                               |
 | orderID          | string  | Yes      | Order ID                                                                                                                                                                                                                                                                                        |
 | orderType        | string  | Yes      | Order type <br/>76: Limit Order<br/>77: Market order<br/>80: Algo order                                                                                                                                                                                                                         |
 | postOnly         | boolean | Yes      | Indicates if order is a post only order                                                                                                                                                                                                                                                         |
@@ -818,15 +852,15 @@ This API Requires `Trading` permission
 
 ### Request Parameters
 
-| Name          | Type    | Required | Description            |
-| ---           | ---     | ---      | ---                    |
-| symbol        | string  | Yes      | Market symbol          |
-| price         | double  | Yes      | Minimum price for a sell order, this is the lowest price that a user is willing to sell at. Maximum price for a buy order, this is the maximum price a user is willing to buy at. |
-| size          | long    | Yes      | Order size             |
-| side          | string  | Yes      | Order side<br/>BUY or SELL |
-| clOrderID     | string  | No       | Custom order Id        |
-| deviation     | double  | No       | How much should the order price deviate from index price. Value is in percentage and can range from `-10` to `10` |
-| stealth       | double  | No       | How many percent of the order is to be displayed on the orderbook.                                                |
+| Name      | Type   | Required | Description                                                                                                                                                                       |
+| ---       | ---    | ---      | ---                                                                                                                                                                               |
+| symbol    | string | Yes      | Market symbol                                                                                                                                                                     |
+| price     | double | Yes      | Minimum price for a sell order, this is the lowest price that a user is willing to sell at. Maximum price for a buy order, this is the maximum price a user is willing to buy at. |
+| size      | long   | Yes      | Order size                                                                                                                                                                        |
+| side      | string | Yes      | Order side<br/>BUY or SELL                                                                                                                                                        |
+| clOrderID | string | No       | Custom order Id                                                                                                                                                                   |
+| deviation | double | No       | How much should the order price deviate from index price. Value is in percentage and can range from `-10` to `10`                                                                 |
+| stealth   | double | No       | How many percent of the order is to be displayed on the orderbook.                                                                                                                |
 
 ### Response Content
 
@@ -834,7 +868,7 @@ This API Requires `Trading` permission
 | ---              | ---     | ---      | ---                                                                                                                                                                                                                                                                                             |
 | symbol           | string  | Yes      | Market symbol                                                                                                                                                                                                                                                                                   |
 | clOrderID        | string  | Yes      | Customer tag sent in by trader                                                                                                                                                                                                                                                                  |
-| fillSize         | string  | Yes      | Trade filled size                                                                                                                                                                                                                                                                               |
+| fillSize         | number  | Yes      | Trade filled size                                                                                                                                                                                                                                                                               |
 | orderID          | string  | Yes      | Order ID                                                                                                                                                                                                                                                                                        |
 | orderType        | string  | Yes      | Order type <br/>76: Limit Order<br/>77: Market order<br/>80: Algo order                                                                                                                                                                                                                         |
 | postOnly         | boolean | Yes      | Indicates if order is a post only order                                                                                                                                                                                                                                                         |
@@ -995,9 +1029,9 @@ Cancels pending orders that has not yet been transacted. The `orderID` is a uniq
 
 ### Request Parameters
 
-| Name      | Type   | Required | Description                    |
-| ---       | ---    | ---      | ---                            |
-| symbol    | string | Yes      | Market symbol                  |
+| Name      | Type   | Required | Description                                                                                                                        |
+| ---       | ---    | ---      | ---                                                                                                                                |
+| symbol    | string | Yes      | Market symbol                                                                                                                      |
 | orderID   | string | No       | Unique identifier for an order. Mandatory when `clOrderID` is not provided. If `orderID` is provided, `clOrderID` will be ignored. |
 | clOrderID | string | No       | Client custom order ID. Mandatory when `orderID` is not provided.                                                                  |
 
@@ -1019,8 +1053,8 @@ Cancels pending orders that has not yet been transacted. The `orderID` is a uniq
 | time_in_force    | string  | Yes      | Order validity                                                                                                                                                                                                                                                                                  |
 | timestamp        | long    | Yes      | Order timestamp                                                                                                                                                                                                                                                                                 |
 | trigger          | string  | Yes      | Indicator if order is a trigger order                                                                                                                                                                                                                                                           |
-| triggerPrice     | string  | Yes      | Order trigger price, returns 0 if order is not a trigger order                                                                                                                                                                                                                                  |
-| avgFillPrice     | string  | Yes      | Average filled price. Returns the average filled price for partially transacted orders                                                                                                                                                                                                          |
+| triggerPrice     | double  | Yes      | Order trigger price, returns 0 if order is not a trigger order                                                                                                                                                                                                                                  |
+| avgFillPrice     | double  | Yes      | Average filled price. Returns the average filled price for partially transacted orders                                                                                                                                                                                                          |
 | message          | string  | Yes      | Trade messages                                                                                                                                                                                                                                                                                  |
 | stealth          | string  | Yes      | Stealth value of order                                                                                                                                                                                                                                                                          |
 | deviation        | string  | Yes      | Deviation value of order                                                                                                                                                                                                                                                                        |
@@ -1104,12 +1138,12 @@ Retrieves open orders that have not yet been matched or matched recently.
 
 ### Request Parameters
 
-| Name      | Type   | Required | Description                                                                         |
-| ---       | ---    | ---      | ---                                                                                 |
-| symbol    | string | No       | Market symbol                                                                       |
-| orderID   | string | No       | Query using internal order ID                                                       |
-| clOrderID | string | No       | Query using custom order ID. If `orderID` is provided, `clOrderID` will be ignored. |
-
+| Name               | Type    | Required | Description                                                                         |
+| ---                | ---     | ---      | ---                                                                                 |
+| symbol             | string  | No       | Market symbol                                                                       |
+| orderID            | string  | No       | Query using internal order ID                                                       |
+| clOrderID          | string  | No       | Query using custom order ID. If `orderID` is provided, `clOrderID` will be ignored. |
+| useNewSymbolNaming | boolean | No       | True to return futures market name in the new format, default to False              |
 
 ### Response Content
 
@@ -1191,17 +1225,17 @@ Retrieves a user's trade history
 
 ### Request Parameters
 
-| Name           | Type    | Required | Description                                                                       |
-| ---            | ---     | ---      | ---                                                                               |
-| symbol         | string  | No       | Market symbol                                                                     |
-| startTime      | long    | No       | Starting time (eg. 1624987283000)                                                 |
-| endTime        | long    | No       | Ending time (eg. 1624987283000)                                                   |
-| beforeSerialId | string  | No       | Condition to retrieve records before the specified serial Id. Used for pagination |
-| afterSerialId  | string  | No       | Condition to retrieve records after the specified serial Id. Used for pagination  |
-| count          | long    | No       | Number of records to return                                                       |
-| includeOld     | boolean | No       | Retrieve trade  history records past 7 days                                       |
-| clOrderID      | string  | No       | Query trade history by custom order ID                                            |
-
+| Name               | Type    | Required | Description                                                                       |
+| ---                | ---     | ---      | ---                                                                               |
+| symbol             | string  | No       | Market symbol                                                                     |
+| startTime          | long    | No       | Starting time (eg. 1624987283000)                                                 |
+| endTime            | long    | No       | Ending time (eg. 1624987283000)                                                   |
+| beforeSerialId     | string  | No       | Condition to retrieve records before the specified serial Id. Used for pagination |
+| afterSerialId      | string  | No       | Condition to retrieve records after the specified serial Id. Used for pagination  |
+| count              | long    | No       | Number of records to return                                                       |
+| includeOld         | boolean | No       | Retrieve trade  history records past 7 days                                       |
+| clOrderID          | string  | No       | Query trade history by custom order ID                                            |
+| useNewSymbolNaming | boolean | No       | True to use new futures market name in symbol, default to False                   |
 
 ### Response Content
 
@@ -1271,10 +1305,10 @@ Queries user's current position. When no symbol is specified, positions for all 
 
 ### Request Parameters
 
-| Name   | Type   | Required | Description   |
-| ---    | ---    | ---      | ---           |
-| symbol | string | No       | Market symbol |
-
+| Name               | Type    | Required | Description                                                     |
+| ---                | ---     | ---      | ---                                                             |
+| symbol             | string  | No       | Market symbol                                                   |
+| useNewSymbolNaming | boolean | No       | True to use new futures market name in symbol, default to False |
 
 ### Response Content
 
@@ -1345,12 +1379,12 @@ Closes a user's position for the particular market as specified by symbol. If ty
 
 ### Request Parameters
 
-| Name   | Type   | Required | Description                                                                                    |
-| ---    | ---    | ---      |------------------------------------------------------------------------------------------------|
-| symbol | string | Yes      | Market symbol                                                                                  |
-| type   | string | Yes      | Close position type with values:<br/>LIMIT: Close at `price`<br/>MARKET: Close at market price |
-| price  | double | No       | Close price. Mandatory when type is `LIMIT`                                                    |
-
+| Name               | Type    | Required | Description                                                                                      |
+| ---                | ---     | ---      | ------------------------------------------------------------------------------------------------ |
+| symbol             | string  | Yes      | Market symbol                                                                                    |
+| type               | string  | Yes      | Close position type with values:<br/>LIMIT: Close at `price`<br/>MARKET: Close at market price   |
+| price              | double  | No       | Close price. Mandatory when type is `LIMIT`                                                      |
+| useNewSymbolNaming | boolean | No       | True to use new futures market name in symbol, default to False                                  |
 
 ### Response Content
 
@@ -1377,7 +1411,7 @@ Closes a user's position for the particular market as specified by symbol. If ty
 | remainingSize | double  | Yes      | Size left to be transacted                                                                                                                                                                                                                                                                       |
 | originalSize  | double  | Yes      | Original order size                                                                                                                                                                                                                                                                              |
 
-## Set Risk Limits
+## Set Risk Limit
 
 > Request
 
@@ -1406,11 +1440,11 @@ Changes risk limit for the specified market
 
 ### Request Parameters
 
-| Name      | Type    | Required | Description      |
-| ---       | ---     | ---      | ---              |
-| symbol    | string  | Yes      | Market symbol    |
-| riskLimit | long    | Yes      | Risk limit value |
-
+| Name               | Type    | Required | Description                                                                                                   |
+| ---                | ---     | ---      | ---                                                                                                           |
+| symbol             | string  | Yes      | Market symbol                                                                                                 |
+| riskLimit          | long    | Yes      | Risk limit value now in position size, but will be changed to USD value along with futures market name change |
+| useNewSymbolNaming | boolean | No       | True if use new futures market name as symbol , default to False                                              |
 
 ### Response Content
 
@@ -1451,11 +1485,11 @@ Change leverage values for the specified market
 
 ### Request Parameters
 
-| Name     | Type    | Required | Description    |
-| ---      | ---     | ---      | ---            |
-| symbol   | string  | Yes      | Market symbol  |
-| leverage | long    | Yes      | Leverage value |
-
+| Name               | Type    | Required | Description                                                    |
+| ---                | ---     | ---      | ---                                                            |
+| symbol             | string  | Yes      | Market symbol                                                  |
+| leverage           | long    | Yes      | Leverage value                                                 |
+| useNewSymbolNaming | boolean | No       | True if use new futures market name in symbol default to False |
 
 ### Response Content
 
@@ -1467,7 +1501,7 @@ Change leverage values for the specified market
 | timestamp | long    | Yes      | Timestamp where leverage was set                                                                                                        |
 | message   | long    | Yes      | Message                                                                                                                                 |
 
-## Change contract settlement currency
+## Change Contract Settlement Currency
 
 > Request
 
@@ -1494,10 +1528,11 @@ Changes the settlement currency for the position in the current market
 
 ### Request Parameters
 
-| Name     | Type   | Required | Description                |
-| ---      | ---    | ---      | ---                        |
-| symbol   | string | Yes      | Market symbol              |
-| currency | string | Yes      | Settlement currency to set |
+| Name               | Type    | Required | Description                                                     |
+| ---                | ---     | ---      | ---                                                             |
+| symbol             | string  | Yes      | Market symbol                                                   |
+| currency           | string  | Yes      | Settlement currency to set                                      |
+| useNewSymbolNaming | boolean | No       | True to use new futures market name in symbol, default to False |
 
 ### Response Content
 
@@ -1507,7 +1542,7 @@ Changes the settlement currency for the position in the current market
 | errorCode | long    | No       | Error code. Only available when an error occurs.       |
 | message   | string  | No       | Response message. Only available when an error occurs. |
 
-## Query Account Fees
+## Query Account Fee
 
 > Response
 
@@ -1522,6 +1557,14 @@ Changes the settlement currency for the position in the current market
 `GET /api/v2.1/user/fees`
 
 Retrieve user's trading fees
+
+### Request Parameters
+
+| Name               | Type    | Required | Description                                                     |
+| ---                | ---     | ---      | ---                                                             |
+| symbol             | string  | No       | Market symbol                                                   |
+| useNewSymbolNaming | boolean | No       | True to use new futures market name in symbol, default to False |
+
 ### Response Content
 
 | Name     | Type   | Required | Description   |
@@ -1576,9 +1619,11 @@ Query user's wallet balance. Requires `Read` permissions on the API key.
 
 ### Request Parameters
 
-| Name   | Type   | Required | Description                                                                                                                                                                       |
-| ---    | ---    | ---      | ---                                                                                                                                                                               |
-| wallet | string | Yes      | Wallet name<br/>`CROSS@`: Cross wallet<br/>`ISOLATED@market`: Market refers to the current symbol with `-USD` appended. Eg. BTCPFC isolated wallet would be `ISOLATED@BTCPFC-USD` |
+| Name               | Type    | Required | Description                                                                                                                                                                       |
+| ---                | ---     | ---      | ---                                                                                                                                                                               |
+| wallet             | string  | Yes      | Wallet name<br/>`CROSS@`: Cross wallet<br/>`ISOLATED@market`: Market refers to the current symbol with `-USD` appended. Eg. BTCPFC isolated wallet would be `ISOLATED@BTCPFC-USD` |
+| useNewSymbolNaming | boolean | No       | True to return futures market name in the new format, default to False                                                                                                            |
+
 
 ### Response Content
 
@@ -1639,12 +1684,13 @@ Get user's wallet history records on the futures wallet
 
 ### Request Parameters
 
-| Name      | Type    | Required | Description                                                                                                                                 |
-| ---       | ---     | ---      | ---                                                                                                                                         |
-| wallet    | string  | No       | Wallet, if not specified will return all wallets. Valid values are: <br/>`CROSS@`: Cross wallet<br/>`ISOLATED@BTCPFC-USD`: Isolated wallets |
-| startTime | long    | No       | Starting time (eg. 1624987283000)                                                                                                           |
-| endTime   | long    | No       | Ending time (eg. 1624987283000)                                                                                                             |
-| count     | integer | No       | Number of records to return                                                                                                                 |
+| Name               | Type    | Required | Description                                                                                                                                 |
+| ---                | ---     | ---      | ---                                                                                                                                         |
+| wallet             | string  | No       | Wallet, if not specified will return all wallets. Valid values are: <br/>`CROSS@`: Cross wallet<br/>`ISOLATED@BTCPFC-USD`: Isolated wallets |
+| startTime          | long    | No       | Starting time in milliseconds (eg. 1624987283000)                                                                                           |
+| endTime            | long    | No       | Ending time in milliseconds (eg. 1624987283000)                                                                                             |
+| count              | integer | No       | Number of records to return                                                                                                                 |
+| useNewSymbolNaming | boolean | No       | True to return futures market name in the new format, default to False                                                                      |
 
 
 ### Response Content
@@ -1660,7 +1706,7 @@ Get user's wallet history records on the futures wallet
 | status      | integer | Yes      | 1: PENDING<br/>2: PROCESSING<br/>10: COMPLETED<br/>16: CANCELLED                                                  |
 | type        | integer | Yes      | 105: Wallet Transfer<br/>106: Wallet Liquidation<br/>108: Realized PnL<br/>110: Funding<br/>121: Asset Conversion |
 
-## Query wallet Margin
+## Query Wallet Margin
 
 > Response
 
@@ -1704,13 +1750,13 @@ Gets margin information for the specified wallet so that users can know which wa
 
 ### Request Parameters
 
-| Name      | Type    | Required | Description                                           |
-| ---       | ---     | ---      | ---                                                   |
-| symbol    | string  | Yes      | Currency, if not specified will return all currencies |
-| startTime | long    | No       | Starting time (eg. 1624987283000)                     |
-| endTime   | long    | No       | Ending time (eg. 1624987283000)                       |
-| count     | integer | No       | Number of records to return                           |
-
+| Name               | Type    | Required | Description                                                     |
+| ---                | ---     | ---      | ---                                                             |
+| symbol             | string  | No       | Currency, if not specified will return all currencies           |
+| startTime          | long    | No       | Starting time (eg. 1624987283000)                               |
+| endTime            | long    | No       | Ending time (eg. 1624987283000)                                 |
+| count              | integer | No       | Number of records to return                                     |
+| useNewSymbolNaming | boolean | No       | True to use new futures market name in symbol, default to False |
 
 ### Response Content
 
