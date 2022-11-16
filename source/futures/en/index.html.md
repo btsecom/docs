@@ -35,7 +35,7 @@ headingLevel: 2
     - [`Close Position`](#close-position)
     - [`Query Wallet Margin`](#query-wallet-margin)
     - [`Create New Order`](#create-new-order)
-    - [`Query Trade Fills`](#query-trade-fills)
+    - [`Query Trade Fills`](#query-trade-fills-2)
   - Existing websocket topics will return data with the current market name (ex: BTCPFC) and new set of websocket topics are added for new market name (ex: BTC-PERP) where `the response fields will be the same` and here's the mapping table
     - [tradeHistoryApi](#public-trade-fills) -> tradeHistoryApiV2
     - [orderbookApi](#orderbook-snapshot-by-grouping) -> orderbookApiV2
