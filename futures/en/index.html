@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-2-5-0-16th-november-2022" class="toc-h2 toc-link" data-title="Version 2.5.0 (16th November 2022)">Version 2.5.0 (16th November 2022)</a>
+                  </li>
+                  <li>
                     <a href="#version-2-4-1-17th-august-2022" class="toc-h2 toc-link" data-title="Version 2.4.1 (17th August 2022)">Version 2.4.1 (17th August 2022)</a>
                   </li>
                   <li>
@@ -324,7 +327,7 @@
             <a href="#trade-endpoints" class="toc-h1 toc-link" data-title="Trade Endpoints">Trade Endpoints</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#create-new-order" class="toc-h2 toc-link" data-title="Create new order">Create new order</a>
+                    <a href="#create-new-order" class="toc-h2 toc-link" data-title="Create New Order">Create New Order</a>
                   </li>
                   <li>
                     <a href="#create-new-algo-order" class="toc-h2 toc-link" data-title="Create new algo order">Create new algo order</a>
@@ -351,16 +354,16 @@
                     <a href="#close-position" class="toc-h2 toc-link" data-title="Close Position">Close Position</a>
                   </li>
                   <li>
-                    <a href="#set-risk-limits" class="toc-h2 toc-link" data-title="Set Risk Limits">Set Risk Limits</a>
+                    <a href="#set-risk-limit" class="toc-h2 toc-link" data-title="Set Risk Limit">Set Risk Limit</a>
                   </li>
                   <li>
                     <a href="#set-leverage" class="toc-h2 toc-link" data-title="Set Leverage">Set Leverage</a>
                   </li>
                   <li>
-                    <a href="#change-contract-settlement-currency" class="toc-h2 toc-link" data-title="Change contract settlement currency">Change contract settlement currency</a>
+                    <a href="#change-contract-settlement-currency" class="toc-h2 toc-link" data-title="Change Contract Settlement Currency">Change Contract Settlement Currency</a>
                   </li>
                   <li>
-                    <a href="#query-account-fees" class="toc-h2 toc-link" data-title="Query Account Fees">Query Account Fees</a>
+                    <a href="#query-account-fee" class="toc-h2 toc-link" data-title="Query Account Fee">Query Account Fee</a>
                   </li>
               </ul>
           </li>
@@ -374,7 +377,7 @@
                     <a href="#query-wallet-history" class="toc-h2 toc-link" data-title="Query Wallet History">Query Wallet History</a>
                   </li>
                   <li>
-                    <a href="#query-wallet-margin" class="toc-h2 toc-link" data-title="Query wallet Margin">Query wallet Margin</a>
+                    <a href="#query-wallet-margin" class="toc-h2 toc-link" data-title="Query Wallet Margin">Query Wallet Margin</a>
                   </li>
                   <li>
                     <a href="#transfer-funds-between-futures-wallet" class="toc-h2 toc-link" data-title="Transfer funds between Futures wallet">Transfer funds between Futures wallet</a>
@@ -420,7 +423,41 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-2-4-1-17th-august-2022'>Version 2.4.1 (17th August 2022)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-2-5-0-16th-november-2022'>Version 2.5.0 (16th November 2022)</h2>
+<ul>
+<li>[IMPORTANT] BTSE will change futures market naming convention in <strong>December 2022</strong> to provide more clarity to retail users and here are the rules:
+
+<ul>
+<li>Change the suffix for perpetual markets from <code>PFC</code> to <code>PERP</code> (ex: BTCPFC -&gt; BTC-PERP)</li>
+<li>Change the suffix for time-based markets from <code>delivery month + year</code> to <code>settlement date (YYMMDD)</code> (ex: BTCZ22 -&gt; BTC-221230)</li>
+<li>Futures API updated (Generally added a new optional parameter <code>useNewSymbolNaming</code> to specify if the market name is in the new format):</li>
+<li><a href="#market-summary"><code>Market Summary</code></a></li>
+<li><a href="#query-open-orders"><code>Query Open Orders</code></a></li>
+<li><a href="#orderbook-by-grouping"><code>Orderbook by grouping</code></a></li>
+<li><a href="#orderbook"><code>Orderbook</code></a></li>
+<li><a href="#charting-data"><code>Charting Data</code></a></li>
+<li><a href="#query-wallet-history"><code>Query Wallet History</code></a></li>
+<li><a href="#query-wallet-balance"><code>Query Wallet Balance</code></a></li>
+<li><a href="#set-leverage"><code>Set Leverage</code></a></li>
+<li><a href="#set-risk-limit"><code>Set Risk Limit</code></a></li>
+<li><a href="#query-market-price"><code>Query Market Price</code></a></li>
+<li><a href="#change-contract-settlement-currency"><code>Change Contract Settlement Currency</code></a></li>
+<li><a href="#query-account-fee"><code>Query Account Fee</code></a></li>
+<li><a href="#query-position"><code>Query Position</code></a></li>
+<li><a href="#close-position"><code>Close Position</code></a></li>
+<li><a href="#query-wallet-margin"><code>Query Wallet Margin</code></a></li>
+<li><a href="#create-new-order"><code>Create New Order</code></a></li>
+<li><a href="#query-trade-fills"><code>Query Trade Fills</code></a></li>
+<li>Existing websocket topics will return data with the current market name (ex: BTCPFC) and new set of websocket topics are added for new market name (ex: BTC-PERP) where <code>the response fields will be the same</code> and here&#39;s the mapping table</li>
+<li><a href="#public-trade-fills">tradeHistoryApi</a> -&gt; tradeHistoryApiV2</li>
+<li><a href="#orderbook-snapshot-by-grouping">orderbookApi</a> -&gt; orderbookApiV2</li>
+<li><a href="#orderbook-snapshot-by-depth">orderbookL2Api</a> -&gt; orderbookL2ApiV2</li>
+<li><a href="#user-trade-fills">fills</a> -&gt; fillsV2</li>
+<li><a href="#all-position">allPosition</a> -&gt; allPositionV2</li>
+<li><a href="#notifications">notificationApiV2</a> -&gt; notificationApiV3</li>
+</ul></li>
+</ul>
+<h2 id='version-2-4-1-17th-august-2022'>Version 2.4.1 (17th August 2022)</h2>
 <ul>
 <li>Add more request / response samples in <a href="#trade-endpoints">Trade Endpoints</a></li>
 <li>Correct document in <a href="#trade-endpoints">Trade Endpoints</a></li>
@@ -739,6 +776,12 @@
 <td>No</td>
 <td>Market symbol</td>
 </tr>
+<tr>
+<td>useNewSymbolNaming</td>
+<td>boolean</td>
+<td>No</td>
+<td>True to return futures market name in the new format, default to False</td>
+</tr>
 </tbody></table>
 <h3 id='response-content'>Response Content</h3>
 <table><thead>
@@ -992,19 +1035,25 @@
 <td>start</td>
 <td>long</td>
 <td>No</td>
-<td>Starting time (eg. 1624987283000)</td>
+<td>Starting time in milliseconds (eg. 1624987283000)</td>
 </tr>
 <tr>
 <td>end</td>
 <td>long</td>
 <td>No</td>
-<td>Ending time (eg. 1624987283000)</td>
+<td>Ending time in millisecond (eg. 1624987283000)</td>
 </tr>
 <tr>
 <td>resolution</td>
 <td>string</td>
 <td>Yes</td>
 <td>Supported resolutions are: <br/> 1: 1min<br/> 5: 5mins<br/> 15: 15mins<br/>30: 30mins<br/>60: 60mins<br/>360: 6hours<br/>1440: 1day</td>
+</tr>
+<tr>
+<td>useNewSymbolNaming</td>
+<td>boolean</td>
+<td>No</td>
+<td>True to use new futures market name in symbol, default to False</td>
 </tr>
 </tbody></table>
 <h3 id='response-content-2'>Response Content</h3>
@@ -1086,6 +1135,12 @@
 <td>Yes</td>
 <td>Market symbol</td>
 </tr>
+<tr>
+<td>useNewSymbolNaming</td>
+<td>boolean</td>
+<td>No</td>
+<td>True to use new futures market name in symbol, default to False</td>
+</tr>
 </tbody></table>
 <h3 id='response-content-3'>Response Content</h3>
 <table><thead>
@@ -1160,6 +1215,12 @@
 <td>Yes</td>
 <td>Market symbol, entered as a path variable</td>
 </tr>
+<tr>
+<td>useNewSymbolNaming</td>
+<td>boolean</td>
+<td>No</td>
+<td>True to use new futures market name in symbol, default to False</td>
+</tr>
 </tbody></table>
 <h3 id='response-content-4'>Response Content</h3><h4 id='orderbook'>Orderbook</h4>
 <table><thead>
@@ -1230,7 +1291,7 @@
   </span><span class="p">],</span><span class="w">
   </span><span class="nl">"sellQuote"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"36241.5"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"36241.5"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"600"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">],</span><span class="w">
@@ -1261,6 +1322,12 @@
 <td>long</td>
 <td>No</td>
 <td>Orderbook depth</td>
+</tr>
+<tr>
+<td>useNewSymbolNaming</td>
+<td>boolean</td>
+<td>No</td>
+<td>True to return futures market name in the new format, default to False</td>
 </tr>
 </tbody></table>
 <h3 id='response-content-5'>Response Content</h3><h4 id='orderbook-3'>Orderbook</h4>
@@ -1356,13 +1423,13 @@
 <td>startTime</td>
 <td>long</td>
 <td>No</td>
-<td>Starting time (eg. 1624987283000)</td>
+<td>Starting time in milliseconds (eg. 1624987283000)</td>
 </tr>
 <tr>
 <td>endTime</td>
 <td>long</td>
 <td>No</td>
-<td>Ending time (eg. 1624987283000)</td>
+<td>Ending time in milliseconds (eg. 1624987283000)</td>
 </tr>
 <tr>
 <td>beforeSerialId</td>
@@ -1387,6 +1454,12 @@
 <td>boolean</td>
 <td>Yes</td>
 <td>Retrieve trade  history records past 7 days</td>
+</tr>
+<tr>
+<td>useNewSymbolNaming</td>
+<td>boolean</td>
+<td>No</td>
+<td>True to use new futures market name in symbol, default to False</td>
 </tr>
 </tbody></table>
 <h3 id='response-content-6'>Response Content</h3>
@@ -1435,7 +1508,7 @@
 <td>Transacted timestamp</td>
 </tr>
 </tbody></table>
-<h1 id='trade-endpoints'>Trade Endpoints</h1><h2 id='create-new-order'>Create new order</h2>
+<h1 id='trade-endpoints'>Trade Endpoints</h1><h2 id='create-new-order'>Create New Order</h2>
 <blockquote>
 <p>Request (create <code>MARKET</code> order)</p>
 </blockquote>
@@ -1672,6 +1745,12 @@
 <td>No</td>
 <td>For creating order with txType: <code>STOP</code> or <code>TRIGGER</code>. Valid options: <code>markPrice</code> (default) or <code>lastPrice</code></td>
 </tr>
+<tr>
+<td>useNewSymbolNaming</td>
+<td>boolean</td>
+<td>No</td>
+<td>True to use new futures market name in symbol, default to False</td>
+</tr>
 </tbody></table>
 <h3 id='response-content-7'>Response Content</h3>
 <table><thead>
@@ -1696,7 +1775,7 @@
 </tr>
 <tr>
 <td>fillSize</td>
-<td>string</td>
+<td>number</td>
 <td>Yes</td>
 <td>Trade filled size</td>
 </tr>
@@ -1931,7 +2010,7 @@
 </tr>
 <tr>
 <td>fillSize</td>
-<td>string</td>
+<td>number</td>
 <td>Yes</td>
 <td>Trade filled size</td>
 </tr>
@@ -2440,13 +2519,13 @@
 </tr>
 <tr>
 <td>triggerPrice</td>
-<td>string</td>
+<td>double</td>
 <td>Yes</td>
 <td>Order trigger price, returns 0 if order is not a trigger order</td>
 </tr>
 <tr>
 <td>avgFillPrice</td>
-<td>string</td>
+<td>double</td>
 <td>Yes</td>
 <td>Average filled price. Returns the average filled price for partially transacted orders</td>
 </tr>
@@ -2584,6 +2663,12 @@
 <td>string</td>
 <td>No</td>
 <td>Query using custom order ID. If <code>orderID</code> is provided, <code>clOrderID</code> will be ignored.</td>
+</tr>
+<tr>
+<td>useNewSymbolNaming</td>
+<td>boolean</td>
+<td>No</td>
+<td>True to return futures market name in the new format, default to False</td>
 </tr>
 </tbody></table>
 <h3 id='response-content-12'>Response Content</h3>
@@ -2867,6 +2952,12 @@
 <td>No</td>
 <td>Query trade history by custom order ID</td>
 </tr>
+<tr>
+<td>useNewSymbolNaming</td>
+<td>boolean</td>
+<td>No</td>
+<td>True to use new futures market name in symbol, default to False</td>
+</tr>
 </tbody></table>
 <h3 id='response-content-13'>Response Content</h3>
 <table><thead>
@@ -3064,6 +3155,12 @@
 <td>No</td>
 <td>Market symbol</td>
 </tr>
+<tr>
+<td>useNewSymbolNaming</td>
+<td>boolean</td>
+<td>No</td>
+<td>True to use new futures market name in symbol, default to False</td>
+</tr>
 </tbody></table>
 <h3 id='response-content-14'>Response Content</h3>
 <table><thead>
@@ -3239,6 +3336,12 @@
 <td>No</td>
 <td>Close price. Mandatory when type is <code>LIMIT</code></td>
 </tr>
+<tr>
+<td>useNewSymbolNaming</td>
+<td>boolean</td>
+<td>No</td>
+<td>True to use new futures market name in symbol, default to False</td>
+</tr>
 </tbody></table>
 <h3 id='response-content-15'>Response Content</h3>
 <table><thead>
@@ -3370,7 +3473,7 @@
 <td>Original order size</td>
 </tr>
 </tbody></table>
-<h2 id='set-risk-limits'>Set Risk Limits</h2>
+<h2 id='set-risk-limit'>Set Risk Limit</h2>
 <blockquote>
 <p>Request</p>
 </blockquote>
@@ -3412,7 +3515,13 @@
 <td>riskLimit</td>
 <td>long</td>
 <td>Yes</td>
-<td>Risk limit value</td>
+<td>Risk limit value now in position size, but will be changed to USD value along with futures market name change</td>
+</tr>
+<tr>
+<td>useNewSymbolNaming</td>
+<td>boolean</td>
+<td>No</td>
+<td>True if use new futures market name as symbol , default to False</td>
 </tr>
 </tbody></table>
 <h3 id='response-content-16'>Response Content</h3>
@@ -3499,6 +3608,12 @@
 <td>Yes</td>
 <td>Leverage value</td>
 </tr>
+<tr>
+<td>useNewSymbolNaming</td>
+<td>boolean</td>
+<td>No</td>
+<td>True if use new futures market name in symbol default to False</td>
+</tr>
 </tbody></table>
 <h3 id='response-content-17'>Response Content</h3>
 <table><thead>
@@ -3540,7 +3655,7 @@
 <td>Message</td>
 </tr>
 </tbody></table>
-<h2 id='change-contract-settlement-currency'>Change contract settlement currency</h2>
+<h2 id='change-contract-settlement-currency'>Change Contract Settlement Currency</h2>
 <blockquote>
 <p>Request</p>
 </blockquote>
@@ -3582,6 +3697,12 @@
 <td>Yes</td>
 <td>Settlement currency to set</td>
 </tr>
+<tr>
+<td>useNewSymbolNaming</td>
+<td>boolean</td>
+<td>No</td>
+<td>True to use new futures market name in symbol, default to False</td>
+</tr>
 </tbody></table>
 <h3 id='response-content-18'>Response Content</h3>
 <table><thead>
@@ -3611,7 +3732,7 @@
 <td>Response message. Only available when an error occurs.</td>
 </tr>
 </tbody></table>
-<h2 id='query-account-fees'>Query Account Fees</h2>
+<h2 id='query-account-fee'>Query Account Fee</h2>
 <blockquote>
 <p>Response</p>
 </blockquote>
@@ -3624,6 +3745,28 @@
 <p><code>GET /api/v2.1/user/fees</code></p>
 
 <p>Retrieve user&#39;s trading fees</p>
+<h3 id='request-parameters-19'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>No</td>
+<td>Market symbol</td>
+</tr>
+<tr>
+<td>useNewSymbolNaming</td>
+<td>boolean</td>
+<td>No</td>
+<td>True to use new futures market name in symbol, default to False</td>
+</tr>
+</tbody></table>
 <h3 id='response-content-19'>Response Content</h3>
 <table><thead>
 <tr>
@@ -3691,7 +3834,7 @@
 <p><code>GET /api/v2.1/user/wallet</code></p>
 
 <p>Query user&#39;s wallet balance. Requires <code>Read</code> permissions on the API key.</p>
-<h3 id='request-parameters-19'>Request Parameters</h3>
+<h3 id='request-parameters-20'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3705,6 +3848,12 @@
 <td>string</td>
 <td>Yes</td>
 <td>Wallet name<br/><code>CROSS@</code>: Cross wallet<br/><code>ISOLATED@market</code>: Market refers to the current symbol with <code>-USD</code> appended. Eg. BTCPFC isolated wallet would be <code>ISOLATED@BTCPFC-USD</code></td>
+</tr>
+<tr>
+<td>useNewSymbolNaming</td>
+<td>boolean</td>
+<td>No</td>
+<td>True to return futures market name in the new format, default to False</td>
 </tr>
 </tbody></table>
 <h3 id='response-content-20'>Response Content</h3><h4 id='wallet'>Wallet</h4>
@@ -3853,7 +4002,7 @@
 <p><code>GET /api/v2.1/user/wallet_history</code></p>
 
 <p>Get user&#39;s wallet history records on the futures wallet</p>
-<h3 id='request-parameters-20'>Request Parameters</h3>
+<h3 id='request-parameters-21'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3872,19 +4021,25 @@
 <td>startTime</td>
 <td>long</td>
 <td>No</td>
-<td>Starting time (eg. 1624987283000)</td>
+<td>Starting time in milliseconds (eg. 1624987283000)</td>
 </tr>
 <tr>
 <td>endTime</td>
 <td>long</td>
 <td>No</td>
-<td>Ending time (eg. 1624987283000)</td>
+<td>Ending time in milliseconds (eg. 1624987283000)</td>
 </tr>
 <tr>
 <td>count</td>
 <td>integer</td>
 <td>No</td>
 <td>Number of records to return</td>
+</tr>
+<tr>
+<td>useNewSymbolNaming</td>
+<td>boolean</td>
+<td>No</td>
+<td>True to return futures market name in the new format, default to False</td>
 </tr>
 </tbody></table>
 <h3 id='response-content-21'>Response Content</h3>
@@ -3945,7 +4100,7 @@
 <td>105: Wallet Transfer<br/>106: Wallet Liquidation<br/>108: Realized PnL<br/>110: Funding<br/>121: Asset Conversion</td>
 </tr>
 </tbody></table>
-<h2 id='query-wallet-margin'>Query wallet Margin</h2>
+<h2 id='query-wallet-margin'>Query Wallet Margin</h2>
 <blockquote>
 <p>Response</p>
 </blockquote>
@@ -3984,7 +4139,7 @@
 <p><code>GET /api/v2.1/user/margin</code></p>
 
 <p>Gets margin information for the specified wallet so that users can know which wallet they are currently using in the market.</p>
-<h3 id='request-parameters-21'>Request Parameters</h3>
+<h3 id='request-parameters-22'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3996,7 +4151,7 @@
 <tr>
 <td>symbol</td>
 <td>string</td>
-<td>Yes</td>
+<td>No</td>
 <td>Currency, if not specified will return all currencies</td>
 </tr>
 <tr>
@@ -4016,6 +4171,12 @@
 <td>integer</td>
 <td>No</td>
 <td>Number of records to return</td>
+</tr>
+<tr>
+<td>useNewSymbolNaming</td>
+<td>boolean</td>
+<td>No</td>
+<td>True to use new futures market name in symbol, default to False</td>
 </tr>
 </tbody></table>
 <h3 id='response-content-22'>Response Content</h3><h4 id='wallet-2'>Wallet</h4>
@@ -4199,7 +4360,7 @@
 <p><code>POST /api/v2.1/wallet/transfer</code></p>
 
 <p>Transfers funds between user&#39;s wallet. User can specify the source and target wallet to transfer funds</p>
-<h3 id='request-parameters-22'>Request Parameters</h3><h4 id='wallet-request'>Wallet Request</h4>
+<h3 id='request-parameters-23'>Request Parameters</h3><h4 id='wallet-request'>Wallet Request</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4405,7 +4566,7 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>To subscribe to a websocket feed</p>
-<h3 id='request-parameters-23'>Request Parameters</h3>
+<h3 id='request-parameters-24'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4944,7 +5105,7 @@
   "op":"authKeyExpires",
   "args":["4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x", "1624985375123", "c410d38c681579adb335885800cff24c66171b7cc8376cfe43da1408c581748156b89bcc5a115bb496413bda481139fb"]}
 }
-</code></pre></div><h3 id='request-parameters-24'>Request Parameters</h3>
+</code></pre></div><h3 id='request-parameters-25'>Request Parameters</h3>
 <p>Below details the arguments needed to be sent in.</p>
 
 <table><thead>

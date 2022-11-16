@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-1-1-0-16th-november-2022" class="toc-h2 toc-link" data-title="Version 1.1.0 (16th November 2022)">Version 1.1.0 (16th November 2022)</a>
+                  </li>
+                  <li>
                     <a href="#version-1-0-4-25th-august-2022" class="toc-h2 toc-link" data-title="Version 1.0.4 (25th, August 2022)">Version 1.0.4 (25th, August 2022)</a>
                   </li>
                   <li>
@@ -267,9 +270,6 @@
                   </li>
                   <li>
                     <a href="#api-status-codes" class="toc-h2 toc-link" data-title="API Status Codes">API Status Codes</a>
-                  </li>
-                  <li>
-                    <a href="#api-enum" class="toc-h2 toc-link" data-title="API Enum">API Enum</a>
                   </li>
               </ul>
           </li>
@@ -309,7 +309,7 @@
                     <a href="#convert-funds" class="toc-h2 toc-link" data-title="Convert funds">Convert funds</a>
                   </li>
                   <li>
-                    <a href="#transfer-funds" class="toc-h2 toc-link" data-title="Transfer funds">Transfer funds</a>
+                    <a href="#transfer-funds" class="toc-h2 toc-link" data-title="Transfer Funds">Transfer Funds</a>
                   </li>
               </ul>
           </li>
@@ -320,7 +320,17 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-1-0-4-25th-august-2022'>Version 1.0.4 (25th, August 2022)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-1-1-0-16th-november-2022'>Version 1.1.0 (16th November 2022)</h2>
+<ul>
+<li>[IMPORTANT] BTSE will change futures market naming convention in <strong>December 2022</strong> to provide more clarity to retail users and here are the rules:
+
+<ul>
+<li>Change the suffix for perpetual markets from <code>PFC</code> to <code>PERP</code> (ex: BTCPFC -&gt; BTC-PERP)</li>
+<li>Change the suffix for time-based markets from <code>delivery month + year</code> to <code>settlement date (YYMMDD)</code> (ex: BTCZ22 -&gt; BTC-221230)</li>
+<li>Added a new optional query parameter <code>useNewSymbolNaming</code> in <a href="#query-wallet-history"><code>Query Wallet History</code></a> and <a href="#transfer-funds"><code>Transfer Funds</code></a> if user wants to use new market name</li>
+</ul></li>
+</ul>
+<h2 id='version-1-0-4-25th-august-2022'>Version 1.0.4 (25th, August 2022)</h2>
 <ul>
 <li>Adjust param description of currency in APIs: <a href="#get-wallet-address"><code>Get Wallet Address</code></a>, <a href="#create-wallet-address"><code>Create Wallet Address</code></a>.</li>
 </ul>
@@ -456,33 +466,6 @@
 <li>408 - Request timeout. Indicates that the server did not complete the request. BTSE API timeouts are set at 30secs</li>
 <li>429 - Too many requests. Indicates that the client has exceeded the rates limits set by the server. Refer to Rate Limits for more details</li>
 <li>500 - Internal server error. Indicates that the server encountered an unexpected condition resulting in not being able to fulfill the request</li>
-</ul>
-<h2 id='api-enum'>API Enum</h2>
-<p>When connecting up the BTSE API, you will come across number codes that represents different states or status types in BTSE. The following section provides a list of codes that you are expecting to see.</p>
-
-<ul>
-<li>1: MARKET_UNAVAILABLE = Futures market is unavailable</li>
-<li>2: ORDER_INSERTED = Order is inserted successfully</li>
-<li>4: ORDER_FULLY_TRANSACTED = Order is fully transacted</li>
-<li>5: ORDER_PARTIALLY_TRANSACTED = Order is partially transacted</li>
-<li>6: ORDER_CANCELLED = Order is cancelled successfully</li>
-<li>8: INSUFFICIENT_BALANCE = Insufficient balance in account</li>
-<li>9: TRIGGER_INSERTED = Trigger Order is inserted successfully</li>
-<li>10: TRIGGER_ACTIVATED = Trigger Order is activated successfully</li>
-<li>12: ERROR_UPDATE_RISK_LIMIT = Error in updating risk limit</li>
-<li>15: ORDER_REJECTED = Order is rejected</li>
-<li>16: ORDER_NOTFOUND = Order is not found with the order ID or clOrderID provided</li>
-<li>28: TRANSFER_UNSUCCESSFUL = Transfer funds between spot and futures is unsuccessful</li>
-<li>27: TRANSFER_SUCCESSFUL = Transfer funds between futures and spot is successful</li>
-<li>41: ERROR_INVALID_RISK_LIMIT = Invalid risk limit was specified</li>
-<li>64: STATUS_LIQUIDATION = Account is undergoing liquidation</li>
-<li>101: FUTURES_ORDER_PRICE_OUTSIDE_LIQUIDATION_PRICE = Futures order is outside of liquidation price</li>
-<li>1003: ORDER_LIQUIDATION = Order is undergoing liquidation</li>
-<li>1004: ORDER_ADL = Order is undergoing ADL</li>
-<li>3505: Invalid protocol</li>
-<li>3506: Invalid withdraw amount</li>
-<li>3507: Invalid withdraw address</li>
-<li>3508: Withdraw failed</li>
 </ul>
 <h1 id='public-endpoints'>Public Endpoints</h1><h2 id='query-available-crypto-network-list-for-currency'>Query available crypto network list for currency</h2>
 <blockquote>
@@ -691,19 +674,25 @@
 <td>startTime</td>
 <td>long</td>
 <td>No</td>
-<td>Starting time (eg. 1624987283000)</td>
+<td>Starting time in milliseconds (eg. 1624987283000)</td>
 </tr>
 <tr>
 <td>endTime</td>
 <td>long</td>
 <td>No</td>
-<td>Ending time (eg. 1624987283000)</td>
+<td>Ending time in milliseconds (eg. 1624987283000)</td>
 </tr>
 <tr>
 <td>count</td>
 <td>integer</td>
 <td>No</td>
 <td>Number of records to return</td>
+</tr>
+<tr>
+<td>useNewSymbolNaming</td>
+<td>boolean</td>
+<td>No</td>
+<td>True to return futures market name in the new format, default to False</td>
 </tr>
 </tbody></table>
 <h3 id='response-content-4'>Response Content</h3>
@@ -1111,7 +1100,7 @@
 <td>exchange rate</td>
 </tr>
 </tbody></table>
-<h2 id='transfer-funds'>Transfer funds</h2>
+<h2 id='transfer-funds'>Transfer Funds</h2>
 <blockquote>
 <p>Request</p>
 </blockquote>
@@ -1167,6 +1156,12 @@
 <td>string</td>
 <td>Yes</td>
 <td>receiver email</td>
+</tr>
+<tr>
+<td>useNewSymbolNaming</td>
+<td>boolean</td>
+<td>No</td>
+<td>True if use new futures market name in asset field, default to False</td>
 </tr>
 </tbody></table>
 <h3 id='response-content-10'>Response Content</h3>
