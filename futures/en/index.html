@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-2-5-1-24th-november-2022" class="toc-h2 toc-link" data-title="Version 2.5.1 (24th November 2022)">Version 2.5.1 (24th November 2022)</a>
+                  </li>
+                  <li>
                     <a href="#version-2-5-0-16th-november-2022" class="toc-h2 toc-link" data-title="Version 2.5.0 (16th November 2022)">Version 2.5.0 (16th November 2022)</a>
                   </li>
                   <li>
@@ -423,13 +426,22 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-2-5-0-16th-november-2022'>Version 2.5.0 (16th November 2022)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-2-5-1-24th-november-2022'>Version 2.5.1 (24th November 2022)</h2>
+<ul>
+<li>[IMPORTANT] BTSE will adjust the formula to calculate futures risk limit level and the <code>maxPosition</code> in <a href="#market-summary"><code>Market Summary</code></a> response will no longer be applicable, please adjust accordingly or ask your question in <a href="https://t.me/btsecomAPI">BTSE api TG group</a>
+
+<ul>
+<li><a href="https://blog.btse.com/important-notice-upcoming-changes-to-futures-risk-limits-and-contract-names/">Reference</a></li>
+</ul></li>
+</ul>
+<h2 id='version-2-5-0-16th-november-2022'>Version 2.5.0 (16th November 2022)</h2>
 <ul>
 <li>[IMPORTANT] BTSE will change futures market naming convention in <strong>December 2022</strong> to provide more clarity to retail users and here are the rules:
 
 <ul>
 <li>Change the suffix for perpetual markets from <code>PFC</code> to <code>PERP</code> (ex: BTCPFC -&gt; BTC-PERP)</li>
 <li>Change the suffix for time-based markets from <code>delivery month + year</code> to <code>settlement date (YYMMDD)</code> (ex: BTCZ22 -&gt; BTC-221230)</li>
+<li><a href="https://blog.btse.com/important-notice-upcoming-changes-to-futures-risk-limits-and-contract-names/">Reference</a></li>
 <li>Futures API updated (Generally added a new optional parameter <code>useNewSymbolNaming</code> to specify if the market name is in the new format):</li>
 <li><a href="#market-summary"><code>Market Summary</code></a></li>
 <li><a href="#query-open-orders"><code>Query Open Orders</code></a></li>
@@ -964,7 +976,7 @@
 <td>maxPosition</td>
 <td>double</td>
 <td>No</td>
-<td>Maximum position a user is allowed to have</td>
+<td>Maximum position a user is allowed to have <code>Will no longer be applicable after risk limit adjustment</code></td>
 </tr>
 <tr>
 <td>minRiskLimit</td>
