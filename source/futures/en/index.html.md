@@ -13,11 +13,17 @@ headingLevel: 2
 
 # Change Log
 
+## Version 2.5.1 (24th November 2022)
+
+* [IMPORTANT] BTSE will adjust the formula to calculate futures risk limit level and the `maxPosition` in [`Market Summary`](#market-summary) response will no longer be applicable, please adjust accordingly or ask your question in [BTSE api TG group](https://t.me/btsecomAPI)
+  - [Reference](https://blog.btse.com/important-notice-upcoming-changes-to-futures-risk-limits-and-contract-names/)
+
 ## Version 2.5.0 (16th November 2022)
 
 * [IMPORTANT] BTSE will change futures market naming convention in **December 2022** to provide more clarity to retail users and here are the rules:
   - Change the suffix for perpetual markets from `PFC` to `PERP` (ex: BTCPFC -> BTC-PERP)
   - Change the suffix for time-based markets from `delivery month + year` to `settlement date (YYMMDD)` (ex: BTCZ22 -> BTC-221230)
+  - [Reference](https://blog.btse.com/important-notice-upcoming-changes-to-futures-risk-limits-and-contract-names/)
   - Futures API updated (Generally added a new optional parameter `useNewSymbolNaming` to specify if the market name is in the new format):
     - [`Market Summary`](#market-summary)
     - [`Query Open Orders`](#query-open-orders)
@@ -321,41 +327,41 @@ Gets market summary information. If no symbol parameter is sent, then all market
 
 ### Response Content
 
-| Name                | Type    | Required | Description                                                          |
-| ---                 | ---     | ---      | ---                                                                  |
-| symbol              | string  | Yes      | Market symbol                                                        |
-| last                | double  | Yes      | Last price                                                           |
-| lowestAsk           | double  | Yes      | Lowest ask price in the orderbook                                    |
-| highestBid          | double  | Yes      | Highest bid price in the orderbook                                   |
-| percentageChange    | double  | Yes      | Percentage change against the price within the last 24hours          |
-| volume              | double  | Yes      | Transacted volume                                                    |
-| high24Hr            | double  | Yes      | Highest price over the last 24hours                                  |
-| low24Hr             | double  | Yes      | Lowest price over the last 24hours                                   |
-| base                | string  | Yes      | Base currency                                                        |
-| quote               | string  | Yes      | Quote currency                                                       |
-| active              | boolean | Yes      | Indicator if market is active                                        |
-| size                | double  | Yes      | Transacted size                                                      |
-| minValidPrice       | double  | Yes      | Minimum valid price                                                  |
-| minPriceIncrement   | double  | Yes      | Price increment                                                      |
-| minOrderSize        | double  | Yes      | Minimum tick size                                                    |
-| minSizeIncrement    | double  | Yes      | Tick size                                                            |
-| maxOrderSize        | double  | Yes      | Maximum order size                                                   |
-| openInterest        | double  | No       | Number of open positions in the futures market                       |
-| openInterestUSD     | double  | No       | Number of open positions in the futures market in USD notional value |
-| contractStart       | long    | No       | Contract start time                                                  |
-| contractEnd         | long    | No       | Contract end time                                                    |
-| timeBasedContract   | boolean | No       | Indicator to indicate if it is a time based contract                 |
-| openTime            | long    | Yes      | Market opening time                                                  |
-| closeTime           | long    | Yes      | Market closing time                                                  |
-| startMatching       | long    | Yes      | Matching start time                                                  |
-| inactiveTime        | long    | Yes      | Time where market is inactive                                        |
-| fundingRate         | double  | No       | Funding rate calculated per hour                                     |
-| contractSize        | double  | No       | Size of one contract                                                 |
-| maxPosition         | double  | No       | Maximum position a user is allowed to have                           |
-| minRiskLimit        | double  | No       | Minimum risk limit                                                   |
-| maxRiskLimit        | double  | No       | Maximum risk limit                                                   |
-| availableSettlement | array   | No       | Currencies available for settlement                                  |
-| futures             | boolean | Yes      | Indicator if symbol is a futures contract                            |
+| Name                | Type    | Required | Description                                                                                           |
+| ---                 | ---     | ---      | ---                                                                                                   |
+| symbol              | string  | Yes      | Market symbol                                                                                         |
+| last                | double  | Yes      | Last price                                                                                            |
+| lowestAsk           | double  | Yes      | Lowest ask price in the orderbook                                                                     |
+| highestBid          | double  | Yes      | Highest bid price in the orderbook                                                                    |
+| percentageChange    | double  | Yes      | Percentage change against the price within the last 24hours                                           |
+| volume              | double  | Yes      | Transacted volume                                                                                     |
+| high24Hr            | double  | Yes      | Highest price over the last 24hours                                                                   |
+| low24Hr             | double  | Yes      | Lowest price over the last 24hours                                                                    |
+| base                | string  | Yes      | Base currency                                                                                         |
+| quote               | string  | Yes      | Quote currency                                                                                        |
+| active              | boolean | Yes      | Indicator if market is active                                                                         |
+| size                | double  | Yes      | Transacted size                                                                                       |
+| minValidPrice       | double  | Yes      | Minimum valid price                                                                                   |
+| minPriceIncrement   | double  | Yes      | Price increment                                                                                       |
+| minOrderSize        | double  | Yes      | Minimum tick size                                                                                     |
+| minSizeIncrement    | double  | Yes      | Tick size                                                                                             |
+| maxOrderSize        | double  | Yes      | Maximum order size                                                                                    |
+| openInterest        | double  | No       | Number of open positions in the futures market                                                        |
+| openInterestUSD     | double  | No       | Number of open positions in the futures market in USD notional value                                  |
+| contractStart       | long    | No       | Contract start time                                                                                   |
+| contractEnd         | long    | No       | Contract end time                                                                                     |
+| timeBasedContract   | boolean | No       | Indicator to indicate if it is a time based contract                                                  |
+| openTime            | long    | Yes      | Market opening time                                                                                   |
+| closeTime           | long    | Yes      | Market closing time                                                                                   |
+| startMatching       | long    | Yes      | Matching start time                                                                                   |
+| inactiveTime        | long    | Yes      | Time where market is inactive                                                                         |
+| fundingRate         | double  | No       | Funding rate calculated per hour                                                                      |
+| contractSize        | double  | No       | Size of one contract                                                                                  |
+| maxPosition         | double  | No       | Maximum position a user is allowed to have `Will no longer be applicable after risk limit adjustment` |
+| minRiskLimit        | double  | No       | Minimum risk limit                                                                                    |
+| maxRiskLimit        | double  | No       | Maximum risk limit                                                                                    |
+| availableSettlement | array   | No       | Currencies available for settlement                                                                   |
+| futures             | boolean | Yes      | Indicator if symbol is a futures contract                                                             |
 
 ## Charting Data
 
