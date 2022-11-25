@@ -234,7 +234,7 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#version-2-5-1-24th-november-2022" class="toc-h2 toc-link" data-title="Version 2.5.1 (24th November 2022)">Version 2.5.1 (24th November 2022)</a>
+                    <a href="#version-2-5-1-25th-november-2022" class="toc-h2 toc-link" data-title="Version 2.5.1 (25th November 2022)">Version 2.5.1 (25th November 2022)</a>
                   </li>
                   <li>
                     <a href="#version-2-5-0-16th-november-2022" class="toc-h2 toc-link" data-title="Version 2.5.0 (16th November 2022)">Version 2.5.0 (16th November 2022)</a>
@@ -426,12 +426,18 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-2-5-1-24th-november-2022'>Version 2.5.1 (24th November 2022)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-2-5-1-25th-november-2022'>Version 2.5.1 (25th November 2022)</h2>
 <ul>
-<li>[IMPORTANT] BTSE will adjust the formula to calculate futures risk limit level and the <code>maxPosition</code> in <a href="#market-summary"><code>Market Summary</code></a> response will no longer be applicable, please adjust accordingly or ask your question in <a href="https://t.me/btsecomAPI">BTSE api TG group</a>
+<li>[IMPORTANT] BTSE will adjust the formula to calculate futures risk limit level and some api will be affected.
 
 <ul>
+<li><a href="#market-summary"><code>Market Summary</code></a></li>
+<li><code>maxPosition</code> in response will no longer be applicable since it will be determined by max_risk_limit / futures_market_price</li>
+<li><code>minRiskLimit</code> now in contract size and will be updated to be <code>usd notional value</code></li>
+<li><code>maxRiskLimit</code> now in contract size and will be updated to be <code>usd notional value</code></li>
+<li><code>Order size</code> remains in <code>contract size</code> but not <code>usd value</code> for backward compatibility</li>
 <li><a href="https://blog.btse.com/important-notice-upcoming-changes-to-futures-risk-limits-and-contract-names/">Reference</a></li>
+<li>Can ask question in <a href="https://t.me/btsecomAPI">BTSE api TG group</a> if any</li>
 </ul></li>
 </ul>
 <h2 id='version-2-5-0-16th-november-2022'>Version 2.5.0 (16th November 2022)</h2>
@@ -982,13 +988,13 @@
 <td>minRiskLimit</td>
 <td>double</td>
 <td>No</td>
-<td>Minimum risk limit</td>
+<td>Minimum risk limit in contract size  <code>Will be changed to USD value</code></td>
 </tr>
 <tr>
 <td>maxRiskLimit</td>
 <td>double</td>
 <td>No</td>
-<td>Maximum risk limit</td>
+<td>Maximum risk limit int contract size <code>Will be changed to USD value</code></td>
 </tr>
 <tr>
 <td>availableSettlement</td>
@@ -1689,7 +1695,7 @@
 <td>size</td>
 <td>long</td>
 <td>Yes</td>
-<td>Order size</td>
+<td>Order size in <code>contract size</code> (this remains unchanged even after risk limit adjustment)</td>
 </tr>
 <tr>
 <td>side</td>
@@ -1819,13 +1825,13 @@
 <td>size</td>
 <td>long</td>
 <td>Yes</td>
-<td>Order size</td>
+<td>Order size in <code>contract size</code> (this remains unchanged even after risk limit adjustment)</td>
 </tr>
 <tr>
 <td>status</td>
 <td>long</td>
 <td>Yes</td>
-<td>Order status<br/> 2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed</td>
+<td>Order status<br/>    2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed</td>
 </tr>
 <tr>
 <td>time_in_force</td>
@@ -2054,13 +2060,13 @@
 <td>size</td>
 <td>long</td>
 <td>Yes</td>
-<td>Order size</td>
+<td>Order size in <code>contract size</code> (this remains unchanged even after risk limit adjustment)</td>
 </tr>
 <tr>
 <td>status</td>
 <td>long</td>
 <td>Yes</td>
-<td>Order status<br/> 2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed</td>
+<td>Order status<br/>    2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed</td>
 </tr>
 <tr>
 <td>time_in_force</td>
@@ -2232,7 +2238,7 @@
 <td>orderSize</td>
 <td>number</td>
 <td>No</td>
-<td>For type: <code>ALL</code>, order size to be amended</td>
+<td>For type: <code>ALL</code>, order size in contract size to be amended</td>
 </tr>
 <tr>
 <td>triggerPrice</td>
@@ -2302,13 +2308,13 @@
 <td>size</td>
 <td>long</td>
 <td>Yes</td>
-<td>Order size</td>
+<td>Order size in <code>contract size</code> (this remains unchanged even after risk limit adjustment)</td>
 </tr>
 <tr>
 <td>status</td>
 <td>long</td>
 <td>Yes</td>
-<td>Order status<br/> 2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed</td>
+<td>Order status<br/>    2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed</td>
 </tr>
 <tr>
 <td>time_in_force</td>
@@ -2497,13 +2503,13 @@
 <td>size</td>
 <td>long</td>
 <td>Yes</td>
-<td>Cancelled size</td>
+<td>Order size in <code>contract size</code> (this remains unchanged even after risk limit adjustment)</td>
 </tr>
 <tr>
 <td>status</td>
 <td>long</td>
 <td>Yes</td>
-<td>Order status<br/> 2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed</td>
+<td>Order status<br/>    2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed</td>
 </tr>
 <tr>
 <td>time_in_force</td>
@@ -2768,7 +2774,7 @@
 <td>size</td>
 <td>long</td>
 <td>Yes</td>
-<td>Order size</td>
+<td>Order size in contract size</td>
 </tr>
 <tr>
 <td>timestamp</td>
