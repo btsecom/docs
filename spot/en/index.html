@@ -227,6 +227,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-3-3-5-28th-novement-2022" class="toc-h2 toc-link" data-title="Version 3.3.5 (28th Novement 2022)">Version 3.3.5 (28th Novement 2022)</a>
+                  </li>
+                  <li>
                     <a href="#version-3-3-4-2nd-september-2022" class="toc-h2 toc-link" data-title="Version 3.3.4 (2nd September 2022)">Version 3.3.4 (2nd September 2022)</a>
                   </li>
                   <li>
@@ -405,7 +408,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-3-3-4-2nd-september-2022'>Version 3.3.4 (2nd September 2022)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-3-3-5-28th-novement-2022'>Version 3.3.5 (28th Novement 2022)</h2>
+<ul>
+<li>Add <a href="#orderbook-incremental-updates">Orderbook incremental update</a> error messages.</li>
+</ul>
+<h2 id='version-3-3-4-2nd-september-2022'>Version 3.3.4 (2nd September 2022)</h2>
 <ul>
 <li>Remove unnecessary parameter <code>includeOld</code> in <a href="#query-trades-fills">Query Trades Fills</a> and <a href="https://btsecom.github.io/docs/spot/en/#query-trades-fills-2">Query User’s Trades Fills</a></li>
 <li>Remove inaccurate parameters <code>beforeSerialId</code> and <code>afterSerialId</code> in <a href="#query-trades-fills">Query Trades Fills</a> and <a href="https://btsecom.github.io/docs/spot/en/#query-trades-fills-2">Query User’s Trades Fills</a></li>
@@ -3756,6 +3763,38 @@
 <td>string</td>
 <td>Yes</td>
 <td>Orderbook symbol</td>
+</tr>
+</tbody></table>
+<h4 id='orderbook-error-response'>Orderbook Error Response</h4>
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Message</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1000</td>
+<td>Market pair provided is currently not supported.</td>
+</tr>
+<tr>
+<td>1001</td>
+<td>Operation provided is currently not supported.</td>
+</tr>
+<tr>
+<td>1002</td>
+<td>Invalid request. Please check again your request and provide all information required.</td>
+</tr>
+<tr>
+<td>1005</td>
+<td>Topic provided does not exist.</td>
+</tr>
+<tr>
+<td>1007</td>
+<td>User message buffer is full.</td>
+</tr>
+<tr>
+<td>1008</td>
+<td>Reached maximum failed attempts, closing the session.</td>
 </tr>
 </tbody></table>
 <h2 id='public-trade-fills'>Public Trade Fills</h2>
