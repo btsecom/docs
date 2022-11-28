@@ -13,6 +13,10 @@ language_tabs:
 
 # Change Log
 
+## Version 3.3.5 (28th Novement 2022)
+
+* Add [Orderbook incremental update](#orderbook-incremental-updates) error messages.
+
 ## Version 3.3.4 (2nd September 2022)
 
 * Remove unnecessary parameter `includeOld` in [Query Trades Fills](#query-trades-fills) and [Query User’s Trades Fills](https://btsecom.github.io/docs/spot/en/#query-trades-fills-2)
@@ -1765,6 +1769,17 @@ Also if [crossed orderbook](https://en.wikipedia.org/wiki/Order_book#Crossed_boo
 | type       | string       | Yes      | `snapshot` - Snapshot of the orderbook with a maximum of 50 levels<br/> `delta` -  Updates of the orderbook |
 | timestamp  | long         | Yes      | Timestamp of the orderbook                                                                                  |
 | symbol     | string       | Yes      | Orderbook symbol                                                                                            |
+
+#### Orderbook Error Response
+
+| Error Code | Message                                                                                |
+| ---        | ---                                                                                    |
+| 1000       | Market pair provided is currently not supported.                                       |
+| 1001       | Operation provided is currently not supported.                                         |
+| 1002       | Invalid request. Please check again your request and provide all information required. |
+| 1005       | Topic provided does not exist.                                                         |
+| 1007       | User message buffer is full.                                                           |
+| 1008       | Reached maximum failed attempts, closing the session.                                  |
 
 
 ## Public Trade Fills

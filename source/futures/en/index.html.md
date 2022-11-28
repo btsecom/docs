@@ -13,6 +13,10 @@ headingLevel: 2
 
 # Change Log
 
+## Version 2.5.2 (28th November 2022)
+
+* Add [Orderbook incremental update](#orderbook-incremental-updates) error messages.
+
 ## Version 2.5.1 (25th November 2022)
 
 * [IMPORTANT] BTSE will adjust the formula to calculate futures risk limit level and some api will be affected.
@@ -2210,6 +2214,17 @@ Also if [crossed orderbook](https://en.wikipedia.org/wiki/Order_book#Crossed_boo
 | type       | string       | Yes      | `snapshot` - Snapshot of the orderbook with a maximum of 50 levels<br/> `delta` -  Updates of the orderbook |
 | timestamp  | long         | Yes      | Timestamp of the orderbook                                                                                  |
 | symbol     | string       | Yes      | Orderbook symbol                                                                                            |
+
+#### Orderbook Error Response
+
+| Error Code | Message                                                                                |
+| ---        | ---                                                                                    |
+| 1000       | Market pair provided is currently not supported.                                       |
+| 1001       | Operation provided is currently not supported.                                         |
+| 1002       | Invalid request. Please check again your request and provide all information required. |
+| 1005       | Topic provided does not exist.                                                         |
+| 1007       | User message buffer is full.                                                           |
+| 1008       | Reached maximum failed attempts, closing the session.                                  |
 
 
 ## Public Trade Fills
