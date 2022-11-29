@@ -1916,7 +1916,7 @@ echo -n "/ws/spot1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6726
       "pegPriceDeviation": "Indicate the deviation percentage. Valid for only algo orders.",
       "remainingSize": "<Remaining size on the order>",
       "time_in_force": "<Time where this order is valid>",
-      "txType": "STOP | TAKE_PROFIT",
+      "txType": 0,
       "triggerPrice": "Trade Trigger Price"
     }
   ]
@@ -1946,9 +1946,10 @@ Receive trade notifications by subscribing to the topic `notificationApiV2`. The
 | remainingSize     | double  | Yes      | Remaining size on the order                                                   |
 | time_in_force     | string  | Yes      | Validity of the order                                                         |
 | timestamp         | long    | Yes      | Order timestamp or transacted timestamp                                       |
-| txType            | string  | Yes      | Used by trigger or OCO orders. STOP indicates its a Stop order, TAKEPROFIT indicates its a take profit order, and LIMIT is when its not any of the above    |
+| txType            | integer  | Yes      | Used by trigger or OCO orders. STOP indicates its a Stop order, TAKEPROFIT indicates its a take profit order, and LIMIT is when its not any of the above    |
 | stealth           | double  | Yes      | Percentage of orders to show on orderbook. Only for Algo orders               |
 | pegPriceDeviation | double  | Yes      | Deviation percentage. Only for Algo orders                                    |
+| triggerPrice      | double  | Yes      | Trigger Price                                                                 |
 
 ## User Trade Fills
 
