@@ -234,6 +234,7 @@ Sent by the server whenever an order receives a fill, whenever the status of an 
 | 150  | ExecType | 1 | Reason for this message (see below) |
 | 151  | LeavesQty | 0.8 | Quantity of order that is still open |
 | 1057 | AggressorIndicator | Y | "Y": taker fill; "N": maker fill. Only present if this message was the result of a fill |
+| 5000 | Liquidation | Y | "Y": messages corresponds to an on-market liquidation order. "N" or absent: it does not. |
 
 
 ### ExecType values 
