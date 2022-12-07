@@ -230,6 +230,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-1-1-0-6th-december-2022" class="toc-h2 toc-link" data-title="Version 1.1.0 (6th December 2022)">Version 1.1.0 (6th December 2022)</a>
+                  </li>
+                  <li>
                     <a href="#version-1-0-0-18th-october-2022" class="toc-h2 toc-link" data-title="Version 1.0.0 (18th October 2022)">Version 1.0.0 (18th October 2022)</a>
                   </li>
               </ul>
@@ -288,19 +291,41 @@
 <table><thead>
 <tr>
 <th>Environment</th>
-<th>Endpoint</th>
+<th>SocketConnectHost</th>
+<th>SocketConnectPort</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>test</td>
-<td>tcp+ssl://fix.btse.io:9876</td>
+<td>tcp+ssl://fix.btse.io</td>
+<td>9876</td>
 </tr>
 <tr>
 <td>production</td>
-<td>tcp+ssl://fix.btse.com:9876</td>
+<td>tcp+ssl://fix.btse.com</td>
+<td>9876</td>
 </tr>
 </tbody></table>
-<h1 id='change-log'>Change Log</h1><h2 id='version-1-0-0-18th-october-2022'>Version 1.0.0 (18th October 2022)</h2>
+
+<p>Sessions for Spot and Futures are separated.</p>
+
+<table><thead>
+<tr>
+<th>SenderSubID</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>SPOT</td>
+</tr>
+<tr>
+<td>FUTURES</td>
+</tr>
+</tbody></table>
+<h1 id='change-log'>Change Log</h1><h2 id='version-1-1-0-6th-december-2022'>Version 1.1.0 (6th December 2022)</h2>
+<ul>
+<li>Release Futures market trading functions <a href="#fix-api">FIX API</a></li>
+</ul>
+<h2 id='version-1-0-0-18th-october-2022'>Version 1.0.0 (18th October 2022)</h2>
 <ul>
 <li>Release Spot market trading functions <a href="#fix-api">FIX API</a></li>
 </ul>
@@ -996,10 +1021,6 @@ Client&#39;s API Key and secret can be generated from API page in BTSE portal. C
 <th>Description</th>
 </tr>
 </thead><tbody>
-<tr>
-<td>A</td>
-<td>Open Order</td>
-</tr>
 <tr>
 <td>0</td>
 <td>New Order</td>
