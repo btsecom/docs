@@ -17,14 +17,26 @@ FIX (Financial Information eXchange) is a standard electronic messaging protocol
 
 FIX endpoints: tcp+ssl://fix.btse.com:9876
 
-| Environment | Endpoint         |
-| ---         | ---              |
-| test        | tcp+ssl://fix.btse.io:9876 |
-| production  | tcp+ssl://fix.btse.com:9876 |
+| Environment | SocketConnectHost      | SocketConnectPort |
+| ---         | ---                    | ---               |
+| test        | tcp+ssl://fix.btse.io  | 9876              |
+| production  | tcp+ssl://fix.btse.com | 9876              |
 
+
+Sessions for Spot and Futures are separated.
+
+| SenderSubID |
+| ---         |
+| SPOT        |
+| FUTURES     |
 
 
 # Change Log
+
+
+## Version 1.1.0 (6th December 2022)
+
+* Release Futures market trading functions [FIX API](#fix-api)
 
 ## Version 1.0.0 (18th October 2022)
 
@@ -245,7 +257,6 @@ Note that every order changed will send a execution report message.
 
 | OrdStatus | Description |
 | --- | --- |
-| A | Open Order |
 | 0 | New Order |
 | 1 | Partially filled order |
 | 3 | Fully filled order |
