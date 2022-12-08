@@ -15,13 +15,16 @@ language_tabs:
 
 FIX (Financial Information eXchange) is a standard electronic messaging protocol which can be used to place orders, receive order updates and executions, and cancel orders. Our FIX api is based on the FIX 4.2 specification and modeled after FIX implementations of other popular cryptocurrency exchanges.
 
+<aside class="notice">
+This service is restricted. Please drop an email to bd@btse.com for further information
+</aside>
+
 FIX endpoints: tcp+ssl://fix.btse.com:9876
 
 | Environment | SocketConnectHost      | SocketConnectPort |
 | ---         | ---                    | ---               |
 | test        | tcp+ssl://fix.btse.io  | 9876              |
 | production  | tcp+ssl://fix.btse.com | 9876              |
-
 
 Sessions for Spot and Futures are separated.
 
