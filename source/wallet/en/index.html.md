@@ -13,6 +13,13 @@ headingLevel: 2
 
 # Change Log
 
+## Version 1.1.0 (16th November 2022)
+
+* [IMPORTANT] BTSE will change futures market naming convention in **December 2022** to provide more clarity to retail users and here are the rules:
+  - Change the suffix for perpetual markets from `PFC` to `PERP` (ex: BTCPFC -> BTC-PERP)
+  - Change the suffix for time-based markets from `delivery month + year` to `settlement date (YYMMDD)` (ex: BTCZ22 -> BTC-221230)
+  - Added a new optional query parameter `useNewSymbolNaming` in [`Query Wallet History`](#query-wallet-history) and [`Transfer Funds`](#transfer-funds) if user wants to use new market name
+
 ## Version 1.0.4 (25th, August 2022)
 
 * Adjust param description of currency in APIs: [`Get Wallet Address`](#get-wallet-address), [`Create Wallet Address`](#create-wallet-address).
@@ -117,34 +124,6 @@ Each API will return one of the following HTTP status:
 * 429 - Too many requests. Indicates that the client has exceeded the rates limits set by the server. Refer to Rate Limits for more details
 * 500 - Internal server error. Indicates that the server encountered an unexpected condition resulting in not being able to fulfill the request
 
-## API Enum
-
-When connecting up the BTSE API, you will come across number codes that represents different states or status types in BTSE. The following section provides a list of codes that you are expecting to see.
-
-* 1: MARKET_UNAVAILABLE = Futures market is unavailable
-* 2: ORDER_INSERTED = Order is inserted successfully
-* 4: ORDER_FULLY_TRANSACTED = Order is fully transacted
-* 5: ORDER_PARTIALLY_TRANSACTED = Order is partially transacted
-* 6: ORDER_CANCELLED = Order is cancelled successfully
-* 8: INSUFFICIENT_BALANCE = Insufficient balance in account
-* 9: TRIGGER_INSERTED = Trigger Order is inserted successfully
-* 10: TRIGGER_ACTIVATED = Trigger Order is activated successfully
-* 12: ERROR_UPDATE_RISK_LIMIT = Error in updating risk limit
-* 15: ORDER_REJECTED = Order is rejected
-* 16: ORDER_NOTFOUND = Order is not found with the order ID or clOrderID provided
-* 28: TRANSFER_UNSUCCESSFUL = Transfer funds between spot and futures is unsuccessful
-* 27: TRANSFER_SUCCESSFUL = Transfer funds between futures and spot is successful
-* 41: ERROR_INVALID_RISK_LIMIT = Invalid risk limit was specified
-* 64: STATUS_LIQUIDATION = Account is undergoing liquidation
-* 101: FUTURES_ORDER_PRICE_OUTSIDE_LIQUIDATION_PRICE = Futures order is outside of liquidation price
-* 1003: ORDER_LIQUIDATION = Order is undergoing liquidation
-* 1004: ORDER_ADL = Order is undergoing ADL
-* 3505: Invalid protocol
-* 3506: Invalid withdraw amount
-* 3507: Invalid withdraw address
-* 3508: Withdraw failed
-
-
 # Public Endpoints
 
 ## Query available crypto network list for currency
@@ -228,6 +207,7 @@ Get the exchange rate between assets.
 `GET /api/v3.2/user/wallet`
 
 Query user's wallet balance. Requires `Read` permissions on the API key.
+
 ### Response Content
 
 | Name      | Type   | Required | Description       |
@@ -235,6 +215,7 @@ Query user's wallet balance. Requires `Read` permissions on the API key.
 | currency  | string | Yes      | Currency          |
 | total     | double | Yes      | Total balance     |
 | available | double | Yes      | Available balance |
+
 ## Query Wallet History
 
 > Response
@@ -264,12 +245,13 @@ Get user's wallet history records on the spot wallet
 
 ### Request Parameters
 
-| Name      | Type    | Required | Description                                           |
-| ---       | ---     | ---      | ---                                                   |
-| currency  | string  | No       | Currency, if not specified will return all currencies |
-| startTime | long    | No       | Starting time (eg. 1624987283000)                     |
-| endTime   | long    | No       | Ending time (eg. 1624987283000)                       |
-| count     | integer | No       | Number of records to return                           |
+| Name               | Type    | Required | Description                                                            |
+| ---                | ---     | ---      | ---                                                                    |
+| currency           | string  | No       | Currency, if not specified will return all currencies                  |
+| startTime          | long    | No       | Starting time in milliseconds (eg. 1624987283000)                      |
+| endTime            | long    | No       | Ending time in milliseconds (eg. 1624987283000)                        |
+| count              | integer | No       | Number of records to return                                            |
+| useNewSymbolNaming | boolean | No       | True to return futures market name in the new format, default to False |
 
 
 ### Response Content
@@ -312,9 +294,9 @@ Creates a wallet address. If the address created has not been used before, a 400
 
 ### Request Parameters
 
-| Name     | Type   | Required | Description                                                                 |
-| ---      | ---    | ---      | ---                                                                         |
-| currency | string | Yes      | Ex: BTC  |
+| Name     | Type   | Required | Description |
+| ---      | ---    | ---      | ---         |
+| currency | string | Yes      | Ex: BTC     |
 | network  | string | Yes      | Ex: BITCOIN |
 
 ### Response Content
@@ -352,9 +334,9 @@ Gets a wallet address. To use this API, `Wallet` permission is required.
 
 ### Request Parameters
 
-| Name     | Type   | Required | Description                                                                    |
-| ---      | ---    | ---      | ---                                                                            |
-| currency | string | Yes      | Ex: BTC  |
+| Name     | Type   | Required | Description |
+| ---      | ---    | ---      | ---         |
+| currency | string | Yes      | Ex: BTC     |
 | network  | string | Yes      | Ex: BITCOIN |
 
 ### Response Content
@@ -391,18 +373,18 @@ Performs a wallet withdrawal. To use this API, `Withdraw` permission is required
 
 ### Request Parameters
 
-| Name               | Type    | Required | Description |
-| ---                | ---     | ---      | ---         |
+| Name               | Type    | Required | Description                                                                                                                                                                                                                                                                            |
+| ---                | ---     | ---      | ---                                                                                                                                                                                                                                                                                    |
 | currency           | string  | Yes      | Currency-Network pair <br> Currency list can be retrieved from [Available currency list for action](#query-available-currency-list-for-wallet-action) <br> Network list can be retrieved from [Available network list for currency](#query-available-crypto-network-list-for-currency) |
-| address            | string  | Yes      | Blockchain address |
-| tag                | string  | Yes      | Tag, used only by some blockchain (eg. XRP) |
-| amount             | string  | Yes      | Amount to withdraw (Max decimal supported is `8` for all currencies). Will return Invalid withdraw amount (code: 3506) if exceeds |
-| includeWithdrawFee | boolean | No       | If true or the field doesn't exist, the fee is included in amount. Otherwise, the fee is extra added and the deducted amount can be larger than the amount claimed |
+| address            | string  | Yes      | Blockchain address                                                                                                                                                                                                                                                                     |
+| tag                | string  | Yes      | Tag, used only by some blockchain (eg. XRP)                                                                                                                                                                                                                                            |
+| amount             | string  | Yes      | Amount to withdraw (Max decimal supported is `8` for all currencies). Will return Invalid withdraw amount (code: 3506) if exceeds                                                                                                                                                      |
+| includeWithdrawFee | boolean | No       | If true or the field doesn't exist, the fee is included in amount. Otherwise, the fee is extra added and the deducted amount can be larger than the amount claimed                                                                                                                     |
 
 ### Response Content
 
-| Name        | Type   | Required | Description |
-| ---         | ---    | ---      | --- |
+| Name        | Type   | Required | Description                                                                                                                                                                                                     |
+| ---         | ---    | ---      | ---                                                                                                                                                                                                             |
 | withdraw_id | string | Yes      | Internal withdrawal ID. References the `orderID` field in `wallet_history` API. As withdrawal will not be processed immediately. User can query the wallet history API to check on the status of the withdrawal |
 
 
@@ -483,7 +465,7 @@ Performs a currency conversion from wallet. To use this API, `Wallet` permission
 | settlementCurrency | string | Yes      | destination currency                      |
 | rate               | float  | Yes      | exchange rate                             |
 
-## Transfer funds
+## Transfer Funds
 
 > Request
 
@@ -513,12 +495,13 @@ Performs a internal currency transfer to other user from wallet. To use this API
 
 ### Request Parameters
 
-| Name       | Type   | Required | Description                    |
-| ---        | ---    | ---      | ---                            |
-| amount     | string | Yes      | amount of currency to transfer |
-| asset      | string | Yes      | currency to be transferred     |
-| toUser     | string | Yes      | receiver account               |
-| toUserMail | string | Yes      | receiver email                 |
+| Name               | Type    | Required | Description                                                          |
+| ---                | ---     | ---      | ---                                                                  |
+| amount             | string  | Yes      | amount of currency to transfer                                       |
+| asset              | string  | Yes      | currency to be transferred                                           |
+| toUser             | string  | Yes      | receiver account                                                     |
+| toUserMail         | string  | Yes      | receiver email                                                       |
+| useNewSymbolNaming | boolean | No       | True if use new futures market name in asset field, default to False |
 
 ### Response Content
 

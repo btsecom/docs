@@ -96,15 +96,8 @@ $ echo -n "/api/v1/quote1624985375123{\"orderSizeInBaseCurrency\":1,\"orderAmoun
 
 Rate limits for BTSE is as follows:
 
-**Query**
-
 * Per API: `15 requests/second`
 * Per User: `30 requests/second`
-
-**Orders**
-
-* Per API: `75 requests/second`
-* Per User: `75 requests/second`
 
 ## API Status Codes
 

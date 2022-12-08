@@ -98,27 +98,27 @@ Get all investment products
 
 ### Response Content
 
-|Name|Type|Required|Description|
-|---|---|---|---|
-| id | string | Yes | Product id |
-| name | string | Yes | Product name |
-| currency | string | Yes | Currency |
-| type | string | Yes | Product type |
-| startDate | long | Yes | Inventment start date |
-| interestStartDate | long | Yes | Interest start date |
-| rates | RateObject[] | Yes | Interest rate information |
-| compounding | double | Yes | is product compounding |
-| autoRenewSupported | double | Yes | is product supported renew automatically |
-| dailyLimit | double | Yes | Daily invent amount limit |
-| minSize | double | Yes | Minimum invest size |
-| incrementalSize | double | Yes | Invest step size |
+| Name               | Type         | Required | Description                              |
+| ---                | ---          | ---      | ---                                      |
+| id                 | string       | Yes      | Product id                               |
+| name               | string       | Yes      | Product name                             |
+| currency           | string       | Yes      | Currency                                 |
+| type               | string       | Yes      | Product type                             |
+| startDate          | long         | Yes      | Inventment start date                    |
+| interestStartDate  | long         | Yes      | Interest start date                      |
+| rates              | RateObject[] | Yes      | Interest rate information                |
+| compounding        | double       | Yes      | is product compounding                   |
+| autoRenewSupported | double       | Yes      | is product supported renew automatically |
+| dailyLimit         | double       | Yes      | Daily invent amount limit                |
+| minSize            | double       | Yes      | Minimum invest size                      |
+| incrementalSize    | double       | Yes      | Invest step size                         |
 
 ### RateObject
 
-|Name|Type|Required|Description|
-|---|---|---|---|
-| days | integer | Yes | Duration in days |
-| rate | double | Yes | Interest rate |
+| Name | Type    | Required | Description      |
+| ---  | ---     | ---      | ---              |
+| days | integer | Yes      | Duration in days |
+| rate | double  | Yes      | Interest rate    |
 
 
 ## Deposit Investment
@@ -148,18 +148,18 @@ Deposit an investment
 
 ### Request Parameters
 
-|Name|Type|Required|Description|
-|---|---|---|---|
-| productId | string | Yes | Invest product id |
-| amount | double | Yes | Invest amount |
-| renew | boolean | Yes | renew automatically |
-| day | integer | Yes | Duration in days |
+| Name      | Type    | Required | Description         |
+| ---       | ---     | ---      | ---                 |
+| productId | string  | Yes      | Invest product id   |
+| amount    | double  | Yes      | Invest amount       |
+| renew     | boolean | Yes      | renew automatically |
+| day       | integer | Yes      | Duration in days    |
 
 ### Response Content
 
-|Name|Type|Required|Description|
-|---|---|---|---|
-| success | boolean | Yes | The processing result |
+| Name    | Type    | Required | Description           |
+| ---     | ---     | ---      | ---                   |
+| success | boolean | Yes      | The processing result |
 
 
 ## Renew Investment
@@ -188,17 +188,17 @@ Renew an investment order
 
 ### Request Parameters
 
-|Name|Type|Required|Description|
-|---|---|---|---|
-| orderId | integer | Yes | Investment order id |
-| autoRenew | boolean | Yes | renew automatically |
+| Name      | Type    | Required | Description         |
+| ---       | ---     | ---      | ---                 |
+| orderId   | integer | Yes      | Investment order id |
+| autoRenew | boolean | Yes      | renew automatically |
 
 ### Response Content
 
-|Name|Type|Required|Description|
-|---|---|---|---|
-| orderId | integer | Yes | Investment order id |
-| autoRenew | boolean | Yes | status of autoRenew flag |
+| Name      | Type    | Required | Description              |
+| ---       | ---     | ---      | ---                      |
+| orderId   | integer | Yes      | Investment order id      |
+| autoRenew | boolean | Yes      | status of autoRenew flag |
 
 
 ## Redeem Investment
@@ -226,16 +226,16 @@ Redeem an investment order
 
 ### Request Parameters
 
-|Name|Type|Required|Description|
-|---|---|---|---|
-| orderId | integer | Yes | Investment order id |
-| amount | double | Yes | Redeem amount |
+| Name    | Type    | Required | Description         |
+| ---     | ---     | ---      | ---                 |
+| orderId | integer | Yes      | Investment order id |
+| amount  | double  | Yes      | Redeem amount       |
 
 ### Response Content
 
-|Name|Type|Required|Description|
-|---|---|---|---|
-| success | boolean | Yes | The processing result |
+| Name    | Type    | Required | Description           |
+| ---     | ---     | ---      | ---                   |
+| success | boolean | Yes      | The processing result |
 
 
 ## Query Investment Orders
@@ -272,24 +272,24 @@ Query investment orders
 
 ### Response Content
 
-|Name|Type|Required|Description|
-|---|---|---|---|
-| id | integer | Yes | Order id |
-| name | string | Yes | Product name |
-| currency | string | Yes | Currency |
-| type | string | Yes | Product type |
-| rate | boolean | Yes | Interest rate |
-| investAmt | boolean | Yes | Amount |
-| interestEarned | boolean | Yes | Intereset earned |
-| nextInterestPayoutTime | boolean | Yes | Next interest payout time |
-| startTime | boolean | Yes | Start time |
-| endTime | boolean | Yes | End time |
-| duration | boolean | Yes | Duration |
-| payoutLockTime | boolean | Yes | Lock time of payout |
-| autoRenew | boolean | Yes | renew automatically |
-| compounding | boolean | Yes | is compounding |
-| autoRenewSupported | boolean | Yes | is renew automatically supported |
-| redemptionProcessing | boolean | Yes | is redemption processing |
+| Name                   | Type    | Required | Description                      |
+| ---                    | ---     | ---      | ---                              |
+| id                     | integer | Yes      | Order id                         |
+| name                   | string  | Yes      | Product name                     |
+| currency               | string  | Yes      | Currency                         |
+| type                   | string  | Yes      | Product type                     |
+| rate                   | boolean | Yes      | Interest rate                    |
+| investAmt              | boolean | Yes      | Amount                           |
+| interestEarned         | boolean | Yes      | Intereset earned                 |
+| nextInterestPayoutTime | boolean | Yes      | Next interest payout time        |
+| startTime              | boolean | Yes      | Start time                       |
+| endTime                | boolean | Yes      | End time                         |
+| duration               | boolean | Yes      | Duration                         |
+| payoutLockTime         | boolean | Yes      | Lock time of payout              |
+| autoRenew              | boolean | Yes      | renew automatically              |
+| compounding            | boolean | Yes      | is compounding                   |
+| autoRenewSupported     | boolean | Yes      | is renew automatically supported |
+| redemptionProcessing   | boolean | Yes      | is redemption processing         |
 
 
 ## Query Investment History
@@ -324,31 +324,32 @@ Query investment history
 
 ### Request Parameters
 
-|Name|Type|Required|Description|
-|---|---|---|---|
-| pageNumber | integer | No | Page number to query, default to 1 (1-based) |
-| pageSize | integer | No | Number of records in a page, default to 10, maximum 50 |
+| Name       | Type    | Required | Description                                            |
+| ---        | ---     | ---      | ---                                                    |
+| pageNumber | integer | No       | Page number to query, default to 1 (1-based)           |
+| pageSize   | integer | No       | Number of records in a page, default to 10, maximum 50 |
 
 
 ### Response Content
 
-|Name|Type|Required|Description|
-|---|---|---|---|
-| totalRows | string | Yes | Total records |
-| pageNumber | string | Yes | current page number |
-| pageSize | string | Yes | Number of records in a page |
-| data | InvestmentHistoryObject[] | Yes | Investment history object |
+| Name       | Type                      | Required | Description                 |
+| ---        | ---                       | ---      | ---                         |
+| totalRows  | string                    | Yes      | Total records               |
+| pageNumber | string                    | Yes      | current page number         |
+| pageSize   | string                    | Yes      | Number of records in a page |
+| data       | InvestmentHistoryObject[] | Yes      | Investment history object   |
 
 ### InvestmentHistoryObject
-|Name|Type|Required|Description|
-|---|---|---|---|
-| txnTime | integer | Yes | Transaction time |
-| name | string | Yes | Product name |
-| currency | string | Yes | Currency |
-| rate | string | Yes | Interest rate |
-| type | boolean | Yes | Product type |
-| txnType | boolean | Yes | Transaction type |
-| amount | boolean | Yes | Transaction amount |
-| totalAmount | boolean | Yes | Total amount of the investment |
-| interestEarned | boolean | Yes | Interest earned |
-| duration | boolean | Yes | Duration |
+
+| Name           | Type    | Required | Description                    |
+| ---            | ---     | ---      | ---                            |
+| txnTime        | integer | Yes      | Transaction time               |
+| name           | string  | Yes      | Product name                   |
+| currency       | string  | Yes      | Currency                       |
+| rate           | string  | Yes      | Interest rate                  |
+| type           | boolean | Yes      | Product type                   |
+| txnType        | boolean | Yes      | Transaction type               |
+| amount         | boolean | Yes      | Transaction amount             |
+| totalAmount    | boolean | Yes      | Total amount of the investment |
+| interestEarned | boolean | Yes      | Interest earned                |
+| duration       | boolean | Yes      | Duration                       |
