@@ -22,7 +22,9 @@ FIX endpoints: tcp+ssl://fix.btse.com:9876
 | test        | tcp+ssl://fix.btse.io:9876 |
 | production  | tcp+ssl://fix.btse.com:9876 |
 
-
+<aside class="notice">
+This service is restricted. Please drop an email to bd@btse.com for further information
+</aside>
 
 # Change Log
 
