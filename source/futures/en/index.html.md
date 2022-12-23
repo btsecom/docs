@@ -13,6 +13,10 @@ headingLevel: 2
 
 # Change Log
 
+## Version 2.5.3  (23th December 2022)
+
+* [IMPORTANT] BTSE will change futures market naming convention in **December 2023**.
+
 ## Version 2.5.2 (28th November 2022)
 
 * Add [Orderbook incremental update](#orderbook-incremental-updates) error messages.
