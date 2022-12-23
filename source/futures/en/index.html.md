@@ -15,7 +15,7 @@ headingLevel: 2
 
 ## Version 2.5.3  (23th December 2022)
 
-* [IMPORTANT] BTSE will change futures market naming convention in **December 2023**. The changes are shown in [Version 2.5.0 (16th November 2022)](#version-2.5.0-(16th-November-2022)).
+* [IMPORTANT] BTSE will change futures market naming convention in **2023**. The changes are shown in [Version 2.5.0 (16th November 2022)](#version-2.5.0-(16th-November-2022)).
 
 ## Version 2.5.2 (28th November 2022)
 
