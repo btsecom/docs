@@ -13,6 +13,10 @@ language_tabs:
 
 # Change Log
 
+## Version 3.3.6 (3rd Jan 2023)
+
+* Add funding fee data in [Query User Trades Fills](#query-user-trades-fills).
+
 ## Version 3.3.5 (28th Novement 2022)
 
 * Add [Orderbook incremental update](#orderbook-incremental-updates) error messages.
@@ -1120,7 +1124,7 @@ Retrieves open orders that have not yet been matched or matched recently.
 | timeInForce                | string | Yes      | Order validity                                                                         |
 | triggered                  | bool   | Yes      | Indicate whether the order is triiggered                                               |
 
-## Query Trades Fills
+## Query User Trades Fills
 
 > Response
 
@@ -1153,7 +1157,7 @@ Retrieves open orders that have not yet been matched or matched recently.
 
 `GET /api/v3.2/user/trade_history`
 
-Retrieves a user's trade history
+Retrieves a user's trade history which includes funding fee data.
 
 ### Request Parameters
 
