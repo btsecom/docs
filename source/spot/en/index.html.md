@@ -1084,7 +1084,7 @@ Retrieves open orders that have not yet been matched or matched recently.
 
 | Name      | Type   | Required | Description                                                                         |
 | ---       | ---    | ---      | ---                                                                                 |
-| symbol    | string | Yes      | Market symbol                                                                       |
+| symbol    | string | No      | Market symbol                                                                       |
 | orderID   | string | No       | Query using internal order ID                                                       |
 | clOrderID | string | No       | Query using custom order ID. If `orderID` is provided, `clOrderID` will be ignored. |
 
