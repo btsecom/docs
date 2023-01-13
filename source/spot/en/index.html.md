@@ -317,6 +317,8 @@ Gets market summary information. If no symbol parameter is sent, then all market
 | maxRiskLimit        | double   | No         | Not valid for spot                                          |
 | availableSettlement | array    | No         | Not valid for spot                                          |
 | futures             | boolean  | Yes        | Indicator if symbol is a futures contract                   |
+| isMarketOpenToOtc   | boolean  | Yes        | Indicator if market is open to otc                          |
+| isMarketOpenToSpot  | boolean  | Yes        | Indicator if market is open to spot                         |
 
 ## Charting Data
 
