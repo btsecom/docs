@@ -202,26 +202,48 @@ When connecting up the BTSE API, you will come across number codes that represen
 * 8: INSUFFICIENT_BALANCE = Insufficient balance in account
 * 9: TRIGGER_INSERTED = Trigger Order is inserted successfully
 * 10: TRIGGER_ACTIVATED = Trigger Order is activated successfully
+* 11: ERROR_INVALID_CURRENCY
 * 12: ERROR_UPDATE_RISK_LIMIT = Error in updating risk limit
+* 13: ERROR_INVALID_LEVERAGE
 * 15: ORDER_REJECTED = Order is rejected
 * 16: ORDER_NOTFOUND = Order is not found with the order ID or clOrderID provided
 * 17: REQUEST_FAILED = Failed to complete the request, please check order status
 * 20: SUCCESS = Action succeeded.
+* 21: FREEZE_SUCCESSFUL
 * 27: TRANSFER_SUCCESSFUL = Transfer funds between futures and spot is successful
 * 28: TRANSFER_UNSUCCESSFUL = Transfer funds between spot and futures is unsuccessful
+* 29: QUERY_GET_ORDERS
+* 31: QUERY_GET_POSITIONS
+* 33: QUERY_GET_ALL_POSITIONS_ORDERS
+* 34: QUERY_WALLET
+* 36: QUERY_FUTURES_MARGIN
 * 41: ERROR_INVALID_RISK_LIMIT = Invalid risk limit was specified
+* 51: QUERY_GET_ORDERS_WITH_LIMIT
 * 64: STATUS_LIQUIDATION = Account is undergoing liquidation
 * 65: STATUS_ACITVE = Order is active
+* 66: MODE_BUY
 * 76: ORDER_TYPE_LIMIT = Limit order
 * 77: ORDER_TYPE_MARKET = Market order
 * 80: ORDER_TYPE_PEG = Peg/Algo order
 * 81: ORDER_TYPE_OTC = Otc order
+* 83: MODE_SELL
 * 85: STATUS_PROCESSING = Order is inactive
 * 88: STATUS_INACTIVE = Order is inactive
 * 101: FUTURES_ORDER_PRICE_OUTSIDE_LIQUIDATION_PRICE = Futures order is outside of liquidation price
+* 110: FUTURES_FUNDING
 * 123: AMEND_ORDER = Order amended
+* 124: UNFREEZE_SUCCESSFUL
+* 300: ERROR_MAX_ORDER_SIZE_EXCEEDED
+* 301: ERROR_INVALID_ORDER_SIZE
+* 302: ERROR_INVALID_ORDER_PRICE
+* 303: ERROR_RATE_LIMITS_EXCEEDED
+* 304: ERROR_MAX_OPEN_ORDER_EXCEEDED
 * 1003: ORDER_LIQUIDATION = Order is undergoing liquidation
 * 1004: ORDER_ADL = Order is undergoing ADL
+* 30000: OTC_ORDER_QUERY
+* 30001: OTC_ORDER_QUOTE
+* 30007: OTC_ORDER_COMPLETE_SUCCESS
+* 30410: BLOCK_TRADE_COMPLETE_SUCCESS
 
 
 # Public Endpoints
