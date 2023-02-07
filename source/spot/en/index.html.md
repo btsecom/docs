@@ -13,7 +13,11 @@ language_tabs:
 
 # Change Log
 
-## Version 3.3.5 (28th Novement 2022)
+## Version 3.3.6 (7th February 2023)
+
+* Update `symbol` parameter as optional in `open_orders`
+
+## Version 3.3.5 (28th November 2022)
 
 * Add [Orderbook incremental update](#orderbook-incremental-updates) error messages.
 
@@ -1106,7 +1110,7 @@ Retrieves open orders that have not yet been matched or matched recently.
 
 | Name      | Type   | Required | Description                                                                         |
 | ---       | ---    | ---      | ---                                                                                 |
-| symbol    | string | Yes      | Market symbol                                                                       |
+| symbol    | string | No       | Market symbol                                                                       |
 | orderID   | string | No       | Query using internal order ID                                                       |
 | clOrderID | string | No       | Query using custom order ID. If `orderID` is provided, `clOrderID` will be ignored. |
 
