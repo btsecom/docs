@@ -347,7 +347,7 @@
                     <a href="#query-open-orders" class="toc-h2 toc-link" data-title="Query Open Orders">Query Open Orders</a>
                   </li>
                   <li>
-                    <a href="#query-trades-fills-2" class="toc-h2 toc-link" data-title="Query Trades Fills">Query Trades Fills</a>
+                    <a href="#query-user-trades-fills" class="toc-h2 toc-link" data-title="Query User Trades Fills">Query User Trades Fills</a>
                   </li>
                   <li>
                     <a href="#query-account-fees" class="toc-h2 toc-link" data-title="query account fees">query account fees</a>
@@ -414,6 +414,7 @@
         <h1 id='change-log'>Change Log</h1><h2 id='version-3-3-6-7th-february-2023'>Version 3.3.6 (7th February 2023)</h2>
 <ul>
 <li>Update <code>symbol</code> parameter as optional in <code>open_orders</code></li>
+<li>Add funding fee data in <a href="#query-user-trades-fills">Query User Trades Fills</a>.</li>
 </ul>
 <h2 id='version-3-3-5-28th-november-2022'>Version 3.3.5 (28th November 2022)</h2>
 <ul>
@@ -2594,7 +2595,7 @@
 <td>Indicate whether the order is triiggered</td>
 </tr>
 </tbody></table>
-<h2 id='query-trades-fills-2'>Query Trades Fills</h2>
+<h2 id='query-user-trades-fills'>Query User Trades Fills</h2>
 <blockquote>
 <p>Response</p>
 </blockquote>
@@ -2625,7 +2626,7 @@
 </span></code></pre></div>
 <p><code>GET /api/v3.2/user/trade_history</code></p>
 
-<p>Retrieves a user&#39;s trade history</p>
+<p>Retrieves a user&#39;s trade history which includes funding fee data.</p>
 <h3 id='request-parameters-12'>Request Parameters</h3>
 <table><thead>
 <tr>
