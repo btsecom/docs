@@ -13,6 +13,10 @@ language_tabs:
 
 # Change Log
 
+## Version 3.3.7 (15th February 2023)
+
+* Add two new response field `isMarketOpenToOtc`, `isMarketOpenToSpot` in [Market Summary](#market-summary)
+
 ## Version 3.3.5 (28th Novement 2022)
 
 * Add [Orderbook incremental update](#orderbook-incremental-updates) error messages.
