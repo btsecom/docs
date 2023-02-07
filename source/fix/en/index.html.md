@@ -36,6 +36,9 @@ Sessions for Spot and Futures are separated.
 
 # Change Log
 
+## Version 1.1.1 (7th February 2023)
+
+* Revise Common request attributes
 
 ## Version 1.1.0 (6th December 2022)
 
@@ -89,7 +92,7 @@ Below attributes are required in every client's request message.
 | 34 | MsgSeqNum    | 1         | Sequence of message, starts from 1 and must be incremented with every message. Messages with duplicate or out-of-order sequence numbers will be rejected. Sequence numbers are reset on new connections. |
 | 35 | MsgType      | 8         | Message type                                         |
 | 49 | SenderCompID | zyf...IZx | Client API key                                       |
-| 50 | SenderSubID  | SPOT      | Currently only support: "SPOT": spot market          |
+| 50 | SenderSubID  | SPOT      | "SPOT": spot market; "FUTURES": futures market       |
 | 52 | SendingTime  | 20220916-07:29:07 | Sending time of message                      |
 | 56 | TargetCompID | BTSE      | Must be set to "BTSE" (for messages from the client) |
 | 10 | CheckSum     | 145       | CheckSum of the message                              |
