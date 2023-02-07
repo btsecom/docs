@@ -36,6 +36,9 @@ Sessions for Spot and Futures are separated.
 
 # Change Log
 
+## Version 1.1.1 (7th February 2023)
+
+* Revise Common request attributes
 
 ## Version 1.1.0 (6th December 2022)
 
