@@ -16,6 +16,7 @@ language_tabs:
 ## Version 3.3.6 (7th February 2023)
 
 * Update `symbol` parameter as optional in `open_orders`
+* Add funding fee data in [Query User Trades Fills](#query-user-trades-fills).
 
 ## Version 3.3.5 (28th November 2022)
 
@@ -1146,7 +1147,7 @@ Retrieves open orders that have not yet been matched or matched recently.
 | timeInForce                | string | Yes      | Order validity                                                                         |
 | triggered                  | bool   | Yes      | Indicate whether the order is triiggered                                               |
 
-## Query Trades Fills
+## Query User Trades Fills
 
 > Response
 
@@ -1179,7 +1180,7 @@ Retrieves open orders that have not yet been matched or matched recently.
 
 `GET /api/v3.2/user/trade_history`
 
-Retrieves a user's trade history
+Retrieves a user's trade history which includes funding fee data.
 
 ### Request Parameters
 
