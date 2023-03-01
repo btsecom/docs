@@ -13,6 +13,10 @@ language_tabs:
 
 # Change Log
 
+## Version 3.3.7 (1th March 2023)
+
+* update the format of args for [Orderbook incremental update](#orderbook-incremental-updates).
+
 ## Version 3.3.6 (7th February 2023)
 
 * Update `symbol` parameter as optional in `open_orders`
