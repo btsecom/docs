@@ -1671,7 +1671,7 @@ Subscribe to the Level 2 Orderbook. The format to subscribe to will be `symbol_d
 {
   "op": "subscribe",
   "args": [
-    "update:BTC-USD"
+    "update:BTC-USD_0"
   ]
 }
 ```
@@ -1680,7 +1680,7 @@ Subscribe to the Level 2 Orderbook. The format to subscribe to will be `symbol_d
 {
   "op": "unsubscribe",
   "args": [
-    "update:BTC-USD"
+    "update:BTC-USD_0"
   ]
 }
 ```
@@ -1689,7 +1689,7 @@ Subscribe to the Level 2 Orderbook. The format to subscribe to will be `symbol_d
 
 ```json
 {
-  "topic": "update:BTC-USD",
+  "topic": "update:BTC-USD_0",
   "data": {
     "bids": [
       [
@@ -1768,7 +1768,7 @@ Subscribe to the Level 2 Orderbook. The format to subscribe to will be `symbol_d
 }
 ```
 
-Subscribe to Orderbook incremental updates through the endpoint `wss://ws.btse.com/ws/oss/spot`. The topic to subscribe to will be `update` specifying the symbol (eg. `update:BTC-USD`). The first response received will be a snapshot of the current orderbook (this is indicated in the `type` field) and 50 levels will be returned. Incremental updates will be sent in subsequent packets with type `delta`.
+Subscribe to Orderbook incremental updates through the endpoint `wss://ws.btse.com/ws/oss/spot`. The format of topic will be `update:symbol_grouping` (eg. `update:BTC-USD_0`). The first response received will be a snapshot of the current orderbook (this is indicated in the `type` field) and 50 levels will be returned. Incremental updates will be sent in subsequent packets with type `delta`.
 
 Bids and asks will be sent in `price` and `size` tuples. The size sent will be the new updated size for the price. If a value of `0` is sent, the price should be removed from the local copy of the orderbook.
 
