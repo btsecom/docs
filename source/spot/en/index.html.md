@@ -13,6 +13,10 @@ language_tabs:
 
 # Change Log
 
+## Version 3.3.8 (29th March 2023)
+
+* Update the http status code for authentication failed to `401`
+
 ## Version 3.3.7 (1th March 2023)
 
 * update the format of args for [Orderbook incremental update](#orderbook-incremental-updates).
