@@ -13,9 +13,13 @@ headingLevel: 2
 
 # Change Log
 
+## Version 2.5.5 (29th March 2023)
+
+* Update the http status code for authentication failed to `401`
+
 ## Version 2.5.4 (1th March 2023)
 
-* update the format of args for [Orderbook incremental update](#orderbook-incremental-updates).
+* Update the format of args for [Orderbook incremental update](#orderbook-incremental-updates).
 
 ## Version 2.5.3  (23th December 2022)
 
