@@ -18,7 +18,7 @@ headingLevel: 2
 * [IMPORTANT] BTSE will change futures market naming convention in **April 2023** to provide more clarity to retail users and here are the rules:
   - Change the suffix for perpetual markets from `PFC` to `PERP` (ex: BTCPFC -> BTC-PERP)
   - Change the suffix for time-based markets from `delivery month + year` to `settlement date (YYMMDD)` (ex: BTCM23 -> BTC-230630)
-  - [Reference](https://blog.btse.com/important-notice-upcoming-changes-to-futures-risk-limits-and-contract-names/)
+  - [Reference](https://www.btse.com/blog/important-notice-upcoming-changes-to-futures-risk-limits-and-contract-names/)
   - Futures API updated (Generally added a new optional parameter `useNewSymbolNaming` to specify if the market name is in the new format):
     - [`Market Summary`](#market-summary)
     - [`Query Open Orders`](#query-open-orders)
@@ -69,7 +69,7 @@ headingLevel: 2
     - `minRiskLimit` now in contract size and will be updated to be `usd notional value`
     - `maxRiskLimit` now in contract size and will be updated to be `usd notional value`
   - `Order size` remains in `contract size` but not `usd value` for backward compatibility
-  - [Reference](https://blog.btse.com/important-notice-upcoming-changes-to-futures-risk-limits-and-contract-names/)
+  - [Reference](https://www.btse.com/blog/important-notice-upcoming-changes-to-futures-risk-limits-and-contract-names/)
   - Can ask question in [BTSE api TG group](https://t.me/btsecomAPI) if any
 
 ## Version 2.5.0 (16th November 2022)
@@ -77,7 +77,7 @@ headingLevel: 2
 * [IMPORTANT] BTSE will change futures market naming convention in **December 2022** to provide more clarity to retail users and here are the rules:
   - Change the suffix for perpetual markets from `PFC` to `PERP` (ex: BTCPFC -> BTC-PERP)
   - Change the suffix for time-based markets from `delivery month + year` to `settlement date (YYMMDD)` (ex: BTCZ22 -> BTC-221230)
-  - [Reference](https://blog.btse.com/important-notice-upcoming-changes-to-futures-risk-limits-and-contract-names/)
+  - [Reference](https://www.btse.com/blog/important-notice-upcoming-changes-to-futures-risk-limits-and-contract-names/)
   - Futures API updated (Generally added a new optional parameter `useNewSymbolNaming` to specify if the market name is in the new format):
     - [`Market Summary`](#market-summary)
     - [`Query Open Orders`](#query-open-orders)
