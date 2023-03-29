@@ -1334,7 +1334,7 @@ Retrieves a user's trade history
       {
         "dateTime": 1680059656492,
         "orderType": 77,
-        "symbol": "BTC-PERP",
+        "symbol": "BTCPFC",
         "orderId": "8ff187ed-0a03-4ff5-b67a-6a90fbac4ad7",
         "fee": 0.548024,
         "orderSize": 100.0,
@@ -1358,12 +1358,12 @@ Retrieves a user's trade history
         "fillSize": 100.0,
         "orderTypeName": "TYPE_MARKET",
         "entryPrice": 0.0,
-        "marketName": "BTC-PERP-USD",
+        "marketName": "BTCPFC-USD",
         "futureTradeHistories": [
           {
             "dateTime": 1680059656492,
             "orderType": 77,
-            "symbol": "BTC-PERP",
+            "symbol": "BTCPFC",
             "orderId": "8ff187ed-0a03-4ff5-b67a-6a90fbac4ad7",
             "fee": 0.548024,
             "orderSize": 100.0,
@@ -1387,16 +1387,16 @@ Retrieves a user's trade history
             "fillSize": 100.0,
             "orderTypeName": "TYPE_MARKET",
             "entryPrice": 0.0,
-            "marketName": "BTC-PERP-USD",
+            "marketName": "BTCPFC-USD",
             "futureTradeHistories": [],
             "orderMode": 66,
-            "walletName": "ISOLATED@BTC-PERP-USD",
+            "walletName": "ISOLATED@BTCPFC-USD",
             "realizedPnl": 0.0,
             "triggerOrderTypeName": "NULL"
           }
         ],
         "orderMode": 66,
-        "walletName": "ISOLATED@BTC-PERP-USD",
+        "walletName": "ISOLATED@BTCPFC-USD",
         "realizedPnl": 0.0,
         "triggerOrderTypeName": "NULL"
       }
