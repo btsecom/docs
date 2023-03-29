@@ -13,6 +13,38 @@ headingLevel: 2
 
 # Change Log
 
+## Version 2.5.6 (29th March 2023)
+
+* [IMPORTANT] BTSE will change futures market naming convention in **April 2023** to provide more clarity to retail users and here are the rules:
+  - Change the suffix for perpetual markets from `PFC` to `PERP` (ex: BTCPFC -> BTC-PERP)
+  - Change the suffix for time-based markets from `delivery month + year` to `settlement date (YYMMDD)` (ex: BTCM23 -> BTC-230630)
+  - [Reference](https://blog.btse.com/important-notice-upcoming-changes-to-futures-risk-limits-and-contract-names/)
+  - Futures API updated (Generally added a new optional parameter `useNewSymbolNaming` to specify if the market name is in the new format):
+    - [`Market Summary`](#market-summary)
+    - [`Query Open Orders`](#query-open-orders)
+    - [`Orderbook by grouping`](#orderbook-by-grouping)
+    - [`Orderbook`](#orderbook)
+    - [`Charting Data`](#charting-data)
+    - [`Query Wallet History`](#query-wallet-history)
+    - [`Query Wallet Balance`](#query-wallet-balance)
+    - [`Set Leverage`](#set-leverage)
+    - [`Set Risk Limit`](#set-risk-limit)
+    - [`Query Market Price`](#query-market-price)
+    - [`Change Contract Settlement Currency`](#change-contract-settlement-currency)
+    - [`Query Account Fee`](#query-account-fee)
+    - [`Query Position`](#query-position)
+    - [`Close Position`](#close-position)
+    - [`Query Wallet Margin`](#query-wallet-margin)
+    - [`Create New Order`](#create-new-order)
+    - [`Query Trades Fills`](#query-trades-fills-2)
+  - Existing websocket topics will return data with the current market name (ex: BTCPFC) and new set of websocket topics are added for new market name (ex: BTC-PERP) where `the response fields will be the same` and here's the mapping table
+    - [tradeHistoryApi](#public-trade-fills) -> tradeHistoryApiV2
+    - [orderbookApi](#orderbook-snapshot-by-grouping) -> orderbookApiV2
+    - [orderbookL2Api](#orderbook-snapshot-by-depth) -> orderbookL2ApiV2
+    - [fills](#user-trade-fills) -> fillsV2
+    - [allPosition](#all-position) -> allPositionV2
+    - [notificationApiV2](#notifications) -> notificationApiV3
+
 ## Version 2.5.5 (29th March 2023)
 
 * Update the http status code for authentication failed to `401`
