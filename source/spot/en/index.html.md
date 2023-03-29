@@ -1226,6 +1226,111 @@ Retrieves a user's trade history which includes funding fee data.
 | realizedpnl | long   | yes      | not used in spot                        |
 | total       | long   | yes      | not used in spot                        |
 
+## Query User Transaction History
+
+> Response
+
+```json
+{
+  "code": 1,
+  "msg": "Success",
+  "time": 1680053703058,
+  "data": {
+    "totalRows": 767,
+    "pageSize": 1,
+    "currentPage": 1,
+    "totalPages": 767,
+    "data": [
+      {
+        "orderId": "cf751230-d731-4c1a-a985-2d130342a470",
+        "orderMode": "B",
+        "orderType": "M",
+        "orderPrice": null,
+        "fillPrice": 27411.396509480717,
+        "orderSize": 2740570.0,
+        "fillSize": 36.68394,
+        "transactionTime": "2023-03-29T01:34:58.000+00:00",
+        "name": null,
+        "netAmount": 36.672934818,
+        "feeAmount": 0.011005182,
+        "priceCurrency": "USD",
+        "osCurrency": "USD",
+        "fsCurrency": "BTC",
+        "feeCurrency": "BTC",
+        "netCurrency": "BTC",
+        "triggerOrderType": 0,
+        "transactionUnixtime": 1680053698101,
+        "isRebate": null,
+        "orderDetailType": null,
+        "list": [
+          {
+            "orderId": "cf751230-d731-4c1a-a985-2d130342a470",
+            "orderMode": "B",
+            "orderType": "M",
+            "orderPrice": null,
+            "fillPrice": 27405.7,
+            "orderSize": null,
+            "fillSize": 1.27445,
+            "transactionTime": "2023-03-29T01:34:58.000+00:00",
+            "name": null,
+            "netAmount": 1.274067665,
+            "feeAmount": 3.82335E-4,
+            "priceCurrency": "USD",
+            "osCurrency": "USD",
+            "fsCurrency": "BTC",
+            "feeCurrency": "BTC",
+            "netCurrency": "BTC",
+            "triggerOrderType": 0,
+            "transactionUnixtime": 1680053698101,
+            "isRebate": null,
+            "orderDetailType": null,
+            "list": []
+        ]
+      }
+    ]
+  },
+  "success": true
+}
+```
+
+`GET /api/v3.2/user/transaction_history`
+
+Retrieve user's transaction history
+### Request Parameters
+| Name          | Type    | Required | Description
+| ---           | ---     | ---      | ---
+| fromTimestamp | long    | No       | Starting time in milliseconds (e.g. 1624987283000)
+| toTimestamp   | long    | No       | Ending time in milliseconds (e.g. 1624987283000)
+| base          | string  | No       | Base currency (e.g. BTC)
+| quote         | string  | No       | Quote currency (e.g. USD)
+| orderMode     | string  | No       | Enum: [BUY, SELL]
+| currentPage   | integer | No       |
+| pageSize      | integer | No       |
+
+### Response Content
+| Name                | Type    | Required | Description
+| ---                 | ---     | ---      | ---
+| orderId             | string  | Yes      | 
+| orderMode           | string  | Yes      | B=BUY, S=SELL
+| orderType           | string  | Yes      | L=LIMIT, M=MARKET, P=INDEX, O=OTC
+| orderPrice          | double  | Yes      | 
+| fillPrice           | double  | Yes      | 
+| orderSize           | double  | Yes      | 
+| fillSize            | double  | Yes      |
+| transactionTime     | string  | Yes      |
+| name                | string  | Yes      |
+| netAmount           | double  | Yes      |
+| feeAmount           | double  | Yes      |
+| priceCurrency       | string  | Yes      |
+| osCurrency          | string  | Yes      | Order size currency
+| fsCurrency          | string  | Yes      | Fill size currency
+| feeCurrency         | string  | Yes      | Fee currency
+| netCurrency         | string  | Yes      | Net amount currency
+| triggerOrderType    | integer | Yes      | 1001=STOP_LOSS, 1002=TAKE_PROFIT
+| transactionUnixtime | long    | Yes      |
+| isRebate            | boolean | Yes      |
+| orderDetailType     | string  | Yes      | 
+| list                | list    | Yes      | The list contains sub order for same order id
 
 ## query account fees
 
