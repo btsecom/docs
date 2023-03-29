@@ -1428,7 +1428,7 @@ Query user's transaction history
 | ---                  | ---     | ---      | ---
 | dateTime             | long    | Yes      |
 | orderType            | integer | Yes      | 76: Limit Order, 77: Market Order, 1003: Liquidation, 1004: ADL, 1006: Settlement
-| orderId              | integer | Yes      |
+| orderId              | string  | Yes      |
 | fee                  | double  | Yes      |
 | orderSize            | double  | Yes      |
 | feeCurrency          | string  | Yes      |
@@ -1440,7 +1440,7 @@ Query user's transaction history
 | total                | double  | Yes      |
 | tempOrderMode        | integer | Yes      |
 | serialId             | integer | Yes      |
-| orderPrice           | integer | Yes      |
+| orderPrice           | double | Yes      |
 | positionRemaining    | integer | Yes      |
 | settleAsset          | string  | Yes      |
 | triggerPrice         | double  | Yes      |
