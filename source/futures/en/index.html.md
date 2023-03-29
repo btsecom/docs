@@ -1313,7 +1313,150 @@ Retrieves a user's trade history
 | orderType        | long    | Yes      | Order Type                                                                                                                                                                        |
 | realizedPnL      | double  | Yes      | Not used in Spot                                                                                                                                                                  |
 | total            | long    | Yes      | Not used in Spot                                                                                                                                                                  |
+## Query User Transaction History
+> Request
 
+```
+/api/v2.1/user/transaction_history?from=1679155200000&to=1680059656492&orderType=MARKET&pageNumber=1&pageSize=1&walletName=ISOLATED@BTCPFC-USD&marketName=BTCPFC-USD
+```
+> Response
+```json
+{
+  "code": 1,
+  "msg": "Success",
+  "time": 1680061268133,
+  "data": {
+    "total": 289,
+    "pageNumber": 1,
+    "null": false,
+    "pagesAvailable": 289,
+    "pageItems": [
+      {
+        "dateTime": 1680059656492,
+        "orderType": 77,
+        "symbol": "BTC-PERP",
+        "orderId": "8ff187ed-0a03-4ff5-b67a-6a90fbac4ad7",
+        "fee": 0.548024,
+        "orderSize": 100.0,
+        "feeCurrency": "USD",
+        "liquidationPrice": 0.0,
+        "orderDetailType": null,
+        "orderStatus": null,
+        "triggerOrderType": 0,
+        "orderStatusName": null,
+        "total": -0.548024,
+        "tempOrderMode": 66,
+        "rate": 0.0,
+        "serialId": 13871247,
+        "currency": "USD",
+        "orderPrice": 0.0,
+        "positionRemaining": 100199,
+        "settleAsset": "",
+        "triggerPrice": 0.0,
+        "orderModeName": "MODE_BUY",
+        "fillPrice": 27401.2,
+        "fillSize": 100.0,
+        "orderTypeName": "TYPE_MARKET",
+        "entryPrice": 0.0,
+        "marketName": "BTC-PERP-USD",
+        "futureTradeHistories": [
+          {
+            "dateTime": 1680059656492,
+            "orderType": 77,
+            "symbol": "BTC-PERP",
+            "orderId": "8ff187ed-0a03-4ff5-b67a-6a90fbac4ad7",
+            "fee": 0.548024,
+            "orderSize": 100.0,
+            "feeCurrency": "USD",
+            "liquidationPrice": 0.0,
+            "orderDetailType": null,
+            "orderStatus": 88,
+            "triggerOrderType": 0,
+            "orderStatusName": "STATUS_INACTIVE",
+            "total": -0.548024,
+            "tempOrderMode": 66,
+            "rate": 0.0,
+            "serialId": 13871247,
+            "currency": "USD",
+            "orderPrice": 0.0,
+            "positionRemaining": 100199,
+            "settleAsset": "",
+            "triggerPrice": 0.0,
+            "orderModeName": "MODE_BUY",
+            "fillPrice": 27401.2,
+            "fillSize": 100.0,
+            "orderTypeName": "TYPE_MARKET",
+            "entryPrice": 0.0,
+            "marketName": "BTC-PERP-USD",
+            "futureTradeHistories": [],
+            "orderMode": 66,
+            "walletName": "ISOLATED@BTC-PERP-USD",
+            "realizedPnl": 0.0,
+            "triggerOrderTypeName": "NULL"
+          }
+        ],
+        "orderMode": 66,
+        "walletName": "ISOLATED@BTC-PERP-USD",
+        "realizedPnl": 0.0,
+        "triggerOrderTypeName": "NULL"
+      }
+    ],
+    "from": 1,
+    "to": 1,
+    "empty": false
+  },
+  "success": true
+}
+```
+`GET /api/v2.1/user/transaction_history`
+
+Query user's transaction history
+
+### Request Parameters
+| Name       | Type    | Required | Description
+| ---        | ---     | ---      | ---
+| from       | long    | No       | Starting time in milliseconds (e.g. 1624987283000)
+| to         | long    | No       | Ending time in milliseconds (e.g. 1624987283000)
+| marketName | string  | No       | Market name (e.g. BTCPFC-USD)
+| walletName | string  | No       | Wallet name (e.g. CROSS@ or ISOLATED@BTCPFC-USD)
+| orderMode  | string  | No       | Enum: [BUY, SELL]
+| orderType  | string  | No       | Enum: [LIMIT, MARKET, PEG, FUNDING, LIQUIDATION, ADL]
+| pageNumber | integer | Yes      | 
+| pageSize   | integer | Yes      | 
+### Response Content
+| Name                 | Type    | Required | Description
+| ---                  | ---     | ---      | ---
+| dateTime             | long    | Yes      |
+| orderType            | integer | Yes      | 76: Limit Order, 77: Market Order, 1003: Liquidation, 1004: ADL, 1006: Settlement
+| orderId              | integer | Yes      |
+| fee                  | double  | Yes      |
+| orderSize            | double  | Yes      |
+| feeCurrency          | string  | Yes      |
+| currency             | string  | Yes      |
+| liquidationPrice     | double  | Yes      |
+| orderStatus          | integer | Yes      | 65: STATUS_ACTIVE, 85: STATUS_PROCESSING, 88: STATUS_INACTIVE
+| triggerOrderType     | integer | Yes      |
+| orderStatusName      | string  | Yes      |
+| total                | double  | Yes      |
+| tempOrderMode        | integer | Yes      |
+| serialId             | integer | Yes      |
+| orderPrice           | integer | Yes      |
+| positionRemaining    | integer | Yes      |
+| settleAsset          | string  | Yes      |
+| triggerPrice         | double  | Yes      |
+| orderModeName        | string  | Yes      |
+| fillPrice            | double  | Yes      |
+| fillSize             | double  | Yes      |
+| orderTypeName        | string  | Yes      |
+| entryPrice           | double  | Yes      |
+| marketName           | string  | Yes      |
+| futureTradeHistories | list    | Yes      |
+| orderMode            | integer | Yes      | 66: MODE_BUY, 83: MODE_SELL
+| walletName           | string  | Yes      |
+| rate                 | double  | Yes      |
+| realizedPnl          | double  | Yes      |
+| triggerOrderTypeName | string  | Yes      |
+| orderDetailType      | string  | Yes      |
 
 ## Query Position
 

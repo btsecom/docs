@@ -1227,7 +1227,10 @@ Retrieves a user's trade history which includes funding fee data.
 | total       | long   | yes      | not used in spot                        |
 
 ## Query User Transaction History
-
+> Request
+```
+/api/v3.2/user/transaction_history?fromTimestamp=1674748800000&toTimestamp=1680058498398&currentPage=1&pageSize=1&base=BTC&quote=USD
+```
 > Response
 
 ```json
@@ -1285,6 +1288,7 @@ Retrieves a user's trade history which includes funding fee data.
             "isRebate": null,
             "orderDetailType": null,
             "list": []
+          }
         ]
       }
     ]
@@ -1311,8 +1315,8 @@ Retrieve user's transaction history
 | Name                | Type    | Required | Description
 | ---                 | ---     | ---      | ---
 | orderId             | string  | Yes      | 
-| orderMode           | string  | Yes      | B=BUY, S=SELL
-| orderType           | string  | Yes      | L=LIMIT, M=MARKET, P=INDEX, O=OTC
+| orderMode           | string  | Yes      | B: BUY, S: SELL
+| orderType           | string  | Yes      | L: LIMIT, M: MARKET, P: INDEX, O: OTC
 | orderPrice          | double  | Yes      | 
 | fillPrice           | double  | Yes      | 
 | orderSize           | double  | Yes      | 
@@ -1326,7 +1330,7 @@ Retrieve user's transaction history
 | fsCurrency          | string  | Yes      | Fill size currency
 | feeCurrency         | string  | Yes      | Fee currency
 | netCurrency         | string  | Yes      | Net amount currency
-| triggerOrderType    | integer | Yes      | 1001=STOP_LOSS, 1002=TAKE_PROFIT
+| triggerOrderType    | integer | Yes      | 1001: STOP_LOSS, 1002: TAKE_PROFIT
 | transactionUnixtime | long    | Yes      |
 | isRebate            | boolean | Yes      |
 | orderDetailType     | string  | Yes      | 
