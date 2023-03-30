@@ -1421,8 +1421,8 @@ Query user's transaction history
 | walletName | string  | No       | Wallet name (e.g. CROSS@ or ISOLATED@BTCPFC-USD)
 | orderMode  | string  | No       | Enum: [BUY, SELL]
 | orderType  | string  | No       | Enum: [LIMIT, MARKET, PEG, FUNDING, LIQUIDATION, ADL]
-| pageNumber | integer | Yes      | 
-| pageSize   | integer | Yes      | 
+| pageNumber | integer | No       | 
+| pageSize   | integer | No       | 
 ### Response Content
 | Name                 | Type    | Required | Description
 | ---                  | ---     | ---      | ---
