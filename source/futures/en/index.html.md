@@ -13,6 +13,10 @@ headingLevel: 2
 
 # Change Log
 
+## Version 2.5.7 (6th April 2023)
+
+* Add [OSS L1 Snapshot (By grouping)](#oss-l1-snapshot-by-grouping)
+
 ## Version 2.5.6 (29th March 2023)
 
 * [IMPORTANT] BTSE will change futures market naming convention in **April 2023** to provide more clarity to retail users and here are the rules:
@@ -190,11 +194,15 @@ You will need to create an API key on the BTSE platform before you can use authe
   * Websocket
      * `wss://ws.btse.com/ws/futures`
      * `wss://aws-ws.btse.com/ws/futures` (Optimised for connection via AWS, enabled by request)
+  * Websocket (for orderbook stream)
+     * `wss://ws.btse.com/ws/oss/futures` (Used for Orderbook incremental update stream)
 * Testnet
   * HTTP
      * `https://testapi.btse.io/futures`
   * Websocket
      * `wss://testws.btse.io/ws/futures`
+  * Websocket (for orderbook stream)
+     * `wss://testws.btse.io/ws/oss/futures` (Used for Orderbook incremental update stream)
 
 ## Authentication
 
@@ -2149,6 +2157,75 @@ Subscribe to the Level 2 Orderbook. The format to subscribe to will be `symbol_d
 | sellQuote | Quote Object | Yes      | Asks quotes         |
 | symbol    | string       | Yes      | Market symbol       |
 | depth     | int          | Yes      | Orderbook depth     |
+| timestamp | long         | Yes      | Orderbook timestamp |
+
+## OSS L1 Snapshot (By grouping)
+
+> Request
+
+```json
+{
+  "op": "subscribe",
+  "args": [
+    "snapshotL1:BTCPFC_0"
+  ]
+}
+
+{
+  "op": "unsubscribe",
+  "args": [
+    "snapshotL1:BTCPFC_0"
+  ]
+}
+```
+
+> Response
+
+```json
+{
+  "topic": "snapshotL1:BTCPFC_0",
+  "data": {
+    "bids": [
+      [
+          "28064.9",
+          "1268"
+      ]
+    ],
+    "asks": [
+      [
+          "28065.0",
+          "1015"
+      ]
+    ],
+    "type": "snapshotL1",
+    "symbol": "BTCPFC",
+    "timestamp": 1680751558529
+  }
+}
+```
+
+Subscribe to the Level 1 Orderbook through the endpoint `wss://ws.btse.com/ws/oss/futures`. The format to subscribe to will be `symbol_grouping`.
+
+* `symbol` indicates the market symbol
+* `grouping` indicates the grouping granularity. Valid values are 0-8.
+
+### Response Content
+
+#### Orderbook Object
+
+| Name  | Type        | Required | Description                |
+| ---   | ---         | ---      | ---                        |
+| topic | string      | Yes      | Websocket topic            |
+| data  | Data Object | Yes      | Refer to data object below |
+
+#### Data Object
+
+| Name      | Type         | Required | Description         |
+| ---       | ---          | ---      | ---                 |
+| bids      | Quote Object | Yes      | Bid quotes          |
+| asks      | Quote Object | Yes      | Asks quotes         |
+| symbol    | string       | Yes      | Market symbol       |
+| type      | string       | Yes      | `snapshotL1` - L1 data refers to the best bid / best ask of a trading pair’s order book.   |
 | timestamp | long         | Yes      | Orderbook timestamp |
 
 ## Orderbook Incremental Updates

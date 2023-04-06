@@ -13,6 +13,10 @@ language_tabs:
 
 # Change Log
 
+## Version 3.3.9 (6th April 2023)
+
+* Add [OSS L1 Snapshot (By grouping)](#oss-l1-snapshot-by-grouping)
+
 ## Version 3.3.8 (29th March 2023)
 
 * Update the http status code for authentication failed to `401`
@@ -126,20 +130,20 @@ You will need to create an API key on the BTSE platform before you can use authe
 
 * Production
   * HTTP
-    * `https://api.btse.com/spot`
-    * `https://aws-api.btse.com/spot` (Optimised for connection via AWS, enabled by request)
+     * `https://api.btse.com/spot`
+     * `https://aws-api.btse.com/spot` (Optimised for connection via AWS, enabled by request)
   * Websocket
-    * `wss://ws.btse.com/ws/spot`
-    * `wss://aws-ws.btse.com/ws/spot` (Optimised for connection via AWS, enabled by request)
+     * `wss://ws.btse.com/ws/spot`
+     * `wss://aws-ws.btse.com/ws/spot` (Optimised for connection via AWS, enabled by request)
   * Websocket (for orderbook stream)
-    * `wss://ws.btse.com/ws/oss/spot` (Used for Orderbook incremental update stream)
+     * `wss://ws.btse.com/ws/oss/spot` (Used for Orderbook incremental update stream)
 * Testnet
   * HTTP
-    * `https://testapi.btse.io/spot`
+     * `https://testapi.btse.io/spot`
   * Websocket
-    * `wss://testws.btse.io/ws/spot`
+     * `wss://testws.btse.io/ws/spot`
   * Websocket (for orderbook stream)
-    * `wss://testws.btse.io/ws/oss/spot` (Used for Orderbook incremental update stream)
+     * `wss://testws.btse.io/ws/oss/spot` (Used for Orderbook incremental update stream)
 
 ## Authentication
 
@@ -1669,6 +1673,75 @@ Subscribe to the Level 2 Orderbook. The format to subscribe to will be `symbol_d
 | sellQuote | Quote Object | Yes      | Asks quotes         |
 | symbol    | string       | Yes      | Market symbol       |
 | depth     | int          | Yes      | Orderbook depth     |
+| timestamp | long         | Yes      | Orderbook timestamp |
+
+## OSS L1 Snapshot (By grouping)
+
+> Request
+
+```json
+{
+  "op": "subscribe",
+  "args": [
+    "snapshotL1:BTC-USD_0"
+  ]
+}
+
+{
+  "op": "unsubscribe",
+  "args": [
+    "snapshotL1:BTC-USD_0"
+  ]
+}
+```
+
+> Response
+
+```json
+{
+  "topic": "snapshotL1:BTC-USD_0",
+  "data": {
+    "bids": [
+      [
+          "28016.7",
+          "1.48063"
+      ]
+    ],
+    "asks": [
+      [
+          "28033.6",
+          "1.34133"
+      ]
+    ],
+    "type": "snapshotL1",
+    "symbol": "BTC-USD",
+    "timestamp": 1680750154232
+  }
+}
+```
+
+Subscribe to the Level 1 Orderbook through the endpoint `wss://ws.btse.com/ws/oss/spot`. The format to subscribe to will be `symbol_grouping`.
+
+* `symbol` indicates the market symbol
+* `grouping` indicates the grouping granularity. Valid values are 0-8.
+
+### Response Content
+
+#### Orderbook Object
+
+| Name  | Type        | Required | Description                |
+| ---   | ---         | ---      | ---                        |
+| topic | string      | Yes      | Websocket topic            |
+| data  | Data Object | Yes      | Refer to data object below |
+
+#### Data Object
+
+| Name      | Type         | Required | Description         |
+| ---       | ---          | ---      | ---                 |
+| bids      | Quote Object | Yes      | Bid quotes          |
+| asks      | Quote Object | Yes      | Asks quotes         |
+| symbol    | string       | Yes      | Market symbol       |
+| type      | string       | Yes      | `snapshotL1` - L1 data refers to the best bid / best ask of a trading pair’s order book.   |
 | timestamp | long         | Yes      | Orderbook timestamp |
 
 ## Orderbook Incremental Updates
