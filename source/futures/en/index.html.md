@@ -13,6 +13,12 @@ headingLevel: 2
 
 # Change Log
 
+## Version 2.5.6 (12th April 2023)
+* Deprecated two websokcet topics `Orderbook Snapshot (By grouping)` and `Orderbook Snapshot (By depth)` today. 
+Please use the following websokcet topic through the endpoint `wss://ws.btse.com/ws/oss/futures` to get orderbook data
+  - [Orderbook Incremental Updates](#orderbook-incremental-updates)
+  - [OSS L1 Snapshot (By grouping)](#oss-l1-snapshot-by-grouping)
+
 ## Version 2.5.7 (6th April 2023)
 
 * Add [OSS L1 Snapshot (By grouping)](#oss-l1-snapshot-by-grouping)
@@ -2032,132 +2038,6 @@ To subscribe to a websocket feed
 | event   | string | Yes      | Respond with the event type                   |
 | channel | array  | Yes      | Topics which have been sucessfully subscribed |
 
-
-## Orderbook Snapshot (By grouping)
-
-> Request
-
-```json
-{
-  "op": "subscribe",
-  "args": [
-    "orderBookApi:BTCPFC_0"
-  ]
-}
-```
-
-> Response
-
-```json
-{
-  "topic": "orderBookApi",
-  "data": {
-    "buyQuote":
-    [
-      {
-        "price": 0,
-        "size": 0
-      }
-    ],
-    "sellQuote":
-    [
-      {
-        "price": 0,
-        "size": 0
-      }
-    ],
-    "symbol":"BTCPFC",
-    "timestamp":1565135165600
-  }
-}
-```
-
-Subscribe to the Orderbook in different groupings. The format to subscribe to will be `symbol_grouping`.
-
-* `symbol` indicates the market symbol
-* `grouping` indicates the grouping granularity. Valid values are 0-9.
-
-### Response Content
-
-#### Orderbook Object
-
-| Name  | Type        | Required | Description                |
-| ---   | ---         | ---      | ---                        |
-| topic | string      | Yes      | Websocket topic            |
-| data  | Data Object | Yes      | Refer to data object below |
-
-#### Data Object
-
-| Name      | Type         | Required | Description         |
-| ---       | ---          | ---      | ---                 |
-| buyQuote  | Quote Object | Yes      | Bid quotes          |
-| sellQuote | Quote Object | Yes      | Asks quotes         |
-| symbol    | string       | Yes      | Market symbol       |
-| timestamp | long         | Yes      | Orderbook timestamp |
-
-## Orderbook Snapshot (By depth)
-
-> Request
-
-```json
-{
-  "op": "subscribe",
-  "args": [
-    "orderBookL2Api:BTCPFC_0"
-  ]
-}
-```
-
-> Response
-
-```json
-{
-  "topic": "orderBookL2Api",
-  "data": {
-    "buyQuote":
-    [
-      {
-        "price": 0,
-        "size": 0
-      }
-    ],
-    "sellQuote":
-    [
-      {
-        "price": 0,
-        "size": 0
-      }
-    ],
-    "symbol":"BTCPFC",
-    "depth": 0,
-    "timestamp":1565135165600
-  }
-}
-```
-
-Subscribe to the Level 2 Orderbook. The format to subscribe to will be `symbol_depth`.
-
-* `symbol` indicates the market symbol
-* `depth` indicates the levels of orderbook to retrieve. Value of 0 will retrieve the entire orderbook.
-
-### Response Content
-
-#### Orderbook Object
-
-| Name  | Type        | Required | Description                |
-| ---   | ---         | ---      | ---                        |
-| topic | string      | Yes      | Websocket topic            |
-| data  | Data Object | Yes      | Refer to data object below |
-
-#### Data Object
-
-| Name      | Type         | Required | Description         |
-| ---       | ---          | ---      | ---                 |
-| buyQuote  | Quote Object | Yes      | Bid quotes          |
-| sellQuote | Quote Object | Yes      | Asks quotes         |
-| symbol    | string       | Yes      | Market symbol       |
-| depth     | int          | Yes      | Orderbook depth     |
-| timestamp | long         | Yes      | Orderbook timestamp |
 
 ## OSS L1 Snapshot (By grouping)
 
