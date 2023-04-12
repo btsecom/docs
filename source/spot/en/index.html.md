@@ -14,7 +14,7 @@ language_tabs:
 # Change Log
 
 ## Version 3.4.0 (12th April 2023)
-* Remove two websokcet topics `Orderbook Snapshot (By grouping)` and `Orderbook Snapshot (By depth)` today. 
+* Deprecated two websokcet topics `Orderbook Snapshot (By grouping)` and `Orderbook Snapshot (By depth)` today. 
 Please use the following websokcet topic through the endpoint `wss://ws.btse.com/ws/oss/spot` to get orderbook data
   - [Orderbook Incremental Updates](#orderbook-incremental-updates)
   - [OSS L1 Snapshot (By grouping)](#oss-l1-snapshot-by-grouping)
