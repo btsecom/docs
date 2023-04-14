@@ -265,6 +265,9 @@
                   <li>
                     <a href="#api-status-codes" class="toc-h2 toc-link" data-title="API Status Codes">API Status Codes</a>
                   </li>
+                  <li>
+                    <a href="#api-enum" class="toc-h2 toc-link" data-title="API ENUM">API ENUM</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -434,6 +437,15 @@
 <li>408 - Request timeout. Indicates that the server did not complete the request. BTSE API timeouts are set at 30secs</li>
 <li>429 - Too many requests. Indicates that the client has exceeded the rates limits set by the server. Refer to Rate Limits for more details</li>
 <li>500 - Internal server error. Indicates that the server encountered an unexpected condition resulting in not being able to fulfill the request</li>
+</ul>
+<h2 id='api-enum'>API ENUM</h2>
+<p>When connecting up the BTSE API, you will come across number codes that represents different states or status types in BTSE. The following section provides a list of codes that you are expecting to see.</p>
+
+<ul>
+<li>30000: OTC_ORDER_QUERY</li>
+<li>30001: OTC_ORDER_QUOTE</li>
+<li>30007: OTC_ORDER_COMPLETE_SUCCESS</li>
+<li>30008: OTC_ORDER_REQUOTE</li>
 </ul>
 <h1 id='workflow'>Workflow</h1>
 <ul>
