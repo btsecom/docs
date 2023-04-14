@@ -113,6 +113,15 @@ Each API will return one of the following HTTP status:
 * 429 - Too many requests. Indicates that the client has exceeded the rates limits set by the server. Refer to Rate Limits for more details
 * 500 - Internal server error. Indicates that the server encountered an unexpected condition resulting in not being able to fulfill the request
 
+## API ENUM
+
+When connecting up the BTSE API, you will come across number codes that represents different states or status types in BTSE. The following section provides a list of codes that you are expecting to see.
+
+* 30000: OTC_ORDER_QUERY
+* 30001: OTC_ORDER_QUOTE
+* 30007: OTC_ORDER_COMPLETE_SUCCESS
+* 30008: OTC_ORDER_REQUOTE
+
 # Workflow
 
 * Request for Quote to get an OTC quote from BTSE
