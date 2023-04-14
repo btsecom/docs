@@ -341,9 +341,6 @@ When connecting up the BTSE API, you will come across number codes that represen
 * 304: ERROR_MAX_OPEN_ORDER_EXCEEDED
 * 1003: ORDER_LIQUIDATION = Order is undergoing liquidation
 * 1004: ORDER_ADL = Order is undergoing ADL
-* 30000: OTC_ORDER_QUERY
-* 30001: OTC_ORDER_QUOTE
-* 30007: OTC_ORDER_COMPLETE_SUCCESS
 * 30410: BLOCK_TRADE_COMPLETE_SUCCESS
 
 ## Spam Orders
