@@ -1535,7 +1535,7 @@ Changes risk limit for the specified market
 | Name               | Type    | Required | Description                                                                                                   |
 | ---                | ---     | ---      | ---                                                                                                           |
 | symbol             | string  | Yes      | Market symbol                                                                                                 |
-| riskLimit          | long    | Yes      | Risk limit value now in position size, but will be changed to USD value along with futures market name change |
+| riskLimit          | long    | Yes      | Risk limit value now in position size, but it will be changed to USD value in the future. |
 | useNewSymbolNaming | boolean | No       | True if use new futures market name as symbol , default to False                                              |
 
 ### Response Content
