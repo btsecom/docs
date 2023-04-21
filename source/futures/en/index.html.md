@@ -13,7 +13,11 @@ headingLevel: 2
 
 # Change Log
 
-## Version 2.5.6 (12th April 2023)
+## Version 2.5.9 (21th April 2023)
+
+* Add [Get Risk Limit](#get-risk-limit)
+
+## Version 2.5.8 (12th April 2023)
 * Deprecated two websokcet topics `Orderbook Snapshot (By grouping)` and `Orderbook Snapshot (By depth)` today. 
 Please use the following websokcet topic through the endpoint `wss://ws.btse.com/ws/oss/futures` to get orderbook data
   - [Orderbook Incremental Updates](#orderbook-incremental-updates)
@@ -1502,6 +1506,38 @@ Closes a user's position for the particular market as specified by symbol. If ty
 | deviation     | string  | Yes      | Deviation value of order                                                                                                                                                                                                                                                                         |
 | remainingSize | double  | Yes      | Size left to be transacted                                                                                                                                                                                                                                                                       |
 | originalSize  | double  | Yes      | Original order size                                                                                                                                                                                                                                                                              |
+
+## Get Risk Limit
+
+> Request
+
+```
+/api/v2.1/risk_limit?symbol=BTCPFC
+```
+
+> Response
+
+```json
+{
+    "symbol": "BTCPFC",
+    "riskLimit": 100000
+}
+```
+`GET /api/v2.1/risk_limit`
+
+Query risk limit for the specified market
+### Request Parameters
+
+| Name               | Type    | Required | Description |
+| ---                | ---     | ---      | --- |
+| symbol             | string  | Yes      | Market symbol  |
+
+### Response Content
+
+| Name      | Type    | Required | Description|
+| ---       | ---     | ---      | --- |
+| symbol    | string  | Yes      | Market symbol  |
+| riskLimit | long    | Yes      | Risk limit value now in position size, but will be changed to USD value along with futures market name change |
 
 ## Set Risk Limit
 
