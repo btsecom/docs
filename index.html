@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>API Documentation</title>
+    <title>BTSE API Documentation</title>
     <link href="images/favicon-3eb77247.ico" rel="icon" type="image/ico" />
     <style>
       .highlight table td { padding: 5px; }
@@ -198,11 +198,11 @@
     </style>
     <link href="stylesheets/screen-a7292fd4.css" rel="stylesheet" media="screen" />
     <link href="stylesheets/print-953e3353.css" rel="stylesheet" media="print" />
-      <script src="javascripts/all_nosearch-8f5ea5a5.js"></script>
+      <script src="javascripts/all-a9fde460.js"></script>
 
   </head>
 
-  <body class="index" data-languages="[]">
+  <body class="index" data-languages="[&quot;json&quot;]">
     <a href="#" id="nav-button">
       <span>
         <img src="images/navbar-cad8cdcb.png" alt="" />
@@ -222,6 +222,13 @@
 
   </header>
     <div class="toc-wrapper">
+        <div class="lang-selector">
+              <a href="#" data-language-name="json">json</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
       <ul id="toc" class="toc-list-h1">
           <li>
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
@@ -416,13 +423,15 @@
               </ul>
           </li>
       </ul>
+        <ul class="toc-footer">
+        </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='change-log'>Change Log</h1><h2 id='version-3-4-0-12th-april-2023'>Version 3.4.0 (12th April 2023)</h2>
 <ul>
-<li>Deprecated two websokcet topics <code>Orderbook Snapshot (By grouping)</code> and <code>Orderbook Snapshot (By depth)</code> today. 
+<li>Deprecated two websokcet topics <code>Orderbook Snapshot (By grouping)</code> and <code>Orderbook Snapshot (By depth)</code> today.
 Please use the following websokcet topic through the endpoint <code>wss://ws.btse.com/ws/oss/spot</code> to get orderbook data
 
 <ul>
@@ -4245,6 +4254,9 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 
       </div>
       <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="json">json</a>
+          </div>
       </div>
     </div>
     <script>
