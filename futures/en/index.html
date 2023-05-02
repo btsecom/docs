@@ -446,7 +446,7 @@
       <div class="content">
         <h1 id='change-log'>Change Log</h1><h2 id='version-2-5-6-12th-april-2023'>Version 2.5.6 (12th April 2023)</h2>
 <ul>
-<li>Deprecated two websokcet topics <code>Orderbook Snapshot (By grouping)</code> and <code>Orderbook Snapshot (By depth)</code> today. 
+<li>Deprecated two websokcet topics <code>Orderbook Snapshot (By grouping)</code> and <code>Orderbook Snapshot (By depth)</code> today.
 Please use the following websokcet topic through the endpoint <code>wss://ws.btse.com/ws/oss/futures</code> to get orderbook data
 
 <ul>
@@ -5152,7 +5152,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"op"</span><span class="p">:</span><span class="s2">"authKeyExpires"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"args"</span><span class="p">:[</span><span class="s2">"APIKey"</span><span class="p">,</span><span class="w"> </span><span class="s2">"nonce"</span><span class="p">,</span><span class="w"> </span><span class="s2">"signature"</span><span class="p">]}</span><span class="w">
+  </span><span class="nl">"args"</span><span class="p">:[</span><span class="s2">"APIKey"</span><span class="p">,</span><span class="w"> </span><span class="s2">"nonce"</span><span class="p">,</span><span class="w"> </span><span class="s2">"signature"</span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>Authenticate the websocket session to subscribe to authenticated websocket topics. Assume we have values as follows:</p>
@@ -5166,7 +5166,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <p>Our subscription request will be:</p>
 <div class="highlight"><pre class="highlight plaintext"><code>{
   "op":"authKeyExpires",
-  "args":["4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x", "1624985375123", "c410d38c681579adb335885800cff24c66171b7cc8376cfe43da1408c581748156b89bcc5a115bb496413bda481139fb"]}
+  "args":["4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x", "1624985375123", "c410d38c681579adb335885800cff24c66171b7cc8376cfe43da1408c581748156b89bcc5a115bb496413bda481139fb"]
 }
 </code></pre></div><h3 id='request-parameters-25'>Request Parameters</h3>
 <p>Below details the arguments needed to be sent in.</p>
