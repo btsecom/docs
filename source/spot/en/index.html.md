@@ -1,20 +1,20 @@
 ---
 title: BTSE API Documentation
 language_tabs:
-- json
-  toc_footers: []
-  includes: []
-  search: true
-  highlight_theme: darkula
-  code_clipboard: true
-  headingLevel: 2
+  - json
+toc_footers: []
+includes: []
+search: true
+highlight_theme: darkula
+code_clipboard: true
+headingLevel: 2
 
 ---
 
 # Change Log
 
 ## Version 3.4.0 (12th April 2023)
-* Deprecated two websokcet topics `Orderbook Snapshot (By grouping)` and `Orderbook Snapshot (By depth)` today. 
+* Deprecated two websokcet topics `Orderbook Snapshot (By grouping)` and `Orderbook Snapshot (By depth)` today.
 Please use the following websokcet topic through the endpoint `wss://ws.btse.com/ws/oss/spot` to get orderbook data
   - [Orderbook Incremental Updates](#orderbook-incremental-updates)
   - [OSS L1 Snapshot (By grouping)](#oss-l1-snapshot-by-grouping)
@@ -1826,7 +1826,7 @@ Subscribe to recent trade feed for a market. The topic will be `tradeHistoryApi:
 ```json
 {
   "op":"authKeyExpires",
-  "args":["APIKey", "nonce", "signature"]}
+  "args":["APIKey", "nonce", "signature"]
 }
 ```
 
@@ -1841,7 +1841,7 @@ Our subscription request will be:
 ```
 {
   "op":"authKeyExpires",
-  "args":["4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x", "1624985375123", "c410d38c681579adb335885800cff24c66171b7cc8376cfe43da1408c581748156b89bcc5a115bb496413bda481139fb"]}
+  "args":["4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x", "1624985375123", "c410d38c681579adb335885800cff24c66171b7cc8376cfe43da1408c581748156b89bcc5a115bb496413bda481139fb"]
 }
 ```
 
