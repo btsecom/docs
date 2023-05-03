@@ -16,7 +16,7 @@ headingLevel: 2
 ## Version 2.5.9 (21th April 2023)
 
 * Add [Get Risk Limit](#get-risk-limit)
-* Add Sub-Account Wallet Transfer
+* Add [Sub-Account Wallet Transfer](#sub-account-wallet-trasnsfer)
 
 ## Version 2.5.8 (12th April 2023)
 * Deprecated two websokcet topics `Orderbook Snapshot (By grouping)` and `Orderbook Snapshot (By depth)` today. 
