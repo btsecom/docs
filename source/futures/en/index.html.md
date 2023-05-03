@@ -2030,6 +2030,62 @@ Transfers funds between user's wallet. User can specify the source and target wa
 | currency   | string | Yes      | Currency    |
 
 
+## Sub-Account Wallet Trasnsfer
+
+`POST /api/v2.1/subaccount/wallet/transfer`
+
+Transfers funds between user and sub-account wallet. User can specify the source and target wallet to transfer funds
+
+, `Wallet` permission is required. To get supported currency list please check [Available currency list for action](#query-available-currency-list-for-wallet-action)
+
+### Request Parameters
+
+#### Wallet Request
+
+| Name           | Type          | Required | Description                                                                                                                                                                  |
+|----------------| ---           | ---      |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| walletSrc      | string        | Yes      | Source wallet                                                                                                                                                                |
+| walletSrcType  | string        | Yes      | Source type, valid values are:<br/>`SPOT@`: Spot Wallet<br/>`CROSS@`: Cross Wallet<br/>`ISOLATED@market`: Isolated wallet for the market where market the market symbol      |
+| walletDest     | string        | Yes      | Destination wallet                                                                                                                                                           |
+| walletDestType | string        | Yes      | Destination type, valid values are:<br/>`SPOT@`: Spot Wallet<br/>`CROSS@`: Cross Wallet<br/>`ISOLATED@market`: Isolated wallet for the market where market the market symbol |
+| fromUser       | string        | Yes      | Source username                                                                                                                                                              |
+| receiver       | string        | Yes      | Receiver username                                                                                                                                                            |
+| apiWallets     | Wallet Detail | Yes      | Transfer details                                                                                                                                                             |
+
+#### Wallet Detail Request
+
+| Name       | Type    | Required | Description                                          |
+| ---        | ---     | ---      | ---                                                  |
+| currency   | string  | Yes      | Wallet Currency                                      |
+| allBalance | boolean | Yes      | Indicator if all wallet balance is to be transferred |
+
+
+
+### Response Content
+
+#### Wallet
+
+| Name                 | Type     | Required | Description         |
+|----------------------|----------|----------|---------------------|
+| code                 | integer  | Yes      | Response code       |
+| msg                  | string   | Yes      | Response message    |
+| time                 | integer  | Yes      | Response Time       |
+| data                 | object   | No       |                     |
+| success              | boolean  | Yes      | Is transfer success |
+
+
+#### Transfer Error Code
+
+| Code  | Description                                            |
+|-------|--------------------------------------------------------|
+| -2    | Invalid request parameter                              |
+| -1046 | Transfer fromUser Futures asset to DestWallet failed   |
+| -1047 | Transfer fromUser to receiver failed                   |
+| -1048 | Transfer receiver Spot wallet to Futures wallet failed |
+
+
+
+
 # Websocket Streams
 
 ## Subscription
