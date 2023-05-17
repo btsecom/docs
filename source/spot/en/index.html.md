@@ -13,6 +13,10 @@ headingLevel: 2
 
 # Change Log
 
+## Version 3.4.1 (17th May 2023)
+
+* Add [`Ping/Pong`](#pingpong) for websocket streams
+
 ## Version 3.4.0 (12th April 2023)
 * Deprecated two websokcet topics `Orderbook Snapshot (By grouping)` and `Orderbook Snapshot (By depth)` today.
 Please use the following websokcet topic through the endpoint `wss://ws.btse.com/ws/oss/spot` to get orderbook data
@@ -1510,6 +1514,20 @@ query investment history
 
 
 # websocket streams
+
+## Ping/Pong
+For all our WebSocket servers, simply send a 'ping' message, and the WebSocket server will respond with a 'pong' message if the WebSocket connection is established and active.
+> Request
+
+```
+ping
+```
+
+> Response
+
+```
+pong
+```
 
 ## subscription
 
