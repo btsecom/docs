@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-2-6-0-17th-may-2023" class="toc-h2 toc-link" data-title="Version 2.6.0 (17th May 2023)">Version 2.6.0 (17th May 2023)</a>
+                  </li>
+                  <li>
                     <a href="#version-2-5-9-21th-april-2023" class="toc-h2 toc-link" data-title="Version 2.5.9 (21th April 2023)">Version 2.5.9 (21th April 2023)</a>
                   </li>
                   <li>
@@ -421,6 +424,9 @@
             <a href="#websocket-streams" class="toc-h1 toc-link" data-title="Websocket Streams">Websocket Streams</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#ping-pong" class="toc-h2 toc-link" data-title="Ping/Pong">Ping/Pong</a>
+                  </li>
+                  <li>
                     <a href="#subscription" class="toc-h2 toc-link" data-title="Subscription">Subscription</a>
                   </li>
                   <li>
@@ -453,7 +459,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-2-5-9-21th-april-2023'>Version 2.5.9 (21th April 2023)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-2-6-0-17th-may-2023'>Version 2.6.0 (17th May 2023)</h2>
+<ul>
+<li>Add <a href="#pingpong"><code>Ping/Pong</code></a> for websocket streams</li>
+</ul>
+<h2 id='version-2-5-9-21th-april-2023'>Version 2.5.9 (21th April 2023)</h2>
 <ul>
 <li>Add <a href="#get-risk-limit">Get Risk Limit</a></li>
 <li>Add <a href="#sub-account-wallet-trasnsfer">Sub-Account Wallet Transfer</a></li>
@@ -4881,7 +4891,19 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>Transfer receiver Spot wallet to Futures wallet failed</td>
 </tr>
 </tbody></table>
-<h1 id='websocket-streams'>Websocket Streams</h1><h2 id='subscription'>Subscription</h2>
+<h1 id='websocket-streams'>Websocket Streams</h1><h2 id='ping-pong'>Ping/Pong</h2>
+<p>For all our WebSocket servers, simply send a &#39;ping&#39; message, and the WebSocket server will respond with a &#39;pong&#39; message if the WebSocket connection is established and active.</p>
+
+<blockquote>
+<p>Reques</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>ping
+</code></pre></div>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>pong
+</code></pre></div><h2 id='subscription'>Subscription</h2>
 <blockquote>
 <p>Request</p>
 </blockquote>
