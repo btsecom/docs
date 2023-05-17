@@ -15,7 +15,7 @@ headingLevel: 2
 
 ## Version 3.4.1 (17th May 2023)
 
-* Add [`Ping/Pong`](#pingpong) for websocket streams
+* Add [`Ping/Pong`](#ping-pong) for websocket streams
 
 ## Version 3.4.0 (12th April 2023)
 * Deprecated two websokcet topics `Orderbook Snapshot (By grouping)` and `Orderbook Snapshot (By depth)` today.

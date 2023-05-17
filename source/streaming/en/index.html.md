@@ -15,7 +15,7 @@ headingLevel: 2
 
 ## Version 1.2 (17th May 2023)
 
-* Add [`Ping/Pong`](#pingpong) for websocket streams
+* Add [`Ping/Pong`](#ping-pong) for websocket streams
 
 ## Version 1.1 (16th March 2022)
 
