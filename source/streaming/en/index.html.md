@@ -13,6 +13,10 @@ headingLevel: 2
 
 # Change Log
 
+## Version 1.2 (17th May 2023)
+
+* Add [`Ping/Pong`](#pingpong) for websocket streams
+
 ## Version 1.1 (16th March 2022)
 
 * Addition of request parameter [`side`](#quote-stream) to allow return one side quote.
@@ -72,6 +76,19 @@ You will need to create an API key on the BTSE platform before you can use authe
 
 # Websocket Streams
 
+## Ping/Pong
+For all our WebSocket servers, simply send a 'ping' message, and the WebSocket server will respond with a 'pong' message if the WebSocket connection is established and active.
+> Request
+
+```
+ping
+```
+
+> Response
+
+```
+pong
+```
 
 ## Authentication
 
