@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-2-6-1-24th-may-2023" class="toc-h2 toc-link" data-title="Version 2.6.1 (24th May 2023)">Version 2.6.1 (24th May 2023)</a>
+                  </li>
+                  <li>
                     <a href="#version-2-6-0-17th-may-2023" class="toc-h2 toc-link" data-title="Version 2.6.0 (17th May 2023)">Version 2.6.0 (17th May 2023)</a>
                   </li>
                   <li>
@@ -459,7 +462,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-2-6-0-17th-may-2023'>Version 2.6.0 (17th May 2023)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-2-6-1-24th-may-2023'>Version 2.6.1 (24th May 2023)</h2>
+<ul>
+<li>Add group parameter on <a href="#orderbook-by-grouping"><code>Orderbook by grouping</code></a></li>
+</ul>
+<h2 id='version-2-6-0-17th-may-2023'>Version 2.6.0 (17th May 2023)</h2>
 <ul>
 <li>Add <a href="#ping-pong"><code>Ping/Pong</code></a> for websocket streams</li>
 </ul>
@@ -1368,6 +1375,12 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>string</td>
 <td>Yes</td>
 <td>Market symbol, entered as a path variable</td>
+</tr>
+<tr>
+<td>group</td>
+<td>integer</td>
+<td>No</td>
+<td>Orderbook grouping. Valid values are: <br/>0-8 where 0 indicates level 0 grouping (eg. for BTC-PERP, it will be 0.1)<br/>Level 1 grouping for BTC-PERP would be 0.5<br/>Level 2 grouping for BTC-PERP would be 1<br/></td>
 </tr>
 <tr>
 <td>useNewSymbolNaming</td>
