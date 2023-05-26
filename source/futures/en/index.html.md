@@ -13,6 +13,10 @@ headingLevel: 2
 
 # Change Log
 
+## Version 2.5.10 (24th May 2023)
+
+* Add group parameter on [`Orderbook by grouping`](#orderbook-by-grouping)
+* 
 ## Version 2.5.9 (21th April 2023)
 
 * Add [Get Risk Limit](#get-risk-limit)
@@ -572,10 +576,11 @@ Retrieves a snapshot of the orderbook.
 
 ### Request Parameters
 
-| Name               | Type    | Required | Description                                                     |
-| ---                | ---     | ---      | ---                                                             |
-| symbol             | string  | Yes      | Market symbol, entered as a path variable                       |
-| useNewSymbolNaming | boolean | No       | True to use new futures market name in symbol, default to False |
+| Name               | Type    | Required | Description                                                                                                                                                                                                           |
+|--------------------| ---     | ---      |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| symbol             | string  | Yes      | Market symbol, entered as a path variable                                                                                                                                                                             |
+| group              | integer | No       | Orderbook grouping. Valid values are: <br/>0-8 where 0 indicates level 0 grouping (eg. for BTC-PERP, it will be 0.1)<br/>Level 1 grouping for BTC-PERP would be 0.5<br/>Level 2 grouping for BTC-PERP would be 1<br/> |
+| useNewSymbolNaming | boolean | No       | True to use new futures market name in symbol, default to False                                                                                                                                                       |
 
 ### Response Content
 

@@ -476,12 +476,12 @@ Retrieves a Level 2 snapshot of the orderbook and allows you to specify grouping
 
 ### Request Parameters
 
-| Name       | Type    | Required | Description                                                                                                                                                  |
-| ---        | ---     | ---      | ---                                                                                                                                                          |
-| symbol     | string  | Yes      | Market symbol                                                                                                                                                |
-| group      | integer | No       | Orderbook grouping. Valid values are: <br/>0-8 where 0 indicates level 0 grouping (eg. for BTC, it will be 0.5)<br/>Level 1 grouping for BTC would be 1<br/> |
-| limit_bids | integer | No       | Orderbook depth on the bid side                                                                                                                              |
-| limit_asks | integer | No       | Orderbook depth on the ask side                                                                                                                              |
+| Name       | Type    | Required | Description                                                                                                                                                                                             |
+| ---        | ---     | ---      |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| symbol     | string  | Yes      | Market symbol                                                                                                                                                                                           |
+| group      | integer | No       | Orderbook grouping. Valid values are: <br/>0-8 where 0 indicates level 0 grouping (eg. for BTC, it will be 0.1)<br/>Level 1 grouping for BTC would be 0.5<br/>Level 1 grouping for BTC would be 1<br/>  |
+| limit_bids | integer | No       | Orderbook depth on the bid side                                                                                                                                                                         |
+| limit_asks | integer | No       | Orderbook depth on the ask side                                                                                                                                                                         |
 
 ### Response Content
 
