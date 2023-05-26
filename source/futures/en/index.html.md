@@ -13,10 +13,15 @@ headingLevel: 2
 
 # Change Log
 
-## Version 2.5.10 (24th May 2023)
+
+## Version 2.6.1 (24th May 2023)
 
 * Add group parameter on [`Orderbook by grouping`](#orderbook-by-grouping)
-* 
+
+## Version 2.6.0 (17th May 2023)
+
+* Add [`Ping/Pong`](#ping-pong) for websocket streams
+
 ## Version 2.5.9 (21th April 2023)
 
 * Add [Get Risk Limit](#get-risk-limit)
@@ -2092,6 +2097,20 @@ Transfers funds between user and sub-account wallet. User can specify the source
 
 
 # Websocket Streams
+
+## Ping/Pong
+For all our WebSocket servers, simply send a 'ping' message, and the WebSocket server will respond with a 'pong' message if the WebSocket connection is established and active.
+> Reques
+
+```
+ping
+```
+
+> Response
+
+```
+pong
+```
 
 ## Subscription
 
