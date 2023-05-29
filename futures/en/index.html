@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-2-6-2-29th-may-2023" class="toc-h2 toc-link" data-title="Version 2.6.2 (29th May 2023)">Version 2.6.2 (29th May 2023)</a>
+                  </li>
+                  <li>
                     <a href="#version-2-6-1-24th-may-2023" class="toc-h2 toc-link" data-title="Version 2.6.1 (24th May 2023)">Version 2.6.1 (24th May 2023)</a>
                   </li>
                   <li>
@@ -462,7 +465,41 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-2-6-1-24th-may-2023'>Version 2.6.1 (24th May 2023)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-2-6-2-29th-may-2023'>Version 2.6.2 (29th May 2023)</h2>
+<ul>
+<li>Update the error message format of Orderbook Stream Service(OSS). The scheduled effective date is <code>June 6, 2023, at 10:00 AM (UTC+0)</code>.
+
+<ul>
+<li>Before
+<code>
+{
+&quot;severity&quot;: &quot;ERROR&quot;,
+&quot;error&quot;: [
+    {
+        &quot;arg&quot;: &quot;update:BTCC-USD_0&quot;,
+        &quot;errorCode&quot;: &quot;MARKET_PAIR_NOT_SUPPORT&quot;
+    }
+]
+}
+</code></li>
+<li>After
+<code>
+{
+&quot;severity&quot;: &quot;ERROR&quot;,
+&quot;errors&quot;: [
+    {
+        &quot;arg&quot;: &quot;update:BTCC-USD_0&quot;,
+        &quot;error&quot;: {
+            &quot;code&quot;: 1000,
+            &quot;message&quot;: &quot;Market pair provided is currently not supported.&quot;
+        }
+    }
+]
+}
+</code></li>
+</ul></li>
+</ul>
+<h2 id='version-2-6-1-24th-may-2023'>Version 2.6.1 (24th May 2023)</h2>
 <ul>
 <li>Add group parameter on <a href="#orderbook-by-grouping"><code>Orderbook by grouping</code></a></li>
 </ul>
