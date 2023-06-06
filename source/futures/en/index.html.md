@@ -13,6 +13,9 @@ headingLevel: 2
 
 # Change Log
 
+## Version 2.6.3 (6th June 2023)
+* Update the format of [`Wallet Detail Request`](#wallet-detail-request)
+
 ## Version 2.6.2 (29th May 2023)
 * Update the error message format of Orderbook Stream Service(OSS). The scheduled effective date is `June 6, 2023, at 10:00 AM (UTC+0)`.
   * Before
@@ -2033,11 +2036,11 @@ Transfers funds between user's wallet. User can specify the source and target wa
 
 #### Wallet Detail Request
 
-| Name       | Type    | Required | Description                                          |
-| ---        | ---     | ---      | ---                                                  |
-| currency   | string  | Yes      | Wallet Currency                                      |
-| allBalance | boolean | Yes      | Indicator if all wallet balance is to be transferred |
-
+| Name       | Type    | Required | Description                                                |
+| ---        | ---     | ---      | ---                                                        |
+| currency   | string  | Yes      | Wallet Currency                                            |
+| allBalance | boolean | Yes      | Indicator if all wallet balance is to be transferred       |
+| balance    | double  | No       | The value of the balance is to be transferred, example: 10 |
 
 
 ### Response Content
@@ -2094,11 +2097,11 @@ Transfers funds between user and sub-account wallet. User can specify the source
 
 #### Wallet Detail Request
 
-| Name       | Type    | Required | Description                                          |
-| ---        | ---     | ---      | ---                                                  |
-| currency   | string  | Yes      | Wallet Currency                                      |
-| allBalance | boolean | Yes      | Indicator if all wallet balance is to be transferred |
-
+| Name       | Type    | Required | Description                                                |
+| ---        | ---     | ---      | ---                                                        |
+| currency   | string  | Yes      | Wallet Currency                                            |
+| allBalance | boolean | Yes      | Indicator if all wallet balance is to be transferred       |
+| balance    | double  | No       | The value of the balance is to be transferred, example: 10 |
 
 
 ### Response Content
