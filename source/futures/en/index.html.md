@@ -2033,11 +2033,11 @@ Transfers funds between user's wallet. User can specify the source and target wa
 
 #### Wallet Detail Request
 
-| Name       | Type    | Required | Description                                          |
-| ---        | ---     | ---      | ---                                                  |
-| currency   | string  | Yes      | Wallet Currency                                      |
-| allBalance | boolean | Yes      | Indicator if all wallet balance is to be transferred |
-
+| Name       | Type    | Required | Description                                                |
+| ---        | ---     | ---      | ---                                                        |
+| currency   | string  | Yes      | Wallet Currency                                            |
+| allBalance | boolean | Yes      | Indicator if all wallet balance is to be transferred       |
+| balance    | double  | No       | The value of the balance is to be transferred, example: 10 |
 
 
 ### Response Content
@@ -2094,11 +2094,11 @@ Transfers funds between user and sub-account wallet. User can specify the source
 
 #### Wallet Detail Request
 
-| Name       | Type    | Required | Description                                          |
-| ---        | ---     | ---      | ---                                                  |
-| currency   | string  | Yes      | Wallet Currency                                      |
-| allBalance | boolean | Yes      | Indicator if all wallet balance is to be transferred |
-
+| Name       | Type    | Required | Description                                                |
+| ---        | ---     | ---      | ---                                                        |
+| currency   | string  | Yes      | Wallet Currency                                            |
+| allBalance | boolean | Yes      | Indicator if all wallet balance is to be transferred       |
+| balance    | double  | No       | The value of the balance is to be transferred, example: 10 |
 
 
 ### Response Content
