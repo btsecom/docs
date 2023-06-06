@@ -13,6 +13,9 @@ headingLevel: 2
 
 # Change Log
 
+## Version 2.6.3 (6th June 2023)
+* Update the format of [`Wallet Detail Request`](#wallet-detail-request)
+
 ## Version 2.6.2 (29th May 2023)
 * Update the error message format of Orderbook Stream Service(OSS). The scheduled effective date is `June 6, 2023, at 10:00 AM (UTC+0)`.
   * Before
