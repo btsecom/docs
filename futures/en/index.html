@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-2-6-3-6th-june-2023" class="toc-h2 toc-link" data-title="Version 2.6.3 (6th June 2023)">Version 2.6.3 (6th June 2023)</a>
+                  </li>
+                  <li>
                     <a href="#version-2-6-2-29th-may-2023" class="toc-h2 toc-link" data-title="Version 2.6.2 (29th May 2023)">Version 2.6.2 (29th May 2023)</a>
                   </li>
                   <li>
@@ -465,7 +468,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-2-6-2-29th-may-2023'>Version 2.6.2 (29th May 2023)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-2-6-3-6th-june-2023'>Version 2.6.3 (6th June 2023)</h2>
+<ul>
+<li>Update the format of <a href="#wallet-detail-request"><code>Wallet Detail Request</code></a></li>
+</ul>
+<h2 id='version-2-6-2-29th-may-2023'>Version 2.6.2 (29th May 2023)</h2>
 <ul>
 <li>Update the error message format of Orderbook Stream Service(OSS). The scheduled effective date is <code>June 6, 2023, at 10:00 AM (UTC+0)</code>.
 
@@ -4674,6 +4681,12 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>Yes</td>
 <td>Indicator if all wallet balance is to be transferred</td>
 </tr>
+<tr>
+<td>balance</td>
+<td>double</td>
+<td>No</td>
+<td>The value of the balance is to be transferred, example: 10</td>
+</tr>
 </tbody></table>
 <h3 id='response-content-24'>Response Content</h3><h4 id='wallet-3'>Wallet</h4>
 <table><thead>
@@ -4875,6 +4888,12 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>boolean</td>
 <td>Yes</td>
 <td>Indicator if all wallet balance is to be transferred</td>
+</tr>
+<tr>
+<td>balance</td>
+<td>double</td>
+<td>No</td>
+<td>The value of the balance is to be transferred, example: 10</td>
 </tr>
 </tbody></table>
 <h3 id='response-content-25'>Response Content</h3><h4 id='wallet-4'>Wallet</h4>
