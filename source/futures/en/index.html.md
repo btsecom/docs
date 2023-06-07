@@ -13,6 +13,9 @@ headingLevel: 2
 
 # Change Log
 
+## Version 2.6.4 (7th June 2023)
+* update wallet/transfer [`URL`](#transfer-funds-between-futures-wallet) from /api/v2.1/wallet/transfer to /api/v2.1/user/wallet/transfer
+
 ## Version 2.6.3 (6th June 2023)
 * Update the format of [`Wallet Detail Request`](#wallet-detail-request)
 
@@ -2018,7 +2021,7 @@ Gets margin information for the specified wallet so that users can know which wa
 ]
 ```
 
-`POST /api/v2.1/wallet/transfer`
+`POST /api/v2.1/user/wallet/transfer`
 
 Transfers funds between user's wallet. User can specify the source and target wallet to transfer funds
 
