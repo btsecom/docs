@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-2-6-4-7th-june-2023" class="toc-h2 toc-link" data-title="Version 2.6.4 (7th June 2023)">Version 2.6.4 (7th June 2023)</a>
+                  </li>
+                  <li>
                     <a href="#version-2-6-3-6th-june-2023" class="toc-h2 toc-link" data-title="Version 2.6.3 (6th June 2023)">Version 2.6.3 (6th June 2023)</a>
                   </li>
                   <li>
@@ -468,7 +471,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-2-6-3-6th-june-2023'>Version 2.6.3 (6th June 2023)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-2-6-4-7th-june-2023'>Version 2.6.4 (7th June 2023)</h2>
+<ul>
+<li>update wallet/transfer <a href="#transfer-funds-between-futures-wallet"><code>URL</code></a> from /api/v2.1/wallet/transfer to /api/v2.1/user/wallet/transfer</li>
+</ul>
+<h2 id='version-2-6-3-6th-june-2023'>Version 2.6.3 (6th June 2023)</h2>
 <ul>
 <li>Update the format of <a href="#wallet-detail-request"><code>Wallet Detail Request</code></a></li>
 </ul>
@@ -4617,7 +4624,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
-<p><code>POST /api/v2.1/wallet/transfer</code></p>
+<p><code>POST /api/v2.1/user/wallet/transfer</code></p>
 
 <p>Transfers funds between user&#39;s wallet. User can specify the source and target wallet to transfer funds</p>
 <h3 id='request-parameters-24'>Request Parameters</h3><h4 id='wallet-request'>Wallet Request</h4>
