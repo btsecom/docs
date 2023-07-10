@@ -15,10 +15,6 @@ language_tabs:
 
 FIX (Financial Information eXchange) is a standard electronic messaging protocol which can be used to place orders, receive order updates and executions, and cancel orders. Our FIX api is based on the FIX 4.2 specification and modeled after FIX implementations of other popular cryptocurrency exchanges.
 
-<aside class="notice">
-This service is restricted. Please drop an email to bd@btse.com for further information
-</aside>
-
 FIX endpoints: tcp+ssl://fix.btse.com:9876
 
 | Environment | SocketConnectHost      | SocketConnectPort |
@@ -35,6 +31,10 @@ Sessions for Spot and Futures are separated.
 
 
 # Change Log
+
+## Version 1.1.2 (10th July 2023)
+
+* Apply new symbol name in Futures market. Add ApplyNewSymbolName in [Logon](#logon-a) message
 
 ## Version 1.1.1 (7th February 2023)
 
@@ -127,6 +127,7 @@ Client's API Key and secret can be generated from API page in BTSE portal. Creat
 |  98 | EncryptMethod   | 0                 | Must be set to "0" (None) |
 | 108 | HeartBInt       | 30                | Must be set to "30"       |
 | 141 | ResetSeqNumFlag | Y                 | Must be set to "Y"        |
+| 5001 | ApplyNewSymbolName  | Y            | This field only apply in futures. If this field is not provided, FIX only accepts old symbol names. New symbol pattern: BTC-PERP, old symbol pattern: BTCPFC |
 
 
 ## Heartbeat (0)
