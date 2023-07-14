@@ -32,6 +32,10 @@ Sessions for Spot and Futures are separated.
 
 # Change Log
 
+## Version 1.1.3 (10th July 2023)
+
+Add [heartbeat](#heartbeat-0) recommondation
+
 ## Version 1.1.2 (10th July 2023)
 
 * Apply new symbol name in Futures market. Add ApplyNewSymbolName in [Logon](#logon-a) message
@@ -125,12 +129,14 @@ Client's API Key and secret can be generated from API page in BTSE portal. Creat
 |  95 | RawDataLength   | 96                | Length of RawData         |
 |  96 | RawData         | 8f7e...4783       | For security, the Logon message must be signed by the client. To compute the signature, concatenate the following fields, joined by the FIX field separator (byte 0x01), and compute the SHA384 HMAC using the API secret:<br/><br/> * SendingTime (52)<br/> * MsgType (35)<br/> * MsgSeqNum (34)<br/> * SenderCompID (49)<br/> * TargetCompID (56)<br/><br/>The resulting hash should be hex-encoded. |
 |  98 | EncryptMethod   | 0                 | Must be set to "0" (None) |
-| 108 | HeartBInt       | 30                | Must be set to "30"       |
+| 108 | HeartBInt       | 30                | If client set heartbeat interval to N. We recommend that you send heartbeat approximately every N - 5 seconds to keep connection alive.       |
 | 141 | ResetSeqNumFlag | Y                 | Must be set to "Y"        |
 | 5001 | ApplyNewSymbolName  | Y            | This field only apply in futures. If this field is not provided, FIX only accepts old symbol names. New symbol pattern: BTC-PERP, old symbol pattern: BTCPFC |
 
 
 ## Heartbeat (0)
+
+If client set heartbeat interval to N. We recommend that you send heartbeat approximately every N - 5 seconds to keep connection alive.
 
 | Tag | Name | Value | Description |
 | --- | ---  | ---   | ---         |
