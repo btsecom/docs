@@ -14,7 +14,7 @@ headingLevel: 2
 # Change Log
 
 ## Version 2.6.5 (27th July 2023)
-* Add a new symbol "1KFLOKIPFC" to our futures market. This symbol is an alias for "1000FLOKIUSDT-PERP."
+* Add a new symbol "1KFLOKIPFC" to our futures market. This symbol is an alias for "1000FLOKIUSDT-PERP"
 
 ## Version 2.6.4 (7th June 2023)
 * update wallet/transfer [`URL`](#transfer-funds-between-futures-wallet) from /api/v2.1/wallet/transfer to /api/v2.1/user/wallet/transfer
