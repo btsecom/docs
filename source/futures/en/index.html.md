@@ -13,6 +13,9 @@ headingLevel: 2
 
 # Change Log
 
+## Version 2.6.5 (27th July 2023)
+* We have introduced a new addition to our futures market: 1,000 Floki Perpetual Futures Contracts (1KFLOKI-PERP or 1KFLOKIPFC)
+
 ## Version 2.6.4 (7th June 2023)
 * update wallet/transfer [`URL`](#transfer-funds-between-futures-wallet) from /api/v2.1/wallet/transfer to /api/v2.1/user/wallet/transfer
 
@@ -64,7 +67,7 @@ headingLevel: 2
 * Add [Sub-Account Wallet Transfer](#sub-account-wallet-trasnsfer)
 
 ## Version 2.5.8 (12th April 2023)
-* Deprecated two websokcet topics `Orderbook Snapshot (By grouping)` and `Orderbook Snapshot (By depth)` today. 
+* Deprecated two websokcet topics `Orderbook Snapshot (By grouping)` and `Orderbook Snapshot (By depth)` today.
 Please use the following websokcet topic through the endpoint `wss://ws.btse.com/ws/oss/futures` to get orderbook data
   - [Orderbook Incremental Updates](#orderbook-incremental-updates)
   - [OSS L1 Snapshot (By grouping)](#oss-l1-snapshot-by-grouping)
