@@ -13,6 +13,9 @@ headingLevel: 2
 
 # Change Log
 
+## Version 3.4.3 (17th Aug 2023)
+* Update [`Notifications`](#notifications) response data format from array to object.
+
 ## Version 3.4.2 (29th May 2023)
 * Update the error message format of Orderbook Stream Service(OSS). The scheduled effective date is `June 6, 2023, at 10:00 AM (UTC+0)`.
   * Before
@@ -1929,8 +1932,7 @@ echo -n "/ws/spot1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6726
 ```json
 {
   "topic": "notificationApiV2",
-  "data": [
-    {
+  "data": {
       "symbol": "Market Symbol (eg. BTC-USD)",
       "orderId": "BTSE internal order ID",
       "side": "BUY",
@@ -1951,8 +1953,6 @@ echo -n "/ws/spot1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6726
       "txType": 0,
       "triggerPrice": "Trade Trigger Price"
     }
-  ]
-
 }
 
 ```
