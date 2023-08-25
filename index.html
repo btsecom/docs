@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-3-4-3-17th-aug-2023" class="toc-h2 toc-link" data-title="Version 3.4.3 (17th Aug 2023)">Version 3.4.3 (17th Aug 2023)</a>
+                  </li>
+                  <li>
                     <a href="#version-3-4-2-29th-may-2023" class="toc-h2 toc-link" data-title="Version 3.4.2 (29th May 2023)">Version 3.4.2 (29th May 2023)</a>
                   </li>
                   <li>
@@ -438,7 +441,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-3-4-2-29th-may-2023'>Version 3.4.2 (29th May 2023)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-3-4-3-17th-aug-2023'>Version 3.4.3 (17th Aug 2023)</h2>
+<ul>
+<li>Update <a href="#notifications"><code>Notifications</code></a> response data format from array to object.</li>
+</ul>
+<h2 id='version-3-4-2-29th-may-2023'>Version 3.4.2 (29th May 2023)</h2>
 <ul>
 <li>Update the error message format of Orderbook Stream Service(OSS). The scheduled effective date is <code>June 6, 2023, at 10:00 AM (UTC+0)</code>.
 
@@ -4019,8 +4026,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"notificationApiV2"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Market Symbol (eg. BTC-USD)"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTSE internal order ID"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
@@ -4041,8 +4047,6 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
       </span><span class="nl">"txType"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Trade Trigger Price"</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
-
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre></div>
