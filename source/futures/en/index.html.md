@@ -13,6 +13,9 @@ headingLevel: 2
 
 # Change Log
 
+## Version 2.6.6 (28th August 2023)
+* Add postOnly parameter on [`Close Position`](#close-position)
+
 ## Version 2.6.5 (27th July 2023)
 * We have introduced a new addition to our futures market: 1,000 Floki Perpetual Futures Contracts (1KFLOKI-PERP or 1KFLOKIPFC)
 
@@ -1525,12 +1528,13 @@ Closes a user's position for the particular market as specified by symbol. If ty
 
 ### Request Parameters
 
-| Name               | Type    | Required | Description                                                                                      |
-| ---                | ---     | ---      | ------------------------------------------------------------------------------------------------ |
-| symbol             | string  | Yes      | Market symbol                                                                                    |
-| type               | string  | Yes      | Close position type with values:<br/>LIMIT: Close at `price`<br/>MARKET: Close at market price   |
-| price              | double  | No       | Close price. Mandatory when type is `LIMIT`                                                      |
-| useNewSymbolNaming | boolean | No       | True to use new futures market name in symbol, default to False                                  |
+| Name               | Type    | Required | Description                                                                                             |
+|--------------------| ---     | ---      |---------------------------------------------------------------------------------------------------------|
+| symbol             | string  | Yes      | Market symbol                                                                                           |
+| type               | string  | Yes      | Close position type with values:<br/>LIMIT: Close at `price`<br/>MARKET: Close at market price          |
+| price              | double  | No       | Close price. Mandatory when type is `LIMIT`                                                             |
+| postOnly           | boolean | No       | Boolean to indicate if this is a post only order. For post only orders, traders are charged maker fees  |
+| useNewSymbolNaming | boolean | No       | True to use new futures market name in symbol, default to False                                         |
 
 ### Response Content
 
