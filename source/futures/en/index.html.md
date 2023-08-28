@@ -13,7 +13,7 @@ headingLevel: 2
 
 # Change Log
 
-## Version 2.6.6 (23th August 2023)
+## Version 2.6.6 (28th August 2023)
 * Add postOnly parameter on [`Close Position`](#close-position)
 
 ## Version 2.6.5 (27th July 2023)
