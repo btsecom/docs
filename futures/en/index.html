@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-2-6-6-28th-august-2023" class="toc-h2 toc-link" data-title="Version 2.6.6 (28th August 2023)">Version 2.6.6 (28th August 2023)</a>
+                  </li>
+                  <li>
                     <a href="#version-2-6-5-27th-july-2023" class="toc-h2 toc-link" data-title="Version 2.6.5 (27th July 2023)">Version 2.6.5 (27th July 2023)</a>
                   </li>
                   <li>
@@ -474,7 +477,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-2-6-5-27th-july-2023'>Version 2.6.5 (27th July 2023)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-2-6-6-28th-august-2023'>Version 2.6.6 (28th August 2023)</h2>
+<ul>
+<li>Add postOnly parameter on <a href="#close-position"><code>Close Position</code></a></li>
+</ul>
+<h2 id='version-2-6-5-27th-july-2023'>Version 2.6.5 (27th July 2023)</h2>
 <ul>
 <li>We have introduced a new addition to our futures market: 1,000 Floki Perpetual Futures Contracts (1KFLOKI-PERP or 1KFLOKIPFC)</li>
 </ul>
@@ -3554,6 +3561,12 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>double</td>
 <td>No</td>
 <td>Close price. Mandatory when type is <code>LIMIT</code></td>
+</tr>
+<tr>
+<td>postOnly</td>
+<td>boolean</td>
+<td>No</td>
+<td>Boolean to indicate if this is a post only order. For post only orders, traders are charged maker fees</td>
 </tr>
 <tr>
 <td>useNewSymbolNaming</td>
