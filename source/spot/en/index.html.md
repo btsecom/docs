@@ -13,6 +13,10 @@ headingLevel: 2
 
 # Change Log
 
+## Version 3.4.4 (29th Aug 2023)
+
+* Add 451 status code in [`API Status Codes`](#api-status-codes) and make [`Order Book Websocket Streams`](#order-book-websocket-streams) as independent paragraph
+
 ## Version 3.4.3 (17th Aug 2023)
 * Update [`Notifications`](#notifications) response data format from array to object.
 
@@ -247,6 +251,7 @@ Each API will return one of the following HTTP status:
 * 405 - Method not allowed. Indicates that the request method is not known to the requested server
 * 408 - Request timeout. Indicates that the server did not complete the request. BTSE API timeouts are set at 30secs
 * 429 - Too many requests. Indicates that the client has exceeded the rates limits set by the server. Refer to Rate Limits for more details
+* 451 - Unavailable For Legal Reasons. Indicates that the client has been banned because abnormal behavior
 * 500 - Internal server error. Indicates that the server encountered an unexpected condition resulting in not being able to fulfill the request
 
 ## API Enum
@@ -659,7 +664,7 @@ Gets server time
 
 # Trade Endpoints
 
-## Create new order
+## Create New Order
 
 > Request (create `MARKET` order)
 
@@ -1093,7 +1098,7 @@ Cancels pending orders that has not yet been transacted. The `orderID` is a uniq
 | stealth          | string  | Yes      | Stealth value of order                                                                                                                                                                                                                                                                          |
 | deviation        | string  | Yes      | Deviation value of order                                                                                                                                                                                                                                                                        |
 
-## Dead man's switch (Cancel all after)
+## Dead Man's Switch (Cancel All After)
 
 > Request
 
@@ -1302,9 +1307,9 @@ retrieve user's trading fees
 | takerfee | double | yes      | taker fees    |
 
 
-# investment endpoints
+# Investment Endpoints
 
-## query investment products
+## Query Investment Products
 
 > response
 
@@ -1366,7 +1371,7 @@ get all investment products
 | rate | double  | yes      | interest rate    |
 
 
-## deposit investment
+## Deposit Investment
 
 > request
 
@@ -1389,7 +1394,7 @@ deposit an investment
 | amount    | double  | yes      | invest amount       |
 
 
-## renew investment
+## Renew Investment
 
 > request
 
@@ -1428,7 +1433,7 @@ renew an investment order
 | autoRenew | boolean | yes      | status of autoRenew flag |
 
 
-## redeem investment
+## Redeem Investment
 
 > request
 
@@ -1451,7 +1456,7 @@ redeem an investment order
 | amount  | double  | yes      | redeem amount       |
 
 
-## query investment orders
+## Query Investment Orders
 
 > response
 
@@ -1505,7 +1510,7 @@ query investment orders
 | redemptionprocessing   | boolean | yes      | is redemption processing         |
 
 
-## query investment history
+## Query Investment History
 
 > response
 
@@ -1546,61 +1551,13 @@ query investment history
 | duration       | boolean | yes      | duration                       |
 
 
-# websocket streams
+# Order Book Websocket Streams
 
-## Ping/Pong
-For all our WebSocket servers, simply send a 'ping' message, and the WebSocket server will respond with a 'pong' message if the WebSocket connection is established and active.
-> Request
-
-```
-ping
-```
-
-> Response
-
-```
-pong
-```
-
-## subscription
-
-> request
-
-```json
-{
-  "op": "subscribe",
-  "args": [
-    "orderbookapi:btc-usd_0"
-  ]
-}
-```
-
-> response
-
-```json
-{
-  "event": "subscribe",
-  "channel": [
-    "orderbookapi:btc-usd_0"
-  ]
-}
-```
-
-to subscribe to a websocket feed
-
-### request parameters
-
-| name | type   | required | description                                                                                                            |
-| ---  | ---    | ---      | ---                                                                                                                    |
-| op   | string | yes      | operation. `subscribe` will subscribe to the topics provided in `args`. `unsubscribe` will unsubscribe from the topics |
-| args | array  | yes      | topics to subscribe to.                                                                                                |
-
-### response content
-
-| Name    | Type   | Required | Description                                   |
-| ---     | ---    | ---      | ---                                           |
-| event   | string | Yes      | Respond with the event type                   |
-| channel | array  | Yes      | Topics which have been sucessfully subscribed |
+## Endpoints
+  * Production
+     * `wss://ws.btse.com/ws/oss/spot`
+  * Testnet
+     * `wss://testws.btse.io/ws/oss/spot` 
 
 ## OSS L1 Snapshot (By grouping)
 
@@ -1815,6 +1772,71 @@ Also if [crossed orderbook](https://en.wikipedia.org/wiki/Order_book#Crossed_boo
 | 1005       | Topic provided does not exist.                                                         |
 | 1007       | User message buffer is full.                                                           |
 | 1008       | Reached maximum failed attempts, closing the session.                                  |
+
+# Websocket Streams
+
+## Endpoints
+  * Production
+    * `wss://ws.btse.com/ws/spot`
+    * `wss://aws-ws.btse.com/ws/spot` (Optimised for connection via AWS, enabled by request)
+  * Testnet
+    * `wss://testws.btse.io/ws/spot`
+
+## Ping/Pong
+For all our WebSocket servers, simply send a 'ping' message, and the WebSocket server will respond with a 'pong' message if the WebSocket connection is established and active.
+> Request
+
+```
+ping
+```
+
+> Response
+
+```
+pong
+```
+
+## Subscription
+
+> request
+
+```json
+{
+  "op": "subscribe",
+  "args": [
+    "tradeHistoryApi:BTC-USD"
+  ]
+}
+```
+
+> response
+
+```json
+{
+  "event": "subscribe",
+  "channel": [
+    "tradeHistoryApi:BTC-USD"
+  ]
+}
+```
+
+to subscribe to a websocket public trade fill
+
+### request parameters
+
+| name | type   | required | description                                                                                                            |
+| ---  | ---    | ---      | ---                                                                                                                    |
+| op   | string | yes      | operation. `subscribe` will subscribe to the topics provided in `args`. `unsubscribe` will unsubscribe from the topics |
+| args | array  | yes      | topics to subscribe to.                                                                                                |
+
+### response content
+
+| Name    | Type   | Required | Description                                   |
+| ---     | ---    | ---      | ---                                           |
+| event   | string | Yes      | Respond with the event type                   |
+| channel | array  | Yes      | Topics which have been sucessfully subscribed |
+
+
 
 
 ## Public Trade Fills

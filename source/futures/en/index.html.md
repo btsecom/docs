@@ -13,6 +13,9 @@ headingLevel: 2
 
 # Change Log
 
+## Version 2.6.7 (29th August 2023)
+* Add 451 status code in [`API Status Codes`](#api-status-codes) and make [`Order Book Websocket Streams`](#order-book-websocket-streams) as independent paragraph 
+
 ## Version 2.6.6 (28th August 2023)
 * Add postOnly parameter on [`Close Position`](#close-position)
 
@@ -344,6 +347,7 @@ Each API will return one of the following HTTP status:
 * 405 - Method not allowed. Indicates that the request method is not known to the requested server
 * 408 - Request timeout. Indicates that the server did not complete the request. BTSE API timeouts are set at 30secs
 * 429 - Too many requests. Indicates that the client has exceeded the rates limits set by the server. Refer to Rate Limits for more details
+* 451 - Unavailable For Legal Reasons. Indicates that the client has been banned because abnormal behavior
 * 500 - Internal server error. Indicates that the server encountered an unexpected condition resulting in not being able to fulfill the request
 
 ## API Enum
@@ -1210,7 +1214,7 @@ Cancels pending orders that has not yet been transacted. The `orderID` is a uniq
 | remainingSize | double  | Yes      | Size left to be transacted                                                                                                                                                                                                                                                                      |
 | originalSize  | double  | Yes      | Original order size                                                                                                                                                                                                                                                                             |
 
-## Dead man's switch (Cancel all after)
+## Dead Man's Switch (Cancel All After)
 
 > Request
 
@@ -2138,63 +2142,13 @@ Transfers funds between user and sub-account wallet. User can specify the source
 
 
 
+# Order Book Websocket Streams
 
-# Websocket Streams
-
-## Ping/Pong
-For all our WebSocket servers, simply send a 'ping' message, and the WebSocket server will respond with a 'pong' message if the WebSocket connection is established and active.
-> Reques
-
-```
-ping
-```
-
-> Response
-
-```
-pong
-```
-
-## Subscription
-
-> Request
-
-```json
-{
-  "op": "subscribe",
-  "args": [
-    "orderBookApi:BTCPFC_0"
-  ]
-}
-```
-
-> Response
-
-```json
-{
-  "event": "subscribe",
-  "channel": [
-    "orderBookApi:BTCPFC_0"
-  ]
-}
-```
-
-To subscribe to a websocket feed
-
-### Request Parameters
-
-| Name | Type   | Required | Description                                                                                                            |
-| ---  | ---    | ---      | ---                                                                                                                    |
-| op   | string | Yes      | Operation. `subscribe` will subscribe to the topics provided in `args`. `unsubscribe` will unsubscribe from the topics |
-| args | array  | Yes      | Topics to subscribe to.                                                                                                |
-
-### Response Content
-
-| Name    | Type   | Required | Description                                   |
-| ---     | ---    | ---      | ---                                           |
-| event   | string | Yes      | Respond with the event type                   |
-| channel | array  | Yes      | Topics which have been sucessfully subscribed |
-
+## Endpoints
+  * Production
+    * `wss://ws.btse.com/ws/oss/futures`
+  * Testnet
+    * `wss://testws.btse.io/ws/oss/futures`
 
 ## OSS L1 Snapshot (By grouping)
 
@@ -2405,6 +2359,74 @@ Also if [crossed orderbook](https://en.wikipedia.org/wiki/Order_book#Crossed_boo
 | 1005       | Topic provided does not exist.                                                         |
 | 1007       | User message buffer is full.                                                           |
 | 1008       | Reached maximum failed attempts, closing the session.                                  |
+
+
+# Websocket Streams
+
+## Endpoints
+  * Production
+     * `wss://ws.btse.com/ws/futures`
+     * `wss://aws-ws.btse.com/ws/futures` (Optimised for connection via AWS, enabled by request)
+  * Testnet
+    * `wss://testws.btse.io/ws/futures`
+
+## Ping/Pong
+For all our WebSocket servers, simply send a 'ping' message, and the WebSocket server will respond with a 'pong' message if the WebSocket connection is established and active.
+> Reques
+
+```
+ping
+```
+
+> Response
+
+```
+pong
+```
+
+## Subscription
+
+Here is an example for topic subscription.
+
+> Request
+
+```json
+{
+  "op": "subscribe",
+  "args": [
+    "tradeHistoryApi:BTCPFC"
+  ]
+}
+```
+
+> Response
+
+```json
+{
+  "event": "subscribe",
+  "channel": [
+    "tradeHistoryApi:BTCPFC"
+  ]
+}
+```
+
+To subscribe to a websocket public trade fill
+
+### Request Parameters
+
+| Name | Type   | Required | Description                                                                                                            |
+| ---  | ---    | ---      | ---                                                                                                                    |
+| op   | string | Yes      | Operation. `subscribe` will subscribe to the topics provided in `args`. `unsubscribe` will unsubscribe from the topics |
+| args | array  | Yes      | Topics to subscribe to.                                                                                                |
+
+### Response Content
+
+| Name    | Type   | Required | Description                                   |
+| ---     | ---    | ---      | ---                                           |
+| event   | string | Yes      | Respond with the event type                   |
+| channel | array  | Yes      | Topics which have been sucessfully subscribed |
+
+
 
 
 ## Public Trade Fills
