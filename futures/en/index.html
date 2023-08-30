@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-2-6-7-29th-august-2023" class="toc-h2 toc-link" data-title="Version 2.6.7 (29th August 2023)">Version 2.6.7 (29th August 2023)</a>
+                  </li>
+                  <li>
                     <a href="#version-2-6-6-28th-august-2023" class="toc-h2 toc-link" data-title="Version 2.6.6 (28th August 2023)">Version 2.6.6 (28th August 2023)</a>
                   </li>
                   <li>
@@ -387,7 +390,7 @@
                     <a href="#cancel-order" class="toc-h2 toc-link" data-title="Cancel Order">Cancel Order</a>
                   </li>
                   <li>
-                    <a href="#dead-man-39-s-switch-cancel-all-after" class="toc-h2 toc-link" data-title="Dead man's switch (Cancel all after)">Dead man's switch (Cancel all after)</a>
+                    <a href="#dead-man-39-s-switch-cancel-all-after" class="toc-h2 toc-link" data-title="Dead Man's Switch (Cancel All After)">Dead Man's Switch (Cancel All After)</a>
                   </li>
                   <li>
                     <a href="#query-open-orders" class="toc-h2 toc-link" data-title="Query Open Orders">Query Open Orders</a>
@@ -439,19 +442,30 @@
               </ul>
           </li>
           <li>
-            <a href="#websocket-streams" class="toc-h1 toc-link" data-title="Websocket Streams">Websocket Streams</a>
+            <a href="#order-book-websocket-streams" class="toc-h1 toc-link" data-title="Order Book Websocket Streams">Order Book Websocket Streams</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#ping-pong" class="toc-h2 toc-link" data-title="Ping/Pong">Ping/Pong</a>
-                  </li>
-                  <li>
-                    <a href="#subscription" class="toc-h2 toc-link" data-title="Subscription">Subscription</a>
+                    <a href="#endpoints-2" class="toc-h2 toc-link" data-title="Endpoints">Endpoints</a>
                   </li>
                   <li>
                     <a href="#oss-l1-snapshot-by-grouping" class="toc-h2 toc-link" data-title="OSS L1 Snapshot (By grouping)">OSS L1 Snapshot (By grouping)</a>
                   </li>
                   <li>
                     <a href="#orderbook-incremental-updates" class="toc-h2 toc-link" data-title="Orderbook Incremental Updates">Orderbook Incremental Updates</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#websocket-streams" class="toc-h1 toc-link" data-title="Websocket Streams">Websocket Streams</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#endpoints-3" class="toc-h2 toc-link" data-title="Endpoints">Endpoints</a>
+                  </li>
+                  <li>
+                    <a href="#ping-pong" class="toc-h2 toc-link" data-title="Ping/Pong">Ping/Pong</a>
+                  </li>
+                  <li>
+                    <a href="#subscription" class="toc-h2 toc-link" data-title="Subscription">Subscription</a>
                   </li>
                   <li>
                     <a href="#public-trade-fills" class="toc-h2 toc-link" data-title="Public Trade Fills">Public Trade Fills</a>
@@ -477,7 +491,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-2-6-6-28th-august-2023'>Version 2.6.6 (28th August 2023)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-2-6-7-29th-august-2023'>Version 2.6.7 (29th August 2023)</h2>
+<ul>
+<li>Add 451 status code in <a href="#api-status-codes"><code>API Status Codes</code></a> and make <a href="#order-book-websocket-streams"><code>Order Book Websocket Streams</code></a> as independent paragraph </li>
+</ul>
+<h2 id='version-2-6-6-28th-august-2023'>Version 2.6.6 (28th August 2023)</h2>
 <ul>
 <li>Add postOnly parameter on <a href="#close-position"><code>Close Position</code></a></li>
 </ul>
@@ -876,6 +894,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <li>405 - Method not allowed. Indicates that the request method is not known to the requested server</li>
 <li>408 - Request timeout. Indicates that the server did not complete the request. BTSE API timeouts are set at 30secs</li>
 <li>429 - Too many requests. Indicates that the client has exceeded the rates limits set by the server. Refer to Rate Limits for more details</li>
+<li>451 - Unavailable For Legal Reasons. Indicates that the client has been banned because abnormal behavior</li>
 <li>500 - Internal server error. Indicates that the server encountered an unexpected condition resulting in not being able to fulfill the request</li>
 </ul>
 <h2 id='api-enum'>API Enum</h2>
@@ -2786,7 +2805,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>Original order size</td>
 </tr>
 </tbody></table>
-<h2 id='dead-man-39-s-switch-cancel-all-after'>Dead man&#39;s switch (Cancel all after)</h2>
+<h2 id='dead-man-39-s-switch-cancel-all-after'>Dead Man&#39;s Switch (Cancel All After)</h2>
 <blockquote>
 <p>Request</p>
 </blockquote>
@@ -4987,84 +5006,19 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>Transfer receiver Spot wallet to Futures wallet failed</td>
 </tr>
 </tbody></table>
-<h1 id='websocket-streams'>Websocket Streams</h1><h2 id='ping-pong'>Ping/Pong</h2>
-<p>For all our WebSocket servers, simply send a &#39;ping&#39; message, and the WebSocket server will respond with a &#39;pong&#39; message if the WebSocket connection is established and active.</p>
+<h1 id='order-book-websocket-streams'>Order Book Websocket Streams</h1><h2 id='endpoints-2'>Endpoints</h2>
+<ul>
+<li>Production
 
-<blockquote>
-<p>Reques</p>
-</blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>ping
-</code></pre></div>
-<blockquote>
-<p>Response</p>
-</blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>pong
-</code></pre></div><h2 id='subscription'>Subscription</h2>
-<blockquote>
-<p>Request</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"op"</span><span class="p">:</span><span class="w"> </span><span class="s2">"subscribe"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"orderBookApi:BTCPFC_0"</span><span class="w">
-  </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<blockquote>
-<p>Response</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"subscribe"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"channel"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"orderBookApi:BTCPFC_0"</span><span class="w">
-  </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p>To subscribe to a websocket feed</p>
-<h3 id='request-parameters-26'>Request Parameters</h3>
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>op</td>
-<td>string</td>
-<td>Yes</td>
-<td>Operation. <code>subscribe</code> will subscribe to the topics provided in <code>args</code>. <code>unsubscribe</code> will unsubscribe from the topics</td>
-</tr>
-<tr>
-<td>args</td>
-<td>array</td>
-<td>Yes</td>
-<td>Topics to subscribe to.</td>
-</tr>
-</tbody></table>
-<h3 id='response-content-26'>Response Content</h3>
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>event</td>
-<td>string</td>
-<td>Yes</td>
-<td>Respond with the event type</td>
-</tr>
-<tr>
-<td>channel</td>
-<td>array</td>
-<td>Yes</td>
-<td>Topics which have been sucessfully subscribed</td>
-</tr>
-</tbody></table>
+<ul>
+<li><code>wss://ws.btse.com/ws/oss/futures</code></li>
+</ul></li>
+<li>Testnet
+
+<ul>
+<li><code>wss://testws.btse.io/ws/oss/futures</code></li>
+</ul></li>
+</ul>
 <h2 id='oss-l1-snapshot-by-grouping'>OSS L1 Snapshot (By grouping)</h2>
 <blockquote>
 <p>Request</p>
@@ -5113,7 +5067,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <li><code>symbol</code> indicates the market symbol</li>
 <li><code>grouping</code> indicates the grouping granularity. Valid values are 0-8.</li>
 </ul>
-<h3 id='response-content-27'>Response Content</h3><h4 id='orderbook-object'>Orderbook Object</h4>
+<h3 id='response-content-26'>Response Content</h3><h4 id='orderbook-object'>Orderbook Object</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5274,7 +5228,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <p>To ensure that the updates are received in sequence, <code>seqNum</code> indicates the current sequence and <code>prevSeqNum</code> refers to the packet before. <code>seqNum</code> will always be one after the <code>prevSeqNum</code>. If the sequence is out of order, you will need to unsubscribe and re-subscribe to the topic again.</p>
 
 <p>Also if <a href="https://en.wikipedia.org/wiki/Order_book#Crossed_book">crossed orderbook</a> ever occurs when the best bid higher or equal to the best ask, please unsubscribe and re-subscribe to the topic again.</p>
-<h3 id='response-content-28'>Response Content</h3><h4 id='orderbook-object-2'>Orderbook Object</h4>
+<h3 id='response-content-27'>Response Content</h3><h4 id='orderbook-object-2'>Orderbook Object</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5378,6 +5332,100 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <tr>
 <td>1008</td>
 <td>Reached maximum failed attempts, closing the session.</td>
+</tr>
+</tbody></table>
+<h1 id='websocket-streams'>Websocket Streams</h1><h2 id='endpoints-3'>Endpoints</h2>
+<ul>
+<li>Production
+
+<ul>
+<li><code>wss://ws.btse.com/ws/futures</code></li>
+<li><code>wss://aws-ws.btse.com/ws/futures</code> (Optimised for connection via AWS, enabled by request)</li>
+</ul></li>
+<li>Testnet
+
+<ul>
+<li><code>wss://testws.btse.io/ws/futures</code></li>
+</ul></li>
+</ul>
+<h2 id='ping-pong'>Ping/Pong</h2>
+<p>For all our WebSocket servers, simply send a &#39;ping&#39; message, and the WebSocket server will respond with a &#39;pong&#39; message if the WebSocket connection is established and active.</p>
+
+<blockquote>
+<p>Reques</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>ping
+</code></pre></div>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>pong
+</code></pre></div><h2 id='subscription'>Subscription</h2>
+<p>Here is an example for topic subscription.</p>
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"op"</span><span class="p">:</span><span class="w"> </span><span class="s2">"subscribe"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"tradeHistoryApi:BTCPFC"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"event"</span><span class="p">:</span><span class="w"> </span><span class="s2">"subscribe"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"channel"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"tradeHistoryApi:BTCPFC"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>To subscribe to a websocket public trade fill</p>
+<h3 id='request-parameters-26'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>op</td>
+<td>string</td>
+<td>Yes</td>
+<td>Operation. <code>subscribe</code> will subscribe to the topics provided in <code>args</code>. <code>unsubscribe</code> will unsubscribe from the topics</td>
+</tr>
+<tr>
+<td>args</td>
+<td>array</td>
+<td>Yes</td>
+<td>Topics to subscribe to.</td>
+</tr>
+</tbody></table>
+<h3 id='response-content-28'>Response Content</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>event</td>
+<td>string</td>
+<td>Yes</td>
+<td>Respond with the event type</td>
+</tr>
+<tr>
+<td>channel</td>
+<td>array</td>
+<td>Yes</td>
+<td>Topics which have been sucessfully subscribed</td>
 </tr>
 </tbody></table>
 <h2 id='public-trade-fills'>Public Trade Fills</h2>
