@@ -13,6 +13,9 @@ headingLevel: 2
 
 # Change Log
 
+## Version 3.4.5 (3rd September 2023)
+* Remove the slide parameter from [`amend-order`](#amend-order)
+
 ## Version 3.4.4 (29th Aug 2023)
 
 * Add 451 status code in [`API Status Codes`](#api-status-codes) and make [`Order Book Websocket Streams`](#order-book-websocket-streams) as independent paragraph
@@ -931,7 +934,7 @@ Creates a new order. Requires `Trading` permission.
 
 `PUT /api/v3.2/order`
 
-Amend the price or size or trigger price of an order. For trigger orders, if the order has already been triggered, the trigger price cannot be further amended. If an order is a POST-ONLY order, and `slide` option is set to true, then price will set to be the best bid/ask price. Amend order _does not_ apply to algo orders
+Amend the price or size or trigger price of an order. For trigger orders, if the order has already been triggered, the trigger price cannot be further amended. Amend order _does not_ apply to algo orders
 
 ### Request Parameters
 
@@ -942,7 +945,6 @@ Amend the price or size or trigger price of an order. For trigger orders, if the
 | clOrderID    | string  | No       | Custom order ID. Mandatory when `orderID` is not provided.                                                                                                         |
 | type         | string  | Yes      | Type of amendment<br/>`PRICE`: To amend order price<br/>`SIZE`: To amend order size<br/>`TRIGGERPRICE`: To amend trigger price<br/>`ALL`: to amend multiple fields |
 | value        | number  | No       | Mandatory for types: `PRICE`, `SIZE`, `TRIGGERPRICE`. The value to be amended to. Value depends on the type being set.                                             |
-| slide        | boolean | No       | Used for Post-Only orders. When set to true will set price to best bid/ask                                                                                         |
 | orderPrice   | number  | No       | For type: `ALL`, order price to be amended                                                                                                                         |
 | orderSize    | number  | No       | For type: `ALL`, order size to be amended                                                                                                                          |
 | triggerPrice | number  | No       | For type: `ALL`, trigger price to be amended                                                                                                                       |
