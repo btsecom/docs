@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-3-4-5-3rd-september-2023" class="toc-h2 toc-link" data-title="Version 3.4.5 (3rd September 2023)">Version 3.4.5 (3rd September 2023)</a>
+                  </li>
+                  <li>
                     <a href="#version-3-4-4-29th-aug-2023" class="toc-h2 toc-link" data-title="Version 3.4.4 (29th Aug 2023)">Version 3.4.4 (29th Aug 2023)</a>
                   </li>
                   <li>
@@ -455,7 +458,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-3-4-4-29th-aug-2023'>Version 3.4.4 (29th Aug 2023)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-3-4-5-3rd-september-2023'>Version 3.4.5 (3rd September 2023)</h2>
+<ul>
+<li>Remove the slide parameter from <a href="#amend-order"><code>amend-order</code></a></li>
+</ul>
+<h2 id='version-3-4-4-29th-aug-2023'>Version 3.4.4 (29th Aug 2023)</h2>
 <ul>
 <li>Add 451 status code in <a href="#api-status-codes"><code>API Status Codes</code></a> and make <a href="#order-book-websocket-streams"><code>Order Book Websocket Streams</code></a> as independent paragraph</li>
 </ul>
@@ -2029,7 +2036,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 </span></code></pre></div>
 <p><code>PUT /api/v3.2/order</code></p>
 
-<p>Amend the price or size or trigger price of an order. For trigger orders, if the order has already been triggered, the trigger price cannot be further amended. If an order is a POST-ONLY order, and <code>slide</code> option is set to true, then price will set to be the best bid/ask price. Amend order <em>does not</em> apply to algo orders</p>
+<p>Amend the price or size or trigger price of an order. For trigger orders, if the order has already been triggered, the trigger price cannot be further amended. Amend order <em>does not</em> apply to algo orders</p>
 <h3 id='request-parameters-8'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -2068,12 +2075,6 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>number</td>
 <td>No</td>
 <td>Mandatory for types: <code>PRICE</code>, <code>SIZE</code>, <code>TRIGGERPRICE</code>. The value to be amended to. Value depends on the type being set.</td>
-</tr>
-<tr>
-<td>slide</td>
-<td>boolean</td>
-<td>No</td>
-<td>Used for Post-Only orders. When set to true will set price to best bid/ask</td>
 </tr>
 <tr>
 <td>orderPrice</td>
