@@ -17,7 +17,7 @@ headingLevel: 2
 * Remove the slide parameter from [`amend-order`](#amend-order)
 
 ## Version 2.6.7 (29th August 2023)
-* Add 451 status code in [`API Status Codes`](#api-status-codes) and make [`Order Book Websocket Streams`](#order-book-websocket-streams) as independent paragraph 
+* Add 451 status code in [`API Status Codes`](#api-status-codes) and make [`Order Book Websocket Streams`](#order-book-websocket-streams) as independent paragraph
 
 ## Version 2.6.6 (28th August 2023)
 * Add postOnly parameter on [`Close Position`](#close-position)
@@ -258,10 +258,8 @@ You will need to create an API key on the BTSE platform before you can use authe
 * Production
   * HTTP
      * `https://api.btse.com/futures`
-     * `https://aws-api.btse.com/futures` (Optimised for connection via AWS, enabled by request)
   * Websocket
      * `wss://ws.btse.com/ws/futures`
-     * `wss://aws-ws.btse.com/ws/futures` (Optimised for connection via AWS, enabled by request)
   * Websocket (for orderbook stream)
      * `wss://ws.btse.com/ws/oss/futures` (Used for Orderbook incremental update stream)
 * Testnet
@@ -2368,7 +2366,6 @@ Also if [crossed orderbook](https://en.wikipedia.org/wiki/Order_book#Crossed_boo
 ## Endpoints
   * Production
      * `wss://ws.btse.com/ws/futures`
-     * `wss://aws-ws.btse.com/ws/futures` (Optimised for connection via AWS, enabled by request)
   * Testnet
     * `wss://testws.btse.io/ws/futures`
 
