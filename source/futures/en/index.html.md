@@ -13,6 +13,9 @@ headingLevel: 2
 
 # Change Log
 
+## Version 2.6.9 (11th September 2023)
+* Add [`get-leverage`](#get-leverage) to get leverage for market
+
 ## Version 2.6.8 (3rd September 2023)
 * Remove the slide parameter from [`amend-order`](#amend-order)
 
@@ -100,6 +103,7 @@ Please use the following websokcet topic through the endpoint `wss://ws.btse.com
     - [`Query Wallet History`](#query-wallet-history)
     - [`Query Wallet Balance`](#query-wallet-balance)
     - [`Set Leverage`](#set-leverage)
+    - [`Get Leverage`](#get-leverage)
     - [`Set Risk Limit`](#set-risk-limit)
     - [`Query Market Price`](#query-market-price)
     - [`Change Contract Settlement Currency`](#change-contract-settlement-currency)
@@ -1686,6 +1690,34 @@ Change leverage values for the specified market
 | type      | double  | Yes      | Value will be 93 indicating that type is `Leverage`                                                                                     |
 | timestamp | long    | Yes      | Timestamp where leverage was set                                                                                                        |
 | message   | long    | Yes      | Message                                                                                                                                 |
+
+## Get Leverage
+
+> Response
+
+```json
+{
+  "symbol": "BTC-PERP",
+  "leverage": 100.0
+}
+```
+
+`Get /api/v2.1/leverage`
+
+Get leverage value for the specified market
+
+### Request Parameters
+
+| Name               | Type    | Required | Description |
+| ---                | ---     | ---      | --- |
+| symbol             | string  | Yes      | Market symbol |
+
+### Response Content
+
+| Name      | Type    | Required | Description                                                                                                                             |
+| ---       | ---     | ---      | ---  |
+| symbol    | string  | Yes      | Market symbol |
+| leverage  | double  | Yes      | Current leverage value for the market for isolated margin mode, return 0 if the margin mode is cross|
 
 ## Change Contract Settlement Currency
 
