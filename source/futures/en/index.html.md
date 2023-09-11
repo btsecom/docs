@@ -1693,14 +1693,6 @@ Change leverage values for the specified market
 
 ## Get Leverage
 
-> Request
-
-```json
-{
-  "symbol": "BTC-PERP"
-}
-```
-
 > Response
 
 ```json
