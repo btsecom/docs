@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-2-6-9-11th-september-2023" class="toc-h2 toc-link" data-title="Version 2.6.9 (11th September 2023)">Version 2.6.9 (11th September 2023)</a>
+                  </li>
+                  <li>
                     <a href="#version-2-6-8-3rd-september-2023" class="toc-h2 toc-link" data-title="Version 2.6.8 (3rd September 2023)">Version 2.6.8 (3rd September 2023)</a>
                   </li>
                   <li>
@@ -417,6 +420,9 @@
                     <a href="#set-leverage" class="toc-h2 toc-link" data-title="Set Leverage">Set Leverage</a>
                   </li>
                   <li>
+                    <a href="#get-leverage" class="toc-h2 toc-link" data-title="Get Leverage">Get Leverage</a>
+                  </li>
+                  <li>
                     <a href="#change-contract-settlement-currency" class="toc-h2 toc-link" data-title="Change Contract Settlement Currency">Change Contract Settlement Currency</a>
                   </li>
                   <li>
@@ -494,7 +500,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-2-6-8-3rd-september-2023'>Version 2.6.8 (3rd September 2023)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-2-6-9-11th-september-2023'>Version 2.6.9 (11th September 2023)</h2>
+<ul>
+<li>Add <a href="#get-leverage"><code>get-leverage</code></a> to get leverage for market</li>
+</ul>
+<h2 id='version-2-6-8-3rd-september-2023'>Version 2.6.8 (3rd September 2023)</h2>
 <ul>
 <li>Remove the slide parameter from <a href="#amend-order"><code>amend-order</code></a></li>
 </ul>
@@ -596,6 +606,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <li><a href="#query-wallet-history"><code>Query Wallet History</code></a></li>
 <li><a href="#query-wallet-balance"><code>Query Wallet Balance</code></a></li>
 <li><a href="#set-leverage"><code>Set Leverage</code></a></li>
+<li><a href="#get-leverage"><code>Get Leverage</code></a></li>
 <li><a href="#set-risk-limit"><code>Set Risk Limit</code></a></li>
 <li><a href="#query-market-price"><code>Query Market Price</code></a></li>
 <li><a href="#change-contract-settlement-currency"><code>Change Contract Settlement Currency</code></a></li>
@@ -3960,6 +3971,56 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>Message</td>
 </tr>
 </tbody></table>
+<h2 id='get-leverage'>Get Leverage</h2>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-PERP"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"leverage"</span><span class="p">:</span><span class="w"> </span><span class="mf">100.0</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><code>Get /api/v2.1/leverage</code></p>
+
+<p>Get leverage value for the specified market</p>
+<h3 id='request-parameters-19'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Yes</td>
+<td>Market symbol</td>
+</tr>
+</tbody></table>
+<h3 id='response-content-19'>Response Content</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Yes</td>
+<td>Market symbol</td>
+</tr>
+<tr>
+<td>leverage</td>
+<td>double</td>
+<td>Yes</td>
+<td>Current leverage value for the market for isolated margin mode, return 0 if the margin mode is cross</td>
+</tr>
+</tbody></table>
 <h2 id='change-contract-settlement-currency'>Change Contract Settlement Currency</h2>
 <blockquote>
 <p>Request</p>
@@ -3981,7 +4042,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <p><code>POST /api/v2.1/settle_in</code></p>
 
 <p>Changes the settlement currency for the position in the current market</p>
-<h3 id='request-parameters-19'>Request Parameters</h3>
+<h3 id='request-parameters-20'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4009,7 +4070,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>True to use new futures market name in symbol, default to False</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-19'>Response Content</h3>
+<h3 id='response-content-20'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4050,7 +4111,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <p><code>GET /api/v2.1/user/fees</code></p>
 
 <p>Retrieve user&#39;s trading fees</p>
-<h3 id='request-parameters-20'>Request Parameters</h3>
+<h3 id='request-parameters-21'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4072,7 +4133,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>True to use new futures market name in symbol, default to False</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-20'>Response Content</h3>
+<h3 id='response-content-21'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4139,7 +4200,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <p><code>GET /api/v2.1/user/wallet</code></p>
 
 <p>Query user&#39;s wallet balance. Requires <code>Read</code> permissions on the API key.</p>
-<h3 id='request-parameters-21'>Request Parameters</h3>
+<h3 id='request-parameters-22'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4161,7 +4222,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>True to return futures market name in the new format, default to False</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-21'>Response Content</h3><h4 id='wallet'>Wallet</h4>
+<h3 id='response-content-22'>Response Content</h3><h4 id='wallet'>Wallet</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4307,7 +4368,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <p><code>GET /api/v2.1/user/wallet_history</code></p>
 
 <p>Get user&#39;s wallet history records on the futures wallet</p>
-<h3 id='request-parameters-22'>Request Parameters</h3>
+<h3 id='request-parameters-23'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4347,7 +4408,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>True to return futures market name in the new format, default to False</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-22'>Response Content</h3>
+<h3 id='response-content-23'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4444,7 +4505,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <p><code>GET /api/v2.1/user/margin</code></p>
 
 <p>Gets margin information for the specified wallet so that users can know which wallet they are currently using in the market.</p>
-<h3 id='request-parameters-23'>Request Parameters</h3>
+<h3 id='request-parameters-24'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4484,7 +4545,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>True to use new futures market name in symbol, default to False</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-23'>Response Content</h3><h4 id='wallet-2'>Wallet</h4>
+<h3 id='response-content-24'>Response Content</h3><h4 id='wallet-2'>Wallet</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4665,7 +4726,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <p><code>POST /api/v2.1/user/wallet/transfer</code></p>
 
 <p>Transfers funds between user&#39;s wallet. User can specify the source and target wallet to transfer funds</p>
-<h3 id='request-parameters-24'>Request Parameters</h3><h4 id='wallet-request'>Wallet Request</h4>
+<h3 id='request-parameters-25'>Request Parameters</h3><h4 id='wallet-request'>Wallet Request</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4733,7 +4794,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>The value of the balance is to be transferred, example: 10</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-24'>Response Content</h3><h4 id='wallet-3'>Wallet</h4>
+<h3 id='response-content-25'>Response Content</h3><h4 id='wallet-3'>Wallet</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4861,7 +4922,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <p>Transfers funds between user and sub-account wallet. User can specify the source and target wallet to transfer funds</p>
 
 <p>, <code>Wallet</code> permission is required. To get supported currency list please check <a href="#query-available-currency-list-for-wallet-action">Available currency list for action</a></p>
-<h3 id='request-parameters-25'>Request Parameters</h3><h4 id='wallet-request-2'>Wallet Request</h4>
+<h3 id='request-parameters-26'>Request Parameters</h3><h4 id='wallet-request-2'>Wallet Request</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4941,7 +5002,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>The value of the balance is to be transferred, example: 10</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-25'>Response Content</h3><h4 id='wallet-4'>Wallet</h4>
+<h3 id='response-content-26'>Response Content</h3><h4 id='wallet-4'>Wallet</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5066,7 +5127,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <li><code>symbol</code> indicates the market symbol</li>
 <li><code>grouping</code> indicates the grouping granularity. Valid values are 0-8.</li>
 </ul>
-<h3 id='response-content-26'>Response Content</h3><h4 id='orderbook-object'>Orderbook Object</h4>
+<h3 id='response-content-27'>Response Content</h3><h4 id='orderbook-object'>Orderbook Object</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5227,7 +5288,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <p>To ensure that the updates are received in sequence, <code>seqNum</code> indicates the current sequence and <code>prevSeqNum</code> refers to the packet before. <code>seqNum</code> will always be one after the <code>prevSeqNum</code>. If the sequence is out of order, you will need to unsubscribe and re-subscribe to the topic again.</p>
 
 <p>Also if <a href="https://en.wikipedia.org/wiki/Order_book#Crossed_book">crossed orderbook</a> ever occurs when the best bid higher or equal to the best ask, please unsubscribe and re-subscribe to the topic again.</p>
-<h3 id='response-content-27'>Response Content</h3><h4 id='orderbook-object-2'>Orderbook Object</h4>
+<h3 id='response-content-28'>Response Content</h3><h4 id='orderbook-object-2'>Orderbook Object</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5382,7 +5443,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>To subscribe to a websocket public trade fill</p>
-<h3 id='request-parameters-26'>Request Parameters</h3>
+<h3 id='request-parameters-27'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5404,7 +5465,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>Topics to subscribe to.</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-28'>Response Content</h3>
+<h3 id='response-content-29'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5455,7 +5516,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>Subscribe to recent trade feed for a market. The topic will be <code>tradeHistoryApi:&lt;market&gt;</code> where <code>&lt;market&gt;</code> is the market symbol.</p>
-<h3 id='response-content-29'>Response Content</h3><h4 id='tradehistory-object'>TradeHistory Object</h4>
+<h3 id='response-content-30'>Response Content</h3><h4 id='tradehistory-object'>TradeHistory Object</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5545,7 +5606,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
   "op":"authKeyExpires",
   "args":["4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x", "1624985375123", "c410d38c681579adb335885800cff24c66171b7cc8376cfe43da1408c581748156b89bcc5a115bb496413bda481139fb"]
 }
-</code></pre></div><h3 id='request-parameters-27'>Request Parameters</h3>
+</code></pre></div><h3 id='request-parameters-28'>Request Parameters</h3>
 <p>Below details the arguments needed to be sent in.</p>
 
 <table><thead>
@@ -5625,7 +5686,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 
 </span></code></pre></div>
 <p>Receive trade notifications by subscribing to the topic <code>notificationApiV2</code>. The websocket feed will push trade level notifications to the subscriber. If topic is subscribed without being authenticated, no messages will be sent.</p>
-<h3 id='response-content-30'>Response Content</h3>
+<h3 id='response-content-31'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5779,7 +5840,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 
 </span></code></pre></div>
 <p>When a trade has been transacted, this topic will send the trade information back to the subscriber.</p>
-<h3 id='response-content-31'>Response Content</h3>
+<h3 id='response-content-32'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5930,7 +5991,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 }
 </code></pre></div>
 <p>All futures positions will be pushed periodically via this topic.</p>
-<h3 id='response-content-32'>Response Content</h3>
+<h3 id='response-content-33'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
