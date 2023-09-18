@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-3-4-6-18th-sep-2023" class="toc-h2 toc-link" data-title="Version 3.4.6 (18th Sep 2023)">Version 3.4.6 (18th Sep 2023)</a>
+                  </li>
+                  <li>
                     <a href="#version-3-4-5-3rd-september-2023" class="toc-h2 toc-link" data-title="Version 3.4.5 (3rd September 2023)">Version 3.4.5 (3rd September 2023)</a>
                   </li>
                   <li>
@@ -458,7 +461,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-3-4-5-3rd-september-2023'>Version 3.4.5 (3rd September 2023)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-3-4-6-18th-sep-2023'>Version 3.4.6 (18th Sep 2023)</h2>
+<ul>
+<li>Correct the data types of parameters in order related APIs and remove 451 status code</li>
+</ul>
+<h2 id='version-3-4-5-3rd-september-2023'>Version 3.4.5 (3rd September 2023)</h2>
 <ul>
 <li>Remove the slide parameter from <a href="#amend-order"><code>amend-order</code></a></li>
 </ul>
@@ -750,7 +757,6 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <li>405 - Method not allowed. Indicates that the request method is not known to the requested server</li>
 <li>408 - Request timeout. Indicates that the server did not complete the request. BTSE API timeouts are set at 30secs</li>
 <li>429 - Too many requests. Indicates that the client has exceeded the rates limits set by the server. Refer to Rate Limits for more details</li>
-<li>451 - Unavailable For Legal Reasons. Indicates that the client has been banned because abnormal behavior</li>
 <li>500 - Internal server error. Indicates that the server encountered an unexpected condition resulting in not being able to fulfill the request</li>
 </ul>
 <h2 id='api-enum'>API Enum</h2>
@@ -1846,7 +1852,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 </tr>
 <tr>
 <td>fillSize</td>
-<td>string</td>
+<td>double</td>
 <td>Yes</td>
 <td>Trade filled size</td>
 </tr>
@@ -1858,7 +1864,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 </tr>
 <tr>
 <td>orderType</td>
-<td>string</td>
+<td>integer</td>
 <td>Yes</td>
 <td>Order type <br/>76: Limit order<br/>77: Market order<br/>80: Peg/Algo order</td>
 </tr>
@@ -1894,7 +1900,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 </tr>
 <tr>
 <td>stopPrice</td>
-<td>string</td>
+<td>double</td>
 <td>Yes</td>
 <td>Stop price</td>
 </tr>
@@ -1906,25 +1912,25 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 </tr>
 <tr>
 <td>timestamp</td>
-<td>string</td>
+<td>long</td>
 <td>Yes</td>
 <td>Order timestamp</td>
 </tr>
 <tr>
 <td>trigger</td>
-<td>string</td>
+<td>boolean</td>
 <td>Yes</td>
 <td>Indicator if order is a trigger order</td>
 </tr>
 <tr>
 <td>triggerPrice</td>
-<td>string</td>
+<td>double</td>
 <td>Yes</td>
 <td>Order trigger price, returns 0 if order is not a trigger order</td>
 </tr>
 <tr>
 <td>averageFillPrice</td>
-<td>string</td>
+<td>double</td>
 <td>Yes</td>
 <td>Average filled price. Returns the average filled price for partially transacted orders</td>
 </tr>
@@ -1936,13 +1942,13 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 </tr>
 <tr>
 <td>stealth</td>
-<td>string</td>
+<td>double</td>
 <td>Yes</td>
 <td>Stealth value of order</td>
 </tr>
 <tr>
 <td>deviation</td>
-<td>string</td>
+<td>double</td>
 <td>Yes</td>
 <td>Deviation value of order</td>
 </tr>
@@ -2070,25 +2076,25 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 </tr>
 <tr>
 <td>value</td>
-<td>number</td>
+<td>double</td>
 <td>No</td>
 <td>Mandatory for types: <code>PRICE</code>, <code>SIZE</code>, <code>TRIGGERPRICE</code>. The value to be amended to. Value depends on the type being set.</td>
 </tr>
 <tr>
 <td>orderPrice</td>
-<td>number</td>
+<td>double</td>
 <td>No</td>
 <td>For type: <code>ALL</code>, order price to be amended</td>
 </tr>
 <tr>
 <td>orderSize</td>
-<td>number</td>
+<td>double</td>
 <td>No</td>
 <td>For type: <code>ALL</code>, order size to be amended</td>
 </tr>
 <tr>
 <td>triggerPrice</td>
-<td>number</td>
+<td>double</td>
 <td>No</td>
 <td>For type: <code>ALL</code>, trigger price to be amended</td>
 </tr>
@@ -2116,7 +2122,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 </tr>
 <tr>
 <td>fillSize</td>
-<td>string</td>
+<td>double</td>
 <td>Yes</td>
 <td>Trade filled size</td>
 </tr>
@@ -2128,7 +2134,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 </tr>
 <tr>
 <td>orderType</td>
-<td>string</td>
+<td>integer</td>
 <td>Yes</td>
 <td>Order type <br/>76: Limit order<br/>77: Market order<br/>80: Peg/Algo order</td>
 </tr>
@@ -2164,7 +2170,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 </tr>
 <tr>
 <td>stopPrice</td>
-<td>string</td>
+<td>double</td>
 <td>Yes</td>
 <td>Stop price</td>
 </tr>
@@ -2176,25 +2182,25 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 </tr>
 <tr>
 <td>timestamp</td>
-<td>string</td>
+<td>long</td>
 <td>Yes</td>
 <td>Order timestamp</td>
 </tr>
 <tr>
 <td>trigger</td>
-<td>string</td>
+<td>boolean</td>
 <td>Yes</td>
 <td>Indicator if order is a trigger order</td>
 </tr>
 <tr>
 <td>triggerPrice</td>
-<td>string</td>
+<td>double</td>
 <td>Yes</td>
 <td>Order trigger price, returns 0 if order is not a trigger order</td>
 </tr>
 <tr>
 <td>averageFillPrice</td>
-<td>string</td>
+<td>double</td>
 <td>Yes</td>
 <td>Average filled price. Returns the average filled price for partially transacted orders</td>
 </tr>
@@ -2206,13 +2212,13 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 </tr>
 <tr>
 <td>stealth</td>
-<td>string</td>
+<td>double</td>
 <td>Yes</td>
 <td>Stealth value of order</td>
 </tr>
 <tr>
 <td>deviation</td>
-<td>string</td>
+<td>double</td>
 <td>Yes</td>
 <td>Deviation value of order</td>
 </tr>
@@ -2358,7 +2364,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 </tr>
 <tr>
 <td>fillSize</td>
-<td>string</td>
+<td>double</td>
 <td>Yes</td>
 <td>Trade filled size</td>
 </tr>
@@ -2370,7 +2376,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 </tr>
 <tr>
 <td>orderType</td>
-<td>string</td>
+<td>integer</td>
 <td>Yes</td>
 <td>Order type <br/>76: Limit order<br/>77: Market order<br/>80: Peg/Algo order</td>
 </tr>
@@ -2406,7 +2412,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 </tr>
 <tr>
 <td>stopPrice</td>
-<td>string</td>
+<td>double</td>
 <td>Yes</td>
 <td>Stop price</td>
 </tr>
@@ -2418,25 +2424,25 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 </tr>
 <tr>
 <td>timestamp</td>
-<td>string</td>
+<td>long</td>
 <td>Yes</td>
 <td>Order timestamp</td>
 </tr>
 <tr>
 <td>trigger</td>
-<td>string</td>
+<td>boolean</td>
 <td>Yes</td>
 <td>Indicator if order is a trigger order</td>
 </tr>
 <tr>
 <td>triggerPrice</td>
-<td>string</td>
+<td>double</td>
 <td>Yes</td>
 <td>Order trigger price, returns 0 if order is not a trigger order</td>
 </tr>
 <tr>
 <td>averageFillPrice</td>
-<td>string</td>
+<td>double</td>
 <td>Yes</td>
 <td>Average filled price. Returns the average filled price for partially transacted orders</td>
 </tr>
@@ -2448,13 +2454,13 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 </tr>
 <tr>
 <td>stealth</td>
-<td>string</td>
+<td>double</td>
 <td>Yes</td>
 <td>Stealth value of order</td>
 </tr>
 <tr>
 <td>deviation</td>
-<td>string</td>
+<td>double</td>
 <td>Yes</td>
 <td>Deviation value of order</td>
 </tr>
@@ -2567,7 +2573,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 </thead><tbody>
 <tr>
 <td>orderType</td>
-<td>double</td>
+<td>integer</td>
 <td>Yes</td>
 <td>Order type <br/>76: Limit order<br/>77: Market order<br/>80: Peg/Algo order</td>
 </tr>
@@ -2627,7 +2633,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 </tr>
 <tr>
 <td>timestamp</td>
-<td>double</td>
+<td>long</td>
 <td>Yes</td>
 <td>Order placement time</td>
 </tr>
@@ -2687,7 +2693,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 </tr>
 <tr>
 <td>averageFillPrice</td>
-<td>string</td>
+<td>double</td>
 <td>Yes</td>
 <td>Average filled price. Returns the average filled price for partially transacted orders</td>
 </tr>
@@ -2907,7 +2913,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 </tr>
 <tr>
 <td>ordertype</td>
-<td>long</td>
+<td>integer</td>
 <td>yes</td>
 <td>order type</td>
 </tr>
@@ -3313,19 +3319,19 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 </tr>
 <tr>
 <td>rate</td>
-<td>number</td>
+<td>double</td>
 <td>yes</td>
 <td>interest rate</td>
 </tr>
 <tr>
 <td>investment</td>
-<td>number</td>
+<td>double</td>
 <td>yes</td>
 <td>amount</td>
 </tr>
 <tr>
 <td>interestearned</td>
-<td>number</td>
+<td>double</td>
 <td>yes</td>
 <td>intereset earned</td>
 </tr>
@@ -3367,7 +3373,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 </tr>
 <tr>
 <td>compounding</td>
-<td>oolean</td>
+<td>boolean</td>
 <td>yes</td>
 <td>is compounding</td>
 </tr>
@@ -3453,19 +3459,19 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 </tr>
 <tr>
 <td>amount</td>
-<td>number</td>
+<td>double</td>
 <td>yes</td>
 <td>transaction amount</td>
 </tr>
 <tr>
 <td>totalamount</td>
-<td>number</td>
+<td>double</td>
 <td>yes</td>
 <td>total amount of the investment</td>
 </tr>
 <tr>
 <td>interestearned</td>
-<td>number</td>
+<td>double</td>
 <td>yes</td>
 <td>interest earned</td>
 </tr>
