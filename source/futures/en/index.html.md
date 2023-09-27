@@ -13,12 +13,6 @@ headingLevel: 2
 
 # Change Log
 
-## Version 2.6.10 (25th September 2023)
-* Update fundingRate description in [`market-summary`](#market-summary)
-* Add listFullAttributes parameter in [`market-summary`](#market-summary)
-* Add optional fundingIntervalMinutes and fundingTime in [`market-summary`](#market-summary)
-* The scheduled effective date is `Oct 11, 2023, at 10:00 AM (UTC+0)`
-
 ## Version 2.6.9 (11th September 2023)
 * Add [`get-leverage`](#get-leverage) to get leverage for market
 
@@ -482,7 +476,6 @@ Gets market summary information. If no symbol parameter is sent, then all market
 | ---                | ---     | ---      | ---                                                                    |
 | symbol             | string  | No       | Market symbol                                                          |
 | useNewSymbolNaming | boolean | No       | True to return futures market name in the new format, default to False |
-| listFullAttributes | boolean | No       | True to return all attributes of market summary |
 
 ### Response Content
 
@@ -514,15 +507,13 @@ Gets market summary information. If no symbol parameter is sent, then all market
 | closeTime           | long    | Yes      | Market closing time                                                                                   |
 | startMatching       | long    | Yes      | Matching start time                                                                                   |
 | inactiveTime        | long    | Yes      | Time where market is inactive                                                                         |
-| fundingRate         | double  | No       | The funding rate is calculated every 8 hours(default)                                                                      |
+| fundingRate         | double  | No       | Funding rate calculated per hour                                                                      |
 | contractSize        | double  | No       | Size of one contract                                                                                  |
 | maxPosition         | double  | No       | Maximum position a user is allowed to have `Will no longer be applicable after risk limit adjustment` |
 | minRiskLimit        | double  | No       | Minimum risk limit in contract size  `Will be changed to USD value`                                   |
 | maxRiskLimit        | double  | No       | Maximum risk limit int contract size `Will be changed to USD value`                                   |
 | availableSettlement | array   | No       | Currencies available for settlement                                                                   |
 | futures             | boolean | Yes      | Indicator if symbol is a futures contract                                                             |
-| fundingIntervalMinutes             | integer | No      | Funding interval, only display when param `listFullAttributes` is true|
-| fundingTime             | long | No      | Next funding time, only display when param `listFullAttributes` is true|
 
 ## Charting Data
 
