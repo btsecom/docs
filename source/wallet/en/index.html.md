@@ -71,14 +71,14 @@ You will need to create an API key on the BTSE platform before you can use authe
 
 ## Authentication
 
-* API Key (btse-api)
-  * Parameter Name: `btse-api`, in: header. API key is obtained from BTSE platform as a string
+* API Key (api)
+  * Parameter Name: `api`, in: header. API key is obtained from BTSE platform as a string
 
-* API Key (btse-nonce)
-  * Parameter Name: `btse-nonce`, in: header. Representation of current timestamp in long format
+* API Key (nonce)
+  * Parameter Name: `nonce`, in: header. Representation of current timestamp in long format
 
-* API Key (btse-sign)
-  * Parameter Name: `btse-sign`, in: header. A composite signature produced based on the following algorithm: Signature=HMAC.Sha384 (secretkey, (urlpath + btse-nonce + bodyStr)) (note: bodyStr = '' when no data):
+* API Key (sign)
+  * Parameter Name: `sign`, in: header. A composite signature produced based on the following algorithm: Signature=HMAC.Sha384 (secretkey, (urlpath + nonce + bodyStr)) (note: bodyStr = '' when no data):
 
 ### Example 1: Get Wallet
 
@@ -91,12 +91,12 @@ $ echo -n "/api/v3.2/user/wallet1624984297330" | openssl dgst -sha384 -hmac "848
 
 * Endpoint to get wallet is `https://api.btse.com/spot/api/v3.2/user/wallet`
 * Assume we have the values as follows:
-  * btse-nonce: `1624984297330`
-  * btse-api: `4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x`
+  * nonce: `1624984297330`
+  * api: `4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x`
   * secret: `848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx`
   * Path: `/api/v3.2/user/wallet`
 * Generated signature will be:
-  * btse-sign: `14b986706a4368221e0af14a6725377161805e7a57d568220478cb3590ce532d4fad4ac68e6c02a14afced6a0619bfd3`
+  * sign: `14b986706a4368221e0af14a6725377161805e7a57d568220478cb3590ce532d4fad4ac68e6c02a14afced6a0619bfd3`
 
 ## Rate Limits
 
