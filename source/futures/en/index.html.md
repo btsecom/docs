@@ -13,11 +13,10 @@ headingLevel: 2
 
 # Change Log
 
-## Version 2.6.10 (25th September 2023)
+## Version 2.6.10 (11th October 2023)
 * Update fundingRate description in [`market-summary`](#market-summary)
 * Add listFullAttributes parameter in [`market-summary`](#market-summary)
 * Add optional fundingIntervalMinutes and fundingTime in [`market-summary`](#market-summary)
-* The scheduled effective date is `Oct 11, 2023, at 10:00 AM (UTC+0)`
 
 ## Version 2.6.9 (11th September 2023)
 * Add [`get-leverage`](#get-leverage) to get leverage for market
