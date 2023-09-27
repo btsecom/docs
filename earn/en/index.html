@@ -327,20 +327,20 @@
 </ul>
 <h2 id='authentication'>Authentication</h2>
 <ul>
-<li><p>API Key (request-api)</p>
+<li><p>API Key (btse-api)</p>
 
 <ul>
-<li>Parameter Name: <code>request-api</code>, in: header. API key is obtained from BTSE platform as a string</li>
+<li>Parameter Name: <code>btse-api</code>, in: header. API key is obtained from BTSE platform as a string</li>
 </ul></li>
-<li><p>API Key (request-nonce)</p>
+<li><p>API Key (btse-nonce)</p>
 
 <ul>
-<li>Parameter Name: <code>request-nonce</code>, in: header. Representation of current timestamp in long format</li>
+<li>Parameter Name: <code>btse-nonce</code>, in: header. Representation of current timestamp in long format</li>
 </ul></li>
-<li><p>API Key (request-sign)</p>
+<li><p>API Key (btse-sign)</p>
 
 <ul>
-<li>Parameter Name: <code>request-sign</code>, in: header. A composite signature produced based on the following algorithm: Signature=HMAC.Sha384 (secretkey, (urlpath + request-nonce + bodyStr)) (note: bodyStr = &#39;&#39; when no data):</li>
+<li>Parameter Name: <code>btse-sign</code>, in: header. A composite signature produced based on the following algorithm: Signature=HMAC.Sha384 (secretkey, (urlpath + btse-nonce + bodyStr)) (note: bodyStr = &#39;&#39; when no data):</li>
 </ul></li>
 </ul>
 <h1 id='investment-endpoints'>Investment Endpoints</h1><h2 id='query-investment-products'>Query Investment Products</h2>
