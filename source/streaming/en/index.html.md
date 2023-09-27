@@ -53,14 +53,14 @@ You will need to create an API key on the BTSE platform before you can use authe
 
 ## Authentication
 
-* API Key (request-api)
-  * Parameter Name: `request-api`, in: header. API key is obtained from BTSE platform as a string
+* API Key (btse-api)
+  * Parameter Name: `btse-api`, in: header. API key is obtained from BTSE platform as a string
 
-* API Key (request-nonce)
-  * Parameter Name: `request-nonce`, in: header. Representation of current timestamp in long format
+* API Key (btse-nonce)
+  * Parameter Name: `btse-nonce`, in: header. Representation of current timestamp in long format
 
-* API Key (request-sign)
-  * Parameter Name: `request-sign`, in: header. A composite signature produced based on the following algorithm: Signature=HMAC.Sha384 (secretkey, (urlpath + request-nonce + bodyStr)) (note: bodyStr = '' when no data):
+* API Key (btse-sign)
+  * Parameter Name: `btse-sign`, in: header. A composite signature produced based on the following algorithm: Signature=HMAC.Sha384 (secretkey, (urlpath + btse-nonce + bodyStr)) (note: bodyStr = '' when no data):
 
 # Workflow
 
@@ -102,8 +102,8 @@ pong
 
 Authenticate the websocket session to subscribe to authenticated websocket topics. Assume we have values as follows:
 
-* `request-nonce`: 1624985375123
-* `request-api`: 4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x
+* `btse-nonce`: 1624985375123
+* `btse-api`: 4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x
 * `secret`: 848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx
 
 Our subscription request will be:
