@@ -234,9 +234,6 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#version-2-6-10-25th-september-2023" class="toc-h2 toc-link" data-title="Version 2.6.10 (25th September 2023)">Version 2.6.10 (25th September 2023)</a>
-                  </li>
-                  <li>
                     <a href="#version-2-6-9-11th-september-2023" class="toc-h2 toc-link" data-title="Version 2.6.9 (11th September 2023)">Version 2.6.9 (11th September 2023)</a>
                   </li>
                   <li>
@@ -503,14 +500,7 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-2-6-10-25th-september-2023'>Version 2.6.10 (25th September 2023)</h2>
-<ul>
-<li>Update fundingRate description in <a href="#market-summary"><code>market-summary</code></a></li>
-<li>Add listFullAttributes parameter in <a href="#market-summary"><code>market-summary</code></a></li>
-<li>Add optional fundingIntervalMinutes and fundingTime in <a href="#market-summary"><code>market-summary</code></a></li>
-<li>The scheduled effective date is <code>Oct 11, 2023, at 10:00 AM (UTC+0)</code></li>
-</ul>
-<h2 id='version-2-6-9-11th-september-2023'>Version 2.6.9 (11th September 2023)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-2-6-9-11th-september-2023'>Version 2.6.9 (11th September 2023)</h2>
 <ul>
 <li>Add <a href="#get-leverage"><code>get-leverage</code></a> to get leverage for market</li>
 </ul>
@@ -1053,12 +1043,6 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>No</td>
 <td>True to return futures market name in the new format, default to False</td>
 </tr>
-<tr>
-<td>listFullAttributes</td>
-<td>boolean</td>
-<td>No</td>
-<td>True to return all attributes of market summary</td>
-</tr>
 </tbody></table>
 <h3 id='response-content'>Response Content</h3>
 <table><thead>
@@ -1229,7 +1213,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>fundingRate</td>
 <td>double</td>
 <td>No</td>
-<td>The funding rate is calculated every 8 hours(default)</td>
+<td>Funding rate calculated per hour</td>
 </tr>
 <tr>
 <td>contractSize</td>
@@ -1266,18 +1250,6 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>boolean</td>
 <td>Yes</td>
 <td>Indicator if symbol is a futures contract</td>
-</tr>
-<tr>
-<td>fundingIntervalMinutes</td>
-<td>integer</td>
-<td>No</td>
-<td>Funding interval, only display when param <code>listFullAttributes</code> is true</td>
-</tr>
-<tr>
-<td>fundingTime</td>
-<td>long</td>
-<td>No</td>
-<td>Next funding time, only display when param <code>listFullAttributes</code> is true</td>
 </tr>
 </tbody></table>
 <h2 id='charting-data'>Charting Data</h2>
