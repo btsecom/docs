@@ -1740,7 +1740,7 @@ Query risk limit for the specified market
   "riskLimit": 0
 }
 ```
-> Request (For positionMode is `HEDGE`)
+> Request (When  positionMode is `HEDGE`)
 
 ```json
 {
@@ -1795,7 +1795,7 @@ Changes risk limit for the specified market
 }
 ```
 
-> Request (For positionMode is `HEDGE`)
+> Request (When positionMode is `HEDGE`)
 
 ```json
 {
@@ -1828,6 +1828,7 @@ Change leverage values for the specified market
 | symbol             | string  | Yes      | Market symbol                                                  |
 | leverage           | long    | Yes      | Leverage value                                                 |
 | useNewSymbolNaming | boolean | No       | True if use new futures market name in symbol default to False |
+| positionMode       | string  | no       | ONE_WAY(default) or HEDGE. Mandatory when positionMode is `HEDGE`  |
 
 ### Response Content
 
@@ -1878,6 +1879,16 @@ Get leverage value for the specified market
 }
 ```
 
+> Request (When positionMode is `HEDGE`)
+
+```json
+{
+    "symbol": "BTCPFC",
+    "currency": "USDT"
+    "positionId": "BTCPFC-USD|LONG"
+}
+```
+
 > Response (only available when an error occurs)
 
 ```json
@@ -1899,6 +1910,7 @@ Changes the settlement currency for the position in the current market
 | symbol             | string  | Yes      | Market symbol                                                   |
 | currency           | string  | Yes      | Settlement currency to set                                      |
 | useNewSymbolNaming | boolean | No       | True to use new futures market name in symbol, default to False |
+| positionId         | string  | No       | The position ID that you want to set. Mandatory when positionMode is `HEDGE` |
 
 ### Response Content
 
