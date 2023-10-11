@@ -402,6 +402,7 @@ When connecting up the BTSE API, you will come across number codes that represen
 * 110: FUTURES_FUNDING
 * 123: AMEND_ORDER = Order amended
 * 124: UNFREEZE_SUCCESSFUL
+* 129: FUTURES_CONFIG_MODE_CHANGE
 * 300: ERROR_MAX_ORDER_SIZE_EXCEEDED
 * 301: ERROR_INVALID_ORDER_SIZE
 * 302: ERROR_INVALID_ORDER_PRICE
@@ -1800,7 +1801,7 @@ Changes risk limit for the specified market
 ```json
 {
     "symbol": "BTCPFC",
-    "leverage": 0
+    "leverage": 0,
     "positionMode": "HEDGE"
 }
 ```
@@ -1950,6 +1951,72 @@ Retrieve user's trading fees
 | symbol   | string | Yes      | Market symbol |
 | makerFee | double | Yes      | Maker fees    |
 | takerFee | double | Yes      | Taker fees    |
+
+
+## Query Position Mode
+> Response
+```json
+[
+    {
+        "symbol": "ETH-PERP",
+        "positionMode": "HEDGE"
+    },
+    {
+        "symbol": "BTC-PERP",
+        "positionMode": "ONE_WAY"
+    }
+]
+```
+
+`GET /api/v2.1/position_mode`
+
+Retrieve user's position mode
+
+### Request Parameters
+
+| Name               | Type    | Required | Description
+| ---                | ---     | ---      | ---
+| symbol             | string  | No       | Market symbol
+
+### Response Content
+
+| Name         | Type   | Required | Description
+| ---          | ---    | ---      | --- 
+| symbol       | string | Yes      | Market symbol
+| positionMode | string | Yes      | ONE_WAY or HEDGE
+
+## Change Position Mode
+
+> Request
+
+```json
+{
+  "symbol": "BTC-PERP",
+  "positionMode": "HEDGE"
+}
+```
+
+`POST /api/v2.1/position_mode`
+
+Changes position mode
+
+### Request Parameters
+
+| Name               | Type    | Required | Description
+| ---                | ---     | ---      | --- 
+| symbol             | string  | Yes      | Market symbol
+| positionMODE       | string  | Yes      | ONE_WAY or HEDGE 
+
+### Response Content
+
+| Name      | Type    | Required | Description
+| ---       | ---     | ---      | ---
+| symbol    | string  | Yes      | Markey symbol
+| timestamp | long    | No       | Timestamp where position mode was set
+| status    | string  | No       | Status of the request. Values are: <br>20: Success
+| type      | string  | No       | Value will be 129 indicating that type is `Futures Config Mode Change` |
+| message   | string  | No       | Message |
+
 
 # Wallet Endpoints
 
