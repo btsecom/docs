@@ -826,7 +826,17 @@ Get trade fills for the market specified by `symbol`
   "triggerPrice": 30000
 }
 ```
+> Request (create hedge mode `MARKET` order)
 
+```json
+{
+  "symbol": "BTCPFC",
+  "size": 1,
+  "side": "BUY",
+  "type": "MARKET",
+  "positionMode": "HEDGE"
+}
+```
 > Response (general)
 
 ```json
@@ -851,6 +861,9 @@ Get trade fills for the market specified by `symbol`
     "originalSize": 1.0,
     "postOnly": false,
     "remainingSize": 0.0,
+    "positionMode": "ONE_WAY",
+    "positionDirection": null,
+    "positionId": "BTCPFC-USD",
     "time_in_force": "GTC"
   }
 ]
@@ -880,6 +893,9 @@ Get trade fills for the market specified by `symbol`
     "originalSize": 1.0,
     "postOnly": false,
     "remainingSize": 1.0,
+    "positionMode": "ONE_WAY",
+    "positionDirection": null,
+    "positionId": "BTCPFC-USD",
     "time_in_force": "GTC"
   },
   {
@@ -902,6 +918,41 @@ Get trade fills for the market specified by `symbol`
     "originalSize": 1.0,
     "postOnly": false,
     "remainingSize": 1.0,
+    "positionMode": "ONE_WAY",
+    "positionDirection": null,
+    "positionId": "BTCPFC-USD",
+    "time_in_force": "GTC"
+  }
+]
+```
+
+> Response (for hedge mode order)
+
+```json
+[
+  {
+    "status": 4,
+    "symbol": "BTCPFC",
+    "orderType": 76,
+    "price": 21000.0,
+    "side": "BUY",
+    "size": 1,
+    "orderID": "abb3f457-fdc0-4bdb-a46b-8e4aa49a57c2",
+    "timestamp": 1660558270207,
+    "triggerPrice": 0.0,
+    "trigger": false,
+    "deviation": 100.0,
+    "stealth": 100.0,
+    "message": "",
+    "avgFillPrice": 21000.0,
+    "fillSize": 1.0,
+    "clOrderID": "",
+    "originalSize": 1.0,
+    "postOnly": false,
+    "remainingSize": 0.0,
+    "positionMode": "HEDGE",
+    "positionDirection": "LONG",
+    "positionId": "BTCPFC-USD|LONG",
     "time_in_force": "GTC"
   }
 ]
@@ -914,7 +965,7 @@ Creates a new order. Requires `Trading` permission
 ### Request Parameters
 
 | Name          | Type    | Required | Description                                                                                                                                                                                                                                                                                                                                                        |
-| ---           | ---     | ---      | ---                                                                                                                                                                                                                                                                                                                                                                |
+|---------------| ---     | ---      |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | symbol        | string  | Yes      | Market symbol                                                                                                                                                                                                                                                                                                                                                      |
 | price         | double  | No       | Mandatory unless creating a MARKET order. Order price                                                                                                                                                                                                                                                                                                              |
 | size          | long    | Yes      | Order size in `contract size` (this remains unchanged even after risk limit adjustment)                                                                                                                                                                                                                                                                            |
@@ -926,9 +977,10 @@ Creates a new order. Requires `Trading` permission
 | triggerPrice  | double  | No       | Mandatory when creating a Stop, Trigger, OCO order. Indicates the trigger price                                                                                                                                                                                                                                                                                    |
 | trailValue    | double  | No       | Trail value                                                                                                                                                                                                                                                                                                                                                        |
 | postOnly      | boolean | No       | Boolean to indicate if this is a post only order. For post only orders, traders are charged maker fees                                                                                                                                                                                                                                                             |
-| reduceOnly    | boolean | No       | Boolean to indicate if this is a reduce only order.                                                                                                                                                                                                                                                                                                                |
+| reduceOnly    | boolean | No       | Boolean to indicate if this is a reduce only order, if in hedge mode, it is used to reduce the specified position, ex: sell to reduce long position, buy to reduce short position.                                                                                                                                                                                 |
 | clOrderID     | string  | No       | Custom order Id                                                                                                                                                                                                                                                                                                                                                    |
 | trigger       | string  | No       | For creating order with txType: `STOP` or `TRIGGER`. Valid options: `markPrice` (default) or `lastPrice`                                                                                                                                                                                                                                                           |
+| positionMode  | string  | No       | For creating order and wanting to specify the positionMode. Valid options: `ONE_WAY` (default) or `HEDGE`                                                                                                                                                                                                                                                          |
 
 
 ### Response Content
@@ -955,6 +1007,9 @@ Creates a new order. Requires `Trading` permission
 | deviation     | double  | Yes      | Only valid for Algo orders                                                                                                                                                                                                                                                                      |
 | remainingSize | double  | Yes      | Size left to be transacted                                                                                                                                                                                                                                                                      |
 | originalSize  | double  | Yes      | Original order size                                                                                                                                                                                                                                                                             |
+| positionMode  | string  | Yes      | Position mode<br/>ONE_WAY or HEDGE                                                                                                                                                                                                                                                                                  |
+| positionDirection  | string  | Yes  | Position direction                                                                                                                                                                                                                                                                             |
+| positionId  | string  | Yes      | The current order belongs to the id of position.                                                                                                                                                                                                                                                                             |
 
 ## Create new algo order
 
@@ -996,6 +1051,9 @@ Creates a new order. Requires `Trading` permission
     "originalSize": 1.0,
     "postOnly": false,
     "remainingSize": 1.0,
+    "positionMode": "ONE_WAY",
+    "positionDirection": null,
+    "positionId": "BTCPFC-USD",
     "time_in_force": "GTC"
   }
 ]
@@ -1022,6 +1080,7 @@ This API Requires `Trading` permission
 | clOrderID | string | No       | Custom order Id                                                                                                                                                                   |
 | deviation | double | No       | How much should the order price deviate from index price. Value is in percentage and can range from `-10` to `10`                                                                 |
 | stealth   | double | No       | How many percent of the order is to be displayed on the orderbook.                                                                                                                |
+| positionMode  | string  | No       | For creating order and wanting to specify the positionMode. Valid options: `ONE_WAY` (default) or `HEDGE`                                                                                                                                                                                                                                                          |
 
 ### Response Content
 
@@ -1047,6 +1106,9 @@ This API Requires `Trading` permission
 | deviation     | double  | Yes      | Deviation value of order                                                                                                                                                                                                                                                                        |
 | remainingSize | double  | Yes      | Size left to be transacted                                                                                                                                                                                                                                                                      |
 | originalSize  | double  | Yes      | Original order size                                                                                                                                                                                                                                                                             |
+| positionMode  | string  | Yes      | Position mode<br/>ONE_WAY or HEDGE                                                                                                                                                                                                                                                                                  |
+| positionDirection  | string  | Yes  | Position direction                                                                                                                                                                                                                                                                             |
+| positionId  | string  | Yes      | The current order belongs to the id of position.                                                                                                                                                                                                                                                                             |
 
 ## Amend Order
 
@@ -1098,6 +1160,9 @@ This API Requires `Trading` permission
     "originalSize": 1.0,
     "postOnly": false,
     "remainingSize": 1.0,
+    "positionMode": "ONE_WAY",
+    "positionDirection": null,
+    "positionId": "BTCPFC-USD",
     "time_in_force": "GTC"
   }
 ]
@@ -1145,6 +1210,9 @@ Amend the price or size or trigger price of an order. For trigger orders, if the
 | deviation     | string  | Yes      | Deviation value of order                                                                                                                                                                                                                                                                        |
 | remainingSize | double  | Yes      | Size left to be transacted                                                                                                                                                                                                                                                                      |
 | originalSize  | double  | Yes      | Original order size                                                                                                                                                                                                                                                                             |
+| positionMode  | string  | Yes      | Position mode<br/>ONE_WAY or HEDGE                                                                                                                                                                                                                                                                                  |
+| positionDirection  | string  | Yes  | Position direction                                                                                                                                                                                                                                                                             |
+| positionId  | string  | Yes      | The current order belongs to the id of position.                                                                                                                                                                                                                                                                             |
 
 ## Cancel Order
 
@@ -1178,6 +1246,9 @@ Amend the price or size or trigger price of an order. For trigger orders, if the
     "originalSize": 1.0,
     "postOnly": false,
     "remainingSize": 1.0,
+    "positionMode": "ONE_WAY",
+    "positionDirection": null,
+    "positionId": "BTCPFC-USD",
     "time_in_force": "GTC"
   }
 ]
@@ -1220,6 +1291,9 @@ Cancels pending orders that has not yet been transacted. The `orderID` is a uniq
 | deviation     | double  | Yes      | Deviation value of order                                                                                                                                                                                                                                                                        |
 | remainingSize | double  | Yes      | Size left to be transacted                                                                                                                                                                                                                                                                      |
 | originalSize  | double  | Yes      | Original order size                                                                                                                                                                                                                                                                             |
+| positionMode  | string  | Yes      | Position mode<br/>ONE_WAY or HEDGE                                                                                                                                                                                                                                                                                  |
+| positionDirection  | string  | Yes  | Position direction                                                                                                                                                                                                                                                                             |
+| positionId  | string  | Yes      | The current order belongs to the id of position.                                                                                                                                                                                                                                                                             |
 
 ## Dead Man's Switch (Cancel All After)
 
@@ -1286,6 +1360,9 @@ Dead-man's switch allows the trader to send in a timeout value which is a Time t
     "orderState": "STATUS_ACTIVE",
     "triggerUseLastPrice": false,
     "avgFilledPrice": 0.0,
+    "positionMode": "ONE_WAY",
+    "positionDirection": null,
+    "positionId": "BTCPFC-USD",
     "timeInForce": "GTC",
     "averageFillPrice": 0.0
   }
@@ -1338,6 +1415,9 @@ Retrieves open orders that have not yet been matched or matched recently.
 | averageFillPrice             | double | Yes      | Average fill price                                                                     |
 | stealth                      | double | Yes      | Stealth value of order                                                                 |
 | orderState                   | string | Yes      | `STATUS_ACTIVE`, `STATUS_INACTIVE`                                                     |
+| positionMode  | string  | Yes      | Position mode<br/>ONE_WAY or HEDGE                                                                                                                                                                                                                                                                                  |
+| positionDirection  | string  | Yes  | Position direction                                                                                                                                                                                                                                                                             |
+| positionId  | string  | Yes      | The current order belongs to the id of position.                                                                                                                                                                                                                                                                             |
 
 ## Query Trades Fills
 
@@ -1374,6 +1454,7 @@ Retrieves open orders that have not yet been matched or matched recently.
     "triggerPrice": 0,
     "triggerType": 0,
     "username": "string",
+    "positionId": null,
     "wallet": "string"
   }
 ]
@@ -1424,6 +1505,7 @@ Retrieves a user's trade history
 | orderType        | integer | Yes      | Order Type                                                                                                                                                                        |
 | realizedPnL      | double  | Yes      | Not used in Spot                                                                                                                                                                  |
 | total            | long    | Yes      | Not used in Spot                                                                                                                                                                  |
+| positionId  | string  | Yes      | The current order belongs to the id of position.                                                                                                                                                                                                                                                                             |
 
 
 ## Query Position
@@ -1431,7 +1513,7 @@ Retrieves a user's trade history
 > Request
 
 ```
-/api/v2.1/user/positions?symbol=BTCPFC
+/api/v2.1/user/positions
 ```
 
 > Response
@@ -1454,7 +1536,32 @@ Retrieves a user's trade history
     "adlScoreBucket": 2,
     "liquidationInProgress": false,
     "timestamp": 1576661434072,
+    "positionMode": "ONE_WAY",
+    "positionDirection": null,
+    "positionId": "BTCPFC-USD",
     "currentLeverage": 0
+  },{
+      "marginType": 91,
+      "entryPrice": 1631.106666667,
+      "markPrice": 1630.398947255,
+      "symbol": "ETHPFC",
+      "side": "BUY",
+      "orderValue": 48.9119684176,
+      "settleWithAsset": "USDT",
+      "unrealizedProfitLoss": -0.02123158,
+      "totalMaintenanceMargin": 0.254871114,
+      "size": 3,
+      "liquidationPrice": 0,
+      "isolatedLeverage": 0,
+      "adlScoreBucket": 2,
+      "liquidationInProgress": false,
+      "timestamp": 0,
+      "takeProfitOrder": null,
+      "stopLossOrder": null,
+      "positionMode": "HEDGE",
+      "positionDirection": "LONG",
+      "positionId": "ETHPFC-USD|LONG",
+      "currentLeverage": 0.0340349245
   }
 ]
 ```
@@ -1490,6 +1597,9 @@ Queries user's current position. When no symbol is specified, positions for all 
 | liquidationInProgress  | boolean | Yes      | Indicator if liquidation is in progress                                     |
 | currentLeverage        | double  | Yes      | Current leverage                                                            |
 | timestamp              | long    | Yes      | Timestamp when position was queried                                         |
+| positionMode  | string  | Yes      | Position mode<br/>ONE_WAY or HEDGE                                                                                                                                                                                                                                                                                  |
+| positionDirection  | string  | Yes  | Position direction                                                                                                                                                                                                                                                                             |
+| positionId  | string  | Yes      | Position id                                                                                                                                                                                                                                                                             |
 
 
 ## Close Position
@@ -1503,7 +1613,16 @@ Queries user's current position. When no symbol is specified, positions for all 
   "type": "MARKET"
 }
 ```
+> Request(For hedge mode position)
 
+```json
+{
+  "price": 0,
+  "symbol": "BTCPFC",
+  "type": "MARKET",
+  "positionId": "BTCPFC-USD|LONG"
+}
+```
 > Response
 
 ```json
@@ -1528,6 +1647,9 @@ Queries user's current position. When no symbol is specified, positions for all 
     "originalSize": 1.0,
     "postOnly": false,
     "remainingSize": 0.0,
+    "positionMode": "ONE_WAY",
+    "positionDirection": null,
+    "positionId": null,
     "time_in_force": "GTC"
   }
 ]
@@ -1545,6 +1667,7 @@ Closes a user's position for the particular market as specified by symbol. If ty
 | type               | string  | Yes      | Close position type with values:<br/>LIMIT: Close at `price`<br/>MARKET: Close at market price          |
 | price              | double  | No       | Close price. Mandatory when type is `LIMIT`                                                             |
 | postOnly           | boolean | No       | Boolean to indicate if this is a post only order. For post only orders, traders are charged maker fees  |
+| positionId         | string  | No       | The position ID that you want to close. Mandatory when positionMode is `HEDGE`                          |
 | useNewSymbolNaming | boolean | No       | True to use new futures market name in symbol, default to False                                         |
 
 ### Response Content
@@ -1571,6 +1694,10 @@ Closes a user's position for the particular market as specified by symbol. If ty
 | deviation     | string  | Yes      | Deviation value of order                                                                                                                                                                                                                                                                         |
 | remainingSize | double  | Yes      | Size left to be transacted                                                                                                                                                                                                                                                                       |
 | originalSize  | double  | Yes      | Original order size                                                                                                                                                                                                                                                                              |
+| positionMode  | string  | Yes      | Position mode<br/>ONE_WAY or HEDGE                                                                                                                                                                                                                                                                                  |
+| positionDirection  | string  | Yes  | Position direction                                                                                                                                                                                                                                                                             |
+| positionId  | string  | Yes      | Position id                                                                                                                                                                                                                                                                             |
+
 
 ## Get Risk Limit
 
@@ -1587,7 +1714,6 @@ Closes a user's position for the particular market as specified by symbol. If ty
     "symbol": "BTCPFC",
     "riskLimit": 100000
 }
-```
 `GET /api/v2.1/risk_limit`
 
 Query risk limit for the specified market
@@ -1614,7 +1740,15 @@ Query risk limit for the specified market
   "riskLimit": 0
 }
 ```
+> Request (For positionMode is `HEDGE`)
 
+```json
+{
+    "symbol": "BTCPFC",
+    "riskLimit": 100000,
+    "positionMode": "HEDGE"
+}
+```
 > Response
 
 ```json
@@ -1637,6 +1771,7 @@ Changes risk limit for the specified market
 | ---                | ---     | ---      | ---                                                                                                           |
 | symbol             | string  | Yes      | Market symbol                                                                                                 |
 | riskLimit          | long    | Yes      | Risk limit value now in position size, but it will be changed to USD value in the future. |
+| positionMode       | string  | no       | ONE_WAY(default) or HEDGE. Mandatory when positionMode is `HEDGE`  |
 | useNewSymbolNaming | boolean | No       | True if use new futures market name as symbol , default to False                                              |
 
 ### Response Content
@@ -1657,6 +1792,16 @@ Changes risk limit for the specified market
 {
   "symbol": "BTCPFC",
   "leverage": 0
+}
+```
+
+> Request (For positionMode is `HEDGE`)
+
+```json
+{
+    "symbol": "BTCPFC",
+    "leverage": 0
+    "positionMode": "HEDGE"
 }
 ```
 
