@@ -684,20 +684,20 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 </ul>
 <h2 id='authentication'>Authentication</h2>
 <ul>
-<li><p>API Key (btse-api)</p>
+<li><p>API Key (request-api)</p>
 
 <ul>
-<li>Parameter Name: <code>btse-api</code>, in: header. API key is obtained from BTSE platform as a string</li>
+<li>Parameter Name: <code>request-api</code>, in: header. API key is obtained from BTSE platform as a string</li>
 </ul></li>
-<li><p>API Key (btse-nonce)</p>
+<li><p>API Key (request-nonce)</p>
 
 <ul>
-<li>Parameter Name: <code>btse-nonce</code>, in: header. Representation of current timestamp in long format</li>
+<li>Parameter Name: <code>request-nonce</code>, in: header. Representation of current timestamp in long format</li>
 </ul></li>
-<li><p>API Key (btse-sign)</p>
+<li><p>API Key (request-sign)</p>
 
 <ul>
-<li>Parameter Name: <code>btse-sign</code>, in: header. A composite signature produced based on the following algorithm: Signature=HMAC.Sha384 (secretkey, (urlpath + btse-nonce + bodyStr)) (note: bodyStr = &#39;&#39; when no data):</li>
+<li>Parameter Name: <code>request-sign</code>, in: header. A composite signature produced based on the following algorithm: Signature=HMAC.Sha384 (secretkey, (urlpath + request-nonce + bodyStr)) (note: bodyStr = &#39;&#39; when no data):</li>
 </ul></li>
 </ul>
 <h3 id='example-1-place-an-order'>Example 1: Place an order</h3>
@@ -712,8 +712,8 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <li>Assume we have the values as follows:
 
 <ul>
-<li>btse-nonce: <code>1624985375123</code></li>
-<li>btse-api: <code>4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x</code></li>
+<li>request-nonce: <code>1624985375123</code></li>
+<li>request-api: <code>4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x</code></li>
 <li>secret: <code>848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx</code></li>
 <li>Path: <code>/api/v3.2/order</code></li>
 <li>Body: <code>{&quot;postOnly&quot;:false,&quot;price&quot;:8500.0,&quot;side&quot;:&quot;BUY&quot;,&quot;size&quot;:0.002,&quot;stopPrice&quot;:0.0,&quot;symbol&quot;:&quot;BTC-USD&quot;,&quot;time_in_force&quot;:&quot;GTC&quot;,&quot;trailValue&quot;:0.0,&quot;triggerPrice&quot;:0.0,&quot;txType&quot;:&quot;LIMIT&quot;,&quot;type&quot;:&quot;LIMIT&quot;}</code></li>
@@ -722,7 +722,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <li>Generated signature will be:
 
 <ul>
-<li>btse-sign: <code>e9cd0babdf497b536d1e48bc9cf1fadad3426b36406b5747d77ae4e3cdc9ab556863f2d0cf78e0228c39a064ad43afb7</code></li>
+<li>request-sign: <code>e9cd0babdf497b536d1e48bc9cf1fadad3426b36406b5747d77ae4e3cdc9ab556863f2d0cf78e0228c39a064ad43afb7</code></li>
 </ul></li>
 </ul>
 <h2 id='rate-limits'>Rate Limits</h2>
@@ -4014,8 +4014,8 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <p>Authenticate the websocket session to subscribe to authenticated websocket topics. Assume we have values as follows:</p>
 
 <ul>
-<li><code>btse-nonce</code>: 1624985375123</li>
-<li><code>btse-api</code>: 4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x</li>
+<li><code>request-nonce</code>: 1624985375123</li>
+<li><code>request-api</code>: 4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x</li>
 <li><code>secret</code>: 848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx</li>
 </ul>
 
