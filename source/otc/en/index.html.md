@@ -58,14 +58,14 @@ You will need to create an API key on the BTSE platform before you can use authe
 
 ## Authentication
 
-* API Key (btse-api)
-  * Parameter Name: `btse-api`, in: header. API key is obtained from BTSE platform as a string
+* API Key (request-api)
+  * Parameter Name: `request-api`, in: header. API key is obtained from BTSE platform as a string
 
-* API Key (btse-nonce)
-  * Parameter Name: `btse-nonce`, in: header. Representation of current timestamp in long format
+* API Key (request-nonce)
+  * Parameter Name: `request-nonce`, in: header. Representation of current timestamp in long format
 
-* API Key (btse-sign)
-  * Parameter Name: `btse-sign`, in: header. A composite signature produced based on the following algorithm: Signature=HMAC.Sha384 (secretkey, (urlpath + btse-nonce + bodyStr)) (note: bodyStr = '' when no data):
+* API Key (request-sign)
+  * Parameter Name: `request-sign`, in: header. A composite signature produced based on the following algorithm: Signature=HMAC.Sha384 (secretkey, (urlpath + request-nonce + bodyStr)) (note: bodyStr = '' when no data):
 
 ### Example 1: Query Quote
 
@@ -78,14 +78,14 @@ $ echo -n "/api/v1/quote1624985375123{\"orderSizeInBaseCurrency\":1,\"orderAmoun
 
 * Endpoint to place an order is `https://api.btse.com/otc/api/v1/quote`
 * Assume we have the values as follows:
-  * btse-nonce: `1624985375123`
-  * btse-api: `4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x`
+  * request-nonce: `1624985375123`
+  * request-api: `4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x`
   * secret: `848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx`
   * Path: `/api/v1/quote`
   * Body: `{"orderSizeInBaseCurrency":1,"orderAmountInOrderCurrency":0,"side":"buy","baseCurrency":"BTC","orderCurrency":"USD"}`
   * Encrypted Text: `"/api/v1/quote1624985375123{"orderSizeInBaseCurrency":1,"orderAmountInOrderCurrency":0,"side":"buy","baseCurrency":"BTC","orderCurrency":"USD"}"`
 * Generated signature will be:
-  * btse-sign: `8ee43810606da581fb6ce03e10370f89125c2269a64de832a55cea219795e9ae0c3df86b51afbafdd28c03b16acd1427`
+  * request-sign: `8ee43810606da581fb6ce03e10370f89125c2269a64de832a55cea219795e9ae0c3df86b51afbafdd28c03b16acd1427`
 
 
 ## Rate Limits
@@ -448,8 +448,8 @@ Query order information
 
 Authenticate the websocket session to subscribe to authenticated websocket topics. Assume we have values as follows:
 
-* `btse-nonce`: 1624985375123
-* `btse-api`: 4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x
+* `request-nonce`: 1624985375123
+* `request-api`: 4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x
 * `secret`: 848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx
 
 Our subscription request will be:
