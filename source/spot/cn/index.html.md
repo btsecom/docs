@@ -1333,7 +1333,7 @@ BTSE的速率限制如下:
 | type               | string       | yes       | 产品类型                                 |
 | startdate          | long       | yes       | 投资开始日期                             |
 | intereststartdate  | long       | yes       | 利息开始日期                             |
-| rates              | 利率对象[]  | yes       | 利率信息                                 |
+| rates              | rateobject[]  | yes       | 利率信息                                 |
 | compounding        | double       | yes       | 是否复利                                 |
 | autorenewsupported | double       | yes       | 是否支持自动续约                         |
 | dailylimit         | double       | yes       | 每日投资金额限制                         |
