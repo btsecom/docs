@@ -118,7 +118,7 @@ pong
 
 下面详细说明了需要发送的参数。
 
-| 索引 | 类型   | 必需     | 描述                          |
+| 索引 | 类型   | 是否必须     | 描述                          |
 | ---  | ---    | ---      | ---                          |
 | 0    | string | 是       | 第一个参数是 API 密钥        |
 | 1    | long | 是       | Nonce，即当前时间戳           |
@@ -191,7 +191,7 @@ echo -n "/ws/otc1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6726e
 
 ### 请求参数
 
-| 名称      | 类型   | 必需     | 描述                                                                                   |
+| 名称      | 类型   | 是否必须     | 描述                                                                                   |
 | ---       | ---    | ---      | ---                                                                                   |
 | op        | string | 是       | 操作，此处为 `quote`、`unsubscribe-quote` 或 `unsubscribe-quote-all`                  |
 | symbol    | string | 是       | 市场标志，参考 `getMarkets` API                                                        |
@@ -202,7 +202,7 @@ echo -n "/ws/otc1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6726e
 
 ### 响应内容
 
-| 名称            | 类型   | 必需     | 描述                                                                                             |
+| 名称            | 类型   | 是否必须     | 描述                                                                                             |
 | ---             | ---    | ---      | ---                                                                                             |
 | topic           | string | 是       | WebSocket 主题                                                                                  |
 | buyQuoteId      | string | 否       | 买方的报价 ID。如果该值为空/为null，则表示您的 WebSocket 流未经身份验证或您未订阅此方向  |
