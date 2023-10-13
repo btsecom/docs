@@ -390,7 +390,7 @@ BTSE的速率限制如下:
 
 ## 图表数据
 
-> Response
+> 响应
 
 ```json
 [
@@ -1766,7 +1766,7 @@ grouping 表示分组粒度。有效值为 0 到 8。
 ping
 ```
 
-> Response
+> 响应
 
 ```
 pong
