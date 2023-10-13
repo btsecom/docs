@@ -130,9 +130,11 @@ const IS_DEV = <%= config.debug_mode %>;
 const DOCS_PREFIX = IS_DEV ? '/' : '/docs/';
 const TAB_MAP = {
   spot: {
+    en: 'Spot',
     cn: '现货'
   },
   futures: {
+    en: 'Futures',
     cn: '期货'
   },
   otc: {
@@ -144,12 +146,15 @@ const TAB_MAP = {
     cn: '錢包'
   },
   streaming: {
-    cn: '串流'
+    en: 'Streaming',
+    cn: '數據流'
   },
   fix: {
-    en: 'FIX'
+    en: 'FIX',
+    cn: 'FIX'
   },
   earn: {
+    en: 'Earn',
     cn: '賺幣'
   }
 };
