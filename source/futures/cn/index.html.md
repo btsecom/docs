@@ -17,25 +17,25 @@ headingLevel: 2
 * 修正响应数据类型
 
 ## 版本 2.6.9（2023年9月11日）
-* 添加 [`get-leverage`](#get-leverage) 以获取市场杠杆
+* 添加 [`获取杠杆`](#6d32c96f0c) 以获取市场杠杆
 
 ## 版本 2.6.8（2023年9月3日）
-* 从 [`amend-order`](#amend-order) 中移除滑动参数
+* 从 [`修改订单`](#89e5b08e91) 中移除滑动参数
 
 ## 版本 2.6.7（2023年8月29日）
-* 在 [`API状态代码`](#api-status-codes) 中添加 451 状态代码，并将 [`订单簿Websocket流`](#order-book-websocket-streams) 设置为独立段落
+* 在 [`API状态代码`](#api-2) 中添加 451 状态代码，并将 [`订单簿 WebSocket 数据流`](#websocket) 设置为独立段落
 
 ## 版本 2.6.6（2023年8月28日）
-* 在 [`平仓`](#close-position) 中添加 postOnly 参数
+* 在 [`平仓仓位`](#b1f6ce457c) 中添加 postOnly 参数
 
 ## 版本 2.6.5（2023年7月27日）
 * 我们在期货市场中引入了一个新的产品：1,000 Floki 永续期货合约（1KFLOKI-PERP 或 1KFLOKIPFC）
 
 ## 版本 2.6.4（2023年6月7日）
-* 将 [`钱包/转账链接`](#transfer-funds-between-futures-wallet) 从 /api/v2.1/wallet/transfer 更新为 /api/v2.1/user/wallet/transfer
+* 将 [`在期货钱包之间转账资金`](#8babba8e02) 的 URL 从 /api/v2.1/wallet/transfer 更新为 /api/v2.1/user/wallet/transfer
 
 ## 版本 2.6.3（2023年6月6日）
-* 更新 [`钱包详情请求`](#wallet-detail-request) 的格式
+* 更新 [`钱包明细请求`](#e164979872) 的格式
 
 ## 版本 2.6.2（2023年5月29日）
 * 更新订单簿流服务（OSS）的错误消息格式。计划生效日期为 `2023年6月6日，上午10:00（UTC+0）`。
@@ -70,7 +70,7 @@ headingLevel: 2
 
 ## 版本 2.6.1（2023年5月24日）
 
-* 在 [`按分组排序的订单簿`](#orderbook-by-grouping) 上添加 group 参数
+* 在 [`按分组的订单簿`](#bf4a200892) 上添加 group 参数
 
 ## 版本 2.6.0（2023年5月17日）
 
@@ -78,18 +78,18 @@ headingLevel: 2
 
 ## 版本 2.5.9（2023年4月21日）
 
-* 添加 [获取风险限制](#get-risk-limit)
-* 添加 [子账户钱包转账](#sub-account-wallet-trasnsfer)
+* 添加 [获取风险限制](#420063dd1a)
+* 添加 [子账户钱包转账](#a1b5b663b6)
 
 ## 版本 2.5.8（2023年4月12日）
 * 弃用两个 WebSocket 主题 `现货订单簿快照（按分组）` 和 `现货订单簿快照（按深度）` 今日起。
 请使用以下 WebSocket 主题通过端点 `wss://ws.btse.com/ws/oss/futures` 获取订单簿数据
-  - [现货订单簿增量更新](#orderbook-incremental-updates)
-  - [OSS L1 快照（按分组）](#oss-l1-snapshot-by-grouping)
+  - [订单簿增量更新](#bb4b2c51b6)
+  - [OSS L1 快照 (按分组)](#oss-l1)
 
 ## 版本 2.5.7（2023年4月6日）
 
-* 添加 [OSS L1 快照（按分组）](#oss-l1-snapshot-by-grouping)
+* 添加 [OSS L1 快照 (按分组)](#oss-l1)
 
 ## 版本 2.5.6（2023年3月29日）
 
@@ -98,31 +98,31 @@ headingLevel: 2
   - 将基于时间的市场的后缀从 `交割月份 + 年份` 更改为 `结算日期（YYMMDD）`（例如：BTCM23 -> BTC-230630）
   - [参考链接](https://www.btse.com/blog/important-notice-upcoming-changes-to-futures-risk-limits-and-contract-names/)
   - 期货 API 已更新（通常添加了一个新的可选参数 `useNewSymbolNaming`，以指定市场名称是否采用新格式）：
-    - [`市场摘要`](#market-summary)
-    - [`查询未完成订单`](#query-open-orders)
-    - [`按分组排序的订单簿`](#orderbook-by-grouping)
-    - [`订单簿`](#orderbook)
-    - [`图表数据`](#charting-data)
-    - [`查询钱包历史`](#query-wallet-history)
-    - [`查询钱包余额`](#query-wallet-balance)
-    - [`设置杠杆`](#set-leverage)
-    - [`获取杠杆`](#get-leverage)
-    - [`设置风险限制`](#set-risk-limit)
-    - [`查询市场价格`](#query-market-price)
-    - [`更改合同结算货币`](#change-contract-settlement-currency)
-    - [`查询账户费用`](#query-account-fee)
-    - [`查询持仓`](#query-position)
-    - [`关闭持仓`](#close-position)
-    - [`查询钱包保证金`](#query-wallet-margin)
-    - [`创建新订单`](#create-new-order)
-    - [`查询交易成交`](#query-trades-fills-2)
+    - [市场摘要](#7335b2436c)
+    - [查询未完成订单](#72485acdf4)
+    - [按分组的订单簿](#bf4a200892)
+    - [订单簿](#0feebe82a6)
+    - [图表数据](#af657f5fd9)
+    - [查询钱包历史记录](#2d46780fe3)
+    - [查询钱包余额](#0bed682e6f)
+    - [设置杠杆](#47d1d65d6f)
+    - [获取杠杆](#6d32c96f0c)
+    - [设置风险限制](#f233c937b2)
+    - [查询市场价格](#b107fab298)
+    - [更改合同结算货币](#5d5e41f6fe)
+    - [查询帐户费用](#9afbea1929)
+    - [查询持仓](#e602fd627b)
+    - [平仓仓位](#b1f6ce457c)
+    - [查询钱包保证金](#5a0de97d1d)
+    - [创建新订单](#8be954be0d)
+    - [查询成交记录](#bbd4754907-2)
   - 现有的 WebSocket 主题将返回具有当前市场名称的数据（例如：BTCPFC），并为新市场名称（例如：BTC-PERP）添加了一组新的 WebSocket 主题，`响应字段将相同`，以下是映射表：
-    - [tradeHistoryApi](#public-trade-fills) -> tradeHistoryApiV2
+    - [tradeHistoryApi](#6ac7b4be08) -> tradeHistoryApiV2
     - [orderbookApi](#orderbook-snapshot-by-grouping) -> orderbookApiV2
     - [orderbookL2Api](#orderbook-snapshot-by-depth) -> orderbookL2ApiV2
-    - [fills](#user-trade-fills) -> fillsV2
-    - [allPosition](#all-position) -> allPositionV2
-    - [notificationApiV2](#notifications) -> notificationApiV3
+    - [fills](#384d988850) -> fillsV2
+    - [allPosition](#35edece5cf) -> allPositionV2
+    - [notificationApiV2](#7a66c0d036) -> notificationApiV3
 
 ## 版本 2.5.5（2023年3月29日）
 
@@ -160,7 +160,7 @@ headingLevel: 2
   - 期货 API 已更新（通常添加了一个新的可选参数 `useNewSymbolNaming`，以指定市场名称是否采用新格式）：
     - [`市场摘要`](#market-summary)
     - [`查询未完成订单`](#query-open-orders)
-    - [`按分组排序的订单簿`](#orderbook-by-grouping)
+    - [`按分组的订单簿`](#bf4a200892)
     - [`订单簿`](#orderbook)
     - [`图表数据`](#charting-data)
     - [`查询钱包历史`](#query-wallet-history)
@@ -168,13 +168,13 @@ headingLevel: 2
     - [`设置杠杆`](#set-leverage)
     - [`设置风险限制`](#set-risk-limit)
     - [`查询市场价格`](#query-market-price)
-    - [`更改合同结算货币`](#change-contract-settlement-currency)
-    - [`查询账户费用`](#query-account-fee)
+    - [`更改合同结算货币`](#5d5e41f6fe)
+    - [`查询帐户费用`](#query-account-fee)
     - [`查询持仓`](#query-position)
-    - [`关闭持仓`](#close-position)
+    - [`平仓仓位`](#close-position)
     - [`查询钱包保证金`](#query-wallet-margin)
     - [`创建新订单`](#create-new-order)
-    - [`查询交易成交`](#query-trades-fills-2)
+    - [`查询成交记录`](#query-trades-fills-2)
   - 现有的 WebSocket 主题将返回具有当前市场名称的数据（例如：BTCPFC），并为新市场名称（例如：BTC-PERP）添加了一组新的 WebSocket 主题，`响应字段将相同`，以下是映射表：
     - [tradeHistoryApi](#public-trade-fills) -> tradeHistoryApiV2
     - [orderbookApi](#orderbook-snapshot-by-grouping) -> orderbookApiV2
@@ -199,20 +199,20 @@ headingLevel: 2
 
 ## 版本 2.3.0（2022年1月21日）
 
-* 在 [创建新订单](#create-new-order)、[创建新算法订单](#create-new-algo-order) 和 [关闭持仓](#close-position) 中添加两个新的响应字段 `remainingSize` 和 `originalSize` **[注意]：此更改将于2022年1月25日生效（UTC+0）**
+* 在 [创建新订单](#create-new-order)、[创建新算法订单](#create-new-algo-order) 和 [平仓仓位](#close-position) 中添加两个新的响应字段 `remainingSize` 和 `originalSize` **[注意]：此更改将于2022年1月25日生效（UTC+0）**
 
 ## 版本 2.2.1（2021年11月26日）
 
-* 更新期货市场的市场名称 [订单簿 WebSocket 数据流](#orderbook-incremental-updates)
+* 更新期货市场的市场名称 [订单簿 WebSocket 数据流](#websocket)
 
 ## 版本 2.2.0（2021年11月23日）
 
-* 添加订单簿增量更新 [订单簿 WebSocket 数据流](#orderbook-incremental-updates)
+* 添加订单簿增量更新 [订单簿 WebSocket 数据流](#websocket)
 
 ## 版本 2.1.8（2021年7月1日）
 
 * 添加 `fills` WebSocket 主题以订阅 [用户交易成交](#user-trade-fills)
-* 为 [订单簿 WebSocket 数据流](#orderbook-snapshot-by-depth) 添加属性 `depth`
+* 为 [订单簿 WebSocket 数据流](#websocket) 添加属性 `depth`
 
 ## 版本 2.1.7（2021年2月4日）
 
@@ -1339,7 +1339,7 @@ BTSE 的速率限制如下：
 | stealth                      | double  | Yes      | 订单的隐身值                                                                           |
 | orderState                   | string  | Yes      | `STATUS_ACTIVE`, `STATUS_INACTIVE`                                                     |
 
-## 查询交易成交记录
+## 查询成交记录
 
 > 请求
 
@@ -1694,7 +1694,7 @@ BTSE 的速率限制如下：
 | timestamp  | long    | Yes      | 设置杠杆的时间戳                                                                                                                                               |
 | message    | long    | Yes      | 消息                                                                                                                                                          |
 
-## 获取杠杆倍数
+## 获取杠杆
 
 > 响应
 
@@ -1722,7 +1722,7 @@ BTSE 的速率限制如下：
 | symbol    | string  | Yes      | 市场符号                                                                                                   |
 | leverage  | double  | Yes      | 对于隔离保证金模式下的市场的当前杠杆值，如果保证金模式为交叉，则返回0                                       |
 
-## 更改合约结算货币
+## 更改合同结算货币
 
 > 请求
 
@@ -2444,7 +2444,7 @@ pong
 }
 ```
 
-通过Websocket订阅公共交易填充
+订阅Websocket的公开交易成交信息
 
 ### 请求参数
 
@@ -2463,7 +2463,7 @@ pong
 
 
 
-## 公共交易填充
+## 公开成交记录
 
 > 请求
 
