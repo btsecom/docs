@@ -130,20 +130,20 @@ headingLevel: 2
 
 ## 版本 2.5.4（2023年3月1日）
 
-* 更新 [订单簿增量更新](#orderbook-incremental-updates) 的参数格式。
+* 更新 [订单簿增量更新](#bb4b2c51b6) 的参数格式。
 
 ## 版本 2.5.3（2022年12月23日）
 
-* [重要通知] BTSE 将于 **2023年** 更改期货市场命名约定。更改内容详见 [版本 2.5.0（2022年11月16日）](#version-2.5.0-(16th-November-2022))。
+* [重要通知] BTSE 将于 **2023年** 更改期货市场命名约定。更改内容详见 [版本 2.5.0（2022年11月16日）](#2-5-0-2022-11-16)。
 
 ## 版本 2.5.2（2022年11月28日）
 
-* 添加 [订单簿增量更新](#orderbook-incremental-updates) 的错误消息。
+* 添加 [订单簿增量更新](#bb4b2c51b6) 的错误消息。
 
 ## 版本 2.5.1（2022年11月25日）
 
 * [重要通知] BTSE 将调整计算期货风险限制级别的公式，某些 API 将受到影响。
-  - [`市场摘要`](#market-summary)
+  - [`市场摘要`](#7335b2436c)
     - 响应中的 `maxPosition` 将不再适用，因为它将由 `max_risk_limit / futures_market_price` 确定
     - `minRiskLimit` 现在以合同大小表示，并将更新为 `美元名义值`
     - `maxRiskLimit` 现在以合同大小表示，并将更新为 `美元名义值`
@@ -158,48 +158,48 @@ headingLevel: 2
   - 将基于时间的市场的后缀从 `交割月份 + 年份` 更改为 `结算日期（YYMMDD）`（例如：BTCZ22 -> BTC-221230）
   - [参考链接](https://www.btse.com/blog/important-notice-upcoming-changes-to-futures-risk-limits-and-contract-names/)
   - 期货 API 已更新（通常添加了一个新的可选参数 `useNewSymbolNaming`，以指定市场名称是否采用新格式）：
-    - [`市场摘要`](#market-summary)
-    - [`查询未完成订单`](#query-open-orders)
+    - [`市场摘要`](#7335b2436c)
+    - [`查询未完成订单`](#72485acdf4)
     - [`按分组的订单簿`](#bf4a200892)
-    - [`订单簿`](#orderbook)
-    - [`图表数据`](#charting-data)
-    - [`查询钱包历史`](#query-wallet-history)
-    - [`查询钱包余额`](#query-wallet-balance)
-    - [`设置杠杆`](#set-leverage)
-    - [`设置风险限制`](#set-risk-limit)
-    - [`查询市场价格`](#query-market-price)
+    - [`订单簿`](#0feebe82a6)
+    - [`图表数据`](#af657f5fd9)
+    - [`查询钱包历史记录`](#2d46780fe3)
+    - [`查询钱包余额`](#0bed682e6f)
+    - [`设置杠杆`](#47d1d65d6f)
+    - [`设置风险限制`](#f233c937b2)
+    - [`查询市场价格`](#b107fab298)
     - [`更改合同结算货币`](#5d5e41f6fe)
-    - [`查询帐户费用`](#query-account-fee)
-    - [`查询持仓`](#query-position)
-    - [`平仓仓位`](#close-position)
-    - [`查询钱包保证金`](#query-wallet-margin)
-    - [`创建新订单`](#create-new-order)
-    - [`查询成交记录`](#query-trades-fills-2)
+    - [`查询帐户费用`](#9afbea1929)
+    - [`查询持仓`](#e602fd627b)
+    - [`平仓仓位`](#b1f6ce457c)
+    - [`查询钱包保证金`](#5a0de97d1d)
+    - [`创建新订单`](#8be954be0d)
+    - [`查询成交记录`](#bbd4754907)
   - 现有的 WebSocket 主题将返回具有当前市场名称的数据（例如：BTCPFC），并为新市场名称（例如：BTC-PERP）添加了一组新的 WebSocket 主题，`响应字段将相同`，以下是映射表：
-    - [tradeHistoryApi](#public-trade-fills) -> tradeHistoryApiV2
+    - [tradeHistoryApi](#6ac7b4be08) -> tradeHistoryApiV2
     - [orderbookApi](#orderbook-snapshot-by-grouping) -> orderbookApiV2
     - [orderbookL2Api](#orderbook-snapshot-by-depth) -> orderbookL2ApiV2
-    - [fills](#user-trade-fills) -> fillsV2
-    - [allPosition](#all-position) -> allPositionV2
-    - [notificationApiV2](#notifications) -> notificationApiV3
+    - [fills](#384d988850) -> fillsV2
+    - [allPosition](#35edece5cf) -> allPositionV2
+    - [notificationApiV2](#7a66c0d036) -> notificationApiV3
     
 
 ## 版本 2.4.1（2022年8月17日）
 
-* 在 [交易端点](#trade-endpoints) 中添加更多请求/响应示例
-* 在 [交易端点](#trade-endpoints) 中纠正文档
+* 在 [交易端点](#bca3630877) 中添加更多请求/响应示例
+* 在 [交易端点](#bca3630877) 中纠正文档
 
 ## 版本 2.4.0（2022年3月30日）
 
-* 添加新的 WebSocket 主题 `allPosition` 以获取所有未平仓头寸 [所有头寸](#all-position)
+* 添加新的Websocket主题 `allPosition` 以获取所有开放的仓位 [所有仓位](#35edece5cf)
 
 ## 版本 2.3.1（2022年3月29日）
 
-* 在 [创建新订单](#create-new-order) 中添加新的 `HALFMIN` time_in_force 选项
+* 在 [创建新订单](#8be954be0d) 中添加新的 `HALFMIN` time_in_force 选项
 
 ## 版本 2.3.0（2022年1月21日）
 
-* 在 [创建新订单](#create-new-order)、[创建新算法订单](#create-new-algo-order) 和 [平仓仓位](#close-position) 中添加两个新的响应字段 `remainingSize` 和 `originalSize` **[注意]：此更改将于2022年1月25日生效（UTC+0）**
+* 在 [创建新订单](#8be954be0d)、[创建新的算法订单](#a78f1cdd03) 和 [平仓仓位](#b1f6ce457c) 中添加两个新的响应字段 `remainingSize` 和 `originalSize` **[注意]：此更改将于2022年1月25日生效（UTC+0）**
 
 ## 版本 2.2.1（2021年11月26日）
 
@@ -211,7 +211,7 @@ headingLevel: 2
 
 ## 版本 2.1.8（2021年7月1日）
 
-* 添加 `fills` WebSocket 主题以订阅 [用户交易成交](#user-trade-fills)
+* 添加 `fills` WebSocket 主题以订阅 [用户交易记录](#384d988850)
 * 为 [订单簿 WebSocket 数据流](#websocket) 添加属性 `depth`
 
 ## 版本 2.1.7（2021年2月4日）
@@ -760,7 +760,7 @@ BTSE 的速率限制如下：
 | timestamp | long    | Yes      | 交易时间戳                                   |
 
 
-# 交易终端
+# 交易端点
 
 ## 创建新订单
 
