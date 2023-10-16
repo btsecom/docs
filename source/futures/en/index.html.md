@@ -13,12 +13,29 @@ headingLevel: 2
 
 # Change Log
 
-## Version 2.6.6 (14th Aug 2023)
+## Version 2.6.11 (16th October 2023)
 * Add TP/SL (Take Profit/Stop Loss) parameters in [Create New Order](#create-new-order)
 * Add API [Bind TP/SL](#bind-tpsl) in Trade Endpoints to bind TP/SL with an existing position
 * Add TP/SL fields in Trade Endpoints [Query Open Orders](#query-open-orders) and [Query Positions](#query-position) 
 * Add TP/SL fields in Websocket Streams [All Position](#all-position)
 
+## Version 2.6.10 (25th September 2023)
+* Update fundingRate description in [`market-summary`](#market-summary)
+* Add listFullAttributes parameter in [`market-summary`](#market-summary)
+* Add optional fundingIntervalMinutes and fundingTime in [`market-summary`](#market-summary)
+* The scheduled effective date is `Oct 11, 2023, at 10:00 AM (UTC+0)`
+
+## Version 2.6.9 (11th September 2023)
+* Add [`get-leverage`](#get-leverage) to get leverage for market
+
+## Version 2.6.8 (3rd September 2023)
+* Remove the slide parameter from [`amend-order`](#amend-order)
+
+## Version 2.6.7 (29th August 2023)
+* Add 451 status code in [`API Status Codes`](#api-status-codes) and make [`Order Book Websocket Streams`](#order-book-websocket-streams) as independent paragraph
+
+## Version 2.6.6 (28th August 2023)
+* Add postOnly parameter on [`Close Position`](#close-position)
 
 ## Version 2.6.5 (27th July 2023)
 * We have introduced a new addition to our futures market: 1,000 Floki Perpetual Futures Contracts (1KFLOKI-PERP or 1KFLOKIPFC)
@@ -98,6 +115,7 @@ Please use the following websokcet topic through the endpoint `wss://ws.btse.com
     - [`Query Wallet History`](#query-wallet-history)
     - [`Query Wallet Balance`](#query-wallet-balance)
     - [`Set Leverage`](#set-leverage)
+    - [`Get Leverage`](#get-leverage)
     - [`Set Risk Limit`](#set-risk-limit)
     - [`Query Market Price`](#query-market-price)
     - [`Change Contract Settlement Currency`](#change-contract-settlement-currency)
@@ -256,10 +274,8 @@ You will need to create an API key on the BTSE platform before you can use authe
 * Production
   * HTTP
      * `https://api.btse.com/futures`
-     * `https://aws-api.btse.com/futures` (Optimised for connection via AWS, enabled by request)
   * Websocket
      * `wss://ws.btse.com/ws/futures`
-     * `wss://aws-ws.btse.com/ws/futures` (Optimised for connection via AWS, enabled by request)
   * Websocket (for orderbook stream)
      * `wss://ws.btse.com/ws/oss/futures` (Used for Orderbook incremental update stream)
 * Testnet
@@ -348,6 +364,7 @@ Each API will return one of the following HTTP status:
 * 405 - Method not allowed. Indicates that the request method is not known to the requested server
 * 408 - Request timeout. Indicates that the server did not complete the request. BTSE API timeouts are set at 30secs
 * 429 - Too many requests. Indicates that the client has exceeded the rates limits set by the server. Refer to Rate Limits for more details
+* 451 - Unavailable For Legal Reasons. Indicates that the client has been banned because abnormal behavior
 * 500 - Internal server error. Indicates that the server encountered an unexpected condition resulting in not being able to fulfill the request
 
 ## API Enum
@@ -471,6 +488,7 @@ Gets market summary information. If no symbol parameter is sent, then all market
 | ---                | ---     | ---      | ---                                                                    |
 | symbol             | string  | No       | Market symbol                                                          |
 | useNewSymbolNaming | boolean | No       | True to return futures market name in the new format, default to False |
+| listFullAttributes | boolean | No       | True to return all attributes of market summary |
 
 ### Response Content
 
@@ -502,13 +520,15 @@ Gets market summary information. If no symbol parameter is sent, then all market
 | closeTime           | long    | Yes      | Market closing time                                                                                   |
 | startMatching       | long    | Yes      | Matching start time                                                                                   |
 | inactiveTime        | long    | Yes      | Time where market is inactive                                                                         |
-| fundingRate         | double  | No       | Funding rate calculated per hour                                                                      |
+| fundingRate         | double  | No       | The funding rate is calculated every 8 hours(default)                                                                      |
 | contractSize        | double  | No       | Size of one contract                                                                                  |
 | maxPosition         | double  | No       | Maximum position a user is allowed to have `Will no longer be applicable after risk limit adjustment` |
 | minRiskLimit        | double  | No       | Minimum risk limit in contract size  `Will be changed to USD value`                                   |
 | maxRiskLimit        | double  | No       | Maximum risk limit int contract size `Will be changed to USD value`                                   |
 | availableSettlement | array   | No       | Currencies available for settlement                                                                   |
 | futures             | boolean | Yes      | Indicator if symbol is a futures contract                                                             |
+| fundingIntervalMinutes             | integer | No      | Funding interval, only display when param `listFullAttributes` is true|
+| fundingTime             | long | No      | Next funding time, only display when param `listFullAttributes` is true|
 
 ## Charting Data
 
@@ -1138,7 +1158,7 @@ This API Requires `Trading` permission
 
 `PUT /api/v2.1/order`
 
-Amend the price or size or trigger price of an order. For trigger orders, if the order has already been triggered, the trigger price cannot be further amended. If an order is a POST-ONLY order, and `slide` option is set to true, then price will set to be the best bid/ask price. Amend order _does not_ apply to algo orders
+Amend the price or size or trigger price of an order. For trigger orders, if the order has already been triggered, the trigger price cannot be further amended. Amend order _does not_ apply to algo orders
 
 ### Request Parameters
 
@@ -1149,7 +1169,6 @@ Amend the price or size or trigger price of an order. For trigger orders, if the
 | clOrderID    | string  | No       | Custom order ID. Mandatory when `orderID` is not provided.                                                                                                         |
 | type         | string  | Yes      | Type of amendmend<br/>`PRICE`: To amend order price<br/>`SIZE`: To amend order size<br/>`TRIGGERPRICE`: To amend trigger price<br/>`ALL`: to amend multiple fields |
 | value        | number  | Yes      | The value to be amended to. Value depends on the type being set.                                                                                                   |
-| slide        | boolean | No       | For type: `PRICE`. Used for Post-Only orders. When set to true will set price to best bid/ask                                                                      |
 | orderPrice   | number  | No       | For type: `ALL`, order price to be amended                                                                                                                         |
 | orderSize    | number  | No       | For type: `ALL`, order size in contract size to be amended                                                                                                         |
 | triggerPrice | number  | No       | For type: `ALL`, trigger price to be amended                                                                                                                       |
@@ -1255,7 +1274,7 @@ Cancels pending orders that has not yet been transacted. The `orderID` is a uniq
 | remainingSize | double  | Yes      | Size left to be transacted                                                                                                                                                                                                                                                                      |
 | originalSize  | double  | Yes      | Original order size                                                                                                                                                                                                                                                                             |
 
-## Dead man's switch (Cancel all after)
+## Dead Man's Switch (Cancel All After)
 
 > Request
 
@@ -1603,12 +1622,13 @@ Closes a user's position for the particular market as specified by symbol. If ty
 
 ### Request Parameters
 
-| Name               | Type    | Required | Description                                                                                      |
-| ---                | ---     | ---      | ------------------------------------------------------------------------------------------------ |
-| symbol             | string  | Yes      | Market symbol                                                                                    |
-| type               | string  | Yes      | Close position type with values:<br/>LIMIT: Close at `price`<br/>MARKET: Close at market price   |
-| price              | double  | No       | Close price. Mandatory when type is `LIMIT`                                                      |
-| useNewSymbolNaming | boolean | No       | True to use new futures market name in symbol, default to False                                  |
+| Name               | Type    | Required | Description                                                                                             |
+|--------------------| ---     | ---      |---------------------------------------------------------------------------------------------------------|
+| symbol             | string  | Yes      | Market symbol                                                                                           |
+| type               | string  | Yes      | Close position type with values:<br/>LIMIT: Close at `price`<br/>MARKET: Close at market price          |
+| price              | double  | No       | Close price. Mandatory when type is `LIMIT`                                                             |
+| postOnly           | boolean | No       | Boolean to indicate if this is a post only order. For post only orders, traders are charged maker fees  |
+| useNewSymbolNaming | boolean | No       | True to use new futures market name in symbol, default to False                                         |
 
 ### Response Content
 
@@ -1756,6 +1776,34 @@ Change leverage values for the specified market
 | type      | double  | Yes      | Value will be 93 indicating that type is `Leverage`                                                                                     |
 | timestamp | long    | Yes      | Timestamp where leverage was set                                                                                                        |
 | message   | long    | Yes      | Message                                                                                                                                 |
+
+## Get Leverage
+
+> Response
+
+```json
+{
+  "symbol": "BTC-PERP",
+  "leverage": 100.0
+}
+```
+
+`Get /api/v2.1/leverage`
+
+Get leverage value for the specified market
+
+### Request Parameters
+
+| Name               | Type    | Required | Description |
+| ---                | ---     | ---      | --- |
+| symbol             | string  | Yes      | Market symbol |
+
+### Response Content
+
+| Name      | Type    | Required | Description                                                                                                                             |
+| ---       | ---     | ---      | ---  |
+| symbol    | string  | Yes      | Market symbol |
+| leverage  | double  | Yes      | Current leverage value for the market for isolated margin mode, return 0 if the margin mode is cross|
 
 ## Change Contract Settlement Currency
 
@@ -2296,63 +2344,13 @@ Transfers funds between user and sub-account wallet. User can specify the source
 
 
 
+# Order Book Websocket Streams
 
-# Websocket Streams
-
-## Ping/Pong
-For all our WebSocket servers, simply send a 'ping' message, and the WebSocket server will respond with a 'pong' message if the WebSocket connection is established and active.
-> Reques
-
-```
-ping
-```
-
-> Response
-
-```
-pong
-```
-
-## Subscription
-
-> Request
-
-```json
-{
-  "op": "subscribe",
-  "args": [
-    "orderBookApi:BTCPFC_0"
-  ]
-}
-```
-
-> Response
-
-```json
-{
-  "event": "subscribe",
-  "channel": [
-    "orderBookApi:BTCPFC_0"
-  ]
-}
-```
-
-To subscribe to a websocket feed
-
-### Request Parameters
-
-| Name | Type   | Required | Description                                                                                                            |
-| ---  | ---    | ---      | ---                                                                                                                    |
-| op   | string | Yes      | Operation. `subscribe` will subscribe to the topics provided in `args`. `unsubscribe` will unsubscribe from the topics |
-| args | array  | Yes      | Topics to subscribe to.                                                                                                |
-
-### Response Content
-
-| Name    | Type   | Required | Description                                   |
-| ---     | ---    | ---      | ---                                           |
-| event   | string | Yes      | Respond with the event type                   |
-| channel | array  | Yes      | Topics which have been sucessfully subscribed |
-
+## Endpoints
+  * Production
+    * `wss://ws.btse.com/ws/oss/futures`
+  * Testnet
+    * `wss://testws.btse.io/ws/oss/futures`
 
 ## OSS L1 Snapshot (By grouping)
 
@@ -2563,6 +2561,73 @@ Also if [crossed orderbook](https://en.wikipedia.org/wiki/Order_book#Crossed_boo
 | 1005       | Topic provided does not exist.                                                         |
 | 1007       | User message buffer is full.                                                           |
 | 1008       | Reached maximum failed attempts, closing the session.                                  |
+
+
+# Websocket Streams
+
+## Endpoints
+  * Production
+     * `wss://ws.btse.com/ws/futures`
+  * Testnet
+    * `wss://testws.btse.io/ws/futures`
+
+## Ping/Pong
+For all our WebSocket servers, simply send a 'ping' message, and the WebSocket server will respond with a 'pong' message if the WebSocket connection is established and active.
+> Reques
+
+```
+ping
+```
+
+> Response
+
+```
+pong
+```
+
+## Subscription
+
+Here is an example for topic subscription.
+
+> Request
+
+```json
+{
+  "op": "subscribe",
+  "args": [
+    "tradeHistoryApi:BTCPFC"
+  ]
+}
+```
+
+> Response
+
+```json
+{
+  "event": "subscribe",
+  "channel": [
+    "tradeHistoryApi:BTCPFC"
+  ]
+}
+```
+
+To subscribe to a websocket public trade fill
+
+### Request Parameters
+
+| Name | Type   | Required | Description                                                                                                            |
+| ---  | ---    | ---      | ---                                                                                                                    |
+| op   | string | Yes      | Operation. `subscribe` will subscribe to the topics provided in `args`. `unsubscribe` will unsubscribe from the topics |
+| args | array  | Yes      | Topics to subscribe to.                                                                                                |
+
+### Response Content
+
+| Name    | Type   | Required | Description                                   |
+| ---     | ---    | ---      | ---                                           |
+| event   | string | Yes      | Respond with the event type                   |
+| channel | array  | Yes      | Topics which have been sucessfully subscribed |
+
+
 
 
 ## Public Trade Fills
