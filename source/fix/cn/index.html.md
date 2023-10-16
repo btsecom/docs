@@ -33,11 +33,11 @@ Spot 和 Futures 的会话是分开的。
 
 ## 版本 1.1.3（2023年7月10日）
 
-添加 [心跳](#heartbeat-0) 推荐
+添加 [心跳 (0)](#0) 推荐
 
 ## 版本 1.1.2（2023年7月10日）
 
-* 在 Futures 市场中应用新的符号名称。在 [Logon](#logon-a) 消息中添加 ApplyNewSymbolName
+* 在 Futures 市场中应用新的符号名称。在 [登录 (A)](#a) 消息中添加 ApplyNewSymbolName
 
 ## 版本 1.1.1（2023年2月7日）
 
