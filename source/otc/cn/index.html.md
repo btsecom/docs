@@ -19,7 +19,7 @@ headingLevel: 2
 
 ## 版本 1.1.2 (2022年1月25日)
 
-* 更新 [`accept`](#accept-quote) 以允许部分接受场外交易报价。
+* 更新 [`accept`](#a61744ae67) 以允许部分接受场外交易报价。
 
 ## 版本 1.1.1 (2021年11月24日)
 
@@ -305,7 +305,7 @@ BTSE的速率限制如下：
 
 接受报价。
 该报价允许通过在请求体中获取 `baseAmount` 或 `quoteAmount` 来**部分接受**，
-这分别对应 [`报价`](#request-for-quote)中的 `orderSizeInBaseCurrency` 和 `orderAmountInOrderCurrency`。
+这分别对应 [`报价`](#db8afb45d1)中的 `orderSizeInBaseCurrency` 和 `orderAmountInOrderCurrency`。
 请注意，如果金额大于您报价的数字，只会接受报价的数字。
 
 ### 请求参数
