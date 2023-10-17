@@ -15,11 +15,11 @@ headingLevel: 2
 
 ## 版本 1.1.3 (2022年3月16日)
 
-* 增加了请求参数 [`side`](#quote-stream)，以允许返回单边报价。
+* 增加了请求参数 [`side`](#42034b88ca)，以允许返回单边报价。
 
 ## 版本 1.1.2 (2022年1月25日)
 
-* 更新 [`accept`](#accept-quote) 以允许部分接受场外交易报价。
+* 更新 [`accept`](#a61744ae67) 以允许部分接受场外交易报价。
 
 ## 版本 1.1.1 (2021年11月24日)
 
@@ -27,7 +27,7 @@ headingLevel: 2
 
 ## 版本 1.1.0 (2021年9月17日)
 
-* 添加了 [`quote`](#quote-stream) WebSocket 主题，用于订阅场外市场的价格流。
+* 添加了 [`quote`](#42034b88ca) WebSocket 主题，用于订阅场外市场的价格流。
 
 
 # 概览
@@ -75,14 +75,15 @@ $ echo -n "/api/v1/quote1624985375123{\"orderSizeInBaseCurrency\":1,\"orderAmoun
 (stdin)= 8ee43810606da581fb6ce03e10370f89125c2269a64de832a55cea219795e9ae0c3df86b51afbafdd28c03b16acd1427
 ```
 
+
 * 下单的终端点是 `https://api.btse.com/otc/api/v1/quote`
 * 假设我们有以下数值：
   * request-nonce: `1624985375123`
   * request-api: `4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x`
   * secret: `848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx`
-  * 路径：`/api/v1/quote`
-  * 主体：`{"orderSizeInBaseCurrency":1,"orderAmountInOrderCurrency":0,"side":"buy","baseCurrency":"BTC","orderCurrency":"USD"}`
-  * 加密文本：`"/api/v1/quote1624985375123{"orderSizeInBaseCurrency":1,"orderAmountInOrderCurrency":0,"side":"buy","baseCurrency":"BTC","orderCurrency":"USD"}"`
+  * Path：`/api/v1/quote`
+  * Body：`{"orderSizeInBaseCurrency":1,"orderAmountInOrderCurrency":0,"side":"buy","baseCurrency":"BTC","orderCurrency":"USD"}`
+  * Encrypted Text：`"/api/v1/quote1624985375123{"orderSizeInBaseCurrency":1,"orderAmountInOrderCurrency":0,"side":"buy","baseCurrency":"BTC","orderCurrency":"USD"}"`
 * 生成的签名将是：
   * request-sign: `8ee43810606da581fb6ce03e10370f89125c2269a64de832a55cea219795e9ae0c3df86b51afbafdd28c03b16acd1427`
 
@@ -270,6 +271,7 @@ BTSE的速率限制如下：
 | quoteValidDurationMs      | long  | 是       | 报价有效期                                                                                                                                                                                        |
 | status                    | integer    | 是       | 订单状态，具有以下值：<br/>8: 余额不足<br/>30001: 订单报价<br/>30008: OTC订单重新报价<br/>30007: OTC订单已成功完成<br/>40001: 服务不可用<br/>40003: 拒绝 |
 
+## 接受报价
 
 > 请求
 
@@ -302,12 +304,13 @@ BTSE的速率限制如下：
 `POST /api/v1/accept/{quoteId}`
 
 接受报价。
-允许**部分接受**报价，通过在请求体中使用 `baseAmount` 或 `quoteAmount`，分别对应于 [`quote`](#request-for-quote) 中的 `orderSizeInBaseCurrency` 和 `orderAmountInOrderCurrency`。
-请注意，如果金额大于您所报的数额，只有所报的数额将被接受。
+该报价允许通过在请求体中获取 `baseAmount` 或 `quoteAmount` 来**部分接受**，
+这分别对应 [`报价`](#db8afb45d1)中的 `orderSizeInBaseCurrency` 和 `orderAmountInOrderCurrency`。
+请注意，如果金额大于您报价的数字，只会接受报价的数字。
 
 ### 请求参数
 
-| 名称          | 类型     | 必填     | 描述                                     |
+| 名称          | 类型     | 是否必须     | 描述                                     |
 | ------------- | -------- | -------- | ---------------------------------------- |
 | quoteId       | string   | 是       | 作为路径参数提供的报价ID                |
 | baseAmount    | double   | 否       | 接受报价的部分金额                      |
@@ -315,19 +318,21 @@ BTSE的速率限制如下：
 
 ### 响应内容
 
-| 名称                      | 类型    | 必填     | 描述                                                                                                                                                                                                       |
-| ---                       | ---     | ---      | ---                                                                                                                                                                                                       |
-| 状态                      | integer    | 是       | 具有以下值的订单状态：<br/>8：余额不足<br/>30001：订单报价<br/>30008：OTC订单重新报价<br/>30007：OTC订单成功完成<br/>40001：服务不可用<br/>40003：已拒绝 |
-| 报价ID                    | string  | 是       | 报价ID                                                                                                                                                                                                  |
-| 报价有效期毫秒            | long  | 是       | 报价有效期                                                                                                                                                                                            |
-| 要接收的报价金额          | double  | 是       | 要接收的报价金额                                                                                                                                                                                   |
-| 要接收的报价货币          | string  | 是       | 要接收的报价货币                                                                                                                                                                                 |
-| 要扣除的报价金额          | double  | 是       | 要扣除的报价金额                                                                                                                                                                                    |
-| 要扣除的报价货币          | string  | 是       | 要扣除的报价货币                                                                                                                                                                               |
-| 报价时间戳                | long  | 是       | 报价时间戳                                                                                                                                                                                           |
-| 报价价格（按订单货币）   | double  | 是       | 报价价格（按订单货币）                                                                                                                                                                             |
-| 报价价格（按美元）       | long  | 是       | 报价价格（按美元）                                                                                                                                                                                |
-| 买入或卖出                | string  | 是       | 买入或卖出                                                                                                                                                                                               |
+
+| 名称                      | 类型    | 是否必须  | 描述                                                                                                                                                                                               |
+| ------------------------ | ------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| status                   | integer | 是       | 订单状态，其值为：<br/>8: 余额不足<br/>30001: 订单报价<br/>30008: OTC订单重新报价<br/>30007: OTC订单成功完成<br/>40001: 服务不可用<br/>40003: 被拒绝                                                   |
+| quoteId                  | string  | 是       | 报价ID                                                                                                                                                                                              |
+| quoteValidDurationMs     | long    | 是       | 报价有效期                                                                                                                                                                                          |
+| quoteAmountToReceive     | double  | 是       | 应收报价金额                                                                                                                                                                                        |
+| quoteCurrencyToReceiveIn | string  | 是       | 应收报价货币                                                                                                                                                                                        |
+| quoteAmountToDeduct      | double  | 是       | 扣除的报价金额                                                                                                                                                                                      |
+| quoteCurrencyToDeductIn  | string  | 是       | 扣除的报价货币                                                                                                                                                                                      |
+| quoteTimestamp           | long    | 是       | 报价时间戳                                                                                                                                                                                          |
+| quotePriceInOrderCurrency| double  | 是       | 订单货币中的报价价格                                                                                                                                                                                |
+| quotePriceInUSD          | long    | 是       | USD中的报价价格                                                                                                                                                                                     |
+| side                     | string  | 是       | 买或卖                                                                                                                                                                                              |
+
 
 ## 拒绝报价
 
@@ -404,7 +409,7 @@ BTSE的速率限制如下：
 
 `POST /api/v1/queryOrder/{quoteId}`
 
-## 查询订单信息
+查询订单信息
 
 ### 请求参数
 
@@ -529,8 +534,6 @@ echo -n "/ws/otc1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6726e
 }
 
 ```
-
-
 
 通过订阅 `quote` WebSocket，接收报价数据流。WebSocket 主题将不断向订阅者推送新价格。要接受报价，请使用 `/accept` API 指示买入或卖出报价 ID。
 
