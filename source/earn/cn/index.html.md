@@ -99,25 +99,25 @@ headingLevel: 2
 
 | 名称               | 类型         | 是否必须 | 描述                              |
 | ---                | ---          | ---  | ---                             |
-| id                 | string       | 是   | 产品编号                         |
-| name               | string       | 是   | 产品名称                         |
-| currency           | string       | 是   | 货币                             |
-| type               | string       | 是   | 产品类型                         |
-| startDate          | long       | 是   | 投资开始日期                     |
-| interestStartDate  | long       | 是   | 利息开始日期                     |
-| rates              | RateObject[] | 是   | 利息率信息                       |
-| compounding        | double       | 是   | 产品是否复利                     |
-| autoRenewSupported | double       | 是   | 产品是否支持自动续约             |
-| dailyLimit         | double       | 是   | 每日投资金额限制                 |
-| minSize            | double       | 是   | 最低投资额                       |
-| incrementalSize    | double       | 是   | 投资步进大小                     |
+| id                 | string       | Yes   | 产品编号                         |
+| name               | string       | Yes   | 产品名称                         |
+| currency           | string       | Yes   | 货币                             |
+| type               | string       | Yes   | 产品类型                         |
+| startDate          | long       | Yes   | 投资开始日期                     |
+| interestStartDate  | long       | Yes   | 利息开始日期                     |
+| rates              | RateObject[] | Yes   | 利息率信息                       |
+| compounding        | double       | Yes   | 产品是否复利                     |
+| autoRenewSupported | double       | Yes   | 产品是否支持自动续约             |
+| dailyLimit         | double       | Yes   | 每日投资金额限制                 |
+| minSize            | double       | Yes   | 最低投资额                       |
+| incrementalSize    | double       | Yes   | 投资步进大小                     |
 
 ### RateObject
 
 | 名称 | 类型    | 是否必须 | 描述         |
 | ---  | ---     | ---  | ---         |
-| days | integer | 是   | 天数         |
-| rate | double  | 是   | 利率         |
+| days | integer | Yes   | 天数         |
+| rate | double  | Yes   | 利率         |
 
 
 ## 存款投资
@@ -149,16 +149,16 @@ headingLevel: 2
 
 | 名称      | 类型    | 是否必须 | 描述                  |
 | ---       | ---     | ---  | ---                  |
-| productId | string  | 是   | 投资产品编号        |
-| amount    | double  | 是   | 投资金额             |
-| renew     | boolean  | 是   | 自动续约             |
-| day       | integer    | 是   | 天数                  |
+| productId | string  | Yes   | 投资产品编号        |
+| amount    | double  | Yes   | 投资金额             |
+| renew     | boolean  | Yes   | 自动续约             |
+| day       | integer    | Yes   | 天数                  |
 
 ### 响应内容
 
 | 名称    | 类型    | 是否必须 | 描述                  |
 | ---     | ---     | ---  | ---                  |
-| success | boolean  | 是   | 处理结果              |
+| success | boolean  | Yes   | 处理结果              |
 
 
 ## 续投资
@@ -189,15 +189,15 @@ headingLevel: 2
 
 | 名称      | 类型    | 是否必须 | 描述                  |
 | ---       | ---     | ---  | ---                  |
-| orderId   | integer    | 是   | 投资订单编号         |
-| autoRenew | boolean  | 是   | 自动续约             |
+| orderId   | integer    | Yes   | 投资订单编号         |
+| autoRenew | boolean  | Yes   | 自动续约             |
 
 ### 响应内容
 
 | 名称      | 类型    | 是否必须 | 描述                     |
 | ---       | ---     | ---  | ---                     |
-| orderId   | integer    | 是   | 投资订单编号             |
-| autoRenew | boolean  | 是   | 自动续约标志的状态      |
+| orderId   | integer    | Yes   | 投资订单编号             |
+| autoRenew | boolean  | Yes   | 自动续约标志的状态      |
 
 
 ## 赎回投资
@@ -227,14 +227,14 @@ headingLevel: 2
 
 | 名称    | 类型    | 是否必须 | 描述                  |
 | ---     | ---     | ---  | ---                  |
-| orderId | integer    | 是   | 投资订单编号         |
-| amount  | double  | 是   | 赎回金额             |
+| orderId | integer    | Yes   | 投资订单编号         |
+| amount  | double  | Yes   | 赎回金额             |
 
 ### 响应内容
 
 | 名称    | 类型    | 是否必须 | 描述                  |
 | ---     | ---     | ---  | ---                  |
-| success | boolean  | 是   | 处理结果              |
+| success | boolean  | Yes   | 处理结果              |
 
 
 ## 查询投资订单
@@ -273,22 +273,22 @@ headingLevel: 2
 
 | 名称                   | 类型    | 是否必须 | 描述                          |
 | ---                    | ---     | ---  | ---                          |
-| id                     | integer    | 是   | 订单编号                     |
-| name                   | string  | 是   | 产品名称                     |
-| currency               | string  | 是   | 货币                         |
-| type                   | string  | 是   | 产品类型                     |
-| rate                   | boolean  | 是   | 利率                         |
-| investAmt              | boolean  | 是   | 金额                         |
-| interestEarned         | boolean  | 是   | 赚取的利息                   |
-| nextInterestPayoutTime | boolean  | 是   | 下次利息支付时间             |
-| startTime              | boolean  | 是   | 开始时间                     |
-| endTime                | boolean  | 是   | 结束时间                     |
-| duration               | boolean  | 是   | 期限                         |
-| payoutLockTime         | boolean  | 是   | 支付锁定时间                 |
-| autoRenew              | boolean  | 是   | 自动续约                     |
-| compounding            | boolean  | 是   | 复利                         |
-| autoRenewSupported     | boolean  | 是   | 是否支持自动续约             |
-| redemptionProcessing   | boolean  | 是   | 是否正在赎回处理             |
+| id                     | integer    | Yes   | 订单编号                     |
+| name                   | string  | Yes   | 产品名称                     |
+| currency               | string  | Yes   | 货币                         |
+| type                   | string  | Yes   | 产品类型                     |
+| rate                   | boolean  | Yes   | 利率                         |
+| investAmt              | boolean  | Yes   | 金额                         |
+| interestEarned         | boolean  | Yes   | 赚取的利息                   |
+| nextInterestPayoutTime | boolean  | Yes   | 下次利息支付时间             |
+| startTime              | boolean  | Yes   | 开始时间                     |
+| endTime                | boolean  | Yes   | 结束时间                     |
+| duration               | boolean  | Yes   | 期限                         |
+| payoutLockTime         | boolean  | Yes   | 支付锁定时间                 |
+| autoRenew              | boolean  | Yes   | 自动续约                     |
+| compounding            | boolean  | Yes   | 复利                         |
+| autoRenewSupported     | boolean  | Yes   | 是否支持自动续约             |
+| redemptionProcessing   | boolean  | Yes   | 是否正在赎回处理             |
 
 
 ## 查询投资历史
@@ -333,22 +333,22 @@ headingLevel: 2
 
 | 名称         | 类型                        | 是否必须 | 描述                   |
 | ---          | ---                         | ---  | ---                   |
-| totalRows    | string                      | 是   | 总记录数               |
-| pageNumber   | string                      | 是   | 当前页码               |
-| pageSize     | string                      | 是   | 每页记录数             |
-| data         | InvestmentHistoryObject[]  | 是   | 投资历史对象           |
+| totalRows    | string                      | Yes   | 总记录数               |w
+| pageNumber   | string                      | Yes   | 当前页码               |
+| pageSize     | string                      | Yes   | 每页记录数             |
+| data         | InvestmentHistoryObject[]  | Yes   | 投资历史对象           |
 
 ### InvestmentHistoryObject
 
 | 名称           | 类型    | 是否必须 | 描述                        |
 | ---            | ---     | ---  | ---                        |
-| txnTime        | integer    | 是   | 交易时间                   |
-| name           | string  | 是   | 产品名称                   |
-| currency       | string  | 是   | 货币                       |
-| rate           | string  | 是   | 利率                       |
-| type           | boolean  | 是   | 产品类型                   |
-| txnType        | boolean  | 是   | 交易类型                   |
-| amount         | boolean  | 是   | 交易金额                   |
-| totalAmount    | boolean  | 是   | 投资总额                   |
-| interestEarned | boolean  | 是   | 赚取的利息                 |
-| duration       | boolean  | 是   | 期限                       |
+| txnTime        | integer    | Yes   | 交易时间                   |
+| name           | string  | Yes   | 产品名称                   |
+| currency       | string  | Yes   | 货币                       |
+| rate           | string  | Yes   | 利率                       |
+| type           | boolean  | Yes   | 产品类型                   |
+| txnType        | boolean  | Yes   | 交易类型                   |
+| amount         | boolean  | Yes   | 交易金额                   |
+| totalAmount    | boolean  | Yes   | 投资总额                   |
+| interestEarned | boolean  | Yes   | 赚取的利息                 |
+| duration       | boolean  | Yes   | 期限                       |
