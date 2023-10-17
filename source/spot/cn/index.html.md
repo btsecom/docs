@@ -18,14 +18,14 @@ headingLevel: 2
 * 修正订单相关API中参数的数据类型，并删除451状态代码
 
 ## 版本 3.4.5（2023年9月3日）
-* 从[`amend-order`](#amend-order)中删除slide参数
+* 从[`修正订单`](#d347e421a4)中删除slide参数
 
 ## 版本 3.4.4（2023年8月29日）
 
-* 在[`API状态代码`](#api-status-codes)中添加451状态代码，并将[`Order Book Websocket Streams`](#order-book-websocket-streams)设置为独立段落
+* 在[`API状态代码`](#api-status-codes)中添加451状态代码，并将[`Order Book Websocket Streams`](#订单簿 WebSocket 流)设置为独立段落
 
 ## 版本 3.4.3（2023年8月17日）
-* 将[`Notifications`](#notifications)响应数据格式从array更改为对象。
+* 将[`通知`](#7a66c0d036)响应数据格式从array更改为对象。
 
 ## 版本 3.4.2（2023年5月29日）
 * 更新Orderbook Stream Service(OSS)的错误消息格式。计划生效日期为`2023年6月6日，上午10:00（UTC+0）`。
@@ -64,7 +64,7 @@ headingLevel: 2
 ## 版本 3.4.0（2023年4月12日）
 * 今天已弃用两个websocket主题“Orderbook Snapshot（按组）”和“Orderbook Snapshot（按深度）”。
 请使用端点`wss://ws.btse.com/ws/oss/spot`获取订单簿数据的以下websocket主题
-  - [Orderbook Incremental Updates](#orderbook-incremental-updates)
+  - [订单簿增量更新](#bb4b2c51b6)
   - [OSS L1 Snapshot（按组）](#oss-l1-snapshot-by-grouping)
 
 ## 版本 3.3.9（2023年4月6日）
@@ -77,44 +77,44 @@ headingLevel: 2
 
 ## 版本 3.3.7（2023年3月1日）
 
-* 更新[Orderbook incremental update](#orderbook-incremental-updates)的参数格式。
+* 更新[订单簿增量更新](#bb4b2c51b6)的参数格式。
 
 ## 版本 3.3.6（2023年2月7日）
 
 * 在`open_orders`中将`symbol`参数更改为可选
-* 在[Query User Trades Fills](#query-user-trades-fills)中添加资金费用数据。
+* 在[查询用户交易成交](#a49d12728a)中添加资金费用数据。
 
 ## 版本 3.3.5（2022年11月28日）
 
-* 添加[Orderbook incremental update](#orderbook-incremental-updates)错误消息。
+* 添加[订单簿增量更新](#bb4b2c51b6)错误消息。
 
 ## 版本 3.3.4（2022年9月2日）
 
-* 在[Query Trades Fills](#query-trades-fills)和[Query User’s Trades Fills](https://btsecom.github.io/docs/spot/en/#query-trades-fills-2)中删除不必要的参数`includeOld`
-* 在[Query Trades Fills](#query-trades-fills)和[Query User’s Trades Fills](https://btsecom.github.io/docs/spot/en/#query-trades-fills-2)中删除不准确的参数`beforeSerialId`和`afterSerialId`
+* 在[查询交易成交](#1ab8fa8e94)和[Query User’s Trades Fills](https://btsecom.github.io/docs/spot/en/#query-trades-fills-2)中删除不必要的参数`includeOld`
+* 在[查询交易成交](#1ab8fa8e94)和[Query User’s Trades Fills](https://btsecom.github.io/docs/spot/en/#query-trades-fills-2)中删除不准确的参数`beforeSerialId`和`afterSerialId`
 
 ## 版本 3.3.3（2022年8月15日）
 
-* 将文档部分`Create new algo order`合并到[Create new order](#create-new-order)
-* 在[Trade Endpoints](#trade-endpoints)中添加更多请求/响应示例
-* 在[Amend Order](#amend-order)中，将`TRIGGER`请求的`type`更正为`TRIGGERPRICE`
+* 将文档部分`Create new algo order`合并到[创建新订单](#8be954be0d)
+* 在[交易端点](#bca3630877)中添加更多请求/响应示例
+* 在[修正订单](#d347e421a4)中，将`TRIGGER`请求的`type`更正为`TRIGGERPRICE`
 
 ## 版本 3.3.2（2022年3月29日）
 
-* 在[Create new order](#create-new-order)中添加新的`HALFMIN` time_in_force选项
+* 在[创建新订单](#8be954be0d)中添加新的`HALFMIN` time_in_force选项
 
 ## 版本 3.3.1（2022年3月2日）
 
-* 在[Create new order](#create-new-order)中删除不必要的字段`reduceOnly`
+* 在[创建新订单](#8be954be0d)中删除不必要的字段`reduceOnly`
 
 ## 版本 3.3.0（2022年1月21日）
 
-* 在[Create new order](#create-new-order)和[Create new algo order](#create-new-algo-order)中添加两个新的响应字段`remainingSize`和`originalSize` **[注意]：此更改将于2022年1月25日（UTC+0）生效*
+* 在[创建新订单](#8be954be0d)和[Create new algo order](#create-new-algo-order)中添加两个新的响应字段`remainingSize`和`originalSize` **[注意]：此更改将于2022年1月25日（UTC+0）生效*
 
 ## 版本 3.2.9（2022年1月13日）
 
-* 将与钱包相关的端点迁移到`Wallet`部分
-* 将与钱包投资相关的端点迁移到`Earn`部分
+* 将与钱包相关的端点迁移到`钱包`部分
+* 将与钱包投资相关的端点迁移到`賺幣`部分
 
 ## 版本 3.2.8（2021年12月8日）
 
@@ -128,12 +128,12 @@ headingLevel: 2
 
 ## 版本 3.2.5（2021年10月25日）
 
-* 添加订单簿增量更新[Orderbook websocket feed](#orderbook-incremental-updates)
+* 添加订单簿增量更新[订单簿 WebSocket 订阅](#bb4b2c51b6)
 
 ## 版本 3.2.4（2021年7月1日）
 
-* 添加`fills` websocket主题以订阅[user trade fills](#user-trade-fills)
-* 为[Orderbook websocket feed](#orderbook-snapshot-by-depth)添加属性`depth`
+* 添加`fills` websocket主题以订阅[用户交易成交](#05a22d5a79-23)
+* 为[订单簿 WebSocket 订阅](#orderbook-snapshot-by-depth)添加属性`depth`
 
 ## 版本 3.2.3（2021年6月2日）
 
@@ -150,7 +150,7 @@ headingLevel: 2
 * 登录主题现在会返回一个JSON成功/失败消息 {"event":"login","success":true}
 * 当订阅或取消订阅Websocket主题时，将返回一个确认信息，指示哪些主题已成功订阅/取消订阅。不成功的主题不会在响应中返回。
 * Websocket通知将额外包含以下指示符：
-  * maker - 布尔值，表示订单是制造商还是接受者订单
+  * maker - bolean，表示订单是制造商还是接受者订单
   * remainingSize - 表示订单上的剩余大小的值
   * time_in_force - 表示设置在订单上的有效时间的值
 
