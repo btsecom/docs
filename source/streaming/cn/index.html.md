@@ -19,11 +19,11 @@ headingLevel: 2
 
 ## 版本 1.1（2022年3月16日）
 
-* 添加请求参数 [`side`](#quote-stream) 以允许返回一个方向的报价。
+* 添加请求参数 [`side`](#42034b88ca) 以允许返回一个方向的报价。
 
 ## 版本 1.0（2021年11月19日）
 
-* 添加 [`quote`](#quote-stream) WebSocket 主题以订阅 OTC 市场上的价格数据流
+* 添加 [`报价数据流`](#42034b88ca) WebSocket 主题以订阅 OTC 市场上的价格数据流
 
 
 # 概述
@@ -120,9 +120,9 @@ pong
 
 | 索引 | 类型   | 是否必须     | 描述                          |
 | ---  | ---    | ---      | ---                          |
-| 0    | string | 是       | 第一个参数是 API 密钥        |
-| 1    | long | 是       | Nonce，即当前时间戳           |
-| 2    | string | 是       | 生成的签名                    |
+| 0    | string | Yes       | 第一个参数是 API 密钥        |
+| 1    | long | Yes       | Nonce，即当前时间戳           |
+| 2    | string | Yes       | 生成的签名                    |
 
 > 生成签名
 
@@ -193,29 +193,29 @@ echo -n "/ws/otc1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6726e
 
 | 名称      | 类型   | 是否必须     | 描述                                                                                   |
 | ---       | ---    | ---      | ---                                                                                   |
-| op        | string | 是       | 操作，此处为 `quote`、`unsubscribe-quote` 或 `unsubscribe-quote-all`                  |
-| symbol    | string | 是       | 市场标志，参考 `getMarkets` API                                                        |
-| side      | string | 否       | 报价方向，`buy` 或 `sell`，区分大小写。如果此字段为空/为null，则将返回两个方向的报价  |
-| clOrderId | string | 否       | 客户自定义订单 ID                                                                     |
-| quantity  | double | 是       | 订单数量                                                                             |
-| currency  | string | 是       | 可以是基础货币或报价货币。如果指定基础货币，那么报价流将以响应形式返回 |
+| op        | string | Yes       | 操作，此处为 `quote`、`unsubscribe-quote` 或 `unsubscribe-quote-all`                  |
+| symbol    | string | Yes       | 市场标志，参考 `getMarkets` API                                                        |
+| side      | string | No       | 报价方向，`buy` 或 `sell`，区分大小写。如果此字段为空/为null，则将返回两个方向的报价  |
+| clOrderId | string | No       | 客户自定义订单 ID                                                                     |
+| quantity  | double | Yes       | 订单数量                                                                             |
+| currency  | string | Yes       | 可以是基础货币或报价货币。如果指定基础货币，那么报价流将以响应形式返回 |
 
 ### 响应内容
 
 | 名称            | 类型   | 是否必须     | 描述                                                                                             |
 | ---             | ---    | ---      | ---                                                                                             |
-| topic           | string | 是       | WebSocket 主题                                                                                  |
-| buyQuoteId      | string | 否       | 买方的报价 ID。如果该值为空/为null，则表示您的 WebSocket 流未经身份验证或您未订阅此方向  |
-| sellQuoteId     | string | 否       | 卖方的报价 ID。如果该值为空/为null，则表示您的 WebSocket 流未经身份验证或您未订阅此方向 |
-| clOrderId       | string | 是       | 用户自定义订单 ID                                                                               |
-| buyQuantity     | double | 否       | 基于报价请求的购买数量。如果该值为null，则表示您未订阅此方向                          |
-| buyUnitPrice    | double | 否       | 基础符号每单位的单价。如果该值为null，则表示您未订阅此方向                         |
-| buyTotalAmount  | double | 否       | 以报价货币支付的总价格。如果该值为null，则表示您未订阅此方向                      |
-| sellQuantity    | double | 否       | 基于报价请求的销售数量。如果该值为null，则表示您未订阅此方向                      |
-| sellUnitPrice   | double | 否       | 基础符号每单位的单价。如果该值为null，则表示您未订阅此方向                     |
-| sellTotalAmount | double | 否       | 以报价货币支付的总价格。如果该值为null，则表示您未订阅此方向                   |
-| status          | string | 否       | 响应状态。如果该值为null，则表示您未订阅此方向                                  |
-| reason          | string | 否       | 如果返回错误，reason 字段将包含错误的原因                                      |
+| topic           | string | Yes       | WebSocket 主题                                                                                  |
+| buyQuoteId      | string | No       | 买方的报价 ID。如果该值为空/为null，则表示您的 WebSocket 流未经身份验证或您未订阅此方向  |
+| sellQuoteId     | string | No       | 卖方的报价 ID。如果该值为空/为null，则表示您的 WebSocket 流未经身份验证或您未订阅此方向 |
+| clOrderId       | string | Yes       | 用户自定义订单 ID                                                                               |
+| buyQuantity     | double | No       | 基于报价请求的购买数量。如果该值为null，则表示您未订阅此方向                          |
+| buyUnitPrice    | double | No       | 基础符号每单位的单价。如果该值为null，则表示您未订阅此方向                         |
+| buyTotalAmount  | double | No       | 以报价货币支付的总价格。如果该值为null，则表示您未订阅此方向                      |
+| sellQuantity    | double | No       | 基于报价请求的销售数量。如果该值为null，则表示您未订阅此方向                      |
+| sellUnitPrice   | double | No       | 基础符号每单位的单价。如果该值为null，则表示您未订阅此方向                     |
+| sellTotalAmount | double | No       | 以报价货币支付的总价格。如果该值为null，则表示您未订阅此方向                   |
+| status          | string | No       | 响应状态。如果该值为null，则表示您未订阅此方向                                  |
+| reason          | string | No       | 如果返回错误，reason 字段将包含错误的原因                                      |
 
 
 </section>
