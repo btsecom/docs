@@ -58,6 +58,7 @@ headingLevel: 2
     ```
 
 ## 版本 3.4.1（2023年5月17日）
+
 * 为websocket流添加[`Ping/Pong`](#ping-pong)
 
 ## 版本 3.4.0（2023年4月12日）
@@ -67,70 +68,91 @@ headingLevel: 2
   - [OSS L1 Snapshot（按组）](#oss-l1-snapshot-by-grouping)
 
 ## 版本 3.3.9（2023年4月6日）
+
 * 添加[OSS L1 Snapshot（按组）](#oss-l1-snapshot-by-grouping)
 
 ## 版本 3.3.8（2023年3月29日）
+
 * 将身份验证失败的HTTP状态代码更新为`401`
 
 ## 版本 3.3.7（2023年3月1日）
+
 * 更新[Orderbook incremental update](#orderbook-incremental-updates)的参数格式。
 
 ## 版本 3.3.6（2023年2月7日）
+
 * 在`open_orders`中将`symbol`参数更改为可选
 * 在[Query User Trades Fills](#query-user-trades-fills)中添加资金费用数据。
 
 ## 版本 3.3.5（2022年11月28日）
+
 * 添加[Orderbook incremental update](#orderbook-incremental-updates)错误消息。
 
 ## 版本 3.3.4（2022年9月2日）
+
 * 在[Query Trades Fills](#query-trades-fills)和[Query User’s Trades Fills](https://btsecom.github.io/docs/spot/en/#query-trades-fills-2)中删除不必要的参数`includeOld`
 * 在[Query Trades Fills](#query-trades-fills)和[Query User’s Trades Fills](https://btsecom.github.io/docs/spot/en/#query-trades-fills-2)中删除不准确的参数`beforeSerialId`和`afterSerialId`
 
 ## 版本 3.3.3（2022年8月15日）
+
 * 将文档部分`Create new algo order`合并到[Create new order](#create-new-order)
 * 在[Trade Endpoints](#trade-endpoints)中添加更多请求/响应示例
 * 在[Amend Order](#amend-order)中，将`TRIGGER`请求的`type`更正为`TRIGGERPRICE`
 
 ## 版本 3.3.2（2022年3月29日）
+
 * 在[Create new order](#create-new-order)中添加新的`HALFMIN` time_in_force选项
 
 ## 版本 3.3.1（2022年3月2日）
+
 * 在[Create new order](#create-new-order)中删除不必要的字段`reduceOnly`
 
 ## 版本 3.3.0（2022年1月21日）
+
 * 在[Create new order](#create-new-order)和[Create new algo order](#create-new-algo-order)中添加两个新的响应字段`remainingSize`和`originalSize` **[注意]：此更改将于2022年1月25日（UTC+0）生效*
 
 ## 版本 3.2.9（2022年1月13日）
+
 * 将与钱包相关的端点迁移到`Wallet`部分
 * 将与钱包投资相关的端点迁移到`Earn`部分
 
 ## 版本 3.2.8（2021年12月8日）
 
 ## 版本 3.2.7（2021年11月23日）
+
 * 更新订单簿增量更新描述[Orderbook websocket feed](#orderbook-incremental-updates)
 
 ## 版本 3.2.6（2021年11月19日）
+
 * 在[trade_history](https://btsecom.github.io/docs/spot/en/#query-trades-fills-2)中添加`isMatchSymbol`参数
 
 ## 版本 3.2.5（2021年10月25日）
+
 * 添加订单簿增量更新[Orderbook websocket feed](#orderbook-incremental-updates)
 
 ## 版本 3.2.4（2021年7月1日）
+
 * 添加`fills` websocket主题以订阅[user trade fills](#user-trade-fills)
 * 为[Orderbook websocket feed](#orderbook-snapshot-by-depth)添加属性`depth`
 
 ## 版本 3.2.3（2021年6月2日）
+
 * 引入新的通知主题。请参考`notificationsApiV2`以获取详细信息。
 
 ## 版本 3.2.2（2021年1月29日）
+
 * Websockets端点将更新为以下内容：
   * 现货：wss://ws.btse.com/ws/spot
   * 期货：wss://ws.btse.com/ws/futures
 
   现有端点将继续提供。
 
-* 登录主题现在将以JSON成功/失败消息{"event":"login","success":true}响应
-* 在订阅或取消订阅websocket主题时，将返回确认消息，指示成功订阅/取消订阅的主题。不成功的主题将不会在响应
+* 登录主题现在会返回一个JSON成功/失败消息 {"event":"login","success":true}
+* 当订阅或取消订阅Websocket主题时，将返回一个确认信息，指示哪些主题已成功订阅/取消订阅。不成功的主题不会在响应中返回。
+* Websocket通知将额外包含以下指示符：
+  * maker - 布尔值，表示订单是制造商还是接受者订单
+  * remainingSize - 表示订单上的剩余大小的值
+  * time_in_force - 表示设置在订单上的有效时间的值
 
 ## 版本 3.2.1（2020年9月28日）
 
@@ -144,6 +166,7 @@ headingLevel: 2
 * 增强了 /user/wallet_historyAPI，返回钱包详细信息。
 * 引入了 API 权限。所有当前的 API 密钥都将具有读取、交易和转账权限。查看标题旁边的标签，以了解它们所属的类别。
 * 修复了某些 API 返回的错误消息不正确的问题。
+
 
 # 概述
 
@@ -194,18 +217,16 @@ $ echo -n "/api/v3.2/order1624985375123{\"postOnly\":false,\"price\":8500.0,\"si
 (stdin)=e9cd0babdf497b536d1e48bc9cf1fadad3426b36406b5747d77ae4e3cdc9ab556863f2d0cf78e0228c39a064ad43afb7
 ```
 
-## 下单终端点
-
 * 下单的终端点是 `https://api.btse.com/spot/api/v3.2/order`
 * 假设我们有以下数值:
-  * 请求时间戳: `1624985375123`
-  * 请求API密钥: `4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x`
-  * 密钥: `848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx`
-  * 路径: `/api/v3.2/order`
-  * 请求体: `{"postOnly":false,"price":8500.0,"side":"BUY","size":0.002,"stopPrice":0.0,"symbol":"BTC-USD","time_in_force":"GTC","trailValue":0.0,"triggerPrice":0.0,"txType":"LIMIT","type":"LIMIT"}`
-  * 加密文本: `/api/v3.2/order1624985375123{"postOnly":false,"price":8500.0,"side":"BUY","size":0.002,"stopPrice":0.0,"symbol":"BTC-USD","time_in_force":"GTC","trailValue":0.0,"triggerPrice":0.0,"txType":"LIMIT","type":"LIMIT"}`
+  * request-nonce: `1624985375123`
+  * request-api: `4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x`
+  * secret: `848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx`
+  * Path: `/api/v3.2/order`
+  * Body: `{"postOnly":false,"price":8500.0,"side":"BUY","size":0.002,"stopPrice":0.0,"symbol":"BTC-USD","time_in_force":"GTC","trailValue":0.0,"triggerPrice":0.0,"txType":"LIMIT","type":"LIMIT"}`
+  * Encrypted Text: `/api/v3.2/order1624985375123{"postOnly":false,"price":8500.0,"side":"BUY","size":0.002,"stopPrice":0.0,"symbol":"BTC-USD","time_in_force":"GTC","trailValue":0.0,"triggerPrice":0.0,"txType":"LIMIT","type":"LIMIT"}`
 * 生成的签名如下:
-  * 请求签名: `e9cd0babdf497b536d1e48bc9cf1fadad3426b36406b5747d77ae4e3cdc9ab556863f2d0cf78e0228c39a064ad43afb7`
+  * request-sign: `e9cd0babdf497b536d1e48bc9cf1fadad3426b36406b5747d77ae4e3cdc9ab556863f2d0cf78e0228c39a064ad43afb7`
 
 ## 速率限制
 
@@ -236,7 +257,6 @@ BTSE的速率限制如下:
 * 408 - 请求超时。表示服务器未完成请求。BTSE API的超时设置为30秒
 * 429 - 请求过多。表示客户端已超过服务器设置的速率限制。详细信息请参考速率限制
 * 500 - 服务器内部错误。表示服务器遇到意外情况，导致无法完成请求
-
 
 ## API Enum
 
@@ -290,7 +310,6 @@ BTSE的速率限制如下:
 * 1003: ORDER_LIQUIDATION = 订单正在清算
 * 1004: ORDER_ADL = 订单正在经历ADL
 * 30410: BLOCK_TRADE_COMPLETE_SUCCESS = 区块交易完成成功
-
 
 
 # 公共终端点
@@ -348,7 +367,6 @@ BTSE的速率限制如下:
 | 名称     | 类型     | 是否必须   | 描述     |
 | -------- | -------- | ---------- | --------------- |
 | symbol   | string   | no         | 市场符号   |
-
 
 ### 回复内容
 
@@ -465,6 +483,7 @@ BTSE的速率限制如下:
 | ---    | ---    | ---      | ---          |
 | symbol | string | yes        | 市场符号    |
 
+
 ### 响应内容
 
 | Name       | 类型   | 是否必须 | Description           |
@@ -473,7 +492,6 @@ BTSE的速率限制如下:
 | indexPrice | double | yes        | 指数价格            |
 | lastPrice  | double | yes        | 最后成交价格      |
 | markPrice  | double | yes        | 现货市场不适用    |
-
 
 ## 订单簿（按分组）
 
@@ -528,7 +546,6 @@ BTSE的速率限制如下:
 | ---   | ---    | ---      | ---         |
 | price | double | yes        | 订单价格   |
 | size  | double | yes        | 订单大小   |
-
 
 
 ## 订单簿
@@ -933,21 +950,30 @@ BTSE的速率限制如下:
 | orderSize     | double  | no       | 对于类型：`ALL`，要修订的订单大小。 |
 | triggerPrice  | double  | no       | 对于类型：`ALL`，要修订的触发价格。 |
 
-
 ### 响应内容
 
-| 名称             | 类型    | 是否必须     | 描述                                  |
-| ---              | ---     | ---      | ---                                  |
-| symbol           | string  | yes       | 市场标识符                          |
-| clOrderID        | string  | yes       | 由交易员提供的自定义标签            |
-| fillSize         | double  | yes       | 成交订单的成交大小                  |
-| orderID          | string  | yes       | 订单ID                              |
-| orderType        | integer | yes       | 订单类型<br/>76: 限价订单<br/>77: 市价订单<br/>80: 隐含/算法订单 |
-| postOnly         | boolean | yes       | 表示订单是否为仅限挂单            |
-| price            | double  | yes       | 订单价格                            |
-| side             | string  | yes       | 订单方向<br/>买入或卖出              |
-| size             | double  | yes       | 订单大小                            |
-| status           | integer | yes       | 订单状态<br/>2: 订单已插入<br/>4: 订单已全部成交<br/>5: 订单部分成交<br/>6:
+| 名称             | 类型    | 是否必须 | 说明                                                                                                                                                                                                                                                                                         |
+| ---              | ---     | ---      | ---                                                                                                                                                                                                                                                                                         |
+| symbol           | string  | Yes      | 市场符号                                                                                                                                                                                                                                                                                       |
+| clOrderID        | string  | Yes      | 由交易员发送的客户标签                                                                                                                                                                                                                                                                         |
+| fillSize         | double  | Yes      | 交易填充尺寸                                                                                                                                                                                                                                                                                   |
+| orderID          | string  | Yes      | 订单ID                                                                                                                                                                                                                                                                                        |
+| orderType        | integer | Yes      | 订单类型<br/>76: 限价单<br/>77: 市价单<br/>80: Peg/Algo订单                                                                                                                                                                                                                                 |
+| postOnly         | boolean | Yes      | 表示订单是否仅为发布订单                                                                                                                                                                                                                                                                       |
+| price            | double  | Yes      | 订单价格                                                                                                                                                                                                                                                                                     |
+| side             | string  | Yes      | 订单方向<br/>买入或卖出                                                                                                                                                                                                                                                                       |
+| size             | double  | Yes      | 订单尺寸                                                                                                                                                                                                                                                                                      |
+| status           | integer | Yes      | 订单状态<br/>2: 已插入订单<br/>4: 订单已完全成交<br/>5: 订单部分成交<br/>6: 订单已取消<br/>7: 订单已退款<br/>8: 余额不足<br/>9: 触发器已插入<br/>10: 触发器已激活<br/>15: 订单被拒绝<br/>16: 未找到订单<br/>17: 请求失败                                                                 |
+| stopPrice        | double  | Yes      | 停止价格                                                                                                                                                                                                                                                                                     |
+| time_in_force    | string  | Yes      | 订单有效期                                                                                                                                                                                                                                                                                   |
+| timestamp        | long    | Yes      | 订单时间戳                                                                                                                                                                                                                                                                                   |
+| trigger          | boolean | Yes      | 指示订单是否为触发订单                                                                                                                                                                                                                                                                       |
+| triggerPrice     | double  | Yes      | 订单触发价格，如果订单不是触发订单则返回0                                                                                                                                                                                                                                                     |
+| averageFillPrice | double  | Yes      | 平均成交价格。对于部分交易的订单，返回平均成交价格                                                                                                                                                                                                                                           |
+| message          | string  | Yes      | 交易消息                                                                                                                                                                                                                                                                                      |
+| stealth          | double  | Yes      | 订单的隐身值                                                                                                                                                                                                                                                                                 |
+| deviation        | double  | Yes      | 订单的偏差值                                                                                                                                                                                                                                                                                 |
+
 
 ## 取消订单
 
@@ -956,6 +982,7 @@ BTSE的速率限制如下:
 ```
 /api/v3.2/order?symbol=BTC-USD&clOrderID=my-order-id
 ```
+
 > 响应（通用）
 
 ```json
@@ -1073,7 +1100,6 @@ BTSE的速率限制如下:
 | message            | string   | yes      | 交易消息                                                                                                                                                                                                                                                                                 |
 | stealth            | double   | yes      | 订单的隐匿值                                                                                                                                                                                                                                                                             |
 | deviation          | double   | yes      | 订单的偏差值                                                                                                                                                                                                                                                                             |
-
 
 ## 死人开关（延时自动取消所有）
 
@@ -1233,7 +1259,7 @@ BTSE的速率限制如下:
 | 名称        | 类型    | 是否必须    | 描述                       |
 | ---         | ---     | ---      | ---                       |
 | symbol      | string  | yes      | 市场交易对标识符         |
-| side        | string  | yes      | 交易方向。可选值：[`买入`, `卖出`] |
+| side        | string  | yes      | 交易方向。可选值：[`BUY`, `sell`] |
 | price       | double  | yes      | 成交价格                   |
 | size        | double  | yes      | 成交数量                   |
 | serialid    | long  | yes      | 序列ID，运行的序列号        |
@@ -1283,8 +1309,8 @@ BTSE的速率限制如下:
 | takerfee | double   | yes       | 接收者费用     |
 
 
-# 投资终端点
 
+# 投资终端点
 
 ## 查询投资产品
 
@@ -1348,7 +1374,6 @@ BTSE的速率限制如下:
 | rate | double | yes       | 利率              |
 
 
-
 ## 存入投资
 
 > 请求
@@ -1370,6 +1395,7 @@ BTSE的速率限制如下:
 | ---       | ---     | ---      | ---                  |
 | productId | string  | yes      | 投资产品ID           |
 | amount    | double  | yes      | 投资金额             |
+
 
 ## 续投资
 
@@ -1581,10 +1607,10 @@ BTSE的速率限制如下:
 }
 ```
 
-通过终端点 wss://ws.btse.com/ws/oss/spot 订阅一级订单簿。订阅格式为 symbol_grouping。
+通过端点 `wss://ws.btse.com/ws/oss/spot` 订阅Level 1订单簿。订阅的格式将为 `symbol_grouping`。
 
-symbol 表示市场标识符。
-grouping 表示分组粒度。有效值为 0 到 8。
+* `symbol` 表示市场符号
+* `grouping` 表示分组粒度。有效值为0-8。
 
 ### 响应内容
 
@@ -1710,13 +1736,13 @@ grouping 表示分组粒度。有效值为 0 到 8。
 }
 ```
 
-通过终端点 wss://ws.btse.com/ws/oss/spot 订阅订单簿增量更新。主题的格式将是 update:symbol_grouping（例如，update:BTC-USD_0）。首次接收到的响应将是当前订单簿的快照（在 type 字段中指示），并将返回 50 个级别。增量更新将在随后的数据包中以 delta 类型发送。
+通过端点 `wss://ws.btse.com/ws/oss/spot` 订阅订单簿的增量更新。主题的格式将为 `update:symbol_grouping`（例如 `update:BTC-USD_0`）。收到的第一个响应将是当前订单簿的快照（在 `type` 字段中指示），并返回50个级别。随后的数据包将发送增量更新，其类型为 `delta`。
 
-买盘和卖盘将以 price 和 size 组合的形式发送。发送的 size 将是价格的新更新大小。如果发送值为 0，则应从本地订单簿中删除该价格。
+买单和卖单将在 `price` 和 `size` 元组中发送。发送的大小将是价格的新更新大小。如果发送了 `0` 的值，则应从订单簿的本地副本中删除该价格。
 
-为确保按顺序接收更新，seqNum 指示当前序列，prevSeqNum 指的是前一个数据包的序列。seqNum 将始终比 prevSeqNum 大一。如果序列出现错乱，您需要取消订阅并重新订阅该主题。
+为确保按顺序接收更新，`seqNum` 表示当前序列，`prevSeqNum` 指的是之前的数据包。`seqNum` 将始终在 `prevSeqNum` 之后一个。如果序列是乱序的，您将需要取消订阅并再次重新订阅该主题。
 
-此外，如果出现交叉订单簿，即最佳买盘价格高于或等于最佳卖盘价格，请取消订阅并重新订阅该主题。
+此外，如果当最佳出价高于或等于最佳要价时发生[交叉订单簿](https://en.wikipedia.org/wiki/Order_book#Crossed_book)，请取消订阅并重新订阅该主题。
 
 ### 响应内容
 
@@ -1795,6 +1821,8 @@ pong
   ]
 }
 ```
+
+订阅公开交易成交的Websocket
 
 ### 请求参数
 
