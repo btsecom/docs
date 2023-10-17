@@ -1619,7 +1619,7 @@ BTSE的速率限制如下:
 | 名称  | 类型        | 是否必须    | 描述                 |
 | ---   | ---         | ---      | ---                 |
 | topic | string      | Yes      | WebSocket 主题       |
-| data  | 数据对象    | Yes      | 详细数据，请参考下方数据对象 |
+| data  | Data Object    | Yes      | 详细数据，请参考下方数据对象 |
 
 #### 数据对象
 
@@ -1751,7 +1751,7 @@ BTSE的速率限制如下:
 | 名称  | 类型        | 是否必须    | 描述                 |
 | ---   | ---         | ---      | ---                 |
 | topic | string      | Yes      | WebSocket 主题       |
-| data  | 数据对象    | Yes      | 详细数据，请参考下方数据对象 |
+| data  | Data Object    | Yes      | 详细数据，请参考下方数据对象 |
 
 #### 数据对象
 
