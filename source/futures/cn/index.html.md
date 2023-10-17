@@ -13,6 +13,12 @@ headingLevel: 2
 
 # 更新日志
 
+## 版本 2.6.11（2023年10月16日）
+* 在[创建新订单](#8be954be0d)中添加TP/SL（止盈/止损）参数
+* 在交易端点中添加API [绑定TP/SL](#3a59fc75d3) 以将TP/SL与现有持仓绑定
+* 在交易端点 [查询未完成订单](#72485acdf4) 和 [查询持仓](#72485acdf4) 中添加TP/SL字段
+* 在WebSocket流 [所有仓位](#35edece5cf) 中添加TP/SL字段
+
 ## 版本 2.6.10（2023年10月3日）
 * 修正响应数据类型
 
@@ -826,6 +832,43 @@ BTSE 的速率限制如下：
   "triggerPrice": 30000
 }
 ```
+> 请求 (创建`限价`订单并设置`止盈/止损（TP/SL）`)
+```json
+// Place Order with TP and SL
+{
+    "symbol": "BTC-PERP",
+    "size": 10,
+    "price": 29000,
+    "side": "BUY",
+    "type": "LIMIT",
+    "takeProfitPrice": 31000,
+    "takeProfitTrigger": "markPrice",
+    "stopLossPrice": 27000,
+    "stopLossTrigger": "lastPrice"
+}
+
+// Place Order with TP only
+{
+    "symbol": "BTC-PERP",
+    "size": 10,
+    "price": 29000,
+    "side": "BUY",
+    "type": "LIMIT",
+    "takeProfitPrice": 31000,
+    "takeProfitTrigger": "markPrice"
+}
+
+// Place Order with SL only
+{
+    "symbol": "BTC-PERP",
+    "size": 10,
+    "price": 29000,
+    "side": "BUY",
+    "type": "LIMIT",
+    "stopLossPrice": 27000,
+    "stopLossTrigger": "lastPrice"
+}
+```
 
 > 响应（通用）
 
@@ -928,7 +971,11 @@ BTSE 的速率限制如下：
 | postOnly      | boolean | No       | 布尔值，表示这是否仅为发布订单。对于仅发布订单，交易员将收取制造商费用                                                                                                                                                                                                                                                                                                  |
 | reduceOnly    | boolean | No       | 布尔值，表示这是否只是减少订单。                                                                                                                                                                                                                                                                                                                                       |
 | clOrderID     | string  | No       | 自定义订单ID                                                                                                                                                                                                                                                                                                                                                            |
-| trigger       | string  | No       | 用于创建txType: `STOP` 或 `TRIGGER` 的订单。有效选项: `markPrice` (默认) 或 `lastPrice`                                                                                                                                                                                                                                                                                 |
+| trigger       | string  | No       | 用于创建txType: `STOP` 或 `TRIGGER` 的订单。有效选项: `markPrice` (默认) 或 `lastPrice`  |
+| takeProfitPrice  | double  | No       | 在创建带有止盈订单时强制执行。指示触发价格
+| takeProfitTrigger  | string  | No       | 用于创建带有止盈订单的订单。有效选项：`标记价格`（默认）或`最新价格`|
+| stopLossPrice  | double  | No       | 在创建带有止损订单时强制执行。指示触发价格
+| stopLossTrigger  | string  | No       | 用于创建带有止损订单的订单。有效选项：`标记价格`（默认）或`最新价格`|
 
 
 ### 响应内容
@@ -1287,7 +1334,20 @@ BTSE 的速率限制如下：
     "triggerUseLastPrice": false,
     "avgFilledPrice": 0.0,
     "timeInForce": "GTC",
-    "averageFillPrice": 0.0
+    "averageFillPrice": 0.0,
+    "takeProfitOrder": {
+        "orderId": "ea1ab233-c79a-4503-a475-f8633ecc9d79",
+        "side": "SELL",
+        "triggerPrice": 31000.0,
+        "triggerUseLastPrice": false
+    },
+    "stopLossOrder": {
+        "orderId": "48523190-77b9-44ea-bee0-d67a428a51b8",
+        "side": "SELL",
+        "triggerPrice": 27000.0,
+        "triggerUseLastPrice": true
+    },
+    "closeOrder": false
   }
 ]
 ```
@@ -1338,6 +1398,9 @@ BTSE 的速率限制如下：
 | averageFillPrice             | double  | Yes      | 平均成交价                                                                             |
 | stealth                      | double  | Yes      | 订单的隐身值                                                                           |
 | orderState                   | string  | Yes      | `STATUS_ACTIVE`, `STATUS_INACTIVE`                                                     |
+| takeProfitOrder    | TakeProfitOrder对象  | No | 止盈订单信息
+| stopLossOrder      | StopLossOrder对象    | No | 止损订单信息
+| closeOrder         | bool                | Yes | 是否为关闭此持仓的订单
 
 ## 查询成交记录
 
@@ -1441,7 +1504,7 @@ BTSE 的速率限制如下：
   {
     "marginType": 0,
     "entryPrice": 0,
-    "markPrice": 71126.6,
+    "markPrice": 29286.4,
     "symbol": "BTCPFC",
     "side": "BUY",
     "orderValue": 441.8492,
@@ -1454,7 +1517,19 @@ BTSE 的速率限制如下：
     "adlScoreBucket": 2,
     "liquidationInProgress": false,
     "timestamp": 1576661434072,
-    "currentLeverage": 0
+    "currentLeverage": 0,
+    "takeProfitOrder": {
+        "orderId": "ea1ab233-c79a-4503-a475-f8633ecc9d79",
+        "side": "SELL",
+        "triggerPrice": 31000.0,
+        "triggerUseLastPrice": false
+    },
+    "stopLossOrder": {
+        "orderId": "48523190-77b9-44ea-bee0-d67a428a51b8",
+        "side": "SELL",
+        "triggerPrice": 27000.0,
+        "triggerUseLastPrice": true
+    }
   }
 ]
 ```
@@ -1490,6 +1565,8 @@ BTSE 的速率限制如下：
 | liquidationInProgress  | boolean | Yes      | 指示是否正在进行清算                                                                               |
 | currentLeverage        | double  | Yes      | 当前杠杆                                                                                           |
 | timestamp              | long    | Yes      | 查询仓位时的时间戳                                                                                 |
+| takeProfitOrder  | TakeProfitOrder对象 | No | 止盈订单信息
+| stopLossOrder    | StopLossOrder对象   | No | 止损订单信息
 
 
 ## 平仓仓位
@@ -1793,6 +1870,90 @@ BTSE 的速率限制如下：
 | symbol    | string | Yes      | 市场符号   |
 | makerFee  | double | Yes      | 制造商费用 |
 | takerFee  | double | Yes      | 接受者费用 |
+
+
+## 绑定止盈/止损
+> 请求
+```json
+{
+    "symbol": "BTC-PERP",
+    "side": "SELL",
+    "takeProfitPrice": 31000,
+    "takeProfitTrigger": "markPrice",
+    "stopLossPrice": 22000,
+    "stopLossTrigger": "lastPrice"
+}
+```
+
+> 响应
+
+```json
+[
+    {
+        "status": 9,
+        "symbol": "BTC-PERP",
+        "orderType": 77,
+        "price": 0.0,
+        "side": "SELL",
+        "size": 100,
+        "orderID": "4820b20a-e41b-4273-b3ad-4b19920aeeb5",
+        "timestamp": 1691974463934,
+        "triggerPrice": 31000.0,
+        "trigger": true,
+        "deviation": 100.0,
+        "stealth": 100.0,
+        "message": "",
+        "avgFillPrice": 0.0,
+        "fillSize": 0.0,
+        "clOrderID": "",
+        "originalSize": 100.0,
+        "postOnly": false,
+        "remainingSize": 100.0,
+        "orderDetailType": null,
+        "time_in_force": "GTC"
+    }
+]
+```
+
+`POST /api/v2.1/order/bind/tpsl`
+
+绑定止盈/止损与已有持仓
+
+**请求参数**
+
+| 名称               | 类型    | 是否必需 | 描述
+| ---                | ---     | ---      | --- 
+| symbol             | string  | Yes       | 市场交易对
+| side               | string  | Yes       | "BUY" 或 "SELL" 用于止盈/止损订单
+| takeProfitPrice    | double  | No       | 创建带有止盈订单时强制执行。指示触发价格。在使用此API时，必须至少设置`takeProfitPrice`或`stopLossPrice`。
+| takeProfitTrigger  | string  | No       | 用于创建带有止盈订单的选项。有效选项：`标记价格`（默认）或`最新价格`
+| stopLossPrice      | double  | No       | 创建带有止损订单时强制执行。指示触发价格       
+| stopLossTrigger     | string  | No       | 用于创建带有止损订单的选项。有效选项：`标记价格`（默认）或`最新价格`
+
+**响应内容**
+
+| 名称          | 类型    | 是否必需 | 描述
+| ---           | ---     | ---      | ---
+| symbol        | string  | Yes       | 市场交易对
+| clOrderID     | string  | Yes       | 交易员发送的客户标签
+| fillSize      | number  | Yes       | 成交的交易量 
+| orderID       | string  | Yes       | 订单ID 
+| orderType     | string  | Yes       | 订单类型 <br/>76: 限价订单<br/>77: 市价订单<br/>80: 算法订单
+| postOnly      | boolean  | Yes       | 指示订单是否为仅限发布订单 
+| price         | double  | Yes       | 订单价格 
+| side          | string  | Yes       | 订单方向<br/>BUY 或 SELL
+| size          | long  | Yes       | 以"合约大小"为单位的订单大小（即使在风险限制调整后，此值也保持不变） 
+| status        | long  | Yes       | 订单状态<br/>2: 订单已插入<br/>3: 订单已成交<br/>4: 订单已完全成交<br/>5: 订单部分成交<br/>6: 订单已取消<br/>7: 订单已退款<br/>9: 触发已插入<br>10: 触发已激活<br>15: 订单已拒绝<br>16: 未找到订单<br>17: 请求失败 |
+| time_in_force | string  | Yes       | 订单有效期
+| timestamp     | long  | Yes       | 订单时间戳 
+| trigger       | boolean  | Yes       | 指示订单是否为触发订单 
+| triggerPrice  | double  | Yes       | 订单触发价格，如果订单不是触发订单，则返回0
+| avgFillPrice  | double  | Yes       | 平均成交价格。对于部分成交订单，返回平均成交价格
+| message       | string  | Yes       | 交易消息 
+| stealth       | string  | Yes       | 仅适用于算法订单
+| deviation     | double  | Yes       | 仅适用于算法订单
+| remainingSize | double  | Yes       | 剩余待成交的大小
+| originalSize  | double  | Yes       | 原始订单大小   
 
 # 钱包端点
 
@@ -2548,9 +2709,9 @@ pong
 
 | 索引 | 类型   | 是否必须 | 描述                                   |
 | ---  | ---    | ---      | ---                                    |
-| 0    | string | 是       | 第一个参数是 API 密钥                   |
-| 1    | long   | 是       | Nonce，即当前的时间戳                    |
-| 2    | string | 是       | 生成的签名                             |
+| 0    | string | Yes       | 第一个参数是 API 密钥                   |
+| 1    | long   | Yes       | Nonce，即当前的时间戳                    |
+| 2    | string | Yes       | 生成的签名                             |
 
 > 生成签名
 
@@ -2704,7 +2865,7 @@ echo -n "/ws/futures1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6
 
 > 响应
 
-```
+```json
 {
   "topic": "allPosition",
   "data": [{
@@ -2723,23 +2884,35 @@ echo -n "/ws/futures1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6
     "triggerPrice": 0.0,
     "closeOrder": false,
     "liquidationInProgress": false,
-		"marginType": 91,
-		"entryPrice": 47303.404761929,
-		"liquidationPrice": 0.0,
-		"markedPrice": 47293.949862586,
-		"unrealizedProfitLoss": -0.13236859,
-		"totalMaintenanceMargin": 3.484381756,
-		"totalContracts": 14.0,
-		"isolatedLeverage": 0.0,
-		"totalFees": 0.0,
-		"totalValue": 662.115298076,
-		"adlScoreBucket": 2.0,
-		"orderTypeName": "TYPE_FUTURES_POSITION",
-		"orderModeName": "MODE_BUY",
-		"marginTypeName": "FUTURES_MARGIN_CROSS",
-		"currentLeverage": 0.02,
-		"avgFillPrice": 0.0,
-		"settleWithNonUSDAsset": "BTC"
+    "marginType": 91,
+    "entryPrice": 29286.404761929,
+    "liquidationPrice": 0.0,
+    "markedPrice": 29267.967916154,
+    "unrealizedProfitLoss": -0.13236859,
+    "totalMaintenanceMargin": 3.484381756,
+    "totalContracts": 14.0,
+    "isolatedLeverage": 0.0,
+    "totalFees": 0.0,
+    "totalValue": 662.115298076,
+    "adlScoreBucket": 2.0,
+    "orderTypeName": "TYPE_FUTURES_POSITION",
+    "orderModeName": "MODE_BUY",
+    "marginTypeName": "FUTURES_MARGIN_CROSS",
+    "currentLeverage": 0.02,
+    "avgFillPrice": 0.0,
+    "settleWithNonUSDAsset": "BTC",
+    "takeProfitOrder": {
+        "orderId": "4820b20a-e41b-4273-b3ad-4b19920aeeb5",
+        "side": "SELL",
+        "triggerPrice": 31000.0,
+        "triggerUseLastPrice": false
+    },
+    "stopLossOrder": {
+        "orderId": "eff2b232-e2ce-4562-b0b4-0bd3713c11ec",
+        "side": "SELL",
+        "triggerPrice": 27000.0,
+        "triggerUseLastPrice": true
+    }
   }]
 }
 ```
@@ -2765,7 +2938,7 @@ echo -n "/ws/futures1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6
 | maxStealthDisplayAmount | double  | Yes      | 用于peg订单                                         |
 | sellexchangeRate        | double  | Yes      |                                                    |
 | triggerPrice            | double  | Yes      | OCO订单                                             |
-| closeOrder              | boolean | Yes      | 订单是否关闭                                         |
+| closeOrder              | boolean | Yes      | 是否有关闭此持仓的订单
 | liquidationInProgress   | boolean | Yes      | 是否正在清算                                        |
 | marginType              | integer | Yes      | 钱包类型：<br/>91: 全仓<br/>92: 隔离                    |
 | marginTypeName          | string  | Yes      | marginType的字符串表示                               |
@@ -2782,5 +2955,7 @@ echo -n "/ws/futures1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6
 | currentLeverage         | double  | Yes      |                                                    |
 | avgFillPrice            | double  | Yes      |                                                    |
 | settleWithNonUSDAsset   | string  | Yes      |                                                    |
+| takeProfitOrder | TakeProfitOrder对象 | No | 止盈订单信息
+| stopLossOrder | StopLossOrder对象 | No | 止损订单信息
 
 </section>
