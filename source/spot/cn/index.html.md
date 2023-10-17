@@ -22,7 +22,7 @@ headingLevel: 2
 
 ## 版本 3.4.4（2023年8月29日）
 
-* 在[`API状态代码`](#api-status-codes)中添加451状态代码，并将[`Order Book Websocket Streams`](#订单簿 WebSocket 流)设置为独立段落
+* 在[`API状态代码`](#api-2)中添加451状态代码，并将[`Order Book Websocket Streams`](#订单簿 WebSocket 流)设置为独立段落
 
 ## 版本 3.4.3（2023年8月17日）
 * 将[`通知`](#7a66c0d036)响应数据格式从array更改为对象。
