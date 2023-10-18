@@ -25,7 +25,7 @@ headingLevel: 2
 * 在[`API状态代码`](#api-2)中添加451状态代码，并将[`订单簿 WebSocket 流`](#666564834a-2)设置为独立段落
 
 ## 版本 3.4.3（2023年8月17日）
-* 将[`通知`](#7a66c0d036)响应数据格式从array更改为对象。
+* 将[`通知`](#7a66c0d036)响应数据格式从数组更改为对象。
 
 ## 版本 3.4.2（2023年5月29日）
 * 更新订单簿流服务(OSS)的错误消息格式。计划生效日期为`2023年6月6日，上午10:00（UTC+0）`。
@@ -62,14 +62,14 @@ headingLevel: 2
 * 为websocket流添加[`Ping/Pong`](#ping-pong)
 
 ## 版本 3.4.0（2023年4月12日）
-* 今天已弃用两个websocket主题“Orderbook Snapshot（按组）”和“Orderbook Snapshot（按深度）”。
+* 今天已弃用两个websocket主题“订单簿快照（按组）”和“订单簿快照（按深度）”。
 请使用端点`wss://ws.btse.com/ws/oss/spot`获取订单簿数据的以下websocket主题
   - [订单簿增量更新](#bb4b2c51b6)
-  - [OSS L1 Snapshot（按组）](#oss-l1-snapshot-by-grouping)
+  - [OSS L1 快照（按组）](#oss-l1)
 
 ## 版本 3.3.9（2023年4月6日）
 
-* 添加[OSS L1 Snapshot（按组）](#oss-l1-snapshot-by-grouping)
+* 添加[OSS L1 快照（按组）](#oss-l1)
 
 ## 版本 3.3.8（2023年3月29日）
 
@@ -446,7 +446,7 @@ BTSE的速率限制如下:
 
 ### 响应内容
 
-返回一个包含在下表中描述的索引的二维array。
+返回一个包含在下表中描述的索引的二维数组。
 
 | 索引 | 类型   | 是否必须   | 描述             |
 | ---  | ---    | ---      | ---             |
@@ -493,7 +493,7 @@ BTSE的速率限制如下:
 | lastPrice  | double | Yes      | 最后成交价格      |
 | markPrice  | double | Yes      | 现货市场不适用    |
 
-## 订单簿（按分组）
+## 订单簿（按组）
 
 > 响应
 
@@ -961,7 +961,7 @@ BTSE的速率限制如下:
 | orderType        | integer | Yes      | 订单类型<br/>76: 限价单<br/>77: 市价单<br/>80: Peg/Algo订单                                                                                                                                                                                                                                 |
 | postOnly         | boolean | Yes      | 表示订单是否仅为发布订单                                                                                                                                                                                                                                                                       |
 | price            | double  | Yes      | 订单价格                                                                                                                                                                                                                                                                                     |
-| side             | string  | Yes      | 订单方向<br/>买入或卖出                                                                                                                                                                                                                                                                       |
+| side             | string  | Yes      | 订单方向<br/>BUY或SELL                                                                                                                                                                                                                                                                       |
 | size             | double  | Yes      | 订单尺寸                                                                                                                                                                                                                                                                                      |
 | status           | integer | Yes      | 订单状态<br/>2: 已插入订单<br/>4: 订单已完全成交<br/>5: 订单部分成交<br/>6: 订单已取消<br/>7: 订单已退款<br/>8: 余额不足<br/>9: 触发器已插入<br/>10: 触发器已激活<br/>15: 订单被拒绝<br/>16: 未找到订单<br/>17: 请求失败                                                                 |
 | stopPrice        | double  | Yes      | 停止价格                                                                                                                                                                                                                                                                                     |
@@ -1088,7 +1088,7 @@ BTSE的速率限制如下:
 | orderType          | integer     | Yes      | 订单类型 <br/>76: 限价订单<br/>77: 市价订单<br/>80: 挂单/算法订单                                                                                                                                                                                                                     |
 | postOnly           | boolean   | Yes      | 表示订单是否为只允许挂单                                                                                                                                                                                                                                                               |
 | price              | double   | Yes      | 订单价格                                                                                                                                                                                                                                                                                 |
-| side               | string   | Yes      | 订单方向<br/>买入或卖出                                                                                                                                                                                                                                                                  |
+| side               | string   | Yes      | 订单方向<br/>BUY或SELL                                                                                                                                                                                                                                                                  |
 | size               | double   | Yes      | 已取消的数量                                                                                                                                                                                                                                                                            |
 | status             | integer     | Yes      | 订单状态<br/>2: 订单已插入<br/>3: 订单已成交<br/>4: 订单已完全成交<br/>5: 订单已部分成交<br/>6: 订单已取消<br/>7: 订单已退款<br/>9: 触发已插入<br>10: 触发已激活<br>15: 订单已拒绝<br>16: 未找到订单<br>17: 请求失败 |
 | stopPrice          | double   | Yes      | 止损价格                                                                                                                                                                                                                                                                                  |
@@ -1183,7 +1183,7 @@ BTSE的速率限制如下:
 | orderType                  | integer   | Yes      | 订单类型 <br/>76: 限价订单<br/>77: 市价订单<br/>80: 挂单/算法订单                  |
 | price                      | double | Yes      | 订单价格                                                                               |
 | size                       | double | Yes      | 订单数量                                                                               |
-| side                       | string | Yes      | 订单方向<br/>`买入` 或 `卖出`                                                        |
+| side                       | string | Yes      | 订单方向<br/>`BUY` 或 `SELL`                                                        |
 | orderValue                 | double | Yes      | 该订单的总价值                                                                         |
 | filledSize                 | double | Yes      | 成交数量                                                                               |
 | pegPriceMin                | double | Yes      | 最小可能的挂单价格，优先于挂单价格偏差                                               |
@@ -1252,7 +1252,7 @@ BTSE的速率限制如下:
 | count         | integer    | No      | 要返回的记录数                                                                           |
 | clOrderID     | string  | No      | 使用自定义订单ID查询交易历史                                                           |
 | orderID       | string  | No      | 使用订单ID查询交易历史                                                                 |
-| isMatchSymbol | boolean  | No      | 精确匹配 `symbol`。如果设置为true，只匹配该标的物的记录                                |
+| isMatchSymbol | boolean  | No      | 精确匹配 `symbol`。如果设置为True，只匹配该标的物的记录                                |
 
 ### 响应内容
 
@@ -1562,7 +1562,7 @@ BTSE的速率限制如下:
   * 测试网络
      * `wss://testws.btse.io/ws/oss/spot`
 
-## OSS L1 快照（按分组）
+## OSS L1 快照（按组）
 
 > 请求
 
@@ -1761,7 +1761,7 @@ BTSE的速率限制如下:
 | asks       | Quote Object     | Yes      | 卖盘报价                                                                                            |
 | seqNum     | integer         | Yes      | 当前序列号                                                                                          |
 | prevSeqNum | integer         | Yes      | 前一个序列号                                                                                        |
-| type       | string       | Yes      | `snapshot` - 最多 50 层的订单簿快照<br/> `delta` -  订单簿的更新                           |
+| type       | string       | Yes      | `快照` - 最多 50 层的订单簿快照<br/> `delta` -  订单簿的更新                           |
 | timestamp  | long       | Yes      | 订单簿时间戳                                                                                        |
 | symbol     | string       | Yes      | 订单簿标识符                                                                                      |
 
@@ -1888,7 +1888,7 @@ pong
 | 名称      | 类型   | 是否必须     | 描述                   |
 | ---       | ---    | ---      | ---                   |
 | symbol    | string | Yes      | 市场符号               |
-| side      | string | Yes      | 交易方向，买入或卖出   |
+| side      | string | Yes      | 交易方向，BUY或SELL   |
 | size      | double | Yes      | 交易的数量             |
 | price     | double | Yes      | 交易价格               |
 | tradeId   | long | Yes      | 交易序列号             |
@@ -1981,7 +1981,7 @@ echo -n "/ws/spot1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6726
 
 ```
 
-通过订阅主题 `notificationApiV2` 来接收交易通知。WebSocket feed 将向订阅者推送交易级别的通知。如果在未经身份验证的情况下订阅主题，则不会发送任何消息。
+通过订阅主题 `notificationApiV2` 来接收交易通知。WebSocket订阅 将向订阅者推送交易级别的通知。如果在未经身份验证的情况下订阅主题，则不会发送任何消息。
 
 ### 响应内容
 
@@ -1989,7 +1989,7 @@ echo -n "/ws/spot1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6726
 | ---               | ---     | ---      | ---                                                         |
 | symbol            | string  | Yes      | 市场符号                                                     |
 | orderID           | string  | Yes      | 内部订单ID                                                 |
-| side              | string  | Yes      | 交易方向，买入或卖出                                     |
+| side              | string  | Yes      | 交易方向，BUY或SELL                                     |
 | type              | integer    | Yes      | 订单类型。有效值为：<br/>76: 限价单<br/>77: 市价单<br/>80: 挂单/算法单  |
 | price             | double  | Yes      | 订单价格或交易价格                                       |
 | size              | double  | Yes      | 订单大小或成交大小                                       |
@@ -2058,7 +2058,7 @@ echo -n "/ws/spot1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6726
 | serialId    | string  | Yes      | 交易序列ID                                                                                |
 | tradeId     | string  | Yes      | 交易的唯一标识符                                                                           |
 | type        | integer    | Yes      | 订单类型。有效值为：<br/>76: 限价单<br/>77: 市价单<br/>80: 挂单/算法单                |
-| side        | string  | Yes      | 交易方向，买入或卖出                                                                      |
+| side        | string  | Yes      | 交易方向，BUY或SELL                                                                      |
 | price       | double  | Yes      | 成交价格                                                                                    |
 | size        | double  | Yes      | 成交数量                                                                                    |
 | feeAmount   | double  | Yes      | 手续费金额                                                                                  |
