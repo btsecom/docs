@@ -62,14 +62,14 @@ headingLevel: 2
 * 为websocket流添加[`Ping/Pong`](#ping-pong)
 
 ## 版本 3.4.0（2023年4月12日）
-* 今天已弃用两个websocket主题“订单簿快照（按组）”和“订单簿快照（按深度）”。
+* 今天已弃用两个websocket主题“订单簿快照（按分组）”和“订单簿快照（按深度）”。
 请使用端点`wss://ws.btse.com/ws/oss/spot`获取订单簿数据的以下websocket主题
   - [订单簿增量更新](#bb4b2c51b6)
-  - [OSS L1 快照（按组）](#oss-l1)
+  - [OSS L1 快照（按分组）](#oss-l1)
 
 ## 版本 3.3.9（2023年4月6日）
 
-* 添加[OSS L1 快照（按组）](#oss-l1)
+* 添加[OSS L1 快照（按分组）](#oss-l1)
 
 ## 版本 3.3.8（2023年3月29日）
 
@@ -493,7 +493,7 @@ BTSE的速率限制如下:
 | lastPrice  | double | Yes      | 最后成交价格      |
 | markPrice  | double | Yes      | 现货市场不适用    |
 
-## 订单簿（按组）
+## 订单簿（按分组）
 
 > 响应
 
@@ -1562,7 +1562,7 @@ BTSE的速率限制如下:
   * 测试网络
      * `wss://testws.btse.io/ws/oss/spot`
 
-## OSS L1 快照（按组）
+## OSS L1 快照（按分组）
 
 > 请求
 
