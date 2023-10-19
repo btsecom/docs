@@ -1761,7 +1761,7 @@ BTSE的速率限制如下:
 | asks       | Quote Object     | Yes      | 卖盘报价                                                                                            |
 | seqNum     | integer         | Yes      | 当前序列号                                                                                          |
 | prevSeqNum | integer         | Yes      | 前一个序列号                                                                                        |
-| type       | string       | Yes      | `快照` - 最多 50 层的订单簿快照<br/> `delta` -  订单簿的更新                           |
+| type       | string       | Yes      | `snapshot` - 最多 50 层的订单簿快照<br/> `delta` -  订单簿的更新                           |
 | timestamp  | long       | Yes      | 订单簿时间戳                                                                                        |
 | symbol     | string       | Yes      | 订单簿标识符                                                                                      |
 
