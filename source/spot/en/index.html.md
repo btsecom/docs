@@ -357,7 +357,9 @@ When connecting up the BTSE API, you will come across number codes that represen
     "minRiskLimit": 0,
     "maxRiskLimit": 0,
     "availableSettlement": null,
-    "futures": false
+    "futures": false,
+    "isMarketOpenToOtc": false,
+    "isMarketOpenToSpot": true
   }
 ]
 ```
@@ -433,7 +435,8 @@ Gets market summary information. If no symbol parameter is sent, then all market
     36466,
     36466,
     2370.8095
-  ],
+  ]
+]
 ```
 
 `GET /api/v3.2/ohlcv`
