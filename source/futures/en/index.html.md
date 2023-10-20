@@ -1932,9 +1932,9 @@ Bint TP/SL with an existing position
 | ---                | ---     | ---      | --- 
 | symbol             | string  | yes       | Market symbol
 | side               | string  | yes       | "BUY" or "SELL" for TP/SL order
-| takeProfitPrice    | double  | No        | Mandatory when creating new order with take profit order. Indicates the trigger price. Must set takeProfitPrice   or stopLossPrice at least when using this API.
-| takeProfitTrigger  | string  | No        | For creating order with take profit order. Valid options: `markPrice` (default) or `lastPrice`
-| stopLossPrice      | double  | No        | Mandatory when creating new order with stop loss order. Indicates the trigger price       
+| takeProfitPrice    | double  | No        | Mandatory when creating new order with take profit order. Indicates the trigger price. Must set takeProfitPrice or stopLossPrice at least when using this API. |
+| takeProfitTrigger  | string  | No        | For creating order with take profit order. Valid options: `markPrice` (default) or `lastPrice` |
+| stopLossPrice      | double  | No        | Mandatory when creating new order with stop loss order. Indicates the trigger price        |
 | stopLossTrigger     | string | No       | For creating order with stop loss order. Valid options: `markPrice` (default) or `lastPrice`|
 
 ### Response Content
