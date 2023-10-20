@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-3-4-7-20th-october-2023" class="toc-h2 toc-link" data-title="Version 3.4.7 (20th October 2023)">Version 3.4.7 (20th October 2023)</a>
+                  </li>
+                  <li>
                     <a href="#version-3-4-6-18th-sep-2023" class="toc-h2 toc-link" data-title="Version 3.4.6 (18th Sep 2023)">Version 3.4.6 (18th Sep 2023)</a>
                   </li>
                   <li>
@@ -461,7 +464,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-3-4-6-18th-sep-2023'>Version 3.4.6 (18th Sep 2023)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-3-4-7-20th-october-2023'>Version 3.4.7 (20th October 2023)</h2>
+<ul>
+<li>Add two new response field <code>isMarketOpenToOtc</code>, <code>isMarketOpenToSpot</code> in <a href="#market-summary">Market Summary</a></li>
+</ul>
+<h2 id='version-3-4-6-18th-sep-2023'>Version 3.4.6 (18th Sep 2023)</h2>
 <ul>
 <li>Correct the data types of parameters in order related APIs and remove 451 status code</li>
 </ul>
@@ -1079,6 +1086,18 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>boolean</td>
 <td>Yes</td>
 <td>Indicator if symbol is a futures contract</td>
+</tr>
+<tr>
+<td>isMarketOpenToOtc</td>
+<td>boolean</td>
+<td>Yes</td>
+<td>Indicator if market is open to otc</td>
+</tr>
+<tr>
+<td>isMarketOpenToSpot</td>
+<td>boolean</td>
+<td>Yes</td>
+<td>Indicator if market is open to spot</td>
 </tr>
 </tbody></table>
 <h2 id='charting-data'>Charting Data</h2>
