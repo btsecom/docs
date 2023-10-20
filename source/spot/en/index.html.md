@@ -13,7 +13,7 @@ headingLevel: 2
 
 # Change Log
 
-## Version 3.4.7 (15th February 2023)
+## Version 3.4.7 (20th October 2023)
 
 * Add two new response field `isMarketOpenToOtc`, `isMarketOpenToSpot` in [Market Summary](#market-summary)
 
