@@ -357,7 +357,9 @@ BTSE的速率限制如下:
     "minRiskLimit": 0,
     "maxRiskLimit": 0,
     "availableSettlement": null,
-    "futures": false
+    "futures": false,
+    "isMarketOpenToOtc": false,
+    "isMarketOpenToSpot": true
   }
 ]
 ```
