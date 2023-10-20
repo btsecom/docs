@@ -13,6 +13,10 @@ headingLevel: 2
 
 # Change Log
 
+## Version 3.4.7 (20th October 2023)
+
+* Add two new response field `isMarketOpenToOtc`, `isMarketOpenToSpot` in [Market Summary](#market-summary)
+
 ## Version 3.4.6 (18th Sep 2023)
 
 * Correct the data types of parameters in order related APIs and remove 451 status code
@@ -405,6 +409,8 @@ Gets market summary information. If no symbol parameter is sent, then all market
 | maxRiskLimit        | double   | No         | Not valid for spot                                          |
 | availableSettlement | array    | No         | Not valid for spot                                          |
 | futures             | boolean  | Yes        | Indicator if symbol is a futures contract                   |
+| isMarketOpenToOtc   | boolean  | Yes        | Indicator if market is open to otc                          |
+| isMarketOpenToSpot  | boolean  | Yes        | Indicator if market is open to spot                         |
 
 ## Charting Data
 
