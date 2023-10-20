@@ -545,7 +545,8 @@ BTSE 的速率限制如下：
     36466,
     36466,
     2370.8095
-  ],
+  ]
+]
 ```
 
 `GET /api/v2.1/ohlcv`
@@ -833,8 +834,8 @@ BTSE 的速率限制如下：
 }
 ```
 > 请求 (创建`限价`订单并设置`止盈/止损（TP/SL）`)
+
 ```json
-// Place Order with TP and SL
 {
     "symbol": "BTC-PERP",
     "size": 10,
@@ -846,8 +847,10 @@ BTSE 的速率限制如下：
     "stopLossPrice": 27000,
     "stopLossTrigger": "lastPrice"
 }
+```
+> 请求（仅使用`TP`创建`限价`订单）
 
-// Place Order with TP only
+```json
 {
     "symbol": "BTC-PERP",
     "size": 10,
@@ -857,8 +860,11 @@ BTSE 的速率限制如下：
     "takeProfitPrice": 31000,
     "takeProfitTrigger": "markPrice"
 }
+```
 
-// Place Order with SL only
+> 请求（仅使用`SL`创建`限价`订单）
+
+```json
 {
     "symbol": "BTC-PERP",
     "size": 10,
@@ -1398,9 +1404,9 @@ BTSE 的速率限制如下：
 | averageFillPrice             | double  | Yes      | 平均成交价                                                                             |
 | stealth                      | double  | Yes      | 订单的隐身值                                                                           |
 | orderState                   | string  | Yes      | `STATUS_ACTIVE`, `STATUS_INACTIVE`                                                     |
-| takeProfitOrder    | TakeProfitOrder对象  | No | 止盈订单信息
-| stopLossOrder      | StopLossOrder对象    | No | 止损订单信息
-| closeOrder         | bool                | Yes | 是否为关闭此持仓的订单
+| takeProfitOrder    | TakeProfitOrder对象  | No | 止盈订单信息 |
+| stopLossOrder      | StopLossOrder对象    | No | 止损订单信息 |
+| closeOrder         | bool                | Yes | 是否为关闭此持仓的订单 |
 
 ## 查询成交记录
 
@@ -1565,8 +1571,8 @@ BTSE 的速率限制如下：
 | liquidationInProgress  | boolean | Yes      | 指示是否正在进行清算                                                                               |
 | currentLeverage        | double  | Yes      | 当前杠杆                                                                                           |
 | timestamp              | long    | Yes      | 查询仓位时的时间戳                                                                                 |
-| takeProfitOrder  | TakeProfitOrder对象 | No | 止盈订单信息
-| stopLossOrder    | StopLossOrder对象   | No | 止损订单信息
+| takeProfitOrder  | TakeProfitOrder对象 | No | 止盈订单信息 |
+| stopLossOrder    | StopLossOrder对象   | No | 止损订单信息 |
 
 
 ## 平仓仓位
@@ -1874,6 +1880,7 @@ BTSE 的速率限制如下：
 
 ## 绑定止盈/止损
 > 请求
+
 ```json
 {
     "symbol": "BTC-PERP",
@@ -1921,39 +1928,39 @@ BTSE 的速率限制如下：
 
 **请求参数**
 
-| 名称               | 类型    | 是否必需 | 描述
-| ---                | ---     | ---      | --- 
-| symbol             | string  | Yes       | 市场交易对
-| side               | string  | Yes       | "BUY" 或 "SELL" 用于止盈/止损订单
-| takeProfitPrice    | double  | No       | 创建带有止盈订单时强制执行。指示触发价格。在使用此API时，必须至少设置`takeProfitPrice`或`stopLossPrice`。
-| takeProfitTrigger  | string  | No       | 用于创建带有止盈订单的选项。有效选项：`标记价格`（默认）或`最新价格`
-| stopLossPrice      | double  | No       | 创建带有止损订单时强制执行。指示触发价格       
-| stopLossTrigger     | string  | No       | 用于创建带有止损订单的选项。有效选项：`标记价格`（默认）或`最新价格`
+| 名称               | 类型    | 是否必需 | 描述 |
+| ---                | ---     | ---      | --- |
+| symbol             | string  | Yes       | 市场交易对 |
+| side               | string  | Yes       | "BUY" 或 "SELL" 用于止盈/止损订单 |
+| takeProfitPrice    | double  | No       | 创建带有止盈订单时强制执行。指示触发价格。在使用此API时，必须至少设置`takeProfitPrice`或`stopLossPrice`。 |
+| takeProfitTrigger  | string  | No       | 用于创建带有止盈订单的选项。有效选项：`标记价格`（默认）或`最新价格` |
+| stopLossPrice      | double  | No       | 创建带有止损订单时强制执行。指示触发价格 |
+| stopLossTrigger     | string  | No       | 用于创建带有止损订单的选项。有效选项：`标记价格`（默认）或`最新价格` |
 
 **响应内容**
 
-| 名称          | 类型    | 是否必需 | 描述
-| ---           | ---     | ---      | ---
-| symbol        | string  | Yes       | 市场交易对
-| clOrderID     | string  | Yes       | 交易员发送的客户标签
-| fillSize      | number  | Yes       | 成交的交易量 
-| orderID       | string  | Yes       | 订单ID 
-| orderType     | string  | Yes       | 订单类型 <br/>76: 限价订单<br/>77: 市价订单<br/>80: 算法订单
-| postOnly      | boolean  | Yes       | 指示订单是否为仅限发布订单 
-| price         | double  | Yes       | 订单价格 
-| side          | string  | Yes       | 订单方向<br/>BUY 或 SELL
-| size          | long  | Yes       | 以"合约大小"为单位的订单大小（即使在风险限制调整后，此值也保持不变） 
+| 名称          | 类型    | 是否必需 | 描述 |
+| ---           | ---     | ---      | --- |
+| symbol        | string  | Yes       | 市场交易对 |
+| clOrderID     | string  | Yes       | 交易员发送的客户标签 |
+| fillSize      | number  | Yes       | 成交的交易量 |
+| orderID       | string  | Yes       | 订单ID |
+| orderType     | string  | Yes       | 订单类型 <br/>76: 限价订单<br/>77: 市价订单<br/>80: 算法订单 |
+| postOnly      | boolean  | Yes       | 指示订单是否为仅限发布订单  |
+| price         | double  | Yes       | 订单价格 |
+| side          | string  | Yes       | 订单方向<br/>BUY 或 SELL |
+| size          | long  | Yes       | 以"合约大小"为单位的订单大小（即使在风险限制调整后，此值也保持不变）|
 | status        | long  | Yes       | 订单状态<br/>2: 订单已插入<br/>3: 订单已成交<br/>4: 订单已完全成交<br/>5: 订单部分成交<br/>6: 订单已取消<br/>7: 订单已退款<br/>9: 触发已插入<br>10: 触发已激活<br>15: 订单已拒绝<br>16: 未找到订单<br>17: 请求失败 |
-| time_in_force | string  | Yes       | 订单有效期
-| timestamp     | long  | Yes       | 订单时间戳 
-| trigger       | boolean  | Yes       | 指示订单是否为触发订单 
-| triggerPrice  | double  | Yes       | 订单触发价格，如果订单不是触发订单，则返回0
-| avgFillPrice  | double  | Yes       | 平均成交价格。对于部分成交订单，返回平均成交价格
-| message       | string  | Yes       | 交易消息 
-| stealth       | string  | Yes       | 仅适用于算法订单
-| deviation     | double  | Yes       | 仅适用于算法订单
-| remainingSize | double  | Yes       | 剩余待成交的大小
-| originalSize  | double  | Yes       | 原始订单大小   
+| time_in_force | string  | Yes       | 订单有效期 |
+| timestamp     | long  | Yes       | 订单时间戳  |
+| trigger       | boolean  | Yes       | 指示订单是否为触发订单 |
+| triggerPrice  | double  | Yes       | 订单触发价格，如果订单不是触发订单，则返回0 |
+| avgFillPrice  | double  | Yes       | 平均成交价格。对于部分成交订单，返回平均成交价格 |
+| message       | string  | Yes       | 交易消息  |
+| stealth       | string  | Yes       | 仅适用于算法订单 |
+| deviation     | double  | Yes       | 仅适用于算法订单 |
+| remainingSize | double  | Yes       | 剩余待成交的大小 |
+| originalSize  | double  | Yes       | 原始订单大小    |
 
 # 钱包端点
 
@@ -2955,7 +2962,7 @@ echo -n "/ws/futures1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6
 | currentLeverage         | double  | Yes      |                                                    |
 | avgFillPrice            | double  | Yes      |                                                    |
 | settleWithNonUSDAsset   | string  | Yes      |                                                    |
-| takeProfitOrder | TakeProfitOrder对象 | No | 止盈订单信息
-| stopLossOrder | StopLossOrder对象 | No | 止损订单信息
+| takeProfitOrder | TakeProfitOrder对象 | No | 止盈订单信息                                            |
+| stopLossOrder | StopLossOrder对象 | No | 止损订单信息                                                |
 
 </section>
