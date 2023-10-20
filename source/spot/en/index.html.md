@@ -433,7 +433,8 @@ Gets market summary information. If no symbol parameter is sent, then all market
     36466,
     36466,
     2370.8095
-  ],
+  ]
+]
 ```
 
 `GET /api/v3.2/ohlcv`

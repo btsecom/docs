@@ -15,7 +15,7 @@ headingLevel: 2
 
 ## Version 2.6.11 (16th October 2023)
 * Add TP/SL (Take Profit/Stop Loss) parameters in [Create New Order](#create-new-order)
-* Add API [Bind TP/SL](#bind-tpsl) in Trade Endpoints to bind TP/SL with an existing position
+* Add API [Bind TP/SL](#bind-tp/sl) in Trade Endpoints to bind TP/SL with an existing position
 * Add TP/SL fields in Trade Endpoints [Query Open Orders](#query-open-orders) and [Query Positions](#query-position) 
 * Add TP/SL fields in Websocket Streams [All Position](#all-position)
 
@@ -545,7 +545,8 @@ Gets market summary information. If no symbol parameter is sent, then all market
     36466,
     36466,
     2370.8095
-  ],
+  ]
+]
 ```
 
 `GET /api/v2.1/ohlcv`
@@ -833,8 +834,8 @@ Get trade fills for the market specified by `symbol`
 }
 ```
 > Request (create `Limit` order with `TP/SL`)
+
 ```json
-// Place Order with TP and SL
 {
     "symbol": "BTC-PERP",
     "size": 10,
@@ -846,8 +847,10 @@ Get trade fills for the market specified by `symbol`
     "stopLossPrice": 27000,
     "stopLossTrigger": "lastPrice"
 }
+```
+> Request (create `Limit` order with `TP` only)
 
-// Place Order with TP only
+```json
 {
     "symbol": "BTC-PERP",
     "size": 10,
@@ -857,8 +860,11 @@ Get trade fills for the market specified by `symbol`
     "takeProfitPrice": 31000,
     "takeProfitTrigger": "markPrice"
 }
+```
 
-// Place Order with SL only
+> Request (create `Limit` order with `SL` only)
+
+```json
 {
     "symbol": "BTC-PERP",
     "size": 10,
@@ -1398,9 +1404,9 @@ Retrieves open orders that have not yet been matched or matched recently.
 | averageFillPrice             | double | Yes      | Average fill price                                                                     |
 | stealth                      | double | Yes      | Stealth value of order                                                                 |
 | orderState                   | string | Yes      | `STATUS_ACTIVE`, `STATUS_INACTIVE`                                                     |
-| takeProfitOrder              | TakeProfitOrder object | No | Take profit order info
-| stopLossOrder                | StopLossOrder object   | No | Stop loss order info
-| closeOrder                   | bool   | Yes      | Whether it is an order to close this position
+| takeProfitOrder              | TakeProfitOrder object | No | Take profit order info |
+| stopLossOrder                | StopLossOrder object   | No | Stop loss order info |
+| closeOrder                   | bool   | Yes      | Whether it is an order to close this position |
 
 ## Query Trades Fills
 
@@ -1565,8 +1571,8 @@ Queries user's current position. When no symbol is specified, positions for all 
 | liquidationInProgress  | boolean | Yes      | Indicator if liquidation is in progress                                     |
 | currentLeverage        | double  | Yes      | Current leverage                                                            |
 | timestamp              | long    | Yes      | Timestamp when position was queried                                         |
-| takeProfitOrder        | TakeProfitOrder object | No | Take profit order info
-| stopLossOrder          | StopLossOrder object   | No | Stop loss order info
+| takeProfitOrder        | TakeProfitOrder object | No | Take profit order info |
+| stopLossOrder          | StopLossOrder object   | No | Stop loss order info |
 
 
 ## Close Position
@@ -1874,6 +1880,7 @@ Retrieve user's trading fees
 
 ## Bind TP/SL
 > Request
+
 ```json
 {
     "symbol": "BTC-PERP",
@@ -1925,35 +1932,35 @@ Bint TP/SL with an existing position
 | ---                | ---     | ---      | --- 
 | symbol             | string  | yes       | Market symbol
 | side               | string  | yes       | "BUY" or "SELL" for TP/SL order
-| takeProfitPrice    | double  | No        | Mandatory when creating new order with take profit order. Indicates the trigger price. Must set takeProfitPrice   or stopLossPrice at least when using this API.
-| takeProfitTrigger  | string  | No        | For creating order with take profit order. Valid options: `markPrice` (default) or `lastPrice`
-| stopLossPrice      | double  | No        | Mandatory when creating new order with stop loss order. Indicates the trigger price       
+| takeProfitPrice    | double  | No        | Mandatory when creating new order with take profit order. Indicates the trigger price. Must set takeProfitPrice or stopLossPrice at least when using this API. |
+| takeProfitTrigger  | string  | No        | For creating order with take profit order. Valid options: `markPrice` (default) or `lastPrice` |
+| stopLossPrice      | double  | No        | Mandatory when creating new order with stop loss order. Indicates the trigger price        |
 | stopLossTrigger     | string | No       | For creating order with stop loss order. Valid options: `markPrice` (default) or `lastPrice`|
 
 ### Response Content
 
-| Name          | Type    | Required | Description
-| ---           | ---     | ---      | ---
-| symbol        | string  | Yes      | Market symbol
-| clOrderID     | string  | Yes      | Customer tag sent in by trader
-| fillSize      | number  | Yes      | Trade filled size 
-| orderID       | string  | Yes      | Order ID 
-| orderType     | string  | Yes      | Order type <br/>76: Limit Order<br/>77: Market order<br/>80: Algo order
-| postOnly      | boolean | Yes      | Indicates if order is a post only order 
-| price         | double  | Yes      | Order price 
-| side          | string  | Yes      | Order side<br/>BUY or SELL
-| size          | long    | Yes      | Order size in `contract size` (this remains unchanged even after risk limit adjustment) 
+| Name          | Type    | Required | Description |
+| ---           | ---     | ---      | --- |
+| symbol        | string  | Yes      | Market symbol |
+| clOrderID     | string  | Yes      | Customer tag sent in by trader |
+| fillSize      | number  | Yes      | Trade filled size |
+| orderID       | string  | Yes      | Order ID |
+| orderType     | string  | Yes      | Order type <br/>76: Limit Order<br/>77: Market order<br/>80: Algo order |
+| postOnly      | boolean | Yes      | Indicates if order is a post only order |
+| price         | double  | Yes      | Order price |
+| side          | string  | Yes      | Order side<br/>BUY or SELL |
+| size          | long    | Yes      | Order size in `contract size` (this remains unchanged even after risk limit adjustment) |
 | status        | long    | Yes      | Order status<br/>	2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed |
-| time_in_force | string  | Yes      | Order validity
-| timestamp     | long    | Yes      | Order timestamp 
-| trigger       | boolean | Yes      | Indicator if order is a trigger order 
-| triggerPrice  | double  | Yes      | Order trigger price, returns 0 if order is not a trigger order
-| avgFillPrice  | double  | Yes      | Average filled price. Returns the average filled price for partially transacted orders
-| message       | string  | Yes      | Trade messages 
-| stealth       | string  | Yes      | Only valid for Algo orders
-| deviation     | double  | Yes      | Only valid for Algo
-| remainingSize | double  | Yes      | Size left to be transacted
-| originalSize  | double  | Yes      | Original order size     
+| time_in_force | string  | Yes      | Order validity |
+| timestamp     | long    | Yes      | Order timestamp |
+| trigger       | boolean | Yes      | Indicator if order is a trigger order |
+| triggerPrice  | double  | Yes      | Order trigger price, returns 0 if order is not a trigger order |
+| avgFillPrice  | double  | Yes      | Average filled price. Returns the average filled price for partially transacted orders |
+| message       | string  | Yes      | Trade messages |
+| stealth       | string  | Yes      | Only valid for Algo orders |
+| deviation     | double  | Yes      | Only valid for Algo |
+| remainingSize | double  | Yes      | Size left to be transacted |
+| originalSize  | double  | Yes      | Original order size |
 
 # Wallet Endpoints
 
@@ -2955,7 +2962,7 @@ All futures positions will be pushed periodically via this topic.
 | currentLeverage         | double  | Yes      |                                              |
 | avgFillPrice            | double  | Yes      |                                              |
 | settleWithNonUSDAsset   | string  | Yes      |                                              |
-| takeProfitOrder        | TakeProfitOrder object | No | Take profit order info
-| stopLossOrder          | StopLossOrder object   | No | Stop loss order info
+| takeProfitOrder        | TakeProfitOrder object | No | Take profit order info               |
+| stopLossOrder          | StopLossOrder object   | No | Stop loss order info                 |
 
 </section>
