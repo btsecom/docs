@@ -1,23 +1,94 @@
 ---
 title: BTSE API Documentation
 language_tabs:
-- json
-  toc_footers: []
-  includes: []
-  search: true
-  highlight_theme: darkula
-  code_clipboard: true
-  headingLevel: 2
+  - json
+toc_footers: []
+includes: []
+search: true
+highlight_theme: darkula
+code_clipboard: true
+headingLevel: 2
 
 ---
 
 # Change Log
 
-## Version 3.3.7 (15th February 2023)
+## Version 3.4.7 (15th February 2023)
 
 * Add two new response field `isMarketOpenToOtc`, `isMarketOpenToSpot` in [Market Summary](#market-summary)
 
-## Version 3.3.5 (28th Novement 2022)
+## Version 3.4.6 (18th Sep 2023)
+
+* Correct the data types of parameters in order related APIs and remove 451 status code
+
+## Version 3.4.5 (3rd September 2023)
+* Remove the slide parameter from [`amend-order`](#amend-order)
+
+## Version 3.4.4 (29th Aug 2023)
+
+* Add 451 status code in [`API Status Codes`](#api-status-codes) and make [`Order Book Websocket Streams`](#order-book-websocket-streams) as independent paragraph
+
+## Version 3.4.3 (17th Aug 2023)
+* Update [`Notifications`](#notifications) response data format from array to object.
+
+## Version 3.4.2 (29th May 2023)
+* Update the error message format of Orderbook Stream Service(OSS). The scheduled effective date is `June 6, 2023, at 10:00 AM (UTC+0)`.
+  * Before
+    ```
+    {
+        "severity": "ERROR",
+        "error": [
+            {
+                "arg": "update:BTCC-USD_0",
+                "errorCode": "MARKET_PAIR_NOT_SUPPORT"
+            }
+        ]
+    }
+    ```
+  * After
+    ```
+    {
+        "severity": "ERROR",
+        "errors": [
+            {
+                "arg": "update:BTCC-USD_0",
+                "error": {
+                    "code": 1000,
+                    "message": "Market pair provided is currently not supported."
+                }
+            }
+        ]
+    }
+    ```
+
+## Version 3.4.1 (17th May 2023)
+
+* Add [`Ping/Pong`](#ping-pong) for websocket streams
+
+## Version 3.4.0 (12th April 2023)
+* Deprecated two websokcet topics `Orderbook Snapshot (By grouping)` and `Orderbook Snapshot (By depth)` today.
+Please use the following websokcet topic through the endpoint `wss://ws.btse.com/ws/oss/spot` to get orderbook data
+  - [Orderbook Incremental Updates](#orderbook-incremental-updates)
+  - [OSS L1 Snapshot (By grouping)](#oss-l1-snapshot-by-grouping)
+
+## Version 3.3.9 (6th April 2023)
+
+* Add [OSS L1 Snapshot (By grouping)](#oss-l1-snapshot-by-grouping)
+
+## Version 3.3.8 (29th March 2023)
+
+* Update the http status code for authentication failed to `401`
+
+## Version 3.3.7 (1th March 2023)
+
+* update the format of args for [Orderbook incremental update](#orderbook-incremental-updates).
+
+## Version 3.3.6 (7th February 2023)
+
+* Update `symbol` parameter as optional in `open_orders`
+* Add funding fee data in [Query User Trades Fills](#query-user-trades-fills).
+
+## Version 3.3.5 (28th November 2022)
 
 * Add [Orderbook incremental update](#orderbook-incremental-updates) error messages.
 
@@ -117,31 +188,29 @@ You will need to create an API key on the BTSE platform before you can use authe
 
 * Production
   * HTTP
-    * `https://api.btse.com/spot`
-    * `https://aws-api.btse.com/spot` (Optimised for connection via AWS, enabled by request)
+     * `https://api.btse.com/spot`
   * Websocket
-    * `wss://ws.btse.com/ws/spot`
-    * `wss://aws-ws.btse.com/ws/spot` (Optimised for connection via AWS, enabled by request)
+     * `wss://ws.btse.com/ws/spot`
   * Websocket (for orderbook stream)
-    * `wss://ws.btse.com/ws/oss/spot` (Used for Orderbook incremental update stream)
+     * `wss://ws.btse.com/ws/oss/spot` (Used for Orderbook incremental update stream)
 * Testnet
   * HTTP
-    * `https://testapi.btse.io/spot`
+     * `https://testapi.btse.io/spot`
   * Websocket
-    * `wss://testws.btse.io/ws/spot`
+     * `wss://testws.btse.io/ws/spot`
   * Websocket (for orderbook stream)
-    * `wss://testws.btse.io/ws/oss/spot` (Used for Orderbook incremental update stream)
+     * `wss://testws.btse.io/ws/oss/spot` (Used for Orderbook incremental update stream)
 
 ## Authentication
 
-* API Key (btse-api)
-  * Parameter Name: `btse-api`, in: header. API key is obtained from BTSE platform as a string
+* API Key (request-api)
+  * Parameter Name: `request-api`, in: header. API key is obtained from BTSE platform as a string
 
-* API Key (btse-nonce)
-  * Parameter Name: `btse-nonce`, in: header. Representation of current timestamp in long format
+* API Key (request-nonce)
+  * Parameter Name: `request-nonce`, in: header. Representation of current timestamp in long format
 
-* API Key (btse-sign)
-  * Parameter Name: `btse-sign`, in: header. A composite signature produced based on the following algorithm: Signature=HMAC.Sha384 (secretkey, (urlpath + btse-nonce + bodyStr)) (note: bodyStr = '' when no data):
+* API Key (request-sign)
+  * Parameter Name: `request-sign`, in: header. A composite signature produced based on the following algorithm: Signature=HMAC.Sha384 (secretkey, (urlpath + request-nonce + bodyStr)) (note: bodyStr = '' when no data):
 
 ### Example 1: Place an order
 
@@ -154,14 +223,14 @@ $ echo -n "/api/v3.2/order1624985375123{\"postOnly\":false,\"price\":8500.0,\"si
 
 * Endpoint to place an order is `https://api.btse.com/spot/api/v3.2/order`
 * Assume we have the values as follows:
-  * btse-nonce: `1624985375123`
-  * btse-api: `4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x`
+  * request-nonce: `1624985375123`
+  * request-api: `4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x`
   * secret: `848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx`
   * Path: `/api/v3.2/order`
   * Body: `{"postOnly":false,"price":8500.0,"side":"BUY","size":0.002,"stopPrice":0.0,"symbol":"BTC-USD","time_in_force":"GTC","trailValue":0.0,"triggerPrice":0.0,"txType":"LIMIT","type":"LIMIT"}`
   * Encrypted Text: `/api/v3.2/order1624985375123{"postOnly":false,"price":8500.0,"side":"BUY","size":0.002,"stopPrice":0.0,"symbol":"BTC-USD","time_in_force":"GTC","trailValue":0.0,"triggerPrice":0.0,"txType":"LIMIT","type":"LIMIT"}`
 * Generated signature will be:
-  * btse-sign: `e9cd0babdf497b536d1e48bc9cf1fadad3426b36406b5747d77ae4e3cdc9ab556863f2d0cf78e0228c39a064ad43afb7`
+  * request-sign: `e9cd0babdf497b536d1e48bc9cf1fadad3426b36406b5747d77ae4e3cdc9ab556863f2d0cf78e0228c39a064ad43afb7`
 
 ## Rate Limits
 
@@ -206,26 +275,45 @@ When connecting up the BTSE API, you will come across number codes that represen
 * 8: INSUFFICIENT_BALANCE = Insufficient balance in account
 * 9: TRIGGER_INSERTED = Trigger Order is inserted successfully
 * 10: TRIGGER_ACTIVATED = Trigger Order is activated successfully
+* 11: ERROR_INVALID_CURRENCY
 * 12: ERROR_UPDATE_RISK_LIMIT = Error in updating risk limit
+* 13: ERROR_INVALID_LEVERAGE
 * 15: ORDER_REJECTED = Order is rejected
 * 16: ORDER_NOTFOUND = Order is not found with the order ID or clOrderID provided
 * 17: REQUEST_FAILED = Failed to complete the request, please check order status
 * 20: SUCCESS = Action succeeded.
+* 21: FREEZE_SUCCESSFUL
 * 27: TRANSFER_SUCCESSFUL = Transfer funds between futures and spot is successful
 * 28: TRANSFER_UNSUCCESSFUL = Transfer funds between spot and futures is unsuccessful
+* 29: QUERY_GET_ORDERS
+* 31: QUERY_GET_POSITIONS
+* 33: QUERY_GET_ALL_POSITIONS_ORDERS
+* 34: QUERY_WALLET
+* 36: QUERY_FUTURES_MARGIN
 * 41: ERROR_INVALID_RISK_LIMIT = Invalid risk limit was specified
+* 51: QUERY_GET_ORDERS_WITH_LIMIT
 * 64: STATUS_LIQUIDATION = Account is undergoing liquidation
 * 65: STATUS_ACITVE = Order is active
+* 66: MODE_BUY
 * 76: ORDER_TYPE_LIMIT = Limit order
 * 77: ORDER_TYPE_MARKET = Market order
 * 80: ORDER_TYPE_PEG = Peg/Algo order
 * 81: ORDER_TYPE_OTC = Otc order
+* 83: MODE_SELL
 * 85: STATUS_PROCESSING = Order is inactive
 * 88: STATUS_INACTIVE = Order is inactive
 * 101: FUTURES_ORDER_PRICE_OUTSIDE_LIQUIDATION_PRICE = Futures order is outside of liquidation price
+* 110: FUTURES_FUNDING
 * 123: AMEND_ORDER = Order amended
+* 124: UNFREEZE_SUCCESSFUL
+* 300: ERROR_MAX_ORDER_SIZE_EXCEEDED
+* 301: ERROR_INVALID_ORDER_SIZE
+* 302: ERROR_INVALID_ORDER_PRICE
+* 303: ERROR_RATE_LIMITS_EXCEEDED
+* 304: ERROR_MAX_OPEN_ORDER_EXCEEDED
 * 1003: ORDER_LIQUIDATION = Order is undergoing liquidation
 * 1004: ORDER_ADL = Order is undergoing ADL
+* 30410: BLOCK_TRADE_COMPLETE_SUCCESS
 
 
 # Public Endpoints
@@ -440,12 +528,12 @@ Retrieves a Level 2 snapshot of the orderbook and allows you to specify grouping
 
 ### Request Parameters
 
-| Name       | Type    | Required | Description                                                                                                                                                  |
-| ---        | ---     | ---      | ---                                                                                                                                                          |
-| symbol     | string  | Yes      | Market symbol                                                                                                                                                |
-| group      | integer | No       | Orderbook grouping. Valid values are: <br/>0-8 where 0 indicates level 0 grouping (eg. for BTC, it will be 0.5)<br/>Level 1 grouping for BTC would be 1<br/> |
-| limit_bids | integer | No       | Orderbook depth on the bid side                                                                                                                              |
-| limit_asks | integer | No       | Orderbook depth on the ask side                                                                                                                              |
+| Name       | Type    | Required | Description                                                                                                                                                                                             |
+| ---        | ---     | ---      |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| symbol     | string  | Yes      | Market symbol                                                                                                                                                                                           |
+| group      | integer | No       | Orderbook grouping. Valid values are: <br/>0-8 where 0 indicates level 0 grouping (eg. for BTC, it will be 0.1)<br/>Level 1 grouping for BTC would be 0.5<br/>Level 1 grouping for BTC would be 1<br/>  |
+| limit_bids | integer | No       | Orderbook depth on the bid side                                                                                                                                                                         |
+| limit_asks | integer | No       | Orderbook depth on the ask side                                                                                                                                                                         |
 
 ### Response Content
 
@@ -586,7 +674,7 @@ Gets server time
 
 # Trade Endpoints
 
-## Create new order
+## Create New Order
 
 > Request (create `MARKET` order)
 
@@ -753,23 +841,23 @@ Creates a new order. Requires `Trading` permission.
 | ---              | ---     | ---      | ---                                                                                                                                                                                                                                                                                                 |
 | symbol           | string  | Yes      | Market symbol                                                                                                                                                                                                                                                                                       |
 | clOrderID        | string  | Yes      | Customer tag sent in by trader                                                                                                                                                                                                                                                                      |
-| fillSize         | string  | Yes      | Trade filled size                                                                                                                                                                                                                                                                                   |
+| fillSize         | double  | Yes      | Trade filled size                                                                                                                                                                                                                                                                                   |
 | orderID          | string  | Yes      | Order ID                                                                                                                                                                                                                                                                                            |
-| orderType        | string  | Yes      | Order type <br/>76: Limit order<br/>77: Market order<br/>80: Peg/Algo order                                                                                                                                                                                                                         |
+| orderType        | integer  | Yes      | Order type <br/>76: Limit order<br/>77: Market order<br/>80: Peg/Algo order                                                                                                                                                                                                                         |
 | postOnly         | boolean | Yes      | Indicates if order is a post only order                                                                                                                                                                                                                                                             |
 | price            | double  | Yes      | Order price                                                                                                                                                                                                                                                                                         |
 | side             | string  | Yes      | Order side<br/>BUY or SELL                                                                                                                                                                                                                                                                          |
 | size             | double  | Yes      | Order size                                                                                                                                                                                                                                                                                          |
 | status           | integer | Yes      | Order status<br/>	2: Order Inserted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>8: Insufficient Balance<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request Failed |
-| stopPrice        | string  | Yes      | Stop price                                                                                                                                                                                                                                                                                          |
+| stopPrice        | double  | Yes      | Stop price                                                                                                                                                                                                                                                                                          |
 | time_in_force    | string  | Yes      | Order validity                                                                                                                                                                                                                                                                                      |
-| timestamp        | string  | Yes      | Order timestamp                                                                                                                                                                                                                                                                                     |
-| trigger          | string  | Yes      | Indicator if order is a trigger order                                                                                                                                                                                                                                                               |
-| triggerPrice     | string  | Yes      | Order trigger price, returns 0 if order is not a trigger order                                                                                                                                                                                                                                      |
-| averageFillPrice | string  | Yes      | Average filled price. Returns the average filled price for partially transacted orders                                                                                                                                                                                                              |
+| timestamp        | long  | Yes      | Order timestamp                                                                                                                                                                                                                                                                                     |
+| trigger          | boolean  | Yes      | Indicator if order is a trigger order                                                                                                                                                                                                                                                               |
+| triggerPrice     | double  | Yes      | Order trigger price, returns 0 if order is not a trigger order                                                                                                                                                                                                                                      |
+| averageFillPrice | double  | Yes      | Average filled price. Returns the average filled price for partially transacted orders                                                                                                                                                                                                              |
 | message          | string  | Yes      | Trade messages                                                                                                                                                                                                                                                                                      |
-| stealth          | string  | Yes      | Stealth value of order                                                                                                                                                                                                                                                                              |
-| deviation        | string  | Yes      | Deviation value of order                                                                                                                                                                                                                                                                            |
+| stealth          | double  | Yes      | Stealth value of order                                                                                                                                                                                                                                                                              |
+| deviation        | double  | Yes      | Deviation value of order                                                                                                                                                                                                                                                                            |
 | remainingSize    | double  | Yes      | Size left to be transacted                                                                                                                                                                                                                                                                          |
 | originalSize     | double  | Yes      | Original order size                                                                                                                                                                                                                                                                                 |
 
@@ -853,7 +941,7 @@ Creates a new order. Requires `Trading` permission.
 
 `PUT /api/v3.2/order`
 
-Amend the price or size or trigger price of an order. For trigger orders, if the order has already been triggered, the trigger price cannot be further amended. If an order is a POST-ONLY order, and `slide` option is set to true, then price will set to be the best bid/ask price. Amend order _does not_ apply to algo orders
+Amend the price or size or trigger price of an order. For trigger orders, if the order has already been triggered, the trigger price cannot be further amended. Amend order _does not_ apply to algo orders
 
 ### Request Parameters
 
@@ -863,11 +951,10 @@ Amend the price or size or trigger price of an order. For trigger orders, if the
 | orderID      | string  | No       | Internal order ID. Mandatory when `clOrderID` is not provided. If `orderID` is provided, `clOrderID` will be ignored.                                              |
 | clOrderID    | string  | No       | Custom order ID. Mandatory when `orderID` is not provided.                                                                                                         |
 | type         | string  | Yes      | Type of amendment<br/>`PRICE`: To amend order price<br/>`SIZE`: To amend order size<br/>`TRIGGERPRICE`: To amend trigger price<br/>`ALL`: to amend multiple fields |
-| value        | number  | No       | Mandatory for types: `PRICE`, `SIZE`, `TRIGGERPRICE`. The value to be amended to. Value depends on the type being set.                                             |
-| slide        | boolean | No       | Used for Post-Only orders. When set to true will set price to best bid/ask                                                                                         |
-| orderPrice   | number  | No       | For type: `ALL`, order price to be amended                                                                                                                         |
-| orderSize    | number  | No       | For type: `ALL`, order size to be amended                                                                                                                          |
-| triggerPrice | number  | No       | For type: `ALL`, trigger price to be amended                                                                                                                       |
+| value        | double  | No       | Mandatory for types: `PRICE`, `SIZE`, `TRIGGERPRICE`. The value to be amended to. Value depends on the type being set.                                             |
+| orderPrice   | double  | No       | For type: `ALL`, order price to be amended                                                                                                                         |
+| orderSize    | double  | No       | For type: `ALL`, order size to be amended                                                                                                                          |
+| triggerPrice | double  | No       | For type: `ALL`, trigger price to be amended                                                                                                                       |
 
 ### Response Content
 
@@ -875,23 +962,23 @@ Amend the price or size or trigger price of an order. For trigger orders, if the
 | ---              | ---     | ---      | ---                                                                                                                                                                                                                                                                                                 |
 | symbol           | string  | Yes      | Market symbol                                                                                                                                                                                                                                                                                       |
 | clOrderID        | string  | Yes      | Customer tag sent in by trader                                                                                                                                                                                                                                                                      |
-| fillSize         | string  | Yes      | Trade filled size                                                                                                                                                                                                                                                                                   |
+| fillSize         | double  | Yes      | Trade filled size                                                                                                                                                                                                                                                                                   |
 | orderID          | string  | Yes      | Order ID                                                                                                                                                                                                                                                                                            |
-| orderType        | string  | Yes      | Order type <br/>76: Limit order<br/>77: Market order<br/>80: Peg/Algo order                                                                                                                                                                                                                         |
+| orderType        | integer  | Yes      | Order type <br/>76: Limit order<br/>77: Market order<br/>80: Peg/Algo order                                                                                                                                                                                                                         |
 | postOnly         | boolean | Yes      | Indicates if order is a post only order                                                                                                                                                                                                                                                             |
 | price            | double  | Yes      | Order price                                                                                                                                                                                                                                                                                         |
 | side             | string  | Yes      | Order side<br/>BUY or SELL                                                                                                                                                                                                                                                                          |
 | size             | double  | Yes      | Order size                                                                                                                                                                                                                                                                                          |
 | status           | integer | Yes      | Order status<br/>	2: Order Inserted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>8: Insufficient Balance<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request Failed |
-| stopPrice        | string  | Yes      | Stop price                                                                                                                                                                                                                                                                                          |
+| stopPrice        | double  | Yes      | Stop price                                                                                                                                                                                                                                                                                          |
 | time_in_force    | string  | Yes      | Order validity                                                                                                                                                                                                                                                                                      |
-| timestamp        | string  | Yes      | Order timestamp                                                                                                                                                                                                                                                                                     |
-| trigger          | string  | Yes      | Indicator if order is a trigger order                                                                                                                                                                                                                                                               |
-| triggerPrice     | string  | Yes      | Order trigger price, returns 0 if order is not a trigger order                                                                                                                                                                                                                                      |
-| averageFillPrice | string  | Yes      | Average filled price. Returns the average filled price for partially transacted orders                                                                                                                                                                                                              |
+| timestamp        | long  | Yes      | Order timestamp                                                                                                                                                                                                                                                                                     |
+| trigger          | boolean  | Yes      | Indicator if order is a trigger order                                                                                                                                                                                                                                                               |
+| triggerPrice     | double  | Yes      | Order trigger price, returns 0 if order is not a trigger order                                                                                                                                                                                                                                      |
+| averageFillPrice | double  | Yes      | Average filled price. Returns the average filled price for partially transacted orders                                                                                                                                                                                                              |
 | message          | string  | Yes      | Trade messages                                                                                                                                                                                                                                                                                      |
-| stealth          | string  | Yes      | Stealth value of order                                                                                                                                                                                                                                                                              |
-| deviation        | string  | Yes      | Deviation value of order                                                                                                                                                                                                                                                                            |
+| stealth          | double  | Yes      | Stealth value of order                                                                                                                                                                                                                                                                              |
+| deviation        | double  | Yes      | Deviation value of order                                                                                                                                                                                                                                                                            |
 
 
 ## Cancel Order
@@ -1002,25 +1089,25 @@ Cancels pending orders that has not yet been transacted. The `orderID` is a uniq
 | ---              | ---     | ---      | ---                                                                                                                                                                                                                                                                                             |
 | symbol           | string  | Yes      | Market symbol                                                                                                                                                                                                                                                                                   |
 | clOrderID        | string  | Yes      | Customer tag sent in by trader                                                                                                                                                                                                                                                                  |
-| fillSize         | string  | Yes      | Trade filled size                                                                                                                                                                                                                                                                               |
+| fillSize         | double  | Yes      | Trade filled size                                                                                                                                                                                                                                                                               |
 | orderID          | string  | Yes      | Order ID                                                                                                                                                                                                                                                                                        |
-| orderType        | string  | Yes      | Order type <br/>76: Limit order<br/>77: Market order<br/>80: Peg/Algo order                                                                                                                                                                                                                     |
+| orderType        | integer  | Yes      | Order type <br/>76: Limit order<br/>77: Market order<br/>80: Peg/Algo order                                                                                                                                                                                                                     |
 | postOnly         | boolean | Yes      | Indicates if order is a post only order                                                                                                                                                                                                                                                         |
 | price            | double  | Yes      | Order price                                                                                                                                                                                                                                                                                     |
 | side             | string  | Yes      | Order side<br/>BUY or SELL                                                                                                                                                                                                                                                                      |
 | size             | double  | Yes      | Cancelled size                                                                                                                                                                                                                                                                                  |
 | status           | integer | Yes      | Order status<br/>	2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed |
-| stopPrice        | string  | Yes      | Stop price                                                                                                                                                                                                                                                                                      |
+| stopPrice        | double  | Yes      | Stop price                                                                                                                                                                                                                                                                                      |
 | time_in_force    | string  | Yes      | Order validity                                                                                                                                                                                                                                                                                  |
-| timestamp        | string  | Yes      | Order timestamp                                                                                                                                                                                                                                                                                 |
-| trigger          | string  | Yes      | Indicator if order is a trigger order                                                                                                                                                                                                                                                           |
-| triggerPrice     | string  | Yes      | Order trigger price, returns 0 if order is not a trigger order                                                                                                                                                                                                                                  |
-| averageFillPrice | string  | Yes      | Average filled price. Returns the average filled price for partially transacted orders                                                                                                                                                                                                          |
+| timestamp        | long  | Yes      | Order timestamp                                                                                                                                                                                                                                                                                 |
+| trigger          | boolean  | Yes      | Indicator if order is a trigger order                                                                                                                                                                                                                                                           |
+| triggerPrice     | double  | Yes      | Order trigger price, returns 0 if order is not a trigger order                                                                                                                                                                                                                                  |
+| averageFillPrice | double  | Yes      | Average filled price. Returns the average filled price for partially transacted orders                                                                                                                                                                                                          |
 | message          | string  | Yes      | Trade messages                                                                                                                                                                                                                                                                                  |
-| stealth          | string  | Yes      | Stealth value of order                                                                                                                                                                                                                                                                          |
-| deviation        | string  | Yes      | Deviation value of order                                                                                                                                                                                                                                                                        |
+| stealth          | double  | Yes      | Stealth value of order                                                                                                                                                                                                                                                                          |
+| deviation        | double  | Yes      | Deviation value of order                                                                                                                                                                                                                                                                        |
 
-## Dead man's switch (Cancel all after)
+## Dead Man's Switch (Cancel All After)
 
 > Request
 
@@ -1090,7 +1177,7 @@ Retrieves open orders that have not yet been matched or matched recently.
 
 | Name      | Type   | Required | Description                                                                         |
 | ---       | ---    | ---      | ---                                                                                 |
-| symbol    | string | Yes      | Market symbol                                                                       |
+| symbol    | string | No       | Market symbol                                                                       |
 | orderID   | string | No       | Query using internal order ID                                                       |
 | clOrderID | string | No       | Query using custom order ID. If `orderID` is provided, `clOrderID` will be ignored. |
 
@@ -1099,7 +1186,7 @@ Retrieves open orders that have not yet been matched or matched recently.
 
 | Name                       | Type   | Required | Description                                                                            |
 | ---                          | ---    | ---      | ---                                                                                  |
-| orderType                  | double | Yes      | Order type <br/>76: Limit order<br/>77: Market order<br/>80: Peg/Algo order            |
+| orderType                  | integer | Yes      | Order type <br/>76: Limit order<br/>77: Market order<br/>80: Peg/Algo order            |
 | price                      | double | Yes      | Order price                                                                            |
 | size                       | double | Yes      | Order size                                                                             |
 | side                       | string | Yes      | Order side<br/>`BUY` or `SELL`                                                         |
@@ -1109,7 +1196,7 @@ Retrieves open orders that have not yet been matched or matched recently.
 | pegPriceMax                | double | Yes      | Maximum possible peg price this takes precedence over pegPriceDeviation                |
 | pegPriceDeviation          | double | Yes      | Percentage deviation from Index price                                                  |
 | cancelDuration             | double | Yes      | Order expiration time if not 0                                                         |
-| timestamp                  | double | Yes      | Order placement time                                                                   |
+| timestamp                  | long | Yes      | Order placement time                                                                   |
 | orderID                    | string | Yes      | Order Id                                                                               |
 | triggerOrder               | bool   | Yes      | Indicator if order is a trigger order                                                  |
 | triggerPrice               | double | Yes      | Order trigger price, returns 0 if order is not a trigger order                         |
@@ -1119,14 +1206,14 @@ Retrieves open orders that have not yet been matched or matched recently.
 | triggerStopPrice           | double | Yes      | Stop price, Algo Order only                                                            |
 | symbol                     | string | Yes      | Market name (e.g. BTC-USD)                                                             |
 | trailValue                 | double | Yes      | Trail value                                                                            |
-| averageFillPrice           | string | Yes      | Average filled price. Returns the average filled price for partially transacted orders |
+| averageFillPrice           | double | Yes      | Average filled price. Returns the average filled price for partially transacted orders |
 | fillSize                   | double | Yes      | Fill size                                                                              |
 | clOrderID                  | string | Yes      | Customer order ID                                                                      |
 | orderState                 | string | Yes      | `STATUS_ACTIVE`, `STATUS_INACTIVE`                                                     |
 | timeInForce                | string | Yes      | Order validity                                                                         |
 | triggered                  | bool   | Yes      | Indicate whether the order is triiggered                                               |
 
-## Query Trades Fills
+## Query User Trades Fills
 
 > Response
 
@@ -1159,7 +1246,7 @@ Retrieves open orders that have not yet been matched or matched recently.
 
 `GET /api/v3.2/user/trade_history`
 
-Retrieves a user's trade history
+Retrieves a user's trade history which includes funding fee data.
 
 ### Request Parameters
 
@@ -1193,7 +1280,7 @@ Retrieves a user's trade history
 | feecurrency | long   | yes      | fee currency                            |
 | filledprice | long   | yes      | filled price                            |
 | filledsize  | long   | yes      | filled size                             |
-| ordertype   | long   | yes      | order type                              |
+| ordertype   | integer| yes      | order type                              |
 | realizedpnl | long   | yes      | not used in spot                        |
 | total       | long   | yes      | not used in spot                        |
 
@@ -1229,9 +1316,9 @@ retrieve user's trading fees
 | takerfee | double | yes      | taker fees    |
 
 
-# investment endpoints
+# Investment Endpoints
 
-## query investment products
+## Query Investment Products
 
 > response
 
@@ -1293,7 +1380,7 @@ get all investment products
 | rate | double  | yes      | interest rate    |
 
 
-## deposit investment
+## Deposit Investment
 
 > request
 
@@ -1316,7 +1403,7 @@ deposit an investment
 | amount    | double  | yes      | invest amount       |
 
 
-## renew investment
+## Renew Investment
 
 > request
 
@@ -1355,7 +1442,7 @@ renew an investment order
 | autoRenew | boolean | yes      | status of autoRenew flag |
 
 
-## redeem investment
+## Redeem Investment
 
 > request
 
@@ -1378,7 +1465,7 @@ redeem an investment order
 | amount  | double  | yes      | redeem amount       |
 
 
-## query investment orders
+## Query Investment Orders
 
 > response
 
@@ -1418,21 +1505,21 @@ query investment orders
 | name                   | string  | yes      | product name                     |
 | currency               | string  | yes      | currency                         |
 | type                   | string  | yes      | product type                     |
-| rate                   | number  | yes      | interest rate                    |
-| investment             | number  | yes      | amount                           |
-| interestearned         | number  | yes      | intereset earned                 |
+| rate                   | double  | yes      | interest rate                    |
+| investment             | double  | yes      | amount                           |
+| interestearned         | double  | yes      | intereset earned                 |
 | nextinterestpayouttime | integer | yes      | next interest payout time        |
 | starttime              | integer | yes      | start time                       |
 | endtime                | integer | yes      | end time                         |
 | duration               | integer | yes      | duration                         |
 | payoutlocktime         | integer | yes      | lock time of payout              |
 | autorenew              | boolean | yes      | renew automatically              |
-| compounding            | oolean  | yes      | is compounding                   |
+| compounding            | boolean  | yes      | is compounding                   |
 | autorenewsupported     | boolean | yes      | is renew automatically supported |
 | redemptionprocessing   | boolean | yes      | is redemption processing         |
 
 
-## query investment history
+## Query Investment History
 
 > response
 
@@ -1467,56 +1554,21 @@ query investment history
 | rate           | string  | yes      | interest rate                  |
 | type           | boolean | yes      | product type                   |
 | txntype        | string  | yes      | transaction type               |
-| amount         | number  | yes      | transaction amount             |
-| totalamount    | number  | yes      | total amount of the investment |
-| interestearned | number  | yes      | interest earned                |
+| amount         | double  | yes      | transaction amount             |
+| totalamount    | double  | yes      | total amount of the investment |
+| interestearned | double  | yes      | interest earned                |
 | duration       | boolean | yes      | duration                       |
 
 
-# websocket streams
+# Order Book Websocket Streams
 
-## subscription
+## Endpoints
+  * Production
+     * `wss://ws.btse.com/ws/oss/spot`
+  * Testnet
+     * `wss://testws.btse.io/ws/oss/spot`
 
-> request
-
-```json
-{
-  "op": "subscribe",
-  "args": [
-    "orderbookapi:btc-usd_0"
-  ]
-}
-```
-
-> response
-
-```json
-{
-  "event": "subscribe",
-  "channel": [
-    "orderbookapi:btc-usd_0"
-  ]
-}
-```
-
-to subscribe to a websocket feed
-
-### request parameters
-
-| name | type   | required | description                                                                                                            |
-| ---  | ---    | ---      | ---                                                                                                                    |
-| op   | string | yes      | operation. `subscribe` will subscribe to the topics provided in `args`. `unsubscribe` will unsubscribe from the topics |
-| args | array  | yes      | topics to subscribe to.                                                                                                |
-
-### response content
-
-| Name    | Type   | Required | Description                                   |
-| ---     | ---    | ---      | ---                                           |
-| event   | string | Yes      | Respond with the event type                   |
-| channel | array  | Yes      | Topics which have been sucessfully subscribed |
-
-
-## Orderbook Snapshot (By grouping)
+## OSS L1 Snapshot (By grouping)
 
 > Request
 
@@ -1524,7 +1576,14 @@ to subscribe to a websocket feed
 {
   "op": "subscribe",
   "args": [
-    "orderBookApi:BTC-USD_0"
+    "snapshotL1:BTC-USD_0"
+  ]
+}
+
+{
+  "op": "unsubscribe",
+  "args": [
+    "snapshotL1:BTC-USD_0"
   ]
 }
 ```
@@ -1533,29 +1592,28 @@ to subscribe to a websocket feed
 
 ```json
 {
-  "topic": "orderBookApi",
+  "topic": "snapshotL1:BTC-USD_0",
   "data": {
-    "buyQuote":
-    [
-      {
-        "price": 0,
-        "size": 0
-      }
+    "bids": [
+      [
+          "28016.7",
+          "1.48063"
+      ]
     ],
-    "sellQuote":
-    [
-      {
-        "price": 0,
-        "size": 0
-      }
+    "asks": [
+      [
+          "28033.6",
+          "1.34133"
+      ]
     ],
-    "symbol":"BTC-USD",
-    "timestamp":1565135165600
+    "type": "snapshotL1",
+    "symbol": "BTC-USD",
+    "timestamp": 1680750154232
   }
 }
 ```
 
-Subscribe to the Orderbook in different groupings. The format to subscribe to will be `symbol_grouping`.
+Subscribe to the Level 1 Orderbook through the endpoint `wss://ws.btse.com/ws/oss/spot`. The format to subscribe to will be `symbol_grouping`.
 
 * `symbol` indicates the market symbol
 * `grouping` indicates the grouping granularity. Valid values are 0-8.
@@ -1573,73 +1631,10 @@ Subscribe to the Orderbook in different groupings. The format to subscribe to wi
 
 | Name      | Type         | Required | Description         |
 | ---       | ---          | ---      | ---                 |
-| buyQuote  | Quote Object | Yes      | Bid quotes          |
-| sellQuote | Quote Object | Yes      | Asks quotes         |
+| bids      | Quote Object | Yes      | Bid quotes          |
+| asks      | Quote Object | Yes      | Asks quotes         |
 | symbol    | string       | Yes      | Market symbol       |
-| timestamp | long         | Yes      | Orderbook timestamp |
-
-## Orderbook Snapshot (By depth)
-
-> Request
-
-```json
-{
-  "op": "subscribe",
-  "args": [
-    "orderBookL2Api:BTC-USD_0"
-  ]
-}
-```
-
-> Response
-
-```json
-{
-  "topic": "orderBookL2Api",
-  "data": {
-    "buyQuote":
-    [
-      {
-        "price": 0,
-        "size": 0
-      }
-    ],
-    "sellQuote":
-    [
-      {
-        "price": 0,
-        "size": 0
-      }
-    ],
-    "symbol":"BTC-USD",
-    "depth": 0,
-    "timestamp":1565135165600
-  }
-}
-```
-
-Subscribe to the Level 2 Orderbook. The format to subscribe to will be `symbol_depth`.
-
-* `symbol` indicates the market symbol
-* `depth` indicates the levels of orderbook to retrieve. Value of 0 will retrieve the entire orderbook.
-
-### Response Content
-
-#### Orderbook Object
-
-| Name  | Type        | Required | Description                |
-| ---   | ---         | ---      | ---                        |
-| topic | string      | Yes      | Websocket topic            |
-| data  | Data Object | Yes      | Refer to data object below |
-
-#### Data Object
-
-| Name      | Type         | Required | Description         |
-| ---       | ---          | ---      | ---                 |
-| buyQuote  | Quote Object | Yes      | Bid quotes          |
-| sellQuote | Quote Object | Yes      | Asks quotes         |
-| symbol    | string       | Yes      | Market symbol       |
-| depth     | int          | Yes      | Orderbook depth     |
+| type      | string       | Yes      | `snapshotL1` - L1 data refers to the best bid / best ask of a trading pair’s order book.   |
 | timestamp | long         | Yes      | Orderbook timestamp |
 
 ## Orderbook Incremental Updates
@@ -1650,7 +1645,7 @@ Subscribe to the Level 2 Orderbook. The format to subscribe to will be `symbol_d
 {
   "op": "subscribe",
   "args": [
-    "update:BTC-USD"
+    "update:BTC-USD_0"
   ]
 }
 ```
@@ -1659,7 +1654,7 @@ Subscribe to the Level 2 Orderbook. The format to subscribe to will be `symbol_d
 {
   "op": "unsubscribe",
   "args": [
-    "update:BTC-USD"
+    "update:BTC-USD_0"
   ]
 }
 ```
@@ -1668,7 +1663,7 @@ Subscribe to the Level 2 Orderbook. The format to subscribe to will be `symbol_d
 
 ```json
 {
-  "topic": "update:BTC-USD",
+  "topic": "update:BTC-USD_0",
   "data": {
     "bids": [
       [
@@ -1747,7 +1742,7 @@ Subscribe to the Level 2 Orderbook. The format to subscribe to will be `symbol_d
 }
 ```
 
-Subscribe to Orderbook incremental updates through the endpoint `wss://ws.btse.com/ws/oss/spot`. The topic to subscribe to will be `update` specifying the symbol (eg. `update:BTC-USD`). The first response received will be a snapshot of the current orderbook (this is indicated in the `type` field) and 50 levels will be returned. Incremental updates will be sent in subsequent packets with type `delta`.
+Subscribe to Orderbook incremental updates through the endpoint `wss://ws.btse.com/ws/oss/spot`. The format of topic will be `update:symbol_grouping` (eg. `update:BTC-USD_0`). The first response received will be a snapshot of the current orderbook (this is indicated in the `type` field) and 50 levels will be returned. Incremental updates will be sent in subsequent packets with type `delta`.
 
 Bids and asks will be sent in `price` and `size` tuples. The size sent will be the new updated size for the price. If a value of `0` is sent, the price should be removed from the local copy of the orderbook.
 
@@ -1786,6 +1781,70 @@ Also if [crossed orderbook](https://en.wikipedia.org/wiki/Order_book#Crossed_boo
 | 1005       | Topic provided does not exist.                                                         |
 | 1007       | User message buffer is full.                                                           |
 | 1008       | Reached maximum failed attempts, closing the session.                                  |
+
+# Websocket Streams
+
+## Endpoints
+  * Production
+    * `wss://ws.btse.com/ws/spot`
+  * Testnet
+    * `wss://testws.btse.io/ws/spot`
+
+## Ping/Pong
+For all our WebSocket servers, simply send a 'ping' message, and the WebSocket server will respond with a 'pong' message if the WebSocket connection is established and active.
+> Request
+
+```
+ping
+```
+
+> Response
+
+```
+pong
+```
+
+## Subscription
+
+> request
+
+```json
+{
+  "op": "subscribe",
+  "args": [
+    "tradeHistoryApi:BTC-USD"
+  ]
+}
+```
+
+> response
+
+```json
+{
+  "event": "subscribe",
+  "channel": [
+    "tradeHistoryApi:BTC-USD"
+  ]
+}
+```
+
+to subscribe to a websocket public trade fill
+
+### request parameters
+
+| name | type   | required | description                                                                                                            |
+| ---  | ---    | ---      | ---                                                                                                                    |
+| op   | string | yes      | operation. `subscribe` will subscribe to the topics provided in `args`. `unsubscribe` will unsubscribe from the topics |
+| args | array  | yes      | topics to subscribe to.                                                                                                |
+
+### response content
+
+| Name    | Type   | Required | Description                                   |
+| ---     | ---    | ---      | ---                                           |
+| event   | string | Yes      | Respond with the event type                   |
+| channel | array  | Yes      | Topics which have been sucessfully subscribed |
+
+
 
 
 ## Public Trade Fills
@@ -1848,14 +1907,14 @@ Subscribe to recent trade feed for a market. The topic will be `tradeHistoryApi:
 ```json
 {
   "op":"authKeyExpires",
-  "args":["APIKey", "nonce", "signature"]}
+  "args":["APIKey", "nonce", "signature"]
 }
 ```
 
 Authenticate the websocket session to subscribe to authenticated websocket topics. Assume we have values as follows:
 
-* `btse-nonce`: 1624985375123
-* `btse-api`: 4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x
+* `request-nonce`: 1624985375123
+* `request-api`: 4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x
 * `secret`: 848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx
 
 Our subscription request will be:
@@ -1863,7 +1922,7 @@ Our subscription request will be:
 ```
 {
   "op":"authKeyExpires",
-  "args":["4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x", "1624985375123", "c410d38c681579adb335885800cff24c66171b7cc8376cfe43da1408c581748156b89bcc5a115bb496413bda481139fb"]}
+  "args":["4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x", "1624985375123", "c410d38c681579adb335885800cff24c66171b7cc8376cfe43da1408c581748156b89bcc5a115bb496413bda481139fb"]
 }
 ```
 
@@ -1903,8 +1962,7 @@ echo -n "/ws/spot1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6726
 ```json
 {
   "topic": "notificationApiV2",
-  "data": [
-    {
+  "data": {
       "symbol": "Market Symbol (eg. BTC-USD)",
       "orderId": "BTSE internal order ID",
       "side": "BUY",
@@ -1925,8 +1983,6 @@ echo -n "/ws/spot1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6726
       "txType": 0,
       "triggerPrice": "Trade Trigger Price"
     }
-  ]
-
 }
 
 ```

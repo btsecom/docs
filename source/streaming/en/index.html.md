@@ -13,6 +13,10 @@ headingLevel: 2
 
 # Change Log
 
+## Version 1.2 (17th May 2023)
+
+* Add [`Ping/Pong`](#ping-pong) for websocket streams
+
 ## Version 1.1 (16th March 2022)
 
 * Addition of request parameter [`side`](#quote-stream) to allow return one side quote.
@@ -42,7 +46,6 @@ You will need to create an API key on the BTSE platform before you can use authe
 * Production
   * Websocket
      * `wss://ws.btse.com/ws/otc`
-     * `wss://aws-ws.btse.com/ws/otc` (Optimised for connection via AWS, enabled by request)
 * Testnet
   * Websocket
      * `wss://testws.btse.io/ws/otc`
@@ -50,14 +53,14 @@ You will need to create an API key on the BTSE platform before you can use authe
 
 ## Authentication
 
-* API Key (btse-api)
-  * Parameter Name: `btse-api`, in: header. API key is obtained from BTSE platform as a string
+* API Key (request-api)
+  * Parameter Name: `request-api`, in: header. API key is obtained from BTSE platform as a string
 
-* API Key (btse-nonce)
-  * Parameter Name: `btse-nonce`, in: header. Representation of current timestamp in long format
+* API Key (request-nonce)
+  * Parameter Name: `request-nonce`, in: header. Representation of current timestamp in long format
 
-* API Key (btse-sign)
-  * Parameter Name: `btse-sign`, in: header. A composite signature produced based on the following algorithm: Signature=HMAC.Sha384 (secretkey, (urlpath + btse-nonce + bodyStr)) (note: bodyStr = '' when no data):
+* API Key (request-sign)
+  * Parameter Name: `request-sign`, in: header. A composite signature produced based on the following algorithm: Signature=HMAC.Sha384 (secretkey, (urlpath + request-nonce + bodyStr)) (note: bodyStr = '' when no data):
 
 # Workflow
 
@@ -72,6 +75,19 @@ You will need to create an API key on the BTSE platform before you can use authe
 
 # Websocket Streams
 
+## Ping/Pong
+For all our WebSocket servers, simply send a 'ping' message, and the WebSocket server will respond with a 'pong' message if the WebSocket connection is established and active.
+> Request
+
+```
+ping
+```
+
+> Response
+
+```
+pong
+```
 
 ## Authentication
 
@@ -80,14 +96,14 @@ You will need to create an API key on the BTSE platform before you can use authe
 ```json
 {
   "op":"authKeyExpires",
-  "args":["APIKey", "nonce", "signature"]}
+  "args":["APIKey", "nonce", "signature"]
 }
 ```
 
 Authenticate the websocket session to subscribe to authenticated websocket topics. Assume we have values as follows:
 
-* `btse-nonce`: 1624985375123
-* `btse-api`: 4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x
+* `request-nonce`: 1624985375123
+* `request-api`: 4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x
 * `secret`: 848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx
 
 Our subscription request will be:
@@ -95,7 +111,7 @@ Our subscription request will be:
 ```
 {
   "op":"authKeyExpires",
-  "args":["4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x", "1624985375123", "c410d38c681579adb335885800cff24c66171b7cc8376cfe43da1408c581748156b89bcc5a115bb496413bda481139fb"]}
+  "args":["4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x", "1624985375123", "c410d38c681579adb335885800cff24c66171b7cc8376cfe43da1408c581748156b89bcc5a115bb496413bda481139fb"]
 }
 ```
 

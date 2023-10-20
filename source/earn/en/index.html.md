@@ -40,21 +40,20 @@ You will need to create an API key on the BTSE platform before you can use authe
 * Production
   * HTTP
      * `https://api.btse.com/spot`
-     * `https://aws-api.btse.com/spot` (Optimised for connection via AWS, enabled by request)
 * Testnet
   * HTTP
      * `https://testapi.btse.io/spot`
 
 ## Authentication
 
-* API Key (btse-api)
-  * Parameter Name: `btse-api`, in: header. API key is obtained from BTSE platform as a string
+* API Key (request-api)
+  * Parameter Name: `request-api`, in: header. API key is obtained from BTSE platform as a string
 
-* API Key (btse-nonce)
-  * Parameter Name: `btse-nonce`, in: header. Representation of current timestamp in long format
+* API Key (request-nonce)
+  * Parameter Name: `request-nonce`, in: header. Representation of current timestamp in long format
 
-* API Key (btse-sign)
-  * Parameter Name: `btse-sign`, in: header. A composite signature produced based on the following algorithm: Signature=HMAC.Sha384 (secretkey, (urlpath + btse-nonce + bodyStr)) (note: bodyStr = '' when no data):
+* API Key (request-sign)
+  * Parameter Name: `request-sign`, in: header. A composite signature produced based on the following algorithm: Signature=HMAC.Sha384 (secretkey, (urlpath + request-nonce + bodyStr)) (note: bodyStr = '' when no data):
 
 
 # Investment Endpoints

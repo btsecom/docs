@@ -57,10 +57,8 @@ You will need to create an API key on the BTSE platform before you can use authe
 * Production
   * HTTP
      * `https://api.btse.com/spot`
-     * `https://aws-api.btse.com/spot` (Optimised for connection via AWS, enabled by request)
   * Websocket
      * `wss://ws.btse.com/ws/spot`
-     * `wss://aws-ws.btse.com/ws/spot` (Optimised for connection via AWS, enabled by request)
   * Websocket (for orderbook stream)
      * `wss://ws.btse.com/ws/oss/spot` (Used for Orderbook incremental update stream)
 * Testnet
@@ -73,14 +71,14 @@ You will need to create an API key on the BTSE platform before you can use authe
 
 ## Authentication
 
-* API Key (btse-api)
-  * Parameter Name: `btse-api`, in: header. API key is obtained from BTSE platform as a string
+* API Key (request-api)
+  * Parameter Name: `request-api`, in: header. API key is obtained from BTSE platform as a string
 
-* API Key (btse-nonce)
-  * Parameter Name: `btse-nonce`, in: header. Representation of current timestamp in long format
+* API Key (request-nonce)
+  * Parameter Name: `request-nonce`, in: header. Representation of current timestamp in long format
 
-* API Key (btse-sign)
-  * Parameter Name: `btse-sign`, in: header. A composite signature produced based on the following algorithm: Signature=HMAC.Sha384 (secretkey, (urlpath + btse-nonce + bodyStr)) (note: bodyStr = '' when no data):
+* API Key (request-sign)
+  * Parameter Name: `request-sign`, in: header. A composite signature produced based on the following algorithm: Signature=HMAC.Sha384 (secretkey, (urlpath + request-nonce + bodyStr)) (note: bodyStr = '' when no data):
 
 ### Example 1: Get Wallet
 
@@ -93,12 +91,12 @@ $ echo -n "/api/v3.2/user/wallet1624984297330" | openssl dgst -sha384 -hmac "848
 
 * Endpoint to get wallet is `https://api.btse.com/spot/api/v3.2/user/wallet`
 * Assume we have the values as follows:
-  * btse-nonce: `1624984297330`
-  * btse-api: `4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x`
+  * request-nonce: `1624984297330`
+  * request-api: `4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x`
   * secret: `848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx`
   * Path: `/api/v3.2/user/wallet`
 * Generated signature will be:
-  * btse-sign: `14b986706a4368221e0af14a6725377161805e7a57d568220478cb3590ce532d4fad4ac68e6c02a14afced6a0619bfd3`
+  * request-sign: `14b986706a4368221e0af14a6725377161805e7a57d568220478cb3590ce532d4fad4ac68e6c02a14afced6a0619bfd3`
 
 ## Rate Limits
 

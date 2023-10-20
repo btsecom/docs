@@ -15,10 +15,6 @@ language_tabs:
 
 FIX (Financial Information eXchange) is a standard electronic messaging protocol which can be used to place orders, receive order updates and executions, and cancel orders. Our FIX api is based on the FIX 4.2 specification and modeled after FIX implementations of other popular cryptocurrency exchanges.
 
-<aside class="notice">
-This service is restricted. Please drop an email to bd@btse.com for further information
-</aside>
-
 FIX endpoints: tcp+ssl://fix.btse.com:9876
 
 | Environment | SocketConnectHost      | SocketConnectPort |
@@ -36,6 +32,17 @@ Sessions for Spot and Futures are separated.
 
 # Change Log
 
+## Version 1.1.3 (10th July 2023)
+
+Add [heartbeat](#heartbeat-0) recommondation
+
+## Version 1.1.2 (10th July 2023)
+
+* Apply new symbol name in Futures market. Add ApplyNewSymbolName in [Logon](#logon-a) message
+
+## Version 1.1.1 (7th February 2023)
+
+* Revise Common request attributes
 
 ## Version 1.1.0 (6th December 2022)
 
@@ -89,7 +96,7 @@ Below attributes are required in every client's request message.
 | 34 | MsgSeqNum    | 1         | Sequence of message, starts from 1 and must be incremented with every message. Messages with duplicate or out-of-order sequence numbers will be rejected. Sequence numbers are reset on new connections. |
 | 35 | MsgType      | 8         | Message type                                         |
 | 49 | SenderCompID | zyf...IZx | Client API key                                       |
-| 50 | SenderSubID  | SPOT      | Currently only support: "SPOT": spot market          |
+| 50 | SenderSubID  | SPOT      | "SPOT": spot market; "FUTURES": futures market       |
 | 52 | SendingTime  | 20220916-07:29:07 | Sending time of message                      |
 | 56 | TargetCompID | BTSE      | Must be set to "BTSE" (for messages from the client) |
 | 10 | CheckSum     | 145       | CheckSum of the message                              |
@@ -122,11 +129,14 @@ Client's API Key and secret can be generated from API page in BTSE portal. Creat
 |  95 | RawDataLength   | 96                | Length of RawData         |
 |  96 | RawData         | 8f7e...4783       | For security, the Logon message must be signed by the client. To compute the signature, concatenate the following fields, joined by the FIX field separator (byte 0x01), and compute the SHA384 HMAC using the API secret:<br/><br/> * SendingTime (52)<br/> * MsgType (35)<br/> * MsgSeqNum (34)<br/> * SenderCompID (49)<br/> * TargetCompID (56)<br/><br/>The resulting hash should be hex-encoded. |
 |  98 | EncryptMethod   | 0                 | Must be set to "0" (None) |
-| 108 | HeartBInt       | 30                | Must be set to "30"       |
+| 108 | HeartBInt       | 30                | If client set heartbeat interval to N. We recommend that you send heartbeat approximately every N - 5 seconds to keep connection alive.       |
 | 141 | ResetSeqNumFlag | Y                 | Must be set to "Y"        |
+| 5001 | ApplyNewSymbolName  | Y            | This field only apply in futures. If this field is not provided, FIX only accepts old symbol names. New symbol pattern: BTC-PERP, old symbol pattern: BTCPFC |
 
 
 ## Heartbeat (0)
+
+If client set heartbeat interval to N. We recommend that you send heartbeat approximately every N - 5 seconds to keep connection alive.
 
 | Tag | Name | Value | Description |
 | --- | ---  | ---   | ---         |

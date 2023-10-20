@@ -47,10 +47,8 @@ You will need to create an API key on the BTSE platform before you can use authe
 * Production
   * HTTP
      * `https://api.btse.com/otc`
-     * `https://aws-api.btse.com/otc` (Optimised for connection via AWS, enabled by request)
   * Websocket
      * `wss://ws.btse.com/ws/otc`
-     * `wss://aws-ws.btse.com/ws/otc` (Optimised for connection via AWS, enabled by request)
 * Testnet
   * HTTP
      * `https://testapi.btse.io/otc`
@@ -60,14 +58,14 @@ You will need to create an API key on the BTSE platform before you can use authe
 
 ## Authentication
 
-* API Key (btse-api)
-  * Parameter Name: `btse-api`, in: header. API key is obtained from BTSE platform as a string
+* API Key (request-api)
+  * Parameter Name: `request-api`, in: header. API key is obtained from BTSE platform as a string
 
-* API Key (btse-nonce)
-  * Parameter Name: `btse-nonce`, in: header. Representation of current timestamp in long format
+* API Key (request-nonce)
+  * Parameter Name: `request-nonce`, in: header. Representation of current timestamp in long format
 
-* API Key (btse-sign)
-  * Parameter Name: `btse-sign`, in: header. A composite signature produced based on the following algorithm: Signature=HMAC.Sha384 (secretkey, (urlpath + btse-nonce + bodyStr)) (note: bodyStr = '' when no data):
+* API Key (request-sign)
+  * Parameter Name: `request-sign`, in: header. A composite signature produced based on the following algorithm: Signature=HMAC.Sha384 (secretkey, (urlpath + request-nonce + bodyStr)) (note: bodyStr = '' when no data):
 
 ### Example 1: Query Quote
 
@@ -80,14 +78,14 @@ $ echo -n "/api/v1/quote1624985375123{\"orderSizeInBaseCurrency\":1,\"orderAmoun
 
 * Endpoint to place an order is `https://api.btse.com/otc/api/v1/quote`
 * Assume we have the values as follows:
-  * btse-nonce: `1624985375123`
-  * btse-api: `4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x`
+  * request-nonce: `1624985375123`
+  * request-api: `4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x`
   * secret: `848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx`
   * Path: `/api/v1/quote`
   * Body: `{"orderSizeInBaseCurrency":1,"orderAmountInOrderCurrency":0,"side":"buy","baseCurrency":"BTC","orderCurrency":"USD"}`
   * Encrypted Text: `"/api/v1/quote1624985375123{"orderSizeInBaseCurrency":1,"orderAmountInOrderCurrency":0,"side":"buy","baseCurrency":"BTC","orderCurrency":"USD"}"`
 * Generated signature will be:
-  * btse-sign: `8ee43810606da581fb6ce03e10370f89125c2269a64de832a55cea219795e9ae0c3df86b51afbafdd28c03b16acd1427`
+  * request-sign: `8ee43810606da581fb6ce03e10370f89125c2269a64de832a55cea219795e9ae0c3df86b51afbafdd28c03b16acd1427`
 
 
 ## Rate Limits
@@ -112,6 +110,15 @@ Each API will return one of the following HTTP status:
 * 408 - Request timeout. Indicates that the server did not complete the request. BTSE API timeouts are set at 30secs
 * 429 - Too many requests. Indicates that the client has exceeded the rates limits set by the server. Refer to Rate Limits for more details
 * 500 - Internal server error. Indicates that the server encountered an unexpected condition resulting in not being able to fulfill the request
+
+## API ENUM
+
+When connecting up the BTSE API, you will come across number codes that represents different states or status types in BTSE. The following section provides a list of codes that you are expecting to see.
+
+* 30000: OTC_ORDER_QUERY
+* 30001: OTC_ORDER_QUOTE
+* 30007: OTC_ORDER_COMPLETE_SUCCESS
+* 30008: OTC_ORDER_REQUOTE
 
 # Workflow
 
@@ -435,14 +442,14 @@ Query order information
 ```json
 {
   "op":"authKeyExpires",
-  "args":["APIKey", "nonce", "signature"]}
+  "args":["APIKey", "nonce", "signature"]
 }
 ```
 
 Authenticate the websocket session to subscribe to authenticated websocket topics. Assume we have values as follows:
 
-* `btse-nonce`: 1624985375123
-* `btse-api`: 4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x
+* `request-nonce`: 1624985375123
+* `request-api`: 4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x
 * `secret`: 848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx
 
 Our subscription request will be:
@@ -450,7 +457,7 @@ Our subscription request will be:
 ```
 {
   "op":"authKeyExpires",
-  "args":["4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x", "1624985375123", "c410d38c681579adb335885800cff24c66171b7cc8376cfe43da1408c581748156b89bcc5a115bb496413bda481139fb"]}
+  "args":["4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x", "1624985375123", "c410d38c681579adb335885800cff24c66171b7cc8376cfe43da1408c581748156b89bcc5a115bb496413bda481139fb"]
 }
 ```
 
