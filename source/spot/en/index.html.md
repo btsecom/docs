@@ -357,7 +357,9 @@ When connecting up the BTSE API, you will come across number codes that represen
     "minRiskLimit": 0,
     "maxRiskLimit": 0,
     "availableSettlement": null,
-    "futures": false
+    "futures": false,
+    "isMarketOpenToOtc": false,
+    "isMarketOpenToSpot": true
   }
 ]
 ```
