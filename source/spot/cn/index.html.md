@@ -13,6 +13,10 @@ headingLevel: 2
 
 # 更改日志
 
+## 版本 3.4.7 (2023年10月20日)
+
+* 在[市场摘要](#7335b2436c)中添加两个新的响应字段 `isMarketOpenToOtc` 和 `isMarketOpenToSpot`
+
 ## 版本 3.4.6（2023年9月18日）
 
 * 修正订单相关API中参数的数据类型，并删除451状态代码
@@ -405,6 +409,8 @@ BTSE的速率限制如下:
 | maxRiskLimit        | double   | No      | 不适用于现货市场                                    |
 | availableSettlement | array    | No      | 不适用于现货市场                                    |
 | futures             | boolean  | Yes      | 符号是否为期货合同的指示                         |
+| isMarketOpenToOtc   | boolean  | Yes        | 表示该市场是否对OTC（场外交易）开放                           |
+| isMarketOpenToSpot  | boolean  | Yes        | 表示该市场是否对现货交易开放                                  |
 
 ## 图表数据
 
