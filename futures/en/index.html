@@ -512,7 +512,7 @@
         <h1 id='change-log'>Change Log</h1><h2 id='version-2-6-11-16th-october-2023'>Version 2.6.11 (16th October 2023)</h2>
 <ul>
 <li>Add TP/SL (Take Profit/Stop Loss) parameters in <a href="#create-new-order">Create New Order</a></li>
-<li>Add API <a href="#bind-tpsl">Bind TP/SL</a> in Trade Endpoints to bind TP/SL with an existing position</li>
+<li>Add API <a href="#bind-tp/sl">Bind TP/SL</a> in Trade Endpoints to bind TP/SL with an existing position</li>
 <li>Add TP/SL fields in Trade Endpoints <a href="#query-open-orders">Query Open Orders</a> and <a href="#query-position">Query Positions</a> </li>
 <li>Add TP/SL fields in Websocket Streams <a href="#all-position">All Position</a></li>
 </ul>
@@ -1292,7 +1292,8 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
     </span><span class="mi">36466</span><span class="p">,</span><span class="w">
     </span><span class="mi">36466</span><span class="p">,</span><span class="w">
     </span><span class="mf">2370.8095</span><span class="w">
-  </span><span class="p">],</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <p><code>GET /api/v2.1/ohlcv</code></p>
 
@@ -1859,45 +1860,46 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
-<p>Request (create <code>Limit</code> order with <code>TP/SL</code>)
-```json
-// Place Order with TP and SL
-{
-    &quot;symbol&quot;: &quot;BTC-PERP&quot;,
-    &quot;size&quot;: 10,
-    &quot;price&quot;: 29000,
-    &quot;side&quot;: &quot;BUY&quot;,
-    &quot;type&quot;: &quot;LIMIT&quot;,
-    &quot;takeProfitPrice&quot;: 31000,
-    &quot;takeProfitTrigger&quot;: &quot;markPrice&quot;,
-    &quot;stopLossPrice&quot;: 27000,
-    &quot;stopLossTrigger&quot;: &quot;lastPrice&quot;
-}</p>
+<p>Request (create <code>Limit</code> order with <code>TP/SL</code>)</p>
 </blockquote>
-
-<p>// Place Order with TP only
-{
-    &quot;symbol&quot;: &quot;BTC-PERP&quot;,
-    &quot;size&quot;: 10,
-    &quot;price&quot;: 29000,
-    &quot;side&quot;: &quot;BUY&quot;,
-    &quot;type&quot;: &quot;LIMIT&quot;,
-    &quot;takeProfitPrice&quot;: 31000,
-    &quot;takeProfitTrigger&quot;: &quot;markPrice&quot;
-}</p>
-
-<p>// Place Order with SL only
-{
-    &quot;symbol&quot;: &quot;BTC-PERP&quot;,
-    &quot;size&quot;: 10,
-    &quot;price&quot;: 29000,
-    &quot;side&quot;: &quot;BUY&quot;,
-    &quot;type&quot;: &quot;LIMIT&quot;,
-    &quot;stopLossPrice&quot;: 27000,
-    &quot;stopLossTrigger&quot;: &quot;lastPrice&quot;
-}
-```</p>
-
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-PERP"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">29000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LIMIT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"takeProfitPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">31000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"takeProfitTrigger"</span><span class="p">:</span><span class="w"> </span><span class="s2">"markPrice"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stopLossPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">27000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stopLossTrigger"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lastPrice"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Request (create <code>Limit</code> order with <code>TP</code> only)</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-PERP"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">29000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LIMIT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"takeProfitPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">31000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"takeProfitTrigger"</span><span class="p">:</span><span class="w"> </span><span class="s2">"markPrice"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Request (create <code>Limit</code> order with <code>SL</code> only)</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-PERP"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">29000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LIMIT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stopLossPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">27000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stopLossTrigger"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lastPrice"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
 <blockquote>
 <p>Response (general)</p>
 </blockquote>
@@ -4302,18 +4304,18 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 </tbody></table>
 <h2 id='bind-tp-sl'>Bind TP/SL</h2>
 <blockquote>
-<p>Request
-<code>json
-{
-    &quot;symbol&quot;: &quot;BTC-PERP&quot;,
-    &quot;side&quot;:&quot;SELL&quot;,
-    &quot;takeProfitPrice&quot;: 31000,
-    &quot;takeProfitTrigger&quot;: &quot;markPrice&quot;,
-    &quot;stopLossPrice&quot;: 22000,
-    &quot;stopLossTrigger&quot;: &quot;lastPrice&quot;
-}
-</code></p>
-
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-PERP"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"side"</span><span class="p">:</span><span class="s2">"SELL"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"takeProfitPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">31000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"takeProfitTrigger"</span><span class="p">:</span><span class="w"> </span><span class="s2">"markPrice"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stopLossPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">22000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stopLossTrigger"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lastPrice"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
 <p>Response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
@@ -4370,7 +4372,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>takeProfitPrice</td>
 <td>double</td>
 <td>No</td>
-<td>Mandatory when creating new order with take profit order. Indicates the trigger price. Must set takeProfitPrice   or stopLossPrice at least when using this API.</td>
+<td>Mandatory when creating new order with take profit order. Indicates the trigger price. Must set takeProfitPrice or stopLossPrice at least when using this API.</td>
 </tr>
 <tr>
 <td>takeProfitTrigger</td>
