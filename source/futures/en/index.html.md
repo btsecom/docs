@@ -13,6 +13,12 @@ headingLevel: 2
 
 # Change Log
 
+## Version 2.6.11 (16th October 2023)
+* Add TP/SL (Take Profit/Stop Loss) parameters in [Create New Order](#create-new-order)
+* Add API [Bind TP/SL](#bind-tp/sl) in Trade Endpoints to bind TP/SL with an existing position
+* Add TP/SL fields in Trade Endpoints [Query Open Orders](#query-open-orders) and [Query Positions](#query-position) 
+* Add TP/SL fields in Websocket Streams [All Position](#all-position)
+
 ## Version 2.6.10 (3rd October 2023)
 * Correct response data type
 
@@ -279,14 +285,14 @@ You will need to create an API key on the BTSE platform before you can use authe
 
 ## Authentication
 
-* API Key (btse-api)
-  * Parameter Name: `btse-api`, in: header. API key is obtained from BTSE platform as a string
+* API Key (request-api)
+  * Parameter Name: `request-api`, in: header. API key is obtained from BTSE platform as a string
 
-* API Key (btse-nonce)
-  * Parameter Name: `btse-nonce`, in: header. Representation of current timestamp in long format
+* API Key (request-nonce)
+  * Parameter Name: `request-nonce`, in: header. Representation of current timestamp in long format
 
-* API Key (btse-sign)
-  * Parameter Name: `btse-sign`, in: header. A composite signature produced based on the following algorithm: Signature=HMAC.Sha384 (secretkey, (urlpath + btse-nonce + bodyStr)) (note: bodyStr = '' when no data):
+* API Key (request-sign)
+  * Parameter Name: `request-sign`, in: header. A composite signature produced based on the following algorithm: Signature=HMAC.Sha384 (secretkey, (urlpath + request-nonce + bodyStr)) (note: bodyStr = '' when no data):
 
 ### Example 1: Get Wallet
 
@@ -299,12 +305,12 @@ $ echo -n "/api/v2.1/user/wallet1624984297330" | openssl dgst -sha384 -hmac "848
 
 * Endpoint to get wallet is `https://api.btse.com/futures/api/v2.1/user/wallet`
 * Assume we have the values as follows:
-  * btse-nonce: `1624984297330`
-  * btse-api: `4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x`
+  * request-nonce: `1624984297330`
+  * request-api: `4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x`
   * secret: `848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx`
   * Path: `/api/v2.1/user/wallet`
 * Generated signature will be:
-  * btse-sign: `ea4f1f2b43a0f4d750ae560c5274d6214d140fcab3093da5f4a83e36828535bd2ba7b12160cd12199596f422c8883333`
+  * request-sign: `ea4f1f2b43a0f4d750ae560c5274d6214d140fcab3093da5f4a83e36828535bd2ba7b12160cd12199596f422c8883333`
 
 ### Example 2: Place an order
 
@@ -317,14 +323,14 @@ $ echo -n "/api/v2.1/order1624985375123{\"postOnly\":false,\"price\":8500.0,\"re
 
 * Endpoint to place an order is `https://api.btse.com/futures/api/v2.1/order`
 * Assume we have the values as follows:
-  * btse-nonce: `1624985375123`
-  * btse-api: `4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x`
+  * request-nonce: `1624985375123`
+  * request-api: `4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x`
   * secret: `848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx`
   * Path: `/api/v2.1/order`
   * Body: `{"postOnly":false,"price":8500.0,"reduceOnly":false,"side":"BUY","size":1,"stopPrice":0.0,"symbol":"BTCPFC","time_in_force":"GTC","trailValue":0.0,"triggerPrice":0.0,"txType":"LIMIT","type":"LIMIT"}`
   * Encrypted Text: `/api/v2.1/order1624985375123{"postOnly":false,"price":8500.0,"reduceOnly":false,"side":"BUY","size":1,"stopPrice":0.0,"symbol":"BTCPFC","time_in_force":"GTC","trailValue":0.0,"triggerPrice":0.0,"txType":"LIMIT","type":"LIMIT"}`
 * Generated signature will be:
-  * btse-sign: `943adfce43b609a28506274976b96e08cf4bdc4ea53ca0b4cac0eb2cf0773a7d0807efc0aeab779d47fadcd9a60eea13`
+  * request-sign: `943adfce43b609a28506274976b96e08cf4bdc4ea53ca0b4cac0eb2cf0773a7d0807efc0aeab779d47fadcd9a60eea13`
 
 
 ## Rate Limits
@@ -540,7 +546,8 @@ Gets market summary information. If no symbol parameter is sent, then all market
     36466,
     36466,
     2370.8095
-  ],
+  ]
+]
 ```
 
 `GET /api/v2.1/ohlcv`
@@ -827,6 +834,50 @@ Get trade fills for the market specified by `symbol`
   "triggerPrice": 30000
 }
 ```
+
+> Request (create `Limit` order with `TP/SL`)
+
+```json
+{
+    "symbol": "BTC-PERP",
+    "size": 10,
+    "price": 29000,
+    "side": "BUY",
+    "type": "LIMIT",
+    "takeProfitPrice": 31000,
+    "takeProfitTrigger": "markPrice",
+    "stopLossPrice": 27000,
+    "stopLossTrigger": "lastPrice"
+}
+```
+> Request (create `Limit` order with `TP` only)
+
+```json
+{
+    "symbol": "BTC-PERP",
+    "size": 10,
+    "price": 29000,
+    "side": "BUY",
+    "type": "LIMIT",
+    "takeProfitPrice": 31000,
+    "takeProfitTrigger": "markPrice"
+}
+```
+
+> Request (create `Limit` order with `SL` only)
+
+```json
+{
+    "symbol": "BTC-PERP",
+    "size": 10,
+    "price": 29000,
+    "side": "BUY",
+    "type": "LIMIT",
+    "stopLossPrice": 27000,
+    "stopLossTrigger": "lastPrice"
+}
+```
+
 > Request (create hedge mode `MARKET` order)
 
 ```json
@@ -980,7 +1031,11 @@ Creates a new order. Requires `Trading` permission
 | postOnly      | boolean | No       | Boolean to indicate if this is a post only order. For post only orders, traders are charged maker fees                                                                                                                                                                                                                                                             |
 | reduceOnly    | boolean | No       | Boolean to indicate if this is a reduce only order, if in hedge mode, it is used to reduce the specified position, ex: sell to reduce long position, buy to reduce short position.                                                                                                                                                                                 |
 | clOrderID     | string  | No       | Custom order Id                                                                                                                                                                                                                                                                                                                                                    |
-| trigger       | string  | No       | For creating order with txType: `STOP` or `TRIGGER`. Valid options: `markPrice` (default) or `lastPrice`                                                                                                                                                                                                                                                           |
+| trigger       | string  | No       | For creating order with txType: `STOP` or `TRIGGER`. Valid options: `markPrice` (default) or `lastPrice`|
+| takeProfitPrice  | double  | No       | Mandatory when creating new order with take profit order. Indicates the trigger price     
+| takeProfitTrigger       | string  | No       | For creating order with take profit order. Valid options: `markPrice` (default) or `lastPrice`|
+| stopLossPrice  | double  | No       | Mandatory when creating new order with stop loss order. Indicates the trigger price       
+| stopLossTrigger       | string  | No       | For creating order with stop loss order. Valid options: `markPrice` (default) or `lastPrice`|
 | positionMode  | string  | No       | For creating order and wanting to specify the positionMode. Valid options: `ONE_WAY` (default) or `HEDGE`                                                                                                                                                                                                                                                          |
 
 
@@ -1365,7 +1420,20 @@ Dead-man's switch allows the trader to send in a timeout value which is a Time t
     "positionDirection": null,
     "positionId": "BTCPFC-USD",
     "timeInForce": "GTC",
-    "averageFillPrice": 0.0
+    "averageFillPrice": 0.0,
+    "takeProfitOrder": {
+        "orderId": "ea1ab233-c79a-4503-a475-f8633ecc9d79",
+        "side": "SELL",
+        "triggerPrice": 31000.0,
+        "triggerUseLastPrice": false
+    },
+    "stopLossOrder": {
+        "orderId": "48523190-77b9-44ea-bee0-d67a428a51b8",
+        "side": "SELL",
+        "triggerPrice": 27000.0,
+        "triggerUseLastPrice": true
+    },
+    "closeOrder": false
   }
 ]
 ```
@@ -1385,37 +1453,40 @@ Retrieves open orders that have not yet been matched or matched recently.
 
 ### Response Content
 
-| Name                         | Type     | Required | Description                                                                            |
-|------------------------------|----------|----------|----------------------------------------------------------------------------------------|
-| symbol                       | string   | Yes      | Market symbol                                                                          |
-| clOrderID                    | string   | Yes      | Customer tag sent in by trader                                                         |
-| filledSize                   | long     | Yes      | Trade filled size                                                                      |
-| orderValue                   | double   | Yes      | Notional value                                                                         |
-| pegPriceMin                  | double   | Yes      | peg price min                                                                          |
-| pegPriceMax                  | double   | Yes      | peg price max                                                                          |
-| pegPriceDeviation            | double   | Yes      | Deviation percentage. Only for Algo orders                                             |
-| cancelDuration               | long     | Yes      | Expire in milliseconds. <br/>0: GTC<br/>-1: IOC                                        |
-| orderID                      | string   | Yes      | Order ID                                                                               |
-| orderType                    | integer  | Yes      | Order type <br/>76: Limit Order<br/>77: Market order<br/>80: Algo order                |
-| timeInForce                  | string   | Yes      | Order validity                                                                         |
-| price                        | double   | Yes      | Order price                                                                            |
-| side                         | string   | Yes      | Order side<br/>BUY or SELL                                                             |
-| size                         | long     | Yes      | Order size in contract size                                                            |
-| timestamp                    | long     | Yes      | Order timestamp                                                                        |
-| triggerOrder                 | bool     | Yes      | Indicate if this is a trigger order                                                    |
-| triggered                    | bool     | Yes      | Indicate if this order has been triggered                                              |
-| triggerUseLastPrice          | bool     | Yes      | Indicate if this trigger order uses last price                                         |
-| triggerPrice                 | double   | Yes      | Order trigger price, returns 0 if order is not a trigger order                         |
-| triggerOriginalPrice         | double   | Yes      | Original trigger price                                                                 |
-| triggerOrderType             | string   | Yes      | Trigger order type <br/>1001: Trigger stop loss <br/>1002: Trigger take profit         |
-| triggerTrailingStopDeviation | double   | Yes      | Reserved attribute                                                                     |
-| triggerStopPrice             | double   | Yes      | Reserved attribute                                                                     |
-| trailValue                   | double   | Yes      | Reserved attribute                                                                     |
-| reduceOnly                   | bool     | Yes      | Indicate if this order is reduce only                                                  |
-| avgFilledPrice               | double   | Yes      | Average filled price. Returns the average filled price for partially transacted orders |
-| averageFillPrice             | double   | Yes      | Average fill price                                                                     |
-| stealth                      | double   | Yes      | Stealth value of order                                                                 |
-| orderState                   | string   | Yes      | `STATUS_ACTIVE`, `STATUS_INACTIVE`                                                     |
+| Name                         | Type   | Required | Description                                                                            |
+| ---                          | ---    | ---      | ---                                                                                    |
+| symbol                       | string | Yes      | Market symbol                                                                          |
+| clOrderID                    | string | Yes      | Customer tag sent in by trader                                                         |
+| filledSize                   | long   | Yes      | Trade filled size                                                                      |
+| orderValue                   | double | Yes      | Notional value                                                                         |
+| pegPriceMin                  | double | Yes      | peg price min                                                                          |
+| pegPriceMax                  | double | Yes      | peg price max                                                                          |
+| pegPriceDeviation            | double | Yes      | Deviation percentage. Only for Algo orders                                             |
+| cancelDuration               | long   | Yes      | Expire in milliseconds. <br/>0: GTC<br/>-1: IOC                                        |
+| orderID                      | string | Yes      | Order ID                                                                               |
+| orderType                    | integer| Yes      | Order type <br/>76: Limit Order<br/>77: Market order<br/>80: Algo order                |
+| timeInForce                  | string | Yes      | Order validity                                                                         |
+| price                        | double | Yes      | Order price                                                                            |
+| side                         | string | Yes      | Order side<br/>BUY or SELL                                                             |
+| size                         | long   | Yes      | Order size in contract size                                                            |
+| timestamp                    | long   | Yes      | Order timestamp                                                                        |
+| triggerOrder                 | bool   | Yes      | Indicate if this is a trigger order                                                    |
+| triggered                    | bool   | Yes      | Indicate if this order has been triggered                                              |
+| triggerUseLastPrice          | bool   | Yes      | Indicate if this trigger order uses last price                                         |
+| triggerPrice                 | double | Yes      | Order trigger price, returns 0 if order is not a trigger order                         |
+| triggerOriginalPrice         | double | Yes      | Original trigger price                                                                 |
+| triggerOrderType             | string | Yes      | Trigger order type <br/>1001: Trigger stop loss <br/>1002: Trigger take profit         |
+| triggerTrailingStopDeviation | double | Yes      | Reserved attribute                                                                     |
+| triggerStopPrice             | double | Yes      | Reserved attribute                                                                     |
+| trailValue                   | double | Yes      | Reserved attribute                                                                     |
+| reduceOnly                   | bool   | Yes      | Indicate if this order is reduce only                                                  |
+| avgFilledPrice               | double | Yes      | Average filled price. Returns the average filled price for partially transacted orders |
+| averageFillPrice             | double | Yes      | Average fill price                                                                     |
+| stealth                      | double | Yes      | Stealth value of order                                                                 |
+| orderState                   | string | Yes      | `STATUS_ACTIVE`, `STATUS_INACTIVE`                                                     |
+| takeProfitOrder              | TakeProfitOrder object | No | Take profit order info |
+| stopLossOrder                | StopLossOrder object   | No | Stop loss order info |
+| closeOrder                   | bool   | Yes      | Whether it is an order to close this position |
 | positionMode                 | string   | Yes      | Position mode<br/>ONE_WAY or HEDGE                                                     |
 | positionDirection            | string   | Yes      | Position direction                                                                     |
 | positionId                   | string   | Yes      | The current order belongs to the id of position.                                       |
@@ -1524,7 +1595,7 @@ Retrieves a user's trade history
   {
     "marginType": 0,
     "entryPrice": 0,
-    "markPrice": 71126.6,
+    "markPrice": 29286.4,
     "symbol": "BTCPFC",
     "side": "BUY",
     "orderValue": 441.8492,
@@ -1537,33 +1608,47 @@ Retrieves a user's trade history
     "adlScoreBucket": 2,
     "liquidationInProgress": false,
     "timestamp": 1576661434072,
+    "currentLeverage": 0,
+    "takeProfitOrder": {
+        "orderId": "ea1ab233-c79a-4503-a475-f8633ecc9d79",
+        "side": "SELL",
+        "triggerPrice": 31000.0,
+        "triggerUseLastPrice": false
+    },
+    "stopLossOrder": {
+        "orderId": "48523190-77b9-44ea-bee0-d67a428a51b8",
+        "side": "SELL",
+        "triggerPrice": 27000.0,
+        "triggerUseLastPrice": true
+    },
     "positionMode": "ONE_WAY",
     "positionDirection": null,
-    "positionId": "BTCPFC-USD",
-    "currentLeverage": 0
+    "positionId": "BTCPFC-USD"
   },{
-      "marginType": 91,
-      "entryPrice": 1631.106666667,
-      "markPrice": 1630.398947255,
-      "symbol": "ETHPFC",
-      "side": "BUY",
-      "orderValue": 48.9119684176,
-      "settleWithAsset": "USDT",
-      "unrealizedProfitLoss": -0.02123158,
-      "totalMaintenanceMargin": 0.254871114,
-      "size": 3,
-      "liquidationPrice": 0,
-      "isolatedLeverage": 0,
-      "adlScoreBucket": 2,
-      "liquidationInProgress": false,
-      "timestamp": 0,
-      "takeProfitOrder": null,
-      "stopLossOrder": null,
-      "positionMode": "HEDGE",
-      "positionDirection": "LONG",
-      "positionId": "ETHPFC-USD|LONG",
-      "currentLeverage": 0.0340349245
-  }
+     "marginType": 91,
+     "entryPrice": 1631.106666667,
+     "markPrice": 1630.398947255,
+     "symbol": "ETHPFC",
+     "side": "BUY",
+     "orderValue": 48.9119684176,
+     "settleWithAsset": "USDT",
+     "unrealizedProfitLoss": -0.02123158,
+     "totalMaintenanceMargin": 0.254871114,
+     "size": 3,
+     "liquidationPrice": 0,
+     "isolatedLeverage": 0,
+     "adlScoreBucket": 2,
+     "liquidationInProgress": false,
+     "timestamp": 0,
+     "takeProfitOrder": null,
+     "stopLossOrder": null,
+     "positionMode": "HEDGE",
+     "positionDirection": "LONG",
+     "positionId": "ETHPFC-USD|LONG",
+     "currentLeverage": 0.0340349245,
+     "takeProfitOrder": null,
+     "stopLossOrder": null
+     }
 ]
 ```
 
@@ -1598,6 +1683,8 @@ Queries user's current position. When no symbol is specified, positions for all 
 | liquidationInProgress  | boolean | Yes      | Indicator if liquidation is in progress                                     |
 | currentLeverage        | double  | Yes      | Current leverage                                                            |
 | timestamp              | long    | Yes      | Timestamp when position was queried                                         |
+| takeProfitOrder        | TakeProfitOrder object | No | Take profit order info |
+| stopLossOrder          | StopLossOrder object   | No | Stop loss order info |
 | positionMode           | string  | Yes      | Position mode<br/>ONE_WAY or HEDGE                                          |
 | positionDirection      | string  | Yes      | Position direction                                                          |
 | positionId             | string  | Yes      | Position id                                                                 |
@@ -1951,6 +2038,91 @@ Retrieve user's trading fees
 | symbol   | string | Yes      | Market symbol |
 | makerFee | double | Yes      | Maker fees    |
 | takerFee | double | Yes      | Taker fees    |
+
+
+## Bind TP/SL
+> Request
+
+```json
+{
+    "symbol": "BTC-PERP",
+    "side":"SELL",
+    "takeProfitPrice": 31000,
+    "takeProfitTrigger": "markPrice",
+    "stopLossPrice": 22000,
+    "stopLossTrigger": "lastPrice"
+}
+```
+
+> Response
+
+```json
+[
+    {
+        "status": 9,
+        "symbol": "BTC-PERP",
+        "orderType": 77,
+        "price": 0.0,
+        "side": "SELL",
+        "size": 100,
+        "orderID": "4820b20a-e41b-4273-b3ad-4b19920aeeb5",
+        "timestamp": 1691974463934,
+        "triggerPrice": 31000.0,
+        "trigger": true,
+        "deviation": 100.0,
+        "stealth": 100.0,
+        "message": "",
+        "avgFillPrice": 0.0,
+        "fillSize": 0.0,
+        "clOrderID": "",
+        "originalSize": 100.0,
+        "postOnly": false,
+        "remainingSize": 100.0,
+        "orderDetailType": null,
+        "time_in_force": "GTC"
+    }
+]
+```
+
+`POST /api/v2.1/order/bind/tpsl`
+
+Bint TP/SL with an existing position
+
+### Request Parameters
+
+| Name               | Type    | Required | Description
+| ---                | ---     | ---      | --- 
+| symbol             | string  | yes       | Market symbol
+| side               | string  | yes       | "BUY" or "SELL" for TP/SL order
+| takeProfitPrice    | double  | No        | Mandatory when creating new order with take profit order. Indicates the trigger price. Must set takeProfitPrice or stopLossPrice at least when using this API. |
+| takeProfitTrigger  | string  | No        | For creating order with take profit order. Valid options: `markPrice` (default) or `lastPrice` |
+| stopLossPrice      | double  | No        | Mandatory when creating new order with stop loss order. Indicates the trigger price        |
+| stopLossTrigger     | string | No       | For creating order with stop loss order. Valid options: `markPrice` (default) or `lastPrice`|
+
+### Response Content
+
+| Name          | Type    | Required | Description |
+| ---           | ---     | ---      | --- |
+| symbol        | string  | Yes      | Market symbol |
+| clOrderID     | string  | Yes      | Customer tag sent in by trader |
+| fillSize      | number  | Yes      | Trade filled size |
+| orderID       | string  | Yes      | Order ID |
+| orderType     | string  | Yes      | Order type <br/>76: Limit Order<br/>77: Market order<br/>80: Algo order |
+| postOnly      | boolean | Yes      | Indicates if order is a post only order |
+| price         | double  | Yes      | Order price |
+| side          | string  | Yes      | Order side<br/>BUY or SELL |
+| size          | long    | Yes      | Order size in `contract size` (this remains unchanged even after risk limit adjustment) |
+| status        | long    | Yes      | Order status<br/>	2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed |
+| time_in_force | string  | Yes      | Order validity |
+| timestamp     | long    | Yes      | Order timestamp |
+| trigger       | boolean | Yes      | Indicator if order is a trigger order |
+| triggerPrice  | double  | Yes      | Order trigger price, returns 0 if order is not a trigger order |
+| avgFillPrice  | double  | Yes      | Average filled price. Returns the average filled price for partially transacted orders |
+| message       | string  | Yes      | Trade messages |
+| stealth       | string  | Yes      | Only valid for Algo orders |
+| deviation     | double  | Yes      | Only valid for Algo |
+| remainingSize | double  | Yes      | Size left to be transacted |
+| originalSize  | double  | Yes      | Original order size |
 
 
 ## Query Position Mode
@@ -2753,8 +2925,8 @@ Subscribe to recent trade feed for a market. The topic will be `tradeHistoryApi:
 
 Authenticate the websocket session to subscribe to authenticated websocket topics. Assume we have values as follows:
 
-* `btse-nonce`: 1624985375123
-* `btse-api`: 4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x
+* `request-nonce`: 1624985375123
+* `request-api`: 4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x
 * `secret`: 848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx
 
 Our subscription request will be:
@@ -2930,7 +3102,7 @@ When a trade has been transacted, this topic will send the trade information bac
 
 > Response
 
-```
+```json
 {
   "topic": "allPosition",
   "data": [{
@@ -2949,26 +3121,38 @@ When a trade has been transacted, this topic will send the trade information bac
     "triggerPrice": 0.0,
     "closeOrder": false,
     "liquidationInProgress": false,
-		"marginType": 91,
-		"entryPrice": 47303.404761929,
-		"liquidationPrice": 0.0,
-		"markedPrice": 47293.949862586,
-		"unrealizedProfitLoss": -0.13236859,
-		"totalMaintenanceMargin": 3.484381756,
-		"totalContracts": 14.0,
-		"isolatedLeverage": 0.0,
-		"totalFees": 0.0,
-		"totalValue": 662.115298076,
-		"adlScoreBucket": 2.0,
-		"orderTypeName": "TYPE_FUTURES_POSITION",
-		"orderModeName": "MODE_BUY",
-		"marginTypeName": "FUTURES_MARGIN_CROSS",
-		"currentLeverage": 0.02,
-		"avgFillPrice": 0.0,
+    "marginType": 91,
+    "entryPrice": 29286.404761929,
+    "liquidationPrice": 0.0,
+    "markedPrice": 29267.967916154,
+    "unrealizedProfitLoss": -0.13236859,
+    "totalMaintenanceMargin": 3.484381756,
+    "totalContracts": 14.0,
+    "isolatedLeverage": 0.0,
+    "totalFees": 0.0,
+    "totalValue": 662.115298076,
+    "adlScoreBucket": 2.0,
+    "orderTypeName": "TYPE_FUTURES_POSITION",
+    "orderModeName": "MODE_BUY",
+    "marginTypeName": "FUTURES_MARGIN_CROSS",
+    "currentLeverage": 0.02,
+    "avgFillPrice": 0.0,
     "positionId": "ETHPFC-USD|SHORT",
     "positionMode": "HEDGE",
     "positionDirection": "SHORT",
-		"settleWithNonUSDAsset": "BTC"
+		"settleWithNonUSDAsset": "BTC",
+    "takeProfitOrder": {
+        "orderId": "4820b20a-e41b-4273-b3ad-4b19920aeeb5",
+        "side": "SELL",
+        "triggerPrice": 31000.0,
+        "triggerUseLastPrice": false
+    },
+    "stopLossOrder": {
+        "orderId": "eff2b232-e2ce-4562-b0b4-0bd3713c11ec",
+        "side": "SELL",
+        "triggerPrice": 27000.0,
+        "triggerUseLastPrice": true
+    }
   }]
 }
 ```
@@ -2994,7 +3178,7 @@ All futures positions will be pushed periodically via this topic.
 | maxStealthDisplayAmount | double  | Yes      | used for peg order                           |
 | sellexchangeRate        | double  | Yes      |                                              |
 | triggerPrice            | double  | Yes      | OCO order                                    |
-| closeOrder              | boolean | Yes      | is the order closed                          |
+| closeOrder              | boolean | Yes      | whether it has an order to close this position                        |
 | liquidationInProgress   | boolean | Yes      | whether is in liquidation                    |
 | marginType              | integer | Yes      | WALLET TYPE:<br/>91: CROSS<br/>92: ISOLDATED |
 | marginTypeName          | string  | Yes      | String representation of marginType          |
@@ -3011,6 +3195,8 @@ All futures positions will be pushed periodically via this topic.
 | currentLeverage         | double  | Yes      |                                              |
 | avgFillPrice            | double  | Yes      |                                              |
 | settleWithNonUSDAsset   | string  | Yes      |                                              |
+| takeProfitOrder        | TakeProfitOrder object | No | Take profit order info               |
+| stopLossOrder          | StopLossOrder object   | No | Stop loss order info                 |
 | positionId              | string  | Yes      | Position ID                                  |
 
 </section>
