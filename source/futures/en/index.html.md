@@ -3011,5 +3011,6 @@ All futures positions will be pushed periodically via this topic.
 | currentLeverage         | double  | Yes      |                                              |
 | avgFillPrice            | double  | Yes      |                                              |
 | settleWithNonUSDAsset   | string  | Yes      |                                              |
+| positionId              | string  | Yes      | Position ID                                  |
 
 </section>
