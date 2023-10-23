@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-2-6-12-23th-october-2023" class="toc-h2 toc-link" data-title="Version 2.6.12 (23th October 2023)">Version 2.6.12 (23th October 2023)</a>
+                  </li>
+                  <li>
                     <a href="#version-2-6-11-16th-october-2023" class="toc-h2 toc-link" data-title="Version 2.6.11 (16th October 2023)">Version 2.6.11 (16th October 2023)</a>
                   </li>
                   <li>
@@ -500,6 +503,9 @@
                   <li>
                     <a href="#all-position" class="toc-h2 toc-link" data-title="All Position">All Position</a>
                   </li>
+                  <li>
+                    <a href="#positions" class="toc-h2 toc-link" data-title="Positions">Positions</a>
+                  </li>
               </ul>
           </li>
       </ul>
@@ -509,12 +515,16 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-2-6-11-16th-october-2023'>Version 2.6.11 (16th October 2023)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-2-6-12-23th-october-2023'>Version 2.6.12 (23th October 2023)</h2>
 <ul>
-<li>Add TP/SL (Take Profit/Stop Loss) parameters in <a href="#create-new-order">Create New Order</a></li>
-<li>Add API <a href="#bind-tp/sl">Bind TP/SL</a> in Trade Endpoints to bind TP/SL with an existing position</li>
-<li>Add TP/SL fields in Trade Endpoints <a href="#query-open-orders">Query Open Orders</a> and <a href="#query-position">Query Positions</a> </li>
-<li>Add TP/SL fields in Websocket Streams <a href="#all-position">All Position</a></li>
+<li>Add <a href="#positions"><code>positions</code></a> in websocket streams for user to get all positions includes closed position</li>
+</ul>
+<h2 id='version-2-6-11-16th-october-2023'>Version 2.6.11 (16th October 2023)</h2>
+<ul>
+<li>Add TP/SL (Take Profit/Stop Loss) parameters in <a href="#create-new-order"><code>Create New Order</code></a></li>
+<li>Add API <a href="#bind-tp-sl"><code>Bind TP/SL</code></a> in Trade Endpoints to bind TP/SL with an existing position</li>
+<li>Add TP/SL fields in Trade Endpoints <a href="#query-open-orders"><code>Query Open Orders</code></a> and <a href="#query-position"><code>Query Positions</code></a> </li>
+<li>Add TP/SL fields in Websocket Streams <a href="#all-position"><code>All Position</code></a></li>
 </ul>
 <h2 id='version-2-6-10-3rd-october-2023'>Version 2.6.10 (3rd October 2023)</h2>
 <ul>
@@ -542,7 +552,7 @@
 </ul>
 <h2 id='version-2-6-4-7th-june-2023'>Version 2.6.4 (7th June 2023)</h2>
 <ul>
-<li>update wallet/transfer <a href="#transfer-funds-between-futures-wallet"><code>URL</code></a> from /api/v2.1/wallet/transfer to /api/v2.1/user/wallet/transfer</li>
+<li>Update wallet/transfer <a href="#transfer-funds-between-futures-wallet"><code>URL</code></a> from /api/v2.1/wallet/transfer to /api/v2.1/user/wallet/transfer</li>
 </ul>
 <h2 id='version-2-6-3-6th-june-2023'>Version 2.6.3 (6th June 2023)</h2>
 <ul>
@@ -6366,6 +6376,326 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 </span></code></pre></div>
 <p>All futures positions will be pushed periodically via this topic.</p>
 <h3 id='response-content-34'>Response Content</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>requestId</td>
+<td>integer</td>
+<td>Yes</td>
+<td>request id</td>
+</tr>
+<tr>
+<td>username</td>
+<td>string</td>
+<td>Yes</td>
+<td>btse username</td>
+</tr>
+<tr>
+<td>marketName</td>
+<td>string</td>
+<td>Yes</td>
+<td>market name</td>
+</tr>
+<tr>
+<td>orderType</td>
+<td>integer</td>
+<td>Yes</td>
+<td>90: Futures Position</td>
+</tr>
+<tr>
+<td>orderTypeName</td>
+<td>string</td>
+<td>Yes</td>
+<td>String representation of orderType</td>
+</tr>
+<tr>
+<td>orderMode</td>
+<td>integer</td>
+<td>Yes</td>
+<td>66: BUY<br/>83: SELL</td>
+</tr>
+<tr>
+<td>orderModeName</td>
+<td>string</td>
+<td>Yes</td>
+<td>String representation of orderModeName</td>
+</tr>
+<tr>
+<td>originalAmount</td>
+<td>double</td>
+<td>Yes</td>
+<td>order amount</td>
+</tr>
+<tr>
+<td>maxPriceHeld</td>
+<td>double</td>
+<td>Yes</td>
+<td>max price of all time</td>
+</tr>
+<tr>
+<td>pegPriceMin</td>
+<td>double</td>
+<td>Yes</td>
+<td>peg price min</td>
+</tr>
+<tr>
+<td>stealth</td>
+<td>double</td>
+<td>Yes</td>
+<td>used for peg order</td>
+</tr>
+<tr>
+<td>orderID</td>
+<td>string</td>
+<td>Yes</td>
+<td>order id</td>
+</tr>
+<tr>
+<td>maxStealthDisplayAmount</td>
+<td>double</td>
+<td>Yes</td>
+<td>used for peg order</td>
+</tr>
+<tr>
+<td>sellexchangeRate</td>
+<td>double</td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td>triggerPrice</td>
+<td>double</td>
+<td>Yes</td>
+<td>OCO order</td>
+</tr>
+<tr>
+<td>closeOrder</td>
+<td>boolean</td>
+<td>Yes</td>
+<td>whether it has an order to close this position</td>
+</tr>
+<tr>
+<td>liquidationInProgress</td>
+<td>boolean</td>
+<td>Yes</td>
+<td>whether is in liquidation</td>
+</tr>
+<tr>
+<td>marginType</td>
+<td>integer</td>
+<td>Yes</td>
+<td>WALLET TYPE:<br/>91: CROSS<br/>92: ISOLDATED</td>
+</tr>
+<tr>
+<td>marginTypeName</td>
+<td>string</td>
+<td>Yes</td>
+<td>String representation of marginType</td>
+</tr>
+<tr>
+<td>entryPrice</td>
+<td>double</td>
+<td>Yes</td>
+<td>entry price</td>
+</tr>
+<tr>
+<td>liquidationPrice</td>
+<td>double</td>
+<td>Yes</td>
+<td>liquidation price</td>
+</tr>
+<tr>
+<td>markPrice</td>
+<td>double</td>
+<td>Yes</td>
+<td>mark price</td>
+</tr>
+<tr>
+<td>unrealizedProfitLoss</td>
+<td>double</td>
+<td>Yes</td>
+<td>unrealized pnl</td>
+</tr>
+<tr>
+<td>totalMaintenanceMargin</td>
+<td>double</td>
+<td>Yes</td>
+<td>maintenance margin</td>
+</tr>
+<tr>
+<td>totalContract</td>
+<td>double</td>
+<td>Yes</td>
+<td>size of the contract</td>
+</tr>
+<tr>
+<td>isolatedLeverage</td>
+<td>double</td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td>totalFees</td>
+<td>double</td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td>totalValue</td>
+<td>double</td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td>adlScoreBucket</td>
+<td>double</td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td>currentLeverage</td>
+<td>double</td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td>avgFillPrice</td>
+<td>double</td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td>settleWithNonUSDAsset</td>
+<td>string</td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td>takeProfitOrder</td>
+<td>TakeProfitOrder object</td>
+<td>No</td>
+<td>Take profit order info</td>
+</tr>
+<tr>
+<td>stopLossOrder</td>
+<td>StopLossOrder object</td>
+<td>No</td>
+<td>Stop loss order info</td>
+</tr>
+</tbody></table>
+<h2 id='positions'>Positions</h2>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"op"</span><span class="p">:</span><span class="s2">"subscribe"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"args"</span><span class="p">:[</span><span class="s2">"positions"</span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"positions"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+    </span><span class="nl">"requestId"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"btse"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"marketName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC-USD"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">90</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderMode"</span><span class="p">:</span><span class="w"> </span><span class="mi">66</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"originalAmount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.001</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"maxPriceHeld"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"pegPriceMin"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"maxStealthDisplayAmount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"sellexchangeRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"closeOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"liquidationInProgress"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"marginType"</span><span class="p">:</span><span class="w"> </span><span class="mi">91</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"entryPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">29286.404761929</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"liquidationPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"markedPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">29267.967916154</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"unrealizedProfitLoss"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.13236859</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalMaintenanceMargin"</span><span class="p">:</span><span class="w"> </span><span class="mf">3.484381756</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalContracts"</span><span class="p">:</span><span class="w"> </span><span class="mf">14.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"isolatedLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalFees"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalValue"</span><span class="p">:</span><span class="w"> </span><span class="mf">662.115298076</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"adlScoreBucket"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderTypeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TYPE_FUTURES_POSITION"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderModeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MODE_BUY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"marginTypeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FUTURES_MARGIN_CROSS"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currentLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.02</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"avgFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"settleWithNonUSDAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"takeProfitOrder"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4820b20a-e41b-4273-b3ad-4b19920aeeb5"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SELL"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">31000.0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"triggerUseLastPrice"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"stopLossOrder"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eff2b232-e2ce-4562-b0b4-0bd3713c11ec"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SELL"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">27000.0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"triggerUseLastPrice"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Response (The position has been closed)</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"positions"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+    </span><span class="nl">"requestId"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"btse"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"marketName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC-USD"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderMode"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"originalAmount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"maxPriceHeld"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"pegPriceMin"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"maxStealthDisplayAmount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"sellexchangeRate"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"closeOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"liquidationInProgress"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"marginType"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"entryPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"liquidationPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"markedPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"unrealizedProfitLoss"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalMaintenanceMargin"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalContracts"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"isolatedLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalFees"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"adlScoreBucket"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderTypeName"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderModeName"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"marginTypeName"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currentLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"avgFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"settleWithNonUSDAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"takeProfitOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stopLossOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+  </span><span class="p">}]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>All futures positions will be pushed periodically via this topic. If the user reduces the position to 0, the topic will push data with the totalContracts value of 0 once.&quot;</p>
+<h3 id='response-content-35'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
