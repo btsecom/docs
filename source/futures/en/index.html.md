@@ -2930,7 +2930,7 @@ When a trade has been transacted, this topic will send the trade information bac
 }
 ```
 
-All futures positions will be pushed periodically via this topic.
+All futures positions will be pushed via this topic once the position changes.
 
 ### Response Content
 
@@ -3079,7 +3079,7 @@ All futures positions will be pushed periodically via this topic.
 }
 ```
 
-All futures positions will be pushed periodically via this topic. If the user reduces the position to 0, the topic will push data with the totalContracts value of 0 once.
+All futures positions will be pushed via this topic once the position changes. If the user reduces the position to 0, the topic will push data with the totalContracts value of 0 once.
 
 ### Response Content
 
