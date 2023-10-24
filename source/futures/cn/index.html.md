@@ -13,11 +13,14 @@ headingLevel: 2
 
 # 更新日志
 
+## 版本 2.6.12 (2023年10月23日)
+* 在websocket流中添加[`倉位`](#58eab4157c)，使用户能够获取包括已关闭倉位在内的所有倉位
+
 ## 版本 2.6.11（2023年10月16日）
-* 在[创建新订单](#8be954be0d)中添加TP/SL（止盈/止损）参数
-* 在交易端点中添加API [绑定TP/SL](#3a59fc75d3) 以将TP/SL与现有持仓绑定
-* 在交易端点 [查询未完成订单](#72485acdf4) 和 [查询持仓](#e602fd627b) 中添加TP/SL字段
-* 在WebSocket流 [所有仓位](#35edece5cf) 中添加TP/SL字段
+* 在[`创建新订单`](#8be954be0d)中添加TP/SL（止盈/止损）参数
+* 在交易端点中添加API [`绑定TP/SL`](#3a59fc75d3) 以将TP/SL与现有持仓绑定
+* 在交易端点 [`查询未完成订单`](#72485acdf4) 和 [`查询持仓`](#e602fd627b) 中添加TP/SL字段
+* 在WebSocket流 [`所有仓位`](#35edece5cf) 中添加TP/SL字段
 
 ## 版本 2.6.10（2023年10月3日）
 * 修正响应数据类型
@@ -2964,5 +2967,154 @@ echo -n "/ws/futures1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6
 | settleWithNonUSDAsset   | string  | Yes      |                                                    |
 | takeProfitOrder | TakeProfitOrder对象 | No | 止盈订单信息                                            |
 | stopLossOrder | StopLossOrder对象 | No | 止损订单信息                                                |
+
+## 倉位
+
+> 请求
+
+```json
+{
+  "op":"subscribe",
+  "args":["positions"]
+}
+```
+> 响应
+
+```json
+{
+  "topic": "positions",
+  "data": [{
+    "requestId": 0,
+    "username": "btse",
+    "marketName": "BTCPFC-USD",
+    "orderType": 90,
+    "orderMode": 66,
+    "originalAmount": 0.001,
+    "maxPriceHeld": 0.0,
+    "pegPriceMin": 0.0,
+    "stealth": 1.0,
+    "orderID": null,
+    "maxStealthDisplayAmount": 0.0,
+    "sellexchangeRate": 0.0,
+    "triggerPrice": 0.0,
+    "closeOrder": false,
+    "liquidationInProgress": false,
+    "marginType": 91,
+    "entryPrice": 29286.404761929,
+    "liquidationPrice": 0.0,
+    "markedPrice": 29267.967916154,
+    "unrealizedProfitLoss": -0.13236859,
+    "totalMaintenanceMargin": 3.484381756,
+    "totalContracts": 14.0,
+    "isolatedLeverage": 0.0,
+    "totalFees": 0.0,
+    "totalValue": 662.115298076,
+    "adlScoreBucket": 2.0,
+    "orderTypeName": "TYPE_FUTURES_POSITION",
+    "orderModeName": "MODE_BUY",
+    "marginTypeName": "FUTURES_MARGIN_CROSS",
+    "currentLeverage": 0.02,
+    "avgFillPrice": 0.0,
+    "settleWithNonUSDAsset": "BTC",
+    "takeProfitOrder": {
+      "orderId": "4820b20a-e41b-4273-b3ad-4b19920aeeb5",
+      "side": "SELL",
+      "triggerPrice": 31000.0,
+      "triggerUseLastPrice": false
+    },
+    "stopLossOrder": {
+      "orderId": "eff2b232-e2ce-4562-b0b4-0bd3713c11ec",
+      "side": "SELL",
+      "triggerPrice": 27000.0,
+      "triggerUseLastPrice": true
+    }
+  }]
+}
+```
+
+> 响应 (倉位已关闭)
+
+```json
+{
+  "topic": "positions",
+  "data": [{
+    "requestId": 0,
+    "username": "btse",
+    "marketName": "BTCPFC-USD",
+    "orderType": 0,
+    "orderMode": 0,
+    "originalAmount": 0,
+    "maxPriceHeld": 0,
+    "pegPriceMin": 0,
+    "stealth": 0,
+    "orderID": null,
+    "maxStealthDisplayAmount": 0,
+    "sellexchangeRate": 0,
+    "triggerPrice": 0,
+    "closeOrder": false,
+    "liquidationInProgress": false,
+    "marginType": 0,
+    "entryPrice": 0,
+    "liquidationPrice": 0,
+    "markedPrice": 0,
+    "unrealizedProfitLoss": 0,
+    "totalMaintenanceMargin": 0,
+    "totalContracts": 0,
+    "isolatedLeverage": 0,
+    "totalFees": 0,
+    "totalValue": 0,
+    "adlScoreBucket": 0,
+    "orderTypeName": null,
+    "orderModeName": null,
+    "marginTypeName": null,
+    "currentLeverage": 0,
+    "avgFillPrice": 0,
+    "settleWithNonUSDAsset": "BTC",
+    "takeProfitOrder": null,
+    "stopLossOrder": null
+  }]
+}
+```
+
+所有期货倉位将定期通过此主题推送。如果用户将倉位减少到0，该主题将推送一次totalContracts值为0的数据。
+
+### 响应内容
+
+| 名称                    | 类型    | 是否必须  | 描述                                  |
+| ---                     | ---     | ---      | ---                                    |
+| requestId               | integer | Yes      | 请求ID                                |
+| username                | string  | Yes      | btse 用户名                            |
+| marketName              | string  | Yes      | 市场名称                              |
+| orderType               | integer | Yes      | 90: 期货倉位                          |
+| orderTypeName           | string  | Yes      | orderType的字符串表示                  |
+| orderMode               | integer | Yes      | 66: 买入<br/>83: 卖出                 |
+| orderModeName           | string  | Yes      | orderModeName的字符串表示              |
+| originalAmount          | double  | Yes      | 订单数量                              |
+| maxPriceHeld            | double  | Yes      | 历史最高价                            |
+| pegPriceMin             | double  | Yes      | Peg最低价                             |
+| stealth                 | double  | Yes      | 用于peg订单                           |
+| orderID                 | string  | Yes      | 订单ID                                |
+| maxStealthDisplayAmount | double  | Yes      | 用于peg订单                           |
+| sellexchangeRate        | double  | Yes      |                                        |
+| triggerPrice            | double  | Yes      | OCO订单                               |
+| closeOrder              | boolean | Yes      | 是否有一个订单来关闭此倉位            |
+| liquidationInProgress   | boolean | Yes      | 是否正在进行清算                      |
+| marginType              | integer | Yes      | 钱包类型:<br/>91: 全仓<br/>92: 隔离仓  |
+| marginTypeName          | string  | Yes      | marginType的字符串表示                |
+| entryPrice              | double  | Yes      | 入场价格                              |
+| liquidationPrice        | double  | Yes      | 清算价格                              |
+| markPrice               | double  | Yes      | 标记价格                              |
+| unrealizedProfitLoss    | double  | Yes      | 未实现盈亏                            |
+| totalMaintenanceMargin  | double  | Yes      | 维护保证金                            |
+| totalContract           | double  | Yes      | 合约的大小                            |
+| isolatedLeverage        | double  | Yes      |                                        |
+| totalFees               | double  | Yes      |                                        |
+| totalValue              | double  | Yes      |                                        |
+| adlScoreBucket          | double  | Yes      |                                        |
+| currentLeverage         | double  | Yes      |                                        |
+| avgFillPrice            | double  | Yes      |                                        |
+| settleWithNonUSDAsset   | string  | Yes      |                                        |
+| takeProfitOrder         | TakeProfitOrder object | No       | 止盈订单信息              |
+| stopLossOrder           | StopLossOrder object   | No       | 止损订单信息              |
 
 </section>
