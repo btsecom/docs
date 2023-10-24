@@ -381,7 +381,7 @@
                     <a href="#3eedd32d80" class="toc-h2 toc-link" data-title="取消订单">取消订单</a>
                   </li>
                   <li>
-                    <a href="#72c36eb5ed" class="toc-h2 toc-link" data-title="死人开关（延时自动取消所有）">死人开关（延时自动取消所有）</a>
+                    <a href="#8d3ae04eb2" class="toc-h2 toc-link" data-title="延时自动取消所有">延时自动取消所有</a>
                   </li>
                   <li>
                     <a href="#72485acdf4" class="toc-h2 toc-link" data-title="查询未完成订单">查询未完成订单</a>
@@ -2487,7 +2487,7 @@
 <td>订单的偏差值</td>
 </tr>
 </tbody></table>
-<h2 id='72c36eb5ed'>死人开关（延时自动取消所有）</h2>
+<h2 id='8d3ae04eb2'>延时自动取消所有</h2>
 <blockquote>
 <p>请求</p>
 </blockquote>
@@ -2497,7 +2497,7 @@
 </span></code></pre></div>
 <p><code>POST /api/v3.2/order/cancelAllAfter</code></p>
 
-<p>死人开关允许交易员发送一个超时值，这是一个订单的生存时间 (TTL) 值。通过发送另一个 <code>cancelAllAfter</code> 请求来延长超时时间。如果服务器在超时时间到达之前没有收到另一个请求，所有订单将被取消。</p>
+<p>允许交易员发送一个超时值，这是一个订单的生存时间 (TTL) 值。通过发送另一个 <code>cancelAllAfter</code> 请求来延长超时时间。如果服务器在超时时间到达之前没有收到另一个请求，所有订单将被取消。</p>
 <h3 id='1f9ac54b15-10'>请求参数</h3>
 <table><thead>
 <tr>
