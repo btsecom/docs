@@ -1446,7 +1446,9 @@ BTSE 的速率限制如下：
     "triggerPrice": 0,
     "triggerType": 0,
     "username": "string",
-    "wallet": "string"
+    "wallet": "string",
+    "tradeId": "string",
+    "orderId": "string"
   }
 ]
 ```
@@ -1466,6 +1468,7 @@ BTSE 的速率限制如下：
 | afterSerialId     | string  | No       | 获取指定序列ID之后的记录的条件。用于分页                                                             |
 | count             | long    | No       | 返回的记录数量                                                                                      |
 | includeOld        | boolean | No       | 检索过去7天的交易历史记录                                                                            |
+| orderID           | string  | No       | 通过订单ID查询交易历史                |
 | clOrderID         | string  | No       | 通过自定义订单ID查询交易历史                                                                         |
 | useNewSymbolNaming| boolean | No       | 若为True，则使用新格式的期货市场名称作为符号， 默认为False                                             |
 
@@ -2819,20 +2822,20 @@ echo -n "/ws/futures1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6
 {
   "topic": "fills",
   "data": [{
-    "orderId": "order id", //string
-    "serialId": "serial ID after insertion into DB", //integer / long
-    "clOrderId": "Client Order ID", //string
-    "type": "order type", //string
-    "symbol": "ex: BTC-USD", //string
-    "side": "BUY|SELL" //string
-    "price": "filled price", //double (need to make sure no scientific notation)
-    "size": "filled size", //double (no scientific notation)
-    "feeAmount": "Fees charged to user, value to be String on API", //double (no scientific notation)
-    "feeCurrency": "Fee currency, eg. Buy would be BTC, Sell would be USD" //string
-    "base": "Base currency, eg. BTC",  //string
-    "quote": "Quote currency eg. USD", //string
-    "maker": "maker or taker",  //boolean (if maker, return true, else return false)
-    "timestamp": "Time trade was matched in the engine" //long, field taken from DB,
+    "orderId": "order id",
+    "serialId": "serial ID after insertion into DB",
+    "clOrderId": "Client Order ID",
+    "type": "order type",
+    "symbol": "ex: BTC-USD",
+    "side": "BUY|SELL",
+    "price": "filled price",
+    "size": "filled size",
+    "feeAmount": "Fees charged to user, value to be String on API",
+    "feeCurrency": "Fee currency, eg. Buy would be BTC, Sell would be USD",
+    "base": "Base currency, eg. BTC",
+    "quote": "Quote currency eg. USD",
+    "maker": "maker or taker",
+    "timestamp": "Time trade was matched in the engine",
     "tradeId": "Trade Unique ID"
   }]
 }
@@ -2847,8 +2850,8 @@ echo -n "/ws/futures1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6
 | 名称        | 类型    | 必须 | 描述                                                                                                      |
 | ---         | ---     | ---  | ---                                                                                                      |
 | symbol      | string  | Yes      | 市场符号                                                                                                  |
-| orderID     | string  | Yes      | 内部订单ID                                                                                                |
-| clOrderID   | string  | Yes      | 自定义订单ID                                                                                              |
+| orderId     | string  | Yes      | 内部订单ID                                                                                                |
+| clOrderId   | string  | Yes      | 自定义订单ID                                                                                              |
 | serialId    | string  | Yes      | 交易序列ID                                                                                                |
 | tradeId     | string  | Yes      | 交易唯一标识符                                                                                            |
 | type        | int     | Yes      | 订单类型。有效值为：<br/>76: 限价订单<br/>77: 市价订单<br/>80: 算法订单                                   |
@@ -2927,7 +2930,7 @@ echo -n "/ws/futures1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6
 }
 ```
 
-所有期货仓位都会通过此主题定期推送。
+一旦仓位发生变化，所有期货仓位将通过这个主题推送。
 
 ### 响应内容
 
@@ -3076,7 +3079,7 @@ echo -n "/ws/futures1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6
 }
 ```
 
-所有期货倉位将定期通过此主题推送。如果用户将倉位减少到0，该主题将推送一次totalContracts值为0的数据。
+一旦仓位发生变化，所有期货仓位将通过这个主题推送。如果用户将倉位减少到0，该主题将推送一次totalContracts值为0的数据。
 
 ### 响应内容
 
