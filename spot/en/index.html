@@ -196,7 +196,7 @@
   color: #f92672;
 }
     </style>
-    <link href="../../stylesheets/screen-a7292fd4.css" rel="stylesheet" media="screen" />
+    <link href="../../stylesheets/screen-bcf56b31.css" rel="stylesheet" media="screen" />
     <link href="../../stylesheets/print-953e3353.css" rel="stylesheet" media="print" />
       <script src="../../javascripts/all-a9fde460.js"></script>
 
@@ -4400,9 +4400,11 @@ const IS_DEV = false;
 const DOCS_PREFIX = IS_DEV ? '/' : '/docs/';
 const TAB_MAP = {
   spot: {
+    en: 'Spot',
     cn: '现货'
   },
   futures: {
+    en: 'Futures',
     cn: '期货'
   },
   otc: {
@@ -4411,15 +4413,18 @@ const TAB_MAP = {
   },
   wallet: {
     en: 'Wallet/Convert/Transfer',
-    cn: '錢包'
+    cn: '钱包/转换/转账'
   },
   streaming: {
-    cn: '串流'
+    en: 'Streaming',
+    cn: '數據流'
   },
   fix: {
-    en: 'FIX'
+    en: 'FIX',
+    cn: 'FIX'
   },
   earn: {
+    en: 'Earn',
     cn: '賺幣'
   }
 };
@@ -4467,6 +4472,14 @@ function generateNavHtml(lang, isTab) {
   })
 }
 
+function addChangeLanguageLink(lang) {
+  // add change lang link in navbar.
+  const langText = lang === 'en' ? '中文' : 'English';
+  const langHref = lang === 'en' ? location.href.replace('/en/', '/cn/') : location.href.replace('/cn/', '/en/');
+  const langLink = `<a class="change-lang-link" href="${langHref}">${langText}</a>`;
+  $('#navBox').append(`<span class="nav_cell">${langLink}</span>`);
+}
+
 $(function() {
   const lang = getLang();
   $('#navBox').html(generateNavHtml(lang, true));
@@ -4485,6 +4498,7 @@ $(function() {
   $('#menuDropdownBtn').click(() => {
     $('.menu-dropdown').toggleClass('hide');
   });
+  addChangeLanguageLink(lang);
 });
   </script>
   </body>
