@@ -13,11 +13,14 @@ headingLevel: 2
 
 # Change Log
 
+## Version 2.6.12 (23th October 2023)
+* Add [`positions`](#positions) in websocket streams for user to get all positions includes closed position
+
 ## Version 2.6.11 (16th October 2023)
-* Add TP/SL (Take Profit/Stop Loss) parameters in [Create New Order](#create-new-order)
-* Add API [Bind TP/SL](#bind-tp/sl) in Trade Endpoints to bind TP/SL with an existing position
-* Add TP/SL fields in Trade Endpoints [Query Open Orders](#query-open-orders) and [Query Positions](#query-position) 
-* Add TP/SL fields in Websocket Streams [All Position](#all-position)
+* Add TP/SL (Take Profit/Stop Loss) parameters in [`Create New Order`](#create-new-order)
+* Add API [`Bind TP/SL`](#bind-tp-sl) in Trade Endpoints to bind TP/SL with an existing position
+* Add TP/SL fields in Trade Endpoints [`Query Open Orders`](#query-open-orders) and [`Query Positions`](#query-position) 
+* Add TP/SL fields in Websocket Streams [`All Position`](#all-position)
 
 ## Version 2.6.10 (3rd October 2023)
 * Correct response data type
@@ -38,7 +41,7 @@ headingLevel: 2
 * We have introduced a new addition to our futures market: 1,000 Floki Perpetual Futures Contracts (1KFLOKI-PERP or 1KFLOKIPFC)
 
 ## Version 2.6.4 (7th June 2023)
-* update wallet/transfer [`URL`](#transfer-funds-between-futures-wallet) from /api/v2.1/wallet/transfer to /api/v2.1/user/wallet/transfer
+* Update wallet/transfer [`URL`](#transfer-funds-between-futures-wallet) from /api/v2.1/wallet/transfer to /api/v2.1/user/wallet/transfer
 
 ## Version 2.6.3 (6th June 2023)
 * Update the format of [`Wallet Detail Request`](#wallet-detail-request)
@@ -2518,7 +2521,7 @@ Transfers funds between user's wallet. User can specify the source and target wa
 | currency   | string | Yes      | Currency    |
 
 
-## Sub-Account Wallet Trasnsfer
+## Sub-Account Wallet Transfer
 
 `POST /api/v2.1/subaccount/wallet/transfer`
 
@@ -2802,7 +2805,7 @@ Also if [crossed orderbook](https://en.wikipedia.org/wiki/Order_book#Crossed_boo
 
 ## Ping/Pong
 For all our WebSocket servers, simply send a 'ping' message, and the WebSocket server will respond with a 'pong' message if the WebSocket connection is established and active.
-> Reques
+> Request
 
 ```
 ping
@@ -3198,5 +3201,154 @@ All futures positions will be pushed periodically via this topic.
 | takeProfitOrder        | TakeProfitOrder object | No | Take profit order info               |
 | stopLossOrder          | StopLossOrder object   | No | Stop loss order info                 |
 | positionId              | string  | Yes      | Position ID                                  |
+
+## Positions
+
+> Request
+
+```json
+{
+  "op":"subscribe",
+  "args":["positions"]
+}
+```
+> Response
+
+```json
+{
+  "topic": "positions",
+  "data": [{
+    "requestId": 0,
+    "username": "btse",
+    "marketName": "BTCPFC-USD",
+    "orderType": 90,
+    "orderMode": 66,
+    "originalAmount": 0.001,
+    "maxPriceHeld": 0.0,
+    "pegPriceMin": 0.0,
+    "stealth": 1.0,
+    "orderID": null,
+    "maxStealthDisplayAmount": 0.0,
+    "sellexchangeRate": 0.0,
+    "triggerPrice": 0.0,
+    "closeOrder": false,
+    "liquidationInProgress": false,
+    "marginType": 91,
+    "entryPrice": 29286.404761929,
+    "liquidationPrice": 0.0,
+    "markedPrice": 29267.967916154,
+    "unrealizedProfitLoss": -0.13236859,
+    "totalMaintenanceMargin": 3.484381756,
+    "totalContracts": 14.0,
+    "isolatedLeverage": 0.0,
+    "totalFees": 0.0,
+    "totalValue": 662.115298076,
+    "adlScoreBucket": 2.0,
+    "orderTypeName": "TYPE_FUTURES_POSITION",
+    "orderModeName": "MODE_BUY",
+    "marginTypeName": "FUTURES_MARGIN_CROSS",
+    "currentLeverage": 0.02,
+    "avgFillPrice": 0.0,
+    "settleWithNonUSDAsset": "BTC",
+    "takeProfitOrder": {
+        "orderId": "4820b20a-e41b-4273-b3ad-4b19920aeeb5",
+        "side": "SELL",
+        "triggerPrice": 31000.0,
+        "triggerUseLastPrice": false
+    },
+    "stopLossOrder": {
+        "orderId": "eff2b232-e2ce-4562-b0b4-0bd3713c11ec",
+        "side": "SELL",
+        "triggerPrice": 27000.0,
+        "triggerUseLastPrice": true
+    }
+  }]
+}
+```
+
+> Response (The position has been closed)
+
+```json
+{
+  "topic": "positions",
+  "data": [{
+    "requestId": 0,
+    "username": "btse",
+    "marketName": "BTCPFC-USD",
+    "orderType": 0,
+    "orderMode": 0,
+    "originalAmount": 0,
+    "maxPriceHeld": 0,
+    "pegPriceMin": 0,
+    "stealth": 0,
+    "orderID": null,
+    "maxStealthDisplayAmount": 0,
+    "sellexchangeRate": 0,
+    "triggerPrice": 0,
+    "closeOrder": false,
+    "liquidationInProgress": false,
+    "marginType": 0,
+    "entryPrice": 0,
+    "liquidationPrice": 0,
+    "markedPrice": 0,
+    "unrealizedProfitLoss": 0,
+    "totalMaintenanceMargin": 0,
+    "totalContracts": 0,
+    "isolatedLeverage": 0,
+    "totalFees": 0,
+    "totalValue": 0,
+    "adlScoreBucket": 0,
+    "orderTypeName": null,
+    "orderModeName": null,
+    "marginTypeName": null,
+    "currentLeverage": 0,
+    "avgFillPrice": 0,
+    "settleWithNonUSDAsset": "BTC",
+    "takeProfitOrder": null,
+    "stopLossOrder": null
+  }]
+}
+```
+
+All futures positions will be pushed periodically via this topic. If the user reduces the position to 0, the topic will push data with the totalContracts value of 0 once."
+
+### Response Content
+
+| Name                    | Type    | Required | Description                                  |
+| ---                     | ---     | ---      | ---                                          |
+| requestId               | integer | Yes      | request id                                   |
+| username                | string  | Yes      | btse username                                |
+| marketName              | string  | Yes      | market name                                  |
+| orderType               | integer | Yes      | 90: Futures Position                         |
+| orderTypeName           | string  | Yes      | String representation of orderType           |
+| orderMode               | integer | Yes      | 66: BUY<br/>83: SELL                         |
+| orderModeName           | string  | Yes      | String representation of orderModeName       |
+| originalAmount          | double  | Yes      | order amount                                 |
+| maxPriceHeld            | double  | Yes      | max price of all time                        |
+| pegPriceMin             | double  | Yes      | peg price min                                |
+| stealth                 | double  | Yes      | used for peg order                           |
+| orderID                 | string  | Yes      | order id                                     |
+| maxStealthDisplayAmount | double  | Yes      | used for peg order                           |
+| sellexchangeRate        | double  | Yes      |                                              |
+| triggerPrice            | double  | Yes      | OCO order                                    |
+| closeOrder              | boolean | Yes      | whether it has an order to close this position                        |
+| liquidationInProgress   | boolean | Yes      | whether is in liquidation                    |
+| marginType              | integer | Yes      | WALLET TYPE:<br/>91: CROSS<br/>92: ISOLDATED |
+| marginTypeName          | string  | Yes      | String representation of marginType          |
+| entryPrice              | double  | Yes      | entry price                                  |
+| liquidationPrice        | double  | Yes      | liquidation price                            |
+| markPrice               | double  | Yes      | mark price                                   |
+| unrealizedProfitLoss    | double  | Yes      | unrealized pnl                               |
+| totalMaintenanceMargin  | double  | Yes      | maintenance margin                           |
+| totalContract           | double  | Yes      | size of the contract                         |
+| isolatedLeverage        | double  | Yes      |                                              |
+| totalFees               | double  | Yes      |                                              |
+| totalValue              | double  | Yes      |                                              |
+| adlScoreBucket          | double  | Yes      |                                              |
+| currentLeverage         | double  | Yes      |                                              |
+| avgFillPrice            | double  | Yes      |                                              |
+| settleWithNonUSDAsset   | string  | Yes      |                                              |
+| takeProfitOrder        | TakeProfitOrder object | No | Take profit order info               |
+| stopLossOrder          | StopLossOrder object   | No | Stop loss order info                 |
 
 </section>

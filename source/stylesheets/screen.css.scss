@@ -862,3 +862,18 @@ header{
 .copy-clipboard:hover {
   opacity: 0.8;
 }
+
+.change-lang-link {
+  color: #FFFFFF;
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  border: 1px solid #FFFFFF;
+  transition: all 0.3s ease;
+}
+
+.change-lang-link:hover {
+  color: #FFFFFF;
+  background-color: #007BFF;
+  border: 1px solid #007BFF;
+}
