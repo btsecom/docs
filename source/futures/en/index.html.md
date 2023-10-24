@@ -2293,7 +2293,7 @@ Transfers funds between user's wallet. User can specify the source and target wa
 | currency   | string | Yes      | Currency    |
 
 
-## Sub-Account Wallet Trasnsfer
+## Sub-Account Wallet Transfer
 
 `POST /api/v2.1/subaccount/wallet/transfer`
 
@@ -2577,7 +2577,7 @@ Also if [crossed orderbook](https://en.wikipedia.org/wiki/Order_book#Crossed_boo
 
 ## Ping/Pong
 For all our WebSocket servers, simply send a 'ping' message, and the WebSocket server will respond with a 'pong' message if the WebSocket connection is established and active.
-> Reques
+> Request
 
 ```
 ping
