@@ -1221,30 +1221,33 @@ Retrieves open orders that have not yet been matched or matched recently.
 > Response
 
 ```json
-{
-  "base": "string",
-  "clOrderID": "string",
-  "feeAmount": 0,
-  "feeCurrency": "string",
-  "filledPrice": 0,
-  "filledSize": 0,
-  "orderId": "string",
-  "orderType": 0,
-  "price": 0,
-  "quote": "string",
-  "realizedPnl": 0,
-  "serialId": 0,
-  "side": "string",
-  "size": 0,
-  "symbol": "string",
-  "timestamp": 0,
-  "total": 0,
-  "tradeId": "string",
-  "triggerPrice": 0,
-  "triggerType": 0,
-  "username": "string",
-  "wallet": "string"
-}
+[
+  {
+    "tradeId": "9c6d016f-fbe3-4f82-aecc-8163e9220397",
+    "orderId": "ba0b69ae-991e-494a-afcb-bfbaeb1adc55",
+    "clOrderID": "_W_dmoryhbw1698118893191",
+    "username": "btse",
+    "side": "BUY",
+    "orderType": 77,
+    "triggerType": 0,
+    "price": 34799.000000025,
+    "size": 0.4,
+    "filledPrice": 34799.000000025,
+    "filledSize": 0.00001,
+    "triggerPrice": 0,
+    "base": "BTC",
+    "quote": "USDT",
+    "symbol": "BTC-USDT",
+    "feeCurrency": "BTC",
+    "feeAmount": 0.000000006,
+    "wallet": "SPOT@",
+    "realizedPnl": 0,
+    "total": 0,
+    "serialId": 94711228,
+    "timestamp": 1698118893000,
+    "averageFillPrice": 34799.000000025
+  }
+]
 ```
 
 `GET /api/v3.2/user/trade_history`
@@ -1266,26 +1269,31 @@ Retrieves a user's trade history which includes funding fee data.
 
 ### Response Content
 
-| Name        | Type   | Required | Description                             |
-| ---         | ---    | ---      | ---                                     |
-| symbol      | string | Yes      | Market symbol                           |
-| side        | string | Yes      | Trade side. Values are: [`BUY`, `sell`] |
-| price       | double | yes      | transacted price                        |
-| size        | double | yes      | transacted size                         |
-| serialid    | long   | yes      | serial id, running sequence number      |
-| tradeid     | string | yes      | trade identifier                        |
-| timestamp   | double | yes      | transacted timestamp                    |
-| base        | long   | yes      | base currency                           |
-| quote       | long   | yes      | quote currency                          |
-| clorderid   | long   | yes      | custom order id                         |
-| orderid     | long   | yes      | order id                                |
-| feeamount   | long   | yes      | fee amount                              |
-| feecurrency | long   | yes      | fee currency                            |
-| filledprice | long   | yes      | filled price                            |
-| filledsize  | long   | yes      | filled size                             |
-| ordertype   | integer| yes      | order type                              |
-| realizedpnl | long   | yes      | not used in spot                        |
-| total       | long   | yes      | not used in spot                        |
+| Name            | Type   | Required | Description                             |
+| ---             | ---    | ---      | ---                                     |
+| symbol          | string | Yes      | Market symbol                           |
+| side            | string | Yes      | Trade side. Values are: [`BUY`, `SELL`] |
+| price           | double | yes      | Transacted price                        |
+| size            | double | yes      | Transacted size                         |
+| serialId        | long   | yes      | Serial id, running sequence number      |
+| tradeId         | string | yes      | Trade identifier                        |
+| timestamp       | long   | yes      | Transacted timestamp                    |
+| base            | long   | yes      | Base currency                           |
+| quote           | long   | yes      | Quote currency                          |
+| clOrderID       | long   | yes      | Custom order id                         |
+| orderId         | long   | yes      | Order id                                |
+| feeAmount       | long   | yes      | Fee amount                              |
+| feeCurrency     | long   | yes      | Fee currency                            |
+| filledPrice     | long   | yes      | Filled price                            |
+| filledSize      | long   | yes      | Filled size                             |
+| orderType       | integer| yes      | Order type                              |
+| realizedPnl     | long   | yes      | Not used in spot                        |
+| total           | long   | yes      | Not used in spot                        |
+| triggerType     | integer| yes      | 1001: Stop Loss 1002: Take Profit       |
+| triggerPrice    | double | yes      | Trigger price                           |
+| wallet          | string | yes      | SPOT@ for spot transactions             |
+| averageFillPrice| string | yes      | Average fill price                      |
+| username        | string | yes      | Username                                |
 
 
 ## query account fees
@@ -1967,7 +1975,7 @@ echo -n "/ws/spot1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6726
   "topic": "notificationApiV2",
   "data": {
       "symbol": "Market Symbol (eg. BTC-USD)",
-      "orderId": "BTSE internal order ID",
+      "orderID": "BTSE internal order ID",
       "side": "BUY",
       "type": "76",
       "price": "Order price or transacted price",
@@ -2034,20 +2042,20 @@ Receive trade notifications by subscribing to the topic `notificationApiV2`. The
 {
   "topic": "fills",
   "data": [{
-    "orderId": "order id", //string
-    "serialId": "serial ID after insertion into DB", //integer / long
-    "clOrderId": "Client Order ID", //string
-    "type": "order type", //string
-    "symbol": "ex: BTC-USD", //string
-    "side": "BUY|SELL" //string
-    "price": "filled price", //double (need to make sure no scientific notation)
-    "size": "filled size", //double (no scientific notation)
-    "feeAmount": "Fees charged to user, value to be String on API", //double (no scientific notation)
-    "feeCurrency": "Fee currency, eg. Buy would be BTC, Sell would be USD" //string
-    "base": "Base currency, eg. BTC",  //string
-    "quote": "Quote currency eg. USD", //string
-    "maker": "maker or taker",  //boolean (if maker, return true, else return false)
-    "timestamp": "Time trade was matched in the engine" //long, field taken from DB,
+    "orderId": "order id",
+    "serialId": "serial ID after insertion into DB",
+    "clOrderId": "Client Order ID",
+    "type": "order type",
+    "symbol": "ex: BTC-USD",
+    "side": "BUY|SELL",
+    "price": "filled price",
+    "size": "filled size",
+    "feeAmount": "Fees charged to user, value to be String on API",
+    "feeCurrency": "Fee currency, eg. Buy would be BTC, Sell would be USD",
+    "base": "Base currency, eg. BTC", 
+    "quote": "Quote currency eg. USD",
+    "maker": "maker or taker",
+    "timestamp": "Time trade was matched in the engine",
     "tradeId": "Trade Unique ID"
   }]
 }
@@ -2062,8 +2070,8 @@ When a trade has been transacted, this topic will send the trade information bac
 | Name        | Type    | Required | Description                                                                                   |
 | ---         | ---     | ---      | ---                                                                                           |
 | symbol      | string  | Yes      | Market symbol                                                                                 |
-| orderID     | string  | Yes      | Internal order ID                                                                             |
-| clOrderID   | string  | Yes      | Custom order ID                                                                               |
+| orderId     | string  | Yes      | Internal order ID                                                                             |
+| clOrderId   | string  | Yes      | Custom order ID                                                                               |
 | serialId    | string  | Yes      | Trade sequence ID                                                                             |
 | tradeId     | string  | Yes      | Trade unique identifier                                                                       |
 | type        | int     | Yes      | Order type. Valid values are:<br/>76: Limit order<br/>77: Market order<br/>80: Peg/Algo order |
