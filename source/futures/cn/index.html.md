@@ -3398,7 +3398,10 @@ echo -n "/ws/futures1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6
     "avgFillPrice": 0,
     "settleWithNonUSDAsset": "BTC",
     "takeProfitOrder": null,
-    "stopLossOrder": null
+    "stopLossOrder": null,
+    "positionId": "BTCPFC-USD|SHORT",
+    "positionMode": null,
+    "positionDirection": null,
   }]
 }
 ```

@@ -2204,7 +2204,7 @@ Changes position mode
 | Name               | Type    | Required | Description
 | ---                | ---     | ---      | --- 
 | symbol             | string  | Yes      | Market symbol
-| positionMODE       | string  | Yes      | ONE_WAY or HEDGE 
+| positionMode       | string  | Yes      | ONE_WAY or HEDGE 
 
 ### Response Content
 
@@ -3262,8 +3262,9 @@ All futures positions will be pushed via this topic once the position changes.
 | settleWithNonUSDAsset   | string  | Yes      |                                              |
 | takeProfitOrder        | TakeProfitOrder object | No | Take profit order info               |
 | stopLossOrder          | StopLossOrder object   | No | Stop loss order info                 |
-| positionId              | string  | Yes      | Position ID                                  |
-
+| positionMode            | string  | Yes      | Position mode<br/>ONE_WAY or HEDGE           |
+| positionDirection       | string  | Yes      | Position direction                           |
+| positionId              | string  | Yes      | Position id                                  |
 ## Positions
 
 > Request
@@ -3407,7 +3408,10 @@ All futures positions will be pushed via this topic once the position changes.
     "avgFillPrice": 0,
     "settleWithNonUSDAsset": "BTC",
     "takeProfitOrder": null,
-    "stopLossOrder": null
+    "stopLossOrder": null,
+    "positionId": "BTCPFC-USD|SHORT",
+    "positionMode": null,
+    "positionDirection": null,
   }]
 }
 ```
@@ -3452,5 +3456,8 @@ All futures positions will be pushed via this topic once the position changes. I
 | settleWithNonUSDAsset   | string  | Yes      |                                              |
 | takeProfitOrder        | TakeProfitOrder object | No | Take profit order info               |
 | stopLossOrder          | StopLossOrder object   | No | Stop loss order info                 |
+| positionMode            | string  | Yes      | Position mode<br/>ONE_WAY or HEDGE           |
+| positionDirection       | string  | Yes      | Position direction                           |
+| positionId              | string  | Yes      | Position id                                  |
 
 </section>
