@@ -881,7 +881,7 @@ Get trade fills for the market specified by `symbol`
 }
 ```
 
-> Request (create hedge mode `MARKET` order)
+> Request (create hedge mode long position `MARKET` order)
 
 ```json
 {
@@ -892,6 +892,21 @@ Get trade fills for the market specified by `symbol`
   "positionMode": "HEDGE"
 }
 ```
+
+
+> Request (create hedge mode short position `MARKET` reduce order)
+
+```json
+{
+  "symbol": "BTCPFC",
+  "size": 1,
+  "side": "BUY",
+  "type": "MARKET",
+  "reduceOnly": true,
+  "positionMode": "HEDGE"
+}
+```
+
 > Response (general)
 
 ```json
@@ -1834,7 +1849,7 @@ Query risk limit for the specified market
   "riskLimit": 0
 }
 ```
-> Request (When  positionMode is `HEDGE`)
+> Request (When positionMode is `HEDGE`)
 
 ```json
 {
@@ -1867,6 +1882,7 @@ Changes risk limit for the specified market
 | riskLimit          | long    | Yes      | Risk limit value now in position size, but it will be changed to USD value in the future. |
 | positionMode       | string  | no       | ONE_WAY(default) or HEDGE. Mandatory when positionMode is `HEDGE`                         |
 | useNewSymbolNaming | boolean | No       | True if use new futures market name as symbol , default to False                          |
+| positionMode       | string  | no       | ONE_WAY(default) or HEDGE. Mandatory when positionMode is `HEDGE`                         |
 
 ### Response Content
 
@@ -1978,7 +1994,7 @@ Get leverage value for the specified market
 ```json
 {
     "symbol": "BTCPFC",
-    "currency": "USDT"
+    "currency": "USDT",
     "positionId": "BTCPFC-USD|LONG"
 }
 ```
@@ -2052,7 +2068,6 @@ Retrieve user's trading fees
 ```json
 {
     "symbol": "BTC-PERP",
-    "side":"SELL",
     "takeProfitPrice": 31000,
     "takeProfitTrigger": "markPrice",
     "stopLossPrice": 22000,
@@ -2066,7 +2081,7 @@ Retrieve user's trading fees
 [
     {
         "status": 9,
-        "symbol": "BTC-PERP",
+        "symbol": "BTCPFC",
         "orderType": 77,
         "price": 0.0,
         "side": "SELL",
@@ -2085,6 +2100,9 @@ Retrieve user's trading fees
         "postOnly": false,
         "remainingSize": 100.0,
         "orderDetailType": null,
+        "positionMode": "ONE_WAY",
+        "positionDirection": null,
+        "positionId": "BTCPFC-USD",
         "time_in_force": "GTC"
     }
 ]
@@ -2099,12 +2117,12 @@ Bint TP/SL with an existing position
 | Name               | Type    | Required | Description
 | ---                | ---     | ---      | --- 
 | symbol             | string  | yes       | Market symbol
-| side               | string  | yes       | "BUY" or "SELL" for TP/SL order
+| side               | string  | yes       | "BUY" or "SELL" Mandatory when positionMode is `HEDGE`, in hedge mode, it is used to clsoe the specified position, ex: sell to close long position, buy to close short position
 | takeProfitPrice    | double  | No        | Mandatory when creating new order with take profit order. Indicates the trigger price. Must set takeProfitPrice or stopLossPrice at least when using this API. |
 | takeProfitTrigger  | string  | No        | For creating order with take profit order. Valid options: `markPrice` (default) or `lastPrice` |
 | stopLossPrice      | double  | No        | Mandatory when creating new order with stop loss order. Indicates the trigger price        |
 | stopLossTrigger     | string | No       | For creating order with stop loss order. Valid options: `markPrice` (default) or `lastPrice`|
-
+| positionMode       | string  | no       | ONE_WAY(default) or HEDGE. Mandatory when positionMode is `HEDGE` |
 ### Response Content
 
 | Name          | Type    | Required | Description |
@@ -2129,6 +2147,9 @@ Bint TP/SL with an existing position
 | deviation     | double  | Yes      | Only valid for Algo |
 | remainingSize | double  | Yes      | Size left to be transacted |
 | originalSize  | double  | Yes      | Original order size |
+| positionMode      | string  | Yes      | Position mode<br/>ONE_WAY or HEDGE                                                                                                                                                                                                                                                                                  |
+| positionDirection | string  | Yes      | Position direction                                                                                                                                                                                                                                                                             |
+| positionId        | string  | Yes      | Position id                                                                                                                                                                                                                                                                             |
 
 
 ## Query Position Mode
@@ -3143,7 +3164,7 @@ When a trade has been transacted, this topic will send the trade information bac
     "marginTypeName": "FUTURES_MARGIN_CROSS",
     "currentLeverage": 0.02,
     "avgFillPrice": 0.0,
-    "positionId": "ETHPFC-USD|SHORT",
+    "positionId": "BTCPFC-USD|SHORT",
     "positionMode": "HEDGE",
     "positionDirection": "SHORT",
 		"settleWithNonUSDAsset": "BTC",
@@ -3159,7 +3180,45 @@ When a trade has been transacted, this topic will send the trade information bac
         "triggerPrice": 27000.0,
         "triggerUseLastPrice": true
     }
-  }]
+  },{
+    "requestId": 0,
+    "username": "btse",
+    "userCurrency": null,
+    "marketName": "LTCPFC-USD",
+    "orderType": 90,
+    "orderMode": 83,
+    "originalAmount": 0.01,
+    "maxPriceHeld": 0,
+    "pegPriceMin": 0,
+    "stealth": 1,
+    "orderID": null,
+    "maxStealthDisplayAmount": 0,
+    "sellexchangeRate": 0,
+    "triggerPrice": 0,
+    "closeOrder": false,
+    "liquidationInProgress": false,
+    "marginType": 91,
+    "entryPrice": 69.9,
+    "liquidationPrice": 29684.3743872669,
+    "markedPrice": 70.062346733,
+    "unrealizedProfitLoss": -0.04870402,
+    "totalMaintenanceMargin": 0.319484301,
+    "totalContracts": 30,
+    "isolatedLeverage": 0,
+    "totalFees": 0,
+    "totalValue": -21.01870402,
+    "adlScoreBucket": 1,
+    "booleanVar1": false,
+    "orderTypeName": "TYPE_FUTURES_POSITION",
+    "orderModeName": "MODE_SELL",
+    "marginTypeName": "FUTURES_MARGIN_CROSS",
+    "currentLeverage": 0.1116510969,
+    "takeProfitOrder": null,
+    "stopLossOrder": null,
+    "positionId": "LTCPFC-USD|SHORT",
+    "positionMode": "HEDGE",
+    "positionDirection": "SHORT",
+}]
 }
 ```
 
@@ -3265,7 +3324,47 @@ All futures positions will be pushed via this topic once the position changes.
         "triggerPrice": 27000.0,
         "triggerUseLastPrice": true
     }
-  }]
+  },{
+        "orderID": null,
+        "requestId": 0,
+        "username": "btse",
+        "marketName": "LTCPFC-USD",
+        "orderType": 90,
+        "orderMode": 83,
+        "originalAmount": 0.01,
+        "maxPriceHeld": 0,
+        "pegPriceMin": 0,
+        "stealth": 1,
+        "maxStealthDisplayAmount": 0,
+        "sellexchangeRate": 0,
+        "triggerPrice": 0,
+        "closeOrder": false,
+        "liquidationInProgress": false,
+        "marginType": 91,
+        "entryPrice": 69.9,
+        "liquidationPrice": 29682.415101008,
+        "markedPrice": 69.685573595,
+        "unrealizedProfitLoss": 0.06432792,
+        "totalMaintenanceMargin": 0.318744,
+        "totalContracts": 30,
+        "isolatedLeverage": 0,
+        "totalFees": 0,
+        "totalValue": -20.905672079,
+        "adlScoreBucket": 2,
+        "orderTypeName": "TYPE_FUTURES_POSITION",
+        "orderModeName": "MODE_SELL",
+        "marginTypeName": "FUTURES_MARGIN_CROSS",
+        "currentLeverage": 0.1113820366,
+        "averageFillPrice": 0,
+        "filledSize": 0,
+        "takeProfitOrder": null,
+        "stopLossOrder": null,
+        "positionId": "LTCPFC-USD|SHORT",
+        "positionMode": "HEDGE",
+        "positionDirection": "SHORT",
+        "settleWithNonUSDAsset": "USDT"
+    }
+  ]
 }
 ```
 
