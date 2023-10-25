@@ -1530,7 +1530,9 @@ Retrieves open orders that have not yet been matched or matched recently.
     "triggerType": 0,
     "username": "string",
     "positionId": null,
-    "wallet": "string"
+    "wallet": "string",
+    "tradeId": "string",
+    "orderId": "string"
   }
 ]
 ```
@@ -1550,6 +1552,7 @@ Retrieves a user's trade history
 | afterSerialId      | string  | No       | Condition to retrieve records after the specified serial Id. Used for pagination  |
 | count              | long    | No       | Number of records to return                                                       |
 | includeOld         | boolean | No       | Retrieve trade  history records past 7 days                                       |
+| orderID            | string  | No       | Query trade history by order ID                                            |
 | clOrderID          | string  | No       | Query trade history by custom order ID                                            |
 | useNewSymbolNaming | boolean | No       | True to use new futures market name in symbol, default to False                   |
 
@@ -3049,20 +3052,20 @@ Receive trade notifications by subscribing to the topic `notificationApiV2`. The
 {
   "topic": "fills",
   "data": [{
-    "orderId": "order id", //string
-    "serialId": "serial ID after insertion into DB", //integer / long
-    "clOrderId": "Client Order ID", //string
-    "type": "order type", //string
-    "symbol": "ex: BTC-USD", //string
-    "side": "BUY|SELL" //string
-    "price": "filled price", //double (need to make sure no scientific notation)
-    "size": "filled size", //double (no scientific notation)
-    "feeAmount": "Fees charged to user, value to be String on API", //double (no scientific notation)
-    "feeCurrency": "Fee currency, eg. Buy would be BTC, Sell would be USD" //string
-    "base": "Base currency, eg. BTC",  //string
-    "quote": "Quote currency eg. USD", //string
-    "maker": "maker or taker",  //boolean (if maker, return true, else return false)
-    "timestamp": "Time trade was matched in the engine" //long, field taken from DB,
+    "orderId": "order id",
+    "serialId": "serial ID after insertion into DB",
+    "clOrderId": "Client Order ID",
+    "type": "order type",
+    "symbol": "ex: BTC-USD",
+    "side": "BUY|SELL",
+    "price": "filled price",
+    "size": "filled size",
+    "feeAmount": "Fees charged to user, value to be String on API", 
+    "feeCurrency": "Fee currency, eg. Buy would be BTC, Sell would be USD",
+    "base": "Base currency, eg. BTC",
+    "quote": "Quote currency eg. USD",
+    "maker": "maker or taker", 
+    "timestamp": "Time trade was matched in the engine",
     "tradeId": "Trade Unique ID"
   }]
 }
@@ -3077,8 +3080,8 @@ When a trade has been transacted, this topic will send the trade information bac
 | Name        | Type    | Required | Description                                                                                |
 | ---         | ---     | ---      | ---                                                                                        |
 | symbol      | string  | Yes      | Market symbol                                                                              |
-| orderID     | string  | Yes      | Internal order ID                                                                          |
-| clOrderID   | string  | Yes      | Custom order ID                                                                            |
+| orderId     | string  | Yes      | Internal order ID                                                                          |
+| clOrderId   | string  | Yes      | Custom order ID                                                                            |
 | serialId    | string  | Yes      | Trade sequence ID                                                                          |
 | tradeId     | string  | Yes      | Trade unique identifier                                                                    |
 | type        | int     | Yes      | Order type. Valid values are:<br/>76: Limit Order<br/>77: Market Order<br/>80: Algo orders |
@@ -3160,7 +3163,7 @@ When a trade has been transacted, this topic will send the trade information bac
 }
 ```
 
-All futures positions will be pushed periodically via this topic.
+All futures positions will be pushed via this topic once the position changes.
 
 ### Response Content
 
@@ -3310,7 +3313,7 @@ All futures positions will be pushed periodically via this topic.
 }
 ```
 
-All futures positions will be pushed periodically via this topic. If the user reduces the position to 0, the topic will push data with the totalContracts value of 0 once."
+All futures positions will be pushed via this topic once the position changes. If the user reduces the position to 0, the topic will push data with the totalContracts value of 0 once.
 
 ### Response Content
 

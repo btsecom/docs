@@ -1110,7 +1110,7 @@ BTSE的速率限制如下:
 | stealth            | double   | Yes      | 订单的隐匿值                                                                                                                                                                                                                                                                             |
 | deviation          | double   | Yes      | 订单的偏差值                                                                                                                                                                                                                                                                             |
 
-## 死人开关（延时自动取消所有）
+## 延时自动取消所有
 
 > 请求
 
@@ -1122,7 +1122,7 @@ BTSE的速率限制如下:
 
 `POST /api/v3.2/order/cancelAllAfter`
 
-死人开关允许交易员发送一个超时值，这是一个订单的生存时间 (TTL) 值。通过发送另一个 `cancelAllAfter` 请求来延长超时时间。如果服务器在超时时间到达之前没有收到另一个请求，所有订单将被取消。
+允许交易员发送一个超时值，这是一个订单的生存时间 (TTL) 值。通过发送另一个 `cancelAllAfter` 请求来延长超时时间。如果服务器在超时时间到达之前没有收到另一个请求，所有订单将被取消。
 
 ### 请求参数
 
@@ -1221,30 +1221,33 @@ BTSE的速率限制如下:
 > 响应
 
 ```json
-{
-  "base": "string",
-  "clOrderID": "string",
-  "feeAmount": 0,
-  "feeCurrency": "string",
-  "filledPrice": 0,
-  "filledSize": 0,
-  "orderId": "string",
-  "orderType": 0,
-  "price": 0,
-  "quote": "string",
-  "realizedPnl": 0,
-  "serialId": 0,
-  "side": "string",
-  "size": 0,
-  "symbol": "string",
-  "timestamp": 0,
-  "total": 0,
-  "tradeId": "string",
-  "triggerPrice": 0,
-  "triggerType": 0,
-  "username": "string",
-  "wallet": "string"
-}
+[
+  {
+    "tradeId": "9c6d016f-fbe3-4f82-aecc-8163e9220397",
+    "orderId": "ba0b69ae-991e-494a-afcb-bfbaeb1adc55",
+    "clOrderID": "_W_dmoryhbw1698118893191",
+    "username": "btse",
+    "side": "BUY",
+    "orderType": 77,
+    "triggerType": 0,
+    "price": 34799.000000025,
+    "size": 0.4,
+    "filledPrice": 34799.000000025,
+    "filledSize": 0.00001,
+    "triggerPrice": 0,
+    "base": "BTC",
+    "quote": "USDT",
+    "symbol": "BTC-USDT",
+    "feeCurrency": "BTC",
+    "feeAmount": 0.000000006,
+    "wallet": "SPOT@",
+    "realizedPnl": 0,
+    "total": 0,
+    "serialId": 94711228,
+    "timestamp": 1698118893000,
+    "averageFillPrice": 34799.000000025
+  }
+]
 ```
 
 `GET /api/v3.2/user/trade_history`
@@ -1268,24 +1271,28 @@ BTSE的速率限制如下:
 | 名称        | 类型    | 是否必须    | 描述                       |
 | ---         | ---     | ---      | ---                       |
 | symbol      | string  | Yes      | 市场交易对标识符         |
-| side        | string  | Yes      | 交易方向。可选值：[`BUY`, `sell`] |
+| side        | string  | Yes      | 交易方向。可选值：[`BUY`, `SELL`] |
 | price       | double  | Yes      | 成交价格                   |
 | size        | double  | Yes      | 成交数量                   |
-| serialid    | long  | Yes      | 序列ID，运行的序列号        |
-| tradeid     | string  | Yes      | 交易标识符                 |
-| timestamp   | double  | Yes      | 成交时间戳                 |
+| serialId    | long  | Yes      | 序列ID，运行的序列号        |
+| tradeId     | string  | Yes      | 交易标识符                 |
+| timestamp   | long  | Yes      | 成交时间戳                 |
 | base        | long  | Yes      | 基础货币                   |
 | quote       | long  | Yes      | 报价货币                   |
-| clorderid   | long  | Yes      | 自定义订单ID               |
-| orderid     | long  | Yes      | 订单ID                     |
-| feeamount   | long  | Yes      | 手续费金额                 |
-| feecurrency | long  | Yes      | 手续费货币                 |
-| filledprice | long  | Yes      | 成交价格                   |
-| filledsize  | long  | Yes      | 成交数量                   |
-| ordertype   | integer    | Yes      | 订单类型                   |
-| realizedpnl | long  | Yes      | 在现货交易中不使用         |
+| clOrderId   | long  | Yes      | 自定义订单ID               |
+| orderId     | long  | Yes      | 订单ID                     |
+| feeAmount   | long  | Yes      | 手续费金额                 |
+| feeCurrency | long  | Yes      | 手续费货币                 |
+| filledPrice | long  | Yes      | 成交价格                   |
+| filledSize  | long  | Yes      | 成交数量                   |
+| orderType   | integer    | Yes      | 订单类型                   |
+| realizedPnl | long  | Yes      | 在现货交易中不使用         |
 | total       | long  | Yes      | 在现货交易中不使用         |
-
+| triggerType     | integer| yes      | 1001: 止损 1002: 止盈       |
+| triggerPrice    | double | yes      | 触发价格                           |
+| wallet          | string | yes      | SPOT@ 用于现货交易            |
+| averageFillPrice| string | yes      | 平均成交价                     |
+| username        | string | yes      | 用户名                                |
 
 ## 查询账户费用
 
@@ -1967,7 +1974,7 @@ echo -n "/ws/spot1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6726
   "topic": "notificationApiV2",
   "data": {
       "symbol": "Market Symbol (eg. BTC-USD)",
-      "orderId": "BTSE internal order ID",
+      "orderID": "BTSE internal order ID",
       "side": "BUY",
       "type": "76",
       "price": "Order price or transacted price",
@@ -2034,20 +2041,20 @@ echo -n "/ws/spot1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6726
 {
   "topic": "fills",
   "data": [{
-    "orderId": "order id", //string
-    "serialId": "serial ID after insertion into DB", //integer / long
-    "clOrderId": "Client Order ID", //string
-    "type": "order type", //string
-    "symbol": "ex: BTC-USD", //string
-    "side": "BUY|SELL" //string
-    "price": "filled price", //double (need to make sure no scientific notation)
-    "size": "filled size", //double (no scientific notation)
-    "feeAmount": "Fees charged to user, value to be String on API", //double (no scientific notation)
-    "feeCurrency": "Fee currency, eg. Buy would be BTC, Sell would be USD" //string
-    "base": "Base currency, eg. BTC",  //string
-    "quote": "Quote currency eg. USD", //string
-    "maker": "maker or taker",  //boolean (if maker, return true, else return false)
-    "timestamp": "Time trade was matched in the engine" //long, field taken from DB,
+    "orderId": "order id",
+    "serialId": "serial ID after insertion into DB",
+    "clOrderId": "Client Order ID",
+    "type": "order type",
+    "symbol": "ex: BTC-USD",
+    "side": "BUY|SELL",
+    "price": "filled price",
+    "size": "filled size",
+    "feeAmount": "Fees charged to user, value to be String on API",
+    "feeCurrency": "Fee currency, eg. Buy would be BTC, Sell would be USD",
+    "base": "Base currency, eg. BTC",
+    "quote": "Quote currency eg. USD",
+    "maker": "maker or taker",
+    "timestamp": "Time trade was matched in the engine",
     "tradeId": "Trade Unique ID"
   }]
 }
@@ -2062,8 +2069,8 @@ echo -n "/ws/spot1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6726
 | 名称        | 类型    | 是否必须     | 描述                                                                                          |
 | ---         | ---     | ---      | ---                                                                                          |
 | symbol      | string  | Yes      | 市场符号                                                                                    |
-| orderID     | string  | Yes      | 内部订单ID                                                                                  |
-| clOrderID   | string  | Yes      | 自定义订单ID                                                                                |
+| orderId     | string  | Yes      | 内部订单ID                                                                                  |
+| clOrderId   | string  | Yes      | 自定义订单ID                                                                                |
 | serialId    | string  | Yes      | 交易序列ID                                                                                |
 | tradeId     | string  | Yes      | 交易的唯一标识符                                                                           |
 | type        | integer    | Yes      | 订单类型。有效值为：<br/>76: 限价单<br/>77: 市价单<br/>80: 挂单/算法单                |
