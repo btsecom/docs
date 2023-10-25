@@ -13,6 +13,10 @@ headingLevel: 2
 
 # 更改日志
 
+## Version 3.4.8 (25th October 2023)
+
+* 新增一个新的API[查询订单](#90376e83a0)
+
 ## 版本 3.4.7 (2023年10月20日)
 
 * 在[市场摘要](#7335b2436c)中添加两个新的响应字段 `isMarketOpenToOtc` 和 `isMarketOpenToSpot`
@@ -864,6 +868,84 @@ BTSE的速率限制如下:
 | remainingSize    | double  | Yes      | 尚未交易的大小                                                                                                                                                                                                                                                                             |
 | originalSize     | double  | Yes      | 原始订单大小                                                                                                                                                                                                                                                                             |
 
+## 查询订单
+
+`GET /api/v3.2/order`
+
+查询指定orderID/clOrderID的订单详情，请注意已取消的订单仅保留30分钟。需要`交易`权限。
+
+> 响应
+
+```json
+{
+  "orderID": "<Order UUID>",
+  "symbol": "BTC-USDT",
+  "quote": "USDT",
+  "status": 6,
+  "orderType": 76,
+  "price": 30000,
+  "size": 0.00001,
+  "side": "SELL",
+  "orderValue": 0.300102,
+  "trailValue": 0,
+  "filledSize": 0,
+  "remainingSize": 0.00001,
+  "averageFillPrice": 0,
+  "clOrderID": "<Client OrderID>",
+  "timeInForce": "GTC",
+  "timestamp": 1697766317422,
+  "pegPriceMin": 0,
+  "pegPriceMax": 0,
+  "pegPriceDeviation": 0,
+  "triggerOrder": false,
+  "triggerPrice": 0,
+  "triggerOriginalPrice": 0,
+  "triggerOrderType": 0,
+  "triggerTrailingStopDeviation": 0,
+  "triggerStopPrice": 0,
+  "triggered": false
+}
+```
+
+### 请求参数
+
+| 名称       | 类型    | 是否必须     | 描述                                                                         |
+| ---       | ---    | ---      | ---                                                                             |
+| orderID   | String	 | No       | 订单的唯一标识符。当未提供clOrderID时，此项为必填。如果提供了orderID，则将忽略clOrderID。 |
+| clOrderID | String	 | No       | 客户自定义订单ID。当未提供orderID时，此项为必填。                                     |
+
+
+### 响应内容
+
+| 名称       | 类型    | 是否必须     | 描述                                                             |
+| ---                           | ---     | ---      | ---                                            |
+| orderID                       | String  | Yes      | 内部订单ID                                      |
+| symbol                        | String  | Yes      | 市场交易对标识符                                   |
+| quote                         | String  | Yes      | 报价货币的符号                                   |
+| orderType                     | Integer | Yes      | 订单类型                                      |
+| side                          | String  | Yes      | 订单方向                                      |
+| price                         | Double  | Yes      | 订单价格                                      |
+| size                          | Double  | Yes      | 订单数量                                      |
+| orderValue                    | Double  | Yes      | 此订单的总价值                                 |
+| filledSize                    | Double  | Yes      | 已成交数量                                    |
+| pegPriceMin                   | Double  | Yes      | 最小可能的挂单价格，优先于挂单价格偏差             |
+| pegPriceMax                   | Double  | Yes      | 最大可能的挂单价格，优先于挂单价格偏差             |
+| pegPriceDeviation             | Double  | Yes      | 与指数价格的百分比偏差                          |
+| timestamp                     | Long    | Yes      | 订单时间戳                                    |
+| triggerOrder                  | Boolean | Yes      | 指示订单是否为触发订单                          |
+| triggerPrice                  | Double  | Yes      | 订单触发价格，如果订单不是触发订单则返回0          |
+| triggerOriginalPrice          | Double  | Yes      | 原始订单的价格。仅对触发订单有效                 |
+| triggerOrderType              | Integer | Yes      | 订单类型                                      |
+| triggerTrailingStopDeviation  | Double  | Yes      | 止损价格的百分比偏差                           |
+| triggerStopPrice              | Double  | Yes      | 止损价格，仅适用于算法订单                       |
+| triggered                     | Boolean | Yes      | 指示订单是否已触发                         |
+| trailValue                    | Double  | Yes      | 跟踪价值                                       |
+| clOrderID                     | String  | Yes      | 由交易员发送的客户标签                          |
+| averageFillPrice              | Double  | Yes      | 平均成交价格。对于部分交易的订单，返回平均成交价格 |
+| remainingSize                 | Double  | Yes      | 订单上剩余的大小                              |
+| status                        | Integer | Yes      | 订单状态。请参照[`API Enum`](#api-enum)      |
+| timeInForce                   | String  | Yes      | 订单有效期                                    |
+
 ## 修正订单
 
 > 请求 (修正价格)
@@ -1279,7 +1361,7 @@ BTSE的速率限制如下:
 | timestamp   | long  | Yes      | 成交时间戳                 |
 | base        | long  | Yes      | 基础货币                   |
 | quote       | long  | Yes      | 报价货币                   |
-| clOrderId   | long  | Yes      | 自定义订单ID               |
+| clOrderID   | long  | Yes      | 自定义订单ID               |
 | orderId     | long  | Yes      | 订单ID                     |
 | feeAmount   | long  | Yes      | 手续费金额                 |
 | feeCurrency | long  | Yes      | 手续费货币                 |
