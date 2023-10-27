@@ -504,7 +504,7 @@
                     <a href="#35edece5cf" class="toc-h2 toc-link" data-title="所有仓位">所有仓位</a>
                   </li>
                   <li>
-                    <a href="#58eab4157c" class="toc-h2 toc-link" data-title="倉位">倉位</a>
+                    <a href="#25a424cad9" class="toc-h2 toc-link" data-title="仓位">仓位</a>
                   </li>
               </ul>
           </li>
@@ -517,7 +517,7 @@
       <div class="content">
         <h1 id='185368440e'>更新日志</h1><h2 id='2-6-12-2023-10-23'>版本 2.6.12 (2023年10月23日)</h2>
 <ul>
-<li>在websocket流中添加<a href="#58eab4157c"><code>倉位</code></a>，使用户能够获取包括已关闭倉位在内的所有倉位</li>
+<li>在websocket流中添加<a href="#25a424cad9"><code>仓位</code></a>，使用户能够获取包括已关闭仓位在内的所有仓位</li>
 </ul>
 <h2 id='2-6-11-2023-10-16'>版本 2.6.11（2023年10月16日）</h2>
 <ul>
@@ -6607,7 +6607,7 @@
 <td>止损订单信息</td>
 </tr>
 </tbody></table>
-<h2 id='58eab4157c'>倉位</h2>
+<h2 id='25a424cad9'>仓位</h2>
 <blockquote>
 <p>请求</p>
 </blockquote>
@@ -6670,7 +6670,7 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
-<p>响应 (倉位已关闭)</p>
+<p>响应 (仓位已关闭)</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"positions"</span><span class="p">,</span><span class="w">
@@ -6712,7 +6712,7 @@
   </span><span class="p">}]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>一旦仓位发生变化，所有期货仓位将通过这个主题推送。如果用户将倉位减少到0，该主题将推送一次totalContracts值为0的数据。</p>
+<p>一旦仓位发生变化，所有期货仓位将通过这个主题推送。如果用户将仓位减少到0，该主题将推送一次totalContracts值为0的数据。</p>
 <h3 id='05a22d5a79-33'>响应内容</h3>
 <table><thead>
 <tr>
@@ -6744,7 +6744,7 @@
 <td>orderType</td>
 <td>integer</td>
 <td>Yes</td>
-<td>90: 期货倉位</td>
+<td>90: 期货仓位</td>
 </tr>
 <tr>
 <td>orderTypeName</td>
@@ -6816,7 +6816,7 @@
 <td>closeOrder</td>
 <td>boolean</td>
 <td>Yes</td>
-<td>是否有一个订单来关闭此倉位</td>
+<td>是否有一个订单来关闭此仓位</td>
 </tr>
 <tr>
 <td>liquidationInProgress</td>
