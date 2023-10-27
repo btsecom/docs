@@ -14,7 +14,7 @@ headingLevel: 2
 # 更新日志
 
 ## 版本 2.6.12 (2023年10月23日)
-* 在websocket流中添加[`倉位`](#58eab4157c)，使用户能够获取包括已关闭倉位在内的所有倉位
+* 在websocket流中添加[`仓位`](#25a424cad9)，使用户能够获取包括已关闭仓位在内的所有仓位
 
 ## 版本 2.6.11（2023年10月16日）
 * 在[`创建新订单`](#8be954be0d)中添加TP/SL（止盈/止损）参数
@@ -2971,7 +2971,7 @@ echo -n "/ws/futures1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6
 | takeProfitOrder | TakeProfitOrder对象 | No | 止盈订单信息                                            |
 | stopLossOrder | StopLossOrder对象 | No | 止损订单信息                                                |
 
-## 倉位
+## 仓位
 
 > 请求
 
@@ -3035,7 +3035,7 @@ echo -n "/ws/futures1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6
 }
 ```
 
-> 响应 (倉位已关闭)
+> 响应 (仓位已关闭)
 
 ```json
 {
@@ -3079,7 +3079,7 @@ echo -n "/ws/futures1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6
 }
 ```
 
-一旦仓位发生变化，所有期货仓位将通过这个主题推送。如果用户将倉位减少到0，该主题将推送一次totalContracts值为0的数据。
+一旦仓位发生变化，所有期货仓位将通过这个主题推送。如果用户将仓位减少到0，该主题将推送一次totalContracts值为0的数据。
 
 ### 响应内容
 
@@ -3088,7 +3088,7 @@ echo -n "/ws/futures1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6
 | requestId               | integer | Yes      | 请求ID                                |
 | username                | string  | Yes      | btse 用户名                            |
 | marketName              | string  | Yes      | 市场名称                              |
-| orderType               | integer | Yes      | 90: 期货倉位                          |
+| orderType               | integer | Yes      | 90: 期货仓位                          |
 | orderTypeName           | string  | Yes      | orderType的字符串表示                  |
 | orderMode               | integer | Yes      | 66: 买入<br/>83: 卖出                 |
 | orderModeName           | string  | Yes      | orderModeName的字符串表示              |
@@ -3100,7 +3100,7 @@ echo -n "/ws/futures1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6
 | maxStealthDisplayAmount | double  | Yes      | 用于peg订单                           |
 | sellexchangeRate        | double  | Yes      |                                        |
 | triggerPrice            | double  | Yes      | OCO订单                               |
-| closeOrder              | boolean | Yes      | 是否有一个订单来关闭此倉位            |
+| closeOrder              | boolean | Yes      | 是否有一个订单来关闭此仓位            |
 | liquidationInProgress   | boolean | Yes      | 是否正在进行清算                      |
 | marginType              | integer | Yes      | 钱包类型:<br/>91: 全仓<br/>92: 隔离仓  |
 | marginTypeName          | string  | Yes      | marginType的字符串表示                |
