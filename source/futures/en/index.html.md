@@ -1930,7 +1930,7 @@ Retrieve user's trading fees
 
 `POST /api/v2.1/order/bind/tpsl`
 
-Bint TP/SL with an existing position
+Bind TP/SL with an existing position
 
 ### Request Parameters
 
