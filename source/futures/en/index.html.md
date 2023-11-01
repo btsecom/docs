@@ -33,14 +33,14 @@ headingLevel: 2
       * Change status code to 400
       * Change errorCode to 400
   * Max open order exceeded
-      * Change status code to 500
+      * Change status code to 400
       * Change errorCode to 304
   * rate limit exceeded
-      * Change status code to 500
+      * Change status code to 429
       * Change errorCode to 303
   * market unavailable
-      * Change status code to 500
-      * Change errorCode to 500
+      * Change status code to 400
+      * Change errorCode to 400
 
 ## Version 2.6.12 (23th October 2023)
 * Add [`positions`](#positions) in websocket streams for user to get all positions includes closed position
