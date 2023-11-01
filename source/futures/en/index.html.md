@@ -25,7 +25,7 @@ headingLevel: 2
   }
   ```
 
-* [IMPORTANT] Adjust the HTTP status codes and error messages. The scheduled effective date is `November 7, 2023, at 10:00 AM (UTC+0)`. This includes but is not limited to the following situations. 
+* [IMPORTANT] Adjust the HTTP status codes and error messages for trading-related API. The scheduled effective date is `November 7, 2023, at 10:00 AM (UTC+0)`. This includes but is not limited to the following situations. 
   * Order not found
       * Change status code to 400
       * Change errorCode to 400
