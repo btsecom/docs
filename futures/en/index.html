@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-2-6-13-31th-october-2023" class="toc-h2 toc-link" data-title="Version 2.6.13 (31th October 2023)">Version 2.6.13 (31th October 2023)</a>
+                  </li>
+                  <li>
                     <a href="#version-2-6-12-23th-october-2023" class="toc-h2 toc-link" data-title="Version 2.6.12 (23th October 2023)">Version 2.6.12 (23th October 2023)</a>
                   </li>
                   <li>
@@ -515,7 +518,53 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-2-6-12-23th-october-2023'>Version 2.6.12 (23th October 2023)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-2-6-13-31th-october-2023'>Version 2.6.13 (31th October 2023)</h2>
+<blockquote>
+<p>error code format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"errorCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BAD_REQUEST: Order doesn't exist"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li>[IMPORTANT] Adjust the HTTP status codes and error messages for trading-related API. The scheduled effective date is <code>November 7, 2023, at 10:00 AM (UTC+0)</code>. This includes but is not limited to the following situations. 
+
+<ul>
+<li>Order not found
+
+<ul>
+<li>Change status code to 400</li>
+<li>Change errorCode to 400</li>
+</ul></li>
+<li>Order reject
+
+<ul>
+<li>Change status code to 400</li>
+<li>Change errorCode to 400</li>
+</ul></li>
+<li>Max open order exceeded
+
+<ul>
+<li>Change status code to 500</li>
+<li>Change errorCode to 304</li>
+</ul></li>
+<li>rate limit exceeded
+
+<ul>
+<li>Change status code to 500</li>
+<li>Change errorCode to 303</li>
+</ul></li>
+<li>market unavailable
+
+<ul>
+<li>Change status code to 500</li>
+<li>Change errorCode to 500</li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id='version-2-6-12-23th-october-2023'>Version 2.6.12 (23th October 2023)</h2>
 <ul>
 <li>Add <a href="#positions"><code>positions</code></a> in websocket streams for user to get all positions includes closed position</li>
 </ul>
