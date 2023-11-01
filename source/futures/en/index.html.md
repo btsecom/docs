@@ -13,6 +13,35 @@ headingLevel: 2
 
 # Change Log
 
+## Version 2.6.13 (31th October 2023)
+
+> error code format
+
+  ``` json
+  {
+    "status": 400,
+    "errorCode": 400,
+    "message": "BAD_REQUEST: Order doesn't exist"
+  }
+  ```
+
+* [IMPORTANT] Adjust the HTTP status codes and error messages. The scheduled effective date is `November 7, 2023, at 10:00 AM (UTC+0)`. This includes but is not limited to the following situations. 
+  * Order not found
+      * Change status code to 400
+      * Change errorCode to 400
+  * Order reject
+      * Change status code to 400
+      * Change errorCode to 400
+  * Max open order exceeded
+      * Change status code to 500
+      * Change errorCode to 304
+  * rate limit exceeded
+      * Change status code to 500
+      * Change errorCode to 303
+  * market unavailable
+      * Change status code to 500
+      * Change errorCode to 500
+
 ## Version 2.6.12 (23th October 2023)
 * Add [`positions`](#positions) in websocket streams for user to get all positions includes closed position
 
