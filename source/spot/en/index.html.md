@@ -938,7 +938,7 @@ Query order detail for a specified orderID/clOrderID, please note that a cancele
 | triggerOrderType              | Integer | Yes      | Order type                                                                             |
 | triggerTrailingStopDeviation  | Double  | Yes      | Percentage deviation from stop price                                                   |
 | triggerStopPrice              | Double  | Yes      | Stop price, Algo Order only                                                            |
-| triggered                   | Boolean | Yes      | Indicate whether the order is triggered                                                |
+| triggered                     | Boolean | Yes      | Indicate whether the order is triggered                                                |
 | trailValue                    | Double  | Yes      | Trail value                                                                            |
 | clOrderID                     | String  | Yes      | Customer tag sent in by trader                                                         |
 | averageFillPrice              | Double  | Yes      | Average filled price. Returns the average filled price for partially transacted orders |
