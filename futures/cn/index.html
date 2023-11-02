@@ -234,6 +234,9 @@
             <a href="#185368440e" class="toc-h1 toc-link" data-title="更新日志">更新日志</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2-6-13-2023-10-31" class="toc-h2 toc-link" data-title="版本 2.6.13 (2023年10月31日)">版本 2.6.13 (2023年10月31日)</a>
+                  </li>
+                  <li>
                     <a href="#2-6-12-2023-10-23" class="toc-h2 toc-link" data-title="版本 2.6.12 (2023年10月23日)">版本 2.6.12 (2023年10月23日)</a>
                   </li>
                   <li>
@@ -515,7 +518,53 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='185368440e'>更新日志</h1><h2 id='2-6-12-2023-10-23'>版本 2.6.12 (2023年10月23日)</h2>
+        <h1 id='185368440e'>更新日志</h1><h2 id='2-6-13-2023-10-31'>版本 2.6.13 (2023年10月31日)</h2>
+<blockquote>
+<p>错误代码格式</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"errorCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BAD_REQUEST: Order doesn't exist"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<ul>
+<li>[重要通知] 调整与交易相关的API的HTTP状态码和错误消息。计划生效日期为<code>2023年11月7日上午10点（UTC+0）</code>。此包括但不限于以下情况。 
+
+<ul>
+<li>订单未找到
+
+<ul>
+<li>将状态码更改为400</li>
+<li>将错误代码更改为400</li>
+</ul></li>
+<li>订单被拒绝
+
+<ul>
+<li>将状态码更改为400</li>
+<li>将错误代码更改为400</li>
+</ul></li>
+<li>最大开放订单超出限制
+
+<ul>
+<li>将状态码更改为400</li>
+<li>将错误代码更改为304</li>
+</ul></li>
+<li>超出速率限制
+
+<ul>
+<li>将状态码更改为429</li>
+<li>将错误代码更改为303</li>
+</ul></li>
+<li>市场不可用
+
+<ul>
+<li>将状态码更改为400</li>
+<li>将错误代码更改为400</li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id='2-6-12-2023-10-23'>版本 2.6.12 (2023年10月23日)</h2>
 <ul>
 <li>在websocket流中添加<a href="#25a424cad9"><code>仓位</code></a>，使用户能够获取包括已关闭仓位在内的所有仓位</li>
 </ul>
