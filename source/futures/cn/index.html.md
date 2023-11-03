@@ -2174,7 +2174,7 @@ BTSE 的速率限制如下：
 ### 请求参数
 
 | 名称                | 类型    | 是否必须   | 描述                         |
-| symbol             | string  | No       | 市场符号                      |
+| symbol             | string  | Yes       | 市场符号                      |
 
 ### 响应内容
 
