@@ -2138,10 +2138,9 @@ Get user's wallet history records on the futures wallet
 [
   {
     "trackingID": 0,
+    "requestId": 0,
     "queryType": 0,
-    "activeWalletName": "string",
     "wallet": "CROSS@",
-    "username": "string",
     "walletTotalValue": 0,
     "totalValue": 100,
     "marginBalance": 100,
@@ -2174,13 +2173,9 @@ Gets margin information for the specified wallet so that users can know which wa
 
 ### Request Parameters
 
-| Name               | Type    | Required | Description                                                     |
-| ---                | ---     | ---      | ---                                                             |
-| symbol             | string  | No       | Currency, if not specified will return all currencies           |
-| startTime          | long    | No       | Starting time (eg. 1624987283000)                               |
-| endTime            | long    | No       | Ending time (eg. 1624987283000)                                 |
-| count              | integer | No       | Number of records to return                                     |
-| useNewSymbolNaming | boolean | No       | True to use new futures market name in symbol, default to False |
+| Name               | Type    | Required | Description      |
+| ---                | ---     | ---      | ---              |
+| symbol             | string  | Yes      | Market symbol    |
 
 ### Response Content
 
@@ -2189,9 +2184,9 @@ Gets margin information for the specified wallet so that users can know which wa
 | Name                 | Type         | Required | Description                          |
 | ---                  | ---          | ---      | ---                                  |
 | wallet               | string       | Yes      | Wallet name                          |
-| activeWalletName     | string       | Yes      | Active wallet name                   |
 | queryType            | integer      | Yes      | Query type                           |
 | trackingID           | long         | Yes      | Internal tracking ID, not being used |
+| requestId            | long         | Yes      | Internal request ID, not being used  |
 | walletTotalValue     | double       | Yes      | Wallet total value                   |
 | totalValue           | double       | Yes      | Total value                          |
 | marginBalance        | double       | Yes      | Margin balance                       |
