@@ -2138,10 +2138,9 @@ BTSE 的速率限制如下：
 [
   {
     "trackingID": 0,
+    "requestId": 0,
     "queryType": 0,
-    "activeWalletName": "string",
     "wallet": "CROSS@",
-    "username": "string",
     "walletTotalValue": 0,
     "totalValue": 100,
     "marginBalance": 100,
@@ -2174,13 +2173,9 @@ BTSE 的速率限制如下：
 
 ### 请求参数
 
-| 名称               | 类型    | 是否必须 | 描述                                                                                                              |
-| ---                | ---     | ---      | ---                                                                                                               |
-| symbol             | string  | No       | 货币，如果未指定，将返回所有货币                                                                                   |
-| startTime          | long    | No       | 开始时间 (例如 1624987283000)                                                                                      |
-| endTime            | long    | No       | 结束时间 (例如 1624987283000)                                                                                      |
-| count              | integer | No       | 要返回的记录数量                                                                                                  |
-| useNewSymbolNaming | boolean | No       | 若为True，则使用新格式的期货市场名称作为符号，默认为False                                                          |
+| 名称                | 类型    | 是否必须   | 描述                         |
+| ---                | ---     | ---      | ---                          |
+| symbol             | string  | Yes      | 市场符号                      |
 
 ### 响应内容
 
@@ -2189,9 +2184,9 @@ BTSE 的速率限制如下：
 | 名称                 | 类型         | 是否必须 | 描述                              |
 | ---                  | ---          | ---      | ---                               |
 | wallet               | string       | Yes      | 钱包名称                          |
-| activeWalletName     | string       | Yes      | 活跃的钱包名称                     |
 | queryType            | integer      | Yes      | 查询类型                          |
 | trackingID           | long         | Yes      | 内部跟踪ID，未被使用               |
+| requestId            | long         | Yes      | 内部請求ID，未被使用               |
 | walletTotalValue     | double       | Yes      | 钱包总值                          |
 | totalValue           | double       | Yes      | 总值                              |
 | marginBalance        | double       | Yes      | 保证金余额                        |
