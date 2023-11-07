@@ -17,7 +17,8 @@ headingLevel: 2
 * Update fundingRate description in [`market-summary`](#market-summary)
 * Add listFullAttributes parameter in [`market-summary`](#market-summary)
 * Add optional fundingIntervalMinutes and fundingTime in [`market-summary`](#market-summary)
-* The scheduled effective date is `Nov 14, 2023`
+* The new funding rate interval scheduled effective date is `Nov 14, 2023`
+* Add new API [`Query Order`](#query-order)
 
 ## Version 2.6.13 (31th October 2023)
 
@@ -1143,6 +1144,93 @@ This API Requires `Trading` permission
 | deviation     | double  | Yes      | Deviation value of order                                                                                                                                                                                                                                                                        |
 | remainingSize | double  | Yes      | Size left to be transacted                                                                                                                                                                                                                                                                      |
 | originalSize  | double  | Yes      | Original order size                                                                                                                                                                                                                                                                             |
+
+## Query Order
+
+> Response
+
+```json
+{
+    "orderType": 76,
+    "price": 1,
+    "size": 111,
+    "side": "BUY",
+    "filledSize": 0,
+    "orderValue": 0.111,
+    "pegPriceMin": 0,
+    "pegPriceMax": 0,
+    "pegPriceDeviation": 1,
+    "timestamp": 1698757024617,
+    "orderID": "<Order UUID>",
+    "stealth": 1,
+    "triggerOrder": false,
+    "triggered": false,
+    "triggerPrice": 0,
+    "triggerOriginalPrice": 0,
+    "triggerOrderType": 0,
+    "triggerTrailingStopDeviation": 0,
+    "triggerStopPrice": 0,
+    "symbol": "BTCPFC",
+    "trailValue": 0,
+    "remainingSize": 111,
+    "clOrderID": "<Order clOrderID>",
+    "reduceOnly": false,
+    "status": 2,
+    "triggerUseLastPrice": false,
+    "avgFilledPrice": 0,
+    "timeInForce": "GTC",
+    "takeProfitOrder": null,
+    "stopLossOrder": null,
+    "closeOrder": false
+}
+```
+
+
+`GET /api/v2.1/order` 
+
+Query order detail for a specified orderID/clOrderID, please note that a canceled order will only exist for 30 minutes. Requires `Trading` permission.
+
+### Request Parameters
+
+| Name      | Type   | Required | Description                                                                                                                  |
+| ---       | ---    | ---      | ---                                                                                                                          |
+| orderID   | String | No       | Unique identifier for an order. Mandatory when clOrderID is not provided. If orderID is provided, clOrderID will be ignored. |
+| clOrderID | String | No       | Client custom order ID. Mandatory when orderID is not provided.                                                              |
+
+### Response Content
+
+| Name                          | Type    | Required | Description                                                                            |
+| ---                           | ---     | ---      | ---                                                                                    |
+| orderID                       | String  | Yes      | Order ID                                                                               |
+| symbol                        | String  | Yes      | Market symbol                                                                          |
+| quote                         | String  | Yes      | Quote symbol                                                                           |
+| orderType                     | Integer | Yes      | Order type                                                                             |
+| side                          | String  | Yes      | Order side                                                                             |
+| price                         | Double  | Yes      | Order price                                                                            |
+| size                          | Double  | Yes      | Order size                                                                             |
+| orderValue                    | Double  | Yes      | Total value of of this order                                                           |
+| filledSize                    | Double  | Yes      | Filled Size                                                                            |
+| pegPriceMin                   | Double  | Yes      | Minimum possible peg price this takes precedence over pegPriceDeviation                |
+| pegPriceMax                   | Double  | Yes      | Peg Price Max (New Entry)                                                              |
+| pegPriceDeviation             | Double  | Yes      | Percentage deviation from Index price                                                  |
+| timestamp                     | Long    | Yes      | Order timestamp                                                                        |
+| triggerOrder                  | Boolean | Yes      | Indicator if order is a trigger order                                                  |
+| triggerPrice                  | Double  | Yes      | Order trigger price, returns 0 if order is not a trigger order                         |
+| triggerOriginalPrice          | Double  | Yes      | Price of the original order. Only valid if it's a triggered order                      |
+| triggerOrderType              | Integer | Yes      | Order type                                                                             |
+| triggerTrailingStopDeviation  | Double  | Yes      | Percentage deviation from stop price                                                   |
+| triggerStopPrice              | Double  | Yes      | Stop price, Algo Order only                                                            |
+| triggered                     | Boolean | Yes      | Indicate whether the order is triggered                                                |
+| trailValue                    | Double  | Yes      | Trail value                                                                            |
+| clOrderID                     | String  | Yes      | Customer tag sent in by trader                                                         |
+| averageFillPrice              | Double  | Yes      | Average filled price. Returns the average filled price for partially transacted orders |
+| remainingSize                 | Double  | Yes      | remainingSize                                                                          |
+| status                        | Integer | Yes      | Order status. Please refer to [`API Enum`](#api-enum)                                  |
+| timeInForce                   | String  | Yes      | Order validity                                                                         |
+| takeProfitOrder               | TakeProfitOrder object | No | Take profit order info |
+| stopLossOrder                 | StopLossOrder object   | No | Stop loss order info |
+| closeOrder                    | bool   | Yes      | Whether it is an order to close this position |
+| timeInForce                   | String  | Yes      | Order validity                                                                         |
 
 ## Amend Order
 
