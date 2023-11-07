@@ -13,6 +13,14 @@ headingLevel: 2
 
 # 更新日志
 
+## 版本 2.6.14 (2023年11月7日)
+
+* 更新 [市场摘要](#7335b2436c) 中的 资金费率（fundingRate） 描述
+* 在 [市场摘要](#7335b2436c) 中添加 listFullAttributes 参数
+* 在 [市场摘要](#7335b2436c) 中添加可选的 fundingIntervalMinutes 和 fundingTime
+* 新的资金费率间隔预定生效日期为 2023年11月14日
+* 新增一个新的API[查询订单](#90376e83a0)
+
 ## 版本 2.6.13 (2023年10月31日)
 
 > 错误代码格式
@@ -502,7 +510,9 @@ BTSE 的速率限制如下：
     "minRiskLimit": 0,
     "maxRiskLimit": 0,
     "availableSettlement": null,
-    "futures": false
+    "futures": false,
+    "fundingIntervalMinutes": 480,
+    "fundingTime": 1699347600000
   }
 ]
 ```
@@ -515,8 +525,9 @@ BTSE 的速率限制如下：
 
 | 名称               | 类型    | 是否必须 | 描述                                                                    |
 | ---                | ---     | ---      | ---                                                                    |
-| 符号               | string  | No       | 市场符号                                                                |
-| 使用新符号命名       | boolean | No       | 为True时返回期货市场名称的新格式， 默认为False                          |
+| symbol               | string  | No       | 市场符号                                                                |
+| useNewSymbolNaming       | boolean | No       | 为True时返回期货市场名称的新格式， 默认为False                          |
+| listFullAttributes | boolean | No       | 为True时返回市場摘要的所有屬性， 默认为False |
 
 ### 响应内容
 
@@ -548,13 +559,15 @@ BTSE 的速率限制如下：
 | closeTime           | long    | Yes      | 市场关闭时间                                                                                            |
 | startMatching       | long    | Yes      | 匹配开始时间                                                                                            |
 | inactiveTime        | long    | Yes      | 市场不活跃时间                                                                                          |
-| fundingRate         | double  | No       | 每小时计算的资金费率                                                                                    |
+| fundingRate         | double  | No       | 资金费率                                                                                    |
 | contractSize        | double  | No       | 一个合同的尺寸                                                                                          |
 | maxPosition         | double  | No       | 用户允许拥有的最大头寸 `风险限额调整后将不再适用`                                                         |
 | minRiskLimit        | double  | No       | 合同大小的最小风险限额 `将更改为美元价值`                                                                 |
 | maxRiskLimit        | double  | No       | 合同大小的最大风险限额 `将更改为美元价值`                                                                 |
 | availableSettlement | array   | No       | 用于结算的可用货币                                                                                      |
 | futures             | boolean | Yes      | 符号是否为期货合同的指标                                                                                  |
+| fundingIntervalMinutes             | integer | No      | 资金费率间隔，仅在参数 listFullAttributes 为 true 时显示|
+| fundingTime             | long | No      | 下一个资金费率时间，仅在参数 listFullAttributes 为 true 时显示|
 
 ## 图表数据
 
@@ -1132,6 +1145,91 @@ BTSE 的速率限制如下：
 | deviation     | double  | Yes      | 订单的偏差值                                                                                                                                                                                                                                                                                       |
 | remainingSize | double  | Yes      | 剩余待交易的大小                                                                                                                                                                                                                                                                                   |
 | originalSize  | double  | Yes      | 原始订单大小                                                                                                                                                                                                                                                                                       |
+
+## 查询订单
+
+> 响应
+
+```json
+{
+    "orderType": 76,
+    "price": 1,
+    "size": 111,
+    "side": "BUY",
+    "filledSize": 0,
+    "orderValue": 0.111,
+    "pegPriceMin": 0,
+    "pegPriceMax": 0,
+    "pegPriceDeviation": 1,
+    "timestamp": 1698757024617,
+    "orderID": "<Order UUID>",
+    "stealth": 1,
+    "triggerOrder": false,
+    "triggered": false,
+    "triggerPrice": 0,
+    "triggerOriginalPrice": 0,
+    "triggerOrderType": 0,
+    "triggerTrailingStopDeviation": 0,
+    "triggerStopPrice": 0,
+    "symbol": "BTCPFC",
+    "trailValue": 0,
+    "remainingSize": 111,
+    "clOrderID": "<Order clOrderID>",
+    "reduceOnly": false,
+    "status": 2,
+    "triggerUseLastPrice": false,
+    "avgFilledPrice": 0,
+    "timeInForce": "GTC",
+    "takeProfitOrder": null,
+    "stopLossOrder": null,
+    "closeOrder": false
+}
+```
+
+`GET /api/v2.1/order`
+
+查询指定orderID/clOrderID的订单详情，请注意已取消的订单仅保留30分钟。需要`交易`权限。
+
+### 请求参数
+
+| 名称       | 类型    | 是否必须     | 描述                                                                         |
+| ---       | ---    | ---      | ---                                                                             |
+| orderID   | String	 | No       | 订单的唯一标识符。当未提供clOrderID时，此项为必填。如果提供了orderID，则将忽略clOrderID。 |
+| clOrderID | String	 | No       | 客户自定义订单ID。当未提供orderID时，此项为必填。                                     |
+
+### 响应内容
+
+| 名称       | 类型    | 是否必须     | 描述                                                             |
+| ---                           | ---     | ---      | ---                                            |
+| orderID                       | String  | Yes      | 内部订单ID                                      |
+| symbol                        | String  | Yes      | 市场交易对标识符                                   |
+| quote                         | String  | Yes      | 报价货币的符号                                   |
+| orderType                     | Integer | Yes      | 订单类型                                      |
+| side                          | String  | Yes      | 订单方向                                      |
+| price                         | Double  | Yes      | 订单价格                                      |
+| size                          | Double  | Yes      | 订单数量                                      |
+| orderValue                    | Double  | Yes      | 此订单的总价值                                 |
+| filledSize                    | Double  | Yes      | 已成交数量                                    |
+| pegPriceMin                   | Double  | Yes      | 最小可能的挂单价格，优先于挂单价格偏差             |
+| pegPriceMax                   | Double  | Yes      | 最大可能的挂单价格，优先于挂单价格偏差             |
+| pegPriceDeviation             | Double  | Yes      | 与指数价格的百分比偏差                          |
+| timestamp                     | Long    | Yes      | 订单时间戳                                    |
+| triggerOrder                  | Boolean | Yes      | 指示订单是否为触发订单                          |
+| triggerPrice                  | Double  | Yes      | 订单触发价格，如果订单不是触发订单则返回0          |
+| triggerOriginalPrice          | Double  | Yes      | 原始订单的价格。仅对触发订单有效                 |
+| triggerOrderType              | Integer | Yes      | 订单类型                                      |
+| triggerTrailingStopDeviation  | Double  | Yes      | 止损价格的百分比偏差                           |
+| triggerStopPrice              | Double  | Yes      | 止损价格，仅适用于算法订单                       |
+| triggered                     | Boolean | Yes      | 指示订单是否已触发                         |
+| trailValue                    | Double  | Yes      | 跟踪价值                                       |
+| clOrderID                     | String  | Yes      | 由交易员发送的客户标签                          |
+| averageFillPrice              | Double  | Yes      | 平均成交价格。对于部分交易的订单，返回平均成交价格 |
+| remainingSize                 | Double  | Yes      | 订单上剩余的大小                              |
+| status                        | Integer | Yes      | 订单状态。请参照[`API Enum`](#api-enum)      |
+| takeProfitOrder               | TakeProfitOrder object | No | 止盈订单信息 |
+| stopLossOrder                 | StopLossOrder object   | No | 止损订单信息 |
+| closeOrder                    | bool   | Yes                | 是否为关闭此持仓的订单 |
+| timeInForce                   | String  | Yes      | 订单有效期                                    |
 
 ## 修改订单
 
