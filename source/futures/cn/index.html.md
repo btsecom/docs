@@ -13,6 +13,13 @@ headingLevel: 2
 
 # 更新日志
 
+## 版本 2.6.14 (2023年11月7日)
+
+* 更新 [市场摘要](#7335b2436c) 中的 资金费率（fundingRate） 描述
+* 在 [市场摘要](#7335b2436c) 中添加 listFullAttributes 参数
+* 在 [市场摘要](#7335b2436c) 中添加可选的 fundingIntervalMinutes 和 fundingTime
+* 预定生效日期为 2023年11月14日
+
 ## 版本 2.6.13 (2023年10月31日)
 
 > 错误代码格式
@@ -502,7 +509,9 @@ BTSE 的速率限制如下：
     "minRiskLimit": 0,
     "maxRiskLimit": 0,
     "availableSettlement": null,
-    "futures": false
+    "futures": false,
+    "fundingIntervalMinutes": 480,
+    "fundingTime": 1699347600000
   }
 ]
 ```
@@ -515,8 +524,9 @@ BTSE 的速率限制如下：
 
 | 名称               | 类型    | 是否必须 | 描述                                                                    |
 | ---                | ---     | ---      | ---                                                                    |
-| 符号               | string  | No       | 市场符号                                                                |
-| 使用新符号命名       | boolean | No       | 为True时返回期货市场名称的新格式， 默认为False                          |
+| symbol               | string  | No       | 市场符号                                                                |
+| useNewSymbolNaming       | boolean | No       | 为True时返回期货市场名称的新格式， 默认为False                          |
+| listFullAttributes | boolean | No       | 为True时返回市場摘要的所有屬性， 默认为False |
 
 ### 响应内容
 
@@ -548,13 +558,15 @@ BTSE 的速率限制如下：
 | closeTime           | long    | Yes      | 市场关闭时间                                                                                            |
 | startMatching       | long    | Yes      | 匹配开始时间                                                                                            |
 | inactiveTime        | long    | Yes      | 市场不活跃时间                                                                                          |
-| fundingRate         | double  | No       | 每小时计算的资金费率                                                                                    |
+| fundingRate         | double  | No       | 资金费率                                                                                    |
 | contractSize        | double  | No       | 一个合同的尺寸                                                                                          |
 | maxPosition         | double  | No       | 用户允许拥有的最大头寸 `风险限额调整后将不再适用`                                                         |
 | minRiskLimit        | double  | No       | 合同大小的最小风险限额 `将更改为美元价值`                                                                 |
 | maxRiskLimit        | double  | No       | 合同大小的最大风险限额 `将更改为美元价值`                                                                 |
 | availableSettlement | array   | No       | 用于结算的可用货币                                                                                      |
 | futures             | boolean | Yes      | 符号是否为期货合同的指标                                                                                  |
+| fundingIntervalMinutes             | integer | No      | 资金费率间隔，仅在参数 listFullAttributes 为 true 时显示|
+| fundingTime             | long | No      | 下一个资金费率时间，仅在参数 listFullAttributes 为 true 时显示|
 
 ## 图表数据
 

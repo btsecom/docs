@@ -35,13 +35,13 @@ headingLevel: 2
   * Order not found
       * Change status code to 400
       * Change errorCode to 400
-  * Order reject
+  * Order rejected
       * Change status code to 400
       * Change errorCode to 400
-  * Max open order exceeded
+  * Max open order reached
       * Change status code to 400
       * Change errorCode to 304
-  * rate limit exceeded
+  * rate limit reached
       * Change status code to 429
       * Change errorCode to 303
   * market unavailable
@@ -508,7 +508,9 @@ Spam orders are large number of small order sizes that is placed. In order to en
     "minRiskLimit": 0,
     "maxRiskLimit": 0,
     "availableSettlement": null,
-    "futures": false
+    "futures": false,
+    "fundingIntervalMinutes": 480,
+    "fundingTime": 1699347600000
   }
 ]
 ```
@@ -523,7 +525,7 @@ Gets market summary information. If no symbol parameter is sent, then all market
 | ---                | ---     | ---      | ---                                                                    |
 | symbol             | string  | No       | Market symbol                                                          |
 | useNewSymbolNaming | boolean | No       | True to return futures market name in the new format, default to False |
-| listFullAttributes | boolean | No       | True to return all attributes of market summary |
+| listFullAttributes | boolean | No       | True to return all attributes of the market summary |
 
 ### Response Content
 
@@ -555,7 +557,7 @@ Gets market summary information. If no symbol parameter is sent, then all market
 | closeTime           | long    | Yes      | Market closing time                                                                                   |
 | startMatching       | long    | Yes      | Matching start time                                                                                   |
 | inactiveTime        | long    | Yes      | Time where market is inactive                                                                         |
-| fundingRate         | double  | No       | The funding rate is calculated every 8 hours(default)                                                                      |
+| fundingRate         | double  | No       | The funding rate                                                                      |
 | contractSize        | double  | No       | Size of one contract                                                                                  |
 | maxPosition         | double  | No       | Maximum position a user is allowed to have `Will no longer be applicable after risk limit adjustment` |
 | minRiskLimit        | double  | No       | Minimum risk limit in contract size  `Will be changed to USD value`                                   |
