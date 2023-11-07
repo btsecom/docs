@@ -234,6 +234,9 @@
             <a href="#185368440e" class="toc-h1 toc-link" data-title="更新日志">更新日志</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2-6-14-2023-11-7" class="toc-h2 toc-link" data-title="版本 2.6.14 (2023年11月7日)">版本 2.6.14 (2023年11月7日)</a>
+                  </li>
+                  <li>
                     <a href="#2-6-13-2023-10-31" class="toc-h2 toc-link" data-title="版本 2.6.13 (2023年10月31日)">版本 2.6.13 (2023年10月31日)</a>
                   </li>
                   <li>
@@ -402,6 +405,9 @@
                     <a href="#a78f1cdd03" class="toc-h2 toc-link" data-title="创建新的算法订单">创建新的算法订单</a>
                   </li>
                   <li>
+                    <a href="#90376e83a0" class="toc-h2 toc-link" data-title="查询订单">查询订单</a>
+                  </li>
+                  <li>
                     <a href="#89e5b08e91" class="toc-h2 toc-link" data-title="修改订单">修改订单</a>
                   </li>
                   <li>
@@ -518,7 +524,15 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='185368440e'>更新日志</h1><h2 id='2-6-13-2023-10-31'>版本 2.6.13 (2023年10月31日)</h2>
+        <h1 id='185368440e'>更新日志</h1><h2 id='2-6-14-2023-11-7'>版本 2.6.14 (2023年11月7日)</h2>
+<ul>
+<li>更新 <a href="#7335b2436c">市场摘要</a> 中的 资金费率（fundingRate） 描述</li>
+<li>在 <a href="#7335b2436c">市场摘要</a> 中添加 listFullAttributes 参数</li>
+<li>在 <a href="#7335b2436c">市场摘要</a> 中添加可选的 fundingIntervalMinutes 和 fundingTime</li>
+<li>新的资金费率间隔预定生效日期为 2023年11月14日</li>
+<li>新增一个新的API<a href="#90376e83a0">查询订单</a></li>
+</ul>
+<h2 id='2-6-13-2023-10-31'>版本 2.6.13 (2023年10月31日)</h2>
 <blockquote>
 <p>错误代码格式</p>
 </blockquote>
@@ -1094,7 +1108,9 @@
     </span><span class="nl">"minRiskLimit"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"maxRiskLimit"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"availableSettlement"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"futures"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="nl">"futures"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"fundingIntervalMinutes"</span><span class="p">:</span><span class="w"> </span><span class="mi">480</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"fundingTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1699347600000</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
@@ -1111,16 +1127,22 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>符号</td>
+<td>symbol</td>
 <td>string</td>
 <td>No</td>
 <td>市场符号</td>
 </tr>
 <tr>
-<td>使用新符号命名</td>
+<td>useNewSymbolNaming</td>
 <td>boolean</td>
 <td>No</td>
 <td>为True时返回期货市场名称的新格式， 默认为False</td>
+</tr>
+<tr>
+<td>listFullAttributes</td>
+<td>boolean</td>
+<td>No</td>
+<td>为True时返回市場摘要的所有屬性， 默认为False</td>
 </tr>
 </tbody></table>
 <h3 id='05a22d5a79'>响应内容</h3>
@@ -1292,7 +1314,7 @@
 <td>fundingRate</td>
 <td>double</td>
 <td>No</td>
-<td>每小时计算的资金费率</td>
+<td>资金费率</td>
 </tr>
 <tr>
 <td>contractSize</td>
@@ -1329,6 +1351,18 @@
 <td>boolean</td>
 <td>Yes</td>
 <td>符号是否为期货合同的指标</td>
+</tr>
+<tr>
+<td>fundingIntervalMinutes</td>
+<td>integer</td>
+<td>No</td>
+<td>资金费率间隔，仅在参数 listFullAttributes 为 true 时显示</td>
+</tr>
+<tr>
+<td>fundingTime</td>
+<td>long</td>
+<td>No</td>
+<td>下一个资金费率时间，仅在参数 listFullAttributes 为 true 时显示</td>
 </tr>
 </tbody></table>
 <h2 id='af657f5fd9'>图表数据</h2>
@@ -2523,6 +2557,253 @@
 <td>原始订单大小</td>
 </tr>
 </tbody></table>
+<h2 id='90376e83a0'>查询订单</h2>
+<blockquote>
+<p>响应</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">111</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"filledSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderValue"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.111</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"pegPriceMin"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"pegPriceMax"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"pegPriceDeviation"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1698757024617</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;Order UUID&gt;"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggered"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerOriginalPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerOrderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerTrailingStopDeviation"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerStopPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"trailValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"remainingSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">111</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;Order clOrderID&gt;"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"reduceOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerUseLastPrice"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"avgFilledPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timeInForce"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"takeProfitOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stopLossOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"closeOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><code>GET /api/v2.1/order</code></p>
+
+<p>查询指定orderID/clOrderID的订单详情，请注意已取消的订单仅保留30分钟。需要<code>交易</code>权限。</p>
+<h3 id='1f9ac54b15-9'>请求参数</h3>
+<table><thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>是否必须</th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>orderID</td>
+<td>String</td>
+<td>No</td>
+<td>订单的唯一标识符。当未提供clOrderID时，此项为必填。如果提供了orderID，则将忽略clOrderID。</td>
+</tr>
+<tr>
+<td>clOrderID</td>
+<td>String</td>
+<td>No</td>
+<td>客户自定义订单ID。当未提供orderID时，此项为必填。</td>
+</tr>
+</tbody></table>
+<h3 id='05a22d5a79-9'>响应内容</h3>
+<table><thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>是否必须</th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>orderID</td>
+<td>String</td>
+<td>Yes</td>
+<td>内部订单ID</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>String</td>
+<td>Yes</td>
+<td>市场交易对标识符</td>
+</tr>
+<tr>
+<td>quote</td>
+<td>String</td>
+<td>Yes</td>
+<td>报价货币的符号</td>
+</tr>
+<tr>
+<td>orderType</td>
+<td>Integer</td>
+<td>Yes</td>
+<td>订单类型</td>
+</tr>
+<tr>
+<td>side</td>
+<td>String</td>
+<td>Yes</td>
+<td>订单方向</td>
+</tr>
+<tr>
+<td>price</td>
+<td>Double</td>
+<td>Yes</td>
+<td>订单价格</td>
+</tr>
+<tr>
+<td>size</td>
+<td>Double</td>
+<td>Yes</td>
+<td>订单数量</td>
+</tr>
+<tr>
+<td>orderValue</td>
+<td>Double</td>
+<td>Yes</td>
+<td>此订单的总价值</td>
+</tr>
+<tr>
+<td>filledSize</td>
+<td>Double</td>
+<td>Yes</td>
+<td>已成交数量</td>
+</tr>
+<tr>
+<td>pegPriceMin</td>
+<td>Double</td>
+<td>Yes</td>
+<td>最小可能的挂单价格，优先于挂单价格偏差</td>
+</tr>
+<tr>
+<td>pegPriceMax</td>
+<td>Double</td>
+<td>Yes</td>
+<td>最大可能的挂单价格，优先于挂单价格偏差</td>
+</tr>
+<tr>
+<td>pegPriceDeviation</td>
+<td>Double</td>
+<td>Yes</td>
+<td>与指数价格的百分比偏差</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>Long</td>
+<td>Yes</td>
+<td>订单时间戳</td>
+</tr>
+<tr>
+<td>triggerOrder</td>
+<td>Boolean</td>
+<td>Yes</td>
+<td>指示订单是否为触发订单</td>
+</tr>
+<tr>
+<td>triggerPrice</td>
+<td>Double</td>
+<td>Yes</td>
+<td>订单触发价格，如果订单不是触发订单则返回0</td>
+</tr>
+<tr>
+<td>triggerOriginalPrice</td>
+<td>Double</td>
+<td>Yes</td>
+<td>原始订单的价格。仅对触发订单有效</td>
+</tr>
+<tr>
+<td>triggerOrderType</td>
+<td>Integer</td>
+<td>Yes</td>
+<td>订单类型</td>
+</tr>
+<tr>
+<td>triggerTrailingStopDeviation</td>
+<td>Double</td>
+<td>Yes</td>
+<td>止损价格的百分比偏差</td>
+</tr>
+<tr>
+<td>triggerStopPrice</td>
+<td>Double</td>
+<td>Yes</td>
+<td>止损价格，仅适用于算法订单</td>
+</tr>
+<tr>
+<td>triggered</td>
+<td>Boolean</td>
+<td>Yes</td>
+<td>指示订单是否已触发</td>
+</tr>
+<tr>
+<td>trailValue</td>
+<td>Double</td>
+<td>Yes</td>
+<td>跟踪价值</td>
+</tr>
+<tr>
+<td>clOrderID</td>
+<td>String</td>
+<td>Yes</td>
+<td>由交易员发送的客户标签</td>
+</tr>
+<tr>
+<td>averageFillPrice</td>
+<td>Double</td>
+<td>Yes</td>
+<td>平均成交价格。对于部分交易的订单，返回平均成交价格</td>
+</tr>
+<tr>
+<td>remainingSize</td>
+<td>Double</td>
+<td>Yes</td>
+<td>订单上剩余的大小</td>
+</tr>
+<tr>
+<td>status</td>
+<td>Integer</td>
+<td>Yes</td>
+<td>订单状态。请参照<a href="#api-enum"><code>API Enum</code></a></td>
+</tr>
+<tr>
+<td>takeProfitOrder</td>
+<td>TakeProfitOrder object</td>
+<td>No</td>
+<td>止盈订单信息</td>
+</tr>
+<tr>
+<td>stopLossOrder</td>
+<td>StopLossOrder object</td>
+<td>No</td>
+<td>止损订单信息</td>
+</tr>
+<tr>
+<td>closeOrder</td>
+<td>bool</td>
+<td>Yes</td>
+<td>是否为关闭此持仓的订单</td>
+</tr>
+<tr>
+<td>timeInForce</td>
+<td>String</td>
+<td>Yes</td>
+<td>订单有效期</td>
+</tr>
+</tbody></table>
 <h2 id='89e5b08e91'>修改订单</h2>
 <blockquote>
 <p>请求（修改价格）</p>
@@ -2577,7 +2858,7 @@
 <p><code>PUT /api/v2.1/order</code></p>
 
 <p>修改订单的价格、数量或触发价格。对于触发订单，如果订单已经被触发，触发价格将无法进一步修改。修订订单不适用于算法订单。</p>
-<h3 id='1f9ac54b15-9'>请求参数</h3>
+<h3 id='1f9ac54b15-10'>请求参数</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -2635,7 +2916,7 @@
 <td>对于类型：<code>ALL</code>，要修改的触发价格</td>
 </tr>
 </tbody></table>
-<h3 id='05a22d5a79-9'>响应内容</h3>
+<h3 id='05a22d5a79-10'>响应内容</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -2802,7 +3083,7 @@
 <p><code>DELETE /api/v2.1/order</code></p>
 
 <p>取消尚未成交的待定订单。orderID是取消特定订单的唯一标识符。clOrderID是交易者发送的自定义ID。通过clOrderID取消时，所有具有相同ID的订单都将被取消。如果未发送orderID和clOrderID，则取消将针对当前市场中的所有订单。</p>
-<h3 id='1f9ac54b15-10'>请求参数</h3>
+<h3 id='1f9ac54b15-11'>请求参数</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -2830,7 +3111,7 @@
 <td>客户端自定义订单ID。当未提供<code>orderID</code>时为必填项。</td>
 </tr>
 </tbody></table>
-<h3 id='05a22d5a79-10'>响应内容</h3>
+<h3 id='05a22d5a79-11'>响应内容</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -2971,7 +3252,7 @@
 <p><code>POST /api/v2.1/order/cancelAllAfter</code></p>
 
 <p>允许交易员发送一个超时值，这是一个订单的生存时间（TTL）值。通过发送另一个“cancelAllAfter”请求来延长超时时间。如果服务器在超时时间到达之前没有收到另一个请求，那么所有订单将被取消。</p>
-<h3 id='1f9ac54b15-11'>请求参数</h3>
+<h3 id='1f9ac54b15-12'>请求参数</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -3054,7 +3335,7 @@
 <p><code>GET /api/v2.1/user/open_orders</code></p>
 
 <p>检索尚未匹配或最近已匹配的未完成订单。</p>
-<h3 id='1f9ac54b15-12'>请求参数</h3>
+<h3 id='1f9ac54b15-13'>请求参数</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -3088,7 +3369,7 @@
 <td>若为True，则返回新格式的期货市场名称，默认为False</td>
 </tr>
 </tbody></table>
-<h3 id='05a22d5a79-11'>响应内容</h3>
+<h3 id='05a22d5a79-12'>响应内容</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -3332,7 +3613,7 @@
 <p><code>GET /api/v2.1/user/trade_history</code></p>
 
 <p>获取用户的交易历史</p>
-<h3 id='1f9ac54b15-13'>请求参数</h3>
+<h3 id='1f9ac54b15-14'>请求参数</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -3402,7 +3683,7 @@
 <td>若为True，则使用新格式的期货市场名称作为符号， 默认为False</td>
 </tr>
 </tbody></table>
-<h3 id='05a22d5a79-12'>响应内容</h3>
+<h3 id='05a22d5a79-13'>响应内容</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -3595,7 +3876,7 @@
 <p><code>GET /api/v2.1/user/positions</code></p>
 
 <p>查询用户当前的仓位。当未指定交易对时，将返回所有市场的仓位。</p>
-<h3 id='1f9ac54b15-14'>请求参数</h3>
+<h3 id='1f9ac54b15-15'>请求参数</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -3617,7 +3898,7 @@
 <td>若为True，则使用新格式的期货市场名称作为符号， 默认为False</td>
 </tr>
 </tbody></table>
-<h3 id='05a22d5a79-13'>响应内容</h3>
+<h3 id='05a22d5a79-14'>响应内容</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -3776,7 +4057,7 @@
 <p><code>POST /api/v2.1/order/close_position</code></p>
 
 <p>平仓用户在特定市场上指定的仓位。如果指定类型为LIMIT，则价格是必须的。当类型为MARKET时，以市场价格平仓仓位。</p>
-<h3 id='1f9ac54b15-15'>请求参数</h3>
+<h3 id='1f9ac54b15-16'>请求参数</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -3816,7 +4097,7 @@
 <td>若为True，则使用新格式的期货市场名称作为符号，默认为False</td>
 </tr>
 </tbody></table>
-<h3 id='05a22d5a79-14'>响应内容</h3>
+<h3 id='05a22d5a79-15'>响应内容</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -3963,7 +4244,7 @@
 <p><code>GET /api/v2.1/risk_limit</code></p>
 
 <p>查询指定市场的风险限制</p>
-<h3 id='1f9ac54b15-16'>请求参数</h3>
+<h3 id='1f9ac54b15-17'>请求参数</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -3979,7 +4260,7 @@
 <td>市场符号</td>
 </tr>
 </tbody></table>
-<h3 id='05a22d5a79-15'>响应内容</h3>
+<h3 id='05a22d5a79-16'>响应内容</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -4026,7 +4307,7 @@
 <p><code>POST /api/v2.1/risk_limit</code></p>
 
 <p>更改指定市场的风险限制</p>
-<h3 id='1f9ac54b15-17'>请求参数</h3>
+<h3 id='1f9ac54b15-18'>请求参数</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -4054,7 +4335,7 @@
 <td>如果使用新的期货市场名称作为符号，则为True，默认为False</td>
 </tr>
 </tbody></table>
-<h3 id='05a22d5a79-16'>响应内容</h3>
+<h3 id='05a22d5a79-17'>响应内容</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -4117,7 +4398,7 @@
 <p><code>POST /api/v2.1/leverage</code></p>
 
 <p>更改指定市场的杠杆值</p>
-<h3 id='1f9ac54b15-18'>请求参数</h3>
+<h3 id='1f9ac54b15-19'>请求参数</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -4145,7 +4426,7 @@
 <td>如果使用新的期货市场名称作为符号，则为True，默认为False</td>
 </tr>
 </tbody></table>
-<h3 id='05a22d5a79-17'>响应内容</h3>
+<h3 id='05a22d5a79-18'>响应内容</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -4197,7 +4478,7 @@
 <p><code>Get /api/v2.1/leverage</code></p>
 
 <p>获取指定市场的杠杆值</p>
-<h3 id='1f9ac54b15-19'>请求参数</h3>
+<h3 id='1f9ac54b15-20'>请求参数</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -4213,7 +4494,7 @@
 <td>市场符号</td>
 </tr>
 </tbody></table>
-<h3 id='05a22d5a79-18'>响应内容</h3>
+<h3 id='05a22d5a79-19'>响应内容</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -4256,7 +4537,7 @@
 <p><code>POST /api/v2.1/settle_in</code></p>
 
 <p>更改当前市场中持仓的结算货币</p>
-<h3 id='1f9ac54b15-20'>请求参数</h3>
+<h3 id='1f9ac54b15-21'>请求参数</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -4284,7 +4565,7 @@
 <td>若为True，则使用新格式的期货市场名称作为符号，默认为False</td>
 </tr>
 </tbody></table>
-<h3 id='05a22d5a79-19'>响应内容</h3>
+<h3 id='05a22d5a79-20'>响应内容</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -4325,7 +4606,7 @@
 <p><code>GET /api/v2.1/user/fees</code></p>
 
 <p>查询用户的交易费用</p>
-<h3 id='1f9ac54b15-21'>请求参数</h3>
+<h3 id='1f9ac54b15-22'>请求参数</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -4347,7 +4628,7 @@
 <td>若为True，则使用新格式的期货市场名称作为符号，默认为False</td>
 </tr>
 </tbody></table>
-<h3 id='05a22d5a79-20'>响应内容</h3>
+<h3 id='05a22d5a79-21'>响应内容</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -4639,7 +4920,7 @@
 <p><code>GET /api/v2.1/user/wallet</code></p>
 
 <p>查询用户的钱包余额。API密钥需要<code>读取</code>权限。</p>
-<h3 id='1f9ac54b15-22'>请求参数</h3>
+<h3 id='1f9ac54b15-23'>请求参数</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -4661,7 +4942,7 @@
 <td>若为True，则返回新格式的期货市场名称，默认为False</td>
 </tr>
 </tbody></table>
-<h3 id='05a22d5a79-21'>响应内容</h3><h4 id='c02d697612'>钱包</h4>
+<h3 id='05a22d5a79-22'>响应内容</h3><h4 id='c02d697612'>钱包</h4>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -4807,7 +5088,7 @@
 <p><code>GET /api/v2.1/user/wallet_history</code></p>
 
 <p>获取期货钱包上的用户钱包历史记录</p>
-<h3 id='1f9ac54b15-23'>请求参数</h3>
+<h3 id='1f9ac54b15-24'>请求参数</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -4847,7 +5128,7 @@
 <td>若为True，则返回新格式的期货市场名称，默认为False</td>
 </tr>
 </tbody></table>
-<h3 id='05a22d5a79-22'>响应内容</h3>
+<h3 id='05a22d5a79-23'>响应内容</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -4943,7 +5224,7 @@
 <p><code>GET /api/v2.1/user/margin</code></p>
 
 <p>获取指定钱包的保证金信息，以便用户知道他们当前在市场上使用的是哪个钱包。</p>
-<h3 id='1f9ac54b15-24'>请求参数</h3>
+<h3 id='1f9ac54b15-25'>请求参数</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -4959,7 +5240,7 @@
 <td>市场符号</td>
 </tr>
 </tbody></table>
-<h3 id='05a22d5a79-23'>响应内容</h3><h4 id='c02d697612-2'>钱包</h4>
+<h3 id='05a22d5a79-24'>响应内容</h3><h4 id='c02d697612-2'>钱包</h4>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -5140,7 +5421,7 @@
 <p><code>POST /api/v2.1/user/wallet/transfer</code></p>
 
 <p>在用户的钱包之间转移资金。用户可以指定源钱包和目标钱包进行资金转账。</p>
-<h3 id='1f9ac54b15-25'>请求参数</h3><h4 id='301b9231fe'>钱包请求</h4>
+<h3 id='1f9ac54b15-26'>请求参数</h3><h4 id='301b9231fe'>钱包请求</h4>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -5208,7 +5489,7 @@
 <td>要转移的余额值，例如：10</td>
 </tr>
 </tbody></table>
-<h3 id='05a22d5a79-24'>响应内容</h3><h4 id='c02d697612-3'>钱包</h4>
+<h3 id='05a22d5a79-25'>响应内容</h3><h4 id='c02d697612-3'>钱包</h4>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -5336,7 +5617,7 @@
 <p>在用户和子账户钱包之间转移资金。用户可以指定源钱包和目标钱包进行资金转账。</p>
 
 <p>需要<code>Wallet</code>权限。要获取支持的货币列表，请查看<a href="#查询钱包操作的可用货币列表">用于操作的可用货币列表</a>。</p>
-<h3 id='1f9ac54b15-26'>请求参数</h3><h4 id='301b9231fe-2'>钱包请求</h4>
+<h3 id='1f9ac54b15-27'>请求参数</h3><h4 id='301b9231fe-2'>钱包请求</h4>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -5416,7 +5697,7 @@
 <td>要转移的余额值，例如：10</td>
 </tr>
 </tbody></table>
-<h3 id='05a22d5a79-25'>响应内容</h3><h4 id='c02d697612-4'>钱包</h4>
+<h3 id='05a22d5a79-26'>响应内容</h3><h4 id='c02d697612-4'>钱包</h4>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -5541,7 +5822,7 @@
 <li><code>symbol</code>表示市场符号</li>
 <li><code>grouping</code>表示分组的粒度。有效值为0-8。</li>
 </ul>
-<h3 id='05a22d5a79-26'>响应内容</h3><h4 id='5e08dfe292'>订单簿对象</h4>
+<h3 id='05a22d5a79-27'>响应内容</h3><h4 id='5e08dfe292'>订单簿对象</h4>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -5702,7 +5983,7 @@
 <p>为确保按顺序接收到更新，<code>seqNum</code>指示当前序列，而<code>prevSeqNum</code>指前一个数据包。<code>seqNum</code>总是在<code>prevSeqNum</code>之后。如果序列是乱序的，您将需要取消订阅并再次订阅该主题。</p>
 
 <p>如果当最佳买入价高于或等于最佳卖出价时发生<a href="https://en.wikipedia.org/wiki/Order_book#Crossed_book">交叉订单簿</a>，请取消订阅并重新订阅该主题。</p>
-<h3 id='05a22d5a79-27'>响应内容</h3><h4 id='5e08dfe292-2'>订单簿对象</h4>
+<h3 id='05a22d5a79-28'>响应内容</h3><h4 id='5e08dfe292-2'>订单簿对象</h4>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -5857,7 +6138,7 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>订阅Websocket的公开交易成交信息</p>
-<h3 id='1f9ac54b15-27'>请求参数</h3>
+<h3 id='1f9ac54b15-28'>请求参数</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -5879,7 +6160,7 @@
 <td>要订阅的主题。</td>
 </tr>
 </tbody></table>
-<h3 id='05a22d5a79-28'>响应内容</h3>
+<h3 id='05a22d5a79-29'>响应内容</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -5930,7 +6211,7 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>订阅市场的最近交易提要。主题将是 <code>tradeHistoryApi:&lt;market&gt;</code>，其中<code>&lt;market&gt;</code> 是市场符号。</p>
-<h3 id='05a22d5a79-29'>响应内容</h3><h4 id='tradehistory'>TradeHistory 对象</h4>
+<h3 id='05a22d5a79-30'>响应内容</h3><h4 id='tradehistory'>TradeHistory 对象</h4>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -6020,7 +6301,7 @@
   "op":"authKeyExpires",
   "args":["4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x", "1624985375123", "c410d38c681579adb335885800cff24c66171b7cc8376cfe43da1408c581748156b89bcc5a115bb496413bda481139fb"]
 }
-</code></pre></div><h3 id='1f9ac54b15-28'>请求参数</h3>
+</code></pre></div><h3 id='1f9ac54b15-29'>请求参数</h3>
 <p>以下详细描述了需要发送的参数。</p>
 
 <table><thead>
@@ -6100,7 +6381,7 @@
 
 </span></code></pre></div>
 <p>接收交易通知通过订阅主题 <code>notificationApiV2</code>。Websocket将向订阅者推送交易级别的通知。如果在未经认证的情况下订阅主题，将不会发送任何消息。</p>
-<h3 id='05a22d5a79-30'>响应内容</h3>
+<h3 id='05a22d5a79-31'>响应内容</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -6254,7 +6535,7 @@
 
 </span></code></pre></div>
 <p>当交易完成后，此主题将把交易信息发回给订阅者。</p>
-<h3 id='05a22d5a79-31'>响应内容</h3>
+<h3 id='05a22d5a79-32'>响应内容</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -6417,7 +6698,7 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>一旦仓位发生变化，所有期货仓位将通过这个主题推送。</p>
-<h3 id='05a22d5a79-32'>响应内容</h3>
+<h3 id='05a22d5a79-33'>响应内容</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -6737,7 +7018,7 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>一旦仓位发生变化，所有期货仓位将通过这个主题推送。如果用户将仓位减少到0，该主题将推送一次totalContracts值为0的数据。</p>
-<h3 id='05a22d5a79-33'>响应内容</h3>
+<h3 id='05a22d5a79-34'>响应内容</h3>
 <table><thead>
 <tr>
 <th>名称</th>
