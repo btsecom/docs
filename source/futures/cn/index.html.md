@@ -1148,10 +1148,6 @@ BTSE 的速率限制如下：
 
 ## 查询订单
 
-`GET /api/v2.1/order`
-
-查询指定orderID/clOrderID的订单详情，请注意已取消的订单仅保留30分钟。需要`交易`权限。
-
 > 响应
 
 ```json
@@ -1190,6 +1186,10 @@ BTSE 的速率限制如下：
 }
 ```
 
+`GET /api/v2.1/order`
+
+查询指定orderID/clOrderID的订单详情，请注意已取消的订单仅保留30分钟。需要`交易`权限。
+
 ### 请求参数
 
 | 名称       | 类型    | 是否必须     | 描述                                                                         |
@@ -1226,8 +1226,10 @@ BTSE 的速率限制如下：
 | averageFillPrice              | Double  | Yes      | 平均成交价格。对于部分交易的订单，返回平均成交价格 |
 | remainingSize                 | Double  | Yes      | 订单上剩余的大小                              |
 | status                        | Integer | Yes      | 订单状态。请参照[`API Enum`](#api-enum)      |
+| takeProfitOrder               | TakeProfitOrder object | No | 止盈订单信息 |
+| stopLossOrder                 | StopLossOrder object   | No | 止损订单信息 |
+| closeOrder                    | bool   | Yes                | 是否为关闭此持仓的订单 |
 | timeInForce                   | String  | Yes      | 订单有效期                                    |
-
 
 ## 修改订单
 

@@ -14,6 +14,7 @@ headingLevel: 2
 # Change Log
 
 ## Version 2.6.14 (7th November 2023)
+
 * Update fundingRate description in [`market-summary`](#market-summary)
 * Add listFullAttributes parameter in [`market-summary`](#market-summary)
 * Add optional fundingIntervalMinutes and fundingTime in [`market-summary`](#market-summary)
@@ -1185,7 +1186,6 @@ This API Requires `Trading` permission
 }
 ```
 
-
 `GET /api/v2.1/order` 
 
 Query order detail for a specified orderID/clOrderID, please note that a canceled order will only exist for 30 minutes. Requires `Trading` permission.
@@ -1226,7 +1226,6 @@ Query order detail for a specified orderID/clOrderID, please note that a cancele
 | averageFillPrice              | Double  | Yes      | Average filled price. Returns the average filled price for partially transacted orders |
 | remainingSize                 | Double  | Yes      | remainingSize                                                                          |
 | status                        | Integer | Yes      | Order status. Please refer to [`API Enum`](#api-enum)                                  |
-| timeInForce                   | String  | Yes      | Order validity                                                                         |
 | takeProfitOrder               | TakeProfitOrder object | No | Take profit order info |
 | stopLossOrder                 | StopLossOrder object   | No | Stop loss order info |
 | closeOrder                    | bool   | Yes      | Whether it is an order to close this position |
