@@ -32,6 +32,11 @@ Sessions for Spot and Futures are separated.
 
 # Change Log
 
+## Version 1.1.4 (15th Nov 2023)
+
+Add new timeInForce status
+
+Add [heartbeat](#heartbeat-0) recommondation
 ## Version 1.1.3 (10th July 2023)
 
 Add [heartbeat](#heartbeat-0) recommondation
