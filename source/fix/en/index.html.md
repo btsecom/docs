@@ -36,7 +36,6 @@ Sessions for Spot and Futures are separated.
 
 Add new timeInForce status
 
-Add [heartbeat](#heartbeat-0) recommondation
 ## Version 1.1.3 (10th July 2023)
 
 Add [heartbeat](#heartbeat-0) recommondation
