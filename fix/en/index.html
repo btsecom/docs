@@ -237,6 +237,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-1-1-4-15th-nov-2023" class="toc-h2 toc-link" data-title="Version 1.1.4 (15th Nov 2023)">Version 1.1.4 (15th Nov 2023)</a>
+                  </li>
+                  <li>
                     <a href="#version-1-1-3-10th-july-2023" class="toc-h2 toc-link" data-title="Version 1.1.3 (10th July 2023)">Version 1.1.3 (10th July 2023)</a>
                   </li>
                   <li>
@@ -339,7 +342,9 @@
 <td>FUTURES</td>
 </tr>
 </tbody></table>
-<h1 id='change-log'>Change Log</h1><h2 id='version-1-1-3-10th-july-2023'>Version 1.1.3 (10th July 2023)</h2>
+<h1 id='change-log'>Change Log</h1><h2 id='version-1-1-4-15th-nov-2023'>Version 1.1.4 (15th Nov 2023)</h2>
+<p>Add new timeInForce status</p>
+<h2 id='version-1-1-3-10th-july-2023'>Version 1.1.3 (10th July 2023)</h2>
 <p>Add <a href="#heartbeat-0">heartbeat</a> recommondation</p>
 <h2 id='version-1-1-2-10th-july-2023'>Version 1.1.2 (10th July 2023)</h2>
 <ul>
@@ -731,7 +736,7 @@ Client&#39;s API Key and secret can be generated from API page in BTSE portal. C
 <td>59</td>
 <td>TimeInForce</td>
 <td>1</td>
-<td>&quot;1&quot;: Good Till Cancel; &quot;3&quot;: Immediate or Cancel; &quot;4&quot;: Fill or Kill (for Limit order)</td>
+<td>&quot;1&quot;: Good Till Cancel; &quot;3&quot;: Immediate or Cancel; &quot;4&quot;: Fill or Kill; &quot;a&quot;=half minute; &quot;b&quot;:five minute; &quot;c&quot;:one hour; &quot;d&quot;:twelve hour; &quot;e&quot;:one week; &quot;f&quot;:one month;  (for Limit order)</td>
 </tr>
 <tr>
 <td>18</td>
@@ -815,7 +820,7 @@ Client&#39;s API Key and secret can be generated from API page in BTSE portal. C
 <td>39</td>
 <td>OrdStatus</td>
 <td>4</td>
-<td>&quot;4&quot; (Canceled) if the order was already cancelled</td>
+<td>&quot;4&quot; (Canceled) if the order was already cancelled, &quot;8&quot; (Rejected) Change made to the order was unsuccessful</td>
 </tr>
 <tr>
 <td>102</td>
