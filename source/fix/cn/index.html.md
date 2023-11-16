@@ -31,6 +31,11 @@ Spot 和 Futures 的会话是分开的。
 
 # 更新日志
 
+
+## 版本 1.1.4（2023年11月15日）
+
+添加新的订单生效时间（timeInForce）状态
+
 ## 版本 1.1.3（2023年7月10日）
 
 添加 [心跳 (0)](#0) 推荐
@@ -156,18 +161,18 @@ final String SIGNATURE = Hex.encodeHexString(HmacUtils.getInitializedMac(HmacAlg
 
 由客户端发送以提交新订单。FIX API当前仅支持市价单和限价单。
 
-| 标签 | 名称 | 值 | 描述 |
-| --- | --- | --- | --- |
-| 35  | MsgType     | D        |   |
-| 21  | HandlInst   | 1        | 必须设置为 "1" (AutomatedExecutionNoIntervention)                                |
-| 11  | ClOrdID     | order123 | 任意选择的用于识别订单的客户端字符串；必须唯一               |
-| 55  | Symbol      | BTC-USD  | 符号名称                                                                          |
-| 40  | OrdType     | 2        | "1": 市价; "2": 限价                                                              |
-| 38  | OrderQty    | 1.1      | 基本单位的订单大小（在限价订单和市价卖单中必需）             |
-| 44  | Price       | 18000    | 限价价格或市价买入价格（在限价订单和市价买入订单中必需）       |
-| 54  | Side        | 1        | "1": 买入; "2": 卖出                                                                  |
-| 59  | TimeInForce | 1        | "1": 永久有效; "3": 立即成交或取消; "4": 填成或立刻取消（限价单） |
-| 18  | ExecInst    | 6        | 此参数是可选的。 "E": 仅减少， "6": 仅发布，未提供: 标准 |
+| 标签 | 名称 | 值 | 描述                                                                                                 |
+| --- | --- | --- |----------------------------------------------------------------------------------------------------|
+| 35  | MsgType     | D        |                                                                                                    |
+| 21  | HandlInst   | 1        | 必须设置为 "1" (AutomatedExecutionNoIntervention)                                                       |
+| 11  | ClOrdID     | order123 | 任意选择的用于识别订单的客户端字符串；必须唯一                                                                            |
+| 55  | Symbol      | BTC-USD  | 符号名称                                                                                               |
+| 40  | OrdType     | 2        | "1": 市价; "2": 限价                                                                                   |
+| 38  | OrderQty    | 1.1      | 基本单位的订单大小（在限价订单和市价卖单中必需）                                                                           |
+| 44  | Price       | 18000    | 限价价格或市价买入价格（在限价订单和市价买入订单中必需）                                                                       |
+| 54  | Side        | 1        | "1": 买入; "2": 卖出                                                                                   |
+| 59  | TimeInForce | 1        | "1": 永久有效; "3": 立即成交或取消; "4": 填成或立刻取消; "a"=半分钟; "b"=五分钟; "c"=一小时; "d"=十二小时; "e"=一周; "f"=一个月; （限价单） |
+| 18  | ExecInst    | 6        | 此参数是可选的。 "E": 仅减少， "6": 仅发布，未提供: 标准                                                                |
 
 如果订单被接受，将返回执行报告（8），其中ExecType为：0（新建）、1（部分成交）、2（全部成交）、4（已取消）、7（已停止）、8（已拒绝）。
 
@@ -191,14 +196,14 @@ final String SIGNATURE = Hex.encodeHexString(HmacUtils.getInitializedMac(HmacAlg
 
 由服务器发送以通知客户端订单取消请求（F）失败。
 
-| 标签 | 名称 | 值 | 描述 |
-| --- | --- | --- | --- |
-| 35  | MsgType          | 9        |                                                      |
+| 标签 | 名称 | 值 | 描述                                                     |
+| --- | --- | --- |--------------------------------------------------------|
+| 35  | MsgType          | 9        |                                                        |
 | 37  | OrderID          | order123 | 从OrderCancelRequest复制，如果未在OrderCancelRequest中提供，将不会显示。 |
 | 41  | OrigClOrdID      | order123 | 从OrderCancelRequest复制，如果未在OrderCancelRequest中提供，将不会显示。 |
-| 39  | OrdStatus        | 4        | 如果订单已取消，则为"4"（已取消）                     |
-| 102 | CxlRejReason     | 1        | "1": 未知订单, "99": 其他                     |
-| 434 | CxlRejResponseTo | 1        | 始终设置为 "1"                                    |
+| 39  | OrdStatus        | 4        | 如果订单已取消，则为"4"（已取消）; 对订单所做的更改未成功 则为"8"（已拒绝）             |
+| 102 | CxlRejReason     | 1        | "1": 未知订单, "99": 其他                                    |
+| 434 | CxlRejResponseTo | 1        | 始终设置为 "1"                                              |
 
 ## 订单状态请求（H）
 

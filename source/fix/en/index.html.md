@@ -32,6 +32,10 @@ Sessions for Spot and Futures are separated.
 
 # Change Log
 
+## Version 1.1.4 (15th Nov 2023)
+
+Add new timeInForce status
+
 ## Version 1.1.3 (10th July 2023)
 
 Add [heartbeat](#heartbeat-0) recommondation
@@ -162,18 +166,18 @@ Sent by either side to terminate the session. The other side should respond with
 
 Sent by the client to submit a new order. Only Market, Limit orders are currently supported by the FIX API.
 
-| Tag |	Name | Value | Description |
-| --- | ---  | ---   | ---         |
-| 35	| MsgType     | D        |   |
-| 21	| HandlInst   | 1        | Must be set to "1" (AutomatedExecutionNoIntervention)                                |
-| 11	| ClOrdID     | order123 | Arbitrary client-selected string to identify the order; must be unique               |
-| 55	| Symbol      | BTC-USD  | Symbol name                                                                          |
-| 40	| OrdType     | 2        | "1": Market; "2": Limit                                                              |
-| 38	| OrderQty    | 1.1      | Order size in base units (required in Limit order and Market sell order)             |
-| 44	| Price       | 18000    | Limit price or Market buy price (required in Limit order and Market buy order)       |
-| 54	| Side        | 1        | "1": buy; "2": sell                                                                  |
-| 59	| TimeInForce | 1        | "1": Good Till Cancel; "3": Immediate or Cancel; "4": Fill or Kill (for Limit order) |
-| 18	| ExecInst    | 6        | This parameter is optional. "E": reduce only, "6": post only, not supplied: standard |
+| Tag |	Name | Value | Description                                                                                                                                                                          |
+| --- | ---  | ---   |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 35	| MsgType     | D        |                                                                                                                                                                                      |
+| 21	| HandlInst   | 1        | Must be set to "1" (AutomatedExecutionNoIntervention)                                                                                                                                |
+| 11	| ClOrdID     | order123 | Arbitrary client-selected string to identify the order; must be unique                                                                                                               |
+| 55	| Symbol      | BTC-USD  | Symbol name                                                                                                                                                                          |
+| 40	| OrdType     | 2        | "1": Market; "2": Limit                                                                                                                                                              |
+| 38	| OrderQty    | 1.1      | Order size in base units (required in Limit order and Market sell order)                                                                                                             |
+| 44	| Price       | 18000    | Limit price or Market buy price (required in Limit order and Market buy order)                                                                                                       |
+| 54	| Side        | 1        | "1": buy; "2": sell                                                                                                                                                                  |
+| 59	| TimeInForce | 1        | "1": Good Till Cancel; "3": Immediate or Cancel; "4": Fill or Kill; "a"=half minute; "b":five minute; "c":one hour; "d":twelve hour; "e":one week; "f":one month;  (for Limit order) |
+| 18	| ExecInst    | 6        | This parameter is optional. "E": reduce only, "6": post only, not supplied: standard                                                                                                 |
 
 If the order is accepted, an ExecutionReport (8) will be returned with ExecType: 0 (New), 1 (Partial fill), 2 (Fill), 4 (Canceled), 7 (Stopped), 8 (Rejected).
 
@@ -198,14 +202,14 @@ If the order is successfully cancelled, an ExecutionReport (8) will be returned.
 
 Sent by the server to notify the client that an OrderCancelRequest (F) failed.
 
-| Tag | Name | Value | Description |
-| --- | ---  | ---   | ---         |
-| 35  | MsgType          | 9        |                                                      |
-| 37  | OrderID          | order123 | Copied from OrderCancelRequest, won't show up if not provided in OrderCancelRequest. |
-| 41  | OrigClOrdID      | order123 | Copied from OrderCancelRequest, won't show up if not provided in OrderCancelRequest. |
-| 39  | OrdStatus        | 4        | "4" (Canceled) if the order was already cancelled                     |
-| 102 | CxlRejReason     | 1        | "1": unknown order, "99": others                     |
-| 434 | CxlRejResponseTo | 1        | Always set to "1"                                    |
+| Tag | Name | Value | Description                                                                                                  |
+| --- | ---  | ---   |--------------------------------------------------------------------------------------------------------------|
+| 35  | MsgType          | 9        |                                                                                                              |
+| 37  | OrderID          | order123 | Copied from OrderCancelRequest, won't show up if not provided in OrderCancelRequest.                         |
+| 41  | OrigClOrdID      | order123 | Copied from OrderCancelRequest, won't show up if not provided in OrderCancelRequest.                         |
+| 39  | OrdStatus        | 4        | "4" (Canceled) if the order was already cancelled, "8" (Rejected) Change made to the order was unsuccessful  |
+| 102 | CxlRejReason     | 1        | "1": unknown order, "99": others                                                                             |
+| 434 | CxlRejResponseTo | 1        | Always set to "1"                                                                                            |
 
 ## Order Status Request (H)
 
