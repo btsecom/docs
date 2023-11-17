@@ -555,7 +555,8 @@
 <span class="kd">final</span> <span class="nc">String</span> <span class="no">DATARAW</span> <span class="o">=</span> <span class="nc">String</span><span class="o">.</span><span class="na">join</span><span class="o">(</span><span class="no">SEPARATOR</span><span class="o">,</span> <span class="n">sendingTime</span><span class="o">,</span> <span class="n">messageType</span><span class="o">,</span> <span class="n">messageSeqNum</span><span class="o">,</span> <span class="n">senderCompID</span><span class="o">,</span> <span class="n">targetCompID</span><span class="o">);</span>
 <span class="kd">final</span> <span class="nc">String</span> <span class="no">SIGNATURE</span> <span class="o">=</span> <span class="nc">Hex</span><span class="o">.</span><span class="na">encodeHexString</span><span class="o">(</span><span class="nc">HmacUtils</span><span class="o">.</span><span class="na">getInitializedMac</span><span class="o">(</span><span class="nc">HmacAlgorithms</span><span class="o">.</span><span class="na">HMAC_SHA_384</span><span class="o">,</span> <span class="n">apiSecret</span><span class="o">.</span><span class="na">getBytes</span><span class="o">()).</span><span class="na">doFinal</span><span class="o">(</span><span class="n">dataRaw</span><span class="o">.</span><span class="na">getBytes</span><span class="o">()));</span>
 </code></pre></div>
-<p>由客户端发送以初始化FIX会话。必须在建立连接后发送的第一条消息。每个连接只能建立一个会话；额外的登录消息将被拒绝。客户端的API密钥和密钥可以在BTSE门户中的API页面生成。创建具有使用FIX API权限的密钥。</p>
+<p>由客户端发送以初始化FIX会话。必须在建立连接后发送的第一条消息。每个连接只能建立一个会话；额外的登录消息将被拒绝。
+客户端的API密钥和密钥可以在BTSE门户中的API页面生成。创建具有使用FIX API权限的密钥。</p>
 
 <table><thead>
 <tr>
