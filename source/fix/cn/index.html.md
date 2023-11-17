@@ -29,8 +29,8 @@ Spot 和 Futures 的会话是分开的。
 | SPOT        |
 | FUTURES     |
 
-# 更新日志
 
+# 更新日志
 
 ## 版本 1.1.4（2023年11月15日）
 
@@ -55,6 +55,7 @@ Spot 和 Futures 的会话是分开的。
 ## 版本 1.0.0（2022年10月18日）
 
 * 发布现货市场交易功能 [FIX API](#fix-api)
+
 
 # 速率限制
 
@@ -83,6 +84,7 @@ Spot 和 Futures 的会话是分开的。
 | 372 | RefMsgType           | F                    | 被拒绝消息的消息类型           |
 | 380 | BusinessRejectReason | 4                    | 始终设置为 "4"：应用程序不可用   |
 
+
 # 消息
 
 FIX 协议使用字段分隔符（字符：`0x01`）来分隔消息中的属性。
@@ -103,6 +105,7 @@ FIX 协议使用字段分隔符（字符：`0x01`）来分隔消息中的属性�
 | 56 | TargetCompID | BTSE      | 必须设置为 "BTSE"（用于来自客户端的消息） |
 | 10 | CheckSum     | 145       | 消息的校验和                              |
 
+
 ## 登录 (A)
 
 ``` java
@@ -121,7 +124,8 @@ final String DATARAW = String.join(SEPARATOR, sendingTime, messageType, messageS
 final String SIGNATURE = Hex.encodeHexString(HmacUtils.getInitializedMac(HmacAlgorithms.HMAC_SHA_384, apiSecret.getBytes()).doFinal(dataRaw.getBytes()));
 ```
 
-由客户端发送以初始化FIX会话。必须在建立连接后发送的第一条消息。每个连接只能建立一个会话；额外的登录消息将被拒绝。客户端的API密钥和密钥可以在BTSE门户中的API页面生成。创建具有使用FIX API权限的密钥。
+由客户端发送以初始化FIX会话。必须在建立连接后发送的第一条消息。每个连接只能建立一个会话；额外的登录消息将被拒绝。
+客户端的API密钥和密钥可以在BTSE门户中的API页面生成。创建具有使用FIX API权限的密钥。
 
 | 标签 | 名称 | 值 | 描述 |
 | --- | --- | --- | --- |
@@ -132,6 +136,7 @@ final String SIGNATURE = Hex.encodeHexString(HmacUtils.getInitializedMac(HmacAlg
 | 108 | HeartBInt       | 30                | 如果客户端将心跳间隔设置为N。我们建议您每隔N - 5秒左右发送一个心跳以保持连接活动。       |
 | 141 | ResetSeqNumFlag | Y                 | 必须设置为 "Y"        |
 | 5001 | ApplyNewSymbolName  | Y            | 此字段仅适用于期货。如果未提供此字段，FIX仅接受旧的符号名称。新符号模式：BTC-PERP，旧符号模式：BTCPFC |
+
 
 ## 心跳 (0)
 
@@ -175,6 +180,7 @@ final String SIGNATURE = Hex.encodeHexString(HmacUtils.getInitializedMac(HmacAlg
 | 18  | ExecInst    | 6        | 此参数是可选的。 "E": 仅减少， "6": 仅发布，未提供: 标准                                                                |
 
 如果订单被接受，将返回执行报告（8），其中ExecType为：0（新建）、1（部分成交）、2（全部成交）、4（已取消）、7（已停止）、8（已拒绝）。
+
 
 ## 订单取消请求（F）
 
@@ -246,6 +252,7 @@ final String SIGNATURE = Hex.encodeHexString(HmacUtils.getInitializedMac(HmacAlg
 | 151  | LeavesQty | 0.8 | 仍然开放的订单数量 |
 | 1057 | AggressorIndicator | Y | "Y": 主动成交; "N": 被动成交。仅当此消息是成交的结果时才会出现 |
 | 5000 | Liquidation | Y | "Y": 消息对应于市场清算订单。 "N"或不出现：不是。 |
+
 
 ### ExecType值
 
