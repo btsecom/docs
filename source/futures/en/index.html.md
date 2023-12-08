@@ -2015,7 +2015,6 @@ Changes risk limit for the specified market
 | riskLimit          | long    | Yes      | Risk limit value now in position size, but it will be changed to USD value in the future. |
 | positionMode       | string  | no       | ONE_WAY(default) or HEDGE. Mandatory when positionMode is `HEDGE`                         |
 | useNewSymbolNaming | boolean | No       | True if use new futures market name as symbol , default to False                          |
-| positionMode       | string  | no       | ONE_WAY(default) or HEDGE. Mandatory when positionMode is `HEDGE`                         |
 
 ### Response Content
 
@@ -2289,6 +2288,7 @@ Bind TP/SL with an existing position
 ## Query Position Mode
 
 > Response
+
 ```json
 [
     {

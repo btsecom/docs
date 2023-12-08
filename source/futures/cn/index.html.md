@@ -2012,8 +2012,8 @@ BTSE 的速率限制如下：
 | ---                | ---     | ---      | ---                                                                                                                                    |
 | symbol             | string  | Yes      | 市场符号                                                                                                                               |
 | riskLimit          | long    | Yes      | 当前的风险限制值以仓位大小表示，但它将在将来转变为USD值。                                                                                  |
-| useNewSymbolNaming | boolean | No       | 如果使用新的期货市场名称作为符号，则为True，默认为False                                                                                 |
 | positionMode       | string  | no       | 单向持仓`ONE_WAY`（默认）或 双向持仓`HEDGE`, 在双向持仓时为必填项                                                            |
+| useNewSymbolNaming | boolean | No       | 如果使用新的期货市场名称作为符号，则为True，默认为False                                                                                 |
 
 ### 响应内容
 
