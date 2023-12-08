@@ -2279,9 +2279,9 @@ Bind TP/SL with an existing position
 | deviation     | double  | Yes      | Only valid for Algo |
 | remainingSize | double  | Yes      | Size left to be transacted |
 | originalSize  | double  | Yes      | Original order size |
-| positionMode      | string  | Yes      | Position mode<br/>ONE_WAY or HEDGE                                                                                                                                                                                                                                                                                  |
-| positionDirection | string  | Yes      | Position direction                                                                                                                                                                                                                                                                             |
-| positionId        | string  | Yes      | Position id                                                                                                                                                                                                                                                                             |
+| positionMode      | string  | Yes      | Position mode<br/>ONE_WAY or HEDGE   |
+| positionDirection | string  | Yes      | Position direction   |
+| positionId        | string  | Yes      | Position id   |
 
 
 ## Query Position Mode
@@ -2305,16 +2305,16 @@ Retrieve user's position mode
 
 ### Request Parameters
 
-| Name               | Type    | Required | Description
-| ---                | ---     | ---      | ---
-| symbol             | string  | No       | Market symbol
+| Name               | Type    | Required | Description          |
+| ---                | ---     | ---      | ---------------------|
+| symbol             | string  | No       | Market symbol        |
 
 ### Response Content
 
-| Name         | Type   | Required | Description
-| ---          | ---    | ---      | --- 
-| symbol       | string | Yes      | Market symbol
-| positionMode | string | Yes      | ONE_WAY or HEDGE
+| Name         | Type   | Required | Description       |
+| ---          | ---    | ---      | ------------------|
+| symbol       | string | Yes      | Market symbol     |
+| positionMode | string | Yes      | ONE_WAY or HEDGE  |
 
 ## Change Position Mode
 
@@ -2333,20 +2333,20 @@ Changes position mode
 
 ### Request Parameters
 
-| Name               | Type    | Required | Description
-| ---                | ---     | ---      | --- 
-| symbol             | string  | Yes      | Market symbol
-| positionMode       | string  | Yes      | ONE_WAY or HEDGE 
+| Name               | Type    | Required | Description     |
+| ---                | ---     | ---      | ----------------|
+| symbol             | string  | Yes      | Market symbol   |
+| positionMode       | string  | Yes      | ONE_WAY or HEDGE|
 
 ### Response Content
 
-| Name      | Type    | Required | Description
-| ---       | ---     | ---      | ---
-| symbol    | string  | Yes      | Markey symbol
-| timestamp | long    | No       | Timestamp where position mode was set
-| status    | string  | No       | Status of the request. Values are: <br>20: Success
+| Name      | Type    | Required | Description                                                            |
+| ---       | ---     | ---      | -----------------------------------------------------------------------|
+| symbol    | string  | Yes      | Markey symbol                                                          |
+| timestamp | long    | No       | Timestamp where position mode was set                                  |
+| status    | string  | No       | Status of the request. Values are: <br>20: Success                     |
 | type      | string  | No       | Value will be 129 indicating that type is `Futures Config Mode Change` |
-| message   | string  | No       | Message |
+| message   | string  | No       | Message                                                                |
 
 
 # Wallet Endpoints

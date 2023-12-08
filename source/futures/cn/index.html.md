@@ -2301,16 +2301,16 @@ BTSE 的速率限制如下：
 
 **请求参数**
 
-| Name               | Type    | Required | Description
-| ---                | ---     | ---      | ---
-| symbol             | string  | No       | 市场交易对
+| Name               | Type    | Required | Description |
+| ---                | ---     | ---      | ------------|
+| symbol             | string  | No       | 市场交易对    |
 
 **响应内容**
 
-| Name         | Type   | Required | Description
-| ---          | ---    | ---      | --- 
-| symbol       | string | Yes      | 市场交易对
-| positionMode | string | Yes      | 单向持仓`ONE_WAY` 或 双向持仓`HEDGE`
+| Name         | Type   | Required | Description                       |
+| ---          | ---    | ---      | --- ------------------------------|
+| symbol       | string | Yes      | 市场交易对                         |
+| positionMode | string | Yes      | 单向持仓`ONE_WAY` 或 双向持仓`HEDGE` |
 
 ## 更改仓位模式
 
