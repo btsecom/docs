@@ -13,6 +13,11 @@ headingLevel: 2
 
 # Change Log
 
+## Version 2.6.15 (8th November 2023)
+
+* Add API for querying [`positionMode`](#query-position-mode) and changing [`positionMode`](#change-position-mode)
+* API related to order and position have added the fields or parameter: positionMode and positionId and positionDirection
+
 ## Version 2.6.14 (7th November 2023)
 
 * Update fundingRate description in [`market-summary`](#market-summary)
