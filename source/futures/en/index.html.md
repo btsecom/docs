@@ -13,6 +13,43 @@ headingLevel: 2
 
 # Change Log
 
+## Version 2.6.14 (7th November 2023)
+
+* Update fundingRate description in [`market-summary`](#market-summary)
+* Add listFullAttributes parameter in [`market-summary`](#market-summary)
+* Add optional fundingIntervalMinutes and fundingTime in [`market-summary`](#market-summary)
+* The new funding rate interval scheduled effective date is `Nov 14, 2023`
+* Add new API [`Query Order`](#query-order)
+
+## Version 2.6.13 (31th October 2023)
+
+> error code format
+
+  ``` json
+  {
+    "status": 400,
+    "errorCode": 400,
+    "message": "BAD_REQUEST: Order doesn't exist"
+  }
+  ```
+
+* [IMPORTANT] Adjust the HTTP status codes and error messages for trading-related API. The scheduled effective date is `November 7, 2023, at 10:00 AM (UTC+0)`. This includes but is not limited to the following situations. 
+  * Order not found
+      * Change status code to 400
+      * Change errorCode to 400
+  * Order rejected
+      * Change status code to 400
+      * Change errorCode to 400
+  * Max open order reached
+      * Change status code to 400
+      * Change errorCode to 304
+  * rate limit reached
+      * Change status code to 429
+      * Change errorCode to 303
+  * market unavailable
+      * Change status code to 400
+      * Change errorCode to 400
+
 ## Version 2.6.12 (23th October 2023)
 * Add [`positions`](#positions) in websocket streams for user to get all positions includes closed position
 
@@ -474,7 +511,9 @@ Spam orders are large number of small order sizes that is placed. In order to en
     "minRiskLimit": 0,
     "maxRiskLimit": 0,
     "availableSettlement": null,
-    "futures": false
+    "futures": false,
+    "fundingIntervalMinutes": 480,
+    "fundingTime": 1699347600000
   }
 ]
 ```
@@ -489,6 +528,7 @@ Gets market summary information. If no symbol parameter is sent, then all market
 | ---                | ---     | ---      | ---                                                                    |
 | symbol             | string  | No       | Market symbol                                                          |
 | useNewSymbolNaming | boolean | No       | True to return futures market name in the new format, default to False |
+| listFullAttributes | boolean | No       | True to return all attributes of the market summary |
 
 ### Response Content
 
@@ -520,13 +560,15 @@ Gets market summary information. If no symbol parameter is sent, then all market
 | closeTime           | long    | Yes      | Market closing time                                                                                   |
 | startMatching       | long    | Yes      | Matching start time                                                                                   |
 | inactiveTime        | long    | Yes      | Time where market is inactive                                                                         |
-| fundingRate         | double  | No       | Funding rate calculated per hour                                                                      |
+| fundingRate         | double  | No       | The funding rate                                                                      |
 | contractSize        | double  | No       | Size of one contract                                                                                  |
 | maxPosition         | double  | No       | Maximum position a user is allowed to have `Will no longer be applicable after risk limit adjustment` |
 | minRiskLimit        | double  | No       | Minimum risk limit in contract size  `Will be changed to USD value`                                   |
 | maxRiskLimit        | double  | No       | Maximum risk limit int contract size `Will be changed to USD value`                                   |
 | availableSettlement | array   | No       | Currencies available for settlement                                                                   |
 | futures             | boolean | Yes      | Indicator if symbol is a futures contract                                                             |
+| fundingIntervalMinutes             | integer | No      | Funding interval, only display when param `listFullAttributes` is true|
+| fundingTime             | long | No      | Next funding time, only display when param `listFullAttributes` is true|
 
 ## Charting Data
 
@@ -1183,6 +1225,91 @@ This API Requires `Trading` permission
 | positionMode      | string  | Yes      | Position mode<br/>ONE_WAY or HEDGE                                                                                                                                                                                                                                                                                  |
 | positionDirection | string  | Yes  | Position direction                                                                                                                                                                                                                                                                             |
 | positionId        | string  | Yes      | The current order belongs to the id of position.                                                                                                                                                                                                                                                                             |
+
+## Query Order
+
+> Response
+
+```json
+{
+    "orderType": 76,
+    "price": 1,
+    "size": 111,
+    "side": "BUY",
+    "filledSize": 0,
+    "orderValue": 0.111,
+    "pegPriceMin": 0,
+    "pegPriceMax": 0,
+    "pegPriceDeviation": 1,
+    "timestamp": 1698757024617,
+    "orderID": "<Order UUID>",
+    "stealth": 1,
+    "triggerOrder": false,
+    "triggered": false,
+    "triggerPrice": 0,
+    "triggerOriginalPrice": 0,
+    "triggerOrderType": 0,
+    "triggerTrailingStopDeviation": 0,
+    "triggerStopPrice": 0,
+    "symbol": "BTCPFC",
+    "trailValue": 0,
+    "remainingSize": 111,
+    "clOrderID": "<Order clOrderID>",
+    "reduceOnly": false,
+    "status": 2,
+    "triggerUseLastPrice": false,
+    "avgFilledPrice": 0,
+    "timeInForce": "GTC",
+    "takeProfitOrder": null,
+    "stopLossOrder": null,
+    "closeOrder": false
+}
+```
+
+`GET /api/v2.1/order` 
+
+Query order detail for a specified orderID/clOrderID, please note that a canceled order will only exist for 30 minutes. Requires `Trading` permission.
+
+### Request Parameters
+
+| Name      | Type   | Required | Description                                                                                                                  |
+| ---       | ---    | ---      | ---                                                                                                                          |
+| orderID   | String | No       | Unique identifier for an order. Mandatory when clOrderID is not provided. If orderID is provided, clOrderID will be ignored. |
+| clOrderID | String | No       | Client custom order ID. Mandatory when orderID is not provided.                                                              |
+
+### Response Content
+
+| Name                          | Type    | Required | Description                                                                            |
+| ---                           | ---     | ---      | ---                                                                                    |
+| orderID                       | String  | Yes      | Order ID                                                                               |
+| symbol                        | String  | Yes      | Market symbol                                                                          |
+| quote                         | String  | Yes      | Quote symbol                                                                           |
+| orderType                     | Integer | Yes      | Order type                                                                             |
+| side                          | String  | Yes      | Order side                                                                             |
+| price                         | Double  | Yes      | Order price                                                                            |
+| size                          | Double  | Yes      | Order size                                                                             |
+| orderValue                    | Double  | Yes      | Total value of of this order                                                           |
+| filledSize                    | Double  | Yes      | Filled Size                                                                            |
+| pegPriceMin                   | Double  | Yes      | Minimum possible peg price this takes precedence over pegPriceDeviation                |
+| pegPriceMax                   | Double  | Yes      | Peg Price Max (New Entry)                                                              |
+| pegPriceDeviation             | Double  | Yes      | Percentage deviation from Index price                                                  |
+| timestamp                     | Long    | Yes      | Order timestamp                                                                        |
+| triggerOrder                  | Boolean | Yes      | Indicator if order is a trigger order                                                  |
+| triggerPrice                  | Double  | Yes      | Order trigger price, returns 0 if order is not a trigger order                         |
+| triggerOriginalPrice          | Double  | Yes      | Price of the original order. Only valid if it's a triggered order                      |
+| triggerOrderType              | Integer | Yes      | Order type                                                                             |
+| triggerTrailingStopDeviation  | Double  | Yes      | Percentage deviation from stop price                                                   |
+| triggerStopPrice              | Double  | Yes      | Stop price, Algo Order only                                                            |
+| triggered                     | Boolean | Yes      | Indicate whether the order is triggered                                                |
+| trailValue                    | Double  | Yes      | Trail value                                                                            |
+| clOrderID                     | String  | Yes      | Customer tag sent in by trader                                                         |
+| averageFillPrice              | Double  | Yes      | Average filled price. Returns the average filled price for partially transacted orders |
+| remainingSize                 | Double  | Yes      | remainingSize                                                                          |
+| status                        | Integer | Yes      | Order status. Please refer to [`API Enum`](#api-enum)                                  |
+| takeProfitOrder               | TakeProfitOrder object | No | Take profit order info |
+| stopLossOrder                 | StopLossOrder object   | No | Stop loss order info |
+| closeOrder                    | bool   | Yes      | Whether it is an order to close this position |
+| timeInForce                   | String  | Yes      | Order validity                                                                         |
 
 ## Amend Order
 
@@ -2110,7 +2237,7 @@ Retrieve user's trading fees
 
 `POST /api/v2.1/order/bind/tpsl`
 
-Bint TP/SL with an existing position
+Bind TP/SL with an existing position
 
 ### Request Parameters
 
@@ -2358,10 +2485,9 @@ Get user's wallet history records on the futures wallet
 [
   {
     "trackingID": 0,
+    "requestId": 0,
     "queryType": 0,
-    "activeWalletName": "string",
     "wallet": "CROSS@",
-    "username": "string",
     "walletTotalValue": 0,
     "totalValue": 100,
     "marginBalance": 100,
@@ -2394,13 +2520,9 @@ Gets margin information for the specified wallet so that users can know which wa
 
 ### Request Parameters
 
-| Name               | Type    | Required | Description                                                     |
-| ---                | ---     | ---      | ---                                                             |
-| symbol             | string  | No       | Currency, if not specified will return all currencies           |
-| startTime          | long    | No       | Starting time (eg. 1624987283000)                               |
-| endTime            | long    | No       | Ending time (eg. 1624987283000)                                 |
-| count              | integer | No       | Number of records to return                                     |
-| useNewSymbolNaming | boolean | No       | True to use new futures market name in symbol, default to False |
+| Name               | Type    | Required | Description      |
+| ---                | ---     | ---      | ---              |
+| symbol             | string  | Yes      | Market symbol    |
 
 ### Response Content
 
@@ -2409,9 +2531,9 @@ Gets margin information for the specified wallet so that users can know which wa
 | Name                 | Type         | Required | Description                          |
 | ---                  | ---          | ---      | ---                                  |
 | wallet               | string       | Yes      | Wallet name                          |
-| activeWalletName     | string       | Yes      | Active wallet name                   |
 | queryType            | integer      | Yes      | Query type                           |
 | trackingID           | long         | Yes      | Internal tracking ID, not being used |
+| requestId            | long         | Yes      | Internal request ID, not being used  |
 | walletTotalValue     | double       | Yes      | Wallet total value                   |
 | totalValue           | double       | Yes      | Total value                          |
 | marginBalance        | double       | Yes      | Margin balance                       |

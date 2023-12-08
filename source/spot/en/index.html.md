@@ -13,6 +13,10 @@ headingLevel: 2
 
 # Change Log
 
+## Version 3.4.8 (25th October 2023)
+
+* Add an new API [Query Order](#query-order)
+
 ## Version 3.4.7 (20th October 2023)
 
 * Add two new response field `isMarketOpenToOtc`, `isMarketOpenToSpot` in [Market Summary](#market-summary)
@@ -864,6 +868,84 @@ Creates a new order. Requires `Trading` permission.
 | remainingSize    | double  | Yes      | Size left to be transacted                                                                                                                                                                                                                                                                          |
 | originalSize     | double  | Yes      | Original order size                                                                                                                                                                                                                                                                                 |
 
+## Query Order
+
+> Response
+
+```json
+{
+  "orderID": "<Order UUID>",
+  "symbol": "BTC-USDT",
+  "quote": "USDT",
+  "status": 6,
+  "orderType": 76,
+  "price": 30000,
+  "size": 0.00001,
+  "side": "SELL",
+  "orderValue": 0.300102,
+  "trailValue": 0,
+  "filledSize": 0,
+  "remainingSize": 0.00001,
+  "averageFillPrice": 0,
+  "clOrderID": "<Client OrderID>",
+  "timeInForce": "GTC",
+  "timestamp": 1697766317422,
+  "pegPriceMin": 0,
+  "pegPriceMax": 0,
+  "pegPriceDeviation": 0,
+  "triggerOrder": false,
+  "triggerPrice": 0,
+  "triggerOriginalPrice": 0,
+  "triggerOrderType": 0,
+  "triggerTrailingStopDeviation": 0,
+  "triggerStopPrice": 0,
+  "triggered": false
+}
+```
+
+
+`GET /api/v3.2/order` 
+
+Query order detail for a specified orderID/clOrderID, please note that a canceled order will only exist for 30 minutes. Requires `Trading` permission.
+
+### Request Parameters
+
+| Name      | Type   | Required | Description                                                                                                                  |
+| ---       | ---    | ---      | ---                                                                                                                          |
+| orderID   | String | No       | Unique identifier for an order. Mandatory when clOrderID is not provided. If orderID is provided, clOrderID will be ignored. |
+| clOrderID | String | No       | Client custom order ID. Mandatory when orderID is not provided.                                                              |
+
+### Response Content
+
+| Name                          | Type    | Required | Description                                                                            |
+| ---                           | ---     | ---      | ---                                                                                    |
+| orderID                       | String  | Yes      | Order ID                                                                               |
+| symbol                        | String  | Yes      | Market symbol                                                                          |
+| quote                         | String  | Yes      | Quote symbol                                                                           |
+| orderType                     | Integer | Yes      | Order type                                                                             |
+| side                          | String  | Yes      | Order side                                                                             |
+| price                         | Double  | Yes      | Order price                                                                            |
+| size                          | Double  | Yes      | Order size                                                                             |
+| orderValue                    | Double  | Yes      | Total value of of this order                                                           |
+| filledSize                    | Double  | Yes      | Filled Size                                                                            |
+| pegPriceMin                   | Double  | Yes      | Minimum possible peg price this takes precedence over pegPriceDeviation                |
+| pegPriceMax                   | Double  | Yes      | Peg Price Max (New Entry)                                                              |
+| pegPriceDeviation             | Double  | Yes      | Percentage deviation from Index price                                                  |
+| timestamp                     | Long    | Yes      | Order timestamp                                                                        |
+| triggerOrder                  | Boolean | Yes      | Indicator if order is a trigger order                                                  |
+| triggerPrice                  | Double  | Yes      | Order trigger price, returns 0 if order is not a trigger order                         |
+| triggerOriginalPrice          | Double  | Yes      | Price of the original order. Only valid if it's a triggered order                      |
+| triggerOrderType              | Integer | Yes      | Order type                                                                             |
+| triggerTrailingStopDeviation  | Double  | Yes      | Percentage deviation from stop price                                                   |
+| triggerStopPrice              | Double  | Yes      | Stop price, Algo Order only                                                            |
+| triggered                     | Boolean | Yes      | Indicate whether the order is triggered                                                |
+| trailValue                    | Double  | Yes      | Trail value                                                                            |
+| clOrderID                     | String  | Yes      | Customer tag sent in by trader                                                         |
+| averageFillPrice              | Double  | Yes      | Average filled price. Returns the average filled price for partially transacted orders |
+| remainingSize                 | Double  | Yes      | remainingSize                                                                          |
+| status                        | Integer | Yes      | Order status. Please refer to [`API Enum`](#api-enum)                                  |
+| timeInForce                   | String  | Yes      | Order validity                                                                         |
+ 
 ## Amend Order
 
 > Request (amend price)

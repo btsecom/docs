@@ -1,13 +1,13 @@
 ---
 title: BTSE FIX Documentation
 language_tabs:
-- json
-  toc_footers: []
-  includes: []
-  search: true
-  highlight_theme: darkula
-  code_clipboard: true
-  headingLevel: 2
+  - json
+toc_footers: []
+includes: []
+search: true
+highlight_theme: darkula
+code_clipboard: true
+headingLevel: 2
 
 ---
 
@@ -29,7 +29,12 @@ Spot 和 Futures 的会话是分开的。
 | SPOT        |
 | FUTURES     |
 
+
 # 更新日志
+
+## 版本 1.1.4（2023年11月15日）
+
+添加新的订单生效时间（timeInForce）状态
 
 ## 版本 1.1.3（2023年7月10日）
 
@@ -50,6 +55,7 @@ Spot 和 Futures 的会话是分开的。
 ## 版本 1.0.0（2022年10月18日）
 
 * 发布现货市场交易功能 [FIX API](#fix-api)
+
 
 # 速率限制
 
@@ -78,6 +84,7 @@ Spot 和 Futures 的会话是分开的。
 | 372 | RefMsgType           | F                    | 被拒绝消息的消息类型           |
 | 380 | BusinessRejectReason | 4                    | 始终设置为 "4"：应用程序不可用   |
 
+
 # 消息
 
 FIX 协议使用字段分隔符（字符：`0x01`）来分隔消息中的属性。
@@ -98,6 +105,7 @@ FIX 协议使用字段分隔符（字符：`0x01`）来分隔消息中的属性�
 | 56 | TargetCompID | BTSE      | 必须设置为 "BTSE"（用于来自客户端的消息） |
 | 10 | CheckSum     | 145       | 消息的校验和                              |
 
+
 ## 登录 (A)
 
 ``` java
@@ -116,7 +124,8 @@ final String DATARAW = String.join(SEPARATOR, sendingTime, messageType, messageS
 final String SIGNATURE = Hex.encodeHexString(HmacUtils.getInitializedMac(HmacAlgorithms.HMAC_SHA_384, apiSecret.getBytes()).doFinal(dataRaw.getBytes()));
 ```
 
-由客户端发送以初始化FIX会话。必须在建立连接后发送的第一条消息。每个连接只能建立一个会话；额外的登录消息将被拒绝。客户端的API密钥和密钥可以在BTSE门户中的API页面生成。创建具有使用FIX API权限的密钥。
+由客户端发送以初始化FIX会话。必须在建立连接后发送的第一条消息。每个连接只能建立一个会话；额外的登录消息将被拒绝。
+客户端的API密钥和密钥可以在BTSE门户中的API页面生成。创建具有使用FIX API权限的密钥。
 
 | 标签 | 名称 | 值 | 描述 |
 | --- | --- | --- | --- |
@@ -127,6 +136,7 @@ final String SIGNATURE = Hex.encodeHexString(HmacUtils.getInitializedMac(HmacAlg
 | 108 | HeartBInt       | 30                | 如果客户端将心跳间隔设置为N。我们建议您每隔N - 5秒左右发送一个心跳以保持连接活动。       |
 | 141 | ResetSeqNumFlag | Y                 | 必须设置为 "Y"        |
 | 5001 | ApplyNewSymbolName  | Y            | 此字段仅适用于期货。如果未提供此字段，FIX仅接受旧的符号名称。新符号模式：BTC-PERP，旧符号模式：BTCPFC |
+
 
 ## 心跳 (0)
 
@@ -156,20 +166,21 @@ final String SIGNATURE = Hex.encodeHexString(HmacUtils.getInitializedMac(HmacAlg
 
 由客户端发送以提交新订单。FIX API当前仅支持市价单和限价单。
 
-| 标签 | 名称 | 值 | 描述 |
-| --- | --- | --- | --- |
-| 35  | MsgType     | D        |   |
-| 21  | HandlInst   | 1        | 必须设置为 "1" (AutomatedExecutionNoIntervention)                                |
-| 11  | ClOrdID     | order123 | 任意选择的用于识别订单的客户端字符串；必须唯一               |
-| 55  | Symbol      | BTC-USD  | 符号名称                                                                          |
-| 40  | OrdType     | 2        | "1": 市价; "2": 限价                                                              |
-| 38  | OrderQty    | 1.1      | 基本单位的订单大小（在限价订单和市价卖单中必需）             |
-| 44  | Price       | 18000    | 限价价格或市价买入价格（在限价订单和市价买入订单中必需）       |
-| 54  | Side        | 1        | "1": 买入; "2": 卖出                                                                  |
-| 59  | TimeInForce | 1        | "1": 永久有效; "3": 立即成交或取消; "4": 填成或立刻取消（限价单） |
-| 18  | ExecInst    | 6        | 此参数是可选的。 "E": 仅减少， "6": 仅发布，未提供: 标准 |
+| 标签 | 名称 | 值 | 描述                                                                                                 |
+| --- | --- | --- |----------------------------------------------------------------------------------------------------|
+| 35  | MsgType     | D        |                                                                                                    |
+| 21  | HandlInst   | 1        | 必须设置为 "1" (AutomatedExecutionNoIntervention)                                                       |
+| 11  | ClOrdID     | order123 | 任意选择的用于识别订单的客户端字符串；必须唯一                                                                            |
+| 55  | Symbol      | BTC-USD  | 符号名称                                                                                               |
+| 40  | OrdType     | 2        | "1": 市价; "2": 限价                                                                                   |
+| 38  | OrderQty    | 1.1      | 基本单位的订单大小（在限价订单和市价卖单中必需）                                                                           |
+| 44  | Price       | 18000    | 限价价格或市价买入价格（在限价订单和市价买入订单中必需）                                                                       |
+| 54  | Side        | 1        | "1": 买入; "2": 卖出                                                                                   |
+| 59  | TimeInForce | 1        | "1": 永久有效; "3": 立即成交或取消; "4": 填成或立刻取消; "a"=半分钟; "b"=五分钟; "c"=一小时; "d"=十二小时; "e"=一周; "f"=一个月; （限价单） |
+| 18  | ExecInst    | 6        | 此参数是可选的。 "E": 仅减少， "6": 仅发布，未提供: 标准                                                                |
 
 如果订单被接受，将返回执行报告（8），其中ExecType为：0（新建）、1（部分成交）、2（全部成交）、4（已取消）、7（已停止）、8（已拒绝）。
+
 
 ## 订单取消请求（F）
 
@@ -191,14 +202,14 @@ final String SIGNATURE = Hex.encodeHexString(HmacUtils.getInitializedMac(HmacAlg
 
 由服务器发送以通知客户端订单取消请求（F）失败。
 
-| 标签 | 名称 | 值 | 描述 |
-| --- | --- | --- | --- |
-| 35  | MsgType          | 9        |                                                      |
+| 标签 | 名称 | 值 | 描述                                                     |
+| --- | --- | --- |--------------------------------------------------------|
+| 35  | MsgType          | 9        |                                                        |
 | 37  | OrderID          | order123 | 从OrderCancelRequest复制，如果未在OrderCancelRequest中提供，将不会显示。 |
 | 41  | OrigClOrdID      | order123 | 从OrderCancelRequest复制，如果未在OrderCancelRequest中提供，将不会显示。 |
-| 39  | OrdStatus        | 4        | 如果订单已取消，则为"4"（已取消）                     |
-| 102 | CxlRejReason     | 1        | "1": 未知订单, "99": 其他                     |
-| 434 | CxlRejResponseTo | 1        | 始终设置为 "1"                                    |
+| 39  | OrdStatus        | 4        | 如果订单已取消，则为"4"（已取消）; 对订单所做的更改未成功 则为"8"（已拒绝）             |
+| 102 | CxlRejReason     | 1        | "1": 未知订单, "99": 其他                                    |
+| 434 | CxlRejResponseTo | 1        | 始终设置为 "1"                                              |
 
 ## 订单状态请求（H）
 
@@ -241,6 +252,7 @@ final String SIGNATURE = Hex.encodeHexString(HmacUtils.getInitializedMac(HmacAlg
 | 151  | LeavesQty | 0.8 | 仍然开放的订单数量 |
 | 1057 | AggressorIndicator | Y | "Y": 主动成交; "N": 被动成交。仅当此消息是成交的结果时才会出现 |
 | 5000 | Liquidation | Y | "Y": 消息对应于市场清算订单。 "N"或不出现：不是。 |
+
 
 ### ExecType值
 
