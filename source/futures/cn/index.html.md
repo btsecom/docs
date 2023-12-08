@@ -1937,6 +1937,8 @@ BTSE 的速率限制如下：
 | positionMode      | string  | Yes      | 仓位模式<br/> 单向持仓`ONE_WAY` 或 双向持仓`HEDGE`                                                                                                                                                                                                                                                                                  |
 | positionDirection | string  | Yes      | 仓位方向<br/>  多头仓位`LONG` 或 空头仓位`SHORT`                                                                                                                                                                                                                                                                             |
 | positionId        | string  | Yes      | 当前订单属于的仓位ID。                                                                                                                                                                                                                                                                             |
+
+
 ## 获取风险限制
 
 > 请求

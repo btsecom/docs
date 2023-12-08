@@ -2284,7 +2284,6 @@ Bind TP/SL with an existing position
 | positionDirection | string  | Yes      | Position direction   |
 | positionId        | string  | Yes      | Position id   |
 
-
 ## Query Position Mode
 
 > Response
