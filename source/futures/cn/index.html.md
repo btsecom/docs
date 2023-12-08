@@ -2329,20 +2329,20 @@ BTSE 的速率限制如下：
 
 **请求参数**
 
-| Name               | Type    | Required | Description
-| ---                | ---     | ---      | --- 
-| symbol              | string | Yes      | 市场交易对
-| positionMode        | string | Yes      | 单向持仓`ONE_WAY` 或 双向持仓`HEDGE`
+| Name               | Type    | Required | Description                 |
+| ---                | ---     | ---      |-----------------------------|
+| symbol              | string | Yes      | 市场交易对                       |
+| positionMode        | string | Yes      | 单向持仓`ONE_WAY` 或 双向持仓`HEDGE` |
 
 **响应内容**
 
-| Name      | Type    | Required | Description
-| ---       | ---     | ---      | ---
-| symbol    | string  | Yes      | 市场交易对
-| timestamp | long    | No       | 订单时间戳
-| status    | string  | No       | 订单状态 <br>20: 成功
+| Name      | Type    | Required | Description           |
+| ---       | ---     | ---      |-----------------------|
+| symbol    | string  | Yes      | 市场交易对                 |
+| timestamp | long    | No       | 订单时间戳                 |
+| status    | string  | No       | 订单状态 <br>20: 成功       |
 | type      | string  | No       | 数值为129，表示为“期货仓位模式更改”。 |
-| message   | string  | No       | 交易消息 |
+| message   | string  | No       | 交易消息                  |
 
 # 钱包端点
 
@@ -3289,7 +3289,7 @@ echo -n "/ws/futures1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6
     "positionId": "BTCPFC-USD|SHORT",
     "positionMode": "HEDGE",
     "positionDirection": "SHORT",
-		"settleWithNonUSDAsset": "BTC",
+    "settleWithNonUSDAsset": "BTC",
     "takeProfitOrder": {
         "orderId": "4820b20a-e41b-4273-b3ad-4b19920aeeb5",
         "side": "SELL",
@@ -3336,7 +3336,7 @@ echo -n "/ws/futures1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6
     "marginTypeName": "FUTURES_MARGIN_CROSS",
     "currentLeverage": 0.1116510969,
     "takeProfitOrder": null,
-		"settleWithNonUSDAsset": "USDT",
+    "settleWithNonUSDAsset": "USDT",
     "stopLossOrder": null,
     "positionId": "LTCPFC-USD|SHORT",
     "positionMode": "HEDGE",
