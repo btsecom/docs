@@ -1277,8 +1277,8 @@ BTSE 的速率限制如下：
 
 | 名称       | 类型    | 是否必须     | 描述                                                                         |
 | ---       | ---    | ---      | ---                                                                             |
-| orderID   | String	 | No       | 订单的唯一标识符。当未提供clOrderID时，此项为必填。如果提供了orderID，则将忽略clOrderID。 |
-| clOrderID | String	 | No       | 客户自定义订单ID。当未提供orderID时，此项为必填。                                     |
+| orderID   | String  | No       | 订单的唯一标识符。当未提供clOrderID时，此项为必填。如果提供了orderID，则将忽略clOrderID。 |
+| clOrderID | String  | No       | 客户自定义订单ID。当未提供orderID时，此项为必填。                                     |
 
 ### 响应内容
 
