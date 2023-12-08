@@ -2199,7 +2199,6 @@ BTSE 的速率限制如下：
 ```json
 {
     "symbol": "BTC-PERP",
-    "side": "SELL",
     "takeProfitPrice": 31000,
     "takeProfitTrigger": "markPrice",
     "stopLossPrice": 22000,
