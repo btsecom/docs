@@ -1043,7 +1043,6 @@ BTSE 的速率限制如下：
 ]
 ```
 
-
 > 响应（用于双向持仓订单）
 
 ```json
@@ -1202,6 +1201,7 @@ BTSE 的速率限制如下：
 | deviation | double  | No       | 订单价格应与指数价格偏离多少。该值以百分比表示，范围从`-10`到`10`                                                                                                                                                                             |
 | stealth   | double  | No       | 订单中应在订单簿上显示的百分比是多少。                                                                                                                                                                                                        |
 | positionMode  | string  | No       | 用于创建指定仓位模式订单。有效选项：单向持仓`ONE_WAY`（默认）或 双向持仓`HEDGE`                                                                                                                                                                                                                                                          |
+
 ### 响应内容
 
 | 名称            | 类型    | 是否必须 | 描述                                                                                                                                                                                                                                                                                                |
@@ -1853,8 +1853,7 @@ BTSE 的速率限制如下：
   "type": "MARKET"
 }
 ```
-
-> 响应（用于双向持仓订单）
+> 请求（用于双向持仓订单）
 
 ```json
 {
@@ -1863,7 +1862,7 @@ BTSE 的速率限制如下：
   "type": "MARKET",
   "positionId": "BTCPFC-USD|LONG"
 }
-
+```
 > Response
 
 ```json
@@ -1888,6 +1887,9 @@ BTSE 的速率限制如下：
     "originalSize": 1.0,
     "postOnly": false,
     "remainingSize": 0.0,
+    "positionMode": "ONE_WAY",
+    "positionDirection": null,
+    "positionId": null,
     "time_in_force": "GTC"
   }
 ]
@@ -1896,7 +1898,6 @@ BTSE 的速率限制如下：
 `POST /api/v2.1/order/close_position`
 
 平仓用户在特定市场上指定的仓位。如果指定类型为LIMIT，则价格是必须的。当类型为MARKET时，以市场价格平仓仓位。
-
 
 ### 请求参数
 
@@ -1936,7 +1937,6 @@ BTSE 的速率限制如下：
 | positionMode      | string  | Yes      | 仓位模式<br/> 单向持仓`ONE_WAY` 或 双向持仓`HEDGE`                                                                                                                                                                                                                                                                                  |
 | positionDirection | string  | Yes      | 仓位方向<br/>  多头仓位`LONG` 或 空头仓位`SHORT`                                                                                                                                                                                                                                                                             |
 | positionId        | string  | Yes      | 当前订单属于的仓位ID。                                                                                                                                                                                                                                                                             |
-
 ## 获取风险限制
 
 > 请求
@@ -1991,6 +1991,7 @@ BTSE 的速率限制如下：
 ```
 
 > 响应
+
 ```json
 {
   "symbol": "BTCPFC",
@@ -2044,7 +2045,6 @@ BTSE 的速率限制如下：
     "positionMode": "HEDGE"
 }
 ```
-
 
 > 响应
 
@@ -2213,7 +2213,7 @@ BTSE 的速率限制如下：
 [
     {
         "status": 9,
-        "symbol": "BTC-PERP",
+        "symbol": "BTCPFC",
         "orderType": 77,
         "price": 0.0,
         "side": "SELL",
@@ -2232,6 +2232,9 @@ BTSE 的速率限制如下：
         "postOnly": false,
         "remainingSize": 100.0,
         "orderDetailType": null,
+        "positionMode": "ONE_WAY",
+        "positionDirection": null,
+        "positionId": "BTCPFC-USD",
         "time_in_force": "GTC"
     }
 ]
@@ -2241,7 +2244,7 @@ BTSE 的速率限制如下：
 
 绑定止盈/止损与已有持仓
 
-**请求参数**
+### 请求参数
 
 | 名称               | 类型    | 是否必需 | 描述 |
 | ---                | ---     | ---      | --- |
@@ -2253,7 +2256,7 @@ BTSE 的速率限制如下：
 | stopLossTrigger     | string  | No       | 用于创建带有止损订单的选项。有效选项：`标记价格`（默认）或`最新价格` |
 | positionMode       | string  | no       | 单向持仓`ONE_WAY`（默认）或 双向持仓`HEDGE`, 在双向持仓时为必填项                                                            |
 
-**响应内容**
+### 响应内容
 
 | 名称          | 类型    | 是否必需 | 描述 |
 | ---           | ---     | ---      | --- |
@@ -2277,6 +2280,9 @@ BTSE 的速率限制如下：
 | deviation     | double  | Yes       | 仅适用于算法订单 |
 | remainingSize | double  | Yes       | 剩余待成交的大小 |
 | originalSize  | double  | Yes       | 原始订单大小    |
+| positionMode      | string  | Yes      | 仓位模式<br/> 单向持仓`ONE_WAY` 或 双向持仓`HEDGE`                                                                                                                                                                                                                                                                                  |
+| positionDirection | string  | Yes      | 仓位方向<br/>  多头仓位`LONG` 或 空头仓位`SHORT`                                                                                                                                                                                                                                                                             |
+| positionId        | string  | Yes      | 当前订单属于的仓位ID。                                                                                                                                                                                                                                                                             |
 
 ## 查询仓位模式
 
@@ -2294,7 +2300,6 @@ BTSE 的速率限制如下：
     }
 ]
 ```
-
 
 `GET /api/v2.1/position_mode`
 
@@ -3409,81 +3414,89 @@ echo -n "/ws/futures1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6
     "orderID": null,
     "requestId": 0,
     "username": "btse",
-    "marketName": "LTCPFC-USD",
+    "marketName": "BTCPFC-USD",
     "orderType": 90,
-    "orderMode": 83,
-    "originalAmount": 0.01,
-    "maxPriceHeld": 0,
-    "pegPriceMin": 0,
-    "stealth": 1,
-    "maxStealthDisplayAmount": 0,
-    "sellexchangeRate": 0,
-    "triggerPrice": 0,
-    "closeOrder": false,
-    "liquidationInProgress": false,
-    "marginType": 91,
-    "entryPrice": 69.9,
-    "liquidationPrice": 29682.415101008,
-    "markedPrice": 69.685573595,
-    "unrealizedProfitLoss": 0.06432792,
-    "totalMaintenanceMargin": 0.318744,
-    "totalContracts": 30,
-    "isolatedLeverage": 0,
-    "totalFees": 0,
-    "totalValue": -20.905672079,
-    "adlScoreBucket": 2,
-    "orderTypeName": "TYPE_FUTURES_POSITION",
-    "orderModeName": "MODE_SELL",
-    "marginTypeName": "FUTURES_MARGIN_CROSS",
-    "currentLeverage": 0.1113820366,
-    "averageFillPrice": 0,
-    "filledSize": 0,
-    "takeProfitOrder": null,
-    "stopLossOrder": null,
-    "positionId": "LTCPFC-USD|SHORT",
-    "positionMode": "HEDGE",
-    "positionDirection": "SHORT",
-    "settleWithNonUSDAsset": "USDT"
-},{
+    "orderMode": 66,
+    "originalAmount": 0.001,
+    "maxPriceHeld": 0.0,
+    "pegPriceMin": 0.0,
+    "stealth": 1.0,
     "orderID": null,
-    "requestId": 0,
-    "username": "btse",
-    "marketName": "LTCPFC-USD",
-    "orderType": 90,
-    "orderMode": 83,
-    "originalAmount": 0.01,
-    "maxPriceHeld": 0,
-    "pegPriceMin": 0,
-    "stealth": 1,
-    "maxStealthDisplayAmount": 0,
-    "sellexchangeRate": 0,
-    "triggerPrice": 0,
+    "maxStealthDisplayAmount": 0.0,
+    "sellexchangeRate": 0.0,
+    "triggerPrice": 0.0,
     "closeOrder": false,
     "liquidationInProgress": false,
     "marginType": 91,
-    "entryPrice": 69.9,
-    "liquidationPrice": 29682.415101008,
-    "markedPrice": 69.685573595,
-    "unrealizedProfitLoss": 0.06432792,
-    "totalMaintenanceMargin": 0.318744,
-    "totalContracts": 30,
-    "isolatedLeverage": 0,
-    "totalFees": 0,
-    "totalValue": -20.905672079,
-    "adlScoreBucket": 2,
+    "entryPrice": 29286.404761929,
+    "liquidationPrice": 0.0,
+    "markedPrice": 29267.967916154,
+    "unrealizedProfitLoss": -0.13236859,
+    "totalMaintenanceMargin": 3.484381756,
+    "totalContracts": 14.0,
+    "isolatedLeverage": 0.0,
+    "totalFees": 0.0,
+    "totalValue": 662.115298076,
+    "adlScoreBucket": 2.0,
     "orderTypeName": "TYPE_FUTURES_POSITION",
-    "orderModeName": "MODE_SELL",
+    "orderModeName": "MODE_BUY",
     "marginTypeName": "FUTURES_MARGIN_CROSS",
-    "currentLeverage": 0.1113820366,
-    "averageFillPrice": 0,
-    "filledSize": 0,
-    "takeProfitOrder": null,
-    "stopLossOrder": null,
-    "positionId": "LTCPFC-USD|SHORT",
-    "positionMode": "HEDGE",
-    "positionDirection": "SHORT",
-    "settleWithNonUSDAsset": "USDT"
-}]
+    "currentLeverage": 0.02,
+    "avgFillPrice": 0.0,
+    "settleWithNonUSDAsset": "BTC",
+    "takeProfitOrder": {
+        "orderId": "4820b20a-e41b-4273-b3ad-4b19920aeeb5",
+        "side": "SELL",
+        "triggerPrice": 31000.0,
+        "triggerUseLastPrice": false
+    },
+    "stopLossOrder": {
+        "orderId": "eff2b232-e2ce-4562-b0b4-0bd3713c11ec",
+        "side": "SELL",
+        "triggerPrice": 27000.0,
+        "triggerUseLastPrice": true
+    }
+  },{
+        "orderID": null,
+        "requestId": 0,
+        "username": "btse",
+        "marketName": "LTCPFC-USD",
+        "orderType": 90,
+        "orderMode": 83,
+        "originalAmount": 0.01,
+        "maxPriceHeld": 0,
+        "pegPriceMin": 0,
+        "stealth": 1,
+        "maxStealthDisplayAmount": 0,
+        "sellexchangeRate": 0,
+        "triggerPrice": 0,
+        "closeOrder": false,
+        "liquidationInProgress": false,
+        "marginType": 91,
+        "entryPrice": 69.9,
+        "liquidationPrice": 29682.415101008,
+        "markedPrice": 69.685573595,
+        "unrealizedProfitLoss": 0.06432792,
+        "totalMaintenanceMargin": 0.318744,
+        "totalContracts": 30,
+        "isolatedLeverage": 0,
+        "totalFees": 0,
+        "totalValue": -20.905672079,
+        "adlScoreBucket": 2,
+        "orderTypeName": "TYPE_FUTURES_POSITION",
+        "orderModeName": "MODE_SELL",
+        "marginTypeName": "FUTURES_MARGIN_CROSS",
+        "currentLeverage": 0.1113820366,
+        "averageFillPrice": 0,
+        "filledSize": 0,
+        "takeProfitOrder": null,
+        "stopLossOrder": null,
+        "positionId": "LTCPFC-USD|SHORT",
+        "positionMode": "HEDGE",
+        "positionDirection": "SHORT",
+        "settleWithNonUSDAsset": "USDT"
+    }
+  ]
 }
 ```
 

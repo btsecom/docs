@@ -1103,7 +1103,6 @@ Creates a new order. Requires `Trading` permission
 | stopLossTrigger       | string  | No       | For creating order with stop loss order. Valid options: `markPrice` (default) or `lastPrice`|
 | positionMode  | string  | No       | For creating order and wanting to specify the positionMode. Valid options: `ONE_WAY` (default) or `HEDGE`                                                                                                                                                                                                                                                          |
 
-
 ### Response Content
 
 | Name              | Type    | Required | Description                                                                                                                                                                                                                                                                                     |
@@ -1955,6 +1954,7 @@ Closes a user's position for the particular market as specified by symbol. If ty
     "symbol": "BTCPFC",
     "riskLimit": 100000
 }
+```
 `GET /api/v2.1/risk_limit`
 
 Query risk limit for the specified market
@@ -1990,6 +1990,7 @@ Query risk limit for the specified market
     "positionMode": "HEDGE"
 }
 ```
+
 > Response
 
 ```json
@@ -2255,6 +2256,7 @@ Bind TP/SL with an existing position
 | stopLossPrice      | double  | No        | Mandatory when creating new order with stop loss order. Indicates the trigger price        |
 | stopLossTrigger     | string | No       | For creating order with stop loss order. Valid options: `markPrice` (default) or `lastPrice`|
 | positionMode       | string  | no       | ONE_WAY(default) or HEDGE. Mandatory when positionMode is `HEDGE` |
+
 ### Response Content
 
 | Name          | Type    | Required | Description |
@@ -2285,6 +2287,7 @@ Bind TP/SL with an existing position
 
 
 ## Query Position Mode
+
 > Response
 ```json
 [
@@ -2347,7 +2350,6 @@ Changes position mode
 | status    | string  | No       | Status of the request. Values are: <br>20: Success                     |
 | type      | string  | No       | Value will be 129 indicating that type is `Futures Config Mode Change` |
 | message   | string  | No       | Message                                                                |
-
 
 # Wallet Endpoints
 
@@ -3342,6 +3344,7 @@ When a trade has been transacted, this topic will send the trade information bac
     "currentLeverage": 0.1116510969,
     "takeProfitOrder": null,
     "stopLossOrder": null,
+    "settleWithNonUSDAsset": "USDT",
     "positionId": "LTCPFC-USD|SHORT",
     "positionMode": "HEDGE",
     "positionDirection": "SHORT",
@@ -3392,6 +3395,7 @@ All futures positions will be pushed via this topic once the position changes.
 | positionMode            | string  | Yes      | Position mode<br/>ONE_WAY or HEDGE           |
 | positionDirection       | string  | Yes      | Position direction                           |
 | positionId              | string  | Yes      | Position id                                  |
+
 ## Positions
 
 > Request
@@ -3408,6 +3412,7 @@ All futures positions will be pushed via this topic once the position changes.
 {
   "topic": "positions",
   "data": [{
+    "orderID": null,
     "requestId": 0,
     "username": "btse",
     "marketName": "BTCPFC-USD",
