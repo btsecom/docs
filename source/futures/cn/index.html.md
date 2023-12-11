@@ -13,6 +13,11 @@ headingLevel: 2
 
 # 更新日志
 
+## 版本 2.6.15 (2023年11月7日)
+
+* 新增新的API[`查询仓位模式`](#查询仓位模式)和[`切換仓位模式`](#更改仓位模式)
+* 关于订单和仓位的API新增了新的栏位或参数:仓位ID(positionId)、仓位方向(positionDirection)、仓位模式(positionMode)。
+
 ## 版本 2.6.14 (2023年11月7日)
 
 * 更新 [市场摘要](#7335b2436c) 中的 资金费率（fundingRate） 描述
@@ -448,6 +453,7 @@ BTSE 的速率限制如下：
 * 110: FUTURES_FUNDING = 期货资金
 * 123: AMEND_ORDER = 订单已修改
 * 124: UNFREEZE_SUCCESSFUL = 解冻成功
+* 129: FUTURES_CONFIG_MODE_CHANGE = 期货仓位模式更改
 * 300: ERROR_MAX_ORDER_SIZE_EXCEEDED = 超过最大订单大小错误
 * 301: ERROR_INVALID_ORDER_SIZE = 无效订单大小错误
 * 302: ERROR_INVALID_ORDER_PRICE = 无效订单价格错误
@@ -921,6 +927,33 @@ BTSE 的速率限制如下：
 }
 ```
 
+> 请求 (创建买侧双向持仓`市价`订单)
+
+```json
+{
+  "symbol": "BTCPFC",
+  "size": 1,
+  "side": "BUY",
+  "type": "MARKET",
+  "positionMode": "HEDGE"
+}
+```
+
+
+> 请求 (创建卖侧双向持仓`市价`减仓订单)
+
+```json
+{
+  "symbol": "BTCPFC",
+  "size": 1,
+  "side": "BUY",
+  "type": "MARKET",
+  "reduceOnly": true,
+  "positionMode": "HEDGE"
+}
+```
+
+
 > 响应（通用）
 
 ```json
@@ -945,6 +978,9 @@ BTSE 的速率限制如下：
     "originalSize": 1.0,
     "postOnly": false,
     "remainingSize": 0.0,
+    "positionMode": "ONE_WAY",
+    "positionDirection": null,
+    "positionId": "BTCPFC-USD",
     "time_in_force": "GTC"
   }
 ]
@@ -974,6 +1010,9 @@ BTSE 的速率限制如下：
     "originalSize": 1.0,
     "postOnly": false,
     "remainingSize": 1.0,
+    "positionMode": "ONE_WAY",
+    "positionDirection": null,
+    "positionId": "BTCPFC-USD",
     "time_in_force": "GTC"
   },
   {
@@ -996,6 +1035,41 @@ BTSE 的速率限制如下：
     "originalSize": 1.0,
     "postOnly": false,
     "remainingSize": 1.0,
+    "positionMode": "ONE_WAY",
+    "positionDirection": null,
+    "positionId": "BTCPFC-USD",
+    "time_in_force": "GTC"
+  }
+]
+```
+
+> 响应（用于双向持仓订单）
+
+```json
+[
+  {
+    "status": 4,
+    "symbol": "BTCPFC",
+    "orderType": 76,
+    "price": 21000.0,
+    "side": "BUY",
+    "size": 1,
+    "orderID": "abb3f457-fdc0-4bdb-a46b-8e4aa49a57c2",
+    "timestamp": 1660558270207,
+    "triggerPrice": 0.0,
+    "trigger": false,
+    "deviation": 100.0,
+    "stealth": 100.0,
+    "message": "",
+    "avgFillPrice": 21000.0,
+    "fillSize": 1.0,
+    "clOrderID": "",
+    "originalSize": 1.0,
+    "postOnly": false,
+    "remainingSize": 0.0,
+    "positionMode": "HEDGE",
+    "positionDirection": "LONG",
+    "positionId": "BTCPFC-USD|LONG",
     "time_in_force": "GTC"
   }
 ]
@@ -1012,22 +1086,22 @@ BTSE 的速率限制如下：
 | symbol        | string  | Yes      | 市场符号                                                                                                                                                                                                                                                                                                                                                                 |
 | price         | double  | No       | 除非创建市场订单，否则为必填。订单价格                                                                                                                                                                                                                                                                                                                                  |
 | size          | long    | Yes      | 订单尺寸以`合同大小`表示（即使在风险限额调整后也保持不变）                                                                                                                                                                                                                                                                                                               |
-| side          | string  | Yes      | 'BUY' 或 'SELL'                                                                                                                                                                                                                                                                                                                                                        |
+| side          | string  | Yes      | `BUY` 或 `SELL`                                                                                                                                                                                                                                                                                                                                                        |
 | time_in_force | string  | No       | 订单的时间有效性<br/>GTC: 有效直至取消<br/>IOC: 立即或取消<br/>FOK: 全部成交或取消<br/>HALFMIN: 订单有效30秒<br/>FIVEMIN: 订单有效5分钟<br/>HOUR: 订单有效一个小时<br/>TWELVEHOUR: 订单有效12小时<br/>DAY: 订单有效一天<br/>WEEK: 订单有效一周<br/>MONTH: 订单有效一个月                                                                                                              |
 | type          | string  | Yes      | 订单类型<br/>LIMIT: 限价订单<br/>MARKET: 市价订单<br/>OCO: 一个取消另一个                                                                                                                                                                                                                                                                                               |
 | txType        | string  | No       | 用于停止订单或触发订单<br/>STOP: 停止订单，`triggerPrice` 是必填项<br/>TRIGGER: 触发订单，`triggerPrice` 是必填项<br/>LIMIT: 默认值，当其既不是停止订单也不是触发订单时使用                                                                                                                                                                                              |
 | stopPrice     | double  | No       | 创建OCO订单时为必填。表示停止价格                                                                                                                                                                                                                                                                                                                                      |
 | triggerPrice  | double  | No       | 创建停止、触发、OCO订单时为必填。表示触发价格                                                                                                                                                                                                                                                                                                                          |
 | trailValue    | double  | No       | 跟踪值                                                                                                                                                                                                                                                                                                                                                                  |
-| postOnly      | boolean | No       | 布尔值，表示这是否仅为发布订单。对于仅发布订单，交易员将收取制造商费用                                                                                                                                                                                                                                                                                                  |
-| reduceOnly    | boolean | No       | 布尔值，表示这是否只是减少订单。                                                                                                                                                                                                                                                                                                                                       |
+| postOnly      | boolean | No       | 布尔值，表示这是否只做Maker(Post only) 订单，交易者将支付Maker手续费                                                                                                                                                                                                                                                                                                  |
+| reduceOnly    | boolean | No       | 布尔值，将这笔订单设置为只减仓, 在双向持仓时，买方`BUY`减少空头仓位，卖方`SELL`则减少多头仓位                                                                                                                                                                                                                                                                                                                                       |
 | clOrderID     | string  | No       | 自定义订单ID                                                                                                                                                                                                                                                                                                                                                            |
 | trigger       | string  | No       | 用于创建txType: `STOP` 或 `TRIGGER` 的订单。有效选项: `markPrice` (默认) 或 `lastPrice`  |
 | takeProfitPrice  | double  | No       | 在创建带有止盈订单时强制执行。指示触发价格
 | takeProfitTrigger  | string  | No       | 用于创建带有止盈订单的订单。有效选项：`标记价格`（默认）或`最新价格`|
 | stopLossPrice  | double  | No       | 在创建带有止损订单时强制执行。指示触发价格
 | stopLossTrigger  | string  | No       | 用于创建带有止损订单的订单。有效选项：`标记价格`（默认）或`最新价格`|
-
+| positionMode  | string  | No       | 用于创建指定仓位模式订单。有效选项：单向持仓`ONE_WAY`（默认）或 双向持仓`HEDGE`                                                                                                                                                                                                                                                          |
 
 ### 响应内容
 
@@ -1038,7 +1112,7 @@ BTSE 的速率限制如下：
 | fillSize      | number  | Yes      | 已成交的交易大小                                                                                                                                                                                                                                                                                   |
 | orderID       | string  | Yes      | 订单ID                                                                                                                                                                                                                                                                                             |
 | orderType     | integer | Yes      | 订单类型 <br/>76: 限价订单<br/>77: 市价订单<br/>80: Algo订单                                                                                                                                                                                                                                       |
-| postOnly      | boolean | Yes      | 表明订单是否为仅发布订单                                                                                                                                                                                                                                                                           |
+| postOnly      | boolean | Yes      | 表明订单是否为只做Maker(Post only) 订单                                                                                                                                                                                                                                                                           |
 | price         | double  | Yes      | 订单价格                                                                                                                                                                                                                                                                                           |
 | side          | string  | Yes      | 订单方向<br/>BUY 或 SELL                                                                                                                                                                                                                                                                           |
 | size          | long    | Yes      | 订单大小以`合同大小`表示（即使在风险限额调整后也保持不变）                                                                                                                                                                                                                                          |
@@ -1053,6 +1127,9 @@ BTSE 的速率限制如下：
 | deviation     | double  | Yes      | 仅对Algo订单有效                                                                                                                                                                                                                                                                                   |
 | remainingSize | double  | Yes      | 剩余待交易的大小                                                                                                                                                                                                                                                                                   |
 | originalSize  | double  | Yes      | 原始订单大小                                                                                                                                                                                                                                                                                       |
+| positionMode      | string  | Yes      | 仓位模式<br/> 单向持仓`ONE_WAY` 或 双向持仓`HEDGE`                                                                                                                                                                                                                                                                                  |
+| positionDirection | string  | Yes      | 仓位方向<br/>  多头仓位`LONG` 或 空头仓位`SHORT`                                                                                                                                                                                                                                                                             |
+| positionId        | string  | Yes      | 当前订单属于的仓位ID。                                                                                                                                                                                                                                                                             |
 
 ## 创建新的算法订单
 
@@ -1094,6 +1171,9 @@ BTSE 的速率限制如下：
     "originalSize": 1.0,
     "postOnly": false,
     "remainingSize": 1.0,
+    "positionMode": "ONE_WAY",
+    "positionDirection": null,
+    "positionId": "BTCPFC-USD",
     "time_in_force": "GTC"
   }
 ]
@@ -1120,6 +1200,7 @@ BTSE 的速率限制如下：
 | clOrderID | string  | No       | 自定义订单ID                                                                                                                                                                                                                                    |
 | deviation | double  | No       | 订单价格应与指数价格偏离多少。该值以百分比表示，范围从`-10`到`10`                                                                                                                                                                             |
 | stealth   | double  | No       | 订单中应在订单簿上显示的百分比是多少。                                                                                                                                                                                                        |
+| positionMode  | string  | No       | 用于创建指定仓位模式订单。有效选项：单向持仓`ONE_WAY`（默认）或 双向持仓`HEDGE`                                                                                                                                                                                                                                                          |
 
 ### 响应内容
 
@@ -1130,7 +1211,7 @@ BTSE 的速率限制如下：
 | fillSize      | number  | Yes      | 已成交的交易大小                                                                                                                                                                                                                                                                                   |
 | orderID       | string  | Yes      | 订单ID                                                                                                                                                                                                                                                                                             |
 | orderType     | integer | Yes      | 订单类型 <br/>76: 限价订单<br/>77: 市价订单<br/>80: Algo订单                                                                                                                                                                                                                                       |
-| postOnly      | boolean | Yes      | 表明订单是否为仅发布订单                                                                                                                                                                                                                                                                           |
+| postOnly      | boolean | Yes      | 表明订单是否为只做Maker(Post only) 订单                                                                                                                                                                                                                                                                           |
 | price         | double  | Yes      | 订单价格                                                                                                                                                                                                                                                                                           |
 | side          | string  | Yes      | 订单方向<br/>BUY 或 SELL                                                                                                                                                                                                                                                                           |
 | size          | long    | Yes      | 订单大小以`合同大小`表示（即使在风险限额调整后也保持不变）                                                                                                                                                                                                                                          |
@@ -1145,6 +1226,9 @@ BTSE 的速率限制如下：
 | deviation     | double  | Yes      | 订单的偏差值                                                                                                                                                                                                                                                                                       |
 | remainingSize | double  | Yes      | 剩余待交易的大小                                                                                                                                                                                                                                                                                   |
 | originalSize  | double  | Yes      | 原始订单大小                                                                                                                                                                                                                                                                                       |
+| positionMode      | string  | Yes      | 仓位模式<br/> 单向持仓`ONE_WAY` 或 双向持仓`HEDGE`                                                                                                                                                                                                                                                                                  |
+| positionDirection | string  | Yes      | 仓位方向<br/>  多头仓位`LONG` 或 空头仓位`SHORT`                                                                                                                                                                                                                                                                             |
+| positionId        | string  | Yes      | 当前订单属于的仓位ID。                                                                                                                                                                                                                                                                             |
 
 ## 查询订单
 
@@ -1194,8 +1278,8 @@ BTSE 的速率限制如下：
 
 | 名称       | 类型    | 是否必须     | 描述                                                                         |
 | ---       | ---    | ---      | ---                                                                             |
-| orderID   | String	 | No       | 订单的唯一标识符。当未提供clOrderID时，此项为必填。如果提供了orderID，则将忽略clOrderID。 |
-| clOrderID | String	 | No       | 客户自定义订单ID。当未提供orderID时，此项为必填。                                     |
+| orderID   | String  | No       | 订单的唯一标识符。当未提供clOrderID时，此项为必填。如果提供了orderID，则将忽略clOrderID。 |
+| clOrderID | String  | No       | 客户自定义订单ID。当未提供orderID时，此项为必填。                                     |
 
 ### 响应内容
 
@@ -1281,6 +1365,9 @@ BTSE 的速率限制如下：
     "originalSize": 1.0,
     "postOnly": false,
     "remainingSize": 1.0,
+    "positionMode": "ONE_WAY",
+    "positionDirection": null,
+    "positionId": "BTCPFC-USD",
     "time_in_force": "GTC"
   }
 ]
@@ -1313,7 +1400,7 @@ BTSE 的速率限制如下：
 | fillSize      | string  | Yes      | 已成交的交易大小                                                                                                                                                                                                                                                                                   |
 | orderID       | string  | Yes      | 订单ID                                                                                                                                                                                                                                                                                             |
 | orderType     | integer | Yes      | 订单类型 <br/>76: 限价订单<br/>77: 市价订单<br/>80: Algo订单                                                                                                                                                                                                                                       |
-| postOnly      | boolean | Yes      | 表明订单是否为仅发布订单                                                                                                                                                                                                                                                                           |
+| postOnly      | boolean | Yes      | 表明订单是否为只做Maker(Post only) 订单                                                                                                                                                                                                                                                                           |
 | price         | double  | Yes      | 订单价格                                                                                                                                                                                                                                                                                           |
 | side          | string  | Yes      | 订单方向<br/>BUY 或 SELL                                                                                                                                                                                                                                                                           |
 | size          | long    | Yes      | 订单大小以`合同大小`表示（即使在风险限额调整后也保持不变）                                                                                                                                                                                                                                          |
@@ -1328,6 +1415,9 @@ BTSE 的速率限制如下：
 | deviation     | string  | Yes      | 订单的偏差值                                                                                                                                                                                                                                                                                       |
 | remainingSize | double  | Yes      | 剩余待交易的大小                                                                                                                                                                                                                                                                                   |
 | originalSize  | double  | Yes      | 原始订单大小                                                                                                                                                                                                                                                                                       |
+| positionMode      | string  | Yes      | 仓位模式<br/> 单向持仓`ONE_WAY` 或 双向持仓`HEDGE`                                                                                                                                                                                                                                                                                  |
+| positionDirection | string  | Yes      | 仓位方向<br/>  多头仓位`LONG` 或 空头仓位`SHORT`                                                                                                                                                                                                                                                                             |
+| positionId        | string  | Yes      | 当前订单属于的仓位ID。                                                                                                                                                                                                                                                                             |
 
 ## 取消订单
 
@@ -1361,6 +1451,9 @@ BTSE 的速率限制如下：
     "originalSize": 1.0,
     "postOnly": false,
     "remainingSize": 1.0,
+    "positionMode": "ONE_WAY",
+    "positionDirection": null,
+    "positionId": "BTCPFC-USD",
     "time_in_force": "GTC"
   }
 ]
@@ -1388,7 +1481,7 @@ BTSE 的速率限制如下：
 | fillSize        | double  | Yes      | 已成交的交易大小                                                                                                                                                                                                                                                                                           |
 | orderID         | string  | Yes      | 订单ID                                                                                                                                                                                                                                                                                                     |
 | orderType       | integer | Yes      | 订单类型 <br/>76: 限价订单<br/>77: 市价订单<br/>80: 算法订单                                                                                                                                                                                                                                               |
-| postOnly        | boolean | Yes      | 表明订单是否为仅发布订单                                                                                                                                                                                                                                                                                   |
+| postOnly        | boolean | Yes      | 表明订单是否为只做Maker(Post only) 订单                                                                                                                                                                                                                                                                                   |
 | price           | double  | Yes      | 订单价格                                                                                                                                                                                                                                                                                                   |
 | side            | string  | Yes      | 订单方向<br/>BUY 或 SELL                                                                                                                                                                                                                                                                                   |
 | size            | long    | Yes      | 以`合同大小`表示的订单大小（即使在风险限额调整后也保持不变）                                                                                                                                                                                                                                                  |
@@ -1403,6 +1496,9 @@ BTSE 的速率限制如下：
 | deviation       | double  | Yes      | 订单的偏差值                                                                                                                                                                                                                                                                                              |
 | remainingSize   | double  | Yes      | 剩余待交易的大小                                                                                                                                                                                                                                                                                          |
 | originalSize    | double  | Yes      | 原始订单大小                                                                                                                                                                                                                                                                                              |
+| positionMode      | string  | Yes      | 仓位模式<br/> 单向持仓`ONE_WAY` 或 双向持仓`HEDGE`                                                                                                                                                                                                                                                                                  |
+| positionDirection | string  | Yes      | 仓位方向<br/>  多头仓位`LONG` 或 空头仓位`SHORT`                                                                                                                                                                                                                                                                             |
+| positionId        | string  | Yes      | 当前订单属于的仓位ID。                                                                                                                                                                                                                                                                             |
 
 ## 延时自动取消所有
 
@@ -1471,6 +1567,9 @@ BTSE 的速率限制如下：
     "avgFilledPrice": 0.0,
     "timeInForce": "GTC",
     "averageFillPrice": 0.0,
+    "positionMode": "ONE_WAY",
+    "positionDirection": null,
+    "positionId": "BTCPFC-USD",
     "takeProfitOrder": {
         "orderId": "ea1ab233-c79a-4503-a475-f8633ecc9d79",
         "side": "SELL",
@@ -1537,6 +1636,9 @@ BTSE 的速率限制如下：
 | takeProfitOrder    | TakeProfitOrder对象  | No | 止盈订单信息 |
 | stopLossOrder      | StopLossOrder对象    | No | 止损订单信息 |
 | closeOrder         | bool                | Yes | 是否为关闭此持仓的订单 |
+| positionMode      | string  | Yes      | 仓位模式<br/> 单向持仓`ONE_WAY` 或 双向持仓`HEDGE`                                                                                                                                                                                                                                                                                  |
+| positionDirection | string  | Yes      | 仓位方向<br/>  多头仓位`LONG` 或 空头仓位`SHORT`                                                                                                                                                                                                                                                                             |
+| positionId        | string  | Yes      | 当前订单属于的仓位ID。                                                                                                                                                                                                                                                                             |
 
 ## 查询成交记录
 
@@ -1573,6 +1675,7 @@ BTSE 的速率限制如下：
     "triggerPrice": 0,
     "triggerType": 0,
     "username": "string",
+    "positionId": null,
     "wallet": "string",
     "tradeId": "string",
     "orderId": "string"
@@ -1626,6 +1729,7 @@ BTSE 的速率限制如下：
 | orderType        | integer | Yes      | 订单类型                                                                                                                                                                            |
 | realizedPnL      | double  | Yes      | 现货中未使用                                                                                                                                                                        |
 | total            | long    | Yes      | 现货中未使用                                                                                                                                                                        |
+| positionId        | string  | Yes      | 当前订单属于的仓位ID。                                                                                                                                                                                                                                                                             |
 
 
 ## 查询持仓
@@ -1668,8 +1772,35 @@ BTSE 的速率限制如下：
         "side": "SELL",
         "triggerPrice": 27000.0,
         "triggerUseLastPrice": true
-    }
-  }
+    },
+    "positionMode": "ONE_WAY",
+    "positionDirection": null,
+    "positionId": "BTCPFC-USD"
+  },{
+     "marginType": 91,
+     "entryPrice": 1631.106666667,
+     "markPrice": 1630.398947255,
+     "symbol": "ETHPFC",
+     "side": "BUY",
+     "orderValue": 48.9119684176,
+     "settleWithAsset": "USDT",
+     "unrealizedProfitLoss": -0.02123158,
+     "totalMaintenanceMargin": 0.254871114,
+     "size": 3,
+     "liquidationPrice": 0,
+     "isolatedLeverage": 0,
+     "adlScoreBucket": 2,
+     "liquidationInProgress": false,
+     "timestamp": 0,
+     "takeProfitOrder": null,
+     "stopLossOrder": null,
+     "positionMode": "HEDGE",
+     "positionDirection": "LONG",
+     "positionId": "ETHPFC-USD|LONG",
+     "currentLeverage": 0.0340349245,
+     "takeProfitOrder": null,
+     "stopLossOrder": null
+     }
 ]
 ```
 
@@ -1706,6 +1837,9 @@ BTSE 的速率限制如下：
 | timestamp              | long    | Yes      | 查询仓位时的时间戳                                                                                 |
 | takeProfitOrder  | TakeProfitOrder对象 | No | 止盈订单信息 |
 | stopLossOrder    | StopLossOrder对象   | No | 止损订单信息 |
+| positionMode      | string  | Yes      | 仓位模式<br/> 单向持仓`ONE_WAY` 或 双向持仓`HEDGE`                                                                                                                                                                                                                                                                                  |
+| positionDirection | string  | Yes      | 仓位方向<br/>  多头仓位`LONG` 或 空头仓位`SHORT`                                                                                                                                                                                                                                                                             |
+| positionId        | string  | Yes      | 当前订单属于的仓位ID。                                                                                                                                                                                                                                                                             |
 
 
 ## 平仓仓位
@@ -1719,7 +1853,16 @@ BTSE 的速率限制如下：
   "type": "MARKET"
 }
 ```
+> 请求（用于双向持仓订单）
 
+```json
+{
+  "price": 0,
+  "symbol": "BTCPFC",
+  "type": "MARKET",
+  "positionId": "BTCPFC-USD|LONG"
+}
+```
 > Response
 
 ```json
@@ -1744,6 +1887,9 @@ BTSE 的速率限制如下：
     "originalSize": 1.0,
     "postOnly": false,
     "remainingSize": 0.0,
+    "positionMode": "ONE_WAY",
+    "positionDirection": null,
+    "positionId": null,
     "time_in_force": "GTC"
   }
 ]
@@ -1753,7 +1899,6 @@ BTSE 的速率限制如下：
 
 平仓用户在特定市场上指定的仓位。如果指定类型为LIMIT，则价格是必须的。当类型为MARKET时，以市场价格平仓仓位。
 
-
 ### 请求参数
 
 | 名称               | 类型    | 是否必须 | 描述                                                                                                                 |
@@ -1761,8 +1906,9 @@ BTSE 的速率限制如下：
 | symbol             | string  | Yes      | 市场符号                                                                                                             |
 | type               | string  | Yes      | 平仓类型，其值为：<br/>LIMIT: 以`price`价格平仓<br/>MARKET: 以市价平仓                                                 |
 | price              | double  | No       | 平仓价格。当类型为`LIMIT`时，此字段为必填                                                                           |
-| postOnly           | boolean | No       | 布尔值，表示此是否为仅发布订单。对于仅发布的订单，交易员将被收取制造商费用                                           |
+| postOnly           | boolean | No       | 布尔值，表示这是否只做Maker(Post only) 订单，交易者将支付Maker手续费                                           |
 | useNewSymbolNaming | boolean | No       | 若为True，则使用新格式的期货市场名称作为符号，默认为False                                                           |
+| positionId         | string  | No       | 想要平仓的仓位ID。在双向持仓时为必填项                        |
 
 ### 响应内容
 
@@ -1773,7 +1919,7 @@ BTSE 的速率限制如下：
 | fillSize       | string  | Yes      | 已成交的交易量                                                                                                                                                                                                                                                               |
 | orderID        | string  | Yes      | 订单ID                                                                                                                                                                                                                                                                       |
 | orderType      | integer | Yes      | 订单类型 <br/>76: 限价单<br/>77: 市价单<br/>80: Algo订单                                                                                                                                                                                                                     |
-| postOnly       | boolean | Yes      | 表示订单是否仅为发布订单                                                                                                                                                                                                                                                     |
+| postOnly       | boolean | Yes      | 表示订单是否仅为只做Maker(Post only) 订单                                                                                                                                                                                                                                                     |
 | price          | double  | Yes      | 订单价格                                                                                                                                                                                                                                                                     |
 | side           | string  | Yes      | 订单方向<br/>BUY 或 SELL                                                                                                                                                                                                                                                    |
 | size           | long    | Yes      | 已取消的大小                                                                                                                                                                                                                                                                |
@@ -1788,6 +1934,10 @@ BTSE 的速率限制如下：
 | deviation      | string  | Yes      | 订单的偏差值                                                                                                                                                                                                                                                                |
 | remainingSize  | double  | Yes      | 剩余待交易的大小                                                                                                                                                                                                                                                           |
 | originalSize   | double  | Yes      | 原始订单大小                                                                                                                                                                                                                                                               |
+| positionMode      | string  | Yes      | 仓位模式<br/> 单向持仓`ONE_WAY` 或 双向持仓`HEDGE`                                                                                                                                                                                                                                                                                  |
+| positionDirection | string  | Yes      | 仓位方向<br/>  多头仓位`LONG` 或 空头仓位`SHORT`                                                                                                                                                                                                                                                                             |
+| positionId        | string  | Yes      | 当前订单属于的仓位ID。                                                                                                                                                                                                                                                                             |
+
 
 ## 获取风险限制
 
@@ -1832,7 +1982,18 @@ BTSE 的速率限制如下：
 }
 ```
 
+> 请求 (当双向持仓时)
+
+```json
+{
+    "symbol": "BTCPFC",
+    "riskLimit": 100000,
+    "positionMode": "HEDGE"
+}
+```
+
 > 响应
+
 ```json
 {
   "symbol": "BTCPFC",
@@ -1853,6 +2014,7 @@ BTSE 的速率限制如下：
 | ---                | ---     | ---      | ---                                                                                                                                    |
 | symbol             | string  | Yes      | 市场符号                                                                                                                               |
 | riskLimit          | long    | Yes      | 当前的风险限制值以仓位大小表示，但它将在将来转变为USD值。                                                                                  |
+| positionMode       | string  | no       | 单向持仓`ONE_WAY`（默认）或 双向持仓`HEDGE`, 在双向持仓时为必填项                                                            |
 | useNewSymbolNaming | boolean | No       | 如果使用新的期货市场名称作为符号，则为True，默认为False                                                                                 |
 
 ### 响应内容
@@ -1873,6 +2035,16 @@ BTSE 的速率限制如下：
 {
   "symbol": "BTCPFC",
   "leverage": 0
+}
+```
+
+> 请求 (当双向持仓时)
+
+```json
+{
+    "symbol": "BTCPFC",
+    "leverage": 0,
+    "positionMode": "HEDGE"
 }
 ```
 
@@ -1899,6 +2071,7 @@ BTSE 的速率限制如下：
 | symbol             | string  | Yes      | 市场符号                                                                                 |
 | leverage           | long    | Yes      | 杠杆值                                                                                   |
 | useNewSymbolNaming | boolean | No       | 如果使用新的期货市场名称作为符号，则为True，默认为False                                 |
+| positionMode       | string  | no       | 单向持仓`ONE_WAY`（默认）或 双向持仓`HEDGE`, 在双向持仓时为必填项                                                            |
 
 ### 响应内容
 
@@ -1949,6 +2122,16 @@ BTSE 的速率限制如下：
 }
 ```
 
+> 请求 (当双向持仓时)
+
+```json
+{
+    "symbol": "BTCPFC",
+    "currency": "USDT",
+    "positionId": "BTCPFC-USD|LONG"
+}
+```
+
 > 响应（仅在发生错误时可用）
 
 ```json
@@ -1970,6 +2153,7 @@ BTSE 的速率限制如下：
 | symbol             | string  | Yes      | 市场符号                                                                                 |
 | currency           | string  | Yes      | 要设置的结算货币                                                                         |
 | useNewSymbolNaming | boolean | No       | 若为True，则使用新格式的期货市场名称作为符号，默认为False                                |
+| positionId         | string  | No       | 想要设置的仓位ID。在双向持仓时为必填项                        |
 
 ### 响应内容
 
@@ -2017,7 +2201,6 @@ BTSE 的速率限制如下：
 ```json
 {
     "symbol": "BTC-PERP",
-    "side": "SELL",
     "takeProfitPrice": 31000,
     "takeProfitTrigger": "markPrice",
     "stopLossPrice": 22000,
@@ -2031,7 +2214,7 @@ BTSE 的速率限制如下：
 [
     {
         "status": 9,
-        "symbol": "BTC-PERP",
+        "symbol": "BTCPFC",
         "orderType": 77,
         "price": 0.0,
         "side": "SELL",
@@ -2050,6 +2233,9 @@ BTSE 的速率限制如下：
         "postOnly": false,
         "remainingSize": 100.0,
         "orderDetailType": null,
+        "positionMode": "ONE_WAY",
+        "positionDirection": null,
+        "positionId": "BTCPFC-USD",
         "time_in_force": "GTC"
     }
 ]
@@ -2059,18 +2245,19 @@ BTSE 的速率限制如下：
 
 绑定止盈/止损与已有持仓
 
-**请求参数**
+### 请求参数
 
 | 名称               | 类型    | 是否必需 | 描述 |
 | ---                | ---     | ---      | --- |
 | symbol             | string  | Yes       | 市场交易对 |
-| side               | string  | Yes       | "BUY" 或 "SELL" 用于止盈/止损订单 |
+| side               | string  | Yes       | `BUY` 或 `SELL` 在双向持仓时为必填项, 在双向持仓时，买方`BUY`綁定至空头仓位，卖方`SELL`则綁定至多头仓位 |
 | takeProfitPrice    | double  | No       | 创建带有止盈订单时强制执行。指示触发价格。在使用此API时，必须至少设置`takeProfitPrice`或`stopLossPrice`。 |
 | takeProfitTrigger  | string  | No       | 用于创建带有止盈订单的选项。有效选项：`标记价格`（默认）或`最新价格` |
 | stopLossPrice      | double  | No       | 创建带有止损订单时强制执行。指示触发价格 |
 | stopLossTrigger     | string  | No       | 用于创建带有止损订单的选项。有效选项：`标记价格`（默认）或`最新价格` |
+| positionMode       | string  | no       | 单向持仓`ONE_WAY`（默认）或 双向持仓`HEDGE`, 在双向持仓时为必填项                                                            |
 
-**响应内容**
+### 响应内容
 
 | 名称          | 类型    | 是否必需 | 描述 |
 | ---           | ---     | ---      | --- |
@@ -2079,7 +2266,7 @@ BTSE 的速率限制如下：
 | fillSize      | number  | Yes       | 成交的交易量 |
 | orderID       | string  | Yes       | 订单ID |
 | orderType     | string  | Yes       | 订单类型 <br/>76: 限价订单<br/>77: 市价订单<br/>80: 算法订单 |
-| postOnly      | boolean  | Yes       | 指示订单是否为仅限发布订单  |
+| postOnly      | boolean  | Yes       | 指示订单是否为只做Maker(Post only) 订单  |
 | price         | double  | Yes       | 订单价格 |
 | side          | string  | Yes       | 订单方向<br/>BUY 或 SELL |
 | size          | long  | Yes       | 以"合约大小"为单位的订单大小（即使在风险限制调整后，此值也保持不变）|
@@ -2094,6 +2281,75 @@ BTSE 的速率限制如下：
 | deviation     | double  | Yes       | 仅适用于算法订单 |
 | remainingSize | double  | Yes       | 剩余待成交的大小 |
 | originalSize  | double  | Yes       | 原始订单大小    |
+| positionMode      | string  | Yes      | 仓位模式<br/> 单向持仓`ONE_WAY` 或 双向持仓`HEDGE`                                                                                                                                                                                                                                                                                  |
+| positionDirection | string  | Yes      | 仓位方向<br/>  多头仓位`LONG` 或 空头仓位`SHORT`                                                                                                                                                                                                                                                                             |
+| positionId        | string  | Yes      | 当前订单属于的仓位ID。                                                                                                                                                                                                                                                                             |
+
+## 查询仓位模式
+
+> 响应
+
+```json
+[
+    {
+        "symbol": "ETH-PERP",
+        "positionMode": "HEDGE"
+    },
+    {
+        "symbol": "BTC-PERP",
+        "positionMode": "ONE_WAY"
+    }
+]
+```
+
+`GET /api/v2.1/position_mode`
+
+查询用户的仓位模式
+
+**请求参数**
+
+| Name               | Type    | Required | Description |
+| ---                | ---     | ---      | ------------|
+| symbol             | string  | No       | 市场交易对    |
+
+**响应内容**
+
+| Name         | Type   | Required | Description                       |
+| ---          | ---    | ---      | --- ------------------------------|
+| symbol       | string | Yes      | 市场交易对                         |
+| positionMode | string | Yes      | 单向持仓`ONE_WAY` 或 双向持仓`HEDGE` |
+
+## 更改仓位模式
+
+> 响应
+
+```json
+{
+  "symbol": "BTC-PERP",
+  "positionMode": "HEDGE"
+}
+```
+
+`POST /api/v2.1/position_mode`
+
+更改仓位模式
+
+**请求参数**
+
+| Name               | Type    | Required | Description                 |
+| ---                | ---     | ---      |-----------------------------|
+| symbol              | string | Yes      | 市场交易对                       |
+| positionMode        | string | Yes      | 单向持仓`ONE_WAY` 或 双向持仓`HEDGE` |
+
+**响应内容**
+
+| Name      | Type    | Required | Description           |
+| ---       | ---     | ---      |-----------------------|
+| symbol    | string  | Yes      | 市场交易对                 |
+| timestamp | long    | No       | 订单时间戳                 |
+| status    | string  | No       | 订单状态 <br>20: 成功       |
+| type      | string  | No       | 数值为129，表示为“期货仓位模式更改”。 |
+| message   | string  | No       | 交易消息                  |
 
 # 钱包端点
 
@@ -2894,6 +3150,7 @@ echo -n "/ws/futures1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6
       "remainingSize": "<Remaining size on the order>",
       "time_in_force": "<Time where this order is valid>",
       "txType": "STOP | TAKE_PROFIT",
+      "positionId": "BTCPFC-USD",
       "triggerPrice": "Trade Trigger Price"
     }
   ]
@@ -2926,6 +3183,7 @@ echo -n "/ws/futures1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6
 | txType            | string  | Yes      | 用于触发或OCO订单。STOP 表示它是一个停止订单，TAKEPROFIT 表示它是一个止盈订单，LIMIT 表示它不是上述任何一个                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | stealth           | double  | Yes      | 在订单簿上显示的订单百分比。仅用于算法订单                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | pegPriceDeviation | double  | Yes      | 偏差百分比。仅用于算法订单                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| positionId        | string  | Yes      | 当前订单属于的仓位ID。                                                                                                                                                                                                                                                                             |
 
 ## 用户交易记录
 
@@ -3035,6 +3293,9 @@ echo -n "/ws/futures1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6
     "marginTypeName": "FUTURES_MARGIN_CROSS",
     "currentLeverage": 0.02,
     "avgFillPrice": 0.0,
+    "positionId": "BTCPFC-USD|SHORT",
+    "positionMode": "HEDGE",
+    "positionDirection": "SHORT",
     "settleWithNonUSDAsset": "BTC",
     "takeProfitOrder": {
         "orderId": "4820b20a-e41b-4273-b3ad-4b19920aeeb5",
@@ -3048,7 +3309,46 @@ echo -n "/ws/futures1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6
         "triggerPrice": 27000.0,
         "triggerUseLastPrice": true
     }
-  }]
+  },{
+    "requestId": 0,
+    "username": "btse",
+    "userCurrency": null,
+    "marketName": "LTCPFC-USD",
+    "orderType": 90,
+    "orderMode": 83,
+    "originalAmount": 0.01,
+    "maxPriceHeld": 0,
+    "pegPriceMin": 0,
+    "stealth": 1,
+    "orderID": null,
+    "maxStealthDisplayAmount": 0,
+    "sellexchangeRate": 0,
+    "triggerPrice": 0,
+    "closeOrder": false,
+    "liquidationInProgress": false,
+    "marginType": 91,
+    "entryPrice": 69.9,
+    "liquidationPrice": 29684.3743872669,
+    "markedPrice": 70.062346733,
+    "unrealizedProfitLoss": -0.04870402,
+    "totalMaintenanceMargin": 0.319484301,
+    "totalContracts": 30,
+    "isolatedLeverage": 0,
+    "totalFees": 0,
+    "totalValue": -21.01870402,
+    "adlScoreBucket": 1,
+    "booleanVar1": false,
+    "orderTypeName": "TYPE_FUTURES_POSITION",
+    "orderModeName": "MODE_SELL",
+    "marginTypeName": "FUTURES_MARGIN_CROSS",
+    "currentLeverage": 0.1116510969,
+    "takeProfitOrder": null,
+    "settleWithNonUSDAsset": "USDT",
+    "stopLossOrder": null,
+    "positionId": "LTCPFC-USD|SHORT",
+    "positionMode": "HEDGE",
+    "positionDirection": "SHORT",
+}]
 }
 ```
 
@@ -3092,6 +3392,9 @@ echo -n "/ws/futures1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6
 | settleWithNonUSDAsset   | string  | Yes      |                                                    |
 | takeProfitOrder | TakeProfitOrder对象 | No | 止盈订单信息                                            |
 | stopLossOrder | StopLossOrder对象 | No | 止损订单信息                                                |
+| positionMode      | string  | Yes      | 仓位模式<br/> 单向持仓`ONE_WAY` 或 双向持仓`HEDGE`                                                                                                                                                                                                                                                                                  |
+| positionDirection | string  | Yes      | 仓位方向<br/>  多头仓位`LONG` 或 空头仓位`SHORT`                                                                                                                                                                                                                                                                             |
+| positionId        | string  | Yes      | 当前订单属于的仓位ID。                                                                                                                                                                                                                                                                             |
 
 ## 仓位
 
@@ -3109,6 +3412,7 @@ echo -n "/ws/futures1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6
 {
   "topic": "positions",
   "data": [{
+    "orderID": null,
     "requestId": 0,
     "username": "btse",
     "marketName": "BTCPFC-USD",
@@ -3142,18 +3446,58 @@ echo -n "/ws/futures1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6
     "avgFillPrice": 0.0,
     "settleWithNonUSDAsset": "BTC",
     "takeProfitOrder": {
-      "orderId": "4820b20a-e41b-4273-b3ad-4b19920aeeb5",
-      "side": "SELL",
-      "triggerPrice": 31000.0,
-      "triggerUseLastPrice": false
+        "orderId": "4820b20a-e41b-4273-b3ad-4b19920aeeb5",
+        "side": "SELL",
+        "triggerPrice": 31000.0,
+        "triggerUseLastPrice": false
     },
     "stopLossOrder": {
-      "orderId": "eff2b232-e2ce-4562-b0b4-0bd3713c11ec",
-      "side": "SELL",
-      "triggerPrice": 27000.0,
-      "triggerUseLastPrice": true
+        "orderId": "eff2b232-e2ce-4562-b0b4-0bd3713c11ec",
+        "side": "SELL",
+        "triggerPrice": 27000.0,
+        "triggerUseLastPrice": true
     }
-  }]
+  },{
+        "orderID": null,
+        "requestId": 0,
+        "username": "btse",
+        "marketName": "LTCPFC-USD",
+        "orderType": 90,
+        "orderMode": 83,
+        "originalAmount": 0.01,
+        "maxPriceHeld": 0,
+        "pegPriceMin": 0,
+        "stealth": 1,
+        "maxStealthDisplayAmount": 0,
+        "sellexchangeRate": 0,
+        "triggerPrice": 0,
+        "closeOrder": false,
+        "liquidationInProgress": false,
+        "marginType": 91,
+        "entryPrice": 69.9,
+        "liquidationPrice": 29682.415101008,
+        "markedPrice": 69.685573595,
+        "unrealizedProfitLoss": 0.06432792,
+        "totalMaintenanceMargin": 0.318744,
+        "totalContracts": 30,
+        "isolatedLeverage": 0,
+        "totalFees": 0,
+        "totalValue": -20.905672079,
+        "adlScoreBucket": 2,
+        "orderTypeName": "TYPE_FUTURES_POSITION",
+        "orderModeName": "MODE_SELL",
+        "marginTypeName": "FUTURES_MARGIN_CROSS",
+        "currentLeverage": 0.1113820366,
+        "averageFillPrice": 0,
+        "filledSize": 0,
+        "takeProfitOrder": null,
+        "stopLossOrder": null,
+        "positionId": "LTCPFC-USD|SHORT",
+        "positionMode": "HEDGE",
+        "positionDirection": "SHORT",
+        "settleWithNonUSDAsset": "USDT"
+    }
+  ]
 }
 ```
 
@@ -3196,7 +3540,10 @@ echo -n "/ws/futures1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6
     "avgFillPrice": 0,
     "settleWithNonUSDAsset": "BTC",
     "takeProfitOrder": null,
-    "stopLossOrder": null
+    "stopLossOrder": null,
+    "positionId": "BTCPFC-USD|SHORT",
+    "positionMode": null,
+    "positionDirection": null,
   }]
 }
 ```
@@ -3241,5 +3588,8 @@ echo -n "/ws/futures1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6
 | settleWithNonUSDAsset   | string  | Yes      |                                        |
 | takeProfitOrder         | TakeProfitOrder object | No       | 止盈订单信息              |
 | stopLossOrder           | StopLossOrder object   | No       | 止损订单信息              |
+| positionMode      | string  | Yes      | 仓位模式<br/> 单向持仓`ONE_WAY` 或 双向持仓`HEDGE`                                                                                                                                                                                                                                                                                  |
+| positionDirection | string  | Yes      | 仓位方向<br/>  多头仓位`LONG` 或 空头仓位`SHORT`                                                                                                                                                                                                                                                                             |
+| positionId        | string  | Yes      | 当前订单属于的仓位ID。                                                                                                                                                                                                                                                                             |
 
 </section>

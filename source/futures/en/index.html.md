@@ -13,6 +13,11 @@ headingLevel: 2
 
 # Change Log
 
+## Version 2.6.15 (8th November 2023)
+
+* Add API for querying [`positionMode`](#query-position-mode) and changing [`positionMode`](#change-position-mode)
+* API related to order and position have added the fields or parameter: positionMode and positionId and positionDirection
+
 ## Version 2.6.14 (7th November 2023)
 
 * Update fundingRate description in [`market-summary`](#market-summary)
@@ -448,6 +453,7 @@ When connecting up the BTSE API, you will come across number codes that represen
 * 110: FUTURES_FUNDING
 * 123: AMEND_ORDER = Order amended
 * 124: UNFREEZE_SUCCESSFUL
+* 129: FUTURES_CONFIG_MODE_CHANGE
 * 300: ERROR_MAX_ORDER_SIZE_EXCEEDED
 * 301: ERROR_INVALID_ORDER_SIZE
 * 302: ERROR_INVALID_ORDER_PRICE
@@ -878,6 +884,7 @@ Get trade fills for the market specified by `symbol`
   "triggerPrice": 30000
 }
 ```
+
 > Request (create `Limit` order with `TP/SL`)
 
 ```json
@@ -921,6 +928,32 @@ Get trade fills for the market specified by `symbol`
 }
 ```
 
+> Request (create hedge mode long position `MARKET` order)
+
+```json
+{
+  "symbol": "BTCPFC",
+  "size": 1,
+  "side": "BUY",
+  "type": "MARKET",
+  "positionMode": "HEDGE"
+}
+```
+
+
+> Request (create hedge mode short position `MARKET` reduce order)
+
+```json
+{
+  "symbol": "BTCPFC",
+  "size": 1,
+  "side": "BUY",
+  "type": "MARKET",
+  "reduceOnly": true,
+  "positionMode": "HEDGE"
+}
+```
+
 > Response (general)
 
 ```json
@@ -945,6 +978,9 @@ Get trade fills for the market specified by `symbol`
     "originalSize": 1.0,
     "postOnly": false,
     "remainingSize": 0.0,
+    "positionMode": "ONE_WAY",
+    "positionDirection": null,
+    "positionId": "BTCPFC-USD",
     "time_in_force": "GTC"
   }
 ]
@@ -974,6 +1010,9 @@ Get trade fills for the market specified by `symbol`
     "originalSize": 1.0,
     "postOnly": false,
     "remainingSize": 1.0,
+    "positionMode": "ONE_WAY",
+    "positionDirection": null,
+    "positionId": "BTCPFC-USD",
     "time_in_force": "GTC"
   },
   {
@@ -996,6 +1035,41 @@ Get trade fills for the market specified by `symbol`
     "originalSize": 1.0,
     "postOnly": false,
     "remainingSize": 1.0,
+    "positionMode": "ONE_WAY",
+    "positionDirection": null,
+    "positionId": "BTCPFC-USD",
+    "time_in_force": "GTC"
+  }
+]
+```
+
+> Response (for hedge mode order)
+
+```json
+[
+  {
+    "status": 4,
+    "symbol": "BTCPFC",
+    "orderType": 76,
+    "price": 21000.0,
+    "side": "BUY",
+    "size": 1,
+    "orderID": "abb3f457-fdc0-4bdb-a46b-8e4aa49a57c2",
+    "timestamp": 1660558270207,
+    "triggerPrice": 0.0,
+    "trigger": false,
+    "deviation": 100.0,
+    "stealth": 100.0,
+    "message": "",
+    "avgFillPrice": 21000.0,
+    "fillSize": 1.0,
+    "clOrderID": "",
+    "originalSize": 1.0,
+    "postOnly": false,
+    "remainingSize": 0.0,
+    "positionMode": "HEDGE",
+    "positionDirection": "LONG",
+    "positionId": "BTCPFC-USD|LONG",
     "time_in_force": "GTC"
   }
 ]
@@ -1008,7 +1082,7 @@ Creates a new order. Requires `Trading` permission
 ### Request Parameters
 
 | Name          | Type    | Required | Description                                                                                                                                                                                                                                                                                                                                                        |
-| ---           | ---     | ---      | ---                                                                                                                                                                                                                                                                                                                                                                |
+|---------------| ---     | ---      |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | symbol        | string  | Yes      | Market symbol                                                                                                                                                                                                                                                                                                                                                      |
 | price         | double  | No       | Mandatory unless creating a MARKET order. Order price                                                                                                                                                                                                                                                                                                              |
 | size          | long    | Yes      | Order size in `contract size` (this remains unchanged even after risk limit adjustment)                                                                                                                                                                                                                                                                            |
@@ -1020,39 +1094,42 @@ Creates a new order. Requires `Trading` permission
 | triggerPrice  | double  | No       | Mandatory when creating a Stop, Trigger, OCO order. Indicates the trigger price                                                                                                                                                                                                                                                                                    |
 | trailValue    | double  | No       | Trail value                                                                                                                                                                                                                                                                                                                                                        |
 | postOnly      | boolean | No       | Boolean to indicate if this is a post only order. For post only orders, traders are charged maker fees                                                                                                                                                                                                                                                             |
-| reduceOnly    | boolean | No       | Boolean to indicate if this is a reduce only order.                                                                                                                                                                                                                                                                                                                |
+| reduceOnly    | boolean | No       | Boolean to indicate if this is a reduce only order, if in hedge mode, it is used to reduce the specified position, ex: sell to reduce long position, buy to reduce short position.                                                                                                                                                                                 |
 | clOrderID     | string  | No       | Custom order Id                                                                                                                                                                                                                                                                                                                                                    |
 | trigger       | string  | No       | For creating order with txType: `STOP` or `TRIGGER`. Valid options: `markPrice` (default) or `lastPrice`|
 | takeProfitPrice  | double  | No       | Mandatory when creating new order with take profit order. Indicates the trigger price     
 | takeProfitTrigger       | string  | No       | For creating order with take profit order. Valid options: `markPrice` (default) or `lastPrice`|
 | stopLossPrice  | double  | No       | Mandatory when creating new order with stop loss order. Indicates the trigger price       
 | stopLossTrigger       | string  | No       | For creating order with stop loss order. Valid options: `markPrice` (default) or `lastPrice`|
-
+| positionMode  | string  | No       | For creating order and wanting to specify the positionMode. Valid options: `ONE_WAY` (default) or `HEDGE`                                                                                                                                                                                                                                                          |
 
 ### Response Content
 
-| Name          | Type    | Required | Description                                                                                                                                                                                                                                                                                     |
-| ---           | ---     | ---      | ---                                                                                                                                                                                                                                                                                             |
-| symbol        | string  | Yes      | Market symbol                                                                                                                                                                                                                                                                                   |
-| clOrderID     | string  | Yes      | Customer tag sent in by trader                                                                                                                                                                                                                                                                  |
-| fillSize      | number  | Yes      | Trade filled size                                                                                                                                                                                                                                                                               |
-| orderID       | string  | Yes      | Order ID                                                                                                                                                                                                                                                                                        |
-| orderType     | integer  | Yes      | Order type <br/>76: Limit Order<br/>77: Market order<br/>80: Algo order                                                                                                                                                                                                                         |
-| postOnly      | boolean | Yes      | Indicates if order is a post only order                                                                                                                                                                                                                                                         |
-| price         | double  | Yes      | Order price                                                                                                                                                                                                                                                                                     |
-| side          | string  | Yes      | Order side<br/>BUY or SELL                                                                                                                                                                                                                                                                      |
-| size          | long    | Yes      | Order size in `contract size` (this remains unchanged even after risk limit adjustment)                                                                                                                                                                                                         |
-| status        | long    | Yes      | Order status<br/>	2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed |
-| time_in_force | string  | Yes      | Order validity                                                                                                                                                                                                                                                                                  |
-| timestamp     | long    | Yes      | Order timestamp                                                                                                                                                                                                                                                                                 |
-| trigger       | boolean | Yes      | Indicator if order is a trigger order                                                                                                                                                                                                                                                           |
-| triggerPrice  | double  | Yes      | Order trigger price, returns 0 if order is not a trigger order                                                                                                                                                                                                                                  |
-| avgFillPrice  | double  | Yes      | Average filled price. Returns the average filled price for partially transacted orders                                                                                                                                                                                                          |
-| message       | string  | Yes      | Trade messages                                                                                                                                                                                                                                                                                  |
-| stealth       | double  | Yes      | Only valid for Algo orders                                                                                                                                                                                                                                                                      |
-| deviation     | double  | Yes      | Only valid for Algo orders                                                                                                                                                                                                                                                                      |
-| remainingSize | double  | Yes      | Size left to be transacted                                                                                                                                                                                                                                                                      |
-| originalSize  | double  | Yes      | Original order size                                                                                                                                                                                                                                                                             |
+| Name              | Type    | Required | Description                                                                                                                                                                                                                                                                                     |
+|-------------------| ---     |----------| ---                                                                                                                                                                                                                                                                                             |
+| symbol            | string  | Yes      | Market symbol                                                                                                                                                                                                                                                                                   |
+| clOrderID         | string  | Yes      | Customer tag sent in by trader                                                                                                                                                                                                                                                                  |
+| fillSize          | number  | Yes      | Trade filled size                                                                                                                                                                                                                                                                               |
+| orderID           | string  | Yes      | Order ID                                                                                                                                                                                                                                                                                        |
+| orderType         | integer  | Yes      | Order type <br/>76: Limit Order<br/>77: Market order<br/>80: Algo order                                                                                                                                                                                                                         |
+| postOnly          | boolean | Yes      | Indicates if order is a post only order                                                                                                                                                                                                                                                         |
+| price             | double  | Yes      | Order price                                                                                                                                                                                                                                                                                     |
+| side              | string  | Yes      | Order side<br/>BUY or SELL                                                                                                                                                                                                                                                                      |
+| size              | long    | Yes      | Order size in `contract size` (this remains unchanged even after risk limit adjustment)                                                                                                                                                                                                         |
+| status            | long    | Yes      | Order status<br/> 2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed |
+| time_in_force     | string  | Yes      | Order validity                                                                                                                                                                                                                                                                                  |
+| timestamp         | long    | Yes      | Order timestamp                                                                                                                                                                                                                                                                                 |
+| trigger           | boolean | Yes      | Indicator if order is a trigger order                                                                                                                                                                                                                                                           |
+| triggerPrice      | double  | Yes      | Order trigger price, returns 0 if order is not a trigger order                                                                                                                                                                                                                                  |
+| avgFillPrice      | double  | Yes      | Average filled price. Returns the average filled price for partially transacted orders                                                                                                                                                                                                          |
+| message           | string  | Yes      | Trade messages                                                                                                                                                                                                                                                                                  |
+| stealth           | double  | Yes      | Only valid for Algo orders                                                                                                                                                                                                                                                                      |
+| deviation         | double  | Yes      | Only valid for Algo orders                                                                                                                                                                                                                                                                      |
+| remainingSize     | double  | Yes      | Size left to be transacted                                                                                                                                                                                                                                                                      |
+| originalSize      | double  | Yes      | Original order size                                                                                                                                                                                                                                                                             |
+| positionMode      | string  | Yes      | Position mode<br/>ONE_WAY or HEDGE                                                                                                                                                                                                                                                                                  |
+| positionDirection | string  | Yes      | Position direction                                                                                                                                                                                                                                                                             |
+| positionId        | string  | Yes      | The current order belongs to the id of position.                                                                                                                                                                                                                                                                             |
 
 ## Create new algo order
 
@@ -1094,6 +1171,9 @@ Creates a new order. Requires `Trading` permission
     "originalSize": 1.0,
     "postOnly": false,
     "remainingSize": 1.0,
+    "positionMode": "ONE_WAY",
+    "positionDirection": null,
+    "positionId": "BTCPFC-USD",
     "time_in_force": "GTC"
   }
 ]
@@ -1111,40 +1191,44 @@ This API Requires `Trading` permission
 
 ### Request Parameters
 
-| Name      | Type   | Required | Description                                                                                                                                                                       |
-| ---       | ---    | ---      | ---                                                                                                                                                                               |
-| symbol    | string | Yes      | Market symbol                                                                                                                                                                     |
-| price     | double | Yes      | Minimum price for a sell order, this is the lowest price that a user is willing to sell at. Maximum price for a buy order, this is the maximum price a user is willing to buy at. |
-| size      | long   | Yes      | Order size                                                                                                                                                                        |
-| side      | string | Yes      | Order side<br/>BUY or SELL                                                                                                                                                        |
-| clOrderID | string | No       | Custom order Id                                                                                                                                                                   |
-| deviation | double | No       | How much should the order price deviate from index price. Value is in percentage and can range from `-10` to `10`                                                                 |
-| stealth   | double | No       | How many percent of the order is to be displayed on the orderbook.                                                                                                                |
+| Name         | Type   | Required | Description                                                                                                                                                                       |
+|--------------| ---    | ---      | ---                                                                                                                                                                               |
+| symbol       | string | Yes      | Market symbol                                                                                                                                                                     |
+| price        | double | Yes      | Minimum price for a sell order, this is the lowest price that a user is willing to sell at. Maximum price for a buy order, this is the maximum price a user is willing to buy at. |
+| size         | long   | Yes      | Order size                                                                                                                                                                        |
+| side         | string | Yes      | Order side<br/>BUY or SELL                                                                                                                                                        |
+| clOrderID    | string | No       | Custom order Id                                                                                                                                                                   |
+| deviation    | double | No       | How much should the order price deviate from index price. Value is in percentage and can range from `-10` to `10`                                                                 |
+| stealth      | double | No       | How many percent of the order is to be displayed on the orderbook.                                                                                                                |
+| positionMode | string  | No       | For creating order and wanting to specify the positionMode. Valid options: `ONE_WAY` (default) or `HEDGE`                                                                                                                                                                                                                                                          |
 
 ### Response Content
 
-| Name          | Type    | Required | Description                                                                                                                                                                                                                                                                                     |
-| ---           | ---     | ---      | ---                                                                                                                                                                                                                                                                                             |
-| symbol        | string  | Yes      | Market symbol                                                                                                                                                                                                                                                                                   |
-| clOrderID     | string  | Yes      | Customer tag sent in by trader                                                                                                                                                                                                                                                                  |
-| fillSize      | number  | Yes      | Trade filled size                                                                                                                                                                                                                                                                               |
-| orderID       | string  | Yes      | Order ID                                                                                                                                                                                                                                                                                        |
-| orderType     | integer  | Yes      | Order type <br/>76: Limit Order<br/>77: Market order<br/>80: Algo order                                                                                                                                                                                                                         |
-| postOnly      | boolean | Yes      | Indicates if order is a post only order                                                                                                                                                                                                                                                         |
-| price         | double  | Yes      | Order price                                                                                                                                                                                                                                                                                     |
-| side          | string  | Yes      | Order side<br/>BUY or SELL                                                                                                                                                                                                                                                                      |
-| size          | long    | Yes      | Order size in `contract size` (this remains unchanged even after risk limit adjustment)                                                                                                                                                                                                         |
-| status        | long    | Yes      | Order status<br/>	2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed |
-| time_in_force | string  | Yes      | Order validity                                                                                                                                                                                                                                                                                  |
-| timestamp     | long    | Yes      | Order timestamp                                                                                                                                                                                                                                                                                 |
-| trigger       | boolean | Yes      | Indicator if order is a trigger order                                                                                                                                                                                                                                                           |
-| triggerPrice  | double  | Yes      | Order trigger price, returns 0 if order is not a trigger order                                                                                                                                                                                                                                  |
-| avgFillPrice  | double  | Yes      | Average filled price. Returns the average filled price for partially transacted orders                                                                                                                                                                                                          |
-| message       | string  | Yes      | Trade messages                                                                                                                                                                                                                                                                                  |
-| stealth       | double  | Yes      | Stealth value of order                                                                                                                                                                                                                                                                          |
-| deviation     | double  | Yes      | Deviation value of order                                                                                                                                                                                                                                                                        |
-| remainingSize | double  | Yes      | Size left to be transacted                                                                                                                                                                                                                                                                      |
-| originalSize  | double  | Yes      | Original order size                                                                                                                                                                                                                                                                             |
+| Name              | Type    | Required | Description                                                                                                                                                                                                                                                                                     |
+|-------------------| ---     | ---      |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| symbol            | string  | Yes      | Market symbol                                                                                                                                                                                                                                                                                   |
+| clOrderID         | string  | Yes      | Customer tag sent in by trader                                                                                                                                                                                                                                                                  |
+| fillSize          | number  | Yes      | Trade filled size                                                                                                                                                                                                                                                                               |
+| orderID           | string  | Yes      | Order ID                                                                                                                                                                                                                                                                                        |
+| orderType         | integer  | Yes      | Order type <br/>76: Limit Order<br/>77: Market order<br/>80: Algo order                                                                                                                                                                                                                         |
+| postOnly          | boolean | Yes      | Indicates if order is a post only order                                                                                                                                                                                                                                                         |
+| price             | double  | Yes      | Order price                                                                                                                                                                                                                                                                                     |
+| side              | string  | Yes      | Order side<br/>BUY or SELL                                                                                                                                                                                                                                                                      |
+| size              | long    | Yes      | Order size in `contract size` (this remains unchanged even after risk limit adjustment)                                                                                                                                                                                                         |
+| status            | long    | Yes      | Order status<br/> 2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed |
+| time_in_force     | string  | Yes      | Order validity                                                                                                                                                                                                                                                                                  |
+| timestamp         | long    | Yes      | Order timestamp                                                                                                                                                                                                                                                                                 |
+| trigger           | boolean | Yes      | Indicator if order is a trigger order                                                                                                                                                                                                                                                           |
+| triggerPrice      | double  | Yes      | Order trigger price, returns 0 if order is not a trigger order                                                                                                                                                                                                                                  |
+| avgFillPrice      | double  | Yes      | Average filled price. Returns the average filled price for partially transacted orders                                                                                                                                                                                                          |
+| message           | string  | Yes      | Trade messages                                                                                                                                                                                                                                                                                  |
+| stealth           | double  | Yes      | Stealth value of order                                                                                                                                                                                                                                                                          |
+| deviation         | double  | Yes      | Deviation value of order                                                                                                                                                                                                                                                                        |
+| remainingSize     | double  | Yes      | Size left to be transacted                                                                                                                                                                                                                                                                      |
+| originalSize      | double  | Yes      | Original order size                                                                                                                                                                                                                                                                             |
+| positionMode      | string  | Yes      | Position mode<br/>ONE_WAY or HEDGE                                                                                                                                                                                                                                                              |
+| positionDirection | string  | Yes  | Position direction                                                                                                                                                                                                                                                                              |
+| positionId        | string  | Yes      | The current order belongs to the id of position.                                                                                                                                                                                                                                                |
 
 ## Query Order
 
@@ -1281,6 +1365,9 @@ Query order detail for a specified orderID/clOrderID, please note that a cancele
     "originalSize": 1.0,
     "postOnly": false,
     "remainingSize": 1.0,
+    "positionMode": "ONE_WAY",
+    "positionDirection": null,
+    "positionId": "BTCPFC-USD",
     "time_in_force": "GTC"
   }
 ]
@@ -1306,28 +1393,31 @@ Amend the price or size or trigger price of an order. For trigger orders, if the
 
 ### Response Content
 
-| Name          | Type    | Required | Description                                                                                                                                                                                                                                                                                     |
-| ---           | ---     | ---      | ---                                                                                                                                                                                                                                                                                             |
-| symbol        | string  | Yes      | Market symbol                                                                                                                                                                                                                                                                                   |
-| clOrderID     | string  | Yes      | Customer tag sent in by trader                                                                                                                                                                                                                                                                  |
-| fillSize      | string  | Yes      | Trade filled size                                                                                                                                                                                                                                                                               |
-| orderID       | string  | Yes      | Order ID                                                                                                                                                                                                                                                                                        |
-| orderType     | integer  | Yes      | Order type <br/>76: Limit Order<br/>77: Market order<br/>80: Algo order                                                                                                                                                                                                                         |
-| postOnly      | boolean | Yes      | Indicates if order is a post only order                                                                                                                                                                                                                                                         |
-| price         | double  | Yes      | Order price                                                                                                                                                                                                                                                                                     |
-| side          | string  | Yes      | Order side<br/>BUY or SELL                                                                                                                                                                                                                                                                      |
-| size          | long    | Yes      | Order size in `contract size` (this remains unchanged even after risk limit adjustment)                                                                                                                                                                                                         |
-| status        | long    | Yes      | Order status<br/>	2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed |
-| time_in_force | string  | Yes      | Order validity                                                                                                                                                                                                                                                                                  |
-| timestamp     | long    | Yes      | Order timestamp                                                                                                                                                                                                                                                                                 |
-| trigger       | string  | Yes      | Indicator if order is a trigger order                                                                                                                                                                                                                                                           |
-| triggerPrice  | string  | Yes      | Order trigger price, returns 0 if order is not a trigger order                                                                                                                                                                                                                                  |
-| avgFillPrice  | string  | Yes      | Average filled price. Returns the average filled price for partially transacted orders                                                                                                                                                                                                          |
-| message       | string  | Yes      | Trade messages                                                                                                                                                                                                                                                                                  |
-| stealth       | double  | Yes      | Stealth value of order                                                                                                                                                                                                                                                                          |
-| deviation     | string  | Yes      | Deviation value of order                                                                                                                                                                                                                                                                        |
-| remainingSize | double  | Yes      | Size left to be transacted                                                                                                                                                                                                                                                                      |
-| originalSize  | double  | Yes      | Original order size                                                                                                                                                                                                                                                                             |
+| Name              | Type    | Required | Description                                                                                                                                                                                                                                                                                     |
+|-------------------| ---     |----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| symbol            | string  | Yes      | Market symbol                                                                                                                                                                                                                                                                                   |
+| clOrderID         | string  | Yes      | Customer tag sent in by trader                                                                                                                                                                                                                                                                  |
+| fillSize          | string  | Yes      | Trade filled size                                                                                                                                                                                                                                                                               |
+| orderID           | string  | Yes      | Order ID                                                                                                                                                                                                                                                                                        |
+| orderType         | integer | Yes      | Order type <br/>76: Limit Order<br/>77: Market order<br/>80: Algo order                                                                                                                                                                                                                         |
+| postOnly          | boolean | Yes      | Indicates if order is a post only order                                                                                                                                                                                                                                                         |
+| price             | double  | Yes      | Order price                                                                                                                                                                                                                                                                                     |
+| side              | string  | Yes      | Order side<br/>BUY or SELL                                                                                                                                                                                                                                                                      |
+| size              | long    | Yes      | Order size in `contract size` (this remains unchanged even after risk limit adjustment)                                                                                                                                                                                                         |
+| status            | long    | Yes      | Order status<br/> 2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed |
+| time_in_force     | string  | Yes      | Order validity                                                                                                                                                                                                                                                                                  |
+| timestamp         | long    | Yes      | Order timestamp                                                                                                                                                                                                                                                                                 |
+| trigger           | string  | Yes      | Indicator if order is a trigger order                                                                                                                                                                                                                                                           |
+| triggerPrice      | string  | Yes      | Order trigger price, returns 0 if order is not a trigger order                                                                                                                                                                                                                                  |
+| avgFillPrice      | string  | Yes      | Average filled price. Returns the average filled price for partially transacted orders                                                                                                                                                                                                          |
+| message           | string  | Yes      | Trade messages                                                                                                                                                                                                                                                                                  |
+| stealth           | double  | Yes      | Stealth value of order                                                                                                                                                                                                                                                                          |
+| deviation         | string  | Yes      | Deviation value of order                                                                                                                                                                                                                                                                        |
+| remainingSize     | double  | Yes      | Size left to be transacted                                                                                                                                                                                                                                                                      |
+| originalSize      | double  | Yes      | Original order size                                                                                                                                                                                                                                                                             |
+| positionMode      | string  | Yes      | Position mode<br/>ONE_WAY or HEDGE                                                                                                                                                                                                                                                              |
+| positionDirection | string  | Yes      | Position direction                                                                                                                                                                                                                                                                              |
+| positionId        | string  | Yes      | The current order belongs to the id of position.                                                                                                                                                                                                                                                |
 
 ## Cancel Order
 
@@ -1361,6 +1451,9 @@ Amend the price or size or trigger price of an order. For trigger orders, if the
     "originalSize": 1.0,
     "postOnly": false,
     "remainingSize": 1.0,
+    "positionMode": "ONE_WAY",
+    "positionDirection": null,
+    "positionId": "BTCPFC-USD",
     "time_in_force": "GTC"
   }
 ]
@@ -1381,28 +1474,31 @@ Cancels pending orders that has not yet been transacted. The `orderID` is a uniq
 
 ### Response Content
 
-| Name          | Type    | Required | Description                                                                                                                                                                                                                                                                                     |
-| ---           | ---     | ---      | ---                                                                                                                                                                                                                                                                                             |
-| symbol        | string  | Yes      | Market symbol                                                                                                                                                                                                                                                                                   |
-| clOrderID     | string  | Yes      | Customer tag sent in by trader                                                                                                                                                                                                                                                                  |
-| fillSize      | double  | Yes      | Trade filled size                                                                                                                                                                                                                                                                               |
-| orderID       | string  | Yes      | Order ID                                                                                                                                                                                                                                                                                        |
-| orderType     | integer  | Yes      | Order type <br/>76: Limit Order<br/>77: Market order<br/>80: Algo order                                                                                                                                                                                                                         |
-| postOnly      | boolean | Yes      | Indicates if order is a post only order                                                                                                                                                                                                                                                         |
-| price         | double  | Yes      | Order price                                                                                                                                                                                                                                                                                     |
-| side          | string  | Yes      | Order side<br/>BUY or SELL                                                                                                                                                                                                                                                                      |
-| size          | long    | Yes      | Order size in `contract size` (this remains unchanged even after risk limit adjustment)                                                                                                                                                                                                         |
-| status        | long    | Yes      | Order status<br/>	2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed |
-| time_in_force | string  | Yes      | Order validity                                                                                                                                                                                                                                                                                  |
-| timestamp     | long    | Yes      | Order timestamp                                                                                                                                                                                                                                                                                 |
-| trigger       | boolean | Yes      | Indicator if order is a trigger order                                                                                                                                                                                                                                                           |
-| triggerPrice  | double  | Yes      | Order trigger price, returns 0 if order is not a trigger order                                                                                                                                                                                                                                  |
-| avgFillPrice  | double  | Yes      | Average filled price. Returns the average filled price for partially transacted orders                                                                                                                                                                                                          |
-| message       | string  | Yes      | Trade messages                                                                                                                                                                                                                                                                                  |
-| stealth       | double  | Yes      | Stealth value of order                                                                                                                                                                                                                                                                          |
-| deviation     | double  | Yes      | Deviation value of order                                                                                                                                                                                                                                                                        |
-| remainingSize | double  | Yes      | Size left to be transacted                                                                                                                                                                                                                                                                      |
-| originalSize  | double  | Yes      | Original order size                                                                                                                                                                                                                                                                             |
+| Name              | Type    | Required | Description                                                                                                                                                                                                                                                                                     |
+|-------------------| ---     |----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| symbol            | string  | Yes      | Market symbol                                                                                                                                                                                                                                                                                   |
+| clOrderID         | string  | Yes      | Customer tag sent in by trader                                                                                                                                                                                                                                                                  |
+| fillSize          | double  | Yes      | Trade filled size                                                                                                                                                                                                                                                                               |
+| orderID           | string  | Yes      | Order ID                                                                                                                                                                                                                                                                                        |
+| orderType         | integer | Yes      | Order type <br/>76: Limit Order<br/>77: Market order<br/>80: Algo order                                                                                                                                                                                                                         |
+| postOnly          | boolean | Yes      | Indicates if order is a post only order                                                                                                                                                                                                                                                         |
+| price             | double  | Yes      | Order price                                                                                                                                                                                                                                                                                     |
+| side              | string  | Yes      | Order side<br/>BUY or SELL                                                                                                                                                                                                                                                                      |
+| size              | long    | Yes      | Order size in `contract size` (this remains unchanged even after risk limit adjustment)                                                                                                                                                                                                         |
+| status            | long    | Yes      | Order status<br/> 2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed |
+| time_in_force     | string  | Yes      | Order validity                                                                                                                                                                                                                                                                                  |
+| timestamp         | long    | Yes      | Order timestamp                                                                                                                                                                                                                                                                                 |
+| trigger           | boolean | Yes      | Indicator if order is a trigger order                                                                                                                                                                                                                                                           |
+| triggerPrice      | double  | Yes      | Order trigger price, returns 0 if order is not a trigger order                                                                                                                                                                                                                                  |
+| avgFillPrice      | double  | Yes      | Average filled price. Returns the average filled price for partially transacted orders                                                                                                                                                                                                          |
+| message           | string  | Yes      | Trade messages                                                                                                                                                                                                                                                                                  |
+| stealth           | double  | Yes      | Stealth value of order                                                                                                                                                                                                                                                                          |
+| deviation         | double  | Yes      | Deviation value of order                                                                                                                                                                                                                                                                        |
+| remainingSize     | double  | Yes      | Size left to be transacted                                                                                                                                                                                                                                                                      |
+| originalSize      | double  | Yes      | Original order size                                                                                                                                                                                                                                                                             |
+| positionMode      | string  | Yes      | Position mode<br/>ONE_WAY or HEDGE                                                                                                                                                                                                                                                              |
+| positionDirection | string  | Yes      | Position direction                                                                                                                                                                                                                                                                              |
+| positionId        | string  | Yes      | The current order belongs to the id of position.                                                                                                                                                                                                                                                |
 
 ## Dead Man's Switch (Cancel All After)
 
@@ -1469,6 +1565,9 @@ Dead-man's switch allows the trader to send in a timeout value which is a Time t
     "orderState": "STATUS_ACTIVE",
     "triggerUseLastPrice": false,
     "avgFilledPrice": 0.0,
+    "positionMode": "ONE_WAY",
+    "positionDirection": null,
+    "positionId": "BTCPFC-USD",
     "timeInForce": "GTC",
     "averageFillPrice": 0.0,
     "takeProfitOrder": {
@@ -1537,6 +1636,9 @@ Retrieves open orders that have not yet been matched or matched recently.
 | takeProfitOrder              | TakeProfitOrder object | No | Take profit order info |
 | stopLossOrder                | StopLossOrder object   | No | Stop loss order info |
 | closeOrder                   | bool   | Yes      | Whether it is an order to close this position |
+| positionMode                 | string   | Yes      | Position mode<br/>ONE_WAY or HEDGE                                                     |
+| positionDirection            | string   | Yes      | Position direction                                                                     |
+| positionId                   | string   | Yes      | The current order belongs to the id of position.                                       |
 
 ## Query Trades Fills
 
@@ -1573,6 +1675,7 @@ Retrieves open orders that have not yet been matched or matched recently.
     "triggerPrice": 0,
     "triggerType": 0,
     "username": "string",
+    "positionId": null,
     "wallet": "string",
     "tradeId": "string",
     "orderId": "string"
@@ -1602,7 +1705,7 @@ Retrieves a user's trade history
 ### Response Content
 
 | Name             | Type    | Required | Description                                                                                                                                                                       |
-| ---              | ---     | ---      | ---                                                                                                                                                                               |
+|------------------| ---     | ---      |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | symbol           | string  | Yes      | Market symbol                                                                                                                                                                     |
 | side             | string  | Yes      | Trade side. Values are: [`BUY`, `SELL`]                                                                                                                                           |
 | price            | double  | Yes      | Transacted price                                                                                                                                                                  |
@@ -1626,6 +1729,7 @@ Retrieves a user's trade history
 | orderType        | integer | Yes      | Order Type                                                                                                                                                                        |
 | realizedPnL      | double  | Yes      | Not used in Spot                                                                                                                                                                  |
 | total            | long    | Yes      | Not used in Spot                                                                                                                                                                  |
+| positionId       | string  | Yes      | The current order belongs to the id of position.                                                                                                                                  |
 
 
 ## Query Position
@@ -1633,7 +1737,7 @@ Retrieves a user's trade history
 > Request
 
 ```
-/api/v2.1/user/positions?symbol=BTCPFC
+/api/v2.1/user/positions
 ```
 
 > Response
@@ -1668,8 +1772,35 @@ Retrieves a user's trade history
         "side": "SELL",
         "triggerPrice": 27000.0,
         "triggerUseLastPrice": true
-    }
-  }
+    },
+    "positionMode": "ONE_WAY",
+    "positionDirection": null,
+    "positionId": "BTCPFC-USD"
+  },{
+     "marginType": 91,
+     "entryPrice": 1631.106666667,
+     "markPrice": 1630.398947255,
+     "symbol": "ETHPFC",
+     "side": "BUY",
+     "orderValue": 48.9119684176,
+     "settleWithAsset": "USDT",
+     "unrealizedProfitLoss": -0.02123158,
+     "totalMaintenanceMargin": 0.254871114,
+     "size": 3,
+     "liquidationPrice": 0,
+     "isolatedLeverage": 0,
+     "adlScoreBucket": 2,
+     "liquidationInProgress": false,
+     "timestamp": 0,
+     "takeProfitOrder": null,
+     "stopLossOrder": null,
+     "positionMode": "HEDGE",
+     "positionDirection": "LONG",
+     "positionId": "ETHPFC-USD|LONG",
+     "currentLeverage": 0.0340349245,
+     "takeProfitOrder": null,
+     "stopLossOrder": null
+     }
 ]
 ```
 
@@ -1687,7 +1818,7 @@ Queries user's current position. When no symbol is specified, positions for all 
 ### Response Content
 
 | Name                   | Type    | Required | Description                                                                 |
-| ---                    |---------| ---      | ---                                                                         |
+|------------------------|---------|----------|-----------------------------------------------------------------------------|
 | symbol                 | string  | Yes      | Market symbol                                                               |
 | side                   | string  | Yes      | Position side. Values are: [`Buy`, `SELL`]                                  |
 | size                   | long    | Yes      | Position size                                                               |
@@ -1706,6 +1837,9 @@ Queries user's current position. When no symbol is specified, positions for all 
 | timestamp              | long    | Yes      | Timestamp when position was queried                                         |
 | takeProfitOrder        | TakeProfitOrder object | No | Take profit order info |
 | stopLossOrder          | StopLossOrder object   | No | Stop loss order info |
+| positionMode           | string  | Yes      | Position mode<br/>ONE_WAY or HEDGE                                          |
+| positionDirection      | string  | Yes      | Position direction                                                          |
+| positionId             | string  | Yes      | Position id                                                                 |
 
 
 ## Close Position
@@ -1719,7 +1853,16 @@ Queries user's current position. When no symbol is specified, positions for all 
   "type": "MARKET"
 }
 ```
+> Request(For hedge mode position)
 
+```json
+{
+  "price": 0,
+  "symbol": "BTCPFC",
+  "type": "MARKET",
+  "positionId": "BTCPFC-USD|LONG"
+}
+```
 > Response
 
 ```json
@@ -1744,6 +1887,9 @@ Queries user's current position. When no symbol is specified, positions for all 
     "originalSize": 1.0,
     "postOnly": false,
     "remainingSize": 0.0,
+    "positionMode": "ONE_WAY",
+    "positionDirection": null,
+    "positionId": null,
     "time_in_force": "GTC"
   }
 ]
@@ -1761,32 +1907,37 @@ Closes a user's position for the particular market as specified by symbol. If ty
 | type               | string  | Yes      | Close position type with values:<br/>LIMIT: Close at `price`<br/>MARKET: Close at market price          |
 | price              | double  | No       | Close price. Mandatory when type is `LIMIT`                                                             |
 | postOnly           | boolean | No       | Boolean to indicate if this is a post only order. For post only orders, traders are charged maker fees  |
+| positionId         | string  | No       | The position ID that you want to close. Mandatory when positionMode is `HEDGE`                          |
 | useNewSymbolNaming | boolean | No       | True to use new futures market name in symbol, default to False                                         |
 
 ### Response Content
 
-| Name          | Type    | Required | Description                                                                                                                                                                                                                                                                                      |
-| ---           | ---     | ---      | ---                                                                                                                                                                                                                                                                                              |
-| symbol        | string  | Yes      | Market symbol                                                                                                                                                                                                                                                                                    |
-| clOrderID     | string  | Yes      | Customer tag sent in by trader                                                                                                                                                                                                                                                                   |
-| fillSize      | string  | Yes      | Trade filled size                                                                                                                                                                                                                                                                                |
-| orderID       | string  | Yes      | Order ID                                                                                                                                                                                                                                                                                         |
-| orderType     | integer | Yes      | Order type <br/>76: Limit Order<br/>77: Market order<br/>80: Algo order                                                                                                                                                                                                                          |
-| postOnly      | boolean | Yes      | Indicates if order is a post only order                                                                                                                                                                                                                                                          |
-| price         | double  | Yes      | Order price                                                                                                                                                                                                                                                                                      |
-| side          | string  | Yes      | Order side<br/>BUY or SELL                                                                                                                                                                                                                                                                       |
-| size          | long    | Yes      | Cancelled size                                                                                                                                                                                                                                                                                   |
-| status        | long    | Yes      | Order status<br/>	2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed |
-| time_in_force | string  | Yes      | Order validity                                                                                                                                                                                                                                                                                   |
-| timestamp     | long    | Yes      | Order timestamp                                                                                                                                                                                                                                                                                  |
-| trigger       | string  | Yes      | Indicator if order is a trigger order                                                                                                                                                                                                                                                            |
-| triggerPrice  | string  | Yes      | Order trigger price, returns 0 if order is not a trigger order                                                                                                                                                                                                                                   |
-| avgFillPrice  | string  | Yes      | Average filled price. Returns the average filled price for partially transacted orders                                                                                                                                                                                                           |
-| message       | string  | Yes      | Trade messages                                                                                                                                                                                                                                                                                   |
-| stealth       | double  | Yes      | Stealth value of order                                                                                                                                                                                                                                                                           |
-| deviation     | string  | Yes      | Deviation value of order                                                                                                                                                                                                                                                                         |
-| remainingSize | double  | Yes      | Size left to be transacted                                                                                                                                                                                                                                                                       |
-| originalSize  | double  | Yes      | Original order size                                                                                                                                                                                                                                                                              |
+| Name              | Type    | Required | Description                                                                                                                                                                                                                                                                                     |
+|-------------------| ---     |----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| symbol            | string  | Yes      | Market symbol                                                                                                                                                                                                                                                                                   |
+| clOrderID         | string  | Yes      | Customer tag sent in by trader                                                                                                                                                                                                                                                                  |
+| fillSize          | string  | Yes      | Trade filled size                                                                                                                                                                                                                                                                               |
+| orderID           | string  | Yes      | Order ID                                                                                                                                                                                                                                                                                        |
+| orderType         | integer | Yes      | Order type <br/>76: Limit Order<br/>77: Market order<br/>80: Algo order                                                                                                                                                                                                                         |
+| postOnly          | boolean | Yes      | Indicates if order is a post only order                                                                                                                                                                                                                                                         |
+| price             | double  | Yes      | Order price                                                                                                                                                                                                                                                                                     |
+| side              | string  | Yes      | Order side<br/>BUY or SELL                                                                                                                                                                                                                                                                      |
+| size              | long    | Yes      | Cancelled size                                                                                                                                                                                                                                                                                  |
+| status            | long    | Yes      | Order status<br/> 2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed |
+| time_in_force     | string  | Yes      | Order validity                                                                                                                                                                                                                                                                                  |
+| timestamp         | long    | Yes      | Order timestamp                                                                                                                                                                                                                                                                                 |
+| trigger           | string  | Yes      | Indicator if order is a trigger order                                                                                                                                                                                                                                                           |
+| triggerPrice      | string  | Yes      | Order trigger price, returns 0 if order is not a trigger order                                                                                                                                                                                                                                  |
+| avgFillPrice      | string  | Yes      | Average filled price. Returns the average filled price for partially transacted orders                                                                                                                                                                                                          |
+| message           | string  | Yes      | Trade messages                                                                                                                                                                                                                                                                                  |
+| stealth           | double  | Yes      | Stealth value of order                                                                                                                                                                                                                                                                          |
+| deviation         | string  | Yes      | Deviation value of order                                                                                                                                                                                                                                                                        |
+| remainingSize     | double  | Yes      | Size left to be transacted                                                                                                                                                                                                                                                                      |
+| originalSize      | double  | Yes      | Original order size                                                                                                                                                                                                                                                                             |
+| positionMode      | string  | Yes      | Position mode<br/>ONE_WAY or HEDGE                                                                                                                                                                                                                                                              |
+| positionDirection | string  | Yes      | Position direction                                                                                                                                                                                                                                                                              |
+| positionId        | string  | Yes      | Position id                                                                                                                                                                                                                                                                                     |
+
 
 ## Get Risk Limit
 
@@ -1831,6 +1982,16 @@ Query risk limit for the specified market
 }
 ```
 
+> Request (When positionMode is `HEDGE`)
+
+```json
+{
+    "symbol": "BTCPFC",
+    "riskLimit": 100000,
+    "positionMode": "HEDGE"
+}
+```
+
 > Response
 
 ```json
@@ -1849,11 +2010,12 @@ Changes risk limit for the specified market
 
 ### Request Parameters
 
-| Name               | Type    | Required | Description                                                                                                   |
-| ---                | ---     | ---      | ---                                                                                                           |
-| symbol             | string  | Yes      | Market symbol                                                                                                 |
+| Name               | Type    | Required | Description                                                                               |
+| ---                | ---     | ---      |-------------------------------------------------------------------------------------------|
+| symbol             | string  | Yes      | Market symbol                                                                             |
 | riskLimit          | long    | Yes      | Risk limit value now in position size, but it will be changed to USD value in the future. |
-| useNewSymbolNaming | boolean | No       | True if use new futures market name as symbol , default to False                                              |
+| positionMode       | string  | no       | ONE_WAY(default) or HEDGE. Mandatory when positionMode is `HEDGE`                         |
+| useNewSymbolNaming | boolean | No       | True if use new futures market name as symbol , default to False                          |
 
 ### Response Content
 
@@ -1876,6 +2038,16 @@ Changes risk limit for the specified market
 }
 ```
 
+> Request (When positionMode is `HEDGE`)
+
+```json
+{
+    "symbol": "BTCPFC",
+    "leverage": 0,
+    "positionMode": "HEDGE"
+}
+```
+
 > Response
 
 ```json
@@ -1894,11 +2066,12 @@ Change leverage values for the specified market
 
 ### Request Parameters
 
-| Name               | Type    | Required | Description                                                    |
-| ---                | ---     | ---      | ---                                                            |
-| symbol             | string  | Yes      | Market symbol                                                  |
-| leverage           | long    | Yes      | Leverage value                                                 |
-| useNewSymbolNaming | boolean | No       | True if use new futures market name in symbol default to False |
+| Name               | Type    | Required | Description                                                       |
+| ---                | ---     | ---      |-------------------------------------------------------------------|
+| symbol             | string  | Yes      | Market symbol                                                     |
+| leverage           | long    | Yes      | Leverage value                                                    |
+| useNewSymbolNaming | boolean | No       | True if use new futures market name in symbol default to False    |
+| positionMode       | string  | no       | ONE_WAY(default) or HEDGE. Mandatory when positionMode is `HEDGE` |
 
 ### Response Content
 
@@ -1933,10 +2106,10 @@ Get leverage value for the specified market
 
 ### Response Content
 
-| Name      | Type    | Required | Description                                                                                                                             |
-| ---       | ---     | ---      | ---  |
-| symbol    | string  | Yes      | Market symbol |
-| leverage  | double  | Yes      | Current leverage value for the market for isolated margin mode, return 0 if the margin mode is cross|
+| Name      | Type    | Required | Description                                                                                          |
+| ---       | ---     | ---      |------------------------------------------------------------------------------------------------------|
+| symbol    | string  | Yes      | Market symbol                                                                                        |
+| leverage  | double  | Yes      | Current leverage value for the market for isolated margin mode, return 0 if the margin mode is cross |
 
 ## Change Contract Settlement Currency
 
@@ -1946,6 +2119,16 @@ Get leverage value for the specified market
 {
   "symbol": "BTCPFC",
   "currency": "BTC"
+}
+```
+
+> Request (When positionMode is `HEDGE`)
+
+```json
+{
+    "symbol": "BTCPFC",
+    "currency": "USDT",
+    "positionId": "BTCPFC-USD|LONG"
 }
 ```
 
@@ -1965,11 +2148,12 @@ Changes the settlement currency for the position in the current market
 
 ### Request Parameters
 
-| Name               | Type    | Required | Description                                                     |
-| ---                | ---     | ---      | ---                                                             |
-| symbol             | string  | Yes      | Market symbol                                                   |
-| currency           | string  | Yes      | Settlement currency to set                                      |
-| useNewSymbolNaming | boolean | No       | True to use new futures market name in symbol, default to False |
+| Name               | Type    | Required | Description                                                                  |
+| ---                | ---     | ---      |------------------------------------------------------------------------------|
+| symbol             | string  | Yes      | Market symbol                                                                |
+| currency           | string  | Yes      | Settlement currency to set                                                   |
+| useNewSymbolNaming | boolean | No       | True to use new futures market name in symbol, default to False              |
+| positionId         | string  | No       | The position ID that you want to set. Mandatory when positionMode is `HEDGE` |
 
 ### Response Content
 
@@ -2017,7 +2201,6 @@ Retrieve user's trading fees
 ```json
 {
     "symbol": "BTC-PERP",
-    "side":"SELL",
     "takeProfitPrice": 31000,
     "takeProfitTrigger": "markPrice",
     "stopLossPrice": 22000,
@@ -2031,7 +2214,7 @@ Retrieve user's trading fees
 [
     {
         "status": 9,
-        "symbol": "BTC-PERP",
+        "symbol": "BTCPFC",
         "orderType": 77,
         "price": 0.0,
         "side": "SELL",
@@ -2050,6 +2233,9 @@ Retrieve user's trading fees
         "postOnly": false,
         "remainingSize": 100.0,
         "orderDetailType": null,
+        "positionMode": "ONE_WAY",
+        "positionDirection": null,
+        "positionId": "BTCPFC-USD",
         "time_in_force": "GTC"
     }
 ]
@@ -2064,11 +2250,12 @@ Bind TP/SL with an existing position
 | Name               | Type    | Required | Description
 | ---                | ---     | ---      | --- 
 | symbol             | string  | yes       | Market symbol
-| side               | string  | yes       | "BUY" or "SELL" for TP/SL order
+| side               | string  | yes       | "BUY" or "SELL" Mandatory when positionMode is `HEDGE`, in hedge mode, it is used to clsoe the specified position, ex: sell to close long position, buy to close short position
 | takeProfitPrice    | double  | No        | Mandatory when creating new order with take profit order. Indicates the trigger price. Must set takeProfitPrice or stopLossPrice at least when using this API. |
 | takeProfitTrigger  | string  | No        | For creating order with take profit order. Valid options: `markPrice` (default) or `lastPrice` |
 | stopLossPrice      | double  | No        | Mandatory when creating new order with stop loss order. Indicates the trigger price        |
 | stopLossTrigger     | string | No       | For creating order with stop loss order. Valid options: `markPrice` (default) or `lastPrice`|
+| positionMode       | string  | no       | ONE_WAY(default) or HEDGE. Mandatory when positionMode is `HEDGE` |
 
 ### Response Content
 
@@ -2083,7 +2270,7 @@ Bind TP/SL with an existing position
 | price         | double  | Yes      | Order price |
 | side          | string  | Yes      | Order side<br/>BUY or SELL |
 | size          | long    | Yes      | Order size in `contract size` (this remains unchanged even after risk limit adjustment) |
-| status        | long    | Yes      | Order status<br/>	2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed |
+| status        | long    | Yes      | Order status<br/> 2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed |
 | time_in_force | string  | Yes      | Order validity |
 | timestamp     | long    | Yes      | Order timestamp |
 | trigger       | boolean | Yes      | Indicator if order is a trigger order |
@@ -2094,6 +2281,75 @@ Bind TP/SL with an existing position
 | deviation     | double  | Yes      | Only valid for Algo |
 | remainingSize | double  | Yes      | Size left to be transacted |
 | originalSize  | double  | Yes      | Original order size |
+| positionMode      | string  | Yes      | Position mode<br/>ONE_WAY or HEDGE   |
+| positionDirection | string  | Yes      | Position direction   |
+| positionId        | string  | Yes      | Position id   |
+
+## Query Position Mode
+
+> Response
+
+```json
+[
+    {
+        "symbol": "ETH-PERP",
+        "positionMode": "HEDGE"
+    },
+    {
+        "symbol": "BTC-PERP",
+        "positionMode": "ONE_WAY"
+    }
+]
+```
+
+`GET /api/v2.1/position_mode`
+
+Retrieve user's position mode
+
+### Request Parameters
+
+| Name               | Type    | Required | Description          |
+| ---                | ---     | ---      | ---------------------|
+| symbol             | string  | No       | Market symbol        |
+
+### Response Content
+
+| Name         | Type   | Required | Description       |
+| ---          | ---    | ---      | ------------------|
+| symbol       | string | Yes      | Market symbol     |
+| positionMode | string | Yes      | ONE_WAY or HEDGE  |
+
+## Change Position Mode
+
+> Request
+
+```json
+{
+  "symbol": "BTC-PERP",
+  "positionMode": "HEDGE"
+}
+```
+
+`POST /api/v2.1/position_mode`
+
+Changes position mode
+
+### Request Parameters
+
+| Name               | Type    | Required | Description     |
+| ---                | ---     | ---      | ----------------|
+| symbol             | string  | Yes      | Market symbol   |
+| positionMode       | string  | Yes      | ONE_WAY or HEDGE|
+
+### Response Content
+
+| Name      | Type    | Required | Description                                                            |
+| ---       | ---     | ---      | -----------------------------------------------------------------------|
+| symbol    | string  | Yes      | Markey symbol                                                          |
+| timestamp | long    | No       | Timestamp where position mode was set                                  |
+| status    | string  | No       | Status of the request. Values are: <br>20: Success                     |
+| type      | string  | No       | Value will be 129 indicating that type is `Futures Config Mode Change` |
+| message   | string  | No       | Message                                                                |
 
 # Wallet Endpoints
 
@@ -2894,6 +3150,7 @@ echo -n "/ws/futures1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6
       "remainingSize": "<Remaining size on the order>",
       "time_in_force": "<Time where this order is valid>",
       "txType": "STOP | TAKE_PROFIT",
+      "positionId": "BTCPFC-USD",
       "triggerPrice": "Trade Trigger Price"
     }
   ]
@@ -2906,26 +3163,27 @@ Receive trade notifications by subscribing to the topic `notificationApiV2`. The
 
 ### Response Content
 
-| Name              | Type    | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| ---               | ---     | ---      | ---                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| symbol            | string  | Yes      | Market symbol                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| orderID           | string  | Yes      | Internal order ID                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| side              | string  | Yes      | Trade side. BUY or SELL                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| type              | int     | Yes      | Order type. Valid values are:<br/>76: Limit Order<br/>77: Market Order<br/>80: Algo orders                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| price             | double  | Yes      | Order price or transcated price                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| size              | double  | Yes      | Order size or transacted size                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| originalSize      | double  | Yes      | Original order size                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| avgFilledPrice    | double  | Yes      | Average filled price                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| fillSize          | double  | Yes      | Filled size of order                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| Name              | Type    | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+|-------------------| ---     | ---      |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| symbol            | string  | Yes      | Market symbol                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| orderID           | string  | Yes      | Internal order ID                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| side              | string  | Yes      | Trade side. BUY or SELL                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| type              | int     | Yes      | Order type. Valid values are:<br/>76: Limit Order<br/>77: Market Order<br/>80: Algo orders                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| price             | double  | Yes      | Order price or transcated price                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| size              | double  | Yes      | Order size or transacted size                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| originalSize      | double  | Yes      | Original order size                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| avgFilledPrice    | double  | Yes      | Average filled price                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| fillSize          | double  | Yes      | Filled size of order                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | status            | integer | Yes      | Status with values as follows:<br/>1: MARKET_UNAVAILABLE, Market is currently unavailable<br/>2: ORDER_INSERTED, Order is inserted successfully<br/>4: ORDER_FULLY_TRANSACTED, Order is fully transacted<br/>5: ORDER_PARTIALLY_TRANSACTED, Order is partially transacted<br/>6: ORDER_CANCELLED, Order is cancelled successfully<br/>8: INSUFFICIENT_BALANCE, Insufficient balance in account<br/>9: TRIGGER_INSERTED, Trigger Order is inserted successfully<br/>10: TRIGGER_ACTIVATED, Trigger Order is activated successfully<br/>12: ERROR_UPDATE_RISK_LIMIT, Error in updating risk limit<br/>15: ORDER_REJECTED, Change made to the order was unsuccessful<br/>20: SUCCESS, Trade finished successfully<br/>27: TRANSFER_SUCCESSFUL, Transfer funds between futures and spot is successful<br/>28: TRANSFER_UNSUCCESSFUL, Transfer funds between spot and futures is unsuccessful<br/>41: ERROR_INVALID_RISK_LIMIT, Invalid risk limit was specified<br/>64: STATUS_LIQUIDATION, Account is undergoing liquidation<br/>96: FUTURES_CONFIG_SETTLE_WITH_ASSET, Set futures settle currency<br/>101: FUTURES_ORDER_PRICE_OUTSIDE_LIQUIDATION_PRICE, Futures order is outside of liquidation price<br/>1003: ORDER_LIQUIDATION, Order is undergoing liquidation<br/>1004: ORDER_ADL, Order is undergoing ADL |
-| clOrderID         | string  | Yes      | Custom order ID                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| maker             | boolean | Yes      | Indicator to indicate if trade is a maker trade                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| remainingSize     | double  | Yes      | Remaining size on the order                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| time_in_force     | string  | Yes      | Validity of the order                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| timestamp         | long    | Yes      | Order timestamp or transacted timestamp                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| txType            | string  | Yes      | Used by trigger or OCO orders. STOP indicates its a Stop order, TAKEPROFIT indicates its a take profit order, and LIMIT is when its not any of the above                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| stealth           | double  | Yes      | Percentage of orders to show on orderbook. Only for Algo orders                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| pegPriceDeviation | double  | Yes      | Deviation percentage. Only for Algo orders                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| clOrderID         | string  | Yes      | Custom order ID                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| maker             | boolean | Yes      | Indicator to indicate if trade is a maker trade                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| remainingSize     | double  | Yes      | Remaining size on the order                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| time_in_force     | string  | Yes      | Validity of the order                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| timestamp         | long    | Yes      | Order timestamp or transacted timestamp                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| txType            | string  | Yes      | Used by trigger or OCO orders. STOP indicates its a Stop order, TAKEPROFIT indicates its a take profit order, and LIMIT is when its not any of the above                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| stealth           | double  | Yes      | Percentage of orders to show on orderbook. Only for Algo orders                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| pegPriceDeviation | double  | Yes      | Deviation percentage. Only for Algo orders                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| positionId        | string  | Yes      | Position ID                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 
 ## User Trade Fills
 
@@ -3035,6 +3293,9 @@ When a trade has been transacted, this topic will send the trade information bac
     "marginTypeName": "FUTURES_MARGIN_CROSS",
     "currentLeverage": 0.02,
     "avgFillPrice": 0.0,
+    "positionId": "BTCPFC-USD|SHORT",
+    "positionMode": "HEDGE",
+    "positionDirection": "SHORT",
     "settleWithNonUSDAsset": "BTC",
     "takeProfitOrder": {
         "orderId": "4820b20a-e41b-4273-b3ad-4b19920aeeb5",
@@ -3048,7 +3309,46 @@ When a trade has been transacted, this topic will send the trade information bac
         "triggerPrice": 27000.0,
         "triggerUseLastPrice": true
     }
-  }]
+  },{
+    "requestId": 0,
+    "username": "btse",
+    "userCurrency": null,
+    "marketName": "LTCPFC-USD",
+    "orderType": 90,
+    "orderMode": 83,
+    "originalAmount": 0.01,
+    "maxPriceHeld": 0,
+    "pegPriceMin": 0,
+    "stealth": 1,
+    "orderID": null,
+    "maxStealthDisplayAmount": 0,
+    "sellexchangeRate": 0,
+    "triggerPrice": 0,
+    "closeOrder": false,
+    "liquidationInProgress": false,
+    "marginType": 91,
+    "entryPrice": 69.9,
+    "liquidationPrice": 29684.3743872669,
+    "markedPrice": 70.062346733,
+    "unrealizedProfitLoss": -0.04870402,
+    "totalMaintenanceMargin": 0.319484301,
+    "totalContracts": 30,
+    "isolatedLeverage": 0,
+    "totalFees": 0,
+    "totalValue": -21.01870402,
+    "adlScoreBucket": 1,
+    "booleanVar1": false,
+    "orderTypeName": "TYPE_FUTURES_POSITION",
+    "orderModeName": "MODE_SELL",
+    "marginTypeName": "FUTURES_MARGIN_CROSS",
+    "currentLeverage": 0.1116510969,
+    "takeProfitOrder": null,
+    "stopLossOrder": null,
+    "settleWithNonUSDAsset": "USDT",
+    "positionId": "LTCPFC-USD|SHORT",
+    "positionMode": "HEDGE",
+    "positionDirection": "SHORT",
+}]
 }
 ```
 
@@ -3092,6 +3392,9 @@ All futures positions will be pushed via this topic once the position changes.
 | settleWithNonUSDAsset   | string  | Yes      |                                              |
 | takeProfitOrder        | TakeProfitOrder object | No | Take profit order info               |
 | stopLossOrder          | StopLossOrder object   | No | Stop loss order info                 |
+| positionMode            | string  | Yes      | Position mode<br/>ONE_WAY or HEDGE           |
+| positionDirection       | string  | Yes      | Position direction                           |
+| positionId              | string  | Yes      | Position id                                  |
 
 ## Positions
 
@@ -3109,6 +3412,7 @@ All futures positions will be pushed via this topic once the position changes.
 {
   "topic": "positions",
   "data": [{
+    "orderID": null,
     "requestId": 0,
     "username": "btse",
     "marketName": "BTCPFC-USD",
@@ -3153,7 +3457,47 @@ All futures positions will be pushed via this topic once the position changes.
         "triggerPrice": 27000.0,
         "triggerUseLastPrice": true
     }
-  }]
+  },{
+        "orderID": null,
+        "requestId": 0,
+        "username": "btse",
+        "marketName": "LTCPFC-USD",
+        "orderType": 90,
+        "orderMode": 83,
+        "originalAmount": 0.01,
+        "maxPriceHeld": 0,
+        "pegPriceMin": 0,
+        "stealth": 1,
+        "maxStealthDisplayAmount": 0,
+        "sellexchangeRate": 0,
+        "triggerPrice": 0,
+        "closeOrder": false,
+        "liquidationInProgress": false,
+        "marginType": 91,
+        "entryPrice": 69.9,
+        "liquidationPrice": 29682.415101008,
+        "markedPrice": 69.685573595,
+        "unrealizedProfitLoss": 0.06432792,
+        "totalMaintenanceMargin": 0.318744,
+        "totalContracts": 30,
+        "isolatedLeverage": 0,
+        "totalFees": 0,
+        "totalValue": -20.905672079,
+        "adlScoreBucket": 2,
+        "orderTypeName": "TYPE_FUTURES_POSITION",
+        "orderModeName": "MODE_SELL",
+        "marginTypeName": "FUTURES_MARGIN_CROSS",
+        "currentLeverage": 0.1113820366,
+        "averageFillPrice": 0,
+        "filledSize": 0,
+        "takeProfitOrder": null,
+        "stopLossOrder": null,
+        "positionId": "LTCPFC-USD|SHORT",
+        "positionMode": "HEDGE",
+        "positionDirection": "SHORT",
+        "settleWithNonUSDAsset": "USDT"
+    }
+  ]
 }
 ```
 
@@ -3196,7 +3540,10 @@ All futures positions will be pushed via this topic once the position changes.
     "avgFillPrice": 0,
     "settleWithNonUSDAsset": "BTC",
     "takeProfitOrder": null,
-    "stopLossOrder": null
+    "stopLossOrder": null,
+    "positionId": "BTCPFC-USD|SHORT",
+    "positionMode": null,
+    "positionDirection": null,
   }]
 }
 ```
@@ -3241,5 +3588,8 @@ All futures positions will be pushed via this topic once the position changes. I
 | settleWithNonUSDAsset   | string  | Yes      |                                              |
 | takeProfitOrder        | TakeProfitOrder object | No | Take profit order info               |
 | stopLossOrder          | StopLossOrder object   | No | Stop loss order info                 |
+| positionMode            | string  | Yes      | Position mode<br/>ONE_WAY or HEDGE           |
+| positionDirection       | string  | Yes      | Position direction                           |
+| positionId              | string  | Yes      | Position id                                  |
 
 </section>
