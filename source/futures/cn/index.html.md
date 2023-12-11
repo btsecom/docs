@@ -13,7 +13,7 @@ headingLevel: 2
 
 # 更新日志
 
-## 版本 2.6.15 (2023年11月7日)
+## 版本 2.6.15 (2023年11月8日)
 
 * 新增新的API[`查询仓位模式`](#0f26e5590e)和[`切換仓位模式`](#4a3f9ffc40)
 * 关于订单和仓位的API新增了新的栏位或参数:仓位ID(positionId)、仓位方向(positionDirection)、仓位模式(positionMode)。
