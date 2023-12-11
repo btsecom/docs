@@ -1981,6 +1981,7 @@ Query risk limit for the specified market
   "riskLimit": 0
 }
 ```
+
 > Request (When positionMode is `HEDGE`)
 
 ```json
