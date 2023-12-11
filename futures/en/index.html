@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-2-6-15-8th-november-2023" class="toc-h2 toc-link" data-title="Version 2.6.15 (8th November 2023)">Version 2.6.15 (8th November 2023)</a>
+                  </li>
+                  <li>
                     <a href="#version-2-6-14-7th-november-2023" class="toc-h2 toc-link" data-title="Version 2.6.14 (7th November 2023)">Version 2.6.14 (7th November 2023)</a>
                   </li>
                   <li>
@@ -449,6 +452,12 @@
                   <li>
                     <a href="#bind-tp-sl" class="toc-h2 toc-link" data-title="Bind TP/SL">Bind TP/SL</a>
                   </li>
+                  <li>
+                    <a href="#query-position-mode" class="toc-h2 toc-link" data-title="Query Position Mode">Query Position Mode</a>
+                  </li>
+                  <li>
+                    <a href="#change-position-mode" class="toc-h2 toc-link" data-title="Change Position Mode">Change Position Mode</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -524,7 +533,12 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-2-6-14-7th-november-2023'>Version 2.6.14 (7th November 2023)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-2-6-15-8th-november-2023'>Version 2.6.15 (8th November 2023)</h2>
+<ul>
+<li>Add API for querying <a href="#query-position-mode"><code>positionMode</code></a> and changing <a href="#change-position-mode"><code>positionMode</code></a></li>
+<li>API related to order and position have added the fields or parameter: positionMode and positionId and positionDirection</li>
+</ul>
+<h2 id='version-2-6-14-7th-november-2023'>Version 2.6.14 (7th November 2023)</h2>
 <ul>
 <li>Update fundingRate description in <a href="#market-summary"><code>market-summary</code></a></li>
 <li>Add listFullAttributes parameter in <a href="#market-summary"><code>market-summary</code></a></li>
@@ -1050,6 +1064,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <li>110: FUTURES_FUNDING</li>
 <li>123: AMEND_ORDER = Order amended</li>
 <li>124: UNFREEZE_SUCCESSFUL</li>
+<li>129: FUTURES_CONFIG_MODE_CHANGE</li>
 <li>300: ERROR_MAX_ORDER_SIZE_EXCEEDED</li>
 <li>301: ERROR_INVALID_ORDER_SIZE</li>
 <li>302: ERROR_INVALID_ORDER_PRICE</li>
@@ -1994,6 +2009,29 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
+<p>Request (create hedge mode long position <code>MARKET</code> order)</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MARKET"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HEDGE"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Request (create hedge mode short position <code>MARKET</code> reduce order)</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MARKET"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"reduceOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HEDGE"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
 <p>Response (general)</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
@@ -2017,6 +2055,9 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
     </span><span class="nl">"originalSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="nl">"remainingSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ONE_WAY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionDirection"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC-USD"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
@@ -2045,6 +2086,9 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
     </span><span class="nl">"originalSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="nl">"remainingSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ONE_WAY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionDirection"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC-USD"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
@@ -2067,6 +2111,40 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
     </span><span class="nl">"originalSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="nl">"remainingSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ONE_WAY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionDirection"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC-USD"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Response (for hedge mode order)</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">21000.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"abb3f457-fdc0-4bdb-a46b-8e4aa49a57c2"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1660558270207</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"trigger"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"deviation"</span><span class="p">:</span><span class="w"> </span><span class="mf">100.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mf">100.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"avgFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">21000.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"fillSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"originalSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"remainingSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HEDGE"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionDirection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LONG"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC-USD|LONG"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
@@ -2153,7 +2231,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>reduceOnly</td>
 <td>boolean</td>
 <td>No</td>
-<td>Boolean to indicate if this is a reduce only order.</td>
+<td>Boolean to indicate if this is a reduce only order, if in hedge mode, it is used to reduce the specified position, ex: sell to reduce long position, buy to reduce short position.</td>
 </tr>
 <tr>
 <td>clOrderID</td>
@@ -2190,6 +2268,12 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>string</td>
 <td>No</td>
 <td>For creating order with stop loss order. Valid options: <code>markPrice</code> (default) or <code>lastPrice</code></td>
+</tr>
+<tr>
+<td>positionMode</td>
+<td>string</td>
+<td>No</td>
+<td>For creating order and wanting to specify the positionMode. Valid options: <code>ONE_WAY</code> (default) or <code>HEDGE</code></td>
 </tr>
 </tbody></table>
 <h3 id='response-content-7'>Response Content</h3>
@@ -2259,7 +2343,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>status</td>
 <td>long</td>
 <td>Yes</td>
-<td>Order status<br/>    2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed</td>
+<td>Order status<br/> 2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed</td>
 </tr>
 <tr>
 <td>time_in_force</td>
@@ -2321,6 +2405,24 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>Yes</td>
 <td>Original order size</td>
 </tr>
+<tr>
+<td>positionMode</td>
+<td>string</td>
+<td>Yes</td>
+<td>Position mode<br/>ONE_WAY or HEDGE</td>
+</tr>
+<tr>
+<td>positionDirection</td>
+<td>string</td>
+<td>Yes</td>
+<td>Position direction</td>
+</tr>
+<tr>
+<td>positionId</td>
+<td>string</td>
+<td>Yes</td>
+<td>The current order belongs to the id of position.</td>
+</tr>
 </tbody></table>
 <h2 id='create-new-algo-order'>Create new algo order</h2>
 <blockquote>
@@ -2360,6 +2462,9 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
     </span><span class="nl">"originalSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="nl">"remainingSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ONE_WAY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionDirection"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC-USD"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
@@ -2425,6 +2530,12 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>double</td>
 <td>No</td>
 <td>How many percent of the order is to be displayed on the orderbook.</td>
+</tr>
+<tr>
+<td>positionMode</td>
+<td>string</td>
+<td>No</td>
+<td>For creating order and wanting to specify the positionMode. Valid options: <code>ONE_WAY</code> (default) or <code>HEDGE</code></td>
 </tr>
 </tbody></table>
 <h3 id='response-content-8'>Response Content</h3>
@@ -2494,7 +2605,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>status</td>
 <td>long</td>
 <td>Yes</td>
-<td>Order status<br/>    2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed</td>
+<td>Order status<br/> 2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed</td>
 </tr>
 <tr>
 <td>time_in_force</td>
@@ -2555,6 +2666,24 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>double</td>
 <td>Yes</td>
 <td>Original order size</td>
+</tr>
+<tr>
+<td>positionMode</td>
+<td>string</td>
+<td>Yes</td>
+<td>Position mode<br/>ONE_WAY or HEDGE</td>
+</tr>
+<tr>
+<td>positionDirection</td>
+<td>string</td>
+<td>Yes</td>
+<td>Position direction</td>
+</tr>
+<tr>
+<td>positionId</td>
+<td>string</td>
+<td>Yes</td>
+<td>The current order belongs to the id of position.</td>
 </tr>
 </tbody></table>
 <h2 id='query-order'>Query Order</h2>
@@ -2851,6 +2980,9 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
     </span><span class="nl">"originalSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="nl">"remainingSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ONE_WAY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionDirection"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC-USD"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
@@ -2983,7 +3115,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>status</td>
 <td>long</td>
 <td>Yes</td>
-<td>Order status<br/>    2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed</td>
+<td>Order status<br/> 2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed</td>
 </tr>
 <tr>
 <td>time_in_force</td>
@@ -3045,6 +3177,24 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>Yes</td>
 <td>Original order size</td>
 </tr>
+<tr>
+<td>positionMode</td>
+<td>string</td>
+<td>Yes</td>
+<td>Position mode<br/>ONE_WAY or HEDGE</td>
+</tr>
+<tr>
+<td>positionDirection</td>
+<td>string</td>
+<td>Yes</td>
+<td>Position direction</td>
+</tr>
+<tr>
+<td>positionId</td>
+<td>string</td>
+<td>Yes</td>
+<td>The current order belongs to the id of position.</td>
+</tr>
 </tbody></table>
 <h2 id='cancel-order'>Cancel Order</h2>
 <blockquote>
@@ -3076,6 +3226,9 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
     </span><span class="nl">"originalSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="nl">"remainingSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ONE_WAY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionDirection"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC-USD"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
@@ -3178,7 +3331,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>status</td>
 <td>long</td>
 <td>Yes</td>
-<td>Order status<br/>    2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed</td>
+<td>Order status<br/> 2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed</td>
 </tr>
 <tr>
 <td>time_in_force</td>
@@ -3239,6 +3392,24 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>double</td>
 <td>Yes</td>
 <td>Original order size</td>
+</tr>
+<tr>
+<td>positionMode</td>
+<td>string</td>
+<td>Yes</td>
+<td>Position mode<br/>ONE_WAY or HEDGE</td>
+</tr>
+<tr>
+<td>positionDirection</td>
+<td>string</td>
+<td>Yes</td>
+<td>Position direction</td>
+</tr>
+<tr>
+<td>positionId</td>
+<td>string</td>
+<td>Yes</td>
+<td>The current order belongs to the id of position.</td>
 </tr>
 </tbody></table>
 <h2 id='dead-man-39-s-switch-cancel-all-after'>Dead Man&#39;s Switch (Cancel All After)</h2>
@@ -3310,6 +3481,9 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
     </span><span class="nl">"orderState"</span><span class="p">:</span><span class="w"> </span><span class="s2">"STATUS_ACTIVE"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"triggerUseLastPrice"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="nl">"avgFilledPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ONE_WAY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionDirection"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC-USD"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"timeInForce"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"averageFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"takeProfitOrder"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -3566,6 +3740,24 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>Yes</td>
 <td>Whether it is an order to close this position</td>
 </tr>
+<tr>
+<td>positionMode</td>
+<td>string</td>
+<td>Yes</td>
+<td>Position mode<br/>ONE_WAY or HEDGE</td>
+</tr>
+<tr>
+<td>positionDirection</td>
+<td>string</td>
+<td>Yes</td>
+<td>Position direction</td>
+</tr>
+<tr>
+<td>positionId</td>
+<td>string</td>
+<td>Yes</td>
+<td>The current order belongs to the id of position.</td>
+</tr>
 </tbody></table>
 <h2 id='query-trades-fills-2'>Query Trades Fills</h2>
 <blockquote>
@@ -3600,6 +3792,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
     </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"triggerType"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nl">"wallet"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"tradeId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
@@ -3826,12 +4019,18 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>Yes</td>
 <td>Not used in Spot</td>
 </tr>
+<tr>
+<td>positionId</td>
+<td>string</td>
+<td>Yes</td>
+<td>The current order belongs to the id of position.</td>
+</tr>
 </tbody></table>
 <h2 id='query-position'>Query Position</h2>
 <blockquote>
 <p>Request</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>/api/v2.1/user/positions?symbol=BTCPFC
+<div class="highlight"><pre class="highlight plaintext"><code>/api/v2.1/user/positions
 </code></pre></div>
 <blockquote>
 <p>Response</p>
@@ -3865,8 +4064,35 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
         </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SELL"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">27000.0</span><span class="p">,</span><span class="w">
         </span><span class="nl">"triggerUseLastPrice"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ONE_WAY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionDirection"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC-USD"</span><span class="w">
+  </span><span class="p">},{</span><span class="w">
+     </span><span class="nl">"marginType"</span><span class="p">:</span><span class="w"> </span><span class="mi">91</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"entryPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">1631.106666667</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"markPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">1630.398947255</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETHPFC"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"orderValue"</span><span class="p">:</span><span class="w"> </span><span class="mf">48.9119684176</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"settleWithAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"unrealizedProfitLoss"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.02123158</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"totalMaintenanceMargin"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.254871114</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"liquidationPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"isolatedLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"adlScoreBucket"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"liquidationInProgress"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"takeProfitOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"stopLossOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HEDGE"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"positionDirection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LONG"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETHPFC-USD|LONG"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"currentLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0340349245</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"takeProfitOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"stopLossOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+     </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <p><code>GET /api/v2.1/user/positions</code></p>
@@ -4011,6 +4237,24 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>No</td>
 <td>Stop loss order info</td>
 </tr>
+<tr>
+<td>positionMode</td>
+<td>string</td>
+<td>Yes</td>
+<td>Position mode<br/>ONE_WAY or HEDGE</td>
+</tr>
+<tr>
+<td>positionDirection</td>
+<td>string</td>
+<td>Yes</td>
+<td>Position direction</td>
+</tr>
+<tr>
+<td>positionId</td>
+<td>string</td>
+<td>Yes</td>
+<td>Position id</td>
+</tr>
 </tbody></table>
 <h2 id='close-position'>Close Position</h2>
 <blockquote>
@@ -4020,6 +4264,16 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
   </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MARKET"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Request(For hedge mode position)</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MARKET"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC-USD|LONG"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
@@ -4046,6 +4300,9 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
     </span><span class="nl">"originalSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="nl">"remainingSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ONE_WAY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionDirection"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
@@ -4085,6 +4342,12 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>boolean</td>
 <td>No</td>
 <td>Boolean to indicate if this is a post only order. For post only orders, traders are charged maker fees</td>
+</tr>
+<tr>
+<td>positionId</td>
+<td>string</td>
+<td>No</td>
+<td>The position ID that you want to close. Mandatory when positionMode is <code>HEDGE</code></td>
 </tr>
 <tr>
 <td>useNewSymbolNaming</td>
@@ -4160,7 +4423,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>status</td>
 <td>long</td>
 <td>Yes</td>
-<td>Order status<br/>    2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed</td>
+<td>Order status<br/> 2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed</td>
 </tr>
 <tr>
 <td>time_in_force</td>
@@ -4221,6 +4484,24 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>double</td>
 <td>Yes</td>
 <td>Original order size</td>
+</tr>
+<tr>
+<td>positionMode</td>
+<td>string</td>
+<td>Yes</td>
+<td>Position mode<br/>ONE_WAY or HEDGE</td>
+</tr>
+<tr>
+<td>positionDirection</td>
+<td>string</td>
+<td>Yes</td>
+<td>Position direction</td>
+</tr>
+<tr>
+<td>positionId</td>
+<td>string</td>
+<td>Yes</td>
+<td>Position id</td>
 </tr>
 </tbody></table>
 <h2 id='get-risk-limit'>Get Risk Limit</h2>
@@ -4288,6 +4569,15 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
+<p>Request (When positionMode is <code>HEDGE</code>)</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"riskLimit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HEDGE"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
 <p>Response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
@@ -4321,6 +4611,12 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>long</td>
 <td>Yes</td>
 <td>Risk limit value now in position size, but it will be changed to USD value in the future.</td>
+</tr>
+<tr>
+<td>positionMode</td>
+<td>string</td>
+<td>no</td>
+<td>ONE_WAY(default) or HEDGE. Mandatory when positionMode is <code>HEDGE</code></td>
 </tr>
 <tr>
 <td>useNewSymbolNaming</td>
@@ -4379,6 +4675,15 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
+<p>Request (When positionMode is <code>HEDGE</code>)</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"leverage"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HEDGE"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
 <p>Response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
@@ -4418,6 +4723,12 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>boolean</td>
 <td>No</td>
 <td>True if use new futures market name in symbol default to False</td>
+</tr>
+<tr>
+<td>positionMode</td>
+<td>string</td>
+<td>no</td>
+<td>ONE_WAY(default) or HEDGE. Mandatory when positionMode is <code>HEDGE</code></td>
 </tr>
 </tbody></table>
 <h3 id='response-content-19'>Response Content</h3>
@@ -4520,6 +4831,15 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
+<p>Request (When positionMode is <code>HEDGE</code>)</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC-USD|LONG"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
 <p>Response (only available when an error occurs)</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
@@ -4557,6 +4877,12 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>boolean</td>
 <td>No</td>
 <td>True to use new futures market name in symbol, default to False</td>
+</tr>
+<tr>
+<td>positionId</td>
+<td>string</td>
+<td>No</td>
+<td>The position ID that you want to set. Mandatory when positionMode is <code>HEDGE</code></td>
 </tr>
 </tbody></table>
 <h3 id='response-content-21'>Response Content</h3>
@@ -4656,7 +4982,6 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-PERP"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"side"</span><span class="p">:</span><span class="s2">"SELL"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"takeProfitPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">31000</span><span class="p">,</span><span class="w">
     </span><span class="nl">"takeProfitTrigger"</span><span class="p">:</span><span class="w"> </span><span class="s2">"markPrice"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"stopLossPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">22000</span><span class="p">,</span><span class="w">
@@ -4669,7 +4994,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
         </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-PERP"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">77</span><span class="p">,</span><span class="w">
         </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
         </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SELL"</span><span class="p">,</span><span class="w">
@@ -4688,6 +5013,9 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
         </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
         </span><span class="nl">"remainingSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">100.0</span><span class="p">,</span><span class="w">
         </span><span class="nl">"orderDetailType"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ONE_WAY"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"positionDirection"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC-USD"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
@@ -4714,7 +5042,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>side</td>
 <td>string</td>
 <td>yes</td>
-<td>&quot;BUY&quot; or &quot;SELL&quot; for TP/SL order</td>
+<td>&quot;BUY&quot; or &quot;SELL&quot; Mandatory when positionMode is <code>HEDGE</code>, in hedge mode, it is used to clsoe the specified position, ex: sell to close long position, buy to close short position</td>
 </tr>
 <tr>
 <td>takeProfitPrice</td>
@@ -4739,6 +5067,12 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>string</td>
 <td>No</td>
 <td>For creating order with stop loss order. Valid options: <code>markPrice</code> (default) or <code>lastPrice</code></td>
+</tr>
+<tr>
+<td>positionMode</td>
+<td>string</td>
+<td>no</td>
+<td>ONE_WAY(default) or HEDGE. Mandatory when positionMode is <code>HEDGE</code></td>
 </tr>
 </tbody></table>
 <h3 id='response-content-23'>Response Content</h3>
@@ -4808,7 +5142,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>status</td>
 <td>long</td>
 <td>Yes</td>
-<td>Order status<br/>    2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed</td>
+<td>Order status<br/> 2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed</td>
 </tr>
 <tr>
 <td>time_in_force</td>
@@ -4870,6 +5204,154 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>Yes</td>
 <td>Original order size</td>
 </tr>
+<tr>
+<td>positionMode</td>
+<td>string</td>
+<td>Yes</td>
+<td>Position mode<br/>ONE_WAY or HEDGE</td>
+</tr>
+<tr>
+<td>positionDirection</td>
+<td>string</td>
+<td>Yes</td>
+<td>Position direction</td>
+</tr>
+<tr>
+<td>positionId</td>
+<td>string</td>
+<td>Yes</td>
+<td>Position id</td>
+</tr>
+</tbody></table>
+<h2 id='query-position-mode'>Query Position Mode</h2>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-PERP"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HEDGE"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-PERP"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ONE_WAY"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<p><code>GET /api/v2.1/position_mode</code></p>
+
+<p>Retrieve user&#39;s position mode</p>
+<h3 id='request-parameters-24'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>No</td>
+<td>Market symbol</td>
+</tr>
+</tbody></table>
+<h3 id='response-content-24'>Response Content</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Yes</td>
+<td>Market symbol</td>
+</tr>
+<tr>
+<td>positionMode</td>
+<td>string</td>
+<td>Yes</td>
+<td>ONE_WAY or HEDGE</td>
+</tr>
+</tbody></table>
+<h2 id='change-position-mode'>Change Position Mode</h2>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-PERP"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HEDGE"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><code>POST /api/v2.1/position_mode</code></p>
+
+<p>Changes position mode</p>
+<h3 id='request-parameters-25'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Yes</td>
+<td>Market symbol</td>
+</tr>
+<tr>
+<td>positionMode</td>
+<td>string</td>
+<td>Yes</td>
+<td>ONE_WAY or HEDGE</td>
+</tr>
+</tbody></table>
+<h3 id='response-content-25'>Response Content</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Yes</td>
+<td>Markey symbol</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>long</td>
+<td>No</td>
+<td>Timestamp where position mode was set</td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>No</td>
+<td>Status of the request. Values are: <br>20: Success</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>No</td>
+<td>Value will be 129 indicating that type is <code>Futures Config Mode Change</code></td>
+</tr>
+<tr>
+<td>message</td>
+<td>string</td>
+<td>No</td>
+<td>Message</td>
+</tr>
 </tbody></table>
 <h1 id='wallet-endpoints'>Wallet Endpoints</h1><h2 id='query-wallet-balance'>Query Wallet Balance</h2>
 <blockquote>
@@ -4910,7 +5392,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <p><code>GET /api/v2.1/user/wallet</code></p>
 
 <p>Query user&#39;s wallet balance. Requires <code>Read</code> permissions on the API key.</p>
-<h3 id='request-parameters-24'>Request Parameters</h3>
+<h3 id='request-parameters-26'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4932,7 +5414,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>True to return futures market name in the new format, default to False</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-24'>Response Content</h3><h4 id='wallet'>Wallet</h4>
+<h3 id='response-content-26'>Response Content</h3><h4 id='wallet'>Wallet</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5078,7 +5560,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <p><code>GET /api/v2.1/user/wallet_history</code></p>
 
 <p>Get user&#39;s wallet history records on the futures wallet</p>
-<h3 id='request-parameters-25'>Request Parameters</h3>
+<h3 id='request-parameters-27'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5118,7 +5600,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>True to return futures market name in the new format, default to False</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-25'>Response Content</h3>
+<h3 id='response-content-27'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5214,7 +5696,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <p><code>GET /api/v2.1/user/margin</code></p>
 
 <p>Gets margin information for the specified wallet so that users can know which wallet they are currently using in the market.</p>
-<h3 id='request-parameters-26'>Request Parameters</h3>
+<h3 id='request-parameters-28'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5230,7 +5712,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>Market symbol</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-26'>Response Content</h3><h4 id='wallet-2'>Wallet</h4>
+<h3 id='response-content-28'>Response Content</h3><h4 id='wallet-2'>Wallet</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5411,7 +5893,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <p><code>POST /api/v2.1/user/wallet/transfer</code></p>
 
 <p>Transfers funds between user&#39;s wallet. User can specify the source and target wallet to transfer funds</p>
-<h3 id='request-parameters-27'>Request Parameters</h3><h4 id='wallet-request'>Wallet Request</h4>
+<h3 id='request-parameters-29'>Request Parameters</h3><h4 id='wallet-request'>Wallet Request</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5479,7 +5961,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>The value of the balance is to be transferred, example: 10</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-27'>Response Content</h3><h4 id='wallet-3'>Wallet</h4>
+<h3 id='response-content-29'>Response Content</h3><h4 id='wallet-3'>Wallet</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5607,7 +6089,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <p>Transfers funds between user and sub-account wallet. User can specify the source and target wallet to transfer funds</p>
 
 <p>, <code>Wallet</code> permission is required. To get supported currency list please check <a href="#query-available-currency-list-for-wallet-action">Available currency list for action</a></p>
-<h3 id='request-parameters-28'>Request Parameters</h3><h4 id='wallet-request-2'>Wallet Request</h4>
+<h3 id='request-parameters-30'>Request Parameters</h3><h4 id='wallet-request-2'>Wallet Request</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5687,7 +6169,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>The value of the balance is to be transferred, example: 10</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-28'>Response Content</h3><h4 id='wallet-4'>Wallet</h4>
+<h3 id='response-content-30'>Response Content</h3><h4 id='wallet-4'>Wallet</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5812,7 +6294,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <li><code>symbol</code> indicates the market symbol</li>
 <li><code>grouping</code> indicates the grouping granularity. Valid values are 0-8.</li>
 </ul>
-<h3 id='response-content-29'>Response Content</h3><h4 id='orderbook-object'>Orderbook Object</h4>
+<h3 id='response-content-31'>Response Content</h3><h4 id='orderbook-object'>Orderbook Object</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5973,7 +6455,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <p>To ensure that the updates are received in sequence, <code>seqNum</code> indicates the current sequence and <code>prevSeqNum</code> refers to the packet before. <code>seqNum</code> will always be one after the <code>prevSeqNum</code>. If the sequence is out of order, you will need to unsubscribe and re-subscribe to the topic again.</p>
 
 <p>Also if <a href="https://en.wikipedia.org/wiki/Order_book#Crossed_book">crossed orderbook</a> ever occurs when the best bid higher or equal to the best ask, please unsubscribe and re-subscribe to the topic again.</p>
-<h3 id='response-content-30'>Response Content</h3><h4 id='orderbook-object-2'>Orderbook Object</h4>
+<h3 id='response-content-32'>Response Content</h3><h4 id='orderbook-object-2'>Orderbook Object</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -6128,7 +6610,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>To subscribe to a websocket public trade fill</p>
-<h3 id='request-parameters-29'>Request Parameters</h3>
+<h3 id='request-parameters-31'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -6150,7 +6632,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>Topics to subscribe to.</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-31'>Response Content</h3>
+<h3 id='response-content-33'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -6201,7 +6683,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>Subscribe to recent trade feed for a market. The topic will be <code>tradeHistoryApi:&lt;market&gt;</code> where <code>&lt;market&gt;</code> is the market symbol.</p>
-<h3 id='response-content-32'>Response Content</h3><h4 id='tradehistory-object'>TradeHistory Object</h4>
+<h3 id='response-content-34'>Response Content</h3><h4 id='tradehistory-object'>TradeHistory Object</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -6291,7 +6773,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
   "op":"authKeyExpires",
   "args":["4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x", "1624985375123", "c410d38c681579adb335885800cff24c66171b7cc8376cfe43da1408c581748156b89bcc5a115bb496413bda481139fb"]
 }
-</code></pre></div><h3 id='request-parameters-30'>Request Parameters</h3>
+</code></pre></div><h3 id='request-parameters-32'>Request Parameters</h3>
 <p>Below details the arguments needed to be sent in.</p>
 
 <table><thead>
@@ -6363,6 +6845,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
       </span><span class="nl">"remainingSize"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;Remaining size on the order&gt;"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;Time where this order is valid&gt;"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"txType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"STOP | TAKE_PROFIT"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC-USD"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Trade Trigger Price"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
@@ -6371,7 +6854,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 
 </span></code></pre></div>
 <p>Receive trade notifications by subscribing to the topic <code>notificationApiV2</code>. The websocket feed will push trade level notifications to the subscriber. If topic is subscribed without being authenticated, no messages will be sent.</p>
-<h3 id='response-content-33'>Response Content</h3>
+<h3 id='response-content-35'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -6488,6 +6971,12 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>Yes</td>
 <td>Deviation percentage. Only for Algo orders</td>
 </tr>
+<tr>
+<td>positionId</td>
+<td>string</td>
+<td>Yes</td>
+<td>Position ID</td>
+</tr>
 </tbody></table>
 <h2 id='user-trade-fills'>User Trade Fills</h2>
 <blockquote>
@@ -6525,7 +7014,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 
 </span></code></pre></div>
 <p>When a trade has been transacted, this topic will send the trade information back to the subscriber.</p>
-<h3 id='response-content-34'>Response Content</h3>
+<h3 id='response-content-36'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -6671,6 +7160,9 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
     </span><span class="nl">"marginTypeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FUTURES_MARGIN_CROSS"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"currentLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.02</span><span class="p">,</span><span class="w">
     </span><span class="nl">"avgFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC-USD|SHORT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HEDGE"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionDirection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SHORT"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"settleWithNonUSDAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"takeProfitOrder"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4820b20a-e41b-4273-b3ad-4b19920aeeb5"</span><span class="p">,</span><span class="w">
@@ -6684,11 +7176,50 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
         </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">27000.0</span><span class="p">,</span><span class="w">
         </span><span class="nl">"triggerUseLastPrice"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">}]</span><span class="w">
+  </span><span class="p">},{</span><span class="w">
+    </span><span class="nl">"requestId"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"btse"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"userCurrency"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"marketName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LTCPFC-USD"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">90</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderMode"</span><span class="p">:</span><span class="w"> </span><span class="mi">83</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"originalAmount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.01</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"maxPriceHeld"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"pegPriceMin"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"maxStealthDisplayAmount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"sellexchangeRate"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"closeOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"liquidationInProgress"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"marginType"</span><span class="p">:</span><span class="w"> </span><span class="mi">91</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"entryPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">69.9</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"liquidationPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">29684.3743872669</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"markedPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">70.062346733</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"unrealizedProfitLoss"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.04870402</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalMaintenanceMargin"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.319484301</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalContracts"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"isolatedLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalFees"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalValue"</span><span class="p">:</span><span class="w"> </span><span class="mf">-21.01870402</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"adlScoreBucket"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"booleanVar1"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderTypeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TYPE_FUTURES_POSITION"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderModeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MODE_SELL"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"marginTypeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FUTURES_MARGIN_CROSS"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currentLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1116510969</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"takeProfitOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stopLossOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"settleWithNonUSDAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LTCPFC-USD|SHORT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HEDGE"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionDirection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SHORT"</span><span class="p">,</span><span class="w">
+</span><span class="p">}]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>All futures positions will be pushed via this topic once the position changes.</p>
-<h3 id='response-content-35'>Response Content</h3>
+<h3 id='response-content-37'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -6901,6 +7432,24 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>No</td>
 <td>Stop loss order info</td>
 </tr>
+<tr>
+<td>positionMode</td>
+<td>string</td>
+<td>Yes</td>
+<td>Position mode<br/>ONE_WAY or HEDGE</td>
+</tr>
+<tr>
+<td>positionDirection</td>
+<td>string</td>
+<td>Yes</td>
+<td>Position direction</td>
+</tr>
+<tr>
+<td>positionId</td>
+<td>string</td>
+<td>Yes</td>
+<td>Position id</td>
+</tr>
 </tbody></table>
 <h2 id='positions'>Positions</h2>
 <blockquote>
@@ -6917,6 +7466,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"positions"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+    </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nl">"requestId"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"btse"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"marketName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC-USD"</span><span class="p">,</span><span class="w">
@@ -6961,7 +7511,47 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
         </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">27000.0</span><span class="p">,</span><span class="w">
         </span><span class="nl">"triggerUseLastPrice"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">}]</span><span class="w">
+  </span><span class="p">},{</span><span class="w">
+        </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"requestId"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"btse"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"marketName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LTCPFC-USD"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">90</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"orderMode"</span><span class="p">:</span><span class="w"> </span><span class="mi">83</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"originalAmount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.01</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"maxPriceHeld"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"pegPriceMin"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"maxStealthDisplayAmount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"sellexchangeRate"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"closeOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"liquidationInProgress"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"marginType"</span><span class="p">:</span><span class="w"> </span><span class="mi">91</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"entryPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">69.9</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"liquidationPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">29682.415101008</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"markedPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">69.685573595</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"unrealizedProfitLoss"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.06432792</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"totalMaintenanceMargin"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.318744</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"totalContracts"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"isolatedLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"totalFees"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"totalValue"</span><span class="p">:</span><span class="w"> </span><span class="mf">-20.905672079</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"adlScoreBucket"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"orderTypeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TYPE_FUTURES_POSITION"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"orderModeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MODE_SELL"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"marginTypeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FUTURES_MARGIN_CROSS"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"currentLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1113820366</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"averageFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"filledSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"takeProfitOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"stopLossOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LTCPFC-USD|SHORT"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HEDGE"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"positionDirection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SHORT"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"settleWithNonUSDAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
@@ -7003,12 +7593,15 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
     </span><span class="nl">"avgFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"settleWithNonUSDAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"takeProfitOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"stopLossOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="nl">"stopLossOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC-USD|SHORT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionDirection"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="p">}]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>All futures positions will be pushed via this topic once the position changes. If the user reduces the position to 0, the topic will push data with the totalContracts value of 0 once.</p>
-<h3 id='response-content-36'>Response Content</h3>
+<h3 id='response-content-38'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -7220,6 +7813,24 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>StopLossOrder object</td>
 <td>No</td>
 <td>Stop loss order info</td>
+</tr>
+<tr>
+<td>positionMode</td>
+<td>string</td>
+<td>Yes</td>
+<td>Position mode<br/>ONE_WAY or HEDGE</td>
+</tr>
+<tr>
+<td>positionDirection</td>
+<td>string</td>
+<td>Yes</td>
+<td>Position direction</td>
+</tr>
+<tr>
+<td>positionId</td>
+<td>string</td>
+<td>Yes</td>
+<td>Position id</td>
 </tr>
 </tbody></table>
 

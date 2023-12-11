@@ -234,6 +234,9 @@
             <a href="#185368440e" class="toc-h1 toc-link" data-title="更新日志">更新日志</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2-6-15-2023-11-7" class="toc-h2 toc-link" data-title="版本 2.6.15 (2023年11月7日)">版本 2.6.15 (2023年11月7日)</a>
+                  </li>
+                  <li>
                     <a href="#2-6-14-2023-11-7" class="toc-h2 toc-link" data-title="版本 2.6.14 (2023年11月7日)">版本 2.6.14 (2023年11月7日)</a>
                   </li>
                   <li>
@@ -449,6 +452,12 @@
                   <li>
                     <a href="#3a59fc75d3" class="toc-h2 toc-link" data-title="绑定止盈/止损">绑定止盈/止损</a>
                   </li>
+                  <li>
+                    <a href="#0f26e5590e" class="toc-h2 toc-link" data-title="查询仓位模式">查询仓位模式</a>
+                  </li>
+                  <li>
+                    <a href="#4a3f9ffc40" class="toc-h2 toc-link" data-title="更改仓位模式">更改仓位模式</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -524,7 +533,12 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='185368440e'>更新日志</h1><h2 id='2-6-14-2023-11-7'>版本 2.6.14 (2023年11月7日)</h2>
+        <h1 id='185368440e'>更新日志</h1><h2 id='2-6-15-2023-11-7'>版本 2.6.15 (2023年11月7日)</h2>
+<ul>
+<li>新增新的API<a href="#查询仓位模式"><code>查询仓位模式</code></a>和<a href="#更改仓位模式"><code>切換仓位模式</code></a></li>
+<li>关于订单和仓位的API新增了新的栏位或参数:仓位ID(positionId)、仓位方向(positionDirection)、仓位模式(positionMode)。</li>
+</ul>
+<h2 id='2-6-14-2023-11-7'>版本 2.6.14 (2023年11月7日)</h2>
 <ul>
 <li>更新 <a href="#7335b2436c">市场摘要</a> 中的 资金费率（fundingRate） 描述</li>
 <li>在 <a href="#7335b2436c">市场摘要</a> 中添加 listFullAttributes 参数</li>
@@ -1050,6 +1064,7 @@
 <li>110: FUTURES_FUNDING = 期货资金</li>
 <li>123: AMEND_ORDER = 订单已修改</li>
 <li>124: UNFREEZE_SUCCESSFUL = 解冻成功</li>
+<li>129: FUTURES_CONFIG_MODE_CHANGE = 期货仓位模式更改</li>
 <li>300: ERROR_MAX_ORDER_SIZE_EXCEEDED = 超过最大订单大小错误</li>
 <li>301: ERROR_INVALID_ORDER_SIZE = 无效订单大小错误</li>
 <li>302: ERROR_INVALID_ORDER_PRICE = 无效订单价格错误</li>
@@ -1994,6 +2009,29 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
+<p>请求 (创建买侧双向持仓<code>市价</code>订单)</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MARKET"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HEDGE"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>请求 (创建卖侧双向持仓<code>市价</code>减仓订单)</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MARKET"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"reduceOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HEDGE"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
 <p>响应（通用）</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
@@ -2017,6 +2055,9 @@
     </span><span class="nl">"originalSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="nl">"remainingSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ONE_WAY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionDirection"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC-USD"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
@@ -2045,6 +2086,9 @@
     </span><span class="nl">"originalSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="nl">"remainingSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ONE_WAY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionDirection"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC-USD"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
@@ -2067,6 +2111,40 @@
     </span><span class="nl">"originalSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="nl">"remainingSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ONE_WAY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionDirection"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC-USD"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>响应（用于双向持仓订单）</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">21000.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"abb3f457-fdc0-4bdb-a46b-8e4aa49a57c2"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1660558270207</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"trigger"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"deviation"</span><span class="p">:</span><span class="w"> </span><span class="mf">100.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mf">100.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"avgFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">21000.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"fillSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"originalSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"remainingSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HEDGE"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionDirection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LONG"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC-USD|LONG"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
@@ -2105,7 +2183,7 @@
 <td>side</td>
 <td>string</td>
 <td>Yes</td>
-<td>&#39;BUY&#39; 或 &#39;SELL&#39;</td>
+<td><code>BUY</code> 或 <code>SELL</code></td>
 </tr>
 <tr>
 <td>time_in_force</td>
@@ -2147,13 +2225,13 @@
 <td>postOnly</td>
 <td>boolean</td>
 <td>No</td>
-<td>布尔值，表示这是否仅为发布订单。对于仅发布订单，交易员将收取制造商费用</td>
+<td>布尔值，表示这是否只做Maker(Post only) 订单，交易者将支付Maker手续费</td>
 </tr>
 <tr>
 <td>reduceOnly</td>
 <td>boolean</td>
 <td>No</td>
-<td>布尔值，表示这是否只是减少订单。</td>
+<td>布尔值，将这笔订单设置为只减仓, 在双向持仓时，买方<code>BUY</code>减少空头仓位，卖方<code>SELL</code>则减少多头仓位</td>
 </tr>
 <tr>
 <td>clOrderID</td>
@@ -2190,6 +2268,12 @@
 <td>string</td>
 <td>No</td>
 <td>用于创建带有止损订单的订单。有效选项：<code>标记价格</code>（默认）或<code>最新价格</code></td>
+</tr>
+<tr>
+<td>positionMode</td>
+<td>string</td>
+<td>No</td>
+<td>用于创建指定仓位模式订单。有效选项：单向持仓<code>ONE_WAY</code>（默认）或 双向持仓<code>HEDGE</code></td>
 </tr>
 </tbody></table>
 <h3 id='05a22d5a79-7'>响应内容</h3>
@@ -2235,7 +2319,7 @@
 <td>postOnly</td>
 <td>boolean</td>
 <td>Yes</td>
-<td>表明订单是否为仅发布订单</td>
+<td>表明订单是否为只做Maker(Post only) 订单</td>
 </tr>
 <tr>
 <td>price</td>
@@ -2321,6 +2405,24 @@
 <td>Yes</td>
 <td>原始订单大小</td>
 </tr>
+<tr>
+<td>positionMode</td>
+<td>string</td>
+<td>Yes</td>
+<td>仓位模式<br/> 单向持仓<code>ONE_WAY</code> 或 双向持仓<code>HEDGE</code></td>
+</tr>
+<tr>
+<td>positionDirection</td>
+<td>string</td>
+<td>Yes</td>
+<td>仓位方向<br/>  多头仓位<code>LONG</code> 或 空头仓位<code>SHORT</code></td>
+</tr>
+<tr>
+<td>positionId</td>
+<td>string</td>
+<td>Yes</td>
+<td>当前订单属于的仓位ID。</td>
+</tr>
 </tbody></table>
 <h2 id='a78f1cdd03'>创建新的算法订单</h2>
 <blockquote>
@@ -2360,6 +2462,9 @@
     </span><span class="nl">"originalSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="nl">"remainingSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ONE_WAY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionDirection"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC-USD"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
@@ -2426,6 +2531,12 @@
 <td>No</td>
 <td>订单中应在订单簿上显示的百分比是多少。</td>
 </tr>
+<tr>
+<td>positionMode</td>
+<td>string</td>
+<td>No</td>
+<td>用于创建指定仓位模式订单。有效选项：单向持仓<code>ONE_WAY</code>（默认）或 双向持仓<code>HEDGE</code></td>
+</tr>
 </tbody></table>
 <h3 id='05a22d5a79-8'>响应内容</h3>
 <table><thead>
@@ -2470,7 +2581,7 @@
 <td>postOnly</td>
 <td>boolean</td>
 <td>Yes</td>
-<td>表明订单是否为仅发布订单</td>
+<td>表明订单是否为只做Maker(Post only) 订单</td>
 </tr>
 <tr>
 <td>price</td>
@@ -2555,6 +2666,24 @@
 <td>double</td>
 <td>Yes</td>
 <td>原始订单大小</td>
+</tr>
+<tr>
+<td>positionMode</td>
+<td>string</td>
+<td>Yes</td>
+<td>仓位模式<br/> 单向持仓<code>ONE_WAY</code> 或 双向持仓<code>HEDGE</code></td>
+</tr>
+<tr>
+<td>positionDirection</td>
+<td>string</td>
+<td>Yes</td>
+<td>仓位方向<br/>  多头仓位<code>LONG</code> 或 空头仓位<code>SHORT</code></td>
+</tr>
+<tr>
+<td>positionId</td>
+<td>string</td>
+<td>Yes</td>
+<td>当前订单属于的仓位ID。</td>
 </tr>
 </tbody></table>
 <h2 id='90376e83a0'>查询订单</h2>
@@ -2851,6 +2980,9 @@
     </span><span class="nl">"originalSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="nl">"remainingSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ONE_WAY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionDirection"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC-USD"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
@@ -2959,7 +3091,7 @@
 <td>postOnly</td>
 <td>boolean</td>
 <td>Yes</td>
-<td>表明订单是否为仅发布订单</td>
+<td>表明订单是否为只做Maker(Post only) 订单</td>
 </tr>
 <tr>
 <td>price</td>
@@ -3045,6 +3177,24 @@
 <td>Yes</td>
 <td>原始订单大小</td>
 </tr>
+<tr>
+<td>positionMode</td>
+<td>string</td>
+<td>Yes</td>
+<td>仓位模式<br/> 单向持仓<code>ONE_WAY</code> 或 双向持仓<code>HEDGE</code></td>
+</tr>
+<tr>
+<td>positionDirection</td>
+<td>string</td>
+<td>Yes</td>
+<td>仓位方向<br/>  多头仓位<code>LONG</code> 或 空头仓位<code>SHORT</code></td>
+</tr>
+<tr>
+<td>positionId</td>
+<td>string</td>
+<td>Yes</td>
+<td>当前订单属于的仓位ID。</td>
+</tr>
 </tbody></table>
 <h2 id='3eedd32d80'>取消订单</h2>
 <blockquote>
@@ -3076,6 +3226,9 @@
     </span><span class="nl">"originalSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="nl">"remainingSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ONE_WAY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionDirection"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC-USD"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
@@ -3154,7 +3307,7 @@
 <td>postOnly</td>
 <td>boolean</td>
 <td>Yes</td>
-<td>表明订单是否为仅发布订单</td>
+<td>表明订单是否为只做Maker(Post only) 订单</td>
 </tr>
 <tr>
 <td>price</td>
@@ -3240,6 +3393,24 @@
 <td>Yes</td>
 <td>原始订单大小</td>
 </tr>
+<tr>
+<td>positionMode</td>
+<td>string</td>
+<td>Yes</td>
+<td>仓位模式<br/> 单向持仓<code>ONE_WAY</code> 或 双向持仓<code>HEDGE</code></td>
+</tr>
+<tr>
+<td>positionDirection</td>
+<td>string</td>
+<td>Yes</td>
+<td>仓位方向<br/>  多头仓位<code>LONG</code> 或 空头仓位<code>SHORT</code></td>
+</tr>
+<tr>
+<td>positionId</td>
+<td>string</td>
+<td>Yes</td>
+<td>当前订单属于的仓位ID。</td>
+</tr>
 </tbody></table>
 <h2 id='8d3ae04eb2'>延时自动取消所有</h2>
 <blockquote>
@@ -3316,6 +3487,9 @@
     </span><span class="nl">"avgFilledPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"timeInForce"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"averageFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ONE_WAY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionDirection"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC-USD"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"takeProfitOrder"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ea1ab233-c79a-4503-a475-f8633ecc9d79"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SELL"</span><span class="p">,</span><span class="w">
@@ -3570,6 +3744,24 @@
 <td>Yes</td>
 <td>是否为关闭此持仓的订单</td>
 </tr>
+<tr>
+<td>positionMode</td>
+<td>string</td>
+<td>Yes</td>
+<td>仓位模式<br/> 单向持仓<code>ONE_WAY</code> 或 双向持仓<code>HEDGE</code></td>
+</tr>
+<tr>
+<td>positionDirection</td>
+<td>string</td>
+<td>Yes</td>
+<td>仓位方向<br/>  多头仓位<code>LONG</code> 或 空头仓位<code>SHORT</code></td>
+</tr>
+<tr>
+<td>positionId</td>
+<td>string</td>
+<td>Yes</td>
+<td>当前订单属于的仓位ID。</td>
+</tr>
 </tbody></table>
 <h2 id='bbd4754907-2'>查询成交记录</h2>
 <blockquote>
@@ -3604,6 +3796,7 @@
     </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"triggerType"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nl">"wallet"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"tradeId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
@@ -3830,6 +4023,12 @@
 <td>Yes</td>
 <td>现货中未使用</td>
 </tr>
+<tr>
+<td>positionId</td>
+<td>string</td>
+<td>Yes</td>
+<td>当前订单属于的仓位ID。</td>
+</tr>
 </tbody></table>
 <h2 id='e602fd627b'>查询持仓</h2>
 <blockquote>
@@ -3869,8 +4068,35 @@
         </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SELL"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">27000.0</span><span class="p">,</span><span class="w">
         </span><span class="nl">"triggerUseLastPrice"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ONE_WAY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionDirection"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC-USD"</span><span class="w">
+  </span><span class="p">},{</span><span class="w">
+     </span><span class="nl">"marginType"</span><span class="p">:</span><span class="w"> </span><span class="mi">91</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"entryPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">1631.106666667</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"markPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">1630.398947255</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETHPFC"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"orderValue"</span><span class="p">:</span><span class="w"> </span><span class="mf">48.9119684176</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"settleWithAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"unrealizedProfitLoss"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.02123158</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"totalMaintenanceMargin"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.254871114</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"liquidationPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"isolatedLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"adlScoreBucket"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"liquidationInProgress"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"takeProfitOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"stopLossOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HEDGE"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"positionDirection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LONG"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETHPFC-USD|LONG"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"currentLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0340349245</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"takeProfitOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"stopLossOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+     </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <p><code>GET /api/v2.1/user/positions</code></p>
@@ -4015,6 +4241,24 @@
 <td>No</td>
 <td>止损订单信息</td>
 </tr>
+<tr>
+<td>positionMode</td>
+<td>string</td>
+<td>Yes</td>
+<td>仓位模式<br/> 单向持仓<code>ONE_WAY</code> 或 双向持仓<code>HEDGE</code></td>
+</tr>
+<tr>
+<td>positionDirection</td>
+<td>string</td>
+<td>Yes</td>
+<td>仓位方向<br/>  多头仓位<code>LONG</code> 或 空头仓位<code>SHORT</code></td>
+</tr>
+<tr>
+<td>positionId</td>
+<td>string</td>
+<td>Yes</td>
+<td>当前订单属于的仓位ID。</td>
+</tr>
 </tbody></table>
 <h2 id='b1f6ce457c'>平仓仓位</h2>
 <blockquote>
@@ -4024,6 +4268,16 @@
   </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MARKET"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>请求（用于双向持仓订单）</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MARKET"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC-USD|LONG"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
@@ -4050,6 +4304,9 @@
     </span><span class="nl">"originalSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="nl">"remainingSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ONE_WAY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionDirection"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
@@ -4088,13 +4345,19 @@
 <td>postOnly</td>
 <td>boolean</td>
 <td>No</td>
-<td>布尔值，表示此是否为仅发布订单。对于仅发布的订单，交易员将被收取制造商费用</td>
+<td>布尔值，表示这是否只做Maker(Post only) 订单，交易者将支付Maker手续费</td>
 </tr>
 <tr>
 <td>useNewSymbolNaming</td>
 <td>boolean</td>
 <td>No</td>
 <td>若为True，则使用新格式的期货市场名称作为符号，默认为False</td>
+</tr>
+<tr>
+<td>positionId</td>
+<td>string</td>
+<td>No</td>
+<td>想要平仓的仓位ID。在双向持仓时为必填项</td>
 </tr>
 </tbody></table>
 <h3 id='05a22d5a79-15'>响应内容</h3>
@@ -4140,7 +4403,7 @@
 <td>postOnly</td>
 <td>boolean</td>
 <td>Yes</td>
-<td>表示订单是否仅为发布订单</td>
+<td>表示订单是否仅为只做Maker(Post only) 订单</td>
 </tr>
 <tr>
 <td>price</td>
@@ -4226,6 +4489,24 @@
 <td>Yes</td>
 <td>原始订单大小</td>
 </tr>
+<tr>
+<td>positionMode</td>
+<td>string</td>
+<td>Yes</td>
+<td>仓位模式<br/> 单向持仓<code>ONE_WAY</code> 或 双向持仓<code>HEDGE</code></td>
+</tr>
+<tr>
+<td>positionDirection</td>
+<td>string</td>
+<td>Yes</td>
+<td>仓位方向<br/>  多头仓位<code>LONG</code> 或 空头仓位<code>SHORT</code></td>
+</tr>
+<tr>
+<td>positionId</td>
+<td>string</td>
+<td>Yes</td>
+<td>当前订单属于的仓位ID。</td>
+</tr>
 </tbody></table>
 <h2 id='420063dd1a'>获取风险限制</h2>
 <blockquote>
@@ -4292,18 +4573,25 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
-<p>响应
-<code>json
-{
-  &quot;symbol&quot;: &quot;BTCPFC&quot;,
-  &quot;timestamp&quot;: 1577093486551,
-  &quot;status&quot;: 20,
-  &quot;type&quot;: 94,
-  &quot;message&quot;: &quot;false&quot;
-}
-</code></p>
+<p>请求 (当双向持仓时)</p>
 </blockquote>
-
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"riskLimit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HEDGE"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>响应</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1577093486551</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="mi">94</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
 <p><code>POST /api/v2.1/risk_limit</code></p>
 
 <p>更改指定市场的风险限制</p>
@@ -4327,6 +4615,12 @@
 <td>long</td>
 <td>Yes</td>
 <td>当前的风险限制值以仓位大小表示，但它将在将来转变为USD值。</td>
+</tr>
+<tr>
+<td>positionMode</td>
+<td>string</td>
+<td>no</td>
+<td>单向持仓<code>ONE_WAY</code>（默认）或 双向持仓<code>HEDGE</code>, 在双向持仓时为必填项</td>
 </tr>
 <tr>
 <td>useNewSymbolNaming</td>
@@ -4385,6 +4679,15 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
+<p>请求 (当双向持仓时)</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"leverage"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HEDGE"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
 <p>响应</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
@@ -4424,6 +4727,12 @@
 <td>boolean</td>
 <td>No</td>
 <td>如果使用新的期货市场名称作为符号，则为True，默认为False</td>
+</tr>
+<tr>
+<td>positionMode</td>
+<td>string</td>
+<td>no</td>
+<td>单向持仓<code>ONE_WAY</code>（默认）或 双向持仓<code>HEDGE</code>, 在双向持仓时为必填项</td>
 </tr>
 </tbody></table>
 <h3 id='05a22d5a79-18'>响应内容</h3>
@@ -4526,6 +4835,15 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
+<p>请求 (当双向持仓时)</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC-USD|LONG"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
 <p>响应（仅在发生错误时可用）</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
@@ -4563,6 +4881,12 @@
 <td>boolean</td>
 <td>No</td>
 <td>若为True，则使用新格式的期货市场名称作为符号，默认为False</td>
+</tr>
+<tr>
+<td>positionId</td>
+<td>string</td>
+<td>No</td>
+<td>想要设置的仓位ID。在双向持仓时为必填项</td>
 </tr>
 </tbody></table>
 <h3 id='05a22d5a79-20'>响应内容</h3>
@@ -4662,7 +4986,6 @@
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-PERP"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SELL"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"takeProfitPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">31000</span><span class="p">,</span><span class="w">
     </span><span class="nl">"takeProfitTrigger"</span><span class="p">:</span><span class="w"> </span><span class="s2">"markPrice"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"stopLossPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">22000</span><span class="p">,</span><span class="w">
@@ -4675,7 +4998,7 @@
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
         </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-PERP"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">77</span><span class="p">,</span><span class="w">
         </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
         </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SELL"</span><span class="p">,</span><span class="w">
@@ -4694,6 +5017,9 @@
         </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
         </span><span class="nl">"remainingSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">100.0</span><span class="p">,</span><span class="w">
         </span><span class="nl">"orderDetailType"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ONE_WAY"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"positionDirection"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC-USD"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
@@ -4701,9 +5027,7 @@
 <p><code>POST /api/v2.1/order/bind/tpsl</code></p>
 
 <p>绑定止盈/止损与已有持仓</p>
-
-<p><strong>请求参数</strong></p>
-
+<h3 id='1f9ac54b15-23'>请求参数</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -4722,7 +5046,7 @@
 <td>side</td>
 <td>string</td>
 <td>Yes</td>
-<td>&quot;BUY&quot; 或 &quot;SELL&quot; 用于止盈/止损订单</td>
+<td><code>BUY</code> 或 <code>SELL</code> 在双向持仓时为必填项, 在双向持仓时，买方<code>BUY</code>綁定至空头仓位，卖方<code>SELL</code>则綁定至多头仓位</td>
 </tr>
 <tr>
 <td>takeProfitPrice</td>
@@ -4748,10 +5072,14 @@
 <td>No</td>
 <td>用于创建带有止损订单的选项。有效选项：<code>标记价格</code>（默认）或<code>最新价格</code></td>
 </tr>
+<tr>
+<td>positionMode</td>
+<td>string</td>
+<td>no</td>
+<td>单向持仓<code>ONE_WAY</code>（默认）或 双向持仓<code>HEDGE</code>, 在双向持仓时为必填项</td>
+</tr>
 </tbody></table>
-
-<p><strong>响应内容</strong></p>
-
+<h3 id='05a22d5a79-22'>响应内容</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -4794,7 +5122,7 @@
 <td>postOnly</td>
 <td>boolean</td>
 <td>Yes</td>
-<td>指示订单是否为仅限发布订单</td>
+<td>指示订单是否为只做Maker(Post only) 订单</td>
 </tr>
 <tr>
 <td>price</td>
@@ -4880,6 +5208,145 @@
 <td>Yes</td>
 <td>原始订单大小</td>
 </tr>
+<tr>
+<td>positionMode</td>
+<td>string</td>
+<td>Yes</td>
+<td>仓位模式<br/> 单向持仓<code>ONE_WAY</code> 或 双向持仓<code>HEDGE</code></td>
+</tr>
+<tr>
+<td>positionDirection</td>
+<td>string</td>
+<td>Yes</td>
+<td>仓位方向<br/>  多头仓位<code>LONG</code> 或 空头仓位<code>SHORT</code></td>
+</tr>
+<tr>
+<td>positionId</td>
+<td>string</td>
+<td>Yes</td>
+<td>当前订单属于的仓位ID。</td>
+</tr>
+</tbody></table>
+<h2 id='0f26e5590e'>查询仓位模式</h2>
+<blockquote>
+<p>响应</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-PERP"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HEDGE"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-PERP"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ONE_WAY"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<p><code>GET /api/v2.1/position_mode</code></p>
+
+<p>查询用户的仓位模式</p>
+
+<p><strong>请求参数</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>No</td>
+<td>市场交易对</td>
+</tr>
+</tbody></table>
+
+<p><strong>响应内容</strong></p>
+
+<p>| Name         | Type   | Required | Description                       |
+| ---          | ---    | ---      | --- ------------------------------|
+| symbol       | string | Yes      | 市场交易对                         |
+| positionMode | string | Yes      | 单向持仓<code>ONE_WAY</code> 或 双向持仓<code>HEDGE</code> |</p>
+<h2 id='4a3f9ffc40'>更改仓位模式</h2>
+<blockquote>
+<p>响应</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-PERP"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HEDGE"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><code>POST /api/v2.1/position_mode</code></p>
+
+<p>更改仓位模式</p>
+
+<p><strong>请求参数</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Yes</td>
+<td>市场交易对</td>
+</tr>
+<tr>
+<td>positionMode</td>
+<td>string</td>
+<td>Yes</td>
+<td>单向持仓<code>ONE_WAY</code> 或 双向持仓<code>HEDGE</code></td>
+</tr>
+</tbody></table>
+
+<p><strong>响应内容</strong></p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Yes</td>
+<td>市场交易对</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>long</td>
+<td>No</td>
+<td>订单时间戳</td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>No</td>
+<td>订单状态 <br>20: 成功</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>No</td>
+<td>数值为129，表示为“期货仓位模式更改”。</td>
+</tr>
+<tr>
+<td>message</td>
+<td>string</td>
+<td>No</td>
+<td>交易消息</td>
+</tr>
 </tbody></table>
 <h1 id='a3d42f9b9f'>钱包端点</h1><h2 id='0bed682e6f'>查询钱包余额</h2>
 <blockquote>
@@ -4920,7 +5387,7 @@
 <p><code>GET /api/v2.1/user/wallet</code></p>
 
 <p>查询用户的钱包余额。API密钥需要<code>读取</code>权限。</p>
-<h3 id='1f9ac54b15-23'>请求参数</h3>
+<h3 id='1f9ac54b15-24'>请求参数</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -4942,7 +5409,7 @@
 <td>若为True，则返回新格式的期货市场名称，默认为False</td>
 </tr>
 </tbody></table>
-<h3 id='05a22d5a79-22'>响应内容</h3><h4 id='c02d697612'>钱包</h4>
+<h3 id='05a22d5a79-23'>响应内容</h3><h4 id='c02d697612'>钱包</h4>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -5088,7 +5555,7 @@
 <p><code>GET /api/v2.1/user/wallet_history</code></p>
 
 <p>获取期货钱包上的用户钱包历史记录</p>
-<h3 id='1f9ac54b15-24'>请求参数</h3>
+<h3 id='1f9ac54b15-25'>请求参数</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -5128,7 +5595,7 @@
 <td>若为True，则返回新格式的期货市场名称，默认为False</td>
 </tr>
 </tbody></table>
-<h3 id='05a22d5a79-23'>响应内容</h3>
+<h3 id='05a22d5a79-24'>响应内容</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -5224,7 +5691,7 @@
 <p><code>GET /api/v2.1/user/margin</code></p>
 
 <p>获取指定钱包的保证金信息，以便用户知道他们当前在市场上使用的是哪个钱包。</p>
-<h3 id='1f9ac54b15-25'>请求参数</h3>
+<h3 id='1f9ac54b15-26'>请求参数</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -5240,7 +5707,7 @@
 <td>市场符号</td>
 </tr>
 </tbody></table>
-<h3 id='05a22d5a79-24'>响应内容</h3><h4 id='c02d697612-2'>钱包</h4>
+<h3 id='05a22d5a79-25'>响应内容</h3><h4 id='c02d697612-2'>钱包</h4>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -5421,7 +5888,7 @@
 <p><code>POST /api/v2.1/user/wallet/transfer</code></p>
 
 <p>在用户的钱包之间转移资金。用户可以指定源钱包和目标钱包进行资金转账。</p>
-<h3 id='1f9ac54b15-26'>请求参数</h3><h4 id='301b9231fe'>钱包请求</h4>
+<h3 id='1f9ac54b15-27'>请求参数</h3><h4 id='301b9231fe'>钱包请求</h4>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -5489,7 +5956,7 @@
 <td>要转移的余额值，例如：10</td>
 </tr>
 </tbody></table>
-<h3 id='05a22d5a79-25'>响应内容</h3><h4 id='c02d697612-3'>钱包</h4>
+<h3 id='05a22d5a79-26'>响应内容</h3><h4 id='c02d697612-3'>钱包</h4>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -5617,7 +6084,7 @@
 <p>在用户和子账户钱包之间转移资金。用户可以指定源钱包和目标钱包进行资金转账。</p>
 
 <p>需要<code>Wallet</code>权限。要获取支持的货币列表，请查看<a href="#查询钱包操作的可用货币列表">用于操作的可用货币列表</a>。</p>
-<h3 id='1f9ac54b15-27'>请求参数</h3><h4 id='301b9231fe-2'>钱包请求</h4>
+<h3 id='1f9ac54b15-28'>请求参数</h3><h4 id='301b9231fe-2'>钱包请求</h4>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -5697,7 +6164,7 @@
 <td>要转移的余额值，例如：10</td>
 </tr>
 </tbody></table>
-<h3 id='05a22d5a79-26'>响应内容</h3><h4 id='c02d697612-4'>钱包</h4>
+<h3 id='05a22d5a79-27'>响应内容</h3><h4 id='c02d697612-4'>钱包</h4>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -5822,7 +6289,7 @@
 <li><code>symbol</code>表示市场符号</li>
 <li><code>grouping</code>表示分组的粒度。有效值为0-8。</li>
 </ul>
-<h3 id='05a22d5a79-27'>响应内容</h3><h4 id='5e08dfe292'>订单簿对象</h4>
+<h3 id='05a22d5a79-28'>响应内容</h3><h4 id='5e08dfe292'>订单簿对象</h4>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -5983,7 +6450,7 @@
 <p>为确保按顺序接收到更新，<code>seqNum</code>指示当前序列，而<code>prevSeqNum</code>指前一个数据包。<code>seqNum</code>总是在<code>prevSeqNum</code>之后。如果序列是乱序的，您将需要取消订阅并再次订阅该主题。</p>
 
 <p>如果当最佳买入价高于或等于最佳卖出价时发生<a href="https://en.wikipedia.org/wiki/Order_book#Crossed_book">交叉订单簿</a>，请取消订阅并重新订阅该主题。</p>
-<h3 id='05a22d5a79-28'>响应内容</h3><h4 id='5e08dfe292-2'>订单簿对象</h4>
+<h3 id='05a22d5a79-29'>响应内容</h3><h4 id='5e08dfe292-2'>订单簿对象</h4>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -6138,7 +6605,7 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>订阅Websocket的公开交易成交信息</p>
-<h3 id='1f9ac54b15-28'>请求参数</h3>
+<h3 id='1f9ac54b15-29'>请求参数</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -6160,7 +6627,7 @@
 <td>要订阅的主题。</td>
 </tr>
 </tbody></table>
-<h3 id='05a22d5a79-29'>响应内容</h3>
+<h3 id='05a22d5a79-30'>响应内容</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -6211,7 +6678,7 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>订阅市场的最近交易提要。主题将是 <code>tradeHistoryApi:&lt;market&gt;</code>，其中<code>&lt;market&gt;</code> 是市场符号。</p>
-<h3 id='05a22d5a79-30'>响应内容</h3><h4 id='tradehistory'>TradeHistory 对象</h4>
+<h3 id='05a22d5a79-31'>响应内容</h3><h4 id='tradehistory'>TradeHistory 对象</h4>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -6301,7 +6768,7 @@
   "op":"authKeyExpires",
   "args":["4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x", "1624985375123", "c410d38c681579adb335885800cff24c66171b7cc8376cfe43da1408c581748156b89bcc5a115bb496413bda481139fb"]
 }
-</code></pre></div><h3 id='1f9ac54b15-29'>请求参数</h3>
+</code></pre></div><h3 id='1f9ac54b15-30'>请求参数</h3>
 <p>以下详细描述了需要发送的参数。</p>
 
 <table><thead>
@@ -6373,6 +6840,7 @@
       </span><span class="nl">"remainingSize"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;Remaining size on the order&gt;"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;Time where this order is valid&gt;"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"txType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"STOP | TAKE_PROFIT"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC-USD"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Trade Trigger Price"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
@@ -6381,7 +6849,7 @@
 
 </span></code></pre></div>
 <p>接收交易通知通过订阅主题 <code>notificationApiV2</code>。Websocket将向订阅者推送交易级别的通知。如果在未经认证的情况下订阅主题，将不会发送任何消息。</p>
-<h3 id='05a22d5a79-31'>响应内容</h3>
+<h3 id='05a22d5a79-32'>响应内容</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -6498,6 +6966,12 @@
 <td>Yes</td>
 <td>偏差百分比。仅用于算法订单</td>
 </tr>
+<tr>
+<td>positionId</td>
+<td>string</td>
+<td>Yes</td>
+<td>当前订单属于的仓位ID。</td>
+</tr>
 </tbody></table>
 <h2 id='384d988850'>用户交易记录</h2>
 <blockquote>
@@ -6535,7 +7009,7 @@
 
 </span></code></pre></div>
 <p>当交易完成后，此主题将把交易信息发回给订阅者。</p>
-<h3 id='05a22d5a79-32'>响应内容</h3>
+<h3 id='05a22d5a79-33'>响应内容</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -6681,6 +7155,9 @@
     </span><span class="nl">"marginTypeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FUTURES_MARGIN_CROSS"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"currentLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.02</span><span class="p">,</span><span class="w">
     </span><span class="nl">"avgFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC-USD|SHORT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HEDGE"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionDirection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SHORT"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"settleWithNonUSDAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"takeProfitOrder"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4820b20a-e41b-4273-b3ad-4b19920aeeb5"</span><span class="p">,</span><span class="w">
@@ -6694,11 +7171,50 @@
         </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">27000.0</span><span class="p">,</span><span class="w">
         </span><span class="nl">"triggerUseLastPrice"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">}]</span><span class="w">
+  </span><span class="p">},{</span><span class="w">
+    </span><span class="nl">"requestId"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"btse"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"userCurrency"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"marketName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LTCPFC-USD"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">90</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderMode"</span><span class="p">:</span><span class="w"> </span><span class="mi">83</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"originalAmount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.01</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"maxPriceHeld"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"pegPriceMin"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"maxStealthDisplayAmount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"sellexchangeRate"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"closeOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"liquidationInProgress"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"marginType"</span><span class="p">:</span><span class="w"> </span><span class="mi">91</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"entryPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">69.9</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"liquidationPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">29684.3743872669</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"markedPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">70.062346733</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"unrealizedProfitLoss"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.04870402</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalMaintenanceMargin"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.319484301</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalContracts"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"isolatedLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalFees"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalValue"</span><span class="p">:</span><span class="w"> </span><span class="mf">-21.01870402</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"adlScoreBucket"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"booleanVar1"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderTypeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TYPE_FUTURES_POSITION"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderModeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MODE_SELL"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"marginTypeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FUTURES_MARGIN_CROSS"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currentLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1116510969</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"takeProfitOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"settleWithNonUSDAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stopLossOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LTCPFC-USD|SHORT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HEDGE"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionDirection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SHORT"</span><span class="p">,</span><span class="w">
+</span><span class="p">}]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>一旦仓位发生变化，所有期货仓位将通过这个主题推送。</p>
-<h3 id='05a22d5a79-33'>响应内容</h3>
+<h3 id='05a22d5a79-34'>响应内容</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -6911,6 +7427,24 @@
 <td>No</td>
 <td>止损订单信息</td>
 </tr>
+<tr>
+<td>positionMode</td>
+<td>string</td>
+<td>Yes</td>
+<td>仓位模式<br/> 单向持仓<code>ONE_WAY</code> 或 双向持仓<code>HEDGE</code></td>
+</tr>
+<tr>
+<td>positionDirection</td>
+<td>string</td>
+<td>Yes</td>
+<td>仓位方向<br/>  多头仓位<code>LONG</code> 或 空头仓位<code>SHORT</code></td>
+</tr>
+<tr>
+<td>positionId</td>
+<td>string</td>
+<td>Yes</td>
+<td>当前订单属于的仓位ID。</td>
+</tr>
 </tbody></table>
 <h2 id='25a424cad9'>仓位</h2>
 <blockquote>
@@ -6927,6 +7461,7 @@
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"positions"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+    </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nl">"requestId"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"btse"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"marketName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC-USD"</span><span class="p">,</span><span class="w">
@@ -6960,18 +7495,58 @@
     </span><span class="nl">"avgFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"settleWithNonUSDAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"takeProfitOrder"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4820b20a-e41b-4273-b3ad-4b19920aeeb5"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SELL"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">31000.0</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"triggerUseLastPrice"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+        </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4820b20a-e41b-4273-b3ad-4b19920aeeb5"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SELL"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">31000.0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"triggerUseLastPrice"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nl">"stopLossOrder"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eff2b232-e2ce-4562-b0b4-0bd3713c11ec"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SELL"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">27000.0</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"triggerUseLastPrice"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+        </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eff2b232-e2ce-4562-b0b4-0bd3713c11ec"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SELL"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">27000.0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"triggerUseLastPrice"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">}]</span><span class="w">
+  </span><span class="p">},{</span><span class="w">
+        </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"requestId"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"btse"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"marketName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LTCPFC-USD"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">90</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"orderMode"</span><span class="p">:</span><span class="w"> </span><span class="mi">83</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"originalAmount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.01</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"maxPriceHeld"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"pegPriceMin"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"maxStealthDisplayAmount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"sellexchangeRate"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"closeOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"liquidationInProgress"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"marginType"</span><span class="p">:</span><span class="w"> </span><span class="mi">91</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"entryPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">69.9</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"liquidationPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">29682.415101008</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"markedPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">69.685573595</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"unrealizedProfitLoss"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.06432792</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"totalMaintenanceMargin"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.318744</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"totalContracts"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"isolatedLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"totalFees"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"totalValue"</span><span class="p">:</span><span class="w"> </span><span class="mf">-20.905672079</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"adlScoreBucket"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"orderTypeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TYPE_FUTURES_POSITION"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"orderModeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MODE_SELL"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"marginTypeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FUTURES_MARGIN_CROSS"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"currentLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1113820366</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"averageFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"filledSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"takeProfitOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"stopLossOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LTCPFC-USD|SHORT"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HEDGE"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"positionDirection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SHORT"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"settleWithNonUSDAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
@@ -7013,12 +7588,15 @@
     </span><span class="nl">"avgFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"settleWithNonUSDAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"takeProfitOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"stopLossOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="nl">"stopLossOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC-USD|SHORT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionDirection"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
   </span><span class="p">}]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>一旦仓位发生变化，所有期货仓位将通过这个主题推送。如果用户将仓位减少到0，该主题将推送一次totalContracts值为0的数据。</p>
-<h3 id='05a22d5a79-34'>响应内容</h3>
+<h3 id='05a22d5a79-35'>响应内容</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -7230,6 +7808,24 @@
 <td>StopLossOrder object</td>
 <td>No</td>
 <td>止损订单信息</td>
+</tr>
+<tr>
+<td>positionMode</td>
+<td>string</td>
+<td>Yes</td>
+<td>仓位模式<br/> 单向持仓<code>ONE_WAY</code> 或 双向持仓<code>HEDGE</code></td>
+</tr>
+<tr>
+<td>positionDirection</td>
+<td>string</td>
+<td>Yes</td>
+<td>仓位方向<br/>  多头仓位<code>LONG</code> 或 空头仓位<code>SHORT</code></td>
+</tr>
+<tr>
+<td>positionId</td>
+<td>string</td>
+<td>Yes</td>
+<td>当前订单属于的仓位ID。</td>
 </tr>
 </tbody></table>
 
