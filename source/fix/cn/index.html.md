@@ -213,7 +213,7 @@ final String SIGNATURE = Hex.encodeHexString(HmacUtils.getInitializedMac(HmacAlg
 
 ## 订单状态请求（H）
 
-由服务器发送以通知客户端订单取消请求（F）失败。
+由服务器发送以通知客户端订单状态请求（F）失败。
 
 | 标签 | 名称 | 值 | 描述 |
 | --- | --- | --- | --- |

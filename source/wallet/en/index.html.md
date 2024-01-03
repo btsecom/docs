@@ -489,7 +489,7 @@ Performs a currency conversion from wallet. To use this API, `Wallet` permission
 
 `POST /api/v3.2/user/wallet/transfer`
 
-Performs a internal currency transfer to other user from wallet. To use this API, `Wallet` permission is required. To get supported currency list please check [Available currency list for action](#query-available-currency-list-for-wallet-action)
+Performs a internal currency transfer to other user from wallet. To use this API, `Transfer` permission is required. To get supported currency list please check [Available currency list for action](#query-available-currency-list-for-wallet-action)
 
 ### Request Parameters
 

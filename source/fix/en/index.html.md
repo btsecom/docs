@@ -213,7 +213,7 @@ Sent by the server to notify the client that an OrderCancelRequest (F) failed.
 
 ## Order Status Request (H)
 
-Sent by the server to notify the client that an OrderCancelRequest (F) failed.
+Sent by the server to notify the client that an OrderStatusRequest (F) failed.
 
 | Tag | Name | Value | Description |
 | --- | ---  | ---   | ---         |
