@@ -89,7 +89,10 @@ When rate limit rule is violated, client's request would be rejected and server 
 
 FIX protocol uses field separator (character: `0x01`) to separate attributes in messages.
 
-## Common request attributes
+## FIX Protocal Attributes
+Our FIX API is based on the `FIX 4.2` specification, which can be referenced at this [URL](https://www.onixs.biz/fix-dictionary/4.2/index.html).
+
+## Common Request Attributes
 
 Below attributes are required in every client's request message.
 

@@ -89,6 +89,9 @@ Spot 和 Futures 的会话是分开的。
 
 FIX 协议使用字段分隔符（字符：`0x01`）来分隔消息中的属性。
 
+## FIX 协议属性
+我们的 FIX API 基于 `FIX 4.2` 规范，可参考此[网址](https://www.onixs.biz/fix-dictionary/4.2/index.html)。
+
 ## 常见请求属性
 
 以下属性在每个客户端的请求消息中都是必需的。
