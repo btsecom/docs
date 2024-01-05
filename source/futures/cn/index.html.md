@@ -13,6 +13,10 @@ headingLevel: 2
 
 # 更新日志
 
+## 版本 2.6.16 (2024年1月5日)
+
+* 修正API [`wallet-transfer`](#transfer-funds-between-futures-wallet) 和 [`subaccount-wallet-transfer`](#sub-account-wallet-transfer) 的描述中，只有当`walletSrcType`和`walletDestType`为`ISOLATED`时，相对应的`walletSrc`和`walletDest`才为**必须**
+
 ## 版本 2.6.15 (2023年11月8日)
 
 * 新增新的API[`查询仓位模式`](#0f26e5590e)和[`切換仓位模式`](#4a3f9ffc40)
@@ -2571,9 +2575,9 @@ BTSE 的速率限制如下：
 
 ```json
 {
-  "walletSrc": "string",
+  "walletSrc": "",
   "walletSrcType": "SPOT",
-  "walletDest": "string",
+  "walletDest": "",
   "walletDestType": "CROSS",
   "apiWallets": [
     {
@@ -2595,7 +2599,7 @@ BTSE 的速率限制如下：
   {
     "trackingID": 0,
     "queryType": 0,
-    "activeWalletName": "string",
+    "activeWalletName": "",
     "wallet": "CROSS@",
     "username": "string",
     "walletTotalValue": 0,
@@ -2632,13 +2636,13 @@ BTSE 的速率限制如下：
 
 #### 钱包请求
 
-| 名称           | 类型          | 是否必须 | 描述                                                                                                                                                                                                  |
-| ---            | ---           | ---      | ---                                                                                                                                                                                                  |
-| walletSrc      | string        | Yes      | 源钱包                                                                                                                                                                                               |
-| walletSrcType  | string        | Yes      | 源类型，有效值为：<br/>`SPOT@`：现货钱包<br/>`CROSS@`：全仓钱包<br/>`ISOLATED@市场`：市场的隔离钱包，其中市场为市场符号                                                                                       |
-| walletDest     | string        | Yes      | 目标钱包                                                                                                                                                                                             |
-| walletDestType | string        | Yes      | 目标类型，有效值为：<br/>`SPOT@`：现货钱包<br/>`CROSS@`：全仓钱包<br/>`ISOLATED@市场`：市场的隔离钱包，其中市场为市场符号                                                                                     |
-| apiWallets     | 钱包明细       | Yes      | 转账详细信息                                                                                                                                                                                         |
+| 名称           | 类型          | 是否必须 | 描述                                                                                                            |
+| ---            | ---           | ---      | ---                                                                                                          |
+| walletSrc      | string        | No       | 源钱包，如果`walletSrcType`为`ISOLATED`则为必须                                                                 |
+| walletSrcType  | string        | Yes      | 源类型，有效值为：<br/>`SPOT`：现货钱包<br/>`CROSS`：全仓钱包<br/>`ISOLATED`：市场的隔离钱包，其中市场为市场符号   |
+| walletDest     | string        | No       | 目标钱包，如果`walletDestType`为`ISOLATED`则为必须                                                               |
+| walletDestType | string        | Yes      | 目标类型，有效值为：<br/>`SPOT`：现货钱包<br/>`CROSS`：全仓钱包<br/>`ISOLATED`：市场的隔离钱包，其中市场为市场符号 |
+| apiWallets     | 钱包明细       | Yes      | 转账详细信息                                                                                                   |
 
 #### 钱包明细请求
 
@@ -2693,10 +2697,10 @@ BTSE 的速率限制如下：
 
 | 名称           | 类型          | 是否必须 | 描述                                                                                                                                                                                                  |
 |----------------| ---           | ---      | ---                                                                                                                                                                                                  |
-| walletSrc      | string        | Yes      | 源钱包                                                                                                                                                                                               |
-| walletSrcType  | string        | Yes      | 源类型，有效值为：<br/>`SPOT@`：现货钱包<br/>`CROSS@`：全仓钱包<br/>`ISOLATED@市场`：市场的隔离钱包，其中市场为市场符号                                                                                       |
-| walletDest     | string        | Yes      | 目标钱包                                                                                                                                                                                             |
-| walletDestType | string        | Yes      | 目标类型，有效值为：<br/>`SPOT@`：现货钱包<br/>`CROSS@`：全仓钱包<br/>`ISOLATED@市场`：市场的隔离钱包，其中市场为市场符号                                                                                     |
+| walletSrc      | string        | No       | 源钱包，如果`walletSrcType`为`ISOLATED`则为必须                                                                 |
+| walletSrcType  | string        | Yes      | 源类型，有效值为：<br/>`SPOT`：现货钱包<br/>`CROSS`：全仓钱包<br/>`ISOLATED`：市场的隔离钱包，其中市场为市场符号   |
+| walletDest     | string        | No       | 目标钱包，如果`walletDestType`为`ISOLATED`则为必须                                                               |
+| walletDestType | string        | Yes      | 目标类型，有效值为：<br/>`SPOT`：现货钱包<br/>`CROSS`：全仓钱包<br/>`ISOLATED`：市场的隔离钱包，其中市场为市场符号 |
 | fromUser       | string        | Yes      | 源用户名                                                                                                                                                                                            |
 | receiver       | string        | Yes      | 接收者用户名                                                                                                                                                                                        |
 | apiWallets     | 钱包明细       | Yes      | 转账详细信息                                                                                                                                                                                         |
