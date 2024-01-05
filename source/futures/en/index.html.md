@@ -13,6 +13,10 @@ headingLevel: 2
 
 # Change Log
 
+## Version 2.6.16 (5th January 2024)
+
+* Change description for `walletSrc` and `walletDest` for [`wallet-transfer`](#transfer-funds-between-futures-wallet) and [`subaccount-wallet-transfer`](#sub-account-wallet-transfer) which is **required** only for related `walletSrcType` and `walletDestType` is `ISOLATED`
+
 ## Version 2.6.15 (8th November 2023)
 
 * Add API for querying [`positionMode`](#query-position-mode) and changing [`positionMode`](#change-position-mode)
@@ -2571,9 +2575,9 @@ Gets margin information for the specified wallet so that users can know which wa
 
 ```json
 {
-  "walletSrc": "string",
+  "walletSrc": "",
   "walletSrcType": "SPOT",
-  "walletDest": "string",
+  "walletDest": "",
   "walletDestType": "CROSS",
   "apiWallets": [
     {
@@ -2595,7 +2599,7 @@ Gets margin information for the specified wallet so that users can know which wa
   {
     "trackingID": 0,
     "queryType": 0,
-    "activeWalletName": "string",
+    "activeWalletName": "",
     "wallet": "CROSS@",
     "username": "string",
     "walletTotalValue": 0,
@@ -2632,13 +2636,13 @@ Transfers funds between user's wallet. User can specify the source and target wa
 
 #### Wallet Request
 
-| Name           | Type          | Required | Description                                                                                                                                                                  |
-| ---            | ---           | ---      | ---                                                                                                                                                                          |
-| walletSrc      | string        | Yes      | Source wallet                                                                                                                                                                |
-| walletSrcType  | string        | Yes      | Source type, valid values are:<br/>`SPOT@`: Spot Wallet<br/>`CROSS@`: Cross Wallet<br/>`ISOLATED@market`: Isolated wallet for the market where market the market symbol      |
-| walletDest     | string        | Yes      | Destination wallet                                                                                                                                                           |
-| walletDestType | string        | Yes      | Destination type, valid values are:<br/>`SPOT@`: Spot Wallet<br/>`CROSS@`: Cross Wallet<br/>`ISOLATED@market`: Isolated wallet for the market where market the market symbol |
-| apiWallets     | Wallet Detail | Yes      | Transfer details                                                                                                                                                             |
+| Name           | Type          | Required | Description                                                                                                                                                         |
+| ---            | ---           | ---      | ---                                                                                                                                                                 |
+| walletSrc      | string        | No       | Source wallet, required if `walletSrcType` is `ISOLATED`                                                                                                            |
+| walletSrcType  | string        | Yes      | Source type, valid values are:<br/>`SPOT`: Spot Wallet<br/>`CROSS`: Cross Wallet<br/>`ISOLATED`: Isolated wallet for the market where market the market symbol      |
+| walletDest     | string        | No       | Destination wallet, required if `walletDestType` is `ISOLATED`                                                                                                      |
+| walletDestType | string        | Yes      | Destination type, valid values are:<br/>`SPOT`: Spot Wallet<br/>`CROSS`: Cross Wallet<br/>`ISOLATED`: Isolated wallet for the market where market the market symbol |
+| apiWallets     | Wallet Detail | Yes      | Transfer details                                                                                                                                                    |
 
 #### Wallet Detail Request
 
@@ -2691,15 +2695,15 @@ Transfers funds between user and sub-account wallet. User can specify the source
 
 #### Wallet Request
 
-| Name           | Type          | Required | Description                                                                                                                                                                  |
-|----------------| ---           | ---      |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| walletSrc      | string        | Yes      | Source wallet                                                                                                                                                                |
-| walletSrcType  | string        | Yes      | Source type, valid values are:<br/>`SPOT@`: Spot Wallet<br/>`CROSS@`: Cross Wallet<br/>`ISOLATED@market`: Isolated wallet for the market where market the market symbol      |
-| walletDest     | string        | Yes      | Destination wallet                                                                                                                                                           |
-| walletDestType | string        | Yes      | Destination type, valid values are:<br/>`SPOT@`: Spot Wallet<br/>`CROSS@`: Cross Wallet<br/>`ISOLATED@market`: Isolated wallet for the market where market the market symbol |
-| fromUser       | string        | Yes      | Source username                                                                                                                                                              |
-| receiver       | string        | Yes      | Receiver username                                                                                                                                                            |
-| apiWallets     | Wallet Detail | Yes      | Transfer details                                                                                                                                                             |
+| Name           | Type          | Required | Description                                                                                                                                                         |
+| ---            | ---           | ---      | ---                                                                                                                                                                 |
+| walletSrc      | string        | No       | Source wallet, required when `walletSrcType` is `ISOLATED`                                                                                                          |
+| walletSrcType  | string        | Yes      | Source type, valid values are:<br/>`SPOT`: Spot Wallet<br/>`CROSS`: Cross Wallet<br/>`ISOLATED`: Isolated wallet for the market where market the market symbol      |
+| walletDest     | string        | No       | Destination wallet, required when `walletDestType` is `ISOLATED`                                                                                                    |
+| walletDestType | string        | Yes      | Destination type, valid values are:<br/>`SPOT`: Spot Wallet<br/>`CROSS`: Cross Wallet<br/>`ISOLATED`: Isolated wallet for the market where market the market symbol |
+| fromUser       | string        | Yes      | Source username                                                                                                                                                     |
+| receiver       | string        | Yes      | Receiver username                                                                                                                                                   |
+| apiWallets     | Wallet Detail | Yes      | Transfer details                                                                                                                                                    |
 
 #### Wallet Detail Request
 
