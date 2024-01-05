@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-2-6-16-5th-january-2024" class="toc-h2 toc-link" data-title="Version 2.6.16 (5th January 2024)">Version 2.6.16 (5th January 2024)</a>
+                  </li>
+                  <li>
                     <a href="#version-2-6-15-8th-november-2023" class="toc-h2 toc-link" data-title="Version 2.6.15 (8th November 2023)">Version 2.6.15 (8th November 2023)</a>
                   </li>
                   <li>
@@ -533,7 +536,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-2-6-15-8th-november-2023'>Version 2.6.15 (8th November 2023)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-2-6-16-5th-january-2024'>Version 2.6.16 (5th January 2024)</h2>
+<ul>
+<li>Change description for <code>walletSrc</code> and <code>walletDest</code> for <a href="#transfer-funds-between-futures-wallet"><code>wallet-transfer</code></a> and <a href="#sub-account-wallet-transfer"><code>subaccount-wallet-transfer</code></a> which is <strong>required</strong> only for related <code>walletSrcType</code> and <code>walletDestType</code> is <code>ISOLATED</code></li>
+</ul>
+<h2 id='version-2-6-15-8th-november-2023'>Version 2.6.15 (8th November 2023)</h2>
 <ul>
 <li>Add API for querying <a href="#query-position-mode"><code>positionMode</code></a> and changing <a href="#change-position-mode"><code>positionMode</code></a></li>
 <li>API related to order and position have added the fields or parameter: positionMode and positionId and positionDirection</li>
@@ -5844,9 +5851,9 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <p>Request</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"walletSrc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"walletSrc"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
   </span><span class="nl">"walletSrcType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SPOT"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"walletDest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"walletDest"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
   </span><span class="nl">"walletDestType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CROSS"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"apiWallets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -5867,7 +5874,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
   </span><span class="p">{</span><span class="w">
     </span><span class="nl">"trackingID"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"queryType"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"activeWalletName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"activeWalletName"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
     </span><span class="nl">"wallet"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CROSS@"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"walletTotalValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -5910,26 +5917,26 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <tr>
 <td>walletSrc</td>
 <td>string</td>
-<td>Yes</td>
-<td>Source wallet</td>
+<td>No</td>
+<td>Source wallet, required if <code>walletSrcType</code> is <code>ISOLATED</code></td>
 </tr>
 <tr>
 <td>walletSrcType</td>
 <td>string</td>
 <td>Yes</td>
-<td>Source type, valid values are:<br/><code>SPOT@</code>: Spot Wallet<br/><code>CROSS@</code>: Cross Wallet<br/><code>ISOLATED@market</code>: Isolated wallet for the market where market the market symbol</td>
+<td>Source type, valid values are:<br/><code>SPOT</code>: Spot Wallet<br/><code>CROSS</code>: Cross Wallet<br/><code>ISOLATED</code>: Isolated wallet for the market where market the market symbol</td>
 </tr>
 <tr>
 <td>walletDest</td>
 <td>string</td>
-<td>Yes</td>
-<td>Destination wallet</td>
+<td>No</td>
+<td>Destination wallet, required if <code>walletDestType</code> is <code>ISOLATED</code></td>
 </tr>
 <tr>
 <td>walletDestType</td>
 <td>string</td>
 <td>Yes</td>
-<td>Destination type, valid values are:<br/><code>SPOT@</code>: Spot Wallet<br/><code>CROSS@</code>: Cross Wallet<br/><code>ISOLATED@market</code>: Isolated wallet for the market where market the market symbol</td>
+<td>Destination type, valid values are:<br/><code>SPOT</code>: Spot Wallet<br/><code>CROSS</code>: Cross Wallet<br/><code>ISOLATED</code>: Isolated wallet for the market where market the market symbol</td>
 </tr>
 <tr>
 <td>apiWallets</td>
@@ -6106,26 +6113,26 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <tr>
 <td>walletSrc</td>
 <td>string</td>
-<td>Yes</td>
-<td>Source wallet</td>
+<td>No</td>
+<td>Source wallet, required when <code>walletSrcType</code> is <code>ISOLATED</code></td>
 </tr>
 <tr>
 <td>walletSrcType</td>
 <td>string</td>
 <td>Yes</td>
-<td>Source type, valid values are:<br/><code>SPOT@</code>: Spot Wallet<br/><code>CROSS@</code>: Cross Wallet<br/><code>ISOLATED@market</code>: Isolated wallet for the market where market the market symbol</td>
+<td>Source type, valid values are:<br/><code>SPOT</code>: Spot Wallet<br/><code>CROSS</code>: Cross Wallet<br/><code>ISOLATED</code>: Isolated wallet for the market where market the market symbol</td>
 </tr>
 <tr>
 <td>walletDest</td>
 <td>string</td>
-<td>Yes</td>
-<td>Destination wallet</td>
+<td>No</td>
+<td>Destination wallet, required when <code>walletDestType</code> is <code>ISOLATED</code></td>
 </tr>
 <tr>
 <td>walletDestType</td>
 <td>string</td>
 <td>Yes</td>
-<td>Destination type, valid values are:<br/><code>SPOT@</code>: Spot Wallet<br/><code>CROSS@</code>: Cross Wallet<br/><code>ISOLATED@market</code>: Isolated wallet for the market where market the market symbol</td>
+<td>Destination type, valid values are:<br/><code>SPOT</code>: Spot Wallet<br/><code>CROSS</code>: Cross Wallet<br/><code>ISOLATED</code>: Isolated wallet for the market where market the market symbol</td>
 </tr>
 <tr>
 <td>fromUser</td>

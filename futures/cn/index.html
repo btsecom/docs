@@ -234,6 +234,9 @@
             <a href="#185368440e" class="toc-h1 toc-link" data-title="更新日志">更新日志</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2-6-16-2024-1-5" class="toc-h2 toc-link" data-title="版本 2.6.16 (2024年1月5日)">版本 2.6.16 (2024年1月5日)</a>
+                  </li>
+                  <li>
                     <a href="#2-6-15-2023-11-8" class="toc-h2 toc-link" data-title="版本 2.6.15 (2023年11月8日)">版本 2.6.15 (2023年11月8日)</a>
                   </li>
                   <li>
@@ -533,7 +536,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='185368440e'>更新日志</h1><h2 id='2-6-15-2023-11-8'>版本 2.6.15 (2023年11月8日)</h2>
+        <h1 id='185368440e'>更新日志</h1><h2 id='2-6-16-2024-1-5'>版本 2.6.16 (2024年1月5日)</h2>
+<ul>
+<li>修正API <a href="#transfer-funds-between-futures-wallet"><code>wallet-transfer</code></a> 和 <a href="#sub-account-wallet-transfer"><code>subaccount-wallet-transfer</code></a> 的描述中，只有当<code>walletSrcType</code>和<code>walletDestType</code>为<code>ISOLATED</code>时，相对应的<code>walletSrc</code>和<code>walletDest</code>才为<strong>必须</strong></li>
+</ul>
+<h2 id='2-6-15-2023-11-8'>版本 2.6.15 (2023年11月8日)</h2>
 <ul>
 <li>新增新的API<a href="#0f26e5590e"><code>查询仓位模式</code></a>和<a href="#4a3f9ffc40"><code>切換仓位模式</code></a></li>
 <li>关于订单和仓位的API新增了新的栏位或参数:仓位ID(positionId)、仓位方向(positionDirection)、仓位模式(positionMode)。</li>
@@ -5839,9 +5846,9 @@
 <p>请求</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"walletSrc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"walletSrc"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
   </span><span class="nl">"walletSrcType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SPOT"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"walletDest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"walletDest"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
   </span><span class="nl">"walletDestType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CROSS"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"apiWallets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -5862,7 +5869,7 @@
   </span><span class="p">{</span><span class="w">
     </span><span class="nl">"trackingID"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"queryType"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"activeWalletName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"activeWalletName"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
     </span><span class="nl">"wallet"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CROSS@"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"walletTotalValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -5905,26 +5912,26 @@
 <tr>
 <td>walletSrc</td>
 <td>string</td>
-<td>Yes</td>
-<td>源钱包</td>
+<td>No</td>
+<td>源钱包，如果<code>walletSrcType</code>为<code>ISOLATED</code>则为必须</td>
 </tr>
 <tr>
 <td>walletSrcType</td>
 <td>string</td>
 <td>Yes</td>
-<td>源类型，有效值为：<br/><code>SPOT@</code>：现货钱包<br/><code>CROSS@</code>：全仓钱包<br/><code>ISOLATED@市场</code>：市场的隔离钱包，其中市场为市场符号</td>
+<td>源类型，有效值为：<br/><code>SPOT</code>：现货钱包<br/><code>CROSS</code>：全仓钱包<br/><code>ISOLATED</code>：市场的隔离钱包，其中市场为市场符号</td>
 </tr>
 <tr>
 <td>walletDest</td>
 <td>string</td>
-<td>Yes</td>
-<td>目标钱包</td>
+<td>No</td>
+<td>目标钱包，如果<code>walletDestType</code>为<code>ISOLATED</code>则为必须</td>
 </tr>
 <tr>
 <td>walletDestType</td>
 <td>string</td>
 <td>Yes</td>
-<td>目标类型，有效值为：<br/><code>SPOT@</code>：现货钱包<br/><code>CROSS@</code>：全仓钱包<br/><code>ISOLATED@市场</code>：市场的隔离钱包，其中市场为市场符号</td>
+<td>目标类型，有效值为：<br/><code>SPOT</code>：现货钱包<br/><code>CROSS</code>：全仓钱包<br/><code>ISOLATED</code>：市场的隔离钱包，其中市场为市场符号</td>
 </tr>
 <tr>
 <td>apiWallets</td>
@@ -6101,26 +6108,26 @@
 <tr>
 <td>walletSrc</td>
 <td>string</td>
-<td>Yes</td>
-<td>源钱包</td>
+<td>No</td>
+<td>源钱包，如果<code>walletSrcType</code>为<code>ISOLATED</code>则为必须</td>
 </tr>
 <tr>
 <td>walletSrcType</td>
 <td>string</td>
 <td>Yes</td>
-<td>源类型，有效值为：<br/><code>SPOT@</code>：现货钱包<br/><code>CROSS@</code>：全仓钱包<br/><code>ISOLATED@市场</code>：市场的隔离钱包，其中市场为市场符号</td>
+<td>源类型，有效值为：<br/><code>SPOT</code>：现货钱包<br/><code>CROSS</code>：全仓钱包<br/><code>ISOLATED</code>：市场的隔离钱包，其中市场为市场符号</td>
 </tr>
 <tr>
 <td>walletDest</td>
 <td>string</td>
-<td>Yes</td>
-<td>目标钱包</td>
+<td>No</td>
+<td>目标钱包，如果<code>walletDestType</code>为<code>ISOLATED</code>则为必须</td>
 </tr>
 <tr>
 <td>walletDestType</td>
 <td>string</td>
 <td>Yes</td>
-<td>目标类型，有效值为：<br/><code>SPOT@</code>：现货钱包<br/><code>CROSS@</code>：全仓钱包<br/><code>ISOLATED@市场</code>：市场的隔离钱包，其中市场为市场符号</td>
+<td>目标类型，有效值为：<br/><code>SPOT</code>：现货钱包<br/><code>CROSS</code>：全仓钱包<br/><code>ISOLATED</code>：市场的隔离钱包，其中市场为市场符号</td>
 </tr>
 <tr>
 <td>fromUser</td>
