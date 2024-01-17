@@ -32,6 +32,10 @@ Spot 和 Futures 的会话是分开的。
 
 # 更新日志
 
+## 版本 1.1.5（2024年1月9日）
+
+添加订单被拒绝生效时间（timeInForce）默認状态
+
 ## 版本 1.1.4（2023年11月15日）
 
 添加新的订单生效时间（timeInForce）状态
@@ -182,7 +186,8 @@ final String SIGNATURE = Hex.encodeHexString(HmacUtils.getInitializedMac(HmacAlg
 | 59  | TimeInForce | 1        | "1": 永久有效; "3": 立即成交或取消; "4": 填成或立刻取消; "a"=半分钟; "b"=五分钟; "c"=一小时; "d"=十二小时; "e"=一周; "f"=一个月; （限价单） |
 | 18  | ExecInst    | 6        | 此参数是可选的。 "E": 仅减少， "6": 仅发布，未提供: 标准                                                                |
 
-如果订单被接受，将返回执行报告（8），其中ExecType为：0（新建）、1（部分成交）、2（全部成交）、4（已取消）、7（已停止）、8（已拒绝）。
+如果订单被接受，将返回执行报告（8），其中ExecType为：0（新建）、1（部分成交）、2（全部成交）、4（已取消）、7（已停止）、8（已拒绝）。<br>
+如果订单除了被取消、拒绝之外的錯誤，TimeInForce始终设置为："1"。
 
 
 ## 订单取消请求（F）
@@ -216,7 +221,7 @@ final String SIGNATURE = Hex.encodeHexString(HmacUtils.getInitializedMac(HmacAlg
 
 ## 订单状态请求（H）
 
-由服务器发送以通知客户端订单状态请求（F）失败。
+由客户端发送以请求订单状态
 
 | 标签 | 名称 | 值 | 描述 |
 | --- | --- | --- | --- |
