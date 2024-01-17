@@ -237,6 +237,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-1-1-5-9th-jan-2024" class="toc-h2 toc-link" data-title="Version 1.1.5 (9th Jan 2024)">Version 1.1.5 (9th Jan 2024)</a>
+                  </li>
+                  <li>
                     <a href="#version-1-1-4-15th-nov-2023" class="toc-h2 toc-link" data-title="Version 1.1.4 (15th Nov 2023)">Version 1.1.4 (15th Nov 2023)</a>
                   </li>
                   <li>
@@ -263,7 +266,7 @@
             <a href="#messages" class="toc-h1 toc-link" data-title="Messages">Messages</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#fix-protocal-attributes" class="toc-h2 toc-link" data-title="FIX Protocal Attributes">FIX Protocal Attributes</a>
+                    <a href="#fix-protocol-attributes" class="toc-h2 toc-link" data-title="FIX Protocol Attributes">FIX Protocol Attributes</a>
                   </li>
                   <li>
                     <a href="#common-request-attributes" class="toc-h2 toc-link" data-title="Common Request Attributes">Common Request Attributes</a>
@@ -345,7 +348,9 @@
 <td>FUTURES</td>
 </tr>
 </tbody></table>
-<h1 id='change-log'>Change Log</h1><h2 id='version-1-1-4-15th-nov-2023'>Version 1.1.4 (15th Nov 2023)</h2>
+<h1 id='change-log'>Change Log</h1><h2 id='version-1-1-5-9th-jan-2024'>Version 1.1.5 (9th Jan 2024)</h2>
+<p>Add new cancelled/rejected timeInForce default status</p>
+<h2 id='version-1-1-4-15th-nov-2023'>Version 1.1.4 (15th Nov 2023)</h2>
 <p>Add new timeInForce status</p>
 <h2 id='version-1-1-3-10th-july-2023'>Version 1.1.3 (10th July 2023)</h2>
 <p>Add <a href="#heartbeat-0">heartbeat</a> recommondation</p>
@@ -478,7 +483,7 @@
 </tbody></table>
 <h1 id='messages'>Messages</h1>
 <p>FIX protocol uses field separator (character: <code>0x01</code>) to separate attributes in messages.</p>
-<h2 id='fix-protocal-attributes'>FIX Protocal Attributes</h2>
+<h2 id='fix-protocol-attributes'>FIX Protocol Attributes</h2>
 <p>Our FIX API is based on the <code>FIX 4.2</code> specification, which can be referenced at this <a href="https://www.onixs.biz/fix-dictionary/4.2/index.html">URL</a>.</p>
 <h2 id='common-request-attributes'>Common Request Attributes</h2>
 <p>Below attributes are required in every client&#39;s request message.</p>
@@ -751,7 +756,8 @@ Client&#39;s API Key and secret can be generated from API page in BTSE portal. C
 </tr>
 </tbody></table>
 
-<p>If the order is accepted, an ExecutionReport (8) will be returned with ExecType: 0 (New), 1 (Partial fill), 2 (Fill), 4 (Canceled), 7 (Stopped), 8 (Rejected).</p>
+<p>If the order is accepted, an ExecutionReport (8) will be returned with ExecType: 0 (New), 1 (Partial fill), 2 (Fill), 4 (Canceled), 7 (Stopped), 8 (Rejected). <br>
+For errors other than order cancelled and rejected, TimeInForce will be always 1.</p>
 <h2 id='order-cancel-request-f'>Order Cancel Request (F)</h2>
 <p>Sent by the client to request to cancel an order.</p>
 
@@ -841,7 +847,7 @@ Client&#39;s API Key and secret can be generated from API page in BTSE portal. C
 </tr>
 </tbody></table>
 <h2 id='order-status-request-h'>Order Status Request (H)</h2>
-<p>Sent by the server to notify the client that an OrderStatusRequest (F) failed.</p>
+<p>Sent by the client to query the order status.</p>
 
 <table><thead>
 <tr>
