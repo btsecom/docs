@@ -32,6 +32,10 @@ Sessions for Spot and Futures are separated.
 
 # Change Log
 
+## Version 1.1.5 (9th Jan 2024)
+
+Add new cancelled/rejected timeInForce default status
+
 ## Version 1.1.4 (15th Nov 2023)
 
 Add new timeInForce status
@@ -89,7 +93,7 @@ When rate limit rule is violated, client's request would be rejected and server 
 
 FIX protocol uses field separator (character: `0x01`) to separate attributes in messages.
 
-## FIX Protocal Attributes
+## FIX Protocol Attributes
 Our FIX API is based on the `FIX 4.2` specification, which can be referenced at this [URL](https://www.onixs.biz/fix-dictionary/4.2/index.html).
 
 ## Common Request Attributes
@@ -182,7 +186,8 @@ Sent by the client to submit a new order. Only Market, Limit orders are currentl
 | 59	| TimeInForce | 1        | "1": Good Till Cancel; "3": Immediate or Cancel; "4": Fill or Kill; "a"=half minute; "b":five minute; "c":one hour; "d":twelve hour; "e":one week; "f":one month;  (for Limit order) |
 | 18	| ExecInst    | 6        | This parameter is optional. "E": reduce only, "6": post only, not supplied: standard                                                                                                 |
 
-If the order is accepted, an ExecutionReport (8) will be returned with ExecType: 0 (New), 1 (Partial fill), 2 (Fill), 4 (Canceled), 7 (Stopped), 8 (Rejected).
+If the order is accepted, an ExecutionReport (8) will be returned with ExecType: 0 (New), 1 (Partial fill), 2 (Fill), 4 (Canceled), 7 (Stopped), 8 (Rejected). <br>
+For errors other than order cancelled and rejected, TimeInForce will be always 1.
 
 
 ## Order Cancel Request (F)
@@ -216,7 +221,7 @@ Sent by the server to notify the client that an OrderCancelRequest (F) failed.
 
 ## Order Status Request (H)
 
-Sent by the server to notify the client that an OrderStatusRequest (F) failed.
+Sent by the client to query the order status.
 
 | Tag | Name | Value | Description |
 | --- | ---  | ---   | ---         |
