@@ -12,6 +12,7 @@ headingLevel: 2
 ---
 
 # 更新日志
+
 ## 版本 2.6.17 (2024年1月31日)
 
 * 新增 [price protection](https://support.btse.com/en/support/solutions/articles/43000720577-what-is-price-protection-mechanism) 相关状态
