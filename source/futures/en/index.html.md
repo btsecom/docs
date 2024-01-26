@@ -14,6 +14,7 @@ headingLevel: 2
 # Change Log
 
 ## Version 2.6.17 (31st January 2024)
+
 * Add [price protection](https://support.btse.com/en/support/solutions/articles/43000720577-what-is-price-protection-mechanism) related status
 
 ## Version 2.6.16 (5th January 2024)
