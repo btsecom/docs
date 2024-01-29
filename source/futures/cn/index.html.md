@@ -2088,6 +2088,7 @@ BTSE 的速率限制如下：
 | leverage           | long    | Yes      | 杠杆值                                                                                   |
 | useNewSymbolNaming | boolean | No       | 如果使用新的期货市场名称作为符号，则为True，默认为False                                 |
 | positionMode       | string  | no       | 单向持仓`ONE_WAY`（默认）或 双向持仓`HEDGE`, 在双向持仓时为必填项                                                            |
+| marginMode       | string  | no       | `CROSS` 或 `ISOLATED`(默认)                                                            |
 
 ### 响应内容
 

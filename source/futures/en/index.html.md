@@ -2109,7 +2109,6 @@ Change leverage values for the specified market
   "symbol": "BTC-PERP",
   "leverage": 100.0,
   "marginMode": "ISOLATED"
-
 }
 ```
 
