@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-2-7-0-29th-january-2024" class="toc-h2 toc-link" data-title="Version 2.7.0 (29th January 2024)">Version 2.7.0 (29th January 2024)</a>
+                  </li>
+                  <li>
                     <a href="#version-2-6-16-5th-january-2024" class="toc-h2 toc-link" data-title="Version 2.6.16 (5th January 2024)">Version 2.6.16 (5th January 2024)</a>
                   </li>
                   <li>
@@ -536,7 +539,15 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-2-6-16-5th-january-2024'>Version 2.6.16 (5th January 2024)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-2-7-0-29th-january-2024'>Version 2.7.0 (29th January 2024)</h2>
+<ul>
+<li>Support Cross Leverage
+
+<ul>
+<li>Add marginMode field in <a href="#get-leverage"><code>get-leverage</code></a> and <a href="#set-leverage"><code>Set Leverage</code></a></li>
+</ul></li>
+</ul>
+<h2 id='version-2-6-16-5th-january-2024'>Version 2.6.16 (5th January 2024)</h2>
 <ul>
 <li>Change description for <code>walletSrc</code> and <code>walletDest</code> for <a href="#transfer-funds-between-futures-wallet"><code>wallet-transfer</code></a> and <a href="#sub-account-wallet-transfer"><code>subaccount-wallet-transfer</code></a> which is <strong>required</strong> only for related <code>walletSrcType</code> and <code>walletDestType</code> is <code>ISOLATED</code></li>
 </ul>
@@ -4683,7 +4694,8 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"leverage"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="nl">"leverage"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"marginMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CROSS"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
@@ -4692,7 +4704,8 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"leverage"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HEDGE"</span><span class="w">
+    </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HEDGE"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"marginMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CROSS"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
@@ -4728,7 +4741,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>leverage</td>
 <td>long</td>
 <td>Yes</td>
-<td>Leverage value</td>
+<td>Leverage value, 0 means cross maximum leverage</td>
 </tr>
 <tr>
 <td>useNewSymbolNaming</td>
@@ -4741,6 +4754,12 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>string</td>
 <td>no</td>
 <td>ONE_WAY(default) or HEDGE. Mandatory when positionMode is <code>HEDGE</code></td>
+</tr>
+<tr>
+<td>marginMode</td>
+<td>string</td>
+<td>no</td>
+<td>CROSS or ISOLATED(default)</td>
 </tr>
 </tbody></table>
 <h3 id='response-content-19'>Response Content</h3>
@@ -4789,7 +4808,8 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-PERP"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"leverage"</span><span class="p">:</span><span class="w"> </span><span class="mf">100.0</span><span class="w">
+  </span><span class="nl">"leverage"</span><span class="p">:</span><span class="w"> </span><span class="mf">100.0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"marginMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ISOLATED"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p><code>Get /api/v2.1/leverage</code></p>
@@ -4830,7 +4850,13 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>leverage</td>
 <td>double</td>
 <td>Yes</td>
-<td>Current leverage value for the market for isolated margin mode, return 0 if the margin mode is cross</td>
+<td>Current leverage value for the market, return 0 means the leverage is the maximum cross leverage</td>
+</tr>
+<tr>
+<td>marginMode</td>
+<td>string</td>
+<td>Yes</td>
+<td>Current margin mode</td>
 </tr>
 </tbody></table>
 <h2 id='change-contract-settlement-currency'>Change Contract Settlement Currency</h2>
@@ -5338,7 +5364,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>symbol</td>
 <td>string</td>
 <td>Yes</td>
-<td>Markey symbol</td>
+<td>Market symbol</td>
 </tr>
 <tr>
 <td>timestamp</td>
@@ -5499,7 +5525,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>leverage</td>
 <td>double</td>
 <td>Yes</td>
-<td>Leverage</td>
+<td>Leverage. In CROSS wallet, this field is current leverage, not leverage setting</td>
 </tr>
 <tr>
 <td>openMargin</td>
