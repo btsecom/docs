@@ -13,6 +13,10 @@ headingLevel: 2
 
 # 更新日志
 
+## 版本 2.7.1 (2024年1月30日)
+
+* 新增API [`Funding History`](#funding-history)
+
 ##  版本 2.7.0 (2024年1月29日)
 
 * 支持全仓杠杆
@@ -830,6 +834,46 @@ BTSE 的速率限制如下：
 | size      | double  | Yes      | 交易尺寸                                     |
 | serialId  | double  | Yes      | 序列ID，运行序列号                           |
 | timestamp | long    | Yes      | 交易时间戳                                   |
+
+
+## 查询资金费率
+
+> 响应
+
+```json
+{
+  "BTC-PERP": [
+    {
+      "time": 1706515200,
+      "rate": 0.000011405,
+      "symbol": "BTC-PERP"
+    }
+  ]
+}
+```
+
+`GET /api/v2.1/funding_history`
+
+获取市场的资金费率历史
+
+### Request Parameters
+
+| 名称                | 类型    | 是否必须 | 描述                                                         |
+| ---                | ---     | ---      | ---                                                        |
+| symbol             | string  | No       | 市场符号                                                    |
+| count              | int     | No       | 返回的记录数 (此设置与 from/to 互斥)                           |
+| from               | long    | No       | 以毫秒为单位的开始时间 (例如 1624987283000; 此设置与 count 互斥) |
+| to                 | long    | No       | 以毫秒为单位的结束时间 (例如 1624987283000; 此设置与 count 互斥) |
+| useNewSymbolNaming | boolean | No       | 设置为True以使用symbol中的新期货市场名称，默认为False            |
+
+### Response Content
+
+| 名称       | 类型   | 是否必须   | 描述                 |
+| ---       | ---    | ---      | ---                  |
+| symbol    | string | Yes      | 市场符号              |
+| time      | long   | Yes      | 以秒为单位的资金费率时间 |
+| rate      | double | Yes      | 资金费率              |
+
 
 
 # 交易端点
