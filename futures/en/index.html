@@ -544,23 +544,23 @@
 <li>Support Cross Leverage
 
 <ul>
-<li>Add marginMode field in <a href="#get-leverage"><code>get-leverage</code></a> and <a href="#set-leverage"><code>Set Leverage</code></a></li>
+<li>Add marginMode field in <a href="#get-leverage"><code>Get leverage</code></a> and <a href="#set-leverage"><code>Set Leverage</code></a></li>
 </ul></li>
 </ul>
 <h2 id='version-2-6-16-5th-january-2024'>Version 2.6.16 (5th January 2024)</h2>
 <ul>
-<li>Change description for <code>walletSrc</code> and <code>walletDest</code> for <a href="#transfer-funds-between-futures-wallet"><code>wallet-transfer</code></a> and <a href="#sub-account-wallet-transfer"><code>subaccount-wallet-transfer</code></a> which is <strong>required</strong> only for related <code>walletSrcType</code> and <code>walletDestType</code> is <code>ISOLATED</code></li>
+<li>Change description for <code>walletSrc</code> and <code>walletDest</code> for <a href="#transfer-funds-between-futures-wallet"><code>Wallet Transfer</code></a> and <a href="#sub-account-wallet-transfer"><code>Sub-account Wallet Transfer</code></a> which is <strong>required</strong> only for related <code>walletSrcType</code> and <code>walletDestType</code> is <code>ISOLATED</code></li>
 </ul>
 <h2 id='version-2-6-15-8th-november-2023'>Version 2.6.15 (8th November 2023)</h2>
 <ul>
-<li>Add API for querying <a href="#query-position-mode"><code>positionMode</code></a> and changing <a href="#change-position-mode"><code>positionMode</code></a></li>
+<li>Add API for querying <a href="#query-position-mode"><code>Query Position Mode</code></a> and changing <a href="#change-position-mode"><code>Change Position Mode</code></a></li>
 <li>API related to order and position have added the fields or parameter: positionMode and positionId and positionDirection</li>
 </ul>
 <h2 id='version-2-6-14-7th-november-2023'>Version 2.6.14 (7th November 2023)</h2>
 <ul>
-<li>Update fundingRate description in <a href="#market-summary"><code>market-summary</code></a></li>
-<li>Add listFullAttributes parameter in <a href="#market-summary"><code>market-summary</code></a></li>
-<li>Add optional fundingIntervalMinutes and fundingTime in <a href="#market-summary"><code>market-summary</code></a></li>
+<li>Update fundingRate description in <a href="#market-summary"><code>Market Summary</code></a></li>
+<li>Add listFullAttributes parameter in <a href="#market-summary"><code>Market Summary</code></a></li>
+<li>Add optional fundingIntervalMinutes and fundingTime in <a href="#market-summary"><code>Market Summary</code></a></li>
 <li>The new funding rate interval scheduled effective date is <code>Nov 14, 2023</code></li>
 <li>Add new API <a href="#query-order"><code>Query Order</code></a></li>
 </ul>
@@ -627,11 +627,11 @@
 </ul>
 <h2 id='version-2-6-9-11th-september-2023'>Version 2.6.9 (11th September 2023)</h2>
 <ul>
-<li>Add <a href="#get-leverage"><code>get-leverage</code></a> to get leverage for market</li>
+<li>Add <a href="#get-leverage"><code>Get leverage</code></a> to get leverage for market</li>
 </ul>
 <h2 id='version-2-6-8-3rd-september-2023'>Version 2.6.8 (3rd September 2023)</h2>
 <ul>
-<li>Remove the slide parameter from <a href="#amend-order"><code>amend-order</code></a></li>
+<li>Remove the slide parameter from <a href="#amend-order"><code>Amend Order</code></a></li>
 </ul>
 <h2 id='version-2-6-7-29th-august-2023'>Version 2.6.7 (29th August 2023)</h2>
 <ul>
@@ -4739,7 +4739,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 </tr>
 <tr>
 <td>leverage</td>
-<td>long</td>
+<td>double</td>
 <td>Yes</td>
 <td>Leverage value, 0 means cross maximum leverage</td>
 </tr>
