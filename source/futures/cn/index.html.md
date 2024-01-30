@@ -20,7 +20,7 @@ headingLevel: 2
 
 ## 版本 2.6.16 (2024年1月5日)
 
-* 修正API [`wallet-transfer`](#transfer-funds-between-futures-wallet) 和 [`subaccount-wallet-transfer`](#sub-account-wallet-transfer) 的描述中，只有当`walletSrcType`和`walletDestType`为`ISOLATED`时，相对应的`walletSrc`和`walletDest`才为**必须**
+* 修正API [`在期货钱包之间转账资金`](#8babba8e02) 和 [`子账户钱包转账`](#a1b5b663b6) 的描述中，只有当`walletSrcType`和`walletDestType`为`ISOLATED`时，相对应的`walletSrc`和`walletDest`才为**必须**
 
 ## 版本 2.6.15 (2023年11月8日)
 

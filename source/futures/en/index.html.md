@@ -20,18 +20,18 @@ headingLevel: 2
 
 ## Version 2.6.16 (5th January 2024)
 
-* Change description for `walletSrc` and `walletDest` for [`wallet-transfer`](#transfer-funds-between-futures-wallet) and [`subaccount-wallet-transfer`](#sub-account-wallet-transfer) which is **required** only for related `walletSrcType` and `walletDestType` is `ISOLATED`
+* Change description for `walletSrc` and `walletDest` for [`Wallet Transfer`](#transfer-funds-between-futures-wallet) and [`Sub-account Wallet Transfer`](#sub-account-wallet-transfer) which is **required** only for related `walletSrcType` and `walletDestType` is `ISOLATED`
 
 ## Version 2.6.15 (8th November 2023)
 
-* Add API for querying [`positionMode`](#query-position-mode) and changing [`positionMode`](#change-position-mode)
+* Add API for querying [`Query Position Mode`](#query-position-mode) and changing [`Change Position Mode`](#change-position-mode)
 * API related to order and position have added the fields or parameter: positionMode and positionId and positionDirection
 
 ## Version 2.6.14 (7th November 2023)
 
-* Update fundingRate description in [`market-summary`](#market-summary)
-* Add listFullAttributes parameter in [`market-summary`](#market-summary)
-* Add optional fundingIntervalMinutes and fundingTime in [`market-summary`](#market-summary)
+* Update fundingRate description in [`Market Summary`](#market-summary)
+* Add listFullAttributes parameter in [`Market Summary`](#market-summary)
+* Add optional fundingIntervalMinutes and fundingTime in [`Market Summary`](#market-summary)
 * The new funding rate interval scheduled effective date is `Nov 14, 2023`
 * Add new API [`Query Order`](#query-order)
 
@@ -80,7 +80,7 @@ headingLevel: 2
 * Add [`Get leverage`](#get-leverage) to get leverage for market
 
 ## Version 2.6.8 (3rd September 2023)
-* Remove the slide parameter from [`amend-order`](#amend-order)
+* Remove the slide parameter from [`Amend Order`](#amend-order)
 
 ## Version 2.6.7 (29th August 2023)
 * Add 451 status code in [`API Status Codes`](#api-status-codes) and make [`Order Book Websocket Streams`](#order-book-websocket-streams) as independent paragraph
@@ -2085,7 +2085,7 @@ Change leverage values for the specified market
 | Name               | Type    | Required | Description                                                       |
 | ---                | ---     | ---      |-------------------------------------------------------------------|
 | symbol             | string  | Yes      | Market symbol                                                     |
-| leverage           | long    | Yes      | Leverage value, 0 means cross maximum leverage                    |
+| leverage           | double  | Yes      | Leverage value, 0 means cross maximum leverage                    |
 | useNewSymbolNaming | boolean | No       | True if use new futures market name in symbol default to False    |
 | positionMode       | string  | no       | ONE_WAY(default) or HEDGE. Mandatory when positionMode is `HEDGE` |
 | marginMode         | string  | no       | CROSS or ISOLATED(default)                                        |
