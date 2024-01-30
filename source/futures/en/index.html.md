@@ -16,7 +16,7 @@ headingLevel: 2
 ## Version 2.7.0 (29th January 2024)
 
 * Support Cross Leverage
- - Add marginMode field in [`get-leverage`](#get-leverage) and [`Set Leverage`](#set-leverage)
+ - Add marginMode field in [`Get leverage`](#get-leverage) and [`Set Leverage`](#set-leverage)
 
 ## Version 2.6.16 (5th January 2024)
 
@@ -77,7 +77,7 @@ headingLevel: 2
 * Correct response data type
 
 ## Version 2.6.9 (11th September 2023)
-* Add [`get-leverage`](#get-leverage) to get leverage for market
+* Add [`Get leverage`](#get-leverage) to get leverage for market
 
 ## Version 2.6.8 (3rd September 2023)
 * Remove the slide parameter from [`amend-order`](#amend-order)
