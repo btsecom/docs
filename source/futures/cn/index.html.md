@@ -15,7 +15,7 @@ headingLevel: 2
 
 ## 版本 2.7.1 (2024年1月30日)
 
-* 新增API [`Funding History`](#funding-history)
+* 新增API [`查询资金费率`](#3b35955a7e)
 
 ##  版本 2.7.0 (2024年1月29日)
 
