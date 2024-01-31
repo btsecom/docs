@@ -874,8 +874,6 @@ BTSE 的速率限制如下：
 | time      | long   | Yes      | 以秒为单位的资金费率时间 |
 | rate      | double | Yes      | 资金费率              |
 
-
-
 # 交易端点
 
 ## 创建新订单

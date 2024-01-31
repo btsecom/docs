@@ -874,7 +874,6 @@ Get funding rate history for certain symbols
 | time      | long   | Yes      | The epoch timestamp in second of the funding rate |
 | rate      | double | Yes      | Funding rate                                      |
 
-
 # Trade Endpoints
 
 ## Create New Order
