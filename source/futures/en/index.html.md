@@ -13,6 +13,10 @@ headingLevel: 2
 
 # Change Log
 
+## Version 2.7.1 (30th January 2024)
+
+* Add API for querying [`Funding History`](#funding-history)
+
 ## Version 2.7.0 (29th January 2024)
 
 * Support Cross Leverage
@@ -831,6 +835,44 @@ Get trade fills for the market specified by `symbol`
 | serialId  | double | Yes      | Serial Id, running sequence number      |
 | timestamp | long   | Yes      | Transacted timestamp                    |
 
+
+## Funding History
+
+> Response
+
+```json
+{
+  "BTC-PERP": [
+    {
+      "time": 1706515200,
+      "rate": 0.000011405,
+      "symbol": "BTC-PERP"
+    }
+  ]
+}
+```
+
+`GET /api/v2.1/funding_history`
+
+Get funding rate history for certain symbols
+
+### Request Parameters
+
+| Name               | Type    | Required | Description                                                                        |
+| ---                | ---     | ---      | ---                                                                                |
+| symbol             | string  | No       | Market symbol (e.g., BTC-PERP)                                                     |
+| count              | int     | No       | Number of records to return (mutually exclusive with from/to)                      |
+| from               | long    | No       | Starting time in milliseconds (e.g., 1624987283000; mutually exclusive with count) |
+| to                 | long    | No       | Ending time in milliseconds (e.g., 1624987283000; mutually exclusive with count)   |
+| useNewSymbolNaming | boolean | No       | True to use new futures market name in symbol, default to False                    |
+
+### Response Content
+
+| Name      | Type   | Required | Description                                       |
+| ---       | ---    | ---      | ---                                               |
+| symbol    | string | Yes      | Market symbol                                     |
+| time      | long   | Yes      | The epoch timestamp in second of the funding rate |
+| rate      | double | Yes      | Funding rate                                      |
 
 # Trade Endpoints
 
