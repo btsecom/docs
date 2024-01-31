@@ -13,24 +13,33 @@ headingLevel: 2
 
 # Change Log
 
-## Version 2.6.17 (31st January 2024)
+## Version 2.7.2 (31st January 2024)
 
 * Add [price protection](https://support.btse.com/en/support/solutions/articles/43000720577-what-is-price-protection-mechanism) related status
 
+## Version 2.7.1 (30th January 2024)
+
+* Add API for querying [`Funding History`](#funding-history)
+
+## Version 2.7.0 (29th January 2024)
+
+* Support Cross Leverage
+ - Add marginMode field in [`Get leverage`](#get-leverage) and [`Set Leverage`](#set-leverage)
+
 ## Version 2.6.16 (5th January 2024)
 
-* Change description for `walletSrc` and `walletDest` for [`wallet-transfer`](#transfer-funds-between-futures-wallet) and [`subaccount-wallet-transfer`](#sub-account-wallet-transfer) which is **required** only for related `walletSrcType` and `walletDestType` is `ISOLATED`
+* Change description for `walletSrc` and `walletDest` for [`Wallet Transfer`](#transfer-funds-between-futures-wallet) and [`Sub-account Wallet Transfer`](#sub-account-wallet-transfer) which is **required** only for related `walletSrcType` and `walletDestType` is `ISOLATED`
 
 ## Version 2.6.15 (8th November 2023)
 
-* Add API for querying [`positionMode`](#query-position-mode) and changing [`positionMode`](#change-position-mode)
+* Add API for querying [`Query Position Mode`](#query-position-mode) and changing [`Change Position Mode`](#change-position-mode)
 * API related to order and position have added the fields or parameter: positionMode and positionId and positionDirection
 
 ## Version 2.6.14 (7th November 2023)
 
-* Update fundingRate description in [`market-summary`](#market-summary)
-* Add listFullAttributes parameter in [`market-summary`](#market-summary)
-* Add optional fundingIntervalMinutes and fundingTime in [`market-summary`](#market-summary)
+* Update fundingRate description in [`Market Summary`](#market-summary)
+* Add listFullAttributes parameter in [`Market Summary`](#market-summary)
+* Add optional fundingIntervalMinutes and fundingTime in [`Market Summary`](#market-summary)
 * The new funding rate interval scheduled effective date is `Nov 14, 2023`
 * Add new API [`Query Order`](#query-order)
 
@@ -76,10 +85,10 @@ headingLevel: 2
 * Correct response data type
 
 ## Version 2.6.9 (11th September 2023)
-* Add [`get-leverage`](#get-leverage) to get leverage for market
+* Add [`Get leverage`](#get-leverage) to get leverage for market
 
 ## Version 2.6.8 (3rd September 2023)
-* Remove the slide parameter from [`amend-order`](#amend-order)
+* Remove the slide parameter from [`Amend Order`](#amend-order)
 
 ## Version 2.6.7 (29th August 2023)
 * Add 451 status code in [`API Status Codes`](#api-status-codes) and make [`Order Book Websocket Streams`](#order-book-websocket-streams) as independent paragraph
@@ -831,6 +840,44 @@ Get trade fills for the market specified by `symbol`
 | serialId  | double | Yes      | Serial Id, running sequence number      |
 | timestamp | long   | Yes      | Transacted timestamp                    |
 
+
+## Funding History
+
+> Response
+
+```json
+{
+  "BTC-PERP": [
+    {
+      "time": 1706515200,
+      "rate": 0.000011405,
+      "symbol": "BTC-PERP"
+    }
+  ]
+}
+```
+
+`GET /api/v2.1/funding_history`
+
+Get funding rate history for certain symbols
+
+### Request Parameters
+
+| Name               | Type    | Required | Description                                                                        |
+| ---                | ---     | ---      | ---                                                                                |
+| symbol             | string  | No       | Market symbol (e.g., BTC-PERP)                                                     |
+| count              | int     | No       | Number of records to return (mutually exclusive with from/to)                      |
+| from               | long    | No       | Starting time in milliseconds (e.g., 1624987283000; mutually exclusive with count) |
+| to                 | long    | No       | Ending time in milliseconds (e.g., 1624987283000; mutually exclusive with count)   |
+| useNewSymbolNaming | boolean | No       | True to use new futures market name in symbol, default to False                    |
+
+### Response Content
+
+| Name      | Type   | Required | Description                                       |
+| ---       | ---    | ---      | ---                                               |
+| symbol    | string | Yes      | Market symbol                                     |
+| time      | long   | Yes      | The epoch timestamp in second of the funding rate |
+| rate      | double | Yes      | Funding rate                                      |
 
 # Trade Endpoints
 
@@ -2048,7 +2095,8 @@ Changes risk limit for the specified market
 ```json
 {
   "symbol": "BTCPFC",
-  "leverage": 0
+  "leverage": 0,
+  "marginMode": "CROSS"
 }
 ```
 
@@ -2058,7 +2106,8 @@ Changes risk limit for the specified market
 {
     "symbol": "BTCPFC",
     "leverage": 0,
-    "positionMode": "HEDGE"
+    "positionMode": "HEDGE",
+    "marginMode": "CROSS"
 }
 ```
 
@@ -2083,9 +2132,10 @@ Change leverage values for the specified market
 | Name               | Type    | Required | Description                                                       |
 | ---                | ---     | ---      |-------------------------------------------------------------------|
 | symbol             | string  | Yes      | Market symbol                                                     |
-| leverage           | long    | Yes      | Leverage value                                                    |
+| leverage           | double  | Yes      | Leverage value, 0 means cross maximum leverage                    |
 | useNewSymbolNaming | boolean | No       | True if use new futures market name in symbol default to False    |
 | positionMode       | string  | no       | ONE_WAY(default) or HEDGE. Mandatory when positionMode is `HEDGE` |
+| marginMode         | string  | no       | CROSS or ISOLATED(default)                                        |
 
 ### Response Content
 
@@ -2104,7 +2154,8 @@ Change leverage values for the specified market
 ```json
 {
   "symbol": "BTC-PERP",
-  "leverage": 100.0
+  "leverage": 100.0,
+  "marginMode": "ISOLATED"
 }
 ```
 
@@ -2123,7 +2174,8 @@ Get leverage value for the specified market
 | Name      | Type    | Required | Description                                                                                          |
 | ---       | ---     | ---      |------------------------------------------------------------------------------------------------------|
 | symbol    | string  | Yes      | Market symbol                                                                                        |
-| leverage  | double  | Yes      | Current leverage value for the market for isolated margin mode, return 0 if the margin mode is cross |
+| leverage  | double  | Yes      | Current leverage value for the market, return 0 means the leverage is the maximum cross leverage     |
+| marginMode| string  | Yes      | Current margin mode                                                                                  |
 
 ## Change Contract Settlement Currency
 
@@ -2359,7 +2411,7 @@ Changes position mode
 
 | Name      | Type    | Required | Description                                                            |
 | ---       | ---     | ---      | -----------------------------------------------------------------------|
-| symbol    | string  | Yes      | Markey symbol                                                          |
+| symbol    | string  | Yes      | Market symbol                                                          |
 | timestamp | long    | No       | Timestamp where position mode was set                                  |
 | status    | string  | No       | Status of the request. Values are: <br>20: Success                     |
 | type      | string  | No       | Value will be 129 indicating that type is `Futures Config Mode Change` |
@@ -2421,22 +2473,22 @@ Query user's wallet balance. Requires `Read` permissions on the API key.
 
 #### Wallet
 
-| Name                 | Type         | Required | Description                          |
-| ---                  | ---          | ---      | ---                                  |
-| wallet               | string       | Yes      | Wallet name                          |
-| activeWalletName     | string       | Yes      | Active wallet name                   |
-| queryType            | integer      | Yes      | Query type                           |
-| trackingID           | long         | Yes      | Internal tracking ID, not being used |
-| walletTotalValue     | double       | Yes      | Wallet total value                   |
-| totalValue           | double       | Yes      | Total value                          |
-| marginBalance        | double       | Yes      | Margin balance                       |
-| availableBalance     | double       | Yes      | Available Balance                    |
-| unrealisedProfitLoss | double       | Yes      | Unrealised Profit / Loss             |
-| maintenanceMargin    | double       | Yes      | Maintenance margin                   |
-| leverage             | double       | Yes      | Leverage                             |
-| openMargin           | double       | Yes      | Open margin                          |
-| assets               | Asset object | Yes      | Assets available                     |
-| assetsInUse          | Asset object | Yes      | Assets in use                        |
+| Name                 | Type         | Required | Description                                                                      |
+| ---                  | ---          | ---      | ---                                                                              |
+| wallet               | string       | Yes      | Wallet name                                                                      |
+| activeWalletName     | string       | Yes      | Active wallet name                                                               |
+| queryType            | integer      | Yes      | Query type                                                                       |
+| trackingID           | long         | Yes      | Internal tracking ID, not being used                                             |
+| walletTotalValue     | double       | Yes      | Wallet total value                                                               |
+| totalValue           | double       | Yes      | Total value                                                                      |
+| marginBalance        | double       | Yes      | Margin balance                                                                   |
+| availableBalance     | double       | Yes      | Available Balance                                                                |
+| unrealisedProfitLoss | double       | Yes      | Unrealised Profit / Loss                                                         |
+| maintenanceMargin    | double       | Yes      | Maintenance margin                                                               |
+| leverage             | double       | Yes      | Leverage. In CROSS wallet, this field is current leverage, not leverage setting  |
+| openMargin           | double       | Yes      | Open margin                                                                      |
+| assets               | Asset object | Yes      | Assets available                                                                 |
+| assetsInUse          | Asset object | Yes      | Assets in use                                                                    |
 
 #### Assets / Asset in Use
 

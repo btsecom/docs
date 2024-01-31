@@ -13,13 +13,22 @@ headingLevel: 2
 
 # 更新日志
 
-## 版本 2.6.17 (2024年1月31日)
+## 版本 2.7.2 (2024年1月31日)
 
 * 新增 [price protection](https://support.btse.com/en/support/solutions/articles/43000720577-what-is-price-protection-mechanism) 相关状态
 
+## 版本 2.7.1 (2024年1月30日)
+
+* 新增API [`查询资金费率`](#3b35955a7e)
+
+##  版本 2.7.0 (2024年1月29日)
+
+* 支持全仓杠杆
+ -  在[`获取杠杆`](#6d32c96f0c)和[`设置杠杆`](#47d1d65d6f)中新增了新的栏位和参数 marginMode
+
 ## 版本 2.6.16 (2024年1月5日)
 
-* 修正API [`wallet-transfer`](#transfer-funds-between-futures-wallet) 和 [`subaccount-wallet-transfer`](#sub-account-wallet-transfer) 的描述中，只有当`walletSrcType`和`walletDestType`为`ISOLATED`时，相对应的`walletSrc`和`walletDest`才为**必须**
+* 修正API [`在期货钱包之间转账资金`](#8babba8e02) 和 [`子账户钱包转账`](#a1b5b663b6) 的描述中，只有当`walletSrcType`和`walletDestType`为`ISOLATED`时，相对应的`walletSrc`和`walletDest`才为**必须**
 
 ## 版本 2.6.15 (2023年11月8日)
 
@@ -831,6 +840,44 @@ BTSE 的速率限制如下：
 | serialId  | double  | Yes      | 序列ID，运行序列号                           |
 | timestamp | long    | Yes      | 交易时间戳                                   |
 
+
+## 查询资金费率
+
+> 响应
+
+```json
+{
+  "BTC-PERP": [
+    {
+      "time": 1706515200,
+      "rate": 0.000011405,
+      "symbol": "BTC-PERP"
+    }
+  ]
+}
+```
+
+`GET /api/v2.1/funding_history`
+
+获取市场的资金费率历史
+
+### Request Parameters
+
+| 名称                | 类型    | 是否必须 | 描述                                                         |
+| ---                | ---     | ---      | ---                                                        |
+| symbol             | string  | No       | 市场符号                                                    |
+| count              | int     | No       | 返回的记录数 (此设置与 from/to 互斥)                           |
+| from               | long    | No       | 以毫秒为单位的开始时间 (例如 1624987283000; 此设置与 count 互斥) |
+| to                 | long    | No       | 以毫秒为单位的结束时间 (例如 1624987283000; 此设置与 count 互斥) |
+| useNewSymbolNaming | boolean | No       | 设置为True以使用symbol中的新期货市场名称，默认为False            |
+
+### Response Content
+
+| 名称       | 类型   | 是否必须   | 描述                 |
+| ---       | ---    | ---      | ---                  |
+| symbol    | string | Yes      | 市场符号              |
+| time      | long   | Yes      | 以秒为单位的资金费率时间 |
+| rate      | double | Yes      | 资金费率              |
 
 # 交易端点
 
@@ -2048,7 +2095,8 @@ BTSE 的速率限制如下：
 ```json
 {
   "symbol": "BTCPFC",
-  "leverage": 0
+  "leverage": 0,
+  "marginMode": "CROSS"
 }
 ```
 
@@ -2058,7 +2106,8 @@ BTSE 的速率限制如下：
 {
     "symbol": "BTCPFC",
     "leverage": 0,
-    "positionMode": "HEDGE"
+    "positionMode": "HEDGE",
+    "marginMode": "CROSS"
 }
 ```
 
@@ -2086,6 +2135,7 @@ BTSE 的速率限制如下：
 | leverage           | long    | Yes      | 杠杆值                                                                                   |
 | useNewSymbolNaming | boolean | No       | 如果使用新的期货市场名称作为符号，则为True，默认为False                                 |
 | positionMode       | string  | no       | 单向持仓`ONE_WAY`（默认）或 双向持仓`HEDGE`, 在双向持仓时为必填项                                                            |
+| marginMode       | string  | no       | `CROSS` 或 `ISOLATED`(默认)                                                            |
 
 ### 响应内容
 
@@ -2104,7 +2154,8 @@ BTSE 的速率限制如下：
 ```json
 {
   "symbol": "BTC-PERP",
-  "leverage": 100.0
+  "leverage": 100.0,
+  "marginMode": "CROSS"
 }
 ```
 
@@ -2123,7 +2174,8 @@ BTSE 的速率限制如下：
 | 名称      | 类型    | 是否必须 | 描述                                                                                                       |
 | ---       | ---     | ---      | ---                                                                                                        |
 | symbol    | string  | Yes      | 市场符号                                                                                                   |
-| leverage  | double  | Yes      | 对于隔离保证金模式下的市场的当前杠杆值，如果保证金模式为交叉，则返回0                                       |
+| leverage  | double  | Yes      | 当前市场的杠杆值，返回 0 表示杠杆是最大的全仓杠杆。                                       |
+| marginMode| string  | Yes      | 当前保证金模式                                                                                  |
 
 ## 更改合同结算货币
 
@@ -2433,7 +2485,7 @@ BTSE 的速率限制如下：
 | availableBalance     | double       | Yes      | 可用余额                           |
 | unrealisedProfitLoss | double       | Yes      | 未实现的利润/损失                  |
 | maintenanceMargin    | double       | Yes      | 维护保证金                         |
-| leverage             | double       | Yes      | 杠杆                               |
+| leverage             | double       | Yes      | 杠杆。在全仓钱包中，此栏位为当前杠杆，而非杠杆设置。|
 | openMargin           | double       | Yes      | 开放保证金                         |
 | assets               | Asset 对象   | Yes      | 可用资产                           |
 | assetsInUse          | Asset 对象   | Yes      | 使用中的资产                       |
