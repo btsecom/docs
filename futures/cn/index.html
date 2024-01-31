@@ -234,9 +234,6 @@
             <a href="#185368440e" class="toc-h1 toc-link" data-title="更新日志">更新日志</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#2-7-2-2024-1-31" class="toc-h2 toc-link" data-title="版本 2.7.2 (2024年1月31日)">版本 2.7.2 (2024年1月31日)</a>
-                  </li>
-                  <li>
                     <a href="#2-7-1-2024-1-30" class="toc-h2 toc-link" data-title="版本 2.7.1 (2024年1月30日)">版本 2.7.1 (2024年1月30日)</a>
                   </li>
                   <li>
@@ -548,11 +545,7 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='185368440e'>更新日志</h1><h2 id='2-7-2-2024-1-31'>版本 2.7.2 (2024年1月31日)</h2>
-<ul>
-<li>新增 <a href="https://support.btse.com/en/support/solutions/articles/43000720577-what-is-price-protection-mechanism">price protection</a> 相关状态</li>
-</ul>
-<h2 id='2-7-1-2024-1-30'>版本 2.7.1 (2024年1月30日)</h2>
+        <h1 id='185368440e'>更新日志</h1><h2 id='2-7-1-2024-1-30'>版本 2.7.1 (2024年1月30日)</h2>
 <ul>
 <li>新增API <a href="#3b35955a7e"><code>查询资金费率</code></a></li>
 </ul>
@@ -1110,7 +1103,6 @@
 <li>302: ERROR_INVALID_ORDER_PRICE = 无效订单价格错误</li>
 <li>303: ERROR_RATE_LIMITS_EXCEEDED = 超过速率限制错误</li>
 <li>304: ERROR_MAX_OPEN_ORDER_EXCEEDED = 超过最大开放订单数错误</li>
-<li>305: ERROR_ORDER_PRICE_OUT_OF_PRICE_PROTECTION_RANGE = 价格超过开放订单范围</li>
 <li>1003: ORDER_LIQUIDATION = 订单正在进行清算</li>
 <li>1004: ORDER_ADL = 订单正在进行ADL</li>
 <li>30410: BLOCK_TRADE_COMPLETE_SUCCESS = 区块交易已成功完成</li>
@@ -7057,7 +7049,7 @@
 <td>status</td>
 <td>integer</td>
 <td>Yes</td>
-<td>状态值如下：<br/>1: 市场不可用<br/>2: 订单成功插入<br/>4: 订单全部交易<br/>5: 订单部分交易<br/>6: 订单成功取消<br/>8: 账户余额不足<br/>9: 触发订单成功插入<br/>10: 触发订单成功激活<br/>12: 更新风险限额时出错<br/>15: 订单被拒绝<br/>20: 交易成功完成<br/>27: 期货和现货之间转账成功<br/>28: 期货和现货之间转账失败<br/>41: 指定了无效的风险限额<br/>64: 账户正在进行清算<br/>96: 设置期货结算货币<br/>101: 期货订单超出清算价格<br/>305: 价格超过开放订单范围<br/>1003: 订单正在清算<br/>1004: 订单正在ADL</td>
+<td>状态值如下：<br/>1: 市场不可用<br/>2: 订单成功插入<br/>4: 订单全部交易<br/>5: 订单部分交易<br/>6: 订单成功取消<br/>8: 账户余额不足<br/>9: 触发订单成功插入<br/>10: 触发订单成功激活<br/>12: 更新风险限额时出错<br/>15: 订单被拒绝<br/>20: 交易成功完成<br/>27: 期货和现货之间转账成功<br/>28: 期货和现货之间转账失败<br/>41: 指定了无效的风险限额<br/>64: 账户正在进行清算<br/>96: 设置期货结算货币<br/>101: 期货订单超出清算价格<br/>1003: 订单正在清算<br/>1004: 订单正在ADL</td>
 </tr>
 <tr>
 <td>clOrderID</td>
