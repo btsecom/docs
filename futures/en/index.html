@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-2-7-3-19th-february-2024" class="toc-h2 toc-link" data-title="Version 2.7.3 (19th February 2024)">Version 2.7.3 (19th February 2024)</a>
+                  </li>
+                  <li>
                     <a href="#version-2-7-2-31st-january-2024" class="toc-h2 toc-link" data-title="Version 2.7.2 (31st January 2024)">Version 2.7.2 (31st January 2024)</a>
                   </li>
                   <li>
@@ -548,7 +551,13 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-2-7-2-31st-january-2024'>Version 2.7.2 (31st January 2024)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-2-7-3-19th-february-2024'>Version 2.7.3 (19th February 2024)</h2>
+<ul>
+<li>Add <a href="https://support.btse.com/en/support/solutions/articles/43000720904-spam-order-detection-mechanism">Spam Order Detection Mechanism : BTSE Support</a> link</li>
+<li>Change description for spam order with a notional value below 5 USDT</li>
+<li>Change threshold for spam account to 20 USDT</li>
+</ul>
+<h2 id='version-2-7-2-31st-january-2024'>Version 2.7.2 (31st January 2024)</h2>
 <ul>
 <li>Add <a href="https://support.btse.com/en/support/solutions/articles/43000720577-what-is-price-protection-mechanism">price protection</a> related status</li>
 </ul>
@@ -1118,12 +1127,14 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <h2 id='spam-orders'>Spam Orders</h2>
 <p>Spam orders are large number of small order sizes that is placed. In order to ensure that the platform and user&#39;s interests are protected from malicious players, we will apply the following for users placing small sized orders.</p>
 
+<p><a href="https://support.btse.com/en/support/solutions/articles/43000720904-spam-order-detection-mechanism">Spam Order Detection Mechanism : BTSE Support</a></p>
+
 <ul>
-<li>Orders equal to or below 5 contracts will be marked as a spam order and will automatically become hidden orders.</li>
+<li>Orders with a notional value below 5 USDT will be marked as a spam order and will automatically become hidden orders.</li>
 <li>Orders marked as spam always pay the taker fee.</li>
 <li>Post-Only API orders marked as spam will be rejected instead of being hidden.</li>
 <li>Too many spam orders may be grounds to temporarily ban an account from trading.</li>
-<li>API accounts placing &gt;= 4 resting orders, with total size less than 20 contracts are at risk of being marked as a spam account.</li>
+<li>API accounts placing &gt;= 4 resting orders, with total size less than 20 USDT are at risk of being marked as a spam account.</li>
 <li>Accounts marked as spam may have limitations placed on the account, including order rate limits, position limits, or have API functions disabled. For questions regarding the new spam order mechanism, please email mm@btse.com.</li>
 </ul>
 <h1 id='public-endpoints'>Public Endpoints</h1><h2 id='market-summary'>Market Summary</h2>
