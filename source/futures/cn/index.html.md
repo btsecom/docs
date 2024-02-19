@@ -13,6 +13,12 @@ headingLevel: 2
 
 # 更新日志
 
+## 版本 2.7.3 (2024年2月19日)
+
+* 添加 [垃圾订单检测机制 : BTSE Support](https://support.btse.com/en/support/solutions/articles/43000720904-spam-order-detection-mechanism) 链接
+* 更改描述：对于名义价值低于 5 USDT的垃圾订单
+* 将垃圾账户的阈值更改为 20 美元。
+
 ## 版本 2.7.2 (2024年1月31日)
 
 * 新增 [price protection](https://support.btse.com/en/support/solutions/articles/43000720577-what-is-price-protection-mechanism) 相关状态
@@ -490,13 +496,14 @@ BTSE 的速率限制如下：
 
 垃圾订单是指大量的小订单大小。为了确保平台和用户的利益不受恶意用户的侵害，我们将对下列情况的用户采取以下措施，这些用户下单小额订单。
 
-* 订单等于或低于5个合约将被标记为垃圾订单，并自动变为隐藏订单。
+[垃圾订单检测机制 : BTSE Support](https://support.btse.com/en/support/solutions/articles/43000720904-spam-order-detection-mechanism)
+
+* 订单的名义价值低于5美元的将被标记为垃圾订单，并自动变为隐藏订单。
 * 被标记为垃圾的订单始终支付吃单费。
 * 被标记为垃圾的Post-Only API订单将被拒绝而不是被隐藏。
 * 太多的垃圾订单可能导致暂时封禁交易账户。
-* 放置 >= 4 个挂单，总大小小于 20 个合约的API账户有可能被标记为垃圾账户。
+* 放置 >= 4 个挂单，总大小小于 20 美元的API账户有可能被标记为垃圾账户。
 * 被标记为垃圾的账户可能会对账户施加限制，包括订单速率限制、持仓限制，或禁用API功能。如对新的垃圾订单机制有疑问，请发送电子邮件至 mm@btse.com。
-
 
 # 公共端点
 

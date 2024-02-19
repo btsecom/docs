@@ -13,6 +13,12 @@ headingLevel: 2
 
 # Change Log
 
+## Version 2.7.3 (19th February 2024)
+
+* Add [Spam Order Detection Mechanism : BTSE Support](https://support.btse.com/en/support/solutions/articles/43000720904-spam-order-detection-mechanism) link
+* Change description for spam order with a notional value below 5 USDT
+* Change threshold for spam account to 20 USDT
+
 ## Version 2.7.2 (31st January 2024)
 
 * Add [price protection](https://support.btse.com/en/support/solutions/articles/43000720577-what-is-price-protection-mechanism) related status
@@ -490,13 +496,14 @@ When connecting up the BTSE API, you will come across number codes that represen
 
 Spam orders are large number of small order sizes that is placed. In order to ensure that the platform and user's interests are protected from malicious players, we will apply the following for users placing small sized orders.
 
-* Orders equal to or below 5 contracts will be marked as a spam order and will automatically become hidden orders.
+[Spam Order Detection Mechanism : BTSE Support](https://support.btse.com/en/support/solutions/articles/43000720904-spam-order-detection-mechanism)
+
+* Orders with a notional value below 5 USDT will be marked as a spam order and will automatically become hidden orders.
 * Orders marked as spam always pay the taker fee.
 * Post-Only API orders marked as spam will be rejected instead of being hidden.
 * Too many spam orders may be grounds to temporarily ban an account from trading.
-* API accounts placing >= 4 resting orders, with total size less than 20 contracts are at risk of being marked as a spam account.
+* API accounts placing >= 4 resting orders, with total size less than 20 USDT are at risk of being marked as a spam account.
 * Accounts marked as spam may have limitations placed on the account, including order rate limits, position limits, or have API functions disabled. For questions regarding the new spam order mechanism, please email mm@btse.com.
-
 
 # Public Endpoints
 
