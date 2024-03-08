@@ -32,6 +32,10 @@ Sessions for Spot and Futures are separated.
 
 # Change Log
 
+## Version 1.1.6 (8th March 2024)
+
+Add timeInForce into execution report
+
 ## Version 1.1.5 (9th Jan 2024)
 
 Add new cancelled/rejected timeInForce default status
@@ -254,8 +258,10 @@ Sent by the server whenever an order receives a fill, whenever the status of an 
 | 54  | Side | 1  | "1": buy; "2": sell |
 | 55  | Symbol | BTC-USD | Symbol name |
 | 58  | Text | text | Description of the reason the order was rejected |
+| 59  | TimeInForce | 6 | "1": Good Till Cancel; "3": Immediate or Cancel; "4": Fill or Kill; "6": Good Till Date; "a"=half minute; "b":five minute; "c":one hour; "d":twelve hour; "e":one week; "f":one month;  (for Limit order) |
 | 60  | TransactTime | 20190525-08:26:38.989 | Time of the order update. Only present on order updates |
 | 103  | OrdRejReason | 11 | "11": when request is failed (UNSUPPORTED_ORDER_CHARACTERISTIC). The rejected reason detail will be shown in Text(58) |
+| 126  | ExpireTime | 20190525-08:26:38.989 | Conditionally required if TimeInForce <59> = GTD and ExpireDate <432> is not specified.|
 | 150  | ExecType | 1 | Reason for this message (see below) |
 | 151  | LeavesQty | 0.8 | Quantity of order that is still open |
 | 1057 | AggressorIndicator | Y | "Y": taker fill; "N": maker fill. Only present if this message was the result of a fill |

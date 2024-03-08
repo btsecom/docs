@@ -32,6 +32,10 @@ Spot 和 Futures 的会话是分开的。
 
 # 更新日志
 
+## 版本 1.1.6（2024年3月8日）
+
+添加订单执行报告的被拒绝生效时间（timeInForce）
+
 ## 版本 1.1.5（2024年1月9日）
 
 添加订单被拒绝生效时间（timeInForce）默認状态
@@ -254,8 +258,10 @@ final String SIGNATURE = Hex.encodeHexString(HmacUtils.getInitializedMac(HmacAlg
 | 54  | Side | 1  | "1": 买入; "2": 卖出 |
 | 55  | Symbol | BTC-USD | 符号名称 |
 | 58  | Text | 文本 | 拒绝订单的原因描述 |
+| 59  | TimeInForce | 6 | "1": 永久有效; "3": 立即成交或取消; "4": 填成或立刻取消; "6": 直到特定时間; "a"=半分钟; "b"=五分钟; "c"=一小时; "d"=十二小时; "e"=一周; "f"=一个月; （限价单） |
 | 60  | TransactTime | 20190525-08:26:38.989 | 订单更新的时间。仅在订单更新时出现 |
 | 103  | OrdRejReason | 11 | "11": 请求失败时（UNSUPPORTED_ORDER_CHARACTERISTIC）。拒绝原因的详细信息将显示在Text（58）中 |
+| 126  | ExpireTime | 20190525-08:26:38.989 | 订单到期时间，仅在GTC<59>为6时出现 |
 | 150  | ExecType | 1 | 此消息的原因（见下文） |
 | 151  | LeavesQty | 0.8 | 仍然开放的订单数量 |
 | 1057 | AggressorIndicator | Y | "Y": 主动成交; "N": 被动成交。仅当此消息是成交的结果时才会出现 |
