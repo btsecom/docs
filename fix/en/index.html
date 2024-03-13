@@ -237,6 +237,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-1-1-6-8th-march-2024" class="toc-h2 toc-link" data-title="Version 1.1.6 (8th March 2024)">Version 1.1.6 (8th March 2024)</a>
+                  </li>
+                  <li>
                     <a href="#version-1-1-5-9th-jan-2024" class="toc-h2 toc-link" data-title="Version 1.1.5 (9th Jan 2024)">Version 1.1.5 (9th Jan 2024)</a>
                   </li>
                   <li>
@@ -348,7 +351,9 @@
 <td>FUTURES</td>
 </tr>
 </tbody></table>
-<h1 id='change-log'>Change Log</h1><h2 id='version-1-1-5-9th-jan-2024'>Version 1.1.5 (9th Jan 2024)</h2>
+<h1 id='change-log'>Change Log</h1><h2 id='version-1-1-6-8th-march-2024'>Version 1.1.6 (8th March 2024)</h2>
+<p>Add timeInForce into execution report</p>
+<h2 id='version-1-1-5-9th-jan-2024'>Version 1.1.5 (9th Jan 2024)</h2>
 <p>Add new cancelled/rejected timeInForce default status</p>
 <h2 id='version-1-1-4-15th-nov-2023'>Version 1.1.4 (15th Nov 2023)</h2>
 <p>Add new timeInForce status</p>
@@ -992,6 +997,12 @@ For errors other than order cancelled and rejected, TimeInForce will be always 1
 <td>Description of the reason the order was rejected</td>
 </tr>
 <tr>
+<td>59</td>
+<td>TimeInForce</td>
+<td>6</td>
+<td>&quot;1&quot;: Good Till Cancel; &quot;3&quot;: Immediate or Cancel; &quot;4&quot;: Fill or Kill; &quot;6&quot;: Good Till Date; &quot;a&quot;=half minute; &quot;b&quot;:five minute; &quot;c&quot;:one hour; &quot;d&quot;:twelve hour; &quot;e&quot;:one week; &quot;f&quot;:one month;  (for Limit order)</td>
+</tr>
+<tr>
 <td>60</td>
 <td>TransactTime</td>
 <td>20190525-08:26:38.989</td>
@@ -1002,6 +1013,12 @@ For errors other than order cancelled and rejected, TimeInForce will be always 1
 <td>OrdRejReason</td>
 <td>11</td>
 <td>&quot;11&quot;: when request is failed (UNSUPPORTED_ORDER_CHARACTERISTIC). The rejected reason detail will be shown in Text(58)</td>
+</tr>
+<tr>
+<td>126</td>
+<td>ExpireTime</td>
+<td>20190525-08:26:38.989</td>
+<td>Conditionally required if TimeInForce <59> = GTD and ExpireDate <432> is not specified.</td>
 </tr>
 <tr>
 <td>150</td>

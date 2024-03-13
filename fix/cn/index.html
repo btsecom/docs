@@ -237,6 +237,9 @@
             <a href="#185368440e" class="toc-h1 toc-link" data-title="更新日志">更新日志</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#1-1-6-2024-3-8" class="toc-h2 toc-link" data-title="版本 1.1.6（2024年3月8日）">版本 1.1.6（2024年3月8日）</a>
+                  </li>
+                  <li>
                     <a href="#1-1-5-2024-1-9" class="toc-h2 toc-link" data-title="版本 1.1.5（2024年1月9日）">版本 1.1.5（2024年1月9日）</a>
                   </li>
                   <li>
@@ -348,7 +351,9 @@
 <td>FUTURES</td>
 </tr>
 </tbody></table>
-<h1 id='185368440e'>更新日志</h1><h2 id='1-1-5-2024-1-9'>版本 1.1.5（2024年1月9日）</h2>
+<h1 id='185368440e'>更新日志</h1><h2 id='1-1-6-2024-3-8'>版本 1.1.6（2024年3月8日）</h2>
+<p>添加订单执行报告的被拒绝生效时间（timeInForce）</p>
+<h2 id='1-1-5-2024-1-9'>版本 1.1.5（2024年1月9日）</h2>
 <p>添加订单被拒绝生效时间（timeInForce）默認状态</p>
 <h2 id='1-1-4-2023-11-15'>版本 1.1.4（2023年11月15日）</h2>
 <p>添加新的订单生效时间（timeInForce）状态</p>
@@ -992,6 +997,12 @@
 <td>拒绝订单的原因描述</td>
 </tr>
 <tr>
+<td>59</td>
+<td>TimeInForce</td>
+<td>6</td>
+<td>&quot;1&quot;: 永久有效; &quot;3&quot;: 立即成交或取消; &quot;4&quot;: 填成或立刻取消; &quot;6&quot;: 直到特定时間; &quot;a&quot;=半分钟; &quot;b&quot;=五分钟; &quot;c&quot;=一小时; &quot;d&quot;=十二小时; &quot;e&quot;=一周; &quot;f&quot;=一个月; （限价单）</td>
+</tr>
+<tr>
 <td>60</td>
 <td>TransactTime</td>
 <td>20190525-08:26:38.989</td>
@@ -1002,6 +1013,12 @@
 <td>OrdRejReason</td>
 <td>11</td>
 <td>&quot;11&quot;: 请求失败时（UNSUPPORTED_ORDER_CHARACTERISTIC）。拒绝原因的详细信息将显示在Text（58）中</td>
+</tr>
+<tr>
+<td>126</td>
+<td>ExpireTime</td>
+<td>20190525-08:26:38.989</td>
+<td>订单到期时间，仅在GTC<59>为6时出现</td>
 </tr>
 <tr>
 <td>150</td>
