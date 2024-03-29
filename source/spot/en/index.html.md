@@ -13,6 +13,10 @@ headingLevel: 2
 
 # Change Log
 
+## Version 3.4.9 (29th March 2024)
+
+* Description of the maximum number of days for querying historical records. [Query Trades Fills](#query-trades-fills)
+
 ## Version 3.4.8 (25th October 2023)
 
 * Add an new API [Query Order](#query-order)
@@ -643,6 +647,15 @@ Get trade fills for the market specified by `symbol`
 | startTime | long    | No       | Starting time in milliseconds (eg. 1624987283000) |
 | endTime   | long    | No       | Ending time in milliseconds (eg. 1624987283000)   |
 | count     | integer | No       | Number of records to return                       |
+
+* maximum days of trade fills
+
+| Time Interval       | Maximum Days  | Explanation                                                                             |
+| :---:               | ---:          | :---:                                                                                   |
+| startTime / endTime | 30            | Maximum **30** days within the specified interval                                       |
+| startTime /    -    | 3             | If the **end time** is not specified, then **3** days after the **start time**          |
+|      -    / endTime | 3             | If the **start time** is not specified, then **3** days before the **end time**         |
+|      -    /    -    | 3             | If neither start nor end time is specified, then **3** days before the **current time** |
 
 ### Response Content
 
