@@ -13,6 +13,10 @@ headingLevel: 2
 
 # 更新日志
 
+## 版本 2.7.4 (2024年3月29日)
+
+* 说明查询历史记录的最大天数. [查询成交记录](#bbd4754907) / [查询钱包历史记录](#2d46780fe3)
+
 ## 版本 2.7.3 (2024年2月19日)
 
 * 添加 [垃圾订单检测机制 : BTSE Support](https://support.btse.com/en/support/solutions/articles/43000720904-spam-order-detection-mechanism) 链接
@@ -825,27 +829,36 @@ BTSE 的速率限制如下：
 
 ### 请求参数
 
-| 名称                | 类型    | 是否必须 | 描述                                                                                                        |
-| ---                | ---     | ---      | ---                                                                                                        |
-| symbol             | string  | Yes      | 市场符号                                                                                                    |
-| startTime          | long    | No       | 以毫秒为单位的开始时间 (例如 1624987283000)                                                                 |
-| endTime            | long    | No       | 以毫秒为单位的结束时间 (例如 1624987283000)                                                                 |
-| beforeSerialId     | string  | Yes      | 用于分页的条件，检索指定序列ID之前的记录                                                                    |
-| afterSerialId      | string  | Yes      | 用于分页的条件，检索指定序列ID之后的记录                                                                    |
-| count              | long    | Yes      | 返回的记录数                                                                                                |
-| includeOld         | boolean | Yes      | 获取过去7天的交易历史记录                                                                                   |
-| useNewSymbolNaming | boolean | No       | 设置为True以使用symbol中的新期货市场名称，默认为False                                                       |
+| 名称                | 类型    | 是否必须   | 描述                                            |
+| ---                | ---     | ---      | ---                                             |
+| symbol             | string  | Yes      | 市场符号                                         |
+| startTime          | long    | No       | 以毫秒为单位的开始时间 (例如 1624987283000)         |
+| endTime            | long    | No       | 以毫秒为单位的结束时间 (例如 1624987283000)         |
+| beforeSerialId     | string  | Yes      | 用于分页的条件，检索指定序列ID之前的记录              |
+| afterSerialId      | string  | Yes      | 用于分页的条件，检索指定序列ID之后的记录              |
+| count              | long    | Yes      | 返回的记录数                                      |
+| includeOld         | boolean | Yes      | 获取过去7天的交易历史记录                           |
+| useNewSymbolNaming | boolean | No       | 设置为True以使用symbol中的新期货市场名称，默认为False |
+
+* 成交紀錄最大天数
+
+| 时间区间              | 最大天数 | 说明                                                 |
+| :---:               | ---:    | :---:                                                |
+| startTime / endTime | 30      | 在指定区间中最多**30**天记录                            |
+| startTime /    -    | 3       | 未指定**结束时间**, 则从**开始时间**往后**3**天           |
+|      -    / endTime | 3       | 未指定**开始时间**, 则从**结束时间**往前**3**天           |
+|      -    /    -    | 3       | 都未指定时间, 则使用**当前时间**作为**结束时间**往前**3**天 |
 
 ### 响应内容
 
-| 名称       | 类型    | 是否必须 | 描述                                         |
-| ---       | ---     | ---      | ---                                         |
-| symbol    | string  | Yes      | 市场符号                                     |
-| side      | string  | Yes      | 交易方向。值包括：[`Buy`, `SELL`]            |
-| price     | double  | Yes      | 交易价格                                     |
-| size      | double  | Yes      | 交易尺寸                                     |
-| serialId  | double  | Yes      | 序列ID，运行序列号                           |
-| timestamp | long    | Yes      | 交易时间戳                                   |
+| 名称       | 类型     | 是否必须  | 描述                            |
+| ---       | ---     | ---      | ---                             |
+| symbol    | string  | Yes      | 市场符号                         |
+| side      | string  | Yes      | 交易方向。值包括：[`Buy`, `SELL`]  |
+| price     | double  | Yes      | 交易价格                         |
+| size      | double  | Yes      | 交易尺寸                         |
+| serialId  | double  | Yes      | 序列ID，运行序列号                 |
+| timestamp | long    | Yes      | 交易时间戳                        |
 
 
 ## 查询资金费率
@@ -2535,27 +2548,35 @@ BTSE 的速率限制如下：
 
 ### 请求参数
 
-| 名称               | 类型    | 是否必须 | 描述                                                                                                                                                                              |
-| ---                | ---     | ---      | ---                                                                                                                                                                               |
-| wallet             | string  | No       | 钱包，如果未指定将返回所有钱包。有效值为：<br/>`CROSS@`: 全仓钱包<br/>`ISOLATED@BTCPFC-USD`: 隔离钱包                                                                                        |
-| startTime          | long    | No       | 以毫秒为单位的开始时间（例如 1624987283000）                                                                                                                                       |
-| endTime            | long    | No       | 以毫秒为单位的结束时间（例如 1624987283000）                                                                                                                                       |
-| count              | integer | No       | 要返回的记录数量                                                                                                                                                                  |
-| useNewSymbolNaming | boolean | No       | 若为True，则返回新格式的期货市场名称，默认为False                                                                                                                                 |
+| 名称                | 类型     | 是否必须  | 描述 |
+| ---                | ---     | ---      | ---                                                                                          |
+| wallet             | string  | No       | 钱包，如果未指定将返回所有钱包。有效值为：<br/>`CROSS@`: 全仓钱包<br/>`ISOLATED@BTCPFC-USD`: 隔离钱包  |
+| startTime          | long    | No       | 以毫秒为单位的开始时间（例如 1624987283000）                                                      |
+| endTime            | long    | No       | 以毫秒为单位的结束时间（例如 1624987283000）                                                      |
+| count              | integer | No       | 要返回的记录数量                                                                                |
+| useNewSymbolNaming | boolean | No       | 若为True，则返回新格式的期货市场名称，默认为 False                                                  |
 
+* 历史记录最大天数
+
+| 时间区间             | 最大天数  | 说明                                                 |
+| :---:               | ---:    | :---:                                                |
+| startTime / endTime | 30      | 在指定区间中最多**30**天记录                            |
+| startTime /    -    | 7       | 未指定**结束时间**, 则从**开始时间**往后**7**天           |
+|      -    / endTime | 7       | 未指定**开始时间**, 则从**结束时间**往前**7**天           |
+|      -    /    -    | 7       | 都未指定时间, 则使用**当前时间**作为**结束时间**往前**7**天 |
 
 ### 响应内容
 
-| 名称        | 类型    | 是否必须 | 描述                                                                                                              |
-| ---         | ---     | ---      | ---                                                                                                               |
-| currency    | string  | Yes      | 货币                                                                                                              |
-| amount      | double  | Yes      | 记录中的金额                                                                                                       |
-| fees        | double  | Yes      | 如有收费                                                                                                          |
-| orderId     | string  | Yes      | 内部钱包订单ID                                                                                                     |
-| wallet      | string  | Yes      | 钱包类型。对于期货将返回 `CROSS@` 或 `ISOLATED@`                                                                   |
-| description | string  | Yes      | 交易描述                                                                                                          |
-| status      | integer | Yes      | 1: 待处理<br/>2: 处理中<br/>10: 完成<br/>16: 取消                                                                  |
-| type        | integer | Yes      | 105: 钱包转账<br/>106: 钱包清算<br/>108: 已实现的PnL<br/>110: 资金<br/>121: 资产转换                                |
+| 名称         | 类型     | 是否必须  | 描述                                                                            |
+| ---         | ---     | ---      | ---                                                                             |
+| currency    | string  | Yes      | 货币                                                                            |
+| amount      | double  | Yes      | 记录中的金额                                                                      |
+| fees        | double  | Yes      | 如有收费                                                                         |
+| orderId     | string  | Yes      | 内部钱包订单ID                                                                    |
+| wallet      | string  | Yes      | 钱包类型。对于期货将返回 `CROSS@` 或 `ISOLATED@`                                    |
+| description | string  | Yes      | 交易描述                                                                         |
+| status      | integer | Yes      | 1: 待处理<br/>2: 处理中<br/>10: 完成<br/>16: 取消                                  |
+| type        | integer | Yes      | 105: 钱包转账<br/>106: 钱包清算<br/>108: 已实现的PnL<br/>110: 资金<br/>121: 资产转换  |
 
 ## 查询钱包保证金
 
