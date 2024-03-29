@@ -13,6 +13,10 @@ headingLevel: 2
 
 # 更改日志
 
+## 版本 3.4.9 (2024年3月29日)
+
+* 说明查询历史记录的最大天数. [查询交易成交](#1ab8fa8e94)
+
 ## 版本 3.4.8 (2023年10月25日)
 
 * 新增一个新的API[查询订单](#90376e83a0)
@@ -637,23 +641,32 @@ BTSE的速率限制如下:
 
 ### 请求参数
 
-| 名称      | 类型    | 是否必须   | 描述                                       |
-| ---       | ---     | ---      | ---                                           |
-| symbol    | string  | Yes      | 市场符号                                 |
-| startTime | long  | No      | 开始时间（毫秒）（例如，1624987283000） |
-| endTime   | long  | No      | 结束时间（毫秒）（例如，1624987283000） |
-| count     | integer    | No      | 要返回的记录数                         |
+| 名称       | 类型     | 是否必须  | 描述                               |
+| ---       | ---     | ---      | ---                                |
+| symbol    | string  | Yes      | 市场符号                            |
+| startTime | long    | No       | 开始时间（毫秒）（例如，1624987283000）|
+| endTime   | long    | No       | 结束时间（毫秒）（例如，1624987283000）|
+| count     | integer | No       | 要返回的记录数                       |
+
+* 成交紀錄最大天数
+
+| 时间区间             | 最大天数     | 说明                                                  |
+| :---:               | ---:        | :---:                                                |
+| startTime / endTime | 30          | 在指定区间中最多**30**天记录                            |
+| startTime /    -    | 3           | 未指定**结束时间**, 则从**开始时间**往后**3**天           |
+|      -    / endTime | 3           | 未指定**开始时间**, 则从**结束时间**往前**3**天           |
+|      -    /    -    | 3           | 都未指定时间, 则使用**当前时间**作为**结束时间**往前**3**天 |
 
 ### 响应内容
 
-| 名称      | 类型    | 是否必须   | 描述                               |
+| 名称       | 类型    | 是否必须   | 描述                              |
 | ---       | ---     | ---      | ---                               |
-| symbol    | string  | Yes      | 市场符号                         |
-| side      | string  | Yes      | 交易方向。可选值为：[`BUY`, `SELL`] |
-| price     | double  | Yes      | 成交价格                         |
-| size      | double  | Yes      | 成交大小                         |
-| serialId  | double  | Yes      | 流水号，递增的序列号             |
-| timestamp | double  | Yes      | 成交时间戳                       |
+| symbol    | string  | Yes      | 市场符号                           |
+| side      | string  | Yes      | 交易方向。可选值为：[`BUY`, `SELL`]  |
+| price     | double  | Yes      | 成交价格                           |
+| size      | double  | Yes      | 成交大小                           |
+| serialId  | double  | Yes      | 流水号，递增的序列号                 |
+| timestamp | double  | Yes      | 成交时间戳                         |
 
 
 ## 查询服务器时间

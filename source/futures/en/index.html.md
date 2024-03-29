@@ -13,6 +13,10 @@ headingLevel: 2
 
 # Change Log
 
+## Version 2.7.4 (29th March 2024)
+
+* Description of the maximum number of days for querying historical records. [Query Trades Fills](#query-trades-fills) / [Query Wallet History](#query-wallet-history)
+
 ## Version 2.7.3 (19th February 2024)
 
 * Add [Spam Order Detection Mechanism : BTSE Support](https://support.btse.com/en/support/solutions/articles/43000720904-spam-order-detection-mechanism) link
@@ -835,6 +839,15 @@ Get trade fills for the market specified by `symbol`
 | count              | long    | Yes      | Number of records to return                                                       |
 | includeOld         | boolean | Yes      | Retrieve trade  history records past 7 days                                       |
 | useNewSymbolNaming | boolean | No       | True to use new futures market name in symbol, default to False                   |
+
+* maximum days of history records
+
+| Time Interval       | Maximum Days  | Explanation                                                                             |
+| :---:               | ---:          | :---:                                                                                   |
+| startTime / endTime | 30            | Maximum **30** days within the specified interval                                       |
+| startTime /    -    | 3             | If the **end time** is not specified, then **3** days after the **start time**          |
+|      -    / endTime | 3             | If the **start time** is not specified, then **3** days before the **end time**         |
+|      -    /    -    | 3             | If neither start nor end time is specified, then **3** days before the **current time** |
 
 ### Response Content
 
@@ -2543,6 +2556,14 @@ Get user's wallet history records on the futures wallet
 | count              | integer | No       | Number of records to return                                                                                                                 |
 | useNewSymbolNaming | boolean | No       | True to return futures market name in the new format, default to False                                                                      |
 
+* maximum days of history records
+
+| Time Interval       | Maximum Days  | Explanation                                                                             |
+| :---:               | ---:          | :---:                                                                                   |
+| startTime / endTime | 30            | Maximum **30** days within the specified interval                                       |
+| startTime /    -    | 7             | If the **end time** is not specified, then **7** days after the **start time**          |
+|      -    / endTime | 7             | If the **start time** is not specified, then **7** days before the **end time**         |
+|      -    /    -    | 7             | If neither start nor end time is specified, then **7** days before the **current time** |
 
 ### Response Content
 
