@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-2-7-4-29th-march-2024" class="toc-h2 toc-link" data-title="Version 2.7.4 (29th March 2024)">Version 2.7.4 (29th March 2024)</a>
+                  </li>
+                  <li>
                     <a href="#version-2-7-3-19th-february-2024" class="toc-h2 toc-link" data-title="Version 2.7.3 (19th February 2024)">Version 2.7.3 (19th February 2024)</a>
                   </li>
                   <li>
@@ -551,7 +554,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-2-7-3-19th-february-2024'>Version 2.7.3 (19th February 2024)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-2-7-4-29th-march-2024'>Version 2.7.4 (29th March 2024)</h2>
+<ul>
+<li>Description of the maximum number of days for querying historical records. <a href="#query-trades-fills">Query Trades Fills</a> / <a href="#query-wallet-history">Query Wallet History</a></li>
+</ul>
+<h2 id='version-2-7-3-19th-february-2024'>Version 2.7.3 (19th February 2024)</h2>
 <ul>
 <li>Add <a href="https://support.btse.com/en/support/solutions/articles/43000720904-spam-order-detection-mechanism">Spam Order Detection Mechanism : BTSE Support</a> link</li>
 <li>Change description for spam order with a notional value below 5 USDT</li>
@@ -1908,6 +1915,39 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>boolean</td>
 <td>No</td>
 <td>True to use new futures market name in symbol, default to False</td>
+</tr>
+</tbody></table>
+
+<ul>
+<li>maximum days of history records</li>
+</ul>
+
+<table><thead>
+<tr>
+<th style="text-align: center">Time Interval</th>
+<th style="text-align: right">Maximum Days</th>
+<th style="text-align: center">Explanation</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">startTime / endTime</td>
+<td style="text-align: right">30</td>
+<td style="text-align: center">Maximum <strong>30</strong> days within the specified interval</td>
+</tr>
+<tr>
+<td style="text-align: center">startTime /    -</td>
+<td style="text-align: right">3</td>
+<td style="text-align: center">If the <strong>end time</strong> is not specified, then <strong>3</strong> days after the <strong>start time</strong></td>
+</tr>
+<tr>
+<td style="text-align: center">-    / endTime</td>
+<td style="text-align: right">3</td>
+<td style="text-align: center">If the <strong>start time</strong> is not specified, then <strong>3</strong> days before the <strong>end time</strong></td>
+</tr>
+<tr>
+<td style="text-align: center">-    /    -</td>
+<td style="text-align: right">3</td>
+<td style="text-align: center">If neither start nor end time is specified, then <strong>3</strong> days before the <strong>current time</strong></td>
 </tr>
 </tbody></table>
 <h3 id='response-content-6'>Response Content</h3>
@@ -5750,6 +5790,39 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>boolean</td>
 <td>No</td>
 <td>True to return futures market name in the new format, default to False</td>
+</tr>
+</tbody></table>
+
+<ul>
+<li>maximum days of history records</li>
+</ul>
+
+<table><thead>
+<tr>
+<th style="text-align: center">Time Interval</th>
+<th style="text-align: right">Maximum Days</th>
+<th style="text-align: center">Explanation</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">startTime / endTime</td>
+<td style="text-align: right">30</td>
+<td style="text-align: center">Maximum <strong>30</strong> days within the specified interval</td>
+</tr>
+<tr>
+<td style="text-align: center">startTime /    -</td>
+<td style="text-align: right">7</td>
+<td style="text-align: center">If the <strong>end time</strong> is not specified, then <strong>7</strong> days after the <strong>start time</strong></td>
+</tr>
+<tr>
+<td style="text-align: center">-    / endTime</td>
+<td style="text-align: right">7</td>
+<td style="text-align: center">If the <strong>start time</strong> is not specified, then <strong>7</strong> days before the <strong>end time</strong></td>
+</tr>
+<tr>
+<td style="text-align: center">-    /    -</td>
+<td style="text-align: right">7</td>
+<td style="text-align: center">If neither start nor end time is specified, then <strong>7</strong> days before the <strong>current time</strong></td>
 </tr>
 </tbody></table>
 <h3 id='response-content-28'>Response Content</h3>
