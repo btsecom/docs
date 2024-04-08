@@ -234,6 +234,9 @@
             <a href="#185368440e" class="toc-h1 toc-link" data-title="更新日志">更新日志</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#1-1-1-2024-04-08" class="toc-h2 toc-link" data-title="版本 1.1.1 (2024年04月08日)">版本 1.1.1 (2024年04月08日)</a>
+                  </li>
+                  <li>
                     <a href="#1-1-0-2022-11-16" class="toc-h2 toc-link" data-title="版本 1.1.0 (2022年11月16日)">版本 1.1.0 (2022年11月16日)</a>
                   </li>
                   <li>
@@ -311,6 +314,9 @@
                   <li>
                     <a href="#fff748076e" class="toc-h2 toc-link" data-title="转账资金">转账资金</a>
                   </li>
+                  <li>
+                    <a href="#dfc184460c" class="toc-h2 toc-link" data-title="子帐号转账历史纪录">子帐号转账历史纪录</a>
+                  </li>
               </ul>
           </li>
       </ul>
@@ -320,7 +326,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='185368440e'>更新日志</h1><h2 id='1-1-0-2022-11-16'>版本 1.1.0 (2022年11月16日)</h2>
+        <h1 id='185368440e'>更新日志</h1><h2 id='1-1-1-2024-04-08'>版本 1.1.1 (2024年04月08日)</h2>
+<ul>
+<li>新增<a href="#dfc184460c"><code>子帐号转帐历史纪录</code></a>API</li>
+</ul>
+<h2 id='1-1-0-2022-11-16'>版本 1.1.0 (2022年11月16日)</h2>
 <ul>
 <li>[重要] BTSE 将在 <strong>2022年12月</strong> 更改期货市场命名约定，以便为零售用户提供更多清晰度，以下是规则：
 
@@ -1194,6 +1204,127 @@
 <td>string</td>
 <td>Yes</td>
 <td>接收者的电子邮件</td>
+</tr>
+</tbody></table>
+<h2 id='dfc184460c'>子帐号转账历史纪录</h2>
+<blockquote>
+<p>响应</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Success"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1653964265608</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"totalRows"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"pageSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currentPage"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalPages"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1711707874850</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"fromUser"</span><span class="p">:</span><span class="w"> </span><span class="s2">"uuooxxsub00002"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"receiver"</span><span class="p">:</span><span class="w"> </span><span class="s2">"uuooxx"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><code>POST /api/v3.2/subaccount/wallet/history</code></p>
+
+<p>查询子帐号转帐历史纪录</p>
+<h3 id='1f9ac54b15-10'>请求参数</h3>
+<table><thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>必填</th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>startTime</td>
+<td>string</td>
+<td>Yes</td>
+<td>要转账的货币金额</td>
+</tr>
+<tr>
+<td>endTime</td>
+<td>string</td>
+<td>Yes</td>
+<td>要转账的货币</td>
+</tr>
+<tr>
+<td>page</td>
+<td>string</td>
+<td>Yes</td>
+<td>接收者的账号</td>
+</tr>
+<tr>
+<td>pageSize</td>
+<td>string</td>
+<td>Yes</td>
+<td>接收者的电子邮件</td>
+</tr>
+</tbody></table>
+<h3 id='05a22d5a79-11'>响应内容</h3>
+<table><thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>必填</th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>totalRows</td>
+<td>integer</td>
+<td>Yes</td>
+<td>接收者的电子邮件</td>
+</tr>
+<tr>
+<td>pageSize</td>
+<td>integer</td>
+<td>Yes</td>
+<td>接收者的电子邮件</td>
+</tr>
+<tr>
+<td>currentPage</td>
+<td>integer</td>
+<td>Yes</td>
+<td>目前页数</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>integer</td>
+<td>Yes</td>
+<td>发送时间</td>
+</tr>
+<tr>
+<td>fromUser</td>
+<td>string</td>
+<td>Yes</td>
+<td>发送者的账号</td>
+</tr>
+<tr>
+<td>receiver</td>
+<td>string</td>
+<td>Yes</td>
+<td>接收者的账号</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>string</td>
+<td>Yes</td>
+<td>转账的货币</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>integer</td>
+<td>Yes</td>
+<td>转账的货币金额</td>
 </tr>
 </tbody></table>
 

@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-1-1-1-08th-april-2024" class="toc-h2 toc-link" data-title="Version 1.1.1 (08th April 2024)">Version 1.1.1 (08th April 2024)</a>
+                  </li>
+                  <li>
                     <a href="#version-1-1-0-16th-november-2022" class="toc-h2 toc-link" data-title="Version 1.1.0 (16th November 2022)">Version 1.1.0 (16th November 2022)</a>
                   </li>
                   <li>
@@ -311,6 +314,9 @@
                   <li>
                     <a href="#transfer-funds" class="toc-h2 toc-link" data-title="Transfer Funds">Transfer Funds</a>
                   </li>
+                  <li>
+                    <a href="#subaccount-transfer-history" class="toc-h2 toc-link" data-title="Subaccount transfer history">Subaccount transfer history</a>
+                  </li>
               </ul>
           </li>
       </ul>
@@ -320,7 +326,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-1-1-0-16th-november-2022'>Version 1.1.0 (16th November 2022)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-1-1-1-08th-april-2024'>Version 1.1.1 (08th April 2024)</h2>
+<ul>
+<li>Add API for querying <a href="#subaccount-transfer-history"><code>Subaccount Transfer History</code></a></li>
+</ul>
+<h2 id='version-1-1-0-16th-november-2022'>Version 1.1.0 (16th November 2022)</h2>
 <ul>
 <li>[IMPORTANT] BTSE will change futures market naming convention in <strong>December 2022</strong> to provide more clarity to retail users and here are the rules:
 
@@ -1194,6 +1204,127 @@
 <td>string</td>
 <td>Yes</td>
 <td>receiver email</td>
+</tr>
+</tbody></table>
+<h2 id='subaccount-transfer-history'>Subaccount transfer history</h2>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Success"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1653964265608</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"totalRows"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"pageSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currentPage"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalPages"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1711707874850</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"fromUser"</span><span class="p">:</span><span class="w"> </span><span class="s2">"uuooxxsub00002"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"receiver"</span><span class="p">:</span><span class="w"> </span><span class="s2">"uuooxx"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><code>POST /api/v3.2/subaccount/wallet/history</code></p>
+
+<p>Query transfer history for subaccounts</p>
+<h3 id='request-parameters-10'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>startTime</td>
+<td>long</td>
+<td>No</td>
+<td>Starting time in milliseconds (eg. 1624987283000)</td>
+</tr>
+<tr>
+<td>endTime</td>
+<td>long</td>
+<td>No</td>
+<td>Ending time in milliseconds (eg. 1624987283000)</td>
+</tr>
+<tr>
+<td>page</td>
+<td>string</td>
+<td>Yes</td>
+<td>Page number to query, default to 1 (1-based)</td>
+</tr>
+<tr>
+<td>pageSize</td>
+<td>string</td>
+<td>Yes</td>
+<td>Number of records in a page, default to 10, maximum 50</td>
+</tr>
+</tbody></table>
+<h3 id='response-content-11'>Response Content</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>totalRows</td>
+<td>integer</td>
+<td>Yes</td>
+<td>Total records</td>
+</tr>
+<tr>
+<td>pageSize</td>
+<td>integer</td>
+<td>Yes</td>
+<td>Number of records in a page</td>
+</tr>
+<tr>
+<td>currentPage</td>
+<td>integer</td>
+<td>Yes</td>
+<td>current page number</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>integer</td>
+<td>Yes</td>
+<td>Unix timestamp</td>
+</tr>
+<tr>
+<td>fromUser</td>
+<td>string</td>
+<td>Yes</td>
+<td>sender account</td>
+</tr>
+<tr>
+<td>receiver</td>
+<td>string</td>
+<td>Yes</td>
+<td>receiver account</td>
+</tr>
+<tr>
+<td>currency</td>
+<td>string</td>
+<td>Yes</td>
+<td>currency of transferred</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>integer</td>
+<td>Yes</td>
+<td>amount of currency</td>
 </tr>
 </tbody></table>
 
