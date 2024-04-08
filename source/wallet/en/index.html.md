@@ -13,6 +13,9 @@ headingLevel: 2
 
 # Change Log
 
+## Version 1.1.1 (08th April 2024)
+  - Add API for querying [`Subaccount Transfer History`](#subaccount-transfer-history)
+
 ## Version 1.1.0 (16th November 2022)
 
 * [IMPORTANT] BTSE will change futures market naming convention in **December 2022** to provide more clarity to retail users and here are the rules:
@@ -509,3 +512,57 @@ Performs a internal currency transfer to other user from wallet. To use this API
 | asset      | string | Yes      | currency to be transferred     |
 | toUser     | string | Yes      | receiver account               |
 | toUserMail | string | Yes      | receiver email                 |
+
+## Subaccount transfer history
+
+> Response
+
+```json
+{
+  "code": 1,
+  "msg": "Success",
+  "time": 1653964265608,
+  "success": true,
+  "data": {
+    "totalRows": 2,
+    "pageSize": 10,
+    "currentPage": 1,
+    "totalPages": 1,
+    "data": [
+      {
+        "timestamp": 1711707874850,
+        "fromUser": "uuooxxsub00002",
+        "receiver": "uuooxx",
+        "currency": "USDT",
+        "amount": 11
+      }
+    ]
+  }
+}
+```
+
+`POST /api/v3.2/subaccount/wallet/history`
+
+Query transfer history for subaccounts
+
+### Request Parameters
+
+| Name               | Type    | Required | Description                                                          |
+| ---                | ---     | ---     | ---                                                            |
+| startTime          | long    | No       | Starting time in milliseconds (eg. 1624987283000)                      |
+| endTime            | long    | No       | Ending time in milliseconds (eg. 1624987283000)                        |
+| page             | string  | Yes     | Page number to query, default to 1 (1-based)           |
+| pageSize         | string  | Yes     | Number of records in a page, default to 10, maximum 50 |
+
+### Response Content
+
+| Name       | Type   | Required | Description                    |
+| ---        | ---    | ---     | ---                           |
+| totalRows | integer | Yes     |Total records               |
+| pageSize | integer | Yes     |Number of records in a page |
+| currentPage | integer | Yes     |current page number         |
+| timestamp | integer | Yes     | Unix timestamp                |
+| fromUser | string | Yes     | sender account                |
+| receiver | string | Yes     | receiver account                |
+| currency | string | Yes     | currency of transferred      |
+| amount | integer | Yes     | amount of currency                |

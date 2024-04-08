@@ -13,6 +13,9 @@ headingLevel: 2
 
 # 更新日志
 
+## 版本 1.1.1 (2024年04月08日)
+  - 新增[`子帐号转帐历史纪录`](#dfc184460c)API
+
 ## 版本 1.1.0 (2022年11月16日)
 
 * [重要] BTSE 将在 **2022年12月** 更改期货市场命名约定，以便为零售用户提供更多清晰度，以下是规则：
@@ -509,3 +512,57 @@ BTSE 的速率限制如下：
 | asset      | string | Yes     | 要转账的货币                    |
 | toUser     | string | Yes     | 接收者的账号                    |
 | toUserMail | string | Yes     | 接收者的电子邮件                |
+
+## 子帐号转账历史纪录
+
+> 响应
+
+```json
+{
+  "code": 1,
+  "msg": "Success",
+  "time": 1653964265608,
+  "success": true,
+  "data": {
+    "totalRows": 2,
+    "pageSize": 10,
+    "currentPage": 1,
+    "totalPages": 1,
+    "data": [
+      {
+        "timestamp": 1711707874850,
+        "fromUser": "uuooxxsub00002",
+        "receiver": "uuooxx",
+        "currency": "USDT",
+        "amount": 11
+      }
+    ]
+  }
+}
+```
+
+`POST /api/v3.2/subaccount/wallet/history`
+
+查询子帐号转帐历史纪录
+
+### 请求参数
+
+| 名称               | 类型    | 必填    | 描述                                                           |
+| ---                | ---     | ---     | ---                                                            |
+| startTime             | string  | Yes     | 要转账的货币金额                                                 |
+| endTime              | string  | Yes     | 要转账的货币                                                     |
+| page             | string  | Yes     | 接收者的账号                                                     |
+| pageSize         | string  | Yes     | 接收者的电子邮件                                                  |
+
+### 响应内容
+
+| 名称       | 类型   | 必填    | 描述                           |
+| ---        | ---    | ---     | ---                           |
+| totalRows | integer | Yes     | 接收者的电子邮件                |
+| pageSize | integer | Yes     | 接收者的电子邮件                |
+| currentPage | integer | Yes     | 目前页数                |
+| timestamp | integer | Yes     | 发送时间                |
+| fromUser | string | Yes     | 发送者的账号                |
+| receiver | string | Yes     | 接收者的账号                |
+| currency | string | Yes     | 转账的货币                |
+| amount | integer | Yes     | 转账的货币金额                |
