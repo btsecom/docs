@@ -13,6 +13,10 @@ headingLevel: 2
 
 # Change Log
 
+## Version 1.1.1 (10th April 2024)
+
+* Update description of `status` and `type` in [`Query Wallet History`](#query-wallet-history)
+
 ## Version 1.1.0 (16th November 2022)
 
 * [IMPORTANT] BTSE will change futures market naming convention in **December 2022** to provide more clarity to retail users and here are the rules:
@@ -226,9 +230,9 @@ Query user's wallet balance. Requires `Read` permissions on the API key.
     "description": "string",
     "fees": 0.06,
     "orderId": 20181213000239,
-    "status": 10,
+    "status": "COMPLETED",
     "timestamp": 1571630174639,
-    "type": 1,
+    "type": "Transfer_In",
     "username": "btseUser",
     "wallet": "Wallet",
     "txid": "<Blockchain Transaction ID>",
@@ -254,16 +258,16 @@ Get user's wallet history records on the spot wallet
 
 ### Response Content
 
-| Name        | Type    | Required | Description                                                                                                                                                                                                                                                            |
-| ---         | ---     | ---      | ---                                                                                                                                                                                                                                                                    |
-| currency    | string  | Yes      | Currency                                                                                                                                                                                                                                                               |
-| amount      | double  | Yes      | Amount in the record                                                                                                                                                                                                                                                   |
-| fees        | double  | Yes      | Fees charged if any                                                                                                                                                                                                                                                    |
-| orderId     | string  | Yes      | Internal wallet order ID                                                                                                                                                                                                                                               |
-| wallet      | string  | Yes      | Wallet type. For spot will return `@SPOT`                                                                                                                                                                                                                              |
-| description | string  | Yes      | Description of the transaction                                                                                                                                                                                                                                         |
-| status      | integer | Yes      | 1: PENDING<br/>2: PROCESSING<br/>10: COMPLETED<br/>16: CANCELLED                                                                                                                                                                                                       |
-| type        | integer | Yes      | `Deposit`: Deposits into account<br/>`Withdraw`: Withdrawals from account<br/>`Transfer_In`: BTSE internal transfer where funds are transferred in<br/>`Transfer_Out`: BTSE internal transfer where funds are transferred out<br/>`ReferralEarning`: Referral Earnings |
+| Name        | Type    | Required | Description                                                                            |
+| ---         | ---     | ---      | ---                                                                                    |
+| currency    | string  | Yes      | Currency                                                                               |
+| amount      | double  | Yes      | Amount in the record                                                                   |
+| fees        | double  | Yes      | Fees charged if any                                                                    |
+| orderId     | string  | Yes      | Internal wallet order ID                                                               |
+| wallet      | string  | Yes      | Wallet type. For spot will return `@SPOT`                                              |
+| description | string  | Yes      | Description of the transaction                                                         |
+| status      | string  | Yes      | `PROCESSING`<br/>`CANCELLED`<br/>`COMPLETED`<br/>`EXPIRED`<br/>`FAILURE`<br/>`PENDING` |
+| type        | string  | Yes      | `Deposit`<br/>`Withdraw`<br/>`Convert fiat`<br/>`Transfer_Out`<br/>`Transfer_In`<br/>`ReferralEarning`<br/>`Trading Fee Stake Freeze`<br/>`Trading Fee Stake Unfreeze`<br/>`Sub Account Transfer In`<br/>`Sub Account Transfer Out`<br/>`express buy`<br/>`Strategy Income`<br/>`Strategy Pay`<br/>`token voucher in`<br/>`spot trading fee rebate`<br/>`futures trading fee rebat`<br/>`trial fund`<br/>`general trading fee rebate`<br/>`token voucher out` |
 
 ## Create Wallet Address
 
