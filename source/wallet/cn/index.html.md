@@ -13,8 +13,13 @@ headingLevel: 2
 
 # 更新日志
 
+## 版本 1.1.2 (2024年4月10日)
+
+* 更新 [`查询钱包历史`](#bc1c4a9961) 中的 `status` 與 `type` 的描述
+
 ## 版本 1.1.1 (2024年04月08日)
-  - 新增[`子帐号转帐历史纪录`](#dfc184460c)API
+
+* 新增[`子帐号转帐历史纪录`](#dfc184460c)API
 
 ## 版本 1.1.0 (2022年11月16日)
 
@@ -229,9 +234,9 @@ BTSE 的速率限制如下：
     "description": "string",
     "fees": 0.06,
     "orderId": 20181213000239,
-    "status": 10,
+    "status": "COMPLETED",
     "timestamp": 1571630174639,
-    "type": 1,
+    "type": "Transfer_In",
     "username": "btseUser",
     "wallet": "Wallet",
     "txid": "<Blockchain Transaction ID>",
@@ -257,16 +262,16 @@ BTSE 的速率限制如下：
 
 ### 响应内容
 
-| 名称        | 类型    | 必填 | 描述                                                                                                              |
-| ---         | ---     | ---  | ---                                                                                                               |
-| currency    | string  | Yes  | 货币                                                                                                               |
-| amount      | double  | Yes  | 记录中的金额                                                                                                       |
-| fees        | double  | Yes  | 如有，将收取的费用                                                                                                 |
-| orderId     | string  | Yes  | 内部钱包订单 ID                                                                                                     |
-| wallet      | string  | Yes  | 钱包类型。对于现货将返回 `@SPOT`                                                                                     |
-| description | string  | Yes  | 交易描述                                                                                                           |
-| status      | integer | Yes  | 1：待定<br/>2：处理中<br/>10：已完成<br/>16：已取消                                                                  |
-| type        | integer | Yes  | `Deposit`：账户存款<br/>`Withdraw`：账户提款<br/>`Transfer_In`：BTSE内部转账，资金已转入<br/>`Transfer_Out`：BTSE内部转账，资金已转出<br/>`ReferralEarning`：推荐收益 |
+| 名称         | 类型    | 必填  | 描述                          |
+| ---         | ---     | ---  | ---                          |
+| currency    | string  | Yes  | 货币                          |
+| amount      | double  | Yes  | 记录中的金额                   |
+| fees        | double  | Yes  | 如有，将收取的费用              |
+| orderId     | string  | Yes  | 内部钱包订单 ID                |
+| wallet      | string  | Yes  | 钱包类型。对于现货将返回 `@SPOT` |
+| description | string  | Yes  | 交易描述                      |
+| status      | string  | Yes  | 记录的状态如下<br/>`PROCESSING`<br/>`CANCELLED`<br/>`COMPLETED`<br/>`EXPIRED`<br/>`FAILURE`<br/>`PENDING` |
+| type        | string  | Yes  | 记录的类型如下<br/>`Deposit`<br/>`Withdraw`<br/>`Convert fiat`<br/>`Transfer_Out`<br/>`Transfer_In`<br/>`ReferralEarning`<br/>`Trading Fee Stake Freeze`<br/>`Trading Fee Stake Unfreeze`<br/>`Sub Account Transfer In`<br/>`Sub Account Transfer Out`<br/>`express buy`<br/>`Strategy Income`<br/>`Strategy Pay`<br/>`token voucher in`<br/>`spot trading fee rebate`<br/>`futures trading fee rebat`<br/>`trial fund`<br/>`general trading fee rebate`<br/>`token voucher out` |
 
 ## 创建钱包地址
 
