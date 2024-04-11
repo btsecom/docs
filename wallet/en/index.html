@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-1-1-2-10th-april-2024" class="toc-h2 toc-link" data-title="Version 1.1.2 (10th April 2024)">Version 1.1.2 (10th April 2024)</a>
+                  </li>
+                  <li>
                     <a href="#version-1-1-1-08th-april-2024" class="toc-h2 toc-link" data-title="Version 1.1.1 (08th April 2024)">Version 1.1.1 (08th April 2024)</a>
                   </li>
                   <li>
@@ -326,7 +329,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-1-1-1-08th-april-2024'>Version 1.1.1 (08th April 2024)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-1-1-2-10th-april-2024'>Version 1.1.2 (10th April 2024)</h2>
+<ul>
+<li>Update description of <code>status</code> and <code>type</code> in <a href="#query-wallet-history"><code>Query Wallet History</code></a></li>
+</ul>
+<h2 id='version-1-1-1-08th-april-2024'>Version 1.1.1 (08th April 2024)</h2>
 <ul>
 <li>Add API for querying <a href="#subaccount-transfer-history"><code>Subaccount Transfer History</code></a></li>
 </ul>
@@ -650,9 +657,9 @@
     </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"fees"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.06</span><span class="p">,</span><span class="w">
     </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="mi">20181213000239</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COMPLETED"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1571630174639</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transfer_In"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"btseUser"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"wallet"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wallet"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"txid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;Blockchain Transaction ID&gt;"</span><span class="p">,</span><span class="w">
@@ -750,15 +757,15 @@
 </tr>
 <tr>
 <td>status</td>
-<td>integer</td>
+<td>string</td>
 <td>Yes</td>
-<td>1: PENDING<br/>2: PROCESSING<br/>10: COMPLETED<br/>16: CANCELLED</td>
+<td>The status of the record is as follows<br/><code>PROCESSING</code><br/><code>CANCELLED</code><br/><code>COMPLETED</code><br/><code>EXPIRED</code><br/><code>FAILURE</code><br/><code>PENDING</code></td>
 </tr>
 <tr>
 <td>type</td>
-<td>integer</td>
+<td>string</td>
 <td>Yes</td>
-<td><code>Deposit</code>: Deposits into account<br/><code>Withdraw</code>: Withdrawals from account<br/><code>Transfer_In</code>: BTSE internal transfer where funds are transferred in<br/><code>Transfer_Out</code>: BTSE internal transfer where funds are transferred out<br/><code>ReferralEarning</code>: Referral Earnings</td>
+<td>The type of the record is as follows<br/><code>Deposit</code><br/><code>Withdraw</code><br/><code>Convert fiat</code><br/><code>Transfer_Out</code><br/><code>Transfer_In</code><br/><code>ReferralEarning</code><br/><code>Trading Fee Stake Freeze</code><br/><code>Trading Fee Stake Unfreeze</code><br/><code>Sub Account Transfer In</code><br/><code>Sub Account Transfer Out</code><br/><code>express buy</code><br/><code>Strategy Income</code><br/><code>Strategy Pay</code><br/><code>token voucher in</code><br/><code>spot trading fee rebate</code><br/><code>futures trading fee rebat</code><br/><code>trial fund</code><br/><code>general trading fee rebate</code><br/><code>token voucher out</code></td>
 </tr>
 </tbody></table>
 <h2 id='create-wallet-address'>Create Wallet Address</h2>

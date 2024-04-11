@@ -234,6 +234,9 @@
             <a href="#185368440e" class="toc-h1 toc-link" data-title="更新日志">更新日志</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#1-1-2-2024-4-10" class="toc-h2 toc-link" data-title="版本 1.1.2 (2024年4月10日)">版本 1.1.2 (2024年4月10日)</a>
+                  </li>
+                  <li>
                     <a href="#1-1-1-2024-04-08" class="toc-h2 toc-link" data-title="版本 1.1.1 (2024年04月08日)">版本 1.1.1 (2024年04月08日)</a>
                   </li>
                   <li>
@@ -326,7 +329,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='185368440e'>更新日志</h1><h2 id='1-1-1-2024-04-08'>版本 1.1.1 (2024年04月08日)</h2>
+        <h1 id='185368440e'>更新日志</h1><h2 id='1-1-2-2024-4-10'>版本 1.1.2 (2024年4月10日)</h2>
+<ul>
+<li>更新 <a href="#bc1c4a9961"><code>查询钱包历史</code></a> 中的 <code>status</code> 與 <code>type</code> 的描述</li>
+</ul>
+<h2 id='1-1-1-2024-04-08'>版本 1.1.1 (2024年04月08日)</h2>
 <ul>
 <li>新增<a href="#dfc184460c"><code>子帐号转帐历史纪录</code></a>API</li>
 </ul>
@@ -650,9 +657,9 @@
     </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"fees"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.06</span><span class="p">,</span><span class="w">
     </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="mi">20181213000239</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COMPLETED"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1571630174639</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Transfer_In"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"btseUser"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"wallet"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wallet"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"txid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;Blockchain Transaction ID&gt;"</span><span class="p">,</span><span class="w">
@@ -750,15 +757,15 @@
 </tr>
 <tr>
 <td>status</td>
-<td>integer</td>
+<td>string</td>
 <td>Yes</td>
-<td>1：待定<br/>2：处理中<br/>10：已完成<br/>16：已取消</td>
+<td>记录的状态如下<br/><code>PROCESSING</code><br/><code>CANCELLED</code><br/><code>COMPLETED</code><br/><code>EXPIRED</code><br/><code>FAILURE</code><br/><code>PENDING</code></td>
 </tr>
 <tr>
 <td>type</td>
-<td>integer</td>
+<td>string</td>
 <td>Yes</td>
-<td><code>Deposit</code>：账户存款<br/><code>Withdraw</code>：账户提款<br/><code>Transfer_In</code>：BTSE内部转账，资金已转入<br/><code>Transfer_Out</code>：BTSE内部转账，资金已转出<br/><code>ReferralEarning</code>：推荐收益</td>
+<td>记录的类型如下<br/><code>Deposit</code><br/><code>Withdraw</code><br/><code>Convert fiat</code><br/><code>Transfer_Out</code><br/><code>Transfer_In</code><br/><code>ReferralEarning</code><br/><code>Trading Fee Stake Freeze</code><br/><code>Trading Fee Stake Unfreeze</code><br/><code>Sub Account Transfer In</code><br/><code>Sub Account Transfer Out</code><br/><code>express buy</code><br/><code>Strategy Income</code><br/><code>Strategy Pay</code><br/><code>token voucher in</code><br/><code>spot trading fee rebate</code><br/><code>futures trading fee rebat</code><br/><code>trial fund</code><br/><code>general trading fee rebate</code><br/><code>token voucher out</code></td>
 </tr>
 </tbody></table>
 <h2 id='b8b48f9d66'>创建钱包地址</h2>
