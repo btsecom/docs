@@ -848,7 +848,6 @@ Get trade fills for the market specified by `symbol`
 | beforeSerialId     | string  | Yes      | Condition to retrieve records before the specified serial Id. Used for pagination |
 | afterSerialId      | string  | Yes      | Condition to retrieve records after the specified serial Id. Used for pagination  |
 | count              | long    | Yes      | Number of records to return                                                       |
-| includeOld         | boolean | Yes      | Retrieve trade  history records past 7 days                                       |
 | useNewSymbolNaming | boolean | No       | True to use new futures market name in symbol, default to False                   |
 
 * maximum days of history records

@@ -848,7 +848,6 @@ BTSE 的速率限制如下：
 | beforeSerialId     | string  | Yes      | 用于分页的条件，检索指定序列ID之前的记录              |
 | afterSerialId      | string  | Yes      | 用于分页的条件，检索指定序列ID之后的记录              |
 | count              | long    | Yes      | 返回的记录数                                      |
-| includeOld         | boolean | Yes      | 获取过去7天的交易历史记录                           |
 | useNewSymbolNaming | boolean | No       | 设置为True以使用symbol中的新期货市场名称，默认为False |
 
 * 成交紀錄最大天数
