@@ -13,6 +13,17 @@ headingLevel: 2
 
 # 更新日志
 
+## 版本 2.7.5 (2024年5月29日)
+
+* 将以下API和WebSocket主题中添加`contractSize`字段
+  * [`查询成交记录`](#bbd4754907-2)
+  * [`查询订单`](#90376e83a0)
+  * [`查询未完成订单`](#72485acdf4)
+  * [`查询持仓`](#e602fd627b)
+  * [`用户交易记录`](#384d988850)
+  * [`所有仓位`](#35edece5cf)
+  * [`仓位`](#25a424cad9) 
+
 ## 版本 2.7.4 (2024年3月29日)
 
 * 说明查询历史记录的最大天数. [查询成交记录](#bbd4754907) / [查询钱包历史记录](#2d46780fe3)
@@ -1347,7 +1358,8 @@ BTSE 的速率限制如下：
     "timeInForce": "GTC",
     "takeProfitOrder": null,
     "stopLossOrder": null,
-    "closeOrder": false
+    "closeOrder": false,
+    "contractSize": 0.001
 }
 ```
 
@@ -1395,6 +1407,7 @@ BTSE 的速率限制如下：
 | stopLossOrder                 | StopLossOrder object   | No | 止损订单信息 |
 | closeOrder                    | bool   | Yes                | 是否为关闭此持仓的订单 |
 | timeInForce                   | String  | Yes      | 订单有效期                                    |
+| contractSize                  | double  | Yes      | 订单合约规模                                    |
 
 ## 修改订单
 
@@ -1651,6 +1664,7 @@ BTSE 的速率限制如下：
     "positionMode": "ONE_WAY",
     "positionDirection": null,
     "positionId": "BTCPFC-USD",
+    "contractSize": 0.0001,
     "takeProfitOrder": {
         "orderId": "ea1ab233-c79a-4503-a475-f8633ecc9d79",
         "side": "SELL",
@@ -1717,9 +1731,10 @@ BTSE 的速率限制如下：
 | takeProfitOrder    | TakeProfitOrder对象  | No | 止盈订单信息 |
 | stopLossOrder      | StopLossOrder对象    | No | 止损订单信息 |
 | closeOrder         | bool                | Yes | 是否为关闭此持仓的订单 |
-| positionMode      | string  | Yes      | 仓位模式<br/> 单向持仓`ONE_WAY` 或 双向持仓`HEDGE`                                                                                                                                                                                                                                                                                  |
-| positionDirection | string  | Yes      | 仓位方向<br/>  多头仓位`LONG` 或 空头仓位`SHORT`                                                                                                                                                                                                                                                                             |
-| positionId        | string  | Yes      | 当前订单属于的仓位ID。                                                                                                                                                                                                                                                                             |
+| positionMode      | string  | Yes      | 仓位模式<br/> 单向持仓`ONE_WAY` 或 双向持仓`HEDGE`               |
+| positionDirection | string  | Yes      | 仓位方向<br/>  多头仓位`LONG` 或 空头仓位`SHORT`           |
+| positionId        | string  | Yes      | 当前订单属于的仓位ID。   |
+| contractSize        | string  | Yes    | 订单合约规模   |
 
 ## 查询成交记录
 
@@ -1759,7 +1774,8 @@ BTSE 的速率限制如下：
     "positionId": null,
     "wallet": "string",
     "tradeId": "string",
-    "orderId": "string"
+    "orderId": "string",
+    "contractSize": "number"
   }
 ]
 ```
@@ -1778,7 +1794,6 @@ BTSE 的速率限制如下：
 | beforeSerialId    | string  | No       | 获取指定序列ID之前的记录的条件。用于分页                                                             |
 | afterSerialId     | string  | No       | 获取指定序列ID之后的记录的条件。用于分页                                                             |
 | count             | long    | No       | 返回的记录数量                                                                                      |
-| includeOld        | boolean | No       | 检索过去7天的交易历史记录                                                                            |
 | orderID           | string  | No       | 通过订单ID查询交易历史                |
 | clOrderID         | string  | No       | 通过自定义订单ID查询交易历史                                                                         |
 | useNewSymbolNaming| boolean | No       | 若为True，则使用新格式的期货市场名称作为符号， 默认为False                                             |
@@ -1811,6 +1826,7 @@ BTSE 的速率限制如下：
 | realizedPnL      | double  | Yes      | 现货中未使用                                                                                                                                                                        |
 | total            | long    | Yes      | 现货中未使用                                                                                                                                                                        |
 | positionId        | string  | Yes      | 当前订单属于的仓位ID。                                                                                                                                                                                                                                                                             |
+| contractSize      | double  | Yes      | 交易合约规模         |
 
 
 ## 查询持仓
@@ -3310,6 +3326,7 @@ echo -n "/ws/futures1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6
     "quote": "Quote currency eg. USD",
     "maker": "maker or taker",
     "timestamp": "Time trade was matched in the engine",
+    "contractSize": "The contract size of fills",
     "tradeId": "Trade Unique ID"
   }]
 }
@@ -3391,6 +3408,7 @@ echo -n "/ws/futures1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6
     "positionMode": "HEDGE",
     "positionDirection": "SHORT",
     "settleWithNonUSDAsset": "BTC",
+    "contractSize": 0.001,
     "takeProfitOrder": {
         "orderId": "4820b20a-e41b-4273-b3ad-4b19920aeeb5",
         "side": "SELL",
@@ -3436,6 +3454,7 @@ echo -n "/ws/futures1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6
     "orderModeName": "MODE_SELL",
     "marginTypeName": "FUTURES_MARGIN_CROSS",
     "currentLeverage": 0.1116510969,
+    "contractSize": 0.001,
     "takeProfitOrder": null,
     "settleWithNonUSDAsset": "USDT",
     "stopLossOrder": null,
@@ -3486,9 +3505,10 @@ echo -n "/ws/futures1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6
 | settleWithNonUSDAsset   | string  | Yes      |                                                    |
 | takeProfitOrder | TakeProfitOrder对象 | No | 止盈订单信息                                            |
 | stopLossOrder | StopLossOrder对象 | No | 止损订单信息                                                |
-| positionMode      | string  | Yes      | 仓位模式<br/> 单向持仓`ONE_WAY` 或 双向持仓`HEDGE`                                                                                                                                                                                                                                                                                  |
-| positionDirection | string  | Yes      | 仓位方向<br/>  多头仓位`LONG` 或 空头仓位`SHORT`                                                                                                                                                                                                                                                                             |
-| positionId        | string  | Yes      | 当前订单属于的仓位ID。                                                                                                                                                                                                                                                                             |
+| positionMode      | string  | Yes      | 仓位模式<br/> 单向持仓`ONE_WAY` 或 双向持仓`HEDGE`   |
+| positionDirection | string  | Yes      | 仓位方向<br/>  多头仓位`LONG` 或 空头仓位`SHORT` |
+| positionId        | string  | Yes      | 当前订单属于的仓位ID。   |   
+| contractSize      | double  | Yes      | 仓位合约规模   |
 
 ## 仓位
 
@@ -3539,6 +3559,7 @@ echo -n "/ws/futures1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6
     "currentLeverage": 0.02,
     "avgFillPrice": 0.0,
     "settleWithNonUSDAsset": "BTC",
+    "contractSize": 0.001,
     "takeProfitOrder": {
         "orderId": "4820b20a-e41b-4273-b3ad-4b19920aeeb5",
         "side": "SELL",
@@ -3584,6 +3605,7 @@ echo -n "/ws/futures1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6
         "currentLeverage": 0.1113820366,
         "averageFillPrice": 0,
         "filledSize": 0,
+        "contractSize": 0.001,
         "takeProfitOrder": null,
         "stopLossOrder": null,
         "positionId": "LTCPFC-USD|SHORT",
@@ -3633,6 +3655,7 @@ echo -n "/ws/futures1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6
     "currentLeverage": 0,
     "avgFillPrice": 0,
     "settleWithNonUSDAsset": "BTC",
+    "contractSize": 0.001,
     "takeProfitOrder": null,
     "stopLossOrder": null,
     "positionId": "BTCPFC-USD|SHORT",
@@ -3682,8 +3705,9 @@ echo -n "/ws/futures1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6
 | settleWithNonUSDAsset   | string  | Yes      |                                        |
 | takeProfitOrder         | TakeProfitOrder object | No       | 止盈订单信息              |
 | stopLossOrder           | StopLossOrder object   | No       | 止损订单信息              |
-| positionMode      | string  | Yes      | 仓位模式<br/> 单向持仓`ONE_WAY` 或 双向持仓`HEDGE`                                                                                                                                                                                                                                                                                  |
-| positionDirection | string  | Yes      | 仓位方向<br/>  多头仓位`LONG` 或 空头仓位`SHORT`                                                                                                                                                                                                                                                                             |
-| positionId        | string  | Yes      | 当前订单属于的仓位ID。                                                                                                                                                                                                                                                                             |
+| positionMode      | string  | Yes      | 仓位模式<br/> 单向持仓`ONE_WAY` 或 双向持仓`HEDGE` |
+| positionDirection | string  | Yes      | 仓位方向<br/>  多头仓位`LONG` 或 空头仓位`SHORT` |
+| positionId        | string  | Yes      | 当前订单属于的仓位ID。 |
+| contractSize      | double  | Yes      | 仓位合约规模  |
 
 </section>
