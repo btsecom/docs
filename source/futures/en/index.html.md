@@ -13,9 +13,9 @@ headingLevel: 2
 
 # Change Log
 
-## Version 2.7.5 (29th May 2024)
+## Version 2.7.5 (27th May 2024)
 
-* Add contractSize field in the following APIs and WebSocket topics
+* Add contractSize field in the following APIs and WebSocket topics. The scheduled effective date is `May 29, 2024, at 10:00 AM (UTC+0)`
   * [`Query Trade History`](#query-trade-history)
   * [`Query Order`](#query-order)
   * [`Query Open Orders`](#query-open-orders)
