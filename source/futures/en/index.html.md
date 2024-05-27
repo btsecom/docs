@@ -13,9 +13,20 @@ headingLevel: 2
 
 # Change Log
 
+## Version 2.7.5 (27th May 2024)
+
+* Add contractSize field in the following APIs and WebSocket topics. The scheduled effective date is `May 29, 2024, at 10:00 AM (UTC+0)`
+  * [`Query Trade History`](#query-trade-history)
+  * [`Query Order`](#query-order)
+  * [`Query Open Orders`](#query-open-orders)
+  * [`Query Position`](#query-position)
+  * [`fills`](#user-trade-fills)
+  * [`allPosition`](#all-position)
+  * [`positions`](#positions) 
+
 ## Version 2.7.4 (29th March 2024)
 
-* Description of the maximum number of days for querying historical records. [Query Trades Fills](#query-trades-fills) / [Query Wallet History](#query-wallet-history)
+* Description of the maximum number of days for querying historical records. [`Query Trade History`](#query-trade-history) / [Query Wallet History](#query-wallet-history)
 
 ## Version 2.7.3 (19th February 2024)
 
@@ -193,7 +204,7 @@ Please use the following websokcet topic through the endpoint `wss://ws.btse.com
     - [`Close Position`](#close-position)
     - [`Query Wallet Margin`](#query-wallet-margin)
     - [`Create New Order`](#create-new-order)
-    - [`Query Trades Fills`](#query-trades-fills-2)
+    - [`Query Trade History`](#query-trade-history)
   - Existing websocket topics will return data with the current market name (ex: BTCPFC) and new set of websocket topics are added for new market name (ex: BTC-PERP) where `the response fields will be the same` and here's the mapping table
     - [tradeHistoryApi](#public-trade-fills) -> tradeHistoryApiV2
     - [orderbookApi](#orderbook-snapshot-by-grouping) -> orderbookApiV2
@@ -252,7 +263,7 @@ Please use the following websokcet topic through the endpoint `wss://ws.btse.com
     - [`Close Position`](#close-position)
     - [`Query Wallet Margin`](#query-wallet-margin)
     - [`Create New Order`](#create-new-order)
-    - [`Query Trades Fills`](#query-trades-fills-2)
+    - [`Query Trade History`](#query-trade-history)
   - Existing websocket topics will return data with the current market name (ex: BTCPFC) and new set of websocket topics are added for new market name (ex: BTC-PERP) where `the response fields will be the same` and here's the mapping table
     - [tradeHistoryApi](#public-trade-fills) -> tradeHistoryApiV2
     - [orderbookApi](#orderbook-snapshot-by-grouping) -> orderbookApiV2
@@ -837,7 +848,6 @@ Get trade fills for the market specified by `symbol`
 | beforeSerialId     | string  | Yes      | Condition to retrieve records before the specified serial Id. Used for pagination |
 | afterSerialId      | string  | Yes      | Condition to retrieve records after the specified serial Id. Used for pagination  |
 | count              | long    | Yes      | Number of records to return                                                       |
-| includeOld         | boolean | Yes      | Retrieve trade  history records past 7 days                                       |
 | useNewSymbolNaming | boolean | No       | True to use new futures market name in symbol, default to False                   |
 
 * maximum days of history records
@@ -1347,7 +1357,8 @@ This API Requires `Trading` permission
     "timeInForce": "GTC",
     "takeProfitOrder": null,
     "stopLossOrder": null,
-    "closeOrder": false
+    "closeOrder": false,
+    "contractSize": 0.001
 }
 ```
 
@@ -1395,6 +1406,7 @@ Query order detail for a specified orderID/clOrderID, please note that a cancele
 | stopLossOrder                 | StopLossOrder object   | No | Stop loss order info |
 | closeOrder                    | bool   | Yes      | Whether it is an order to close this position |
 | timeInForce                   | String  | Yes      | Order validity                                                                         |
+| contractSize                  | double  | Yes      | The order contract size                                                                |
 
 ## Amend Order
 
@@ -1651,6 +1663,7 @@ Dead-man's switch allows the trader to send in a timeout value which is a Time t
     "positionId": "BTCPFC-USD",
     "timeInForce": "GTC",
     "averageFillPrice": 0.0,
+    "contractSize": 0.0001,
     "takeProfitOrder": {
         "orderId": "ea1ab233-c79a-4503-a475-f8633ecc9d79",
         "side": "SELL",
@@ -1717,11 +1730,12 @@ Retrieves open orders that have not yet been matched or matched recently.
 | takeProfitOrder              | TakeProfitOrder object | No | Take profit order info |
 | stopLossOrder                | StopLossOrder object   | No | Stop loss order info |
 | closeOrder                   | bool   | Yes      | Whether it is an order to close this position |
-| positionMode                 | string   | Yes      | Position mode<br/>ONE_WAY or HEDGE                                                     |
-| positionDirection            | string   | Yes      | Position direction                                                                     |
-| positionId                   | string   | Yes      | The current order belongs to the id of position.                                       |
+| positionMode                 | string   | Yes      | Position mode<br/>ONE_WAY or HEDGE                                                   |
+| positionDirection            | string   | Yes      | Position direction                                                                   |
+| positionId                   | string   | Yes      | The current order belongs to the id of position.                                     |
+| contractSize                 | double   | Yes      | The order contract size                                                              |
 
-## Query Trades Fills
+## Query Trade History
 
 > Request
 
@@ -1759,7 +1773,8 @@ Retrieves open orders that have not yet been matched or matched recently.
     "positionId": null,
     "wallet": "string",
     "tradeId": "string",
-    "orderId": "string"
+    "orderId": "string",
+    "contractSize": "number"
   }
 ]
 ```
@@ -1778,7 +1793,6 @@ Retrieves a user's trade history
 | beforeSerialId     | string  | No       | Condition to retrieve records before the specified serial Id. Used for pagination |
 | afterSerialId      | string  | No       | Condition to retrieve records after the specified serial Id. Used for pagination  |
 | count              | long    | No       | Number of records to return                                                       |
-| includeOld         | boolean | No       | Retrieve trade  history records past 7 days                                       |
 | orderID            | string  | No       | Query trade history by order ID                                            |
 | clOrderID          | string  | No       | Query trade history by custom order ID                                            |
 | useNewSymbolNaming | boolean | No       | True to use new futures market name in symbol, default to False                   |
@@ -1811,6 +1825,7 @@ Retrieves a user's trade history
 | realizedPnL      | double  | Yes      | Not used in Spot                                                                                                                                                                  |
 | total            | long    | Yes      | Not used in Spot                                                                                                                                                                  |
 | positionId       | string  | Yes      | The current order belongs to the id of position.                                                                                                                                  |
+| contractSize     | double  | Yes      | The trade contract size                                                                                                                                                           |
 
 
 ## Query Position
@@ -3310,6 +3325,7 @@ Receive trade notifications by subscribing to the topic `notificationApiV2`. The
     "quote": "Quote currency eg. USD",
     "maker": "maker or taker", 
     "timestamp": "Time trade was matched in the engine",
+    "contractSize": "The contract size of fills",
     "tradeId": "Trade Unique ID"
   }]
 }
@@ -3330,7 +3346,7 @@ When a trade has been transacted, this topic will send the trade information bac
 | tradeId     | string  | Yes      | Trade unique identifier                                                                    |
 | type        | int     | Yes      | Order type. Valid values are:<br/>76: Limit Order<br/>77: Market Order<br/>80: Algo orders |
 | side        | string  | Yes      | Trade side. BUY or SELL                                                                    |
-| price       | double  | Yes      | Transcated price                                                                           |
+| price       | double  | Yes      | Transacted price                                                                           |
 | size        | double  | Yes      | Transacted size                                                                            |
 | feeAmount   | double  | Yes      | Fee amount charged                                                                         |
 | feeCurrency | string  | Yes      | Fee currency                                                                               |
@@ -3391,6 +3407,7 @@ When a trade has been transacted, this topic will send the trade information bac
     "positionMode": "HEDGE",
     "positionDirection": "SHORT",
     "settleWithNonUSDAsset": "BTC",
+    "contractSize": 0.001,
     "takeProfitOrder": {
         "orderId": "4820b20a-e41b-4273-b3ad-4b19920aeeb5",
         "side": "SELL",
@@ -3436,6 +3453,7 @@ When a trade has been transacted, this topic will send the trade information bac
     "orderModeName": "MODE_SELL",
     "marginTypeName": "FUTURES_MARGIN_CROSS",
     "currentLeverage": 0.1116510969,
+    "contractSize": 0.001,
     "takeProfitOrder": null,
     "stopLossOrder": null,
     "settleWithNonUSDAsset": "USDT",
@@ -3489,6 +3507,7 @@ All futures positions will be pushed via this topic once the position changes.
 | positionMode            | string  | Yes      | Position mode<br/>ONE_WAY or HEDGE           |
 | positionDirection       | string  | Yes      | Position direction                           |
 | positionId              | string  | Yes      | Position id                                  |
+| contractSize            | double  | Yes      | The position contract size                   |
 
 ## Positions
 
@@ -3539,6 +3558,7 @@ All futures positions will be pushed via this topic once the position changes.
     "currentLeverage": 0.02,
     "avgFillPrice": 0.0,
     "settleWithNonUSDAsset": "BTC",
+    "contractSize": 0.001,
     "takeProfitOrder": {
         "orderId": "4820b20a-e41b-4273-b3ad-4b19920aeeb5",
         "side": "SELL",
@@ -3584,6 +3604,7 @@ All futures positions will be pushed via this topic once the position changes.
         "currentLeverage": 0.1113820366,
         "averageFillPrice": 0,
         "filledSize": 0,
+        "contractSize": 0.001,
         "takeProfitOrder": null,
         "stopLossOrder": null,
         "positionId": "LTCPFC-USD|SHORT",
@@ -3633,6 +3654,7 @@ All futures positions will be pushed via this topic once the position changes.
     "currentLeverage": 0,
     "avgFillPrice": 0,
     "settleWithNonUSDAsset": "BTC",
+    "contractSize": 0.001,
     "takeProfitOrder": null,
     "stopLossOrder": null,
     "positionId": "BTCPFC-USD|SHORT",
@@ -3685,5 +3707,6 @@ All futures positions will be pushed via this topic once the position changes. I
 | positionMode            | string  | Yes      | Position mode<br/>ONE_WAY or HEDGE           |
 | positionDirection       | string  | Yes      | Position direction                           |
 | positionId              | string  | Yes      | Position id                                  |
+| contractSize            | double  | Yes      | The position contract size                   |
 
 </section>
