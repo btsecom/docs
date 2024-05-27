@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-2-7-5-27th-may-2024" class="toc-h2 toc-link" data-title="Version 2.7.5 (27th May 2024)">Version 2.7.5 (27th May 2024)</a>
+                  </li>
+                  <li>
                     <a href="#version-2-7-4-29th-march-2024" class="toc-h2 toc-link" data-title="Version 2.7.4 (29th March 2024)">Version 2.7.4 (29th March 2024)</a>
                   </li>
                   <li>
@@ -444,7 +447,7 @@
                     <a href="#query-open-orders" class="toc-h2 toc-link" data-title="Query Open Orders">Query Open Orders</a>
                   </li>
                   <li>
-                    <a href="#query-trades-fills-2" class="toc-h2 toc-link" data-title="Query Trades Fills">Query Trades Fills</a>
+                    <a href="#query-trade-history" class="toc-h2 toc-link" data-title="Query Trade History">Query Trade History</a>
                   </li>
                   <li>
                     <a href="#query-position" class="toc-h2 toc-link" data-title="Query Position">Query Position</a>
@@ -554,9 +557,23 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-2-7-4-29th-march-2024'>Version 2.7.4 (29th March 2024)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-2-7-5-27th-may-2024'>Version 2.7.5 (27th May 2024)</h2>
 <ul>
-<li>Description of the maximum number of days for querying historical records. <a href="#query-trades-fills">Query Trades Fills</a> / <a href="#query-wallet-history">Query Wallet History</a></li>
+<li>Add contractSize field in the following APIs and WebSocket topics. The scheduled effective date is <code>May 29, 2024, at 10:00 AM (UTC+0)</code>
+
+<ul>
+<li><a href="#query-trade-history"><code>Query Trade History</code></a></li>
+<li><a href="#query-order"><code>Query Order</code></a></li>
+<li><a href="#query-open-orders"><code>Query Open Orders</code></a></li>
+<li><a href="#query-position"><code>Query Position</code></a></li>
+<li><a href="#user-trade-fills"><code>fills</code></a></li>
+<li><a href="#all-position"><code>allPosition</code></a></li>
+<li><a href="#positions"><code>positions</code></a> </li>
+</ul></li>
+</ul>
+<h2 id='version-2-7-4-29th-march-2024'>Version 2.7.4 (29th March 2024)</h2>
+<ul>
+<li>Description of the maximum number of days for querying historical records. <a href="#query-trade-history"><code>Query Trade History</code></a> / <a href="#query-wallet-history">Query Wallet History</a></li>
 </ul>
 <h2 id='version-2-7-3-19th-february-2024'>Version 2.7.3 (19th February 2024)</h2>
 <ul>
@@ -773,7 +790,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <li><a href="#close-position"><code>Close Position</code></a></li>
 <li><a href="#query-wallet-margin"><code>Query Wallet Margin</code></a></li>
 <li><a href="#create-new-order"><code>Create New Order</code></a></li>
-<li><a href="#query-trades-fills-2"><code>Query Trades Fills</code></a></li>
+<li><a href="#query-trade-history"><code>Query Trade History</code></a></li>
 <li>Existing websocket topics will return data with the current market name (ex: BTCPFC) and new set of websocket topics are added for new market name (ex: BTC-PERP) where <code>the response fields will be the same</code> and here&#39;s the mapping table</li>
 <li><a href="#public-trade-fills">tradeHistoryApi</a> -&gt; tradeHistoryApiV2</li>
 <li><a href="#orderbook-snapshot-by-grouping">orderbookApi</a> -&gt; orderbookApiV2</li>
@@ -838,7 +855,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <li><a href="#close-position"><code>Close Position</code></a></li>
 <li><a href="#query-wallet-margin"><code>Query Wallet Margin</code></a></li>
 <li><a href="#create-new-order"><code>Create New Order</code></a></li>
-<li><a href="#query-trades-fills-2"><code>Query Trades Fills</code></a></li>
+<li><a href="#query-trade-history"><code>Query Trade History</code></a></li>
 <li>Existing websocket topics will return data with the current market name (ex: BTCPFC) and new set of websocket topics are added for new market name (ex: BTC-PERP) where <code>the response fields will be the same</code> and here&#39;s the mapping table</li>
 <li><a href="#public-trade-fills">tradeHistoryApi</a> -&gt; tradeHistoryApiV2</li>
 <li><a href="#orderbook-snapshot-by-grouping">orderbookApi</a> -&gt; orderbookApiV2</li>
@@ -1905,12 +1922,6 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>Number of records to return</td>
 </tr>
 <tr>
-<td>includeOld</td>
-<td>boolean</td>
-<td>Yes</td>
-<td>Retrieve trade  history records past 7 days</td>
-</tr>
-<tr>
 <td>useNewSymbolNaming</td>
 <td>boolean</td>
 <td>No</td>
@@ -2898,7 +2909,8 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
     </span><span class="nl">"timeInForce"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"takeProfitOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nl">"stopLossOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"closeOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="nl">"closeOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"contractSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.001</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p><code>GET /api/v2.1/order</code> </p>
@@ -3108,6 +3120,12 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>String</td>
 <td>Yes</td>
 <td>Order validity</td>
+</tr>
+<tr>
+<td>contractSize</td>
+<td>double</td>
+<td>Yes</td>
+<td>The order contract size</td>
 </tr>
 </tbody></table>
 <h2 id='amend-order'>Amend Order</h2>
@@ -3663,6 +3681,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
     </span><span class="nl">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC-USD"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"timeInForce"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"averageFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"contractSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0001</span><span class="p">,</span><span class="w">
     </span><span class="nl">"takeProfitOrder"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ea1ab233-c79a-4503-a475-f8633ecc9d79"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SELL"</span><span class="p">,</span><span class="w">
@@ -3935,8 +3954,14 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>Yes</td>
 <td>The current order belongs to the id of position.</td>
 </tr>
+<tr>
+<td>contractSize</td>
+<td>double</td>
+<td>Yes</td>
+<td>The order contract size</td>
+</tr>
 </tbody></table>
-<h2 id='query-trades-fills-2'>Query Trades Fills</h2>
+<h2 id='query-trade-history'>Query Trade History</h2>
 <blockquote>
 <p>Request</p>
 </blockquote>
@@ -3972,7 +3997,8 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
     </span><span class="nl">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nl">"wallet"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"tradeId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+    </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"contractSize"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
@@ -4023,12 +4049,6 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>long</td>
 <td>No</td>
 <td>Number of records to return</td>
-</tr>
-<tr>
-<td>includeOld</td>
-<td>boolean</td>
-<td>No</td>
-<td>Retrieve trade  history records past 7 days</td>
 </tr>
 <tr>
 <td>orderID</td>
@@ -4201,6 +4221,12 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>string</td>
 <td>Yes</td>
 <td>The current order belongs to the id of position.</td>
+</tr>
+<tr>
+<td>contractSize</td>
+<td>double</td>
+<td>Yes</td>
+<td>The trade contract size</td>
 </tr>
 </tbody></table>
 <h2 id='query-position'>Query Position</h2>
@@ -7232,6 +7258,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
     </span><span class="nl">"quote"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Quote currency eg. USD"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"maker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"maker or taker"</span><span class="p">,</span><span class="w"> 
     </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Time trade was matched in the engine"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"contractSize"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The contract size of fills"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"tradeId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Trade Unique ID"</span><span class="w">
   </span><span class="p">}]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -7294,7 +7321,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>price</td>
 <td>double</td>
 <td>Yes</td>
-<td>Transcated price</td>
+<td>Transacted price</td>
 </tr>
 <tr>
 <td>size</td>
@@ -7389,6 +7416,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
     </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HEDGE"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"positionDirection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SHORT"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"settleWithNonUSDAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"contractSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.001</span><span class="p">,</span><span class="w">
     </span><span class="nl">"takeProfitOrder"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4820b20a-e41b-4273-b3ad-4b19920aeeb5"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SELL"</span><span class="p">,</span><span class="w">
@@ -7434,6 +7462,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
     </span><span class="nl">"orderModeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MODE_SELL"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"marginTypeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FUTURES_MARGIN_CROSS"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"currentLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1116510969</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"contractSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.001</span><span class="p">,</span><span class="w">
     </span><span class="nl">"takeProfitOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nl">"stopLossOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nl">"settleWithNonUSDAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
@@ -7675,6 +7704,12 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>Yes</td>
 <td>Position id</td>
 </tr>
+<tr>
+<td>contractSize</td>
+<td>double</td>
+<td>Yes</td>
+<td>The position contract size</td>
+</tr>
 </tbody></table>
 <h2 id='positions'>Positions</h2>
 <blockquote>
@@ -7724,6 +7759,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
     </span><span class="nl">"currentLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.02</span><span class="p">,</span><span class="w">
     </span><span class="nl">"avgFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"settleWithNonUSDAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"contractSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.001</span><span class="p">,</span><span class="w">
     </span><span class="nl">"takeProfitOrder"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4820b20a-e41b-4273-b3ad-4b19920aeeb5"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SELL"</span><span class="p">,</span><span class="w">
@@ -7769,6 +7805,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
         </span><span class="nl">"currentLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1113820366</span><span class="p">,</span><span class="w">
         </span><span class="nl">"averageFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
         </span><span class="nl">"filledSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"contractSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.001</span><span class="p">,</span><span class="w">
         </span><span class="nl">"takeProfitOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
         </span><span class="nl">"stopLossOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
         </span><span class="nl">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LTCPFC-USD|SHORT"</span><span class="p">,</span><span class="w">
@@ -7817,6 +7854,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
     </span><span class="nl">"currentLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"avgFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"settleWithNonUSDAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"contractSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.001</span><span class="p">,</span><span class="w">
     </span><span class="nl">"takeProfitOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nl">"stopLossOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nl">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC-USD|SHORT"</span><span class="p">,</span><span class="w">
@@ -8056,6 +8094,12 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <td>string</td>
 <td>Yes</td>
 <td>Position id</td>
+</tr>
+<tr>
+<td>contractSize</td>
+<td>double</td>
+<td>Yes</td>
+<td>The position contract size</td>
 </tr>
 </tbody></table>
 

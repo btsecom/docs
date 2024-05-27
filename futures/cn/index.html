@@ -234,6 +234,9 @@
             <a href="#185368440e" class="toc-h1 toc-link" data-title="更新日志">更新日志</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2-7-5-2024-5-27" class="toc-h2 toc-link" data-title="版本 2.7.5 (2024年5月27日)">版本 2.7.5 (2024年5月27日)</a>
+                  </li>
+                  <li>
                     <a href="#2-7-4-2024-3-29" class="toc-h2 toc-link" data-title="版本 2.7.4 (2024年3月29日)">版本 2.7.4 (2024年3月29日)</a>
                   </li>
                   <li>
@@ -554,7 +557,21 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='185368440e'>更新日志</h1><h2 id='2-7-4-2024-3-29'>版本 2.7.4 (2024年3月29日)</h2>
+        <h1 id='185368440e'>更新日志</h1><h2 id='2-7-5-2024-5-27'>版本 2.7.5 (2024年5月27日)</h2>
+<ul>
+<li>将以下API和WebSocket主题中添加<code>contractSize</code>字段。计划生效日期为<code>2024年5月29日上午10点（UTC+0）</code>。
+
+<ul>
+<li><a href="#bbd4754907-2"><code>查询成交记录</code></a></li>
+<li><a href="#90376e83a0"><code>查询订单</code></a></li>
+<li><a href="#72485acdf4"><code>查询未完成订单</code></a></li>
+<li><a href="#e602fd627b"><code>查询持仓</code></a></li>
+<li><a href="#384d988850"><code>用户交易记录</code></a></li>
+<li><a href="#35edece5cf"><code>所有仓位</code></a></li>
+<li><a href="#25a424cad9"><code>仓位</code></a> </li>
+</ul></li>
+</ul>
+<h2 id='2-7-4-2024-3-29'>版本 2.7.4 (2024年3月29日)</h2>
 <ul>
 <li>说明查询历史记录的最大天数. <a href="#bbd4754907">查询成交记录</a> / <a href="#2d46780fe3">查询钱包历史记录</a></li>
 </ul>
@@ -1905,12 +1922,6 @@
 <td>返回的记录数</td>
 </tr>
 <tr>
-<td>includeOld</td>
-<td>boolean</td>
-<td>Yes</td>
-<td>获取过去7天的交易历史记录</td>
-</tr>
-<tr>
 <td>useNewSymbolNaming</td>
 <td>boolean</td>
 <td>No</td>
@@ -2898,7 +2909,8 @@
     </span><span class="nl">"timeInForce"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"takeProfitOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nl">"stopLossOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"closeOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="nl">"closeOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"contractSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.001</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p><code>GET /api/v2.1/order</code></p>
@@ -3108,6 +3120,12 @@
 <td>String</td>
 <td>Yes</td>
 <td>订单有效期</td>
+</tr>
+<tr>
+<td>contractSize</td>
+<td>double</td>
+<td>Yes</td>
+<td>订单合约规模</td>
 </tr>
 </tbody></table>
 <h2 id='89e5b08e91'>修改订单</h2>
@@ -3667,6 +3685,7 @@
     </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ONE_WAY"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"positionDirection"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nl">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC-USD"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"contractSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0001</span><span class="p">,</span><span class="w">
     </span><span class="nl">"takeProfitOrder"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ea1ab233-c79a-4503-a475-f8633ecc9d79"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SELL"</span><span class="p">,</span><span class="w">
@@ -3939,6 +3958,12 @@
 <td>Yes</td>
 <td>当前订单属于的仓位ID。</td>
 </tr>
+<tr>
+<td>contractSize</td>
+<td>string</td>
+<td>Yes</td>
+<td>订单合约规模</td>
+</tr>
 </tbody></table>
 <h2 id='bbd4754907-2'>查询成交记录</h2>
 <blockquote>
@@ -3976,7 +4001,8 @@
     </span><span class="nl">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nl">"wallet"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"tradeId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+    </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"contractSize"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
@@ -4027,12 +4053,6 @@
 <td>long</td>
 <td>No</td>
 <td>返回的记录数量</td>
-</tr>
-<tr>
-<td>includeOld</td>
-<td>boolean</td>
-<td>No</td>
-<td>检索过去7天的交易历史记录</td>
 </tr>
 <tr>
 <td>orderID</td>
@@ -4205,6 +4225,12 @@
 <td>string</td>
 <td>Yes</td>
 <td>当前订单属于的仓位ID。</td>
+</tr>
+<tr>
+<td>contractSize</td>
+<td>double</td>
+<td>Yes</td>
+<td>交易合约规模</td>
 </tr>
 </tbody></table>
 <h2 id='e602fd627b'>查询持仓</h2>
@@ -7227,6 +7253,7 @@
     </span><span class="nl">"quote"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Quote currency eg. USD"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"maker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"maker or taker"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Time trade was matched in the engine"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"contractSize"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The contract size of fills"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"tradeId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Trade Unique ID"</span><span class="w">
   </span><span class="p">}]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -7384,6 +7411,7 @@
     </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HEDGE"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"positionDirection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SHORT"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"settleWithNonUSDAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"contractSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.001</span><span class="p">,</span><span class="w">
     </span><span class="nl">"takeProfitOrder"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4820b20a-e41b-4273-b3ad-4b19920aeeb5"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SELL"</span><span class="p">,</span><span class="w">
@@ -7429,6 +7457,7 @@
     </span><span class="nl">"orderModeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MODE_SELL"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"marginTypeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FUTURES_MARGIN_CROSS"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"currentLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1116510969</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"contractSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.001</span><span class="p">,</span><span class="w">
     </span><span class="nl">"takeProfitOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nl">"settleWithNonUSDAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"stopLossOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -7670,6 +7699,12 @@
 <td>Yes</td>
 <td>当前订单属于的仓位ID。</td>
 </tr>
+<tr>
+<td>contractSize</td>
+<td>double</td>
+<td>Yes</td>
+<td>仓位合约规模</td>
+</tr>
 </tbody></table>
 <h2 id='25a424cad9'>仓位</h2>
 <blockquote>
@@ -7719,6 +7754,7 @@
     </span><span class="nl">"currentLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.02</span><span class="p">,</span><span class="w">
     </span><span class="nl">"avgFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"settleWithNonUSDAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"contractSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.001</span><span class="p">,</span><span class="w">
     </span><span class="nl">"takeProfitOrder"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4820b20a-e41b-4273-b3ad-4b19920aeeb5"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SELL"</span><span class="p">,</span><span class="w">
@@ -7764,6 +7800,7 @@
         </span><span class="nl">"currentLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1113820366</span><span class="p">,</span><span class="w">
         </span><span class="nl">"averageFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
         </span><span class="nl">"filledSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"contractSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.001</span><span class="p">,</span><span class="w">
         </span><span class="nl">"takeProfitOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
         </span><span class="nl">"stopLossOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
         </span><span class="nl">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LTCPFC-USD|SHORT"</span><span class="p">,</span><span class="w">
@@ -7812,6 +7849,7 @@
     </span><span class="nl">"currentLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"avgFillPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"settleWithNonUSDAsset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"contractSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.001</span><span class="p">,</span><span class="w">
     </span><span class="nl">"takeProfitOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nl">"stopLossOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nl">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC-USD|SHORT"</span><span class="p">,</span><span class="w">
@@ -8051,6 +8089,12 @@
 <td>string</td>
 <td>Yes</td>
 <td>当前订单属于的仓位ID。</td>
+</tr>
+<tr>
+<td>contractSize</td>
+<td>double</td>
+<td>Yes</td>
+<td>仓位合约规模</td>
 </tr>
 </tbody></table>
 
