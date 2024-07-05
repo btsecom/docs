@@ -13,6 +13,10 @@ headingLevel: 2
 
 # Change Log
 
+## Version 1.0.1 (10th Jul 2024)
+
+* Add [`Rate Limit Mechanism Description`](#mechanism-description) description
+
 ## Version 1.0.0 (28th June 2024)
 
 * Release V2.2 API
@@ -120,6 +124,19 @@ Rate limits for BTSE is as follows:
 
 * Per API: `75 requests/second`
 * Per User: `75 requests/second`
+
+### Mechanism Description
+
+Our system implements a tiered blocking mechanism with three distinct durations: **1 second**, **5 minutes**, and **15 minutes**. The duration of the block begins calculation from the moment the first block is imposed.
+Additionally, the calculation duration will be reset if the IP address or user does not exceed the rate limit within a span of 1 hour or the 15 mins blocking duration is ended.
+
+A `Retry-After` header is included with a 429 response and will give the unlocked timestamp.
+
+#### Rate limit tiers
+
+* 1 sec
+* 5 min
+* 15 min
 
 ## API Status Codes
 
