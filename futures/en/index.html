@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-2-7-6-10th-jul-2024" class="toc-h2 toc-link" data-title="Version 2.7.6 (10th Jul 2024)">Version 2.7.6 (10th Jul 2024)</a>
+                  </li>
+                  <li>
                     <a href="#version-2-7-5-27th-may-2024" class="toc-h2 toc-link" data-title="Version 2.7.5 (27th May 2024)">Version 2.7.5 (27th May 2024)</a>
                   </li>
                   <li>
@@ -557,7 +560,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-2-7-5-27th-may-2024'>Version 2.7.5 (27th May 2024)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-2-7-6-10th-jul-2024'>Version 2.7.6 (10th Jul 2024)</h2>
+<ul>
+<li>Add <a href="#mechanism-description"><code>Rate Limit Mechanism Description</code></a></li>
+</ul>
+<h2 id='version-2-7-5-27th-may-2024'>Version 2.7.5 (27th May 2024)</h2>
 <ul>
 <li>Add contractSize field in the following APIs and WebSocket topics. The scheduled effective date is <code>May 29, 2024, at 10:00 AM (UTC+0)</code>
 
@@ -1072,6 +1079,17 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 <ul>
 <li>Per API: <code>75 requests/second</code></li>
 <li>Per User: <code>75 requests/second</code></li>
+</ul>
+<h3 id='mechanism-description'>Mechanism Description</h3>
+<p>Our system implements a tiered blocking mechanism with three distinct durations: <strong>1 second</strong>, <strong>5 minutes</strong>, and <strong>15 minutes</strong>. The duration of the block begins calculation from the moment the first block is imposed.
+Additionally, the calculation duration will be reset if the IP address or user does not exceed the rate limit within a span of 1 hour or the 15 mins blocking duration is ended.</p>
+
+<p>A <code>Retry-After</code> header is included with a 429 response and will give the unlocked timestamp.</p>
+<h4 id='rate-limit-tiers'>Rate limit tiers</h4>
+<ul>
+<li>1 sec</li>
+<li>5 min</li>
+<li>15 min</li>
 </ul>
 <h2 id='api-status-codes'>API Status Codes</h2>
 <p>Each API will return one of the following HTTP status:</p>
