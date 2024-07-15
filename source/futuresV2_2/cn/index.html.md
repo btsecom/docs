@@ -27,7 +27,7 @@ headingLevel: 2
 
 * 所有请求中的 symbol 字段应使用 `XXX-PERP`。例如，`BTC-PERP`
 * 所有响应中的 symbol 字段将从 `XXXPFC` 更改为 `XXX-PERP`。例如，`BTCPFC` -> `BTC-PERP`
-* 所有响应中的 market 字段将从 `XXXPFC-USD` 更改为 `XXX-PERP-USD`。例如，`BTCPFC-USD` -> `BTC-PERP-USD`
+* 所有响应中的 market 字段将从 `XXXPFC-USD` 更改为 `XXX-PERP-USDT`。例如，`BTCPFC-USD` -> `BTC-PERP-USDT`
 * 所有响应中的 wallet name 字段将从 `ISOLATED@XXXPFC-USD` 更改为 `ISOLATED@XXX-PERP-USDT`。例如，`ISOLATED@BTCPFC-USD` -> `ISOLATED@BTC-PERP-USDT`
 * 响应中的 quote currency 字段将从 `USD` 更改为 USDT
 * 一旦用户升级到统一钱包，就不再允许使用 v2.1 的 API

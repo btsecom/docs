@@ -27,7 +27,7 @@ headingLevel: 2
 
 * All the symbol field in request should use `XXX-PERP`. e.g. `BTC-PERP`
 * All symbol field in responses will change from `XXXPFC` to `XXX-PERP`. e.g. `BTCPFC` -> `BTC-PERP`
-* All market field in responses will change from `XXXPFC-USD` to `XXX-PERP-USDT`. e.g. `BTCPFC-USD` -> `BTC-PERP-USD`
+* All market field in responses will change from `XXXPFC-USD` to `XXX-PERP-USDT`. e.g. `BTCPFC-USD` -> `BTC-PERP-USDT`
 * All wallet name field in responses will change from `ISOLATED@XXXPFC-USD` to `ISOLATED@XXX-PERP-USDT`. e.g. `ISOLATED@BTCPFC-USD` -> `ISOLATED@BTC-PERP-USDT` 
 * Quote currency field in responses will change from `USD` to `USDT`
 * Once the user upgrade the wallet to unified wallet, the user is not allowed to use v2.1 APIs anymore
