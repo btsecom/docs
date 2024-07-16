@@ -673,7 +673,7 @@ BTSE 的速率限制如下：
 | symbol             | string  | Yes      | 市场符号                                                                                                                                            |
 | start              | long    | No       | 以毫秒为单位的开始时间 (例如 1624987283000)                                                                                                         |
 | end                | long    | No       | 以毫秒为单位的结束时间 (例如 1624987283000)                                                                                                         |
-| resolution         | string  | Yes      | 支持的分辨率包括：<br/> 1: 1分钟<br/> 5: 5分钟<br/> 15: 15分钟<br/>30: 30分钟<br/>60: 60分钟<br/>360: 6小时<br/>1440: 1天                          |
+| resolution         | string  | Yes      | 支持的分辨率包括：<br/> 1: 1分钟<br/> 5: 5分钟<br/> 15: 15分钟<br/>30: 30分钟<br/>60: 60分钟<br/>240: 4小时<br/>360: 6小时<br/>1440: 1天<br/>10080: 1周<br/>43200: 1月                          |
 | useNewSymbolNaming | boolean | No       | 设置为True以使用symbol中的新期货市场名称，默认为False                                                                                              |
 
 
@@ -1821,7 +1821,7 @@ BTSE 的速率限制如下：
 | symbol           | string  | Yes      | 市场符号                                                                                                                                                                            |
 | side             | string  | Yes      | 交易方向。可取值为: [`BUY`, `SELL`]                                                                                                                                                  |
 | price            | double  | Yes      | 成交价格                                                                                                                                                                             |
-| size             | long    | Yes      | 成交数量                                                                                                                                                                             |
+| size             | long    | Yes      | 原始订单数量                                                                                                                                                                             |
 | serialId         | long    | Yes      | 序列号，连续的序列号                                                                                                                                                                 |
 | tradeId          | string  | Yes      | 交易标识符                                                                                                                                                                          |
 | timestamp        | long    | Yes      | 成交时间戳                                                                                                                                                                          |
