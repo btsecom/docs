@@ -462,7 +462,7 @@ BTSE的速率限制如下:
 | symbol      | string | Yes      | 市场符号                                                                                                 |
 | start       | long   | No      | 开始时间（毫秒）（例如：1624987283000）                                                                     |
 | end         | long   | No      | 结束时间（毫秒）（例如：1624987283000）                                                                     |
-| resolution  | string | Yes      | 支持的分辨率如下：<br/> 1: 1分钟<br/> 5: 5分钟<br/> 15: 15分钟<br/> 30: 30分钟<br/> 60: 60分钟<br/> 360: 6小时<br/> 1440: 1天 |
+| resolution  | string | Yes      | 支持的分辨率如下：<br/> 1: 1分钟<br/> 5: 5分钟<br/> 15: 15分钟<br/>30: 30分钟<br/>60: 60分钟<br/>240: 4小时<br/>360: 6小时<br/>1440: 1天<br/>10080: 1周<br/>43200: 1月 |
 
 
 ### 响应内容
@@ -1372,7 +1372,7 @@ BTSE的速率限制如下:
 | symbol      | string  | Yes      | 市场交易对标识符         |
 | side        | string  | Yes      | 交易方向。可选值：[`BUY`, `SELL`] |
 | price       | double  | Yes      | 成交价格                   |
-| size        | double  | Yes      | 成交数量                   |
+| size        | double  | Yes      | 原始订单数量                   |
 | serialId    | long  | Yes      | 序列ID，运行的序列号        |
 | tradeId     | string  | Yes      | 交易标识符                 |
 | timestamp   | long  | Yes      | 成交时间戳                 |

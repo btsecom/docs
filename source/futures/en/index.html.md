@@ -673,7 +673,7 @@ Gets candle stick charting data. Default of 300 data points will be returned at 
 | symbol             | string  | Yes      | Market symbol                                                                                                                       |
 | start              | long    | No       | Starting time in milliseconds (eg. 1624987283000)                                                                                   |
 | end                | long    | No       | Ending time in millisecond (eg. 1624987283000)                                                                                      |
-| resolution         | string  | Yes      | Supported resolutions are: <br/> 1: 1min<br/> 5: 5mins<br/> 15: 15mins<br/>30: 30mins<br/>60: 60mins<br/>360: 6hours<br/>1440: 1day |
+| resolution         | string  | Yes      | Supported resolutions are: <br/> 1: 1 min<br/> 5: 5 mins<br/> 15: 15 mins<br/>30: 30 mins<br/>60: 60 mins<br/>240: 4 hours<br/>360: 6 hours<br/>1440: 1day<br/>10080: 1 week<br/>43200: 1 month |
 | useNewSymbolNaming | boolean | No       | True to use new futures market name in symbol, default to False                                                                     |
 
 
@@ -1821,7 +1821,7 @@ Retrieves a user's trade history
 | symbol           | string  | Yes      | Market symbol                                                                                                                                                                     |
 | side             | string  | Yes      | Trade side. Values are: [`BUY`, `SELL`]                                                                                                                                           |
 | price            | double  | Yes      | Transacted price                                                                                                                                                                  |
-| size             | long    | Yes      | Transacted size                                                                                                                                                                   |
+| size             | long    | Yes      | Original order size                                                                                                                                                                   |
 | serialId         | long    | Yes      | Serial Id, running sequence number                                                                                                                                                |
 | tradeId          | string  | Yes      | Trade identifier                                                                                                                                                                  |
 | timestamp        | long    | Yes      | Transacted timestamp                                                                                                                                                              |

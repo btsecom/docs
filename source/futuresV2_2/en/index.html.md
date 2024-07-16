@@ -356,12 +356,12 @@ Gets candle stick charting data. Default of 300 data points will be returned at 
 
 ### Request Parameters
 
-| Name               | Type    | Required | Description                                                                                                                         |
-| ---                | ---     | ---      | ---                                                                                                                                 |
-| symbol             | string  | Yes      | Market symbol                                                                                                                       |
-| start              | long    | No       | Starting time in milliseconds (eg. 1624987283000)                                                                                   |
-| end                | long    | No       | Ending time in millisecond (eg. 1624987283000)                                                                                      |
-| resolution         | string  | Yes      | Supported resolutions are: <br/> 1: 1min<br/> 5: 5mins<br/> 15: 15mins<br/>30: 30mins<br/>60: 60mins<br/>360: 6hours<br/>1440: 1day |
+| Name               | Type    | Required | Description                                                                                                                                                                                          |
+| ---                | ---     | ---      |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| symbol             | string  | Yes      | Market symbol                                                                                                                                                                                        |
+| start              | long    | No       | Starting time in milliseconds (eg. 1624987283000)                                                                                                                                                    |
+| end                | long    | No       | Ending time in millisecond (eg. 1624987283000)                                                                                                                                                       |
+| resolution         | string  | Yes      | Supported resolutions are: <br/> 1: 1 min<br/> 5: 5 mins<br/> 15: 15 mins<br/>30: 30 mins<br/>60: 60 mins<br/>240: 4 hours<br/>360: 6 hours<br/>1440: 1day<br/>10080: 1 week<br/>43200: 1 month |
 
 
 ### Response Content
@@ -1489,33 +1489,33 @@ Retrieves a user's trade history
 
 ### Response Content
 
-| Name             | Type    | Required | Description                                                                                                                                                                       |
-|------------------| ---     | ---      |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| symbol           | string  | Yes      | Market symbol                                                                                                                                                                     |
-| side             | string  | Yes      | Trade side. Values are: [`BUY`, `SELL`]                                                                                                                                           |
-| price            | double  | Yes      | Transacted price                                                                                                                                                                  |
-| size             | long    | Yes      | Transacted size                                                                                                                                                                   |
-| serialId         | long    | Yes      | Serial Id, running sequence number                                                                                                                                                |
-| tradeId          | string  | Yes      | Trade identifier                                                                                                                                                                  |
-| timestamp        | long    | Yes      | Transacted timestamp                                                                                                                                                              |
-| base             | string  | Yes      | Base currency                                                                                                                                                                     |
-| quote            | string  | Yes      | Quote currency                                                                                                                                                                    |
+| Name             | Type    | Required | Description                                                                                                                                                                             |
+|------------------| ---     | ---      |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| symbol           | string  | Yes      | Market symbol                                                                                                                                                                           |
+| side             | string  | Yes      | Trade side. Values are: [`BUY`, `SELL`]                                                                                                                                                 |
+| price            | double  | Yes      | Transacted price                                                                                                                                                                        |
+| size             | long    | Yes      | Original order size                                                                                                                                                                     |
+| serialId         | long    | Yes      | Serial Id, running sequence number                                                                                                                                                      |
+| tradeId          | string  | Yes      | Trade identifier                                                                                                                                                                        |
+| timestamp        | long    | Yes      | Transacted timestamp                                                                                                                                                                    |
+| base             | string  | Yes      | Base currency                                                                                                                                                                           |
+| quote            | string  | Yes      | Quote currency                                                                                                                                                                          |
 | wallet           | string  | Yes      | Wallet name<br/>`CROSS@`: Cross wallet<br/>`ISOLATED@market`: Market refers to the current symbol with `-USDT` appended. Eg. BTC-PERP isolated wallet would be `ISOLATED@BTC-PERP-USDT` |
-| clOrderID        | string  | Yes      | Custom order ID                                                                                                                                                                   |
-| orderId          | string  | Yes      | Order ID                                                                                                                                                                          |
-| username         | string  | Yes      | btse username                                                                                                                                                                     |
-| triggerType      | long    | Yes      | Trigger type<br/>1001: Stop Loss<br/>1002: Take Profit                                                                                                                            |
-| feeAmount        | long    | Yes      | Fee amount                                                                                                                                                                        |
-| feeCurrency      | long    | Yes      | Fee currency                                                                                                                                                                      |
-| filledPrice      | double  | Yes      | Filled price                                                                                                                                                                      |
-| averageFillPrice | double  | Yes      | Average filled price                                                                                                                                                              |
-| triggerPrice     | double  | Yes      | Trigger price                                                                                                                                                                     |
-| filledSize       | long    | Yes      | Filled size                                                                                                                                                                       |
-| orderType        | integer | Yes      | Order Type                                                                                                                                                                        |
-| realizedPnL      | double  | Yes      | Not used in Spot                                                                                                                                                                  |
-| total            | long    | Yes      | Not used in Spot                                                                                                                                                                  |
-| positionId       | string  | Yes      | The current order belongs to the id of position.                                                                                                                                  |
-| contractSize     | double  | Yes      | The trade contract size                                                                                                                                                           |
+| clOrderID        | string  | Yes      | Custom order ID                                                                                                                                                                         |
+| orderId          | string  | Yes      | Order ID                                                                                                                                                                                |
+| username         | string  | Yes      | btse username                                                                                                                                                                           |
+| triggerType      | long    | Yes      | Trigger type<br/>1001: Stop Loss<br/>1002: Take Profit                                                                                                                                  |
+| feeAmount        | long    | Yes      | Fee amount                                                                                                                                                                              |
+| feeCurrency      | long    | Yes      | Fee currency                                                                                                                                                                            |
+| filledPrice      | double  | Yes      | Filled price                                                                                                                                                                            |
+| averageFillPrice | double  | Yes      | Average filled price                                                                                                                                                                    |
+| triggerPrice     | double  | Yes      | Trigger price                                                                                                                                                                           |
+| filledSize       | long    | Yes      | Filled size                                                                                                                                                                             |
+| orderType        | integer | Yes      | Order Type                                                                                                                                                                              |
+| realizedPnL      | double  | Yes      | Not used in Spot                                                                                                                                                                        |
+| total            | long    | Yes      | Not used in Spot                                                                                                                                                                        |
+| positionId       | string  | Yes      | The current order belongs to the id of position.                                                                                                                                        |
+| contractSize     | double  | Yes      | The trade contract size                                                                                                                                                                 |
 
 
 ## Query Position
