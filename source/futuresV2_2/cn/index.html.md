@@ -2138,6 +2138,43 @@ BTSE 的速率限制如下：
 | type      | string  | No       | 数值为129，表示为“期货仓位模式更改”。 |
 | message   | string  | No       | 交易消息                  |
 
+## 查询用户初始保证金百分比和维持保证金百分比 
+
+> 响应
+
+```json
+[
+    {
+        "symbol": "ETH-PERP",
+        "initialMarginPercentage": 0,
+        "maintenanceMarginPercentage": 0
+    },
+    {
+        "symbol": "BTC-PERP",
+        "initialMarginPercentage": 0,
+        "maintenanceMarginPercentage": 0
+    }
+]
+```
+
+`GET /api/v2.2/user/margin_setting`
+
+查询用户的初始保证金百分比和维持保证金百分比。如果未指定特定的市场符号，则将返回所有市场的保证金百分比。
+
+**请求参数**
+
+| 名称               | 类型      | 是否必须  | 描述     |
+| ---                | ---     | ---      | ---     |
+| symbol             | string  | 否       | 市场符号 |
+
+**响应内容**
+
+| 名称                         | 类型    | 是否必须 | 描述               |
+| ---                         | ---    | ---     | ---                |
+| symbol                      | string | 是      | 市场符号            |
+| initialMarginPercentage     | double | 是      | 当前的初始保证金百分比 |
+| maintenanceMarginPercentage | double | 是      | 当前的维持保证金百分比 |
+
 # 钱包端点
 
 ## 查询钱包余额
