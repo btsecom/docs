@@ -2497,7 +2497,7 @@ BTSE 的速率限制如下：
 | 名称                | 类型    | 是否必须 | 描述                                        |
 | ---                | ---     | ---     | ---                                        |
 | symbol             | string  | 否      | 市场符号                                     |
-| useNewSymbolNaming | boolean | 否      | 若为True，则返回新格式的期货市场名称，默认为False |
+| useNewSymbolNaming | boolean | 否      | 若为True，则返回新格式的市场符号名称，默认为False |
 
 **响应内容**
 

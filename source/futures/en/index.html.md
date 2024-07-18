@@ -2494,10 +2494,10 @@ Queries user's initial margin percentage and maintenance margin percentage. When
 
 ### Request Parameters
 
-| Name               | Type    | Required | Description                                                            |
-| ---                | ---     | ---      | ---                                                                    |
-| symbol             | string  | No       | Market symbol                                                          |
-| useNewSymbolNaming | boolean | No       | True to return futures market name in the new format, default to False |
+| Name               | Type    | Required | Description                                                           |
+| ---                | ---     | ---      | ---                                                                   |
+| symbol             | string  | No       | Market symbol                                                         |
+| useNewSymbolNaming | boolean | No       | True to return market symbol name in the new format, default to False |
 
 ### Response Content
 
