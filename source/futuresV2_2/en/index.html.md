@@ -2159,13 +2159,7 @@ Changes position mode
 
 `GET /api/v2.2/user/margin_setting`
 
-Queries user's initial margin percentage and maintenance margin percentage. When no symbol is specified, margin percentage for all markets will be returned.
-
-### Request Parameters
-
-| Name               | Type    | Required | Description   |
-| ---                | ---     | ---      | ---           |
-| symbol             | string  | No       | Market symbol |
+Queries user's initial margin percentage and maintenance margin percentage.
 
 ### Response Content
 
