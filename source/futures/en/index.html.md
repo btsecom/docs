@@ -2469,6 +2469,43 @@ Changes position mode
 | type      | string  | No       | Value will be 129 indicating that type is `Futures Config Mode Change` |
 | message   | string  | No       | Message                                                                |
 
+## Query User Initial Margin Percentage And Maintenance Margin Percentage 
+
+> Response
+
+```json
+[
+    {
+        "symbol": "ETH-PERP",
+        "initialMarginPercentage": 0.01,
+        "maintenanceMarginPercentage": 0.005
+    },
+    {
+        "symbol": "BTC-PERP",
+        "initialMarginPercentage": 0.01,
+        "maintenanceMarginPercentage": 0.005
+    }
+]
+```
+
+`GET /api/v2.1/user/margin_setting`
+
+Queries user's initial margin percentage and maintenance margin percentage.
+
+### Request Parameters
+
+| Name               | Type    | Required | Description                                                           |
+| ---                | ---     | ---      | ---                                                                   |
+| useNewSymbolNaming | boolean | No       | True to return market symbol name in the new format, default to False |
+
+### Response Content
+
+| Name                        | Type   | Required | Description                           |
+| ---                         | ---    | ---      | ---                                   |
+| symbol                      | string | Yes      | Market symbol                         |
+| initialMarginPercentage     | double | Yes      | Current initial margin percentage     |
+| maintenanceMarginPercentage | double | Yes      | Current maintenance margin percentage |
+
 # Wallet Endpoints
 
 ## Query Wallet Balance
