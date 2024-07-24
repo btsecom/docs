@@ -485,6 +485,9 @@
                   <li>
                     <a href="#4a3f9ffc40" class="toc-h2 toc-link" data-title="更改仓位模式">更改仓位模式</a>
                   </li>
+                  <li>
+                    <a href="#8c21c3c9a8" class="toc-h2 toc-link" data-title="查询用户初始保证金百分比和维持保证金百分比">查询用户初始保证金百分比和维持保证金百分比</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -5582,6 +5585,74 @@
 <td>string</td>
 <td>No</td>
 <td>交易消息</td>
+</tr>
+</tbody></table>
+<h2 id='8c21c3c9a8'>查询用户初始保证金百分比和维持保证金百分比</h2>
+<blockquote>
+<p>响应</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH-PERP"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"initialMarginPercentage"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.01</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"maintenanceMarginPercentage"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.005</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-PERP"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"initialMarginPercentage"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.01</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"maintenanceMarginPercentage"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.005</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<p><code>GET /api/v2.1/user/margin_setting</code></p>
+
+<p>查询用户的初始保证金百分比和维持保证金百分比。</p>
+
+<p><strong>请求参数</strong></p>
+
+<table><thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>是否必须</th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>useNewSymbolNaming</td>
+<td>boolean</td>
+<td>否</td>
+<td>若为True，则返回新格式的市场符号名称，默认为False</td>
+</tr>
+</tbody></table>
+
+<p><strong>响应内容</strong></p>
+
+<table><thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>是否必须</th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>是</td>
+<td>市场符号</td>
+</tr>
+<tr>
+<td>initialMarginPercentage</td>
+<td>double</td>
+<td>是</td>
+<td>当前的初始保证金百分比</td>
+</tr>
+<tr>
+<td>maintenanceMarginPercentage</td>
+<td>double</td>
+<td>是</td>
+<td>当前的维持保证金百分比</td>
 </tr>
 </tbody></table>
 <h1 id='a3d42f9b9f'>钱包端点</h1><h2 id='0bed682e6f'>查询钱包余额</h2>
