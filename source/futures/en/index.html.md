@@ -2477,13 +2477,13 @@ Changes position mode
 [
     {
         "symbol": "ETH-PERP",
-        "initialMarginPercentage": 0,
-        "maintenanceMarginPercentage": 0
+        "initialMarginPercentage": 0.01,
+        "maintenanceMarginPercentage": 0.005
     },
     {
         "symbol": "BTC-PERP",
-        "initialMarginPercentage": 0,
-        "maintenanceMarginPercentage": 0
+        "initialMarginPercentage": 0.01,
+        "maintenanceMarginPercentage": 0.005
     }
 ]
 ```
