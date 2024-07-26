@@ -13,7 +13,7 @@ headingLevel: 2
 
 # Change Log
 
-## Version 1.0.2 (31th Jul 2024)
+## Version 1.0.2 (31st Jul 2024)
 
 * Add API for querying [`User Initial Margin Percentage And Maintenance Margin Percentage`](#query-user-initial-margin-percentage-and-maintenance-margin-percentage)
 
