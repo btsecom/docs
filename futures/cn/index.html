@@ -234,6 +234,9 @@
             <a href="#185368440e" class="toc-h1 toc-link" data-title="更新日志">更新日志</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2-7-7-2024-8-1" class="toc-h2 toc-link" data-title="版本 2.7.7 (2024年8月1日)">版本 2.7.7 (2024年8月1日)</a>
+                  </li>
+                  <li>
                     <a href="#2-7-6-2024-7-10" class="toc-h2 toc-link" data-title="版本 2.7.6 (2024年7月10日)">版本 2.7.6 (2024年7月10日)</a>
                   </li>
                   <li>
@@ -563,7 +566,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='185368440e'>更新日志</h1><h2 id='2-7-6-2024-7-10'>版本 2.7.6 (2024年7月10日)</h2>
+        <h1 id='185368440e'>更新日志</h1><h2 id='2-7-7-2024-8-1'>版本 2.7.7 (2024年8月1日)</h2>
+<ul>
+<li>新增API <a href="#8c21c3c9a8"><code>查询用户初始保证金百分比和维持保证金百分比</code></a></li>
+</ul>
+<h2 id='2-7-6-2024-7-10'>版本 2.7.6 (2024年7月10日)</h2>
 <ul>
 <li>添加<a href="#8943d9ea9a"><code>速率限制机制描述</code></a></li>
 </ul>
@@ -5606,7 +5613,7 @@
 </span></code></pre></div>
 <p><code>GET /api/v2.1/user/margin_setting</code></p>
 
-<p>查询用户的初始保证金百分比和维持保证金百分比。</p>
+<p>查询用户的初始保证金百分比和维持保证金百分比。如果未指定特定的市场符号，则将返回所有市场的保证金百分比。</p>
 
 <p><strong>请求参数</strong></p>
 
@@ -5618,6 +5625,12 @@
 <th>描述</th>
 </tr>
 </thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>否</td>
+<td>市场符号</td>
+</tr>
 <tr>
 <td>useNewSymbolNaming</td>
 <td>boolean</td>

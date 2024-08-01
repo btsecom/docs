@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-1-0-2-1st-august-2024" class="toc-h2 toc-link" data-title="Version 1.0.2 (1st August 2024)">Version 1.0.2 (1st August 2024)</a>
+                  </li>
+                  <li>
                     <a href="#version-1-0-1-10th-jul-2024" class="toc-h2 toc-link" data-title="Version 1.0.1 (10th Jul 2024)">Version 1.0.1 (10th Jul 2024)</a>
                   </li>
                   <li>
@@ -437,7 +440,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-1-0-1-10th-jul-2024'>Version 1.0.1 (10th Jul 2024)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-1-0-2-1st-august-2024'>Version 1.0.2 (1st August 2024)</h2>
+<ul>
+<li>Add API for querying <a href="#query-user-initial-margin-percentage-and-maintenance-margin-percentage"><code>User Initial Margin Percentage And Maintenance Margin Percentage</code></a></li>
+</ul>
+<h2 id='version-1-0-1-10th-jul-2024'>Version 1.0.1 (10th Jul 2024)</h2>
 <ul>
 <li>Add <a href="#mechanism-description"><code>Rate Limit Mechanism Description</code></a> description</li>
 </ul>
@@ -5020,7 +5027,23 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span></code></pre></div>
 <p><code>GET /api/v2.2/user/margin_setting</code></p>
 
-<p>Queries user&#39;s initial margin percentage and maintenance margin percentage.</p>
+<p>Queries user&#39;s initial margin percentage and maintenance margin percentage. When no symbol is specified, margin percentage for all markets will be returned.</p>
+<h3 id='request-parameters-27'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>No</td>
+<td>Market symbol</td>
+</tr>
+</tbody></table>
 <h3 id='response-content-27'>Response Content</h3>
 <table><thead>
 <tr>
@@ -5088,7 +5111,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 <p><code>GET /api/v2.2/user/wallet</code></p>
 
 <p>Query user&#39;s wallet balance. Requires <code>Read</code> permissions on the API key.</p>
-<h3 id='request-parameters-27'>Request Parameters</h3>
+<h3 id='request-parameters-28'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5250,7 +5273,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 <p><code>GET /api/v2.2/user/wallet_history</code></p>
 
 <p>Get user&#39;s wallet history records on the futures wallet</p>
-<h3 id='request-parameters-28'>Request Parameters</h3>
+<h3 id='request-parameters-29'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5368,7 +5391,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 <p><strong>This API is for the users who have upgraded wallet</strong></p>
 
 <p>Gets margin information for the specified wallet or position. </p>
-<h3 id='request-parameters-29'>Request Parameters</h3>
+<h3 id='request-parameters-30'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5516,7 +5539,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 <p>The users who have upgraded wallet to unified wallet are not allow to use this API. Please use <a href="#query-unified-wallet-margin"><code>Query Unified Wallet Margin</code></a>.  </p>
 
 <p>Gets margin information for the specified wallet so that users can know which wallet they are currently using in the market.</p>
-<h3 id='request-parameters-30'>Request Parameters</h3>
+<h3 id='request-parameters-31'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5713,7 +5736,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 <p><code>POST /api/v2.2/user/wallet/transfer</code></p>
 
 <p>Transfers funds between user&#39;s wallet. User can specify the source and target wallet to transfer funds</p>
-<h3 id='request-parameters-31'>Request Parameters</h3><h4 id='wallet-request'>Wallet Request</h4>
+<h3 id='request-parameters-32'>Request Parameters</h3><h4 id='wallet-request'>Wallet Request</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5909,7 +5932,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 <p>Transfers funds between user and sub-account wallet. User can specify the source and target wallet to transfer funds</p>
 
 <p>, <code>Wallet</code> permission is required. To get supported currency list please check <a href="#query-available-currency-list-for-wallet-action">Available currency list for action</a></p>
-<h3 id='request-parameters-32'>Request Parameters</h3><h4 id='wallet-request-2'>Wallet Request</h4>
+<h3 id='request-parameters-33'>Request Parameters</h3><h4 id='wallet-request-2'>Wallet Request</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -6430,7 +6453,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>To subscribe to a websocket public trade fill</p>
-<h3 id='request-parameters-33'>Request Parameters</h3>
+<h3 id='request-parameters-34'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -6593,7 +6616,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
   "op":"authKeyExpires",
   "args":["4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x", "1624985375123", "c410d38c681579adb335885800cff24c66171b7cc8376cfe43da1408c581748156b89bcc5a115bb496413bda481139fb"]
 }
-</code></pre></div><h3 id='request-parameters-34'>Request Parameters</h3>
+</code></pre></div><h3 id='request-parameters-35'>Request Parameters</h3>
 <p>Below details the arguments needed to be sent in.</p>
 
 <table><thead>
