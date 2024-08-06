@@ -13,6 +13,10 @@ headingLevel: 2
 
 # 更新日志
 
+## 版本 1.0.3 (2024年8月6日)
+
+* 更改API [`获取杠杆`](#6d32c96f0c) 的响应内容为数组。
+
 ## 版本 1.0.2 (2024年8月1日)
 
 * 新增API [`查询用户初始保证金百分比和维持保证金百分比`](#8c21c3c9a8)
@@ -1878,11 +1882,20 @@ BTSE 的速率限制如下：
 > 响应
 
 ```json
-{
-  "symbol": "BTC-PERP",
-  "leverage": 100.0,
-  "marginMode": "CROSS"
-}
+[
+  {
+    "symbol": "BTC-PERP",
+    "leverage": 10,
+    "marginMode": "ISOLATED",
+    "positionDirection": "LONG"
+  },
+  {
+    "symbol": "BTC-PERP",
+    "leverage": 3,
+    "marginMode": "ISOLATED",
+    "positionDirection": "SHORT"
+  }
+]
 ```
 
 `Get /api/v2.2/leverage`
@@ -1897,11 +1910,12 @@ BTSE 的速率限制如下：
 
 ### 响应内容
 
-| 名称      | 类型    | 是否必须 | 描述                                                                                                       |
-| ---       | ---     | ---      | ---                                                                                                        |
-| symbol    | string  | Yes      | 市场符号                                                                                                   |
-| leverage  | double  | Yes      | 当前市场的杠杆值，返回 0 表示杠杆是最大的全仓杠杆。                                       |
-| marginMode| string  | Yes      | 当前保证金模式                                                                                  |
+| 名称               | 类型   | 是否必须 | 描述                                        |
+| ---               | ---    | ---    | ---                                         |
+| symbol            | string | Yes    | 市场符号                                     |
+| leverage          | double | Yes    | 当前市场的杠杆值，返回 0 表示杠杆是最大的全仓杠杆。 |
+| marginMode        | string | Yes    | 当前保证金模式                                |
+| positionDirection | string | Yes    | 当前头寸模式为对冲时返回头寸方向，否则返回空值。    |
 
 ## 更改合同结算货币
 
