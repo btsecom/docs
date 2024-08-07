@@ -303,6 +303,9 @@
                     <a href="#b8b48f9d66" class="toc-h2 toc-link" data-title="创建钱包地址">创建钱包地址</a>
                   </li>
                   <li>
+                    <a href="#1d8d8950a9" class="toc-h2 toc-link" data-title="删除钱包地址">删除钱包地址</a>
+                  </li>
+                  <li>
                     <a href="#b13bcdd685" class="toc-h2 toc-link" data-title="获取钱包地址">获取钱包地址</a>
                   </li>
                   <li>
@@ -833,6 +836,47 @@
 <td>创建的时间戳</td>
 </tr>
 </tbody></table>
+<h2 id='1d8d8950a9'>删除钱包地址</h2>
+<blockquote>
+<p>请求</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"network"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LIQUID"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Blockchain address"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><code>DELETE /api/v3.2/user/wallet/address</code></p>
+
+<p>删除地址。如果删除的地址已经被删除 ，将返回一个400错误。要使用此API，需要<code>钱包</code>权限。</p>
+<h3 id='1f9ac54b15-5'>请求参数</h3>
+<table><thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>必填</th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>currency</td>
+<td>string</td>
+<td>Yes</td>
+<td>Ex: BTC</td>
+</tr>
+<tr>
+<td>network</td>
+<td>string</td>
+<td>Yes</td>
+<td>Ex: BITCOIN</td>
+</tr>
+<tr>
+<td>address</td>
+<td>string</td>
+<td>Yes</td>
+<td>Ex: 地址</td>
+</tr>
+</tbody></table>
 <h2 id='b13bcdd685'>获取钱包地址</h2>
 <blockquote>
 <p>请求</p>
@@ -855,7 +899,7 @@
 <p><code>GET /api/v3.2/user/wallet/address</code></p>
 
 <p>获取钱包地址。要使用此API，需要<code>钱包</code>权限。</p>
-<h3 id='1f9ac54b15-5'>请求参数</h3>
+<h3 id='1f9ac54b15-6'>请求参数</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -920,7 +964,7 @@
 <p><code>POST /api/v3.2/user/wallet/withdraw</code></p>
 
 <p>执行钱包提款。要使用此API，需要<code>提币</code>权限。</p>
-<h3 id='1f9ac54b15-6'>请求参数</h3>
+<h3 id='1f9ac54b15-7'>请求参数</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -991,7 +1035,7 @@
 <p><code>GET /api/v3.2/availableCurrencies</code></p>
 
 <p>获取钱包操作的可用货币列表。</p>
-<h3 id='1f9ac54b15-7'>请求参数</h3>
+<h3 id='1f9ac54b15-8'>请求参数</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -1047,7 +1091,7 @@
 <p><code>POST /api/v3.2/user/wallet/convert</code></p>
 
 <p>执行钱包内的货币转换。要使用此API，需要<code>钱包</code>权限。要获取支持的货币列表，请查看<a href="#0ab39c1d97">查询钱包操作的可用货币列表</a></p>
-<h3 id='1f9ac54b15-8'>请求参数</h3>
+<h3 id='1f9ac54b15-9'>请求参数</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -1139,7 +1183,7 @@
 <p><code>POST /api/v3.2/user/wallet/transfer</code></p>
 
 <p>执行钱包内的货币转给其他用户的操作。要使用此API，需要<code>转账</code>权限。要获取支持的货币列表，请查看<a href="#0ab39c1d97">查询钱包操作的可用货币列表</a></p>
-<h3 id='1f9ac54b15-9'>请求参数</h3>
+<h3 id='1f9ac54b15-10'>请求参数</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -1242,7 +1286,7 @@
 <p><code>POST /api/v3.2/subaccount/wallet/history</code></p>
 
 <p>查询子帐号转帐历史纪录</p>
-<h3 id='1f9ac54b15-10'>请求参数</h3>
+<h3 id='1f9ac54b15-11'>请求参数</h3>
 <table><thead>
 <tr>
 <th>名称</th>

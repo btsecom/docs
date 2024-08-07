@@ -303,6 +303,9 @@
                     <a href="#create-wallet-address" class="toc-h2 toc-link" data-title="Create Wallet Address">Create Wallet Address</a>
                   </li>
                   <li>
+                    <a href="#delete-wallet-address" class="toc-h2 toc-link" data-title="Delete Wallet Address">Delete Wallet Address</a>
+                  </li>
+                  <li>
                     <a href="#get-wallet-address" class="toc-h2 toc-link" data-title="Get Wallet Address">Get Wallet Address</a>
                   </li>
                   <li>
@@ -833,6 +836,47 @@
 <td>Created timestamp</td>
 </tr>
 </tbody></table>
+<h2 id='delete-wallet-address'>Delete Wallet Address</h2>
+<blockquote>
+<p>Request</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"network"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LIQUID"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Blockchain address"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><code>DELETE /api/v3.2/user/wallet/address</code></p>
+
+<p>Delete  wallet address. If the address has been delete, a 400 error will return. To use this API, <code>Wallet</code> permission is required.</p>
+<h3 id='request-parameters-5'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>currency</td>
+<td>string</td>
+<td>Yes</td>
+<td>Ex: BTC</td>
+</tr>
+<tr>
+<td>network</td>
+<td>string</td>
+<td>Yes</td>
+<td>Ex: BITCOIN</td>
+</tr>
+<tr>
+<td>address</td>
+<td>string</td>
+<td>Yes</td>
+<td>Ex: Blockchain address</td>
+</tr>
+</tbody></table>
 <h2 id='get-wallet-address'>Get Wallet Address</h2>
 <blockquote>
 <p>Request</p>
@@ -855,7 +899,7 @@
 <p><code>GET /api/v3.2/user/wallet/address</code></p>
 
 <p>Gets a wallet address. To use this API, <code>Wallet</code> permission is required.</p>
-<h3 id='request-parameters-5'>Request Parameters</h3>
+<h3 id='request-parameters-6'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -920,7 +964,7 @@
 <p><code>POST /api/v3.2/user/wallet/withdraw</code></p>
 
 <p>Performs a wallet withdrawal. To use this API, <code>Withdraw</code> permission is required.</p>
-<h3 id='request-parameters-6'>Request Parameters</h3>
+<h3 id='request-parameters-7'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -991,7 +1035,7 @@
 <p><code>GET /api/v3.2/availableCurrencies</code></p>
 
 <p>Get available currency list for wallet action.</p>
-<h3 id='request-parameters-7'>Request Parameters</h3>
+<h3 id='request-parameters-8'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1047,7 +1091,7 @@
 <p><code>POST /api/v3.2/user/wallet/convert</code></p>
 
 <p>Performs a currency conversion from wallet. To use this API, <code>Wallet</code> permission is required. To get supported currency list please check <a href="#query-available-currency-list-for-wallet-action">Available currency list for action</a></p>
-<h3 id='request-parameters-8'>Request Parameters</h3>
+<h3 id='request-parameters-9'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1139,7 +1183,7 @@
 <p><code>POST /api/v3.2/user/wallet/transfer</code></p>
 
 <p>Performs a internal currency transfer to other user from wallet. To use this API, <code>Transfer</code> permission is required. To get supported currency list please check <a href="#query-available-currency-list-for-wallet-action">Available currency list for action</a></p>
-<h3 id='request-parameters-9'>Request Parameters</h3>
+<h3 id='request-parameters-10'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1242,7 +1286,7 @@
 <p><code>POST /api/v3.2/subaccount/wallet/history</code></p>
 
 <p>Query transfer history for subaccounts</p>
-<h3 id='request-parameters-10'>Request Parameters</h3>
+<h3 id='request-parameters-11'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
