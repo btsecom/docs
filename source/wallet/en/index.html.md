@@ -312,6 +312,30 @@ Creates a wallet address. If the address created has not been used before, a 400
 | address | string | Yes      | Blockchain address |
 | created | long   | Yes      | Created timestamp  |
 
+## Delete Wallet Address
+
+> Request
+
+```json
+{
+  "currency": "BTC",
+  "network": "LIQUID",
+  "address": "Blockchain address"
+}
+```
+
+`DELETE /api/v3.2/user/wallet/address`
+
+Delete  wallet address. If the address has been delete, a 400 error will return. To use this API, `Wallet` permission is required.
+
+### Request Parameters
+
+| Name     | Type   | Required | Description |
+|----------| ---    | ---      | ---         |
+| currency | string | Yes      | Ex: BTC     |
+| network  | string | Yes      | Ex: BITCOIN |
+| address  | string | Yes      | Ex: Blockchain address |
+
 ## Get Wallet Address
 
 > Request
