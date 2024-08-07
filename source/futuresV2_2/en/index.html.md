@@ -13,6 +13,10 @@ headingLevel: 2
 
 # Change Log
 
+## Version 1.0.3 (6th August 2024)
+
+* Change the response content of the API [`Get Leverage`](#get-leverage) to an array.
+
 ## Version 1.0.2 (1st August 2024)
 
 * Add API for querying [`User Initial Margin Percentage And Maintenance Margin Percentage`](#query-user-initial-margin-percentage-and-maintenance-margin-percentage)
@@ -1878,11 +1882,20 @@ Change leverage values for the specified market
 > Response
 
 ```json
-{
-  "symbol": "BTC-PERP",
-  "leverage": 100.0,
-  "marginMode": "ISOLATED"
-}
+[
+  {
+    "symbol": "BTC-PERP",
+    "leverage": 10,
+    "marginMode": "ISOLATED",
+    "positionDirection": "LONG"
+  },
+  {
+    "symbol": "BTC-PERP",
+    "leverage": 3,
+    "marginMode": "ISOLATED",
+    "positionDirection": "SHORT"
+  }
+]
 ```
 
 `Get /api/v2.2/leverage`
@@ -1897,11 +1910,12 @@ Get leverage value for the specified market
 
 ### Response Content
 
-| Name      | Type    | Required | Description                                                                                          |
-| ---       | ---     | ---      |------------------------------------------------------------------------------------------------------|
-| symbol    | string  | Yes      | Market symbol                                                                                        |
-| leverage  | double  | Yes      | Current leverage value for the market, return 0 means the leverage is the maximum cross leverage     |
-| marginMode| string  | Yes      | Current margin mode                                                                                  |
+| Name              | Type   | Required | Description                                                                                          |
+| ---               | ---    | ---      |------------------------------------------------------------------------------------------------------|
+| symbol            | string | Yes      | Market symbol                                                                                        |
+| leverage          | double | Yes      | Current leverage value for the market, return 0 means the leverage is the maximum cross leverage     |
+| marginMode        | string | Yes      | Current margin mode                                                                                  |
+| positionDirection | string | Yes      | Current position direction when position mode is Hedge else return null                              |
 
 ## Change Contract Settlement Currency
 
