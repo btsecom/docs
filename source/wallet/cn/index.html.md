@@ -312,6 +312,30 @@ BTSE 的速率限制如下：
 | address | string | Yes  | 区块链地址       |
 | created | long   | Yes  | 创建的时间戳     |
 
+## 删除钱包地址
+
+> 请求
+
+```json
+{
+  "currency": "BTC",
+  "network": "LIQUID",
+  "address": "Blockchain address"
+}
+```
+
+`DELETE /api/v3.2/user/wallet/address`
+
+删除地址。如果删除的地址已经被删除 ，将返回一个400错误。要使用此API，需要`钱包`权限。
+
+### 请求参数
+
+| 名称     | 类型   | 必填 | 描述   |
+| ---      | ---    | ---  | ---    |
+| currency | string | Yes      | Ex: BTC     |
+| network  | string | Yes      | Ex: BITCOIN |
+| address  | string | Yes      | Ex: 地址 |
+
 ## 获取钱包地址
 
 > 请求
