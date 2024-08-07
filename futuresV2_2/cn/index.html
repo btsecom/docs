@@ -234,6 +234,9 @@
             <a href="#185368440e" class="toc-h1 toc-link" data-title="更新日志">更新日志</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#1-0-3-2024-8-6" class="toc-h2 toc-link" data-title="版本 1.0.3 (2024年8月6日)">版本 1.0.3 (2024年8月6日)</a>
+                  </li>
+                  <li>
                     <a href="#1-0-2-2024-8-1" class="toc-h2 toc-link" data-title="版本 1.0.2 (2024年8月1日)">版本 1.0.2 (2024年8月1日)</a>
                   </li>
                   <li>
@@ -440,7 +443,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='185368440e'>更新日志</h1><h2 id='1-0-2-2024-8-1'>版本 1.0.2 (2024年8月1日)</h2>
+        <h1 id='185368440e'>更新日志</h1><h2 id='1-0-3-2024-8-6'>版本 1.0.3 (2024年8月6日)</h2>
+<ul>
+<li>更改API <a href="#6d32c96f0c"><code>获取杠杆</code></a> 的响应内容为数组。</li>
+</ul>
+<h2 id='1-0-2-2024-8-1'>版本 1.0.2 (2024年8月1日)</h2>
 <ul>
 <li>新增API <a href="#8c21c3c9a8"><code>查询用户初始保证金百分比和维持保证金百分比</code></a></li>
 </ul>
@@ -4433,11 +4440,20 @@
 <blockquote>
 <p>响应</p>
 </blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-PERP"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"leverage"</span><span class="p">:</span><span class="w"> </span><span class="mf">100.0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"marginMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CROSS"</span><span class="w">
-</span><span class="p">}</span><span class="w">
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-PERP"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"leverage"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"marginMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ISOLATED"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionDirection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LONG"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-PERP"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"leverage"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"marginMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ISOLATED"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionDirection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SHORT"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <p><code>Get /api/v2.2/leverage</code></p>
 
@@ -4484,6 +4500,12 @@
 <td>string</td>
 <td>Yes</td>
 <td>当前保证金模式</td>
+</tr>
+<tr>
+<td>positionDirection</td>
+<td>string</td>
+<td>Yes</td>
+<td>当前头寸模式为对冲时返回头寸方向，否则返回空值。</td>
 </tr>
 </tbody></table>
 <h2 id='5d5e41f6fe'>更改合同结算货币</h2>
