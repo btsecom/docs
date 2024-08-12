@@ -464,7 +464,7 @@
 <li>All the symbol field in request should use <code>XXX-PERP</code>. e.g. <code>BTC-PERP</code></li>
 <li>All symbol field in responses will change from <code>XXXPFC</code> to <code>XXX-PERP</code>. e.g. <code>BTCPFC</code> -&gt; <code>BTC-PERP</code></li>
 <li>All market field in responses will change from <code>XXXPFC-USD</code> to <code>XXX-PERP-USDT</code>. e.g. <code>BTCPFC-USD</code> -&gt; <code>BTC-PERP-USDT</code></li>
-<li>All wallet name field in responses will change from <code>ISOLATED@XXXPFC-USD</code> to <code>ISOLATED@XXX-PERP-USDT</code>. e.g. <code>ISOLATED@BTCPFC-USD</code> -&gt; <code>ISOLATED@BTC-PERP-USDT</code> </li>
+<li>All wallet name field in responses will change from <code>ISOLATED@XXXPFC-USD</code> to <code>ISOLATED@XXX-PERP-USDT</code>. e.g. <code>ISOLATED@BTCPFC-USD</code> -&gt; <code>ISOLATED@BTC-PERP-USDT</code></li>
 <li>Quote currency field in responses will change from <code>USD</code> to <code>USDT</code></li>
 <li>Once the user upgrade the wallet to unified wallet, the user is not allowed to use v2.1 APIs anymore</li>
 </ul>
@@ -542,7 +542,7 @@
 <p><strong>HMAC SHA384 Signature</strong></p>
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="nv">$ </span><span class="nb">echo</span> <span class="nt">-n</span> <span class="s2">"/api/v2.2/user/wallet1624984297330"</span> | openssl dgst <span class="nt">-sha384</span> <span class="nt">-hmac</span> <span class="s2">"848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx"</span>
-<span class="o">(</span>stdin<span class="o">)=</span> ea4f1f2b43a0f4d750ae560c5274d6214d140fcab3093da5f4a83e36828535bd2ba7b12160cd12199596f422c8883333
+<span class="o">(</span>stdin<span class="o">)=</span> 72021c3b7b6f88dc1bbd1bde253f08d9bb12e4ba7d9b071ae801fee15bc2347a1bab2e3fa0a230ce5fadcd9c616fe44f
 </code></pre></div>
 <ul>
 <li>Endpoint to get wallet is <code>https://api.btse.com/futures/api/v2.2/user/wallet</code></li>
@@ -557,7 +557,7 @@
 <li>Generated signature will be:
 
 <ul>
-<li>request-sign: <code>ea4f1f2b43a0f4d750ae560c5274d6214d140fcab3093da5f4a83e36828535bd2ba7b12160cd12199596f422c8883333</code></li>
+<li>request-sign: <code>72021c3b7b6f88dc1bbd1bde253f08d9bb12e4ba7d9b071ae801fee15bc2347a1bab2e3fa0a230ce5fadcd9c616fe44f</code></li>
 </ul></li>
 </ul>
 <h3 id='example-2-place-an-order'>Example 2: Place an order</h3>
@@ -565,7 +565,7 @@
 <p><strong>HMAC SHA384 Signature</strong></p>
 </blockquote>
 <div class="highlight"><pre class="highlight shell tab-shell"><code><span class="nv">$ </span><span class="nb">echo</span> <span class="nt">-n</span> <span class="s2">"/api/v2.2/order1624985375123{</span><span class="se">\"</span><span class="s2">postOnly</span><span class="se">\"</span><span class="s2">:false,</span><span class="se">\"</span><span class="s2">price</span><span class="se">\"</span><span class="s2">:8500.0,</span><span class="se">\"</span><span class="s2">reduceOnly</span><span class="se">\"</span><span class="s2">:false,</span><span class="se">\"</span><span class="s2">side</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">BUY</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">size</span><span class="se">\"</span><span class="s2">:1,</span><span class="se">\"</span><span class="s2">stopPrice</span><span class="se">\"</span><span class="s2">:0.0,</span><span class="se">\"</span><span class="s2">symbol</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">BTC-PERP</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">time_in_force</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">GTC</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">trailValue</span><span class="se">\"</span><span class="s2">:0.0,</span><span class="se">\"</span><span class="s2">triggerPrice</span><span class="se">\"</span><span class="s2">:0.0,</span><span class="se">\"</span><span class="s2">txType</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">LIMIT</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">type</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">LIMIT</span><span class="se">\"</span><span class="s2">}"</span> | openssl dgst <span class="nt">-sha384</span> <span class="nt">-hmac</span> <span class="s2">"848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx"</span>
-<span class="o">(</span>stdin<span class="o">)=</span> 943adfce43b609a28506274976b96e08cf4bdc4ea53ca0b4cac0eb2cf0773a7d0807efc0aeab779d47fadcd9a60eea13
+<span class="o">(</span>stdin<span class="o">)=</span> 3b900afa243651ef07a61cb6f2a4a6779c6d28e9b0a0ff9ffa3524d4945fafaa864670e45559aa01f49e62c9fb96417e
 </code></pre></div>
 <ul>
 <li>Endpoint to place an order is <code>https://api.btse.com/futures/api/v2.2/order</code></li>
@@ -582,7 +582,7 @@
 <li>Generated signature will be:
 
 <ul>
-<li>request-sign: <code>943adfce43b609a28506274976b96e08cf4bdc4ea53ca0b4cac0eb2cf0773a7d0807efc0aeab779d47fadcd9a60eea13</code></li>
+<li>request-sign: <code>3b900afa243651ef07a61cb6f2a4a6779c6d28e9b0a0ff9ffa3524d4945fafaa864670e45559aa01f49e62c9fb96417e</code></li>
 </ul></li>
 </ul>
 <h2 id='rate-limits'>Rate Limits</h2>
@@ -2387,7 +2387,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
     </span><span class="nl">"contractSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.001</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p><code>GET /api/v2.2/order</code> </p>
+<p><code>GET /api/v2.2/order</code></p>
 
 <p>Query order detail for a specified orderID/clOrderID, please note that a canceled order will only exist for 30 minutes. Requires <code>Trading</code> permission.</p>
 <h3 id='request-parameters-10'>Request Parameters</h3>
@@ -5412,7 +5412,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 
 <p><strong>This API is for the users who have upgraded wallet</strong></p>
 
-<p>Gets margin information for the specified wallet or position. </p>
+<p>Gets margin information for the specified wallet or position.</p>
 <h3 id='request-parameters-30'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -5558,7 +5558,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span></code></pre></div>
 <p><code>GET /api/v2.2/user/margin</code></p>
 
-<p>The users who have upgraded wallet to unified wallet are not allow to use this API. Please use <a href="#query-unified-wallet-margin"><code>Query Unified Wallet Margin</code></a>.  </p>
+<p>The users who have upgraded wallet to unified wallet are not allow to use this API. Please use <a href="#query-unified-wallet-margin"><code>Query Unified Wallet Margin</code></a>.</p>
 
 <p>Gets margin information for the specified wallet so that users can know which wallet they are currently using in the market.</p>
 <h3 id='request-parameters-31'>Request Parameters</h3>
