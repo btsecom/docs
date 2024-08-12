@@ -36,7 +36,7 @@ headingLevel: 2
 * All the symbol field in request should use `XXX-PERP`. e.g. `BTC-PERP`
 * All symbol field in responses will change from `XXXPFC` to `XXX-PERP`. e.g. `BTCPFC` -> `BTC-PERP`
 * All market field in responses will change from `XXXPFC-USD` to `XXX-PERP-USDT`. e.g. `BTCPFC-USD` -> `BTC-PERP-USDT`
-* All wallet name field in responses will change from `ISOLATED@XXXPFC-USD` to `ISOLATED@XXX-PERP-USDT`. e.g. `ISOLATED@BTCPFC-USD` -> `ISOLATED@BTC-PERP-USDT` 
+* All wallet name field in responses will change from `ISOLATED@XXXPFC-USD` to `ISOLATED@XXX-PERP-USDT`. e.g. `ISOLATED@BTCPFC-USD` -> `ISOLATED@BTC-PERP-USDT`
 * Quote currency field in responses will change from `USD` to `USDT`
 * Once the user upgrade the wallet to unified wallet, the user is not allowed to use v2.1 APIs anymore
 
@@ -84,7 +84,7 @@ You will need to create an API key on the BTSE platform before you can use authe
 
 ```shell
 $ echo -n "/api/v2.2/user/wallet1624984297330" | openssl dgst -sha384 -hmac "848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx"
-(stdin)= ea4f1f2b43a0f4d750ae560c5274d6214d140fcab3093da5f4a83e36828535bd2ba7b12160cd12199596f422c8883333
+(stdin)= 72021c3b7b6f88dc1bbd1bde253f08d9bb12e4ba7d9b071ae801fee15bc2347a1bab2e3fa0a230ce5fadcd9c616fe44f
 ```
 
 * Endpoint to get wallet is `https://api.btse.com/futures/api/v2.2/user/wallet`
@@ -94,7 +94,7 @@ $ echo -n "/api/v2.2/user/wallet1624984297330" | openssl dgst -sha384 -hmac "848
   * secret: `848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx`
   * Path: `/api/v2.2/user/wallet`
 * Generated signature will be:
-  * request-sign: `ea4f1f2b43a0f4d750ae560c5274d6214d140fcab3093da5f4a83e36828535bd2ba7b12160cd12199596f422c8883333`
+  * request-sign: `72021c3b7b6f88dc1bbd1bde253f08d9bb12e4ba7d9b071ae801fee15bc2347a1bab2e3fa0a230ce5fadcd9c616fe44f`
 
 ### Example 2: Place an order
 
@@ -102,7 +102,7 @@ $ echo -n "/api/v2.2/user/wallet1624984297330" | openssl dgst -sha384 -hmac "848
 
 ```shell
 $ echo -n "/api/v2.2/order1624985375123{\"postOnly\":false,\"price\":8500.0,\"reduceOnly\":false,\"side\":\"BUY\",\"size\":1,\"stopPrice\":0.0,\"symbol\":\"BTC-PERP\",\"time_in_force\":\"GTC\",\"trailValue\":0.0,\"triggerPrice\":0.0,\"txType\":\"LIMIT\",\"type\":\"LIMIT\"}" | openssl dgst -sha384 -hmac "848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx"
-(stdin)= 943adfce43b609a28506274976b96e08cf4bdc4ea53ca0b4cac0eb2cf0773a7d0807efc0aeab779d47fadcd9a60eea13
+(stdin)= 3b900afa243651ef07a61cb6f2a4a6779c6d28e9b0a0ff9ffa3524d4945fafaa864670e45559aa01f49e62c9fb96417e
 ```
 
 * Endpoint to place an order is `https://api.btse.com/futures/api/v2.2/order`
@@ -114,7 +114,7 @@ $ echo -n "/api/v2.2/order1624985375123{\"postOnly\":false,\"price\":8500.0,\"re
   * Body: `{"postOnly":false,"price":8500.0,"reduceOnly":false,"side":"BUY","size":1,"stopPrice":0.0,"symbol":"BTC-PERP","time_in_force":"GTC","trailValue":0.0,"triggerPrice":0.0,"txType":"LIMIT","type":"LIMIT"}`
   * Encrypted Text: `/api/v2.2/order1624985375123{"postOnly":false,"price":8500.0,"reduceOnly":false,"side":"BUY","size":1,"stopPrice":0.0,"symbol":"BTC-PERP","time_in_force":"GTC","trailValue":0.0,"triggerPrice":0.0,"txType":"LIMIT","type":"LIMIT"}`
 * Generated signature will be:
-  * request-sign: `943adfce43b609a28506274976b96e08cf4bdc4ea53ca0b4cac0eb2cf0773a7d0807efc0aeab779d47fadcd9a60eea13`
+  * request-sign: `3b900afa243651ef07a61cb6f2a4a6779c6d28e9b0a0ff9ffa3524d4945fafaa864670e45559aa01f49e62c9fb96417e`
 
 
 ## Rate Limits
@@ -887,9 +887,9 @@ Creates a new order. Requires `Trading` permission
 | reduceOnly    | boolean | No       | Boolean to indicate if this is a reduce only order, if in hedge mode, it is used to reduce the specified position, ex: sell to reduce long position, buy to reduce short position.                                                                                                                                                                                 |
 | clOrderID     | string  | No       | Custom order Id                                                                                                                                                                                                                                                                                                                                                    |
 | trigger       | string  | No       | For creating order with txType: `STOP` or `TRIGGER`. Valid options: `markPrice` (default) or `lastPrice`|
-| takeProfitPrice  | double  | No       | Mandatory when creating new order with take profit order. Indicates the trigger price     
+| takeProfitPrice  | double  | No       | Mandatory when creating new order with take profit order. Indicates the trigger price
 | takeProfitTrigger       | string  | No       | For creating order with take profit order. Valid options: `markPrice` (default) or `lastPrice`|
-| stopLossPrice  | double  | No       | Mandatory when creating new order with stop loss order. Indicates the trigger price       
+| stopLossPrice  | double  | No       | Mandatory when creating new order with stop loss order. Indicates the trigger price
 | stopLossTrigger       | string  | No       | For creating order with stop loss order. Valid options: `markPrice` (default) or `lastPrice`|
 | positionMode  | string  | No       | For creating order and wanting to specify the positionMode. Valid options: `ONE_WAY` (default) , `HEDGE` , `ISOLATED`                                                                                                                                                                                                                                                          |
 
@@ -1061,7 +1061,7 @@ This API Requires `Trading` permission
 }
 ```
 
-`GET /api/v2.2/order` 
+`GET /api/v2.2/order`
 
 Query order detail for a specified orderID/clOrderID, please note that a canceled order will only exist for 30 minutes. Requires `Trading` permission.
 
@@ -2052,7 +2052,7 @@ Bind TP/SL with an existing position
 ### Request Parameters
 
 | Name               | Type    | Required | Description
-| ---                | ---     | ---      | --- 
+| ---                | ---     | ---      | ---
 | symbol             | string  | yes       | Market symbol
 | side               | string  | yes       | "BUY" or "SELL" Mandatory when positionMode is `HEDGE`, in hedge mode, it is used to clsoe the specified position, ex: sell to close long position, buy to close short position
 | takeProfitPrice    | double  | No        | Mandatory when creating new order with take profit order. Indicates the trigger price. Must set takeProfitPrice or stopLossPrice at least when using this API. |
@@ -2350,7 +2350,7 @@ Get user's wallet history records on the futures wallet
 
 **This API is for the users who have upgraded wallet**
 
-Gets margin information for the specified wallet or position. 
+Gets margin information for the specified wallet or position.
 
 
 ### Request Parameters
@@ -2421,7 +2421,7 @@ Gets margin information for the specified wallet or position.
 
 `GET /api/v2.2/user/margin`
 
-The users who have upgraded wallet to unified wallet are not allow to use this API. Please use [`Query Unified Wallet Margin`](#query-unified-wallet-margin).  
+The users who have upgraded wallet to unified wallet are not allow to use this API. Please use [`Query Unified Wallet Margin`](#query-unified-wallet-margin).
 
 Gets margin information for the specified wallet so that users can know which wallet they are currently using in the market.
 
