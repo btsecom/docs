@@ -13,6 +13,10 @@ headingLevel: 2
 
 # Change Log
 
+## Version 3.4.11 (21st Aug 2024)
+
+* Description of the Index Order only supports USD quotes. [Create new order](#create-new-order)
+
 ## Version 3.4.10 (10th Jul 2024)
 
 * Add [`Rate Limit Mechanism Description`](#mechanism-description) description
