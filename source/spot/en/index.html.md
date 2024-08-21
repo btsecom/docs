@@ -850,7 +850,7 @@ Gets server time
 
 `POST /api/v3.2/order` or `POST /api/v3.2/order/peg` (The 2 endpoints work identically)
 
-Creates a new order. Requires `Trading` permission.
+Creates a new order. Requires `Trading` permission. Please note that Index Order only supports USD quotes.
 
 ### Request Parameters
 
