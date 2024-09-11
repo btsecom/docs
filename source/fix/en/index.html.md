@@ -32,6 +32,10 @@ Sessions for Spot and Futures are separated.
 
 # Change Log
 
+## Version 1.1.7 (12th Sep 2024)
+
+Support unified wallet isolated position [New Order Single](#new-order-single-d)
+
 ## Version 1.1.6 (8th March 2024)
 
 Add timeInForce into execution report
@@ -189,6 +193,8 @@ Sent by the client to submit a new order. Only Market, Limit orders are currentl
 | 54	| Side        | 1        | "1": buy; "2": sell                                                                                                                                                                  |
 | 59	| TimeInForce | 1        | "1": Good Till Cancel; "3": Immediate or Cancel; "4": Fill or Kill; "a"=half minute; "b":five minute; "c":one hour; "d":twelve hour; "e":one week; "f":one month;  (for Limit order) |
 | 18	| ExecInst    | 6        | This parameter is optional. "E": reduce only, "6": post only, not supplied: standard                                                                                                 |
+| 5002 | PositionId | BTC-PERP-USDT | This parameter is optional. Specify the position for which you want to reduce the size |
+| 5003 | PositionMode | ONEWAY | When creating an order, you need to specify the positionMode. Valid options are: ONEWAY (default), HEDGE, and ISOLATED |
 
 If the order is accepted, an ExecutionReport (8) will be returned with ExecType: 0 (New), 1 (Partial fill), 2 (Fill), 4 (Canceled), 7 (Stopped), 8 (Rejected). <br>
 For errors other than order cancelled and rejected, TimeInForce will be always 1.
