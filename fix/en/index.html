@@ -237,6 +237,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-1-1-7-12th-sep-2024" class="toc-h2 toc-link" data-title="Version 1.1.7 (12th Sep 2024)">Version 1.1.7 (12th Sep 2024)</a>
+                  </li>
+                  <li>
                     <a href="#version-1-1-6-8th-march-2024" class="toc-h2 toc-link" data-title="Version 1.1.6 (8th March 2024)">Version 1.1.6 (8th March 2024)</a>
                   </li>
                   <li>
@@ -351,7 +354,9 @@
 <td>FUTURES</td>
 </tr>
 </tbody></table>
-<h1 id='change-log'>Change Log</h1><h2 id='version-1-1-6-8th-march-2024'>Version 1.1.6 (8th March 2024)</h2>
+<h1 id='change-log'>Change Log</h1><h2 id='version-1-1-7-12th-sep-2024'>Version 1.1.7 (12th Sep 2024)</h2>
+<p>Support unified wallet isolated position <a href="#new-order-single-d">New Order Single</a></p>
+<h2 id='version-1-1-6-8th-march-2024'>Version 1.1.6 (8th March 2024)</h2>
 <p>Add timeInForce into execution report</p>
 <h2 id='version-1-1-5-9th-jan-2024'>Version 1.1.5 (9th Jan 2024)</h2>
 <p>Add new cancelled/rejected timeInForce default status</p>
@@ -758,6 +763,18 @@ Client&#39;s API Key and secret can be generated from API page in BTSE portal. C
 <td>ExecInst</td>
 <td>6</td>
 <td>This parameter is optional. &quot;E&quot;: reduce only, &quot;6&quot;: post only, not supplied: standard</td>
+</tr>
+<tr>
+<td>5002</td>
+<td>PositionId</td>
+<td>BTC-PERP-USDT</td>
+<td>This parameter is optional. Specify the position for which you want to reduce the size</td>
+</tr>
+<tr>
+<td>5003</td>
+<td>PositionMode</td>
+<td>ONEWAY</td>
+<td>When creating an order, you need to specify the positionMode. Valid options are: ONEWAY (default), HEDGE, and ISOLATED</td>
 </tr>
 </tbody></table>
 

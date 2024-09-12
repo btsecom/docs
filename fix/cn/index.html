@@ -237,6 +237,9 @@
             <a href="#185368440e" class="toc-h1 toc-link" data-title="更新日志">更新日志</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#1-1-7-2024-9-12" class="toc-h2 toc-link" data-title="版本 1.1.7（2024年9月12日）">版本 1.1.7（2024年9月12日）</a>
+                  </li>
+                  <li>
                     <a href="#1-1-6-2024-3-8" class="toc-h2 toc-link" data-title="版本 1.1.6（2024年3月8日）">版本 1.1.6（2024年3月8日）</a>
                   </li>
                   <li>
@@ -351,7 +354,9 @@
 <td>FUTURES</td>
 </tr>
 </tbody></table>
-<h1 id='185368440e'>更新日志</h1><h2 id='1-1-6-2024-3-8'>版本 1.1.6（2024年3月8日）</h2>
+<h1 id='185368440e'>更新日志</h1><h2 id='1-1-7-2024-9-12'>版本 1.1.7（2024年9月12日）</h2>
+<p>支持统一期货钱包隔离仓位模式 <a href="#d">新订单单（D）</a></p>
+<h2 id='1-1-6-2024-3-8'>版本 1.1.6（2024年3月8日）</h2>
 <p>添加订单执行报告的被拒绝生效时间（timeInForce）</p>
 <h2 id='1-1-5-2024-1-9'>版本 1.1.5（2024年1月9日）</h2>
 <p>添加订单被拒绝生效时间（timeInForce）默認状态</p>
@@ -758,6 +763,18 @@
 <td>ExecInst</td>
 <td>6</td>
 <td>此参数是可选的。 &quot;E&quot;: 仅减少， &quot;6&quot;: 仅发布，未提供: 标准</td>
+</tr>
+<tr>
+<td>5002</td>
+<td>PositionId</td>
+<td>BTC-PERP-USDT</td>
+<td>此参数是可选的。用来指定你想要减少仓位大小的位置</td>
+</tr>
+<tr>
+<td>5003</td>
+<td>PositionMode</td>
+<td>ONEWAY</td>
+<td>下单时，你需要指定 positionMode。有效选项有：ONEWAY（默认）、HEDGE 和 ISOLATED</td>
 </tr>
 </tbody></table>
 
