@@ -13,9 +13,13 @@ headingLevel: 2
 
 # Change Log
 
+## Version 1.0.4 (16th September 2024)
+
+* Update the permission-related content in the description of all APIs
+
 ## Version 1.0.3 (6th August 2024)
 
-* Change the response content of the API [`Get Leverage`](#get-leverage) to an array.
+* Change the response content of the API [`Get Leverage`](#get-leverage) to an array
 
 ## Version 1.0.2 (1st August 2024)
 
@@ -867,7 +871,7 @@ Get funding rate history for certain symbols
 
 `POST /api/v2.2/order`
 
-Creates a new order. Requires `Trading` permission
+Creates a new order. Requires `Trading` permission.
 
 ### Request Parameters
 
@@ -977,7 +981,7 @@ Creates a new algo order. Algo order is an order that price will change accordin
 * `deviation`: How much should the order price deviate from index price. Value is in percentage and can range from `-10` to `10`
 * `stealth`: How many percent of the order is to be displayed on the orderbook.
 
-This API Requires `Trading` permission
+This API Requires `Trading` permission.
 
 ### Request Parameters
 
@@ -1254,6 +1258,7 @@ Amend the price or size or trigger price of an order. For trigger orders, if the
 `DELETE /api/v2.2/order`
 
 Cancels pending orders that has not yet been transacted. The `orderID` is a unique identifier to cancel a particular order. `clOrderID` is a custom ID sent in by the trader. When cancel by `clOrderID`, all orders having the same ID will be cancelled. If `orderID` and `clOrderID` is not sent in, then cancellation will be for all orders in the current market.
+Requires `Trading` permission.
 
 ### Request Parameters
 
@@ -1304,7 +1309,7 @@ Cancels pending orders that has not yet been transacted. The `orderID` is a uniq
 
 `POST /api/v2.2/order/cancelAllAfter`
 
-Dead-man's switch allows the trader to send in a timeout value which is a Time to live (TTL) value for an order. Extension of the timeout is done by sending another `cancelAllAfter` request. If the server does not receive another request before the timeout is reached, all orders will be cancelled.
+Dead-man's switch allows the trader to send in a timeout value which is a Time to live (TTL) value for an order. Extension of the timeout is done by sending another `cancelAllAfter` request. If the server does not receive another request before the timeout is reached, all orders will be cancelled. Requires `Trading` permission.
 
 ### Request Parameters
 
@@ -1382,7 +1387,7 @@ Dead-man's switch allows the trader to send in a timeout value which is a Time t
 
 `GET /api/v2.2/user/open_orders`
 
-Retrieves open orders that have not yet been matched or matched recently.
+Retrieves open orders that have not yet been matched or matched recently. Requires `Read` permission.
 
 ### Request Parameters
 
@@ -1479,7 +1484,7 @@ Retrieves open orders that have not yet been matched or matched recently.
 
 `GET /api/v2.2/user/trade_history`
 
-Retrieves a user's trade history
+Retrieves a user's trade history. Requires `Read` permission.
 
 ### Request Parameters
 
@@ -1601,6 +1606,7 @@ Retrieves a user's trade history
 `GET /api/v2.2/user/positions`
 
 Queries user's current position. When no symbol is specified, positions for all markets will be returned.
+Requires `Read` permission.
 
 ### Request Parameters
 
@@ -1690,7 +1696,7 @@ Queries user's current position. When no symbol is specified, positions for all 
 
 `POST /api/v2.2/order/close_position`
 
-Closes a user's position for the particular market as specified by symbol. If type is specified as LIMIT, then price is mandatory. When type is MARKET, it closes the position at market price.
+Closes a user's position for the particular market as specified by symbol. If type is specified as LIMIT, then price is mandatory. When type is MARKET, it closes the position at market price. Requires `Trading` permission.
 
 ### Request Parameters
 
@@ -1749,7 +1755,8 @@ Closes a user's position for the particular market as specified by symbol. If ty
 ```
 `GET /api/v2.2/risk_limit`
 
-Query risk limit for the specified market
+Query risk limit for the specified market. Requires `Read` permission.
+
 ### Request Parameters
 
 | Name               | Type    | Required | Description |
@@ -1798,7 +1805,7 @@ Query risk limit for the specified market
 
 `POST /api/v2.2/risk_limit`
 
-Changes risk limit for the specified market
+Changes risk limit for the specified market. Requires `Trading` permission.
 
 ### Request Parameters
 
@@ -1855,7 +1862,7 @@ Changes risk limit for the specified market
 
 `POST /api/v2.2/leverage`
 
-Change leverage values for the specified market
+Change leverage values for the specified market. Requires `Trading` permission.
 
 ### Request Parameters
 
@@ -1900,7 +1907,7 @@ Change leverage values for the specified market
 
 `Get /api/v2.2/leverage`
 
-Get leverage value for the specified market
+Get leverage value for the specified market. Requires `Read` permission.
 
 ### Request Parameters
 
@@ -1950,7 +1957,7 @@ Get leverage value for the specified market
 
 `POST /api/v2.2/settle_in`
 
-Changes the settlement currency for the position in the current market
+Changes the settlement currency for the position in the current market. Requires `Trading` permission.
 
 ### Request Parameters
 
@@ -1982,7 +1989,7 @@ Changes the settlement currency for the position in the current market
 
 `GET /api/v2.2/user/fees`
 
-Retrieve user's trading fees
+Retrieve user's trading fees. Requires `Read` permission.
 
 ### Request Parameters
 
@@ -2047,7 +2054,7 @@ Retrieve user's trading fees
 
 `POST /api/v2.2/order/bind/tpsl`
 
-Bind TP/SL with an existing position
+Bind TP/SL with an existing position. Requires `Trading` permission.
 
 ### Request Parameters
 
@@ -2109,7 +2116,7 @@ Bind TP/SL with an existing position
 
 `GET /api/v2.2/position_mode`
 
-Retrieve user's position mode
+Retrieve user's position mode. Requires `Read` permission.
 
 ### Request Parameters
 
@@ -2137,7 +2144,7 @@ Retrieve user's position mode
 
 `POST /api/v2.2/position_mode`
 
-Changes position mode
+Changes position mode. Requires `Trading` permission.
 
 ### Request Parameters
 
@@ -2177,7 +2184,7 @@ Changes position mode
 
 `GET /api/v2.2/user/margin_setting`
 
-Queries user's initial margin percentage and maintenance margin percentage. When no symbol is specified, margin percentage for all markets will be returned.
+Queries user's initial margin percentage and maintenance margin percentage. When no symbol is specified, margin percentage for all markets will be returned. Requires `Read` permission.
 
 ### Request Parameters
 
@@ -2298,7 +2305,7 @@ Query user's wallet balance. Requires `Read` permissions on the API key.
 
 `GET /api/v2.2/user/wallet_history`
 
-Get user's wallet history records on the futures wallet
+Get user's wallet history records on the futures wallet. Requires `Read` permission.
 
 ### Request Parameters
 
@@ -2350,7 +2357,7 @@ Get user's wallet history records on the futures wallet
 
 **This API is for the users who have upgraded wallet**
 
-Gets margin information for the specified wallet or position.
+Gets margin information for the specified wallet or position. Requires `Read` permission.
 
 
 ### Request Parameters
@@ -2424,6 +2431,7 @@ Gets margin information for the specified wallet or position.
 The users who have upgraded wallet to unified wallet are not allow to use this API. Please use [`Query Unified Wallet Margin`](#query-unified-wallet-margin).
 
 Gets margin information for the specified wallet so that users can know which wallet they are currently using in the market.
+Requires `Read` permission.
 
 ### Request Parameters
 
@@ -2521,7 +2529,7 @@ Gets margin information for the specified wallet so that users can know which wa
 
 `POST /api/v2.2/user/wallet/transfer`
 
-Transfers funds between user's wallet. User can specify the source and target wallet to transfer funds
+Transfers funds between user's wallet. User can specify the source and target wallet to transfer funds. Requires `Transfer` permission.
 
 ### Request Parameters
 
@@ -2578,9 +2586,8 @@ Transfers funds between user's wallet. User can specify the source and target wa
 
 `POST /api/v2.2/subaccount/wallet/transfer`
 
-Transfers funds between user and sub-account wallet. User can specify the source and target wallet to transfer funds
-
-, `Wallet` permission is required. To get supported currency list please check [Available currency list for action](#query-available-currency-list-for-wallet-action)
+Transfers funds between user and sub-account wallet. User can specify the source and target wallet to transfer funds,
+`Wallet` permission is required. To get supported currency list please check [Available currency list for action](#query-available-currency-list-for-wallet-action).
 
 ### Request Parameters
 
