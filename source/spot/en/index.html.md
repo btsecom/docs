@@ -13,6 +13,10 @@ headingLevel: 2
 
 # Change Log
 
+## Version 3.4.12 (16th September 2024)
+
+* Update the permission-related content in the description of all APIs
+
 ## Version 3.4.11 (21st Aug 2024)
 
 * Description of the Index Order only supports USD quotes. [Create new order](#create-new-order)
@@ -938,7 +942,7 @@ Creates a new order. Requires `Trading` permission. Please note that Index Order
 ```
 
 
-`GET /api/v3.2/order` 
+`GET /api/v3.2/order`
 
 Query order detail for a specified orderID/clOrderID, please note that a canceled order will only exist for 30 minutes. Requires `Trading` permission.
 
@@ -979,7 +983,7 @@ Query order detail for a specified orderID/clOrderID, please note that a cancele
 | remainingSize                 | Double  | Yes      | remainingSize                                                                          |
 | status                        | Integer | Yes      | Order status. Please refer to [`API Enum`](#api-enum)                                  |
 | timeInForce                   | String  | Yes      | Order validity                                                                         |
- 
+
 ## Amend Order
 
 > Request (amend price)
@@ -1060,7 +1064,7 @@ Query order detail for a specified orderID/clOrderID, please note that a cancele
 
 `PUT /api/v3.2/order`
 
-Amend the price or size or trigger price of an order. For trigger orders, if the order has already been triggered, the trigger price cannot be further amended. Amend order _does not_ apply to algo orders
+Amend the price or size or trigger price of an order. For trigger orders, if the order has already been triggered, the trigger price cannot be further amended. Amend order _does not_ apply to algo orders. Requires `Trading` permission.
 
 ### Request Parameters
 
@@ -1192,7 +1196,7 @@ Amend the price or size or trigger price of an order. For trigger orders, if the
 
 `DELETE /api/v3.2/order`
 
-Cancels pending orders that has not yet been transacted. The `orderID` is a unique identifier to cancel a particular order. `clOrderID` is a custom ID sent in by the trader. When cancel by `clOrderID`, all orders having the same ID will be cancelled. If `orderID` and `clOrderID` is not sent in, then cancellation will be for all orders in the current market.
+Cancels pending orders that has not yet been transacted. The `orderID` is a unique identifier to cancel a particular order. `clOrderID` is a custom ID sent in by the trader. When cancel by `clOrderID`, all orders having the same ID will be cancelled. If `orderID` and `clOrderID` is not sent in, then cancellation will be for all orders in the current market. Requires `Trading` permission.
 
 ### Request Parameters
 
@@ -1238,7 +1242,7 @@ Cancels pending orders that has not yet been transacted. The `orderID` is a uniq
 
 `POST /api/v3.2/order/cancelAllAfter`
 
-Dead-man's switch allows the trader to send in a timeout value which is a Time to live (TTL) value for an order. Extension of the timeout is done by sending another `cancelAllAfter` request. If the server does not receive another request before the timeout is reached, all orders will be cancelled.
+Dead-man's switch allows the trader to send in a timeout value which is a Time to live (TTL) value for an order. Extension of the timeout is done by sending another `cancelAllAfter` request. If the server does not receive another request before the timeout is reached, all orders will be cancelled. Requires `Trading` permission.
 
 ### Request Parameters
 
@@ -1290,7 +1294,7 @@ Dead-man's switch allows the trader to send in a timeout value which is a Time t
 
 `GET /api/v3.2/user/open_orders`
 
-Retrieves open orders that have not yet been matched or matched recently.
+Retrieves open orders that have not yet been matched or matched recently. Requires `Trading` permission.
 
 ### Request Parameters
 
@@ -1368,7 +1372,7 @@ Retrieves open orders that have not yet been matched or matched recently.
 
 `GET /api/v3.2/user/trade_history`
 
-Retrieves a user's trade history which includes funding fee data.
+Retrieves a user's trade history which includes funding fee data. Requires `Read` permission.
 
 ### Request Parameters
 
@@ -1424,9 +1428,9 @@ Retrieves a user's trade history which includes funding fee data.
 }
 ```
 
-`get /api/v3.2/user/fees`
+`GET /api/v3.2/user/fees`
 
-retrieve user's trading fees
+Retrieve user's trading fees. Requires `Read` permission.
 
 ### request parameters
 
@@ -1474,9 +1478,9 @@ retrieve user's trading fees
 ]
 ```
 
-`get /api/v3.2/invest/products`
+`GET /api/v3.2/invest/products`
 
-get all investment products
+Get all investment products. Requires `Read` permission.
 
 ### request parameters
 
@@ -1518,9 +1522,9 @@ get all investment products
 }
 ```
 
-`post /api/v3.2/invest/deposit`
+`POST /api/v3.2/invest/deposit`
 
-deposit an investment
+Deposit an investment. Requires `Wallet` permission.
 
 ### request parameters
 
@@ -1550,9 +1554,9 @@ deposit an investment
 }
 ```
 
-`post /api/v3.2/invest/renew`
+`POST /api/v3.2/invest/renew`
 
-renew an investment order
+Renew an investment order. Requires `Wallet` permission.
 
 ### request parameters
 
@@ -1580,9 +1584,9 @@ renew an investment order
 }
 ```
 
-`post /api/v3.2/invest/redeem`
+`POST /api/v3.2/invest/redeem`
 
-redeem an investment order
+Redeem an investment order. Requires `Wallet` permission.
 
 ### request parameters
 
@@ -1620,9 +1624,9 @@ redeem an investment order
 ]
 ```
 
-`get /api/v3.2/invest/orders`
+`GET /api/v3.2/invest/orders`
 
-query investment orders
+Query investment orders. Requires `Wallet` permission.
 
 ### response content
 
@@ -1667,9 +1671,9 @@ query investment orders
 ]
 ```
 
-`get /api/v3.2/invest/history`
+`GET /api/v3.2/invest/history`
 
-query investment history
+Query investment history. Requires `Wallet` permission.
 
 ### response content
 
@@ -2168,7 +2172,7 @@ Receive trade notifications by subscribing to the topic `notificationApiV2`. The
     "size": "filled size",
     "feeAmount": "Fees charged to user, value to be String on API",
     "feeCurrency": "Fee currency, eg. Buy would be BTC, Sell would be USD",
-    "base": "Base currency, eg. BTC", 
+    "base": "Base currency, eg. BTC",
     "quote": "Quote currency eg. USD",
     "maker": "maker or taker",
     "timestamp": "Time trade was matched in the engine",

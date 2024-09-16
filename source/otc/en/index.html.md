@@ -13,6 +13,10 @@ headingLevel: 2
 
 # Change Log
 
+## Version 1.1.4 (16th September 2024)
+
+* Update the permission-related content in the description of all APIs
+
 ## Version 1.1.3 (16th March 2022)
 
 * Addition of request parameter [`side`](#quote-stream) to allow return one side quote.
@@ -242,7 +246,7 @@ Gets OTC market information
 
 `POST /api/v1/quote`
 
-Request for a quote
+Request for a quote. Requires `Trading` permission.
 
 ### Request Parameters
 
@@ -307,6 +311,7 @@ Accepts a quote.
 The quote is allowed to be **partially accepted** by taking `baseAmount` or `quoteAmount` in the request body,
 which corresponds to `orderSizeInBaseCurrency` and `orderAmountInOrderCurrency` in [`quote`](#request-for-quote), respectively.
 Note that if the amount is larger than the the number you quote, only the quoted number will be accepted.
+Requires `Trading` permission.
 
 ### Request Parameter
 
@@ -349,7 +354,7 @@ Note that if the amount is larger than the the number you quote, only the quoted
 
 `POST /otc/api/v1/reject/{quoteId}`
 
-Reject current quote
+Reject current quote. Requires `Trading` permission.
 
 ### Request Parameter
 
@@ -409,7 +414,7 @@ Reject current quote
 
 `POST /api/v1/queryOrder/{quoteId}`
 
-Query order information
+Query order information. Requires `Read` permission.
 
 ### Request Parameter
 
