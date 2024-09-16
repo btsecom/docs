@@ -234,6 +234,9 @@
             <a href="#185368440e" class="toc-h1 toc-link" data-title="更新日志">更新日志</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#1-1-4-2024-9-16" class="toc-h2 toc-link" data-title="版本 1.1.4 (2024年9月16日)">版本 1.1.4 (2024年9月16日)</a>
+                  </li>
+                  <li>
                     <a href="#1-1-3-2022-3-16" class="toc-h2 toc-link" data-title="版本 1.1.3 (2022年3月16日)">版本 1.1.3 (2022年3月16日)</a>
                   </li>
                   <li>
@@ -289,9 +292,6 @@
                     <a href="#91cb77f2de" class="toc-h2 toc-link" data-title="拒绝报价">拒绝报价</a>
                   </li>
                   <li>
-                    <a href="#0f65a9a797" class="toc-h2 toc-link" data-title="拒绝当前报价">拒绝当前报价</a>
-                  </li>
-                  <li>
                     <a href="#90376e83a0" class="toc-h2 toc-link" data-title="查询订单">查询订单</a>
                   </li>
               </ul>
@@ -314,7 +314,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='185368440e'>更新日志</h1><h2 id='1-1-3-2022-3-16'>版本 1.1.3 (2022年3月16日)</h2>
+        <h1 id='185368440e'>更新日志</h1><h2 id='1-1-4-2024-9-16'>版本 1.1.4 (2024年9月16日)</h2>
+<ul>
+<li>在所有API描述中更新权限相关内容</li>
+</ul>
+<h2 id='1-1-3-2022-3-16'>版本 1.1.3 (2022年3月16日)</h2>
 <ul>
 <li>增加了请求参数 <a href="#42034b88ca"><code>side</code></a>，以允许返回单边报价。</li>
 </ul>
@@ -598,7 +602,7 @@
 </span></code></pre></div>
 <p><code>POST /api/v1/quote</code></p>
 
-<p>请求报价</p>
+<p>请求报价。需要<code>交易</code>权限。</p>
 <h3 id='1f9ac54b15'>请求参数</h3>
 <table><thead>
 <tr>
@@ -753,7 +757,7 @@
 <p>接受报价。
 该报价允许通过在请求体中获取 <code>baseAmount</code> 或 <code>quoteAmount</code> 来<strong>部分接受</strong>，
 这分别对应 <a href="#db8afb45d1"><code>报价</code></a>中的 <code>orderSizeInBaseCurrency</code> 和 <code>orderAmountInOrderCurrency</code>。
-请注意，如果金额大于您报价的数字，只会接受报价的数字。</p>
+请注意，如果金额大于您报价的数字，只会接受报价的数字。需要<code>交易</code>权限。</p>
 <h3 id='1f9ac54b15-2'>请求参数</h3>
 <table><thead>
 <tr>
@@ -870,7 +874,9 @@
 
 </span></code></pre></div>
 <p><code>POST /otc/api/v1/reject/{quoteId}</code></p>
-<h2 id='0f65a9a797'>拒绝当前报价</h2><h3 id='1f9ac54b15-3'>请求参数</h3>
+
+<p>拒绝当前报价。需要<code>交易</code>权限。</p>
+<h3 id='1f9ac54b15-3'>请求参数</h3>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -936,7 +942,7 @@
 </span></code></pre></div>
 <p><code>POST /api/v1/queryOrder/{quoteId}</code></p>
 
-<p>查询订单信息</p>
+<p>查询订单信息。需要<code>读取</code>权限。</p>
 <h3 id='1f9ac54b15-4'>请求参数</h3>
 <table><thead>
 <tr>

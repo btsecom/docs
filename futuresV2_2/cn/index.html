@@ -234,6 +234,9 @@
             <a href="#185368440e" class="toc-h1 toc-link" data-title="更新日志">更新日志</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#1-0-4-2024-9-16" class="toc-h2 toc-link" data-title="版本 1.0.4 (2024年9月16日)">版本 1.0.4 (2024年9月16日)</a>
+                  </li>
+                  <li>
                     <a href="#1-0-3-2024-8-6" class="toc-h2 toc-link" data-title="版本 1.0.3 (2024年8月6日)">版本 1.0.3 (2024年8月6日)</a>
                   </li>
                   <li>
@@ -443,7 +446,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='185368440e'>更新日志</h1><h2 id='1-0-3-2024-8-6'>版本 1.0.3 (2024年8月6日)</h2>
+        <h1 id='185368440e'>更新日志</h1><h2 id='1-0-4-2024-9-16'>版本 1.0.4 (2024年9月16日)</h2>
+<ul>
+<li>在所有API描述中更新权限相关内容</li>
+</ul>
+<h2 id='1-0-3-2024-8-6'>版本 1.0.3 (2024年8月6日)</h2>
 <ul>
 <li>更改API <a href="#6d32c96f0c"><code>获取杠杆</code></a> 的响应内容为数组。</li>
 </ul>
@@ -1813,7 +1820,7 @@
 </span></code></pre></div>
 <p><code>POST /api/v2.2/order</code></p>
 
-<p>创建一个新的订单。需要 <code>Trading</code> 权限</p>
+<p>创建一个新的订单。需要<code>交易</code>权限。</p>
 <h3 id='1f9ac54b15-7'>请求参数</h3>
 <table><thead>
 <tr>
@@ -2141,7 +2148,7 @@
 <li><code>stealth</code>：订单簿上要显示多少百分比的订单量。</li>
 </ul>
 
-<p>此API需要具有<code>交易</code>权限</p>
+<p>此API需要具有<code>交易</code>权限。</p>
 <h3 id='1f9ac54b15-8'>请求参数</h3>
 <table><thead>
 <tr>
@@ -2658,7 +2665,7 @@
 </span></code></pre></div>
 <p><code>PUT /api/v2.2/order</code></p>
 
-<p>修改订单的价格、数量或触发价格。对于触发订单，如果订单已经被触发，触发价格将无法进一步修改。修订订单不适用于算法订单。</p>
+<p>修改订单的价格、数量或触发价格。对于触发订单，如果订单已经被触发，触发价格将无法进一步修改。修订订单不适用于算法订单。需要<code>交易</code>权限。</p>
 <h3 id='1f9ac54b15-10'>请求参数</h3>
 <table><thead>
 <tr>
@@ -2904,7 +2911,7 @@
 </span></code></pre></div>
 <p><code>DELETE /api/v2.2/order</code></p>
 
-<p>取消尚未成交的待定订单。orderID是取消特定订单的唯一标识符。clOrderID是交易者发送的自定义ID。通过clOrderID取消时，所有具有相同ID的订单都将被取消。如果未发送orderID和clOrderID，则取消将针对当前市场中的所有订单。</p>
+<p>取消尚未成交的待定订单。orderID是取消特定订单的唯一标识符。clOrderID是交易者发送的自定义ID。通过clOrderID取消时，所有具有相同ID的订单都将被取消。如果未发送orderID和clOrderID，则取消将针对当前市场中的所有订单。需要<code>交易</code>权限。</p>
 <h3 id='1f9ac54b15-11'>请求参数</h3>
 <table><thead>
 <tr>
@@ -3091,7 +3098,7 @@
 </span></code></pre></div>
 <p><code>POST /api/v2.2/order/cancelAllAfter</code></p>
 
-<p>允许交易员发送一个超时值，这是一个订单的生存时间（TTL）值。通过发送另一个“cancelAllAfter”请求来延长超时时间。如果服务器在超时时间到达之前没有收到另一个请求，那么所有订单将被取消。</p>
+<p>允许交易员发送一个超时值，这是一个订单的生存时间（TTL）值。通过发送另一个“cancelAllAfter”请求来延长超时时间。如果服务器在超时时间到达之前没有收到另一个请求，那么所有订单将被取消。需要<code>交易</code>权限。</p>
 <h3 id='1f9ac54b15-12'>请求参数</h3>
 <table><thead>
 <tr>
@@ -3178,7 +3185,7 @@
 </span></code></pre></div>
 <p><code>GET /api/v2.2/user/open_orders</code></p>
 
-<p>检索尚未匹配或最近已匹配的未完成订单。</p>
+<p>检索尚未匹配或最近已匹配的未完成订单。需要<code>读取</code>权限。</p>
 <h3 id='1f9ac54b15-13'>请求参数</h3>
 <table><thead>
 <tr>
@@ -3476,7 +3483,7 @@
 </span></code></pre></div>
 <p><code>GET /api/v2.2/user/trade_history</code></p>
 
-<p>获取用户的交易历史</p>
+<p>获取用户的交易历史。需要<code>读取</code>权限。</p>
 <h3 id='1f9ac54b15-14'>请求参数</h3>
 <table><thead>
 <tr>
@@ -3772,7 +3779,7 @@
 </span></code></pre></div>
 <p><code>GET /api/v2.2/user/positions</code></p>
 
-<p>查询用户当前的仓位。当未指定交易对时，将返回所有市场的仓位。</p>
+<p>查询用户当前的仓位。当未指定交易对时，将返回所有市场的仓位。需要<code>读取</code>权限。</p>
 <h3 id='1f9ac54b15-15'>请求参数</h3>
 <table><thead>
 <tr>
@@ -3978,7 +3985,7 @@
 </span></code></pre></div>
 <p><code>POST /api/v2.2/order/close_position</code></p>
 
-<p>平仓用户在特定市场上指定的仓位。如果指定类型为LIMIT，则价格是必须的。当类型为MARKET时，以市场价格平仓仓位。</p>
+<p>平仓用户在特定市场上指定的仓位。如果指定类型为LIMIT，则价格是必须的。当类型为MARKET时，以市场价格平仓仓位。需要<code>交易</code>权限。</p>
 <h3 id='1f9ac54b15-16'>请求参数</h3>
 <table><thead>
 <tr>
@@ -4183,7 +4190,7 @@
 </span></code></pre></div>
 <p><code>GET /api/v2.2/risk_limit</code></p>
 
-<p>查询指定市场的风险限制</p>
+<p>查询指定市场的风险限制。需要<code>读取</code>权限。</p>
 <h3 id='1f9ac54b15-17'>请求参数</h3>
 <table><thead>
 <tr>
@@ -4253,7 +4260,7 @@
 </span></code></pre></div>
 <p><code>POST /api/v2.2/risk_limit</code></p>
 
-<p>更改指定市场的风险限制</p>
+<p>更改指定市场的风险限制。需要<code>交易</code>权限。</p>
 <h3 id='1f9ac54b15-18'>请求参数</h3>
 <table><thead>
 <tr>
@@ -4355,7 +4362,7 @@
 </span></code></pre></div>
 <p><code>POST /api/v2.2/leverage</code></p>
 
-<p>更改指定市场的杠杆值</p>
+<p>更改指定市场的杠杆值。需要<code>交易</code>权限。</p>
 <h3 id='1f9ac54b15-19'>请求参数</h3>
 <table><thead>
 <tr>
@@ -4457,7 +4464,7 @@
 </span></code></pre></div>
 <p><code>Get /api/v2.2/leverage</code></p>
 
-<p>获取指定市场的杠杆值</p>
+<p>获取指定市场的杠杆值。需要<code>读取</code>权限。</p>
 <h3 id='1f9ac54b15-20'>请求参数</h3>
 <table><thead>
 <tr>
@@ -4537,7 +4544,7 @@
 </span></code></pre></div>
 <p><code>POST /api/v2.2/settle_in</code></p>
 
-<p>更改当前市场中持仓的结算货币</p>
+<p>更改当前市场中持仓的结算货币。需要<code>交易</code>权限。</p>
 <h3 id='1f9ac54b15-21'>请求参数</h3>
 <table><thead>
 <tr>
@@ -4606,7 +4613,7 @@
 </span></code></pre></div>
 <p><code>GET /api/v2.2/user/fees</code></p>
 
-<p>查询用户的交易费用</p>
+<p>查询用户的交易费用。需要<code>读取</code>权限。</p>
 <h3 id='1f9ac54b15-22'>请求参数</h3>
 <table><thead>
 <tr>
@@ -4697,7 +4704,7 @@
 </span></code></pre></div>
 <p><code>POST /api/v2.2/order/bind/tpsl</code></p>
 
-<p>绑定止盈/止损与已有持仓</p>
+<p>绑定止盈/止损与已有持仓。需要<code>交易</code>权限。</p>
 <h3 id='1f9ac54b15-23'>请求参数</h3>
 <table><thead>
 <tr>
@@ -4921,7 +4928,7 @@
 </span></code></pre></div>
 <p><code>GET /api/v2.2/position_mode</code></p>
 
-<p>查询用户的仓位模式</p>
+<p>查询用户的仓位模式。需要<code>读取</code>权限。</p>
 
 <p><strong>请求参数</strong></p>
 
@@ -4958,7 +4965,7 @@
 </span></code></pre></div>
 <p><code>POST /api/v2.2/position_mode</code></p>
 
-<p>更改仓位模式</p>
+<p>更改仓位模式。需要<code>交易</code>权限。</p>
 
 <p><strong>请求参数</strong></p>
 
@@ -5044,7 +5051,7 @@
 </span></code></pre></div>
 <p><code>GET /api/v2.2/user/margin_setting</code></p>
 
-<p>查询用户的初始保证金百分比和维持保证金百分比。如果未指定特定的市场符号，则将返回所有市场的保证金百分比。</p>
+<p>查询用户的初始保证金百分比和维持保证金百分比。如果未指定特定的市场符号，则将返回所有市场的保证金百分比。需要<code>读取</code>权限。</p>
 
 <p><strong>请求参数</strong></p>
 
@@ -5293,7 +5300,7 @@
 </span></code></pre></div>
 <p><code>GET /api/v2.2/user/wallet_history</code></p>
 
-<p>获取期货钱包上的用户钱包历史记录</p>
+<p>获取期货钱包上的用户钱包历史记录。需要<code>读取</code>权限。</p>
 <h3 id='1f9ac54b15-25'>请求参数</h3>
 <table><thead>
 <tr>
@@ -5411,7 +5418,7 @@
 
 <p><strong>此 API 适用于已升级钱包的用户</strong></p>
 
-<p>获取指定钱包或仓位的保证金信息。</p>
+<p>获取指定钱包或仓位的保证金信息。需要<code>读取</code>权限。</p>
 <h3 id='1f9ac54b15-26'>请求参数</h3>
 <table><thead>
 <tr>
@@ -5559,7 +5566,7 @@
 
 <p>已升级至统一钱包的用户无法使用此 API。请使用 <a href="#7877d0f154"><code>统一期货钱包</code></a></p>
 
-<p>获取指定钱包的保证金信息，以便用户知道他们当前在市场上使用的是哪个钱包。</p>
+<p>获取指定钱包的保证金信息，以便用户知道他们当前在市场上使用的是哪个钱包。需要<code>读取</code>权限。</p>
 <h3 id='1f9ac54b15-27'>请求参数</h3>
 <table><thead>
 <tr>
@@ -5756,7 +5763,7 @@
 </span></code></pre></div>
 <p><code>POST /api/v2.2/user/wallet/transfer</code></p>
 
-<p>在用户的钱包之间转移资金。用户可以指定源钱包和目标钱包进行资金转账。</p>
+<p>在用户的钱包之间转移资金。用户可以指定源钱包和目标钱包进行资金转账。需要<code>转账</code>权限。</p>
 <h3 id='1f9ac54b15-28'>请求参数</h3><h4 id='301b9231fe'>钱包请求</h4>
 <table><thead>
 <tr>
@@ -5952,7 +5959,7 @@
 
 <p>在用户和子账户钱包之间转移资金。用户可以指定源钱包和目标钱包进行资金转账。</p>
 
-<p>需要<code>Wallet</code>权限。要获取支持的货币列表，请查看<a href="#查询钱包操作的可用货币列表">用于操作的可用货币列表</a>。</p>
+<p>需要<code>钱包</code>权限。要获取支持的货币列表，请查看<a href="#查询钱包操作的可用货币列表">用于操作的可用货币列表</a>。</p>
 <h3 id='1f9ac54b15-29'>请求参数</h3><h4 id='301b9231fe-2'>钱包请求</h4>
 <table><thead>
 <tr>

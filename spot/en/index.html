@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-3-4-12-16th-september-2024" class="toc-h2 toc-link" data-title="Version 3.4.12 (16th September 2024)">Version 3.4.12 (16th September 2024)</a>
+                  </li>
+                  <li>
                     <a href="#version-3-4-11-21st-aug-2024" class="toc-h2 toc-link" data-title="Version 3.4.11 (21st Aug 2024)">Version 3.4.11 (21st Aug 2024)</a>
                   </li>
                   <li>
@@ -479,7 +482,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-3-4-11-21st-aug-2024'>Version 3.4.11 (21st Aug 2024)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-3-4-12-16th-september-2024'>Version 3.4.12 (16th September 2024)</h2>
+<ul>
+<li>Update the permission-related content in the description of all APIs</li>
+</ul>
+<h2 id='version-3-4-11-21st-aug-2024'>Version 3.4.11 (21st Aug 2024)</h2>
 <ul>
 <li>Description of the Index Order only supports USD quotes. <a href="#create-new-order">Create new order</a></li>
 </ul>
@@ -2095,7 +2102,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
   </span><span class="nl">"triggered"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p><code>GET /api/v3.2/order</code> </p>
+<p><code>GET /api/v3.2/order</code></p>
 
 <p>Query order detail for a specified orderID/clOrderID, please note that a canceled order will only exist for 30 minutes. Requires <code>Trading</code> permission.</p>
 <h3 id='request-parameters-8'>Request Parameters</h3>
@@ -2361,7 +2368,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span></code></pre></div>
 <p><code>PUT /api/v3.2/order</code></p>
 
-<p>Amend the price or size or trigger price of an order. For trigger orders, if the order has already been triggered, the trigger price cannot be further amended. Amend order <em>does not</em> apply to algo orders</p>
+<p>Amend the price or size or trigger price of an order. For trigger orders, if the order has already been triggered, the trigger price cannot be further amended. Amend order <em>does not</em> apply to algo orders. Requires <code>Trading</code> permission.</p>
 <h3 id='request-parameters-9'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -2633,7 +2640,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span></code></pre></div>
 <p><code>DELETE /api/v3.2/order</code></p>
 
-<p>Cancels pending orders that has not yet been transacted. The <code>orderID</code> is a unique identifier to cancel a particular order. <code>clOrderID</code> is a custom ID sent in by the trader. When cancel by <code>clOrderID</code>, all orders having the same ID will be cancelled. If <code>orderID</code> and <code>clOrderID</code> is not sent in, then cancellation will be for all orders in the current market.</p>
+<p>Cancels pending orders that has not yet been transacted. The <code>orderID</code> is a unique identifier to cancel a particular order. <code>clOrderID</code> is a custom ID sent in by the trader. When cancel by <code>clOrderID</code>, all orders having the same ID will be cancelled. If <code>orderID</code> and <code>clOrderID</code> is not sent in, then cancellation will be for all orders in the current market. Requires <code>Trading</code> permission.</p>
 <h3 id='request-parameters-10'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -2796,7 +2803,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span></code></pre></div>
 <p><code>POST /api/v3.2/order/cancelAllAfter</code></p>
 
-<p>Dead-man&#39;s switch allows the trader to send in a timeout value which is a Time to live (TTL) value for an order. Extension of the timeout is done by sending another <code>cancelAllAfter</code> request. If the server does not receive another request before the timeout is reached, all orders will be cancelled.</p>
+<p>Dead-man&#39;s switch allows the trader to send in a timeout value which is a Time to live (TTL) value for an order. Extension of the timeout is done by sending another <code>cancelAllAfter</code> request. If the server does not receive another request before the timeout is reached, all orders will be cancelled. Requires <code>Trading</code> permission.</p>
 <h3 id='request-parameters-11'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -2854,7 +2861,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span></code></pre></div>
 <p><code>GET /api/v3.2/user/open_orders</code></p>
 
-<p>Retrieves open orders that have not yet been matched or matched recently.</p>
+<p>Retrieves open orders that have not yet been matched or matched recently. Requires <code>Trading</code> permission.</p>
 <h3 id='request-parameters-12'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -3083,7 +3090,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span></code></pre></div>
 <p><code>GET /api/v3.2/user/trade_history</code></p>
 
-<p>Retrieves a user&#39;s trade history which includes funding fee data.</p>
+<p>Retrieves a user&#39;s trade history which includes funding fee data. Requires <code>Read</code> permission.</p>
 <h3 id='request-parameters-13'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -3294,9 +3301,9 @@ Additionally, the calculation duration will be reset if the IP address or user d
   </span><span class="nl">"takerfee"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p><code>get /api/v3.2/user/fees</code></p>
+<p><code>GET /api/v3.2/user/fees</code></p>
 
-<p>retrieve user&#39;s trading fees</p>
+<p>Retrieve user&#39;s trading fees. Requires <code>Read</code> permission.</p>
 <h3 id='request-parameters-14'>request parameters</h3>
 <table><thead>
 <tr>
@@ -3368,9 +3375,9 @@ Additionally, the calculation duration will be reset if the IP address or user d
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
-<p><code>get /api/v3.2/invest/products</code></p>
+<p><code>GET /api/v3.2/invest/products</code></p>
 
-<p>get all investment products</p>
+<p>Get all investment products. Requires <code>Read</code> permission.</p>
 <h3 id='request-parameters-15'>request parameters</h3>
 <p>(none)</p>
 <h3 id='response-content-16'>response content</h3>
@@ -3486,9 +3493,9 @@ Additionally, the calculation duration will be reset if the IP address or user d
     </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">100.99</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p><code>post /api/v3.2/invest/deposit</code></p>
+<p><code>POST /api/v3.2/invest/deposit</code></p>
 
-<p>deposit an investment</p>
+<p>Deposit an investment. Requires <code>Wallet</code> permission.</p>
 <h3 id='request-parameters-16'>request parameters</h3>
 <table><thead>
 <tr>
@@ -3528,9 +3535,9 @@ Additionally, the calculation duration will be reset if the IP address or user d
     </span><span class="nl">"autoRenew"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p><code>post /api/v3.2/invest/renew</code></p>
+<p><code>POST /api/v3.2/invest/renew</code></p>
 
-<p>renew an investment order</p>
+<p>Renew an investment order. Requires <code>Wallet</code> permission.</p>
 <h3 id='request-parameters-17'>request parameters</h3>
 <table><thead>
 <tr>
@@ -3584,9 +3591,9 @@ Additionally, the calculation duration will be reset if the IP address or user d
     </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">12.34</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p><code>post /api/v3.2/invest/redeem</code></p>
+<p><code>POST /api/v3.2/invest/redeem</code></p>
 
-<p>redeem an investment order</p>
+<p>Redeem an investment order. Requires <code>Wallet</code> permission.</p>
 <h3 id='request-parameters-18'>request parameters</h3>
 <table><thead>
 <tr>
@@ -3635,9 +3642,9 @@ Additionally, the calculation duration will be reset if the IP address or user d
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
-<p><code>get /api/v3.2/invest/orders</code></p>
+<p><code>GET /api/v3.2/invest/orders</code></p>
 
-<p>query investment orders</p>
+<p>Query investment orders. Requires <code>Wallet</code> permission.</p>
 <h3 id='response-content-18'>response content</h3>
 <table><thead>
 <tr>
@@ -3763,9 +3770,9 @@ Additionally, the calculation duration will be reset if the IP address or user d
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
-<p><code>get /api/v3.2/invest/history</code></p>
+<p><code>GET /api/v3.2/invest/history</code></p>
 
-<p>query investment history</p>
+<p>Query investment history. Requires <code>Wallet</code> permission.</p>
 <h3 id='response-content-19'>response content</h3>
 <table><thead>
 <tr>
@@ -4605,7 +4612,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
     </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"filled size"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"feeAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fees charged to user, value to be String on API"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"feeCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fee currency, eg. Buy would be BTC, Sell would be USD"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"base"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Base currency, eg. BTC"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nl">"base"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Base currency, eg. BTC"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"quote"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Quote currency eg. USD"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"maker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"maker or taker"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Time trade was matched in the engine"</span><span class="p">,</span><span class="w">

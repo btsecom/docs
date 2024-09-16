@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-2-7-8-16th-september-2024" class="toc-h2 toc-link" data-title="Version 2.7.8 (16th September 2024)">Version 2.7.8 (16th September 2024)</a>
+                  </li>
+                  <li>
                     <a href="#version-2-7-7-1st-august-2024" class="toc-h2 toc-link" data-title="Version 2.7.7 (1st August 2024)">Version 2.7.7 (1st August 2024)</a>
                   </li>
                   <li>
@@ -566,7 +569,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-2-7-7-1st-august-2024'>Version 2.7.7 (1st August 2024)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-2-7-8-16th-september-2024'>Version 2.7.8 (16th September 2024)</h2>
+<ul>
+<li>Update the permission-related content in the description of all APIs</li>
+</ul>
+<h2 id='version-2-7-7-1st-august-2024'>Version 2.7.7 (1st August 2024)</h2>
 <ul>
 <li>Add API for querying <a href="#query-user-initial-margin-percentage-and-maintenance-margin-percentage"><code>User Initial Margin Percentage And Maintenance Margin Percentage</code></a></li>
 </ul>
@@ -585,7 +592,7 @@
 <li><a href="#query-position"><code>Query Position</code></a></li>
 <li><a href="#user-trade-fills"><code>fills</code></a></li>
 <li><a href="#all-position"><code>allPosition</code></a></li>
-<li><a href="#positions"><code>positions</code></a> </li>
+<li><a href="#positions"><code>positions</code></a></li>
 </ul></li>
 </ul>
 <h2 id='version-2-7-4-29th-march-2024'>Version 2.7.4 (29th March 2024)</h2>
@@ -642,7 +649,7 @@
   </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <ul>
-<li>[IMPORTANT] Adjust the HTTP status codes and error messages for trading-related API. The scheduled effective date is <code>November 7, 2023, at 10:00 AM (UTC+0)</code>. This includes but is not limited to the following situations. 
+<li>[IMPORTANT] Adjust the HTTP status codes and error messages for trading-related API. The scheduled effective date is <code>November 7, 2023, at 10:00 AM (UTC+0)</code>. This includes but is not limited to the following situations.
 
 <ul>
 <li>Order not found
@@ -685,7 +692,7 @@
 <ul>
 <li>Add TP/SL (Take Profit/Stop Loss) parameters in <a href="#create-new-order"><code>Create New Order</code></a></li>
 <li>Add API <a href="#bind-tp-sl"><code>Bind TP/SL</code></a> in Trade Endpoints to bind TP/SL with an existing position</li>
-<li>Add TP/SL fields in Trade Endpoints <a href="#query-open-orders"><code>Query Open Orders</code></a> and <a href="#query-position"><code>Query Positions</code></a> </li>
+<li>Add TP/SL fields in Trade Endpoints <a href="#query-open-orders"><code>Query Open Orders</code></a> and <a href="#query-position"><code>Query Positions</code></a></li>
 <li>Add TP/SL fields in Websocket Streams <a href="#all-position"><code>All Position</code></a></li>
 </ul>
 <h2 id='version-2-6-10-3rd-october-2023'>Version 2.6.10 (3rd October 2023)</h2>
@@ -2367,7 +2374,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span></code></pre></div>
 <p><code>POST /api/v2.1/order</code></p>
 
-<p>Creates a new order. Requires <code>Trading</code> permission</p>
+<p>Creates a new order. Requires <code>Trading</code> permission.</p>
 <h3 id='request-parameters-8'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -2695,7 +2702,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 <li><code>stealth</code>: How many percent of the order is to be displayed on the orderbook.</li>
 </ul>
 
-<p>This API Requires <code>Trading</code> permission</p>
+<p>This API Requires <code>Trading</code> permission.</p>
 <h3 id='request-parameters-9'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -2941,7 +2948,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
     </span><span class="nl">"contractSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.001</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p><code>GET /api/v2.1/order</code> </p>
+<p><code>GET /api/v2.1/order</code></p>
 
 <p>Query order detail for a specified orderID/clOrderID, please note that a canceled order will only exist for 30 minutes. Requires <code>Trading</code> permission.</p>
 <h3 id='request-parameters-10'>Request Parameters</h3>
@@ -3212,7 +3219,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span></code></pre></div>
 <p><code>PUT /api/v2.1/order</code></p>
 
-<p>Amend the price or size or trigger price of an order. For trigger orders, if the order has already been triggered, the trigger price cannot be further amended. Amend order <em>does not</em> apply to algo orders</p>
+<p>Amend the price or size or trigger price of an order. For trigger orders, if the order has already been triggered, the trigger price cannot be further amended. Amend order <em>does not</em> apply to algo orders. Requires <code>Trading</code> permission.</p>
 <h3 id='request-parameters-11'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -3458,7 +3465,8 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span></code></pre></div>
 <p><code>DELETE /api/v2.1/order</code></p>
 
-<p>Cancels pending orders that has not yet been transacted. The <code>orderID</code> is a unique identifier to cancel a particular order. <code>clOrderID</code> is a custom ID sent in by the trader. When cancel by <code>clOrderID</code>, all orders having the same ID will be cancelled. If <code>orderID</code> and <code>clOrderID</code> is not sent in, then cancellation will be for all orders in the current market.</p>
+<p>Cancels pending orders that has not yet been transacted. The <code>orderID</code> is a unique identifier to cancel a particular order. <code>clOrderID</code> is a custom ID sent in by the trader. When cancel by <code>clOrderID</code>, all orders having the same ID will be cancelled. If <code>orderID</code> and <code>clOrderID</code> is not sent in, then cancellation will be for all orders in the current market.
+Requires <code>Trading</code> permission.</p>
 <h3 id='request-parameters-12'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -3645,7 +3653,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span></code></pre></div>
 <p><code>POST /api/v2.1/order/cancelAllAfter</code></p>
 
-<p>Dead-man&#39;s switch allows the trader to send in a timeout value which is a Time to live (TTL) value for an order. Extension of the timeout is done by sending another <code>cancelAllAfter</code> request. If the server does not receive another request before the timeout is reached, all orders will be cancelled.</p>
+<p>Dead-man&#39;s switch allows the trader to send in a timeout value which is a Time to live (TTL) value for an order. Extension of the timeout is done by sending another <code>cancelAllAfter</code> request. If the server does not receive another request before the timeout is reached, all orders will be cancelled. Requires <code>Trading</code> permission.</p>
 <h3 id='request-parameters-13'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -3728,7 +3736,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span></code></pre></div>
 <p><code>GET /api/v2.1/user/open_orders</code></p>
 
-<p>Retrieves open orders that have not yet been matched or matched recently.</p>
+<p>Retrieves open orders that have not yet been matched or matched recently. Requires <code>Read</code> permission.</p>
 <h3 id='request-parameters-14'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -4032,7 +4040,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span></code></pre></div>
 <p><code>GET /api/v2.1/user/trade_history</code></p>
 
-<p>Retrieves a user&#39;s trade history</p>
+<p>Retrieves a user&#39;s trade history. Requires <code>Read</code> permission.</p>
 <h3 id='request-parameters-15'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -4328,7 +4336,8 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span></code></pre></div>
 <p><code>GET /api/v2.1/user/positions</code></p>
 
-<p>Queries user&#39;s current position. When no symbol is specified, positions for all markets will be returned.</p>
+<p>Queries user&#39;s current position. When no symbol is specified, positions for all markets will be returned.
+Requires <code>Read</code> permission.</p>
 <h3 id='request-parameters-16'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -4540,7 +4549,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span></code></pre></div>
 <p><code>POST /api/v2.1/order/close_position</code></p>
 
-<p>Closes a user&#39;s position for the particular market as specified by symbol. If type is specified as LIMIT, then price is mandatory. When type is MARKET, it closes the position at market price.</p>
+<p>Closes a user&#39;s position for the particular market as specified by symbol. If type is specified as LIMIT, then price is mandatory. When type is MARKET, it closes the position at market price. Requires <code>Trading</code> permission.</p>
 <h3 id='request-parameters-17'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -4751,7 +4760,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span></code></pre></div>
 <p><code>GET /api/v2.1/risk_limit</code></p>
 
-<p>Query risk limit for the specified market</p>
+<p>Query risk limit for the specified market. Requires <code>Read</code> permission.</p>
 <h3 id='request-parameters-18'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -4821,7 +4830,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span></code></pre></div>
 <p><code>POST /api/v2.1/risk_limit</code></p>
 
-<p>Changes risk limit for the specified market</p>
+<p>Changes risk limit for the specified market. Requires <code>Trading</code> permission.</p>
 <h3 id='request-parameters-19'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -4929,7 +4938,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span></code></pre></div>
 <p><code>POST /api/v2.1/leverage</code></p>
 
-<p>Change leverage values for the specified market</p>
+<p>Change leverage values for the specified market. Requires <code>Trading</code> permission.</p>
 <h3 id='request-parameters-20'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -5022,7 +5031,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span></code></pre></div>
 <p><code>Get /api/v2.1/leverage</code></p>
 
-<p>Get leverage value for the specified market</p>
+<p>Get leverage value for the specified market. Requires <code>Read</code> permission.</p>
 <h3 id='request-parameters-21'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -5096,7 +5105,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span></code></pre></div>
 <p><code>POST /api/v2.1/settle_in</code></p>
 
-<p>Changes the settlement currency for the position in the current market</p>
+<p>Changes the settlement currency for the position in the current market. Requires <code>Trading</code> permission.</p>
 <h3 id='request-parameters-22'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -5171,7 +5180,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span></code></pre></div>
 <p><code>GET /api/v2.1/user/fees</code></p>
 
-<p>Retrieve user&#39;s trading fees</p>
+<p>Retrieve user&#39;s trading fees. Requires <code>Read</code> permission.</p>
 <h3 id='request-parameters-23'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -5268,7 +5277,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span></code></pre></div>
 <p><code>POST /api/v2.1/order/bind/tpsl</code></p>
 
-<p>Bind TP/SL with an existing position</p>
+<p>Bind TP/SL with an existing position. Requires <code>Trading</code> permission.</p>
 <h3 id='request-parameters-24'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -5486,7 +5495,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span></code></pre></div>
 <p><code>GET /api/v2.1/position_mode</code></p>
 
-<p>Retrieve user&#39;s position mode</p>
+<p>Retrieve user&#39;s position mode. Requires <code>Read</code> permission.</p>
 <h3 id='request-parameters-25'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -5536,7 +5545,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span></code></pre></div>
 <p><code>POST /api/v2.1/position_mode</code></p>
 
-<p>Changes position mode</p>
+<p>Changes position mode. Requires <code>Trading</code> permission.</p>
 <h3 id='request-parameters-26'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -5618,7 +5627,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span></code></pre></div>
 <p><code>GET /api/v2.1/user/margin_setting</code></p>
 
-<p>Queries user&#39;s initial margin percentage and maintenance margin percentage. When no symbol is specified, margin percentage for all markets will be returned.</p>
+<p>Queries user&#39;s initial margin percentage and maintenance margin percentage. When no symbol is specified, margin percentage for all markets will be returned. Requires <code>Read</code> permission.</p>
 <h3 id='request-parameters-27'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -5875,7 +5884,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span></code></pre></div>
 <p><code>GET /api/v2.1/user/wallet_history</code></p>
 
-<p>Get user&#39;s wallet history records on the futures wallet</p>
+<p>Get user&#39;s wallet history records on the futures wallet. Requires <code>Read</code> permission.</p>
 <h3 id='request-parameters-29'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -6044,7 +6053,8 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span></code></pre></div>
 <p><code>GET /api/v2.1/user/margin</code></p>
 
-<p>Gets margin information for the specified wallet so that users can know which wallet they are currently using in the market.</p>
+<p>Gets margin information for the specified wallet so that users can know which wallet they are currently using in the market.
+Requires <code>Read</code> permission.</p>
 <h3 id='request-parameters-30'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -6241,7 +6251,8 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span></code></pre></div>
 <p><code>POST /api/v2.1/user/wallet/transfer</code></p>
 
-<p>Transfers funds between user&#39;s wallet. User can specify the source and target wallet to transfer funds</p>
+<p>Transfers funds between user&#39;s wallet. User can specify the source and target wallet to transfer funds.
+Requires <code>Transfer</code> permission.</p>
 <h3 id='request-parameters-31'>Request Parameters</h3><h4 id='wallet-request'>Wallet Request</h4>
 <table><thead>
 <tr>
@@ -6437,7 +6448,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 
 <p>Transfers funds between user and sub-account wallet. User can specify the source and target wallet to transfer funds</p>
 
-<p>, <code>Wallet</code> permission is required. To get supported currency list please check <a href="#query-available-currency-list-for-wallet-action">Available currency list for action</a></p>
+<p>, <code>Wallet</code> permission is required. To get supported currency list please check <a href="#query-available-currency-list-for-wallet-action">Available currency list for action</a>.</p>
 <h3 id='request-parameters-32'>Request Parameters</h3><h4 id='wallet-request-2'>Wallet Request</h4>
 <table><thead>
 <tr>
@@ -7350,11 +7361,11 @@ Additionally, the calculation duration will be reset if the IP address or user d
     </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY|SELL"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"filled price"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"filled size"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"feeAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fees charged to user, value to be String on API"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nl">"feeAmount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fees charged to user, value to be String on API"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"feeCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fee currency, eg. Buy would be BTC, Sell would be USD"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"base"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Base currency, eg. BTC"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"quote"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Quote currency eg. USD"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"maker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"maker or taker"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nl">"maker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"maker or taker"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Time trade was matched in the engine"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"contractSize"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The contract size of fills"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"tradeId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Trade Unique ID"</span><span class="w">

@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-1-0-4-16th-september-2024" class="toc-h2 toc-link" data-title="Version 1.0.4 (16th September 2024)">Version 1.0.4 (16th September 2024)</a>
+                  </li>
+                  <li>
                     <a href="#version-1-0-3-6th-august-2024" class="toc-h2 toc-link" data-title="Version 1.0.3 (6th August 2024)">Version 1.0.3 (6th August 2024)</a>
                   </li>
                   <li>
@@ -443,9 +446,13 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-1-0-3-6th-august-2024'>Version 1.0.3 (6th August 2024)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-1-0-4-16th-september-2024'>Version 1.0.4 (16th September 2024)</h2>
 <ul>
-<li>Change the response content of the API <a href="#get-leverage"><code>Get Leverage</code></a> to an array.</li>
+<li>Update the permission-related content in the description of all APIs</li>
+</ul>
+<h2 id='version-1-0-3-6th-august-2024'>Version 1.0.3 (6th August 2024)</h2>
+<ul>
+<li>Change the response content of the API <a href="#get-leverage"><code>Get Leverage</code></a> to an array</li>
 </ul>
 <h2 id='version-1-0-2-1st-august-2024'>Version 1.0.2 (1st August 2024)</h2>
 <ul>
@@ -1813,7 +1820,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span></code></pre></div>
 <p><code>POST /api/v2.2/order</code></p>
 
-<p>Creates a new order. Requires <code>Trading</code> permission</p>
+<p>Creates a new order. Requires <code>Trading</code> permission.</p>
 <h3 id='request-parameters-8'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -2141,7 +2148,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 <li><code>stealth</code>: How many percent of the order is to be displayed on the orderbook.</li>
 </ul>
 
-<p>This API Requires <code>Trading</code> permission</p>
+<p>This API Requires <code>Trading</code> permission.</p>
 <h3 id='request-parameters-9'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -2904,7 +2911,8 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span></code></pre></div>
 <p><code>DELETE /api/v2.2/order</code></p>
 
-<p>Cancels pending orders that has not yet been transacted. The <code>orderID</code> is a unique identifier to cancel a particular order. <code>clOrderID</code> is a custom ID sent in by the trader. When cancel by <code>clOrderID</code>, all orders having the same ID will be cancelled. If <code>orderID</code> and <code>clOrderID</code> is not sent in, then cancellation will be for all orders in the current market.</p>
+<p>Cancels pending orders that has not yet been transacted. The <code>orderID</code> is a unique identifier to cancel a particular order. <code>clOrderID</code> is a custom ID sent in by the trader. When cancel by <code>clOrderID</code>, all orders having the same ID will be cancelled. If <code>orderID</code> and <code>clOrderID</code> is not sent in, then cancellation will be for all orders in the current market.
+Requires <code>Trading</code> permission.</p>
 <h3 id='request-parameters-12'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -3091,7 +3099,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span></code></pre></div>
 <p><code>POST /api/v2.2/order/cancelAllAfter</code></p>
 
-<p>Dead-man&#39;s switch allows the trader to send in a timeout value which is a Time to live (TTL) value for an order. Extension of the timeout is done by sending another <code>cancelAllAfter</code> request. If the server does not receive another request before the timeout is reached, all orders will be cancelled.</p>
+<p>Dead-man&#39;s switch allows the trader to send in a timeout value which is a Time to live (TTL) value for an order. Extension of the timeout is done by sending another <code>cancelAllAfter</code> request. If the server does not receive another request before the timeout is reached, all orders will be cancelled. Requires <code>Trading</code> permission.</p>
 <h3 id='request-parameters-13'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -3174,7 +3182,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span></code></pre></div>
 <p><code>GET /api/v2.2/user/open_orders</code></p>
 
-<p>Retrieves open orders that have not yet been matched or matched recently.</p>
+<p>Retrieves open orders that have not yet been matched or matched recently. Requires <code>Read</code> permission.</p>
 <h3 id='request-parameters-14'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -3472,7 +3480,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span></code></pre></div>
 <p><code>GET /api/v2.2/user/trade_history</code></p>
 
-<p>Retrieves a user&#39;s trade history</p>
+<p>Retrieves a user&#39;s trade history. Requires <code>Read</code> permission.</p>
 <h3 id='request-parameters-15'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -3768,7 +3776,8 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span></code></pre></div>
 <p><code>GET /api/v2.2/user/positions</code></p>
 
-<p>Queries user&#39;s current position. When no symbol is specified, positions for all markets will be returned.</p>
+<p>Queries user&#39;s current position. When no symbol is specified, positions for all markets will be returned.
+Requires <code>Read</code> permission.</p>
 <h3 id='request-parameters-16'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -3974,7 +3983,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span></code></pre></div>
 <p><code>POST /api/v2.2/order/close_position</code></p>
 
-<p>Closes a user&#39;s position for the particular market as specified by symbol. If type is specified as LIMIT, then price is mandatory. When type is MARKET, it closes the position at market price.</p>
+<p>Closes a user&#39;s position for the particular market as specified by symbol. If type is specified as LIMIT, then price is mandatory. When type is MARKET, it closes the position at market price. Requires <code>Trading</code> permission.</p>
 <h3 id='request-parameters-17'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -4179,7 +4188,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span></code></pre></div>
 <p><code>GET /api/v2.2/risk_limit</code></p>
 
-<p>Query risk limit for the specified market</p>
+<p>Query risk limit for the specified market. Requires <code>Read</code> permission.</p>
 <h3 id='request-parameters-18'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -4249,7 +4258,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span></code></pre></div>
 <p><code>POST /api/v2.2/risk_limit</code></p>
 
-<p>Changes risk limit for the specified market</p>
+<p>Changes risk limit for the specified market. Requires <code>Trading</code> permission.</p>
 <h3 id='request-parameters-19'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -4351,7 +4360,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span></code></pre></div>
 <p><code>POST /api/v2.2/leverage</code></p>
 
-<p>Change leverage values for the specified market</p>
+<p>Change leverage values for the specified market. Requires <code>Trading</code> permission.</p>
 <h3 id='request-parameters-20'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -4453,7 +4462,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span></code></pre></div>
 <p><code>Get /api/v2.2/leverage</code></p>
 
-<p>Get leverage value for the specified market</p>
+<p>Get leverage value for the specified market. Requires <code>Read</code> permission.</p>
 <h3 id='request-parameters-21'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -4533,7 +4542,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span></code></pre></div>
 <p><code>POST /api/v2.2/settle_in</code></p>
 
-<p>Changes the settlement currency for the position in the current market</p>
+<p>Changes the settlement currency for the position in the current market. Requires <code>Trading</code> permission.</p>
 <h3 id='request-parameters-22'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -4602,7 +4611,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span></code></pre></div>
 <p><code>GET /api/v2.2/user/fees</code></p>
 
-<p>Retrieve user&#39;s trading fees</p>
+<p>Retrieve user&#39;s trading fees. Requires <code>Read</code> permission.</p>
 <h3 id='request-parameters-23'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -4693,7 +4702,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span></code></pre></div>
 <p><code>POST /api/v2.2/order/bind/tpsl</code></p>
 
-<p>Bind TP/SL with an existing position</p>
+<p>Bind TP/SL with an existing position. Requires <code>Trading</code> permission.</p>
 <h3 id='request-parameters-24'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -4917,7 +4926,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span></code></pre></div>
 <p><code>GET /api/v2.2/position_mode</code></p>
 
-<p>Retrieve user&#39;s position mode</p>
+<p>Retrieve user&#39;s position mode. Requires <code>Read</code> permission.</p>
 <h3 id='request-parameters-25'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -4967,7 +4976,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span></code></pre></div>
 <p><code>POST /api/v2.2/position_mode</code></p>
 
-<p>Changes position mode</p>
+<p>Changes position mode. Requires <code>Trading</code> permission.</p>
 <h3 id='request-parameters-26'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -5049,7 +5058,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span></code></pre></div>
 <p><code>GET /api/v2.2/user/margin_setting</code></p>
 
-<p>Queries user&#39;s initial margin percentage and maintenance margin percentage. When no symbol is specified, margin percentage for all markets will be returned.</p>
+<p>Queries user&#39;s initial margin percentage and maintenance margin percentage. When no symbol is specified, margin percentage for all markets will be returned. Requires <code>Read</code> permission.</p>
 <h3 id='request-parameters-27'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -5294,7 +5303,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span></code></pre></div>
 <p><code>GET /api/v2.2/user/wallet_history</code></p>
 
-<p>Get user&#39;s wallet history records on the futures wallet</p>
+<p>Get user&#39;s wallet history records on the futures wallet. Requires <code>Read</code> permission.</p>
 <h3 id='request-parameters-29'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -5412,7 +5421,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 
 <p><strong>This API is for the users who have upgraded wallet</strong></p>
 
-<p>Gets margin information for the specified wallet or position.</p>
+<p>Gets margin information for the specified wallet or position. Requires <code>Read</code> permission.</p>
 <h3 id='request-parameters-30'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -5560,7 +5569,8 @@ Additionally, the calculation duration will be reset if the IP address or user d
 
 <p>The users who have upgraded wallet to unified wallet are not allow to use this API. Please use <a href="#query-unified-wallet-margin"><code>Query Unified Wallet Margin</code></a>.</p>
 
-<p>Gets margin information for the specified wallet so that users can know which wallet they are currently using in the market.</p>
+<p>Gets margin information for the specified wallet so that users can know which wallet they are currently using in the market.
+Requires <code>Read</code> permission.</p>
 <h3 id='request-parameters-31'>Request Parameters</h3>
 <table><thead>
 <tr>
@@ -5757,7 +5767,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span></code></pre></div>
 <p><code>POST /api/v2.2/user/wallet/transfer</code></p>
 
-<p>Transfers funds between user&#39;s wallet. User can specify the source and target wallet to transfer funds</p>
+<p>Transfers funds between user&#39;s wallet. User can specify the source and target wallet to transfer funds. Requires <code>Transfer</code> permission.</p>
 <h3 id='request-parameters-32'>Request Parameters</h3><h4 id='wallet-request'>Wallet Request</h4>
 <table><thead>
 <tr>
@@ -5951,9 +5961,8 @@ Additionally, the calculation duration will be reset if the IP address or user d
 <h2 id='sub-account-wallet-transfer'>Sub-Account Wallet Transfer</h2>
 <p><code>POST /api/v2.2/subaccount/wallet/transfer</code></p>
 
-<p>Transfers funds between user and sub-account wallet. User can specify the source and target wallet to transfer funds</p>
-
-<p>, <code>Wallet</code> permission is required. To get supported currency list please check <a href="#query-available-currency-list-for-wallet-action">Available currency list for action</a></p>
+<p>Transfers funds between user and sub-account wallet. User can specify the source and target wallet to transfer funds,
+<code>Wallet</code> permission is required. To get supported currency list please check <a href="#query-available-currency-list-for-wallet-action">Available currency list for action</a>.</p>
 <h3 id='request-parameters-33'>Request Parameters</h3><h4 id='wallet-request-2'>Wallet Request</h4>
 <table><thead>
 <tr>
