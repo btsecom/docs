@@ -2104,7 +2104,8 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span></code></pre></div>
 <p><code>GET /api/v3.2/order</code></p>
 
-<p>Query order detail for a specified orderID/clOrderID, please note that a canceled order will only exist for 30 minutes. Requires <code>Trading</code> permission.</p>
+<p>Query order detail for a specified orderID/clOrderID, for the open orders and cancelled order which is cancelled in 30 minutes only.
+Please note that this API is <code>Trading</code> permission required.</p>
 <h3 id='request-parameters-8'>Request Parameters</h3>
 <table><thead>
 <tr>
