@@ -259,7 +259,7 @@ BTSE 的速率限制如下：
     "quote": "USDT",
     "active": true,
     "size": 4916.8266,
-    "minValidPrice": 0.5,
+    "minValidPrice": 0.00001,
     "minPriceIncrement": 0.5,
     "minOrderSize": 0.00001,
     "maxOrderSize": 2000,
