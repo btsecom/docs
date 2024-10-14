@@ -944,7 +944,8 @@ Creates a new order. Requires `Trading` permission. Please note that Index Order
 
 `GET /api/v3.2/order`
 
-Query order detail for a specified orderID/clOrderID, please note that a canceled order will only exist for 30 minutes. Requires `Trading` permission.
+Query order detail for a specified orderID/clOrderID, for the open orders and cancelled order which is cancelled in 30 minutes only.
+Please note that this API is `Trading` permission required.
 
 ### Request Parameters
 
