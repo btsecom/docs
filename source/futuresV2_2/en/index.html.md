@@ -3039,7 +3039,7 @@ echo -n "/ws/futures1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6
   "topic": "notificationApiV3",
   "data": [
     {
-      "symbol": "Market Symbol (eg. BTC-PERP, for topic \"notificationApiV2\" will be BTCPFC)",
+      "symbol": "Market Symbol (eg. BTC-PERP, for topic 'notificationApiV2' will be BTCPFC)",
       "orderID": "BTSE internal order ID",
       "side": "BUY",
       "type": "76",
