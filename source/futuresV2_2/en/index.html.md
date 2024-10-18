@@ -2953,7 +2953,7 @@ To subscribe to a websocket public trade fill
 }
 ```
 
-Subscribe to recent trade feed for a market. The topic will be `tradeHistoryApi:<market>` where `<market>` is the market symbol.
+Subscribe to recent trade feed for a market. The topic will be `tradeHistoryApiV2:<market>` where `<market>` is the market symbol.
 
 ### Response Content
 
@@ -3039,7 +3039,7 @@ echo -n "/ws/futures1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6
   "topic": "notificationApiV3",
   "data": [
     {
-      "symbol": "Market Symbol (eg. BTC-PERP)",
+      "symbol": "Market Symbol (eg. BTC-PERP, for topic \"notificationApiV2\" will be BTCPFC)",
       "orderID": "BTSE internal order ID",
       "side": "BUY",
       "type": "76",
@@ -3066,7 +3066,8 @@ echo -n "/ws/futures1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6
 
 ```
 
-Receive trade notifications by subscribing to the topic `notificationApiV2`. The websocket feed will push trade level notifications to the subscriber. If topic is subscribed without being authenticated, no messages will be sent.
+To receive trade notifications, subscribe to the `notificationApiV2` or `notificationApiV3` topics. It is recommended to use `notificationApiV3`, which provides market symbols in a more intuitive format, such as BTC-PERP. The WebSocket feed will push real-time, trade-level notifications to authenticated subscribers.
+Please note, if the topic is subscribed to without proper authentication, no messages will be delivered.
 
 ### Response Content
 

@@ -2951,7 +2951,7 @@ pong
 }
 ```
 
-订阅市场的最近交易提要。主题将是 `tradeHistoryApi:<market>`，其中`<market>` 是市场符号。
+订阅市场的最近交易提要。主题将是 `tradeHistoryApiV2:<market>`，其中`<market>` 是市场符号。
 
 ### 响应内容
 
@@ -3037,7 +3037,7 @@ echo -n "/ws/futures1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6
   "topic": "notificationApiV3",
   "data": [
     {
-      "symbol": "Market Symbol (eg. BTC-PERP)",
+      "symbol": "Market Symbol (eg. BTC-PERP, for topic \"notificationApiV2\" will be BTCPFC)",
       "orderID": "BTSE internal order ID",
       "side": "BUY",
       "type": "76",
@@ -3064,7 +3064,8 @@ echo -n "/ws/futures1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6
 
 ```
 
-接收交易通知通过订阅主题 `notificationApiV2`。Websocket将向订阅者推送交易级别的通知。如果在未经认证的情况下订阅主题，将不会发送任何消息。
+接收交易通知，请订阅 `notificationApiV2`或 `notificationApiV3` 主题。建议使用 `notificationApiV3`，它以更直观的格式提供市场符号，例如 BTC-PERP。
+WebSocket 将向已认证的订阅者推送实时交易级别的通知。Websocket将向订阅者推送交易级别的通知。如果在未经认证的情况下订阅主题，将不会发送任何消息。
 
 ### 响应内容
 
