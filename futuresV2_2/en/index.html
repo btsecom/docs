@@ -6556,7 +6556,7 @@ Requires <code>Read</code> permission.</p>
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>Subscribe to recent trade feed for a market. The topic will be <code>tradeHistoryApi:&lt;market&gt;</code> where <code>&lt;market&gt;</code> is the market symbol.</p>
+<p>Subscribe to recent trade feed for a market. The topic will be <code>tradeHistoryApiV2:&lt;market&gt;</code> where <code>&lt;market&gt;</code> is the market symbol.</p>
 <h3 id='response-content-36'>Response Content</h3><h4 id='tradehistory-object'>TradeHistory Object</h4>
 <table><thead>
 <tr>
@@ -6701,7 +6701,7 @@ Requires <code>Read</code> permission.</p>
   </span><span class="nl">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"notificationApiV3"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Market Symbol (eg. BTC-PERP)"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Market Symbol (eg. BTC-PERP, for topic </span><span class="se">\"</span><span class="s2">notificationApiV2</span><span class="se">\"</span><span class="s2"> will be BTCPFC)"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTSE internal order ID"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"76"</span><span class="p">,</span><span class="w">
@@ -6727,7 +6727,8 @@ Requires <code>Read</code> permission.</p>
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre></div>
-<p>Receive trade notifications by subscribing to the topic <code>notificationApiV2</code>. The websocket feed will push trade level notifications to the subscriber. If topic is subscribed without being authenticated, no messages will be sent.</p>
+<p>To receive trade notifications, subscribe to the <code>notificationApiV2</code> or <code>notificationApiV3</code> topics. It is recommended to use <code>notificationApiV3</code>, which provides market symbols in a more intuitive format, such as BTC-PERP. The WebSocket feed will push real-time, trade-level notifications to authenticated subscribers.
+Please note, if the topic is subscribed to without proper authentication, no messages will be delivered.</p>
 <h3 id='response-content-37'>Response Content</h3>
 <table><thead>
 <tr>

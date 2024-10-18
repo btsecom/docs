@@ -6553,7 +6553,7 @@
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>订阅市场的最近交易提要。主题将是 <code>tradeHistoryApi:&lt;market&gt;</code>，其中<code>&lt;market&gt;</code> 是市场符号。</p>
+<p>订阅市场的最近交易提要。主题将是 <code>tradeHistoryApiV2:&lt;market&gt;</code>，其中<code>&lt;market&gt;</code> 是市场符号。</p>
 <h3 id='05a22d5a79-32'>响应内容</h3><h4 id='tradehistory'>TradeHistory 对象</h4>
 <table><thead>
 <tr>
@@ -6698,7 +6698,7 @@
   </span><span class="nl">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"notificationApiV3"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Market Symbol (eg. BTC-PERP)"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Market Symbol (eg. BTC-PERP, for topic </span><span class="se">\"</span><span class="s2">notificationApiV2</span><span class="se">\"</span><span class="s2"> will be BTCPFC)"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTSE internal order ID"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"76"</span><span class="p">,</span><span class="w">
@@ -6724,7 +6724,8 @@
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre></div>
-<p>接收交易通知通过订阅主题 <code>notificationApiV2</code>。Websocket将向订阅者推送交易级别的通知。如果在未经认证的情况下订阅主题，将不会发送任何消息。</p>
+<p>接收交易通知，请订阅 <code>notificationApiV2</code>或 <code>notificationApiV3</code> 主题。建议使用 <code>notificationApiV3</code>，它以更直观的格式提供市场符号，例如 BTC-PERP。
+WebSocket 将向已认证的订阅者推送实时交易级别的通知。Websocket将向订阅者推送交易级别的通知。如果在未经认证的情况下订阅主题，将不会发送任何消息。</p>
 <h3 id='05a22d5a79-33'>响应内容</h3>
 <table><thead>
 <tr>
