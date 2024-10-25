@@ -558,8 +558,8 @@ Get trade fills for the market specified by `symbol`
 | symbol             | string  | Yes      | Market symbol                                                                     |
 | startTime          | long    | No       | Starting time in milliseconds (eg. 1624987283000)                                 |
 | endTime            | long    | No       | Ending time in milliseconds (eg. 1624987283000)                                   |
-| beforeSerialId     | string  | Yes      | Condition to retrieve records before the specified serial Id. Used for pagination |
-| afterSerialId      | string  | Yes      | Condition to retrieve records after the specified serial Id. Used for pagination  |
+| beforeSerialId     | long  | Yes      | Condition to retrieve records before the specified serial Id. Used for pagination |
+| afterSerialId      | long  | Yes      | Condition to retrieve records after the specified serial Id. Used for pagination  |
 | count              | long    | Yes      | Number of records to return                                                       |
 | includeOld         | boolean | Yes      | Retrieve trade  history records past 7 days                                       |
 
@@ -1493,8 +1493,8 @@ Retrieves a user's trade history. Requires `Read` permission.
 | symbol             | string  | No       | Market symbol                                                                     |
 | startTime          | long    | No       | Starting time (eg. 1624987283000)                                                 |
 | endTime            | long    | No       | Ending time (eg. 1624987283000)                                                   |
-| beforeSerialId     | string  | No       | Condition to retrieve records before the specified serial Id. Used for pagination |
-| afterSerialId      | string  | No       | Condition to retrieve records after the specified serial Id. Used for pagination  |
+| beforeSerialId     | long  | No       | Condition to retrieve records before the specified serial Id. Used for pagination |
+| afterSerialId      | long  | No       | Condition to retrieve records after the specified serial Id. Used for pagination  |
 | count              | long    | No       | Number of records to return                                                       |
 | includeOld         | boolean | No       | Retrieve trade  history records past 7 days                                       |
 | orderID            | string  | No       | Query trade history by order ID                                            |
