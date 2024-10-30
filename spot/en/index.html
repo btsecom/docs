@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-3-4-13-30th-october-2024" class="toc-h2 toc-link" data-title="Version 3.4.13 (30th October 2024)">Version 3.4.13 (30th October 2024)</a>
+                  </li>
+                  <li>
                     <a href="#version-3-4-12-16th-september-2024" class="toc-h2 toc-link" data-title="Version 3.4.12 (16th September 2024)">Version 3.4.12 (16th September 2024)</a>
                   </li>
                   <li>
@@ -482,7 +485,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-3-4-12-16th-september-2024'>Version 3.4.12 (16th September 2024)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-3-4-13-30th-october-2024'>Version 3.4.13 (30th October 2024)</h2>
+<ul>
+<li>Add TIMEOUT status in <a href="#api-enum">API Enum</a> for APIs <a href="#create-new-order">Create new order</a>, <a href="#amend-order">Amend order</a>, and <a href="#cancel-order">Cancel order</a></li>
+</ul>
+<h2 id='version-3-4-12-16th-september-2024'>Version 3.4.12 (16th September 2024)</h2>
 <ul>
 <li>Update the permission-related content in the description of all APIs</li>
 </ul>
@@ -819,6 +826,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 <p>When connecting up the BTSE API, you will come across number codes that represents different states or status types in BTSE. The following section provides a list of codes that you are expecting to see.</p>
 
 <ul>
+<li>-1: TIMEOUT= Request timeout, please check the order status</li>
 <li>1: MARKET_UNAVAILABLE = Futures market is unavailable</li>
 <li>2: ORDER_INSERTED = Order is inserted successfully</li>
 <li>4: ORDER_FULLY_TRANSACTED = Order is fully transacted</li>
