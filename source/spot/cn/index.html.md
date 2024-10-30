@@ -13,6 +13,10 @@ headingLevel: 2
 
 # 更改日志
 
+## 版本 3.4.13 (2024年10月30日)
+
+* 在 API [`创建新订单`](#8be954be0d)，[`修正订单`](#d347e421a4) 和 [取消订单](#3eedd32d80) 的 [API Enum](#api-enum) 中新增 TIMEOUT 狀態
+
 ## 版本 3.4.12 (2024年9月16日)
 
 * 在所有API描述中更新权限相关内容
@@ -286,6 +290,7 @@ BTSE的速率限制如下:
 
 在连接BTSE API时，您将遇到代表BTSE中不同状态或状态类型的数字代码。以下部分提供了您可能会看到的代码列表。
 
+* -1: TIMEOUT = 请求逾时，请检查订单状态
 * 1: MARKET_UNAVAILABLE = 期货市场不可用
 * 2: ORDER_INSERTED = 订单成功插入
 * 4: ORDER_FULLY_TRANSACTED = 订单完全成交

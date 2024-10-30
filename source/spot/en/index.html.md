@@ -13,6 +13,10 @@ headingLevel: 2
 
 # Change Log
 
+## Version 3.4.13 (30th October 2024)
+
+* Add TIMEOUT status in [API Enum](#api-enum) for APIs [Create new order](#create-new-order), [Amend order](#amend-order), and [Cancel order](#cancel-order)
+
 ## Version 3.4.12 (16th September 2024)
 
 * Update the permission-related content in the description of all APIs
@@ -299,6 +303,7 @@ Each API will return one of the following HTTP status:
 
 When connecting up the BTSE API, you will come across number codes that represents different states or status types in BTSE. The following section provides a list of codes that you are expecting to see.
 
+* -1: TIMEOUT= Request timeout, please check the order status
 * 1: MARKET_UNAVAILABLE = Futures market is unavailable
 * 2: ORDER_INSERTED = Order is inserted successfully
 * 4: ORDER_FULLY_TRANSACTED = Order is fully transacted
