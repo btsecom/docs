@@ -13,6 +13,10 @@ headingLevel: 2
 
 # Change Log
 
+## Version 3.4.14 (6th November 2024)
+
+* Add maximum days of trade history explanation for API [Query User Trades Fills](#query-user-trades-fills)
+
 ## Version 3.4.13 (30th October 2024)
 
 * Add TIMEOUT status in [API Enum](#api-enum) for APIs [Create new order](#create-new-order), [Amend order](#amend-order), and [Cancel order](#cancel-order)
@@ -1392,6 +1396,14 @@ Retrieves a user's trade history which includes funding fee data. Requires `Read
 | orderID       | string  | No       | Query trade history by order ID                                                             |
 | isMatchSymbol | boolean | No       | Exact match on `symbol`. If this sets to true, will only match records for that symbol only |
 
+* maximum days of trade history
+
+| Time Interval       | Maximum Days  | Explanation                                                                             |
+| :---:               | ---:          | :---:                                                                                   |
+| startTime / endTime | 7            | Maximum **7** days within the specified interval. If specified interval exceeds **7** days, the **start time** will be set to **7** days before the **end time**                                    |
+| startTime /    -    | 7             | If the **end time** is not specified, then **7** days after the **start time**          |
+|      -    / endTime | 7             | If the **start time** is not specified, then **7** days before the **end time**         |
+|      -    /    -    | 7             | If neither start nor end time is specified, then **7** days before the **current time** |
 
 ### Response Content
 

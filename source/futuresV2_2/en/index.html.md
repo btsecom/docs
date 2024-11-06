@@ -13,6 +13,10 @@ headingLevel: 2
 
 # Change Log
 
+## Version 1.0.5 (6th November 2024)
+
+* Add maximum days of trade history explanation for API [Query Trades Fills](#query-trades-fills-2)
+
 ## Version 1.0.4 (16th September 2024)
 
 * Update the permission-related content in the description of all APIs
@@ -1499,6 +1503,17 @@ Retrieves a user's trade history. Requires `Read` permission.
 | includeOld         | boolean | No       | Retrieve trade  history records past 7 days                                       |
 | orderID            | string  | No       | Query trade history by order ID                                            |
 | clOrderID          | string  | No       | Query trade history by custom order ID                                            |
+
+
+* maximum days of trade history
+
+| Time Interval       | Maximum Days  | Explanation                                                                             |
+| :---:               | ---:          | :---:                                                                                   |
+| startTime / endTime | 7            | Maximum **7** days within the specified interval. If specified interval exceeds **7** days, the **start time** will be set to **7** days before the **end time**                                    |
+| startTime /    -    | 7             | If the **end time** is not specified, then **7** days after the **start time**          |
+|      -    / endTime | 7             | If the **start time** is not specified, then **7** days before the **end time**         |
+|      -    /    -    | 7             | If neither start nor end time is specified, then **7** days before the **current time** |
+
 
 ### Response Content
 
