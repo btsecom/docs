@@ -234,6 +234,9 @@
             <a href="#185368440e" class="toc-h1 toc-link" data-title="更新日志">更新日志</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#1-0-5-2024-11-6" class="toc-h2 toc-link" data-title="版本 1.0.5 (2024年11月6日)">版本 1.0.5 (2024年11月6日)</a>
+                  </li>
+                  <li>
                     <a href="#1-0-4-2024-9-16" class="toc-h2 toc-link" data-title="版本 1.0.4 (2024年9月16日)">版本 1.0.4 (2024年9月16日)</a>
                   </li>
                   <li>
@@ -446,7 +449,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='185368440e'>更新日志</h1><h2 id='1-0-4-2024-9-16'>版本 1.0.4 (2024年9月16日)</h2>
+        <h1 id='185368440e'>更新日志</h1><h2 id='1-0-5-2024-11-6'>版本 1.0.5 (2024年11月6日)</h2>
+<ul>
+<li>在 API <a href="#bbd4754907-2"><code>查询成交记录</code></a> 新增交易历史纪录最大天数说明</li>
+</ul>
+<h2 id='1-0-4-2024-9-16'>版本 1.0.4 (2024年9月16日)</h2>
 <ul>
 <li>在所有API描述中更新权限相关内容</li>
 </ul>
@@ -3546,6 +3553,39 @@
 <td>string</td>
 <td>No</td>
 <td>通过自定义订单ID查询交易历史</td>
+</tr>
+</tbody></table>
+
+<ul>
+<li>交易历史纪录最大天数</li>
+</ul>
+
+<table><thead>
+<tr>
+<th style="text-align: center">时间区间</th>
+<th style="text-align: right">最大天数</th>
+<th style="text-align: center">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">startTime / endTime</td>
+<td style="text-align: right">7</td>
+<td style="text-align: center">在指定区间中最多<strong>7</strong>天记录，若指定区间超过<strong>7</strong>天，则<strong>开始时间</strong>将设为<strong>结束时间</strong>的前<strong>7</strong>天</td>
+</tr>
+<tr>
+<td style="text-align: center">startTime /    -</td>
+<td style="text-align: right">7</td>
+<td style="text-align: center">未指定<strong>结束时间</strong>, 则从<strong>开始时间</strong>往后<strong>7</strong>天</td>
+</tr>
+<tr>
+<td style="text-align: center">-    / endTime</td>
+<td style="text-align: right">7</td>
+<td style="text-align: center">未指定<strong>开始时间</strong>, 则从<strong>结束时间</strong>往前<strong>7</strong>天</td>
+</tr>
+<tr>
+<td style="text-align: center">-    /    -</td>
+<td style="text-align: right">7</td>
+<td style="text-align: center">都未指定时间, 则使用<strong>当前时间</strong>作为<strong>结束时间</strong>往前<strong>7</strong>天</td>
 </tr>
 </tbody></table>
 <h3 id='05a22d5a79-13'>响应内容</h3>

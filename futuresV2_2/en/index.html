@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-1-0-5-6th-november-2024" class="toc-h2 toc-link" data-title="Version 1.0.5 (6th November 2024)">Version 1.0.5 (6th November 2024)</a>
+                  </li>
+                  <li>
                     <a href="#version-1-0-4-16th-september-2024" class="toc-h2 toc-link" data-title="Version 1.0.4 (16th September 2024)">Version 1.0.4 (16th September 2024)</a>
                   </li>
                   <li>
@@ -446,7 +449,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-1-0-4-16th-september-2024'>Version 1.0.4 (16th September 2024)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-1-0-5-6th-november-2024'>Version 1.0.5 (6th November 2024)</h2>
+<ul>
+<li>Add maximum days of trade history explanation for API <a href="#query-trades-fills-2">Query Trades Fills</a></li>
+</ul>
+<h2 id='version-1-0-4-16th-september-2024'>Version 1.0.4 (16th September 2024)</h2>
 <ul>
 <li>Update the permission-related content in the description of all APIs</li>
 </ul>
@@ -3543,6 +3550,39 @@ Requires <code>Trading</code> permission.</p>
 <td>string</td>
 <td>No</td>
 <td>Query trade history by custom order ID</td>
+</tr>
+</tbody></table>
+
+<ul>
+<li>maximum days of trade history</li>
+</ul>
+
+<table><thead>
+<tr>
+<th style="text-align: center">Time Interval</th>
+<th style="text-align: right">Maximum Days</th>
+<th style="text-align: center">Explanation</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">startTime / endTime</td>
+<td style="text-align: right">7</td>
+<td style="text-align: center">Maximum <strong>7</strong> days within the specified interval. If specified interval exceeds <strong>7</strong> days, the <strong>start time</strong> will be set to <strong>7</strong> days before the <strong>end time</strong></td>
+</tr>
+<tr>
+<td style="text-align: center">startTime /    -</td>
+<td style="text-align: right">7</td>
+<td style="text-align: center">If the <strong>end time</strong> is not specified, then <strong>7</strong> days after the <strong>start time</strong></td>
+</tr>
+<tr>
+<td style="text-align: center">-    / endTime</td>
+<td style="text-align: right">7</td>
+<td style="text-align: center">If the <strong>start time</strong> is not specified, then <strong>7</strong> days before the <strong>end time</strong></td>
+</tr>
+<tr>
+<td style="text-align: center">-    /    -</td>
+<td style="text-align: right">7</td>
+<td style="text-align: center">If neither start nor end time is specified, then <strong>7</strong> days before the <strong>current time</strong></td>
 </tr>
 </tbody></table>
 <h3 id='response-content-15'>Response Content</h3>

@@ -234,6 +234,9 @@
             <a href="#3f3e207288" class="toc-h1 toc-link" data-title="更改日志">更改日志</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#3-4-14-2024-11-6" class="toc-h2 toc-link" data-title="版本 3.4.14 (2024年11月6日)">版本 3.4.14 (2024年11月6日)</a>
+                  </li>
+                  <li>
                     <a href="#3-4-13-2024-10-30" class="toc-h2 toc-link" data-title="版本 3.4.13 (2024年10月30日)">版本 3.4.13 (2024年10月30日)</a>
                   </li>
                   <li>
@@ -485,7 +488,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='3f3e207288'>更改日志</h1><h2 id='3-4-13-2024-10-30'>版本 3.4.13 (2024年10月30日)</h2>
+        <h1 id='3f3e207288'>更改日志</h1><h2 id='3-4-14-2024-11-6'>版本 3.4.14 (2024年11月6日)</h2>
+<ul>
+<li>在 API <a href="#a49d12728a">查询用户交易成交</a> 新增交易历史纪录最大天数说明</li>
+</ul>
+<h2 id='3-4-13-2024-10-30'>版本 3.4.13 (2024年10月30日)</h2>
 <ul>
 <li>在 API <a href="#8be954be0d"><code>创建新订单</code></a>，<a href="#d347e421a4"><code>修正订单</code></a> 和 <a href="#3eedd32d80">取消订单</a> 的 <a href="#api-enum">API Enum</a> 中新增 TIMEOUT 狀態</li>
 </ul>
@@ -3139,6 +3146,39 @@
 <td>boolean</td>
 <td>No</td>
 <td>精确匹配 <code>symbol</code>。如果设置为True，只匹配该标的物的记录</td>
+</tr>
+</tbody></table>
+
+<ul>
+<li>交易历史纪录最大天数</li>
+</ul>
+
+<table><thead>
+<tr>
+<th style="text-align: center">时间区间</th>
+<th style="text-align: right">最大天数</th>
+<th style="text-align: center">说明</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">startTime / endTime</td>
+<td style="text-align: right">7</td>
+<td style="text-align: center">在指定区间中最多<strong>7</strong>天记录，若指定区间超过<strong>7</strong>天，则<strong>开始时间</strong>将设为<strong>结束时间</strong>的前<strong>7</strong>天</td>
+</tr>
+<tr>
+<td style="text-align: center">startTime /    -</td>
+<td style="text-align: right">7</td>
+<td style="text-align: center">未指定<strong>结束时间</strong>, 则从<strong>开始时间</strong>往后<strong>7</strong>天</td>
+</tr>
+<tr>
+<td style="text-align: center">-    / endTime</td>
+<td style="text-align: right">7</td>
+<td style="text-align: center">未指定<strong>开始时间</strong>, 则从<strong>结束时间</strong>往前<strong>7</strong>天</td>
+</tr>
+<tr>
+<td style="text-align: center">-    /    -</td>
+<td style="text-align: right">7</td>
+<td style="text-align: center">都未指定时间, 则使用<strong>当前时间</strong>作为<strong>结束时间</strong>往前<strong>7</strong>天</td>
 </tr>
 </tbody></table>
 <h3 id='05a22d5a79-13'>响应内容</h3>
