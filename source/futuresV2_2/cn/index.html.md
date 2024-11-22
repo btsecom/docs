@@ -562,8 +562,8 @@ BTSE 的速率限制如下：
 | symbol             | string  | Yes      | 市场符号                                                                                                    |
 | startTime          | long    | No       | 以毫秒为单位的开始时间 (例如 1624987283000)                                                                 |
 | endTime            | long    | No       | 以毫秒为单位的结束时间 (例如 1624987283000)                                                                 |
-| beforeSerialId     | long  | Yes      | 用于分页检索记录，适用于**订单量每毫秒超过500**的情况。对于大多数场景，建议使用 `startTime` 和 `endTime` 参数 |
-| afterSerialId      | long  | Yes      | 用于分页检索记录，适用于**订单量每毫秒超过500**的情况。对于大多数场景，建议使用 `startTime` 和 `endTime` 参数 |
+| beforeSerialId     | long  | No      | 用于分页检索记录，适用于**订单量每毫秒超过500**的情况。对于大多数场景，建议使用 `startTime` 和 `endTime` 参数 |
+| afterSerialId      | long  | No      | 用于分页检索记录，适用于**订单量每毫秒超过500**的情况。对于大多数场景，建议使用 `startTime` 和 `endTime` 参数 |
 | count              | long    | Yes      | 返回的记录数                                                                                                |
 | includeOld         | boolean | Yes      | 获取过去7天的交易历史记录                                                                                   |
 
@@ -1496,8 +1496,8 @@ BTSE 的速率限制如下：
 | symbol            | string  | No       | 市场符号                                                                                            |
 | startTime         | long    | No       | 开始时间 (例如：1624987283000)                                                                      |
 | endTime           | long    | No       | 结束时间 (例如：1624987283000)                                                                      |
-| beforeSerialId    | long  | Yes      | 用于分页检索记录，适用于**订单量每毫秒超过500**的情况。对于大多数场景，建议使用 `startTime` 和 `endTime` 参数 |
-| afterSerialId     | long  | Yes      | 用于分页检索记录，适用于**订单量每毫秒超过500**的情况。对于大多数场景，建议使用 `startTime` 和 `endTime` 参数 |
+| beforeSerialId    | long  | No      | 用于分页检索记录，适用于**订单量每毫秒超过500**的情况。对于大多数场景，建议使用 `startTime` 和 `endTime` 参数 |
+| afterSerialId     | long  | No      | 用于分页检索记录，适用于**订单量每毫秒超过500**的情况。对于大多数场景，建议使用 `startTime` 和 `endTime` 参数 |
 | count             | long    | No       | 返回的记录数量                                                                                      |
 | includeOld        | boolean | No       | 检索过去7天的交易历史记录                                                                            |
 | orderID           | string  | No       | 通过订单ID查询交易历史                |
