@@ -870,8 +870,8 @@ BTSE 的速率限制如下：
 | symbol             | string  | Yes      | 市场符号                                         |
 | startTime          | long    | No       | 以毫秒为单位的开始时间 (例如 1624987283000)         |
 | endTime            | long    | No       | 以毫秒为单位的结束时间 (例如 1624987283000)         |
-| beforeSerialId     | long  | Yes      | 用于分页的条件，检索指定序列ID之前的记录              |
-| afterSerialId      | long  | Yes      | 用于分页的条件，检索指定序列ID之后的记录              |
+| beforeSerialId     | long  | Yes      | 用于分页检索记录，适用于**订单量每毫秒超过500**的情况。对于大多数场景，建议使用 `startTime` 和 `endTime` 参数 |
+| afterSerialId      | long  | Yes      | 用于分页检索记录，适用于**订单量每毫秒超过500**的情况。对于大多数场景，建议使用 `startTime` 和 `endTime` 参数 |
 | count              | long    | Yes      | 返回的记录数                                      |
 | useNewSymbolNaming | boolean | No       | 设置为True以使用symbol中的新期货市场名称，默认为False |
 
@@ -1815,8 +1815,8 @@ BTSE 的速率限制如下：
 | symbol            | string  | No       | 市场符号                                                                                            |
 | startTime         | long    | No       | 开始时间 (例如：1624987283000)                                                                      |
 | endTime           | long    | No       | 结束时间 (例如：1624987283000)                                                                      |
-| beforeSerialId    | long  | No       | 获取指定序列ID之前的记录的条件。用于分页                                                             |
-| afterSerialId     | long  | No       | 获取指定序列ID之后的记录的条件。用于分页                                                             |
+| beforeSerialId    | long  | No       | 用于分页检索记录，适用于**订单量每毫秒超过500**的情况。对于大多数场景，建议使用 `startTime` 和 `endTime` 参数 |
+| afterSerialId     | long  | No       | 用于分页检索记录，适用于**订单量每毫秒超过500**的情况。对于大多数场景，建议使用 `startTime` 和 `endTime` 参数 |
 | count             | long    | No       | 返回的记录数量                                                                                      |
 | orderID           | string  | No       | 通过订单ID查询交易历史                |
 | clOrderID         | string  | No       | 通过自定义订单ID查询交易历史                                                                         |
