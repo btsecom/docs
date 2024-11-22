@@ -1941,14 +1941,14 @@
 <tr>
 <td>beforeSerialId</td>
 <td>long</td>
-<td>Yes</td>
-<td>用于分页的条件，检索指定序列ID之前的记录</td>
+<td>No</td>
+<td>用于分页检索记录，适用于<strong>订单量每毫秒超过500</strong>的情况。对于大多数场景，建议使用 <code>startTime</code> 和 <code>endTime</code> 参数</td>
 </tr>
 <tr>
 <td>afterSerialId</td>
 <td>long</td>
-<td>Yes</td>
-<td>用于分页的条件，检索指定序列ID之后的记录</td>
+<td>No</td>
+<td>用于分页检索记录，适用于<strong>订单量每毫秒超过500</strong>的情况。对于大多数场景，建议使用 <code>startTime</code> 和 <code>endTime</code> 参数</td>
 </tr>
 <tr>
 <td>count</td>
@@ -4075,13 +4075,13 @@
 <td>beforeSerialId</td>
 <td>long</td>
 <td>No</td>
-<td>获取指定序列ID之前的记录的条件。用于分页</td>
+<td>用于分页检索记录，适用于<strong>订单量每毫秒超过500</strong>的情况。对于大多数场景，建议使用 <code>startTime</code> 和 <code>endTime</code> 参数</td>
 </tr>
 <tr>
 <td>afterSerialId</td>
 <td>long</td>
 <td>No</td>
-<td>获取指定序列ID之后的记录的条件。用于分页</td>
+<td>用于分页检索记录，适用于<strong>订单量每毫秒超过500</strong>的情况。对于大多数场景，建议使用 <code>startTime</code> 和 <code>endTime</code> 参数</td>
 </tr>
 <tr>
 <td>count</td>

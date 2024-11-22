@@ -1941,14 +1941,14 @@ Additionally, the calculation duration will be reset if the IP address or user d
 <tr>
 <td>beforeSerialId</td>
 <td>long</td>
-<td>Yes</td>
-<td>Condition to retrieve records before the specified serial Id. Used for pagination</td>
+<td>No</td>
+<td>Used for pagination to retrieve records when the order volume exceeds <strong>500 per millisecond</strong>. For typical scenarios, it is recommended to use the <code>startTime</code> and <code>endTime</code> parameters instead.</td>
 </tr>
 <tr>
 <td>afterSerialId</td>
 <td>long</td>
-<td>Yes</td>
-<td>Condition to retrieve records after the specified serial Id. Used for pagination</td>
+<td>No</td>
+<td>Used for pagination to retrieve records when the order volume exceeds <strong>500 per millisecond</strong>. For typical scenarios, it is recommended to use the <code>startTime</code> and <code>endTime</code> parameters instead.</td>
 </tr>
 <tr>
 <td>count</td>
@@ -4072,13 +4072,13 @@ Requires <code>Trading</code> permission.</p>
 <td>beforeSerialId</td>
 <td>long</td>
 <td>No</td>
-<td>Condition to retrieve records before the specified serial Id. Used for pagination</td>
+<td>Used for pagination to retrieve records when the order volume exceeds <strong>500 per millisecond</strong>. For typical scenarios, it is recommended to use the <code>startTime</code> and <code>endTime</code> parameters instead.</td>
 </tr>
 <tr>
 <td>afterSerialId</td>
 <td>long</td>
 <td>No</td>
-<td>Condition to retrieve records after the specified serial Id. Used for pagination</td>
+<td>Used for pagination to retrieve records when the order volume exceeds <strong>500 per millisecond</strong>. For typical scenarios, it is recommended to use the <code>startTime</code> and <code>endTime</code> parameters instead.</td>
 </tr>
 <tr>
 <td>count</td>
