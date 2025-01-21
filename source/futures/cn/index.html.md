@@ -2910,7 +2910,7 @@ BTSE 的速率限制如下：
   * 测试网络
     * `wss://testws.btse.io/ws/oss/futures`
 
-## OSS L1 快照 (按分组)
+## OSS L1 快照
 
 > 请求
 
@@ -2918,14 +2918,14 @@ BTSE 的速率限制如下：
 {
   "op": "subscribe",
   "args": [
-    "snapshotL1:BTCPFC_0"
+    "snapshotL1:BTCPFC"
   ]
 }
 
 {
   "op": "unsubscribe",
   "args": [
-    "snapshotL1:BTCPFC_0"
+    "snapshotL1:BTCPFC"
   ]
 }
 ```
@@ -2934,7 +2934,7 @@ BTSE 的速率限制如下：
 
 ```json
 {
-  "topic": "snapshotL1:BTCPFC_0",
+  "topic": "snapshotL1:BTCPFC",
   "data": {
     "bids": [
       [
@@ -2955,10 +2955,9 @@ BTSE 的速率限制如下：
 }
 ```
 
-通过端点`wss://ws.btse.com/ws/oss/futures`订阅Level 1订单簿。订阅的格式将为`symbol_grouping`。
+通过端点`wss://ws.btse.com/ws/oss/futures`订阅Level 1订单簿。订阅的格式将为`symbol`。
 
 * `symbol`表示市场符号
-* `grouping`表示分组的粒度。有效值为0-8。
 
 ### 响应内容
 
