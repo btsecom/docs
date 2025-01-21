@@ -1704,7 +1704,7 @@ BTSE的速率限制如下:
   * 测试网络
      * `wss://testws.btse.io/ws/oss/spot`
 
-## OSS L1 快照（按分组）
+## OSS L1 快照
 
 > 请求
 
@@ -1712,14 +1712,14 @@ BTSE的速率限制如下:
 {
   "op": "subscribe",
   "args": [
-    "snapshotL1:BTC-USD_0"
+    "snapshotL1:BTC-USD"
   ]
 }
 
 {
   "op": "unsubscribe",
   "args": [
-    "snapshotL1:BTC-USD_0"
+    "snapshotL1:BTC-USD"
   ]
 }
 ```
@@ -1728,7 +1728,7 @@ BTSE的速率限制如下:
 
 ```json
 {
-  "topic": "snapshotL1:BTC-USD_0",
+  "topic": "snapshotL1:BTC-USD",
   "data": {
     "bids": [
       [
@@ -1749,10 +1749,9 @@ BTSE的速率限制如下:
 }
 ```
 
-通过端点 `wss://ws.btse.com/ws/oss/spot` 订阅Level 1订单簿。订阅的格式将为 `symbol_grouping`。
+通过端点 `wss://ws.btse.com/ws/oss/spot` 订阅Level 1订单簿。订阅的格式将为 `symbol`。
 
 * `symbol` 表示市场符号
-* `grouping` 表示分组粒度。有效值为0-8。
 
 ### 响应内容
 

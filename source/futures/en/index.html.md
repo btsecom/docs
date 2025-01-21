@@ -2914,7 +2914,7 @@ Transfers funds between user and sub-account wallet. User can specify the source
   * Testnet
     * `wss://testws.btse.io/ws/oss/futures`
 
-## OSS L1 Snapshot (By grouping)
+## OSS L1 Snapshot
 
 > Request
 
@@ -2922,14 +2922,14 @@ Transfers funds between user and sub-account wallet. User can specify the source
 {
   "op": "subscribe",
   "args": [
-    "snapshotL1:BTCPFC_0"
+    "snapshotL1:BTCPFC"
   ]
 }
 
 {
   "op": "unsubscribe",
   "args": [
-    "snapshotL1:BTCPFC_0"
+    "snapshotL1:BTCPFC"
   ]
 }
 ```
@@ -2938,7 +2938,7 @@ Transfers funds between user and sub-account wallet. User can specify the source
 
 ```json
 {
-  "topic": "snapshotL1:BTCPFC_0",
+  "topic": "snapshotL1:BTCPFC",
   "data": {
     "bids": [
       [
@@ -2959,10 +2959,9 @@ Transfers funds between user and sub-account wallet. User can specify the source
 }
 ```
 
-Subscribe to the Level 1 Orderbook through the endpoint `wss://ws.btse.com/ws/oss/futures`. The format to subscribe to will be `symbol_grouping`.
+Subscribe to the Level 1 Orderbook through the endpoint `wss://ws.btse.com/ws/oss/futures`. The format to subscribe to will be `symbol`.
 
 * `symbol` indicates the market symbol
-* `grouping` indicates the grouping granularity. Valid values are 0-8.
 
 ### Response Content
 

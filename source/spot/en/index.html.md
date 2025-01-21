@@ -1717,7 +1717,7 @@ Query investment history. Requires `Wallet` permission.
   * Testnet
      * `wss://testws.btse.io/ws/oss/spot`
 
-## OSS L1 Snapshot (By grouping)
+## OSS L1 Snapshot
 
 > Request
 
@@ -1725,14 +1725,14 @@ Query investment history. Requires `Wallet` permission.
 {
   "op": "subscribe",
   "args": [
-    "snapshotL1:BTC-USD_0"
+    "snapshotL1:BTC-USD"
   ]
 }
 
 {
   "op": "unsubscribe",
   "args": [
-    "snapshotL1:BTC-USD_0"
+    "snapshotL1:BTC-USD"
   ]
 }
 ```
@@ -1741,7 +1741,7 @@ Query investment history. Requires `Wallet` permission.
 
 ```json
 {
-  "topic": "snapshotL1:BTC-USD_0",
+  "topic": "snapshotL1:BTC-USD",
   "data": {
     "bids": [
       [
@@ -1762,10 +1762,9 @@ Query investment history. Requires `Wallet` permission.
 }
 ```
 
-Subscribe to the Level 1 Orderbook through the endpoint `wss://ws.btse.com/ws/oss/spot`. The format to subscribe to will be `symbol_grouping`.
+Subscribe to the Level 1 Orderbook through the endpoint `wss://ws.btse.com/ws/oss/spot`. The format to subscribe to will be `symbol`.
 
 * `symbol` indicates the market symbol
-* `grouping` indicates the grouping granularity. Valid values are 0-8.
 
 ### Response Content
 
