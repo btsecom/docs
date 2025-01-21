@@ -523,7 +523,7 @@
                     <a href="#2a1cad5f9e-2" class="toc-h2 toc-link" data-title="端点">端点</a>
                   </li>
                   <li>
-                    <a href="#oss-l1" class="toc-h2 toc-link" data-title="OSS L1 快照 (按分组)">OSS L1 快照 (按分组)</a>
+                    <a href="#oss-l1" class="toc-h2 toc-link" data-title="OSS L1 快照">OSS L1 快照</a>
                   </li>
                   <li>
                     <a href="#bb4b2c51b6" class="toc-h2 toc-link" data-title="订单簿增量更新">订单簿增量更新</a>
@@ -6601,21 +6601,21 @@
 <li><code>wss://testws.btse.io/ws/oss/futures</code></li>
 </ul></li>
 </ul>
-<h2 id='oss-l1'>OSS L1 快照 (按分组)</h2>
+<h2 id='oss-l1'>OSS L1 快照</h2>
 <blockquote>
 <p>请求</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"op"</span><span class="p">:</span><span class="w"> </span><span class="s2">"subscribe"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"snapshotL1:BTCPFC_0"</span><span class="w">
+    </span><span class="s2">"snapshotL1:BTCPFC"</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
 </span><span class="p">{</span><span class="w">
   </span><span class="nl">"op"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unsubscribe"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"snapshotL1:BTCPFC_0"</span><span class="w">
+    </span><span class="s2">"snapshotL1:BTCPFC"</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
@@ -6623,7 +6623,7 @@
 <p>响应</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"snapshotL1:BTCPFC_0"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"snapshotL1:BTCPFC"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"bids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">[</span><span class="w">
@@ -6643,11 +6643,10 @@
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>通过端点<code>wss://ws.btse.com/ws/oss/futures</code>订阅Level 1订单簿。订阅的格式将为<code>symbol_grouping</code>。</p>
+<p>通过端点<code>wss://ws.btse.com/ws/oss/futures</code>订阅Level 1订单簿。订阅的格式将为<code>symbol</code>。</p>
 
 <ul>
 <li><code>symbol</code>表示市场符号</li>
-<li><code>grouping</code>表示分组的粒度。有效值为0-8。</li>
 </ul>
 <h3 id='05a22d5a79-28'>响应内容</h3><h4 id='5e08dfe292'>订单簿对象</h4>
 <table><thead>
