@@ -1075,7 +1075,7 @@ BTSE的速率限制如下:
 | orderID       | string  | No      | 内部订单ID。当未提供`clOrderID`时必须提供。如果提供了`orderID`，则将忽略`clOrderID`。 |
 | clOrderID     | string  | No      | 自定义订单ID。当未提供`orderID`时必须提供。 |
 | type          | string  | Yes      | 修改类型<br/>`PRICE`: 修改订单价格<br/>`SIZE`: 修改订单大小<br/>`TRIGGERPRICE`: 修改触发价格，仅适用于触发单。<br/>`ALL`: 修改多个字段。注意：`TRIGGERPRICE` 仅可在订单为触发单时修改，意味着如果不是触发单，请不要传入`TRIGGERPRICE`。 |
-| value         | double  | No      | 对于类型：`PRICE`、`SIZE`、`TRIGGERPRICE`，是否必须项。要修订的值。值取决于设置的类型。 |
+| value         | double  | No      | 对于类型：`PRICE`、`SIZE`、`TRIGGERPRICE`，是否必须项。要修改的值。值取决于设置的类型。 |
 | orderPrice    | double  | No      | 对于类型：`ALL`，要修改的订单价格。 |
 | orderSize     | double  | No      | 对于类型：`ALL`，要修改的订单大小。 |
 | triggerPrice  | double  | No      | 对于类型：`ALL`，要修改的触发价格。 |
