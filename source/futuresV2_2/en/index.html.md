@@ -13,6 +13,10 @@ headingLevel: 2
 
 # Change Log
 
+## Version 1.0.6 (9th April 2025)
+
+* Update the description for Request field `type` for [Amend order](#amend-order). This change will take effect on 18th May, 2025.
+
 ## Version 1.0.5 (6th November 2024)
 
 * Add maximum days of trade history explanation for API [Query Trades Fills](#query-trades-fills-2)
@@ -1184,11 +1188,11 @@ Amend the price or size or trigger price of an order. For trigger orders, if the
 | symbol       | string  | Yes      | Market symbol                                                                                                                                                      |
 | orderID      | string  | No       | Internal order ID. Mandatory when `clOrderID` is not provided. If `orderID` is provided, `clOrderID` will be ignored.                                              |
 | clOrderID    | string  | No       | Custom order ID. Mandatory when `orderID` is not provided.                                                                                                         |
-| type         | string  | Yes      | Type of amendmend<br/>`PRICE`: To amend order price<br/>`SIZE`: To amend order size<br/>`TRIGGERPRICE`: To amend trigger price<br/>`ALL`: to amend multiple fields |
+| type         | string  | Yes      | Type of amendment.<br/>`PRICE`: To amend order price<br/>`SIZE`: To amend order size<br/>`TRIGGERPRICE`: To amend trigger price for trigger orders only.<br/>`ALL`: To amend multiple fields. Note that the `TRIGGERPRICE` can only be amended if the order is a trigger order. Don't include `TRIGGERPRICE` if it is not a trigger order. |
 | value        | number  | Yes      | The value to be amended to. Value depends on the type being set.                                                                                                   |
-| orderPrice   | number  | No       | For type: `ALL`, order price to be amended                                                                                                                         |
-| orderSize    | number  | No       | For type: `ALL`, order size in contract size to be amended                                                                                                         |
-| triggerPrice | number  | No       | For type: `ALL`, trigger price to be amended                                                                                                                       |
+| orderPrice   | number  | No       | For type: `ALL`, order price to be amended.                                                                                                                         |
+| orderSize    | number  | No       | For type: `ALL`, order size in contract size to be amended.                                                                                                         |
+| triggerPrice | number  | No       | For type: `ALL`, trigger price to be amended.                                                                                                                       |
 
 
 ### Response Content

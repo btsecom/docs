@@ -13,6 +13,10 @@ headingLevel: 2
 
 # 更新日志
 
+## 版本 1.0.6 (2025年4月9日)
+
+* 更新了 [`修改订单`](#d347e421a4) 中请求字段 `type` 的描述。此更改将于2025年5月18日生效。
+
 ## 版本 1.0.5 (2024年11月6日)
 
 * 在 API [`查询成交记录`](#bbd4754907-2) 新增交易历史纪录最大天数说明
@@ -1184,7 +1188,7 @@ BTSE 的速率限制如下：
 | symbol       | string  | Yes      | 市场符号                                                                                                                                                                                                  |
 | orderID      | string  | No       | 内部订单ID。当未提供`clOrderID`时为必填项。如果提供了`orderID`，将忽略`clOrderID`。                                                                                                                        |
 | clOrderID    | string  | No       | 自定义订单ID。当未提供`orderID`时为必填项。                                                                                                                                                               |
-| type         | string  | Yes      | 修改类型<br/>`PRICE`: 修改订单价格<br/>`SIZE`: 修改订单尺寸<br/>`TRIGGERPRICE`: 修改触发价格<br/>`ALL`: 修改多个字段                                                                                     |
+| type         | string  | Yes      | 修改类型<br/>`PRICE`: 修改订单价格<br/>`SIZE`: 修改订单大小<br/>`TRIGGERPRICE`: 修改触发价格，仅适用于触发单。<br/>`ALL`: 修改多个字段。注意：`TRIGGERPRICE` 仅可在订单为触发单时修改，意味着如果不是触发单，请不要传入`TRIGGERPRICE`。                                                                                     |
 | value        | number  | Yes      | 要修改的值。其值取决于设置的类型。                                                                                                                                                                       |
 | orderPrice   | number  | No       | 对于类型：`ALL`，要修改的订单价格                                                                                                                                                                        |
 | orderSize    | number  | No       | 对于类型：`ALL`，要修改的合同大小订单尺寸                                                                                                                                                                |
