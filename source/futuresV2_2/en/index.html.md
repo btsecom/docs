@@ -13,9 +13,9 @@ headingLevel: 2
 
 # Change Log
 
-## Version 1.0.6 (18th May 2025)
+## Version 1.0.6 (9th April 2025)
 
-* Update the description for Request field `type` for [Amend order](#amend-order)
+* Update the description for Request field `type` for [Amend order](#amend-order). This change will take effect on 18th May, 2025.
 
 ## Version 1.0.5 (6th November 2024)
 
