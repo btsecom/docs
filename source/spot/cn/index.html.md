@@ -13,6 +13,10 @@ headingLevel: 2
 
 # 更改日志
 
+## 版本 3.4.15 (2025年5月18日)
+
+* 更新了 [`修正订单`](#d347e421a4) 中请求字段 `type` 的描述
+
 ## 版本 3.4.14 (2024年11月6日)
 
 * 在 API [查询用户交易成交](#a49d12728a) 新增交易历史纪录最大天数说明
@@ -1070,7 +1074,7 @@ BTSE的速率限制如下:
 | symbol        | string  | Yes      | 市场标识符                |
 | orderID       | string  | No      | 内部订单ID。当未提供`clOrderID`时必须提供。如果提供了`orderID`，则将忽略`clOrderID`。 |
 | clOrderID     | string  | No      | 自定义订单ID。当未提供`orderID`时必须提供。 |
-| type          | string  | Yes      | 修订类型<br/>`PRICE`: 修订订单价格<br/>`SIZE`: 修订订单大小<br/>`TRIGGERPRICE`: 修订触发价格<br/>`ALL`: 修订多个字段 |
+| type          | string  | Yes      | 修订类型<br/>`PRICE`: 修订订单价格<br/>`SIZE`: 修订订单大小<br/>`TRIGGERPRICE`: 修订触发价格，仅适用于触发单。<br/>`ALL`: 修订多个字段。注意：`TRIGGERPRICE` 仅可在订单为触发单时修改，意味着如果不是触发单，请不要传入`TRIGGERPRICE`。 |
 | value         | double  | No      | 对于类型：`PRICE`、`SIZE`、`TRIGGERPRICE`，是否必须项。要修订的值。值取决于设置的类型。 |
 | orderPrice    | double  | No      | 对于类型：`ALL`，要修订的订单价格。 |
 | orderSize     | double  | No      | 对于类型：`ALL`，要修订的订单大小。 |
