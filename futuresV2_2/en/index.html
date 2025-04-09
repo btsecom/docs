@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-1-0-6-9th-april-2025" class="toc-h2 toc-link" data-title="Version 1.0.6 (9th April 2025)">Version 1.0.6 (9th April 2025)</a>
+                  </li>
+                  <li>
                     <a href="#version-1-0-5-6th-november-2024" class="toc-h2 toc-link" data-title="Version 1.0.5 (6th November 2024)">Version 1.0.5 (6th November 2024)</a>
                   </li>
                   <li>
@@ -449,7 +452,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-1-0-5-6th-november-2024'>Version 1.0.5 (6th November 2024)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-1-0-6-9th-april-2025'>Version 1.0.6 (9th April 2025)</h2>
+<ul>
+<li>Update the description for Request field <code>type</code> for <a href="#amend-order">Amend order</a>. This change will take effect on 18th May, 2025.</li>
+</ul>
+<h2 id='version-1-0-5-6th-november-2024'>Version 1.0.5 (6th November 2024)</h2>
 <ul>
 <li>Add maximum days of trade history explanation for API <a href="#query-trades-fills-2">Query Trades Fills</a></li>
 </ul>
@@ -2704,7 +2711,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 <td>type</td>
 <td>string</td>
 <td>Yes</td>
-<td>Type of amendmend<br/><code>PRICE</code>: To amend order price<br/><code>SIZE</code>: To amend order size<br/><code>TRIGGERPRICE</code>: To amend trigger price<br/><code>ALL</code>: to amend multiple fields</td>
+<td>Type of amendment.<br/><code>PRICE</code>: To amend order price<br/><code>SIZE</code>: To amend order size<br/><code>TRIGGERPRICE</code>: To amend trigger price for trigger orders only.<br/><code>ALL</code>: To amend multiple fields. Note that the <code>TRIGGERPRICE</code> can only be amended if the order is a trigger order. Don&#39;t include <code>TRIGGERPRICE</code> if it is not a trigger order.</td>
 </tr>
 <tr>
 <td>value</td>
@@ -2716,19 +2723,19 @@ Additionally, the calculation duration will be reset if the IP address or user d
 <td>orderPrice</td>
 <td>number</td>
 <td>No</td>
-<td>For type: <code>ALL</code>, order price to be amended</td>
+<td>For type: <code>ALL</code>, order price to be amended.</td>
 </tr>
 <tr>
 <td>orderSize</td>
 <td>number</td>
 <td>No</td>
-<td>For type: <code>ALL</code>, order size in contract size to be amended</td>
+<td>For type: <code>ALL</code>, order size in contract size to be amended.</td>
 </tr>
 <tr>
 <td>triggerPrice</td>
 <td>number</td>
 <td>No</td>
-<td>For type: <code>ALL</code>, trigger price to be amended</td>
+<td>For type: <code>ALL</code>, trigger price to be amended.</td>
 </tr>
 </tbody></table>
 <h3 id='response-content-11'>Response Content</h3>

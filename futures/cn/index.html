@@ -234,6 +234,9 @@
             <a href="#185368440e" class="toc-h1 toc-link" data-title="更新日志">更新日志</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#2-7-9-2025-4-9" class="toc-h2 toc-link" data-title="版本 2.7.9 (2025年4月9日)">版本 2.7.9 (2025年4月9日)</a>
+                  </li>
+                  <li>
                     <a href="#2-7-8-2024-9-16" class="toc-h2 toc-link" data-title="版本 2.7.8 (2024年9月16日)">版本 2.7.8 (2024年9月16日)</a>
                   </li>
                   <li>
@@ -569,7 +572,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='185368440e'>更新日志</h1><h2 id='2-7-8-2024-9-16'>版本 2.7.8 (2024年9月16日)</h2>
+        <h1 id='185368440e'>更新日志</h1><h2 id='2-7-9-2025-4-9'>版本 2.7.9 (2025年4月9日)</h2>
+<ul>
+<li>更新了 <a href="#d347e421a4"><code>修改订单</code></a> 中请求字段 <code>type</code> 的描述。此更改将于2025年5月18日生效。</li>
+</ul>
+<h2 id='2-7-8-2024-9-16'>版本 2.7.8 (2024年9月16日)</h2>
 <ul>
 <li>在所有API描述中更新权限相关内容</li>
 </ul>
@@ -3251,7 +3258,7 @@
 <td>type</td>
 <td>string</td>
 <td>Yes</td>
-<td>修改类型<br/><code>PRICE</code>: 修改订单价格<br/><code>SIZE</code>: 修改订单尺寸<br/><code>TRIGGERPRICE</code>: 修改触发价格<br/><code>ALL</code>: 修改多个字段</td>
+<td>修改类型<br/><code>PRICE</code>: 修改订单价格<br/><code>SIZE</code>: 修改订单大小<br/><code>TRIGGERPRICE</code>: 修改触发价格，仅适用于触发单。<br/><code>ALL</code>: 修改多个字段。注意：<code>TRIGGERPRICE</code> 仅可在订单为触发单时修改，意味着如果不是触发单，请不要传入<code>TRIGGERPRICE</code>。</td>
 </tr>
 <tr>
 <td>value</td>

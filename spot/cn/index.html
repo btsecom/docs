@@ -234,6 +234,9 @@
             <a href="#3f3e207288" class="toc-h1 toc-link" data-title="更改日志">更改日志</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#3-4-15-2025-4-9" class="toc-h2 toc-link" data-title="版本 3.4.15 (2025年4月9日)">版本 3.4.15 (2025年4月9日)</a>
+                  </li>
+                  <li>
                     <a href="#3-4-14-2024-11-6" class="toc-h2 toc-link" data-title="版本 3.4.14 (2024年11月6日)">版本 3.4.14 (2024年11月6日)</a>
                   </li>
                   <li>
@@ -488,7 +491,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='3f3e207288'>更改日志</h1><h2 id='3-4-14-2024-11-6'>版本 3.4.14 (2024年11月6日)</h2>
+        <h1 id='3f3e207288'>更改日志</h1><h2 id='3-4-15-2025-4-9'>版本 3.4.15 (2025年4月9日)</h2>
+<ul>
+<li>更新了 <a href="#d347e421a4"><code>修改订单</code></a> 中请求字段 <code>type</code> 的描述。此更改将于2025年5月18日生效。</li>
+</ul>
+<h2 id='3-4-14-2024-11-6'>版本 3.4.14 (2024年11月6日)</h2>
 <ul>
 <li>在 API <a href="#a49d12728a">查询用户交易成交</a> 新增交易历史纪录最大天数说明</li>
 </ul>
@@ -2405,31 +2412,31 @@
 <td>type</td>
 <td>string</td>
 <td>Yes</td>
-<td>修订类型<br/><code>PRICE</code>: 修订订单价格<br/><code>SIZE</code>: 修订订单大小<br/><code>TRIGGERPRICE</code>: 修订触发价格<br/><code>ALL</code>: 修订多个字段</td>
+<td>修改类型<br/><code>PRICE</code>: 修改订单价格<br/><code>SIZE</code>: 修改订单大小<br/><code>TRIGGERPRICE</code>: 修改触发价格，仅适用于触发单。<br/><code>ALL</code>: 修改多个字段。注意：<code>TRIGGERPRICE</code> 仅可在订单为触发单时修改，意味着如果不是触发单，请不要传入<code>TRIGGERPRICE</code>。</td>
 </tr>
 <tr>
 <td>value</td>
 <td>double</td>
 <td>No</td>
-<td>对于类型：<code>PRICE</code>、<code>SIZE</code>、<code>TRIGGERPRICE</code>，是否必须项。要修订的值。值取决于设置的类型。</td>
+<td>对于类型：<code>PRICE</code>、<code>SIZE</code>、<code>TRIGGERPRICE</code>，是否必须项。要修改的值。值取决于设置的类型。</td>
 </tr>
 <tr>
 <td>orderPrice</td>
 <td>double</td>
 <td>No</td>
-<td>对于类型：<code>ALL</code>，要修订的订单价格。</td>
+<td>对于类型：<code>ALL</code>，要修改的订单价格。</td>
 </tr>
 <tr>
 <td>orderSize</td>
 <td>double</td>
 <td>No</td>
-<td>对于类型：<code>ALL</code>，要修订的订单大小。</td>
+<td>对于类型：<code>ALL</code>，要修改的订单大小。</td>
 </tr>
 <tr>
 <td>triggerPrice</td>
 <td>double</td>
 <td>No</td>
-<td>对于类型：<code>ALL</code>，要修订的触发价格。</td>
+<td>对于类型：<code>ALL</code>，要修改的触发价格。</td>
 </tr>
 </tbody></table>
 <h3 id='05a22d5a79-9'>响应内容</h3>
