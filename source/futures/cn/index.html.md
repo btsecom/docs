@@ -1450,7 +1450,18 @@ BTSE 的速率限制如下：
 }
 ```
 
-> 请求（全部修改）
+> 请求（修改大小）
+
+```json
+{
+  "symbol": "BTCPFC",
+  "orderID": "604c3ebf-d7fa-468d-9ff0-f6ad030221b4",
+  "type": "SIZE",
+  "value": 100
+}
+```
+
+> 请求（全部修改 - 触发单）
 
 ```json
 {
@@ -1460,6 +1471,18 @@ BTSE 的速率限制如下：
   "orderPrice": 30010,
   "orderSize": 1,
   "triggerPrice": 30000
+}
+```
+
+> 请求（全部修改 - 非触发单）
+
+```json
+{
+  "symbol": "BTCPFC",
+  "orderID": "604c3ebf-d7fa-468d-9ff0-f6ad030221b4",
+  "type": "ALL",
+  "orderPrice": 30010,
+  "orderSize": 1
 }
 ```
 

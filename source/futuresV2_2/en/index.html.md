@@ -1265,7 +1265,7 @@ Query order detail for a specified orderID/clOrderID, please note that a cancele
 
 ## Amend Order
 
-> Request (amend price)
+> Request (Amend price)
 
 ```json
 {
@@ -1276,7 +1276,18 @@ Query order detail for a specified orderID/clOrderID, please note that a cancele
 }
 ```
 
-> Request (amend all)
+> Request (Amend size)
+
+```json
+{
+  "symbol": "BTC-PERP",
+  "orderID": "604c3ebf-d7fa-468d-9ff0-f6ad030221b4",
+  "type": "SIZE",
+  "value": 100
+}
+```
+
+> Request (Amend all - trigger Order.)
 
 ```json
 {
@@ -1286,6 +1297,18 @@ Query order detail for a specified orderID/clOrderID, please note that a cancele
   "orderPrice": 30010,
   "orderSize": 1,
   "triggerPrice": 30000
+}
+```
+
+> Request (Amend all - Not trigger order.)
+
+```json
+{
+  "symbol": "BTC-PERP",
+  "orderID": "604c3ebf-d7fa-468d-9ff0-f6ad030221b4",
+  "type": "ALL",
+  "orderPrice": 30010,
+  "orderSize": 1
 }
 ```
 
