@@ -13,9 +13,13 @@ headingLevel: 2
 
 # 更新日志
 
+## 版本 1.0.7 (2025年5月14日)
+
+* 新增API[`查询市场风险限额设置`](#8743d52e508)，包括每个市场和每个风险等级的初始保证金率和维持保证金率。此更改将于2025年5月28日生效。
+
 ## 版本 1.0.6 (2025年4月9日)
 
-* 更新了 [`修改订单`](#d347e421a4) 中请求字段 `type` 的描述。此更改将于2025年5月18日生效。
+* 更新了 [`修改订单`](#89e5b08e91) 中请求字段 `type` 的描述。此更改将于2025年5月18日生效。
 
 ## 版本 1.0.5 (2024年11月6日)
 
@@ -620,6 +624,144 @@ BTSE 的速率限制如下：
 | time      | long   | Yes      | 以秒为单位的资金费率时间 |
 | rate      | double | Yes      | 资金费率              |
 
+## 查询市场风险限额设置
+
+> 响应 (成功)
+
+```json
+{
+    "code": 1,
+    "msg": "Success",
+    "time": 1747207591721,
+    "data": [
+        {
+            "symbol": "SOL-PERP",
+            "riskLevel": 1,
+            "riskLimitValue": 10000,
+            "initialMarginRate": 0.02,
+            "maintenanceMarginRate": 0.015,
+            "maxLeverage": 50
+        },
+        {
+            "symbol": "SOL-PERP",
+            "riskLevel": 2,
+            "riskLimitValue": 20000,
+            "initialMarginRate": 0.025,
+            "maintenanceMarginRate": 0.02,
+            "maxLeverage": 40
+        },
+        {
+            "symbol": "SOL-PERP",
+            "riskLevel": 3,
+            "riskLimitValue": 30000,
+            "initialMarginRate": 0.03,
+            "maintenanceMarginRate": 0.025,
+            "maxLeverage": 33.33
+        },
+        {
+            "symbol": "SOL-PERP",
+            "riskLevel": 4,
+            "riskLimitValue": 40000,
+            "initialMarginRate": 0.035,
+            "maintenanceMarginRate": 0.03,
+            "maxLeverage": 28.57
+        },
+        {
+            "symbol": "SOL-PERP",
+            "riskLevel": 5,
+            "riskLimitValue": 50000,
+            "initialMarginRate": 0.04,
+            "maintenanceMarginRate": 0.035,
+            "maxLeverage": 25
+        },
+        {
+            "symbol": "SOL-PERP",
+            "riskLevel": 6,
+            "riskLimitValue": 60000,
+            "initialMarginRate": 0.045,
+            "maintenanceMarginRate": 0.04,
+            "maxLeverage": 22.22
+        },
+        {
+            "symbol": "SOL-PERP",
+            "riskLevel": 7,
+            "riskLimitValue": 70000,
+            "initialMarginRate": 0.05,
+            "maintenanceMarginRate": 0.045,
+            "maxLeverage": 20
+        },
+        {
+            "symbol": "SOL-PERP",
+            "riskLevel": 8,
+            "riskLimitValue": 80000,
+            "initialMarginRate": 0.055,
+            "maintenanceMarginRate": 0.05,
+            "maxLeverage": 18.18
+        },
+        {
+            "symbol": "SOL-PERP",
+            "riskLevel": 9,
+            "riskLimitValue": 90000,
+            "initialMarginRate": 0.06,
+            "maintenanceMarginRate": 0.055,
+            "maxLeverage": 16.67
+        },
+        {
+            "symbol": "SOL-PERP",
+            "riskLevel": 10,
+            "riskLimitValue": 100000,
+            "initialMarginRate": 0.065,
+            "maintenanceMarginRate": 0.06,
+            "maxLeverage": 15.38
+        }
+    ],
+    "success": true
+}
+```
+
+> 响应 (未找到对应的市场信息)
+
+```json
+{
+    "code": -2,
+    "msg": "Invalid request parameters",
+    "time": 1747207833879,
+    "data": null,
+    "success": false
+}
+```
+
+`GET /api/v2.2/market/risk_limit`
+
+获取所有市场的默认设置，包括每个市场和每个风险等级的初始保证金率和维持保证金率。如果未传入 symbol 参数，则会返回所有市场的数据。
+
+### Request Parameters
+
+| 名称                | 类型    | 是否必须 | 描述                                                         |
+| ---                | ---     | ---      | ---                                                        |
+| symbol             | string  | No       | 市场符号                                                    |
+
+### Response Content
+
+| 名称                     | 类型     | 是否必须 | 描述                                                                                                    |
+| ---                      | ---      | ---      | ---                                                                                                   |
+| code                     | integer   | Yes     | 响应代码                                                                                                     |
+| msg                      | integer  | Yes      | 响应消息                                                                                                     |
+| time                     | integer  | Yes      | 响应时间                                                                                                     |
+| data                     | 数据对象   | No      | 参见下面的数据对象                                                                                                     |
+| success                  | boolean   | Yes     | 是否成功                                                                                                     |
+
+### 数据对象
+
+| 名称                     | 类型     | 是否必须 | 描述                                                                                                    |
+| ---                      | ---      | ---      | ---                                                                                                   |
+| symbol                   | string   | Yes      | 市场符号                                                                                                    |
+| riskLevel                | integer  | Yes      | 风险等级                                                                                                    |
+| riskLimitValue           | integer  | Yes      | 当前风险等级下的风险限额（以币本位计算）                                                                                                  |
+| initialMarginRate        | double   | Yes      | 初始保证金率                                                                                                    |
+| maintenanceMarginRate    | double   | Yes      | 维持保证金率                                                                                                    |
+| maxLeverage              | double   | Yes      | 当前风险等级下的最大杠杆倍数 
+
 # 交易端点
 
 ## 创建新订单
@@ -1132,7 +1274,18 @@ BTSE 的速率限制如下：
 }
 ```
 
-> 请求（全部修改）
+> 请求（修改大小）
+
+```json
+{
+  "symbol": "BTC-PERP",
+  "orderID": "604c3ebf-d7fa-468d-9ff0-f6ad030221b4",
+  "type": "SIZE",
+  "value": 100
+}
+```
+
+> 请求（全部修改 - 触发单）
 
 ```json
 {
@@ -1142,6 +1295,18 @@ BTSE 的速率限制如下：
   "orderPrice": 30010,
   "orderSize": 1,
   "triggerPrice": 30000
+}
+```
+
+> 请求（全部修改 - 非触发单）
+
+```json
+{
+  "symbol": "BTC-PERP",
+  "orderID": "604c3ebf-d7fa-468d-9ff0-f6ad030221b4",
+  "type": "ALL",
+  "orderPrice": 30010,
+  "orderSize": 1
 }
 ```
 

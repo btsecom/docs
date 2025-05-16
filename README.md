@@ -25,7 +25,9 @@ Quickstart
 2. Push changes into master branch (`git push -U origin`)
 3. Deploy changes to gh-pages branch (`./deploy.sh`)
 
-
+How to generate anchor point for CN version?
+------------
+`echo -n "{anchor_string}" | openssl dgst -sha1 | cut -c1-10`
 
 Features
 ------------
