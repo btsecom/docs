@@ -234,6 +234,9 @@
             <a href="#185368440e" class="toc-h1 toc-link" data-title="更新日志">更新日志</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#1-0-7-2025-5-14" class="toc-h2 toc-link" data-title="版本 1.0.7 (2025年5月14日)">版本 1.0.7 (2025年5月14日)</a>
+                  </li>
+                  <li>
                     <a href="#1-0-6-2025-4-9" class="toc-h2 toc-link" data-title="版本 1.0.6 (2025年4月9日)">版本 1.0.6 (2025年4月9日)</a>
                   </li>
                   <li>
@@ -308,6 +311,9 @@
                   </li>
                   <li>
                     <a href="#3b35955a7e" class="toc-h2 toc-link" data-title="查询资金费率">查询资金费率</a>
+                  </li>
+                  <li>
+                    <a href="#d91925f00e" class="toc-h2 toc-link" data-title="查询市场风险限额设置">查询市场风险限额设置</a>
                   </li>
               </ul>
           </li>
@@ -452,9 +458,13 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='185368440e'>更新日志</h1><h2 id='1-0-6-2025-4-9'>版本 1.0.6 (2025年4月9日)</h2>
+        <h1 id='185368440e'>更新日志</h1><h2 id='1-0-7-2025-5-14'>版本 1.0.7 (2025年5月14日)</h2>
 <ul>
-<li>更新了 <a href="#d347e421a4"><code>修改订单</code></a> 中请求字段 <code>type</code> 的描述。此更改将于2025年5月18日生效。</li>
+<li>新增API<a href="#8743d52e508"><code>查询市场风险限额设置</code></a>，包括每个市场和每个风险等级的初始保证金率和维持保证金率。此更改将于2025年5月28日生效。</li>
+</ul>
+<h2 id='1-0-6-2025-4-9'>版本 1.0.6 (2025年4月9日)</h2>
+<ul>
+<li>更新了 <a href="#89e5b08e91"><code>修改订单</code></a> 中请求字段 <code>type</code> 的描述。此更改将于2025年5月18日生效。</li>
 </ul>
 <h2 id='1-0-5-2024-11-6'>版本 1.0.5 (2024年11月6日)</h2>
 <ul>
@@ -1587,6 +1597,215 @@
 <td>资金费率</td>
 </tr>
 </tbody></table>
+<h2 id='d91925f00e'>查询市场风险限额设置</h2>
+<blockquote>
+<p>响应 (成功)</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Success"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1747207591721</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOL-PERP"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"riskLevel"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"riskLimitValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"initialMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.02</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maintenanceMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.015</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maxLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOL-PERP"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"riskLevel"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"riskLimitValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">20000</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"initialMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.025</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maintenanceMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.02</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maxLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOL-PERP"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"riskLevel"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"riskLimitValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">30000</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"initialMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.03</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maintenanceMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.025</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maxLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mf">33.33</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOL-PERP"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"riskLevel"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"riskLimitValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">40000</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"initialMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.035</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maintenanceMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.03</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maxLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mf">28.57</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOL-PERP"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"riskLevel"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"riskLimitValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">50000</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"initialMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.04</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maintenanceMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.035</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maxLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOL-PERP"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"riskLevel"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"riskLimitValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">60000</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"initialMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.045</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maintenanceMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.04</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maxLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mf">22.22</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOL-PERP"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"riskLevel"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"riskLimitValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">70000</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"initialMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.05</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maintenanceMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.045</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maxLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOL-PERP"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"riskLevel"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"riskLimitValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">80000</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"initialMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.055</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maintenanceMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.05</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maxLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mf">18.18</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOL-PERP"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"riskLevel"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"riskLimitValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">90000</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"initialMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.06</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maintenanceMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.055</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maxLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mf">16.67</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOL-PERP"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"riskLevel"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"riskLimitValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">100000</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"initialMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.065</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maintenanceMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.06</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maxLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mf">15.38</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>响应 (未找到对应的市场信息)</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">-2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid request parameters"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1747207833879</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><code>GET /api/v2.2/market/risk_limit</code></p>
+
+<p>获取所有市场的默认设置，包括每个市场和每个风险等级的初始保证金率和维持保证金率。如果未传入 symbol 参数，则会返回所有市场的数据。</p>
+<h3 id='request-parameters-2'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>是否必须</th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>No</td>
+<td>市场符号</td>
+</tr>
+</tbody></table>
+<h3 id='response-content-2'>Response Content</h3>
+<table><thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>是否必须</th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>code</td>
+<td>integer</td>
+<td>Yes</td>
+<td>响应代码</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>integer</td>
+<td>Yes</td>
+<td>响应消息</td>
+</tr>
+<tr>
+<td>time</td>
+<td>integer</td>
+<td>Yes</td>
+<td>响应时间</td>
+</tr>
+<tr>
+<td>data</td>
+<td>数据对象</td>
+<td>No</td>
+<td>参见下面的数据对象</td>
+</tr>
+<tr>
+<td>success</td>
+<td>boolean</td>
+<td>Yes</td>
+<td>是否成功</td>
+</tr>
+</tbody></table>
+<h3 id='30655043cf'>数据对象</h3>
+<table><thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>是否必须</th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Yes</td>
+<td>市场符号</td>
+</tr>
+<tr>
+<td>riskLevel</td>
+<td>integer</td>
+<td>Yes</td>
+<td>风险等级</td>
+</tr>
+<tr>
+<td>riskLimitValue</td>
+<td>integer</td>
+<td>Yes</td>
+<td>当前风险等级下的风险限额（以币本位计算）</td>
+</tr>
+<tr>
+<td>initialMarginRate</td>
+<td>double</td>
+<td>Yes</td>
+<td>初始保证金率</td>
+</tr>
+<tr>
+<td>maintenanceMarginRate</td>
+<td>double</td>
+<td>Yes</td>
+<td>维持保证金率</td>
+</tr>
+<tr>
+<td>maxLeverage</td>
+<td>double</td>
+<td>Yes</td>
+<td>当前风险等级下的最大杠杆倍数</td>
+</tr>
+</tbody></table>
 <h1 id='bca3630877'>交易端点</h1><h2 id='8be954be0d'>创建新订单</h2>
 <blockquote>
 <p>请求（创建<code>市价</code>订单）</p>
@@ -2635,7 +2854,17 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
-<p>请求（全部修改）</p>
+<p>请求（修改大小）</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-PERP"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"604c3ebf-d7fa-468d-9ff0-f6ad030221b4"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SIZE"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>请求（全部修改 - 触发单）</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-PERP"</span><span class="p">,</span><span class="w">
@@ -2644,6 +2873,17 @@
   </span><span class="nl">"orderPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">30010</span><span class="p">,</span><span class="w">
   </span><span class="nl">"orderSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">30000</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>请求（全部修改 - 非触发单）</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-PERP"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"604c3ebf-d7fa-468d-9ff0-f6ad030221b4"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ALL"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">30010</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
@@ -6234,7 +6474,7 @@
 <td>参见下面的数据对象</td>
 </tr>
 </tbody></table>
-<h4 id='30655043cf'>数据对象</h4>
+<h4 id='30655043cf-2'>数据对象</h4>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -6395,7 +6635,7 @@
 <td>参见下面的数据对象</td>
 </tr>
 </tbody></table>
-<h4 id='30655043cf-2'>数据对象</h4>
+<h4 id='30655043cf-3'>数据对象</h4>
 <table><thead>
 <tr>
 <th>名称</th>
@@ -6623,7 +6863,7 @@
 <td>请参考下面的数据对象</td>
 </tr>
 </tbody></table>
-<h4 id='30655043cf-3'>数据对象</h4>
+<h4 id='30655043cf-4'>数据对象</h4>
 <table><thead>
 <tr>
 <th>名称</th>

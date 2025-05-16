@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-1-0-7-14th-may-2025" class="toc-h2 toc-link" data-title="Version 1.0.7 (14th May 2025)">Version 1.0.7 (14th May 2025)</a>
+                  </li>
+                  <li>
                     <a href="#version-1-0-6-9th-april-2025" class="toc-h2 toc-link" data-title="Version 1.0.6 (9th April 2025)">Version 1.0.6 (9th April 2025)</a>
                   </li>
                   <li>
@@ -308,6 +311,9 @@
                   </li>
                   <li>
                     <a href="#funding-history" class="toc-h2 toc-link" data-title="Funding History">Funding History</a>
+                  </li>
+                  <li>
+                    <a href="#market-risk-limit-setting" class="toc-h2 toc-link" data-title="Market Risk Limit Setting">Market Risk Limit Setting</a>
                   </li>
               </ul>
           </li>
@@ -452,7 +458,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-1-0-6-9th-april-2025'>Version 1.0.6 (9th April 2025)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-1-0-7-14th-may-2025'>Version 1.0.7 (14th May 2025)</h2>
+<ul>
+<li>Add API for querying <a href="#market-risk-limit-setting">Default Market Setting</a>, including initial margin and maintenance margin by each market and each risk limit level. This change will take effect on 28th May, 2025.</li>
+</ul>
+<h2 id='version-1-0-6-9th-april-2025'>Version 1.0.6 (9th April 2025)</h2>
 <ul>
 <li>Update the description for Request field <code>type</code> for <a href="#amend-order">Amend order</a>. This change will take effect on 18th May, 2025.</li>
 </ul>
@@ -1587,6 +1597,215 @@ Additionally, the calculation duration will be reset if the IP address or user d
 <td>Funding rate</td>
 </tr>
 </tbody></table>
+<h2 id='market-risk-limit-setting'>Market Risk Limit Setting</h2>
+<blockquote>
+<p>Response ( Successful )</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Success"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1747207591721</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOL-PERP"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"riskLevel"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"riskLimitValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"initialMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.02</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maintenanceMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.015</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maxLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOL-PERP"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"riskLevel"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"riskLimitValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">20000</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"initialMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.025</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maintenanceMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.02</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maxLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOL-PERP"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"riskLevel"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"riskLimitValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">30000</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"initialMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.03</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maintenanceMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.025</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maxLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mf">33.33</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOL-PERP"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"riskLevel"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"riskLimitValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">40000</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"initialMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.035</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maintenanceMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.03</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maxLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mf">28.57</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOL-PERP"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"riskLevel"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"riskLimitValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">50000</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"initialMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.04</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maintenanceMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.035</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maxLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOL-PERP"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"riskLevel"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"riskLimitValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">60000</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"initialMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.045</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maintenanceMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.04</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maxLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mf">22.22</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOL-PERP"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"riskLevel"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"riskLimitValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">70000</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"initialMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.05</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maintenanceMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.045</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maxLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOL-PERP"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"riskLevel"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"riskLimitValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">80000</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"initialMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.055</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maintenanceMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.05</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maxLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mf">18.18</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOL-PERP"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"riskLevel"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"riskLimitValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">90000</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"initialMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.06</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maintenanceMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.055</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maxLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mf">16.67</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOL-PERP"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"riskLevel"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"riskLimitValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">100000</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"initialMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.065</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maintenanceMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.06</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maxLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mf">15.38</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Response ( Failed to find the market )</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">-2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid request parameters"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"time"</span><span class="p">:</span><span class="w"> </span><span class="mi">1747207833879</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><code>GET /api/v2.2/market/risk_limit</code></p>
+
+<p>Gets all default market settings, including initial margin and maintenance margin by each market and each risk limit level. You&#39;ll retrieve all markets if no symbol parameter is sent.</p>
+<h3 id='request-parameters-8'>Request Parameters</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>No</td>
+<td>Market symbol</td>
+</tr>
+</tbody></table>
+<h3 id='response-content-8'>Response Content</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>code</td>
+<td>integer</td>
+<td>Yes</td>
+<td>Response code</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>integer</td>
+<td>Yes</td>
+<td>Response message</td>
+</tr>
+<tr>
+<td>time</td>
+<td>integer</td>
+<td>Yes</td>
+<td>Response Time</td>
+</tr>
+<tr>
+<td>data</td>
+<td>object</td>
+<td>No</td>
+<td>Refer to data object below</td>
+</tr>
+<tr>
+<td>success</td>
+<td>boolean</td>
+<td>Yes</td>
+<td>Whether or not query is successful</td>
+</tr>
+</tbody></table>
+<h3 id='data-object'>Data Object</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>symbol</td>
+<td>string</td>
+<td>Yes</td>
+<td>Market symbol</td>
+</tr>
+<tr>
+<td>riskLevel</td>
+<td>integer</td>
+<td>Yes</td>
+<td>Risk level</td>
+</tr>
+<tr>
+<td>riskLimitValue</td>
+<td>integer</td>
+<td>Yes</td>
+<td>Risk limit value for current risk level in coin size</td>
+</tr>
+<tr>
+<td>initialMarginRate</td>
+<td>double</td>
+<td>Yes</td>
+<td>Initial margin rate</td>
+</tr>
+<tr>
+<td>maintenanceMarginRate</td>
+<td>double</td>
+<td>Yes</td>
+<td>Maintenance margin rate</td>
+</tr>
+<tr>
+<td>maxLeverage</td>
+<td>double</td>
+<td>Yes</td>
+<td>Max leverage for current risk level</td>
+</tr>
+</tbody></table>
 <h1 id='trade-endpoints'>Trade Endpoints</h1><h2 id='create-new-order'>Create New Order</h2>
 <blockquote>
 <p>Request (create <code>MARKET</code> order)</p>
@@ -1835,7 +2054,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 <p><code>POST /api/v2.2/order</code></p>
 
 <p>Creates a new order. Requires <code>Trading</code> permission.</p>
-<h3 id='request-parameters-8'>Request Parameters</h3>
+<h3 id='request-parameters-9'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -1959,7 +2178,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 <td>For creating order and wanting to specify the positionMode. Valid options: <code>ONE_WAY</code> (default) , <code>HEDGE</code> , <code>ISOLATED</code></td>
 </tr>
 </tbody></table>
-<h3 id='response-content-8'>Response Content</h3>
+<h3 id='response-content-9'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2163,7 +2382,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </ul>
 
 <p>This API Requires <code>Trading</code> permission.</p>
-<h3 id='request-parameters-9'>Request Parameters</h3>
+<h3 id='request-parameters-10'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2221,7 +2440,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 <td>For creating order and wanting to specify the positionMode. Valid options: <code>ONE_WAY</code> (default) , <code>HEDGE</code> , <code>ISOLATED</code></td>
 </tr>
 </tbody></table>
-<h3 id='response-content-9'>Response Content</h3>
+<h3 id='response-content-10'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2411,7 +2630,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 <p><code>GET /api/v2.2/order</code></p>
 
 <p>Query order detail for a specified orderID/clOrderID, please note that a canceled order will only exist for 30 minutes. Requires <code>Trading</code> permission.</p>
-<h3 id='request-parameters-10'>Request Parameters</h3>
+<h3 id='request-parameters-11'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2433,7 +2652,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 <td>Client custom order ID. Mandatory when orderID is not provided.</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-10'>Response Content</h3>
+<h3 id='response-content-11'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2625,7 +2844,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </tbody></table>
 <h2 id='amend-order'>Amend Order</h2>
 <blockquote>
-<p>Request (amend price)</p>
+<p>Request (Amend price)</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-PERP"</span><span class="p">,</span><span class="w">
@@ -2635,7 +2854,17 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
-<p>Request (amend all)</p>
+<p>Request (Amend size)</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-PERP"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"604c3ebf-d7fa-468d-9ff0-f6ad030221b4"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SIZE"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Request (Amend all - trigger Order.)</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-PERP"</span><span class="p">,</span><span class="w">
@@ -2644,6 +2873,17 @@ Additionally, the calculation duration will be reset if the IP address or user d
   </span><span class="nl">"orderPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">30010</span><span class="p">,</span><span class="w">
   </span><span class="nl">"orderSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">30000</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Request (Amend all - Not trigger order.)</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-PERP"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"604c3ebf-d7fa-468d-9ff0-f6ad030221b4"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ALL"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">30010</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
@@ -2680,7 +2920,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 <p><code>PUT /api/v2.2/order</code></p>
 
 <p>Amend the price or size or trigger price of an order. For trigger orders, if the order has already been triggered, the trigger price cannot be further amended. Amend order <em>does not</em> apply to algo orders</p>
-<h3 id='request-parameters-11'>Request Parameters</h3>
+<h3 id='request-parameters-12'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2738,7 +2978,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 <td>For type: <code>ALL</code>, trigger price to be amended.</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-11'>Response Content</h3>
+<h3 id='response-content-12'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2927,7 +3167,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 
 <p>Cancels pending orders that has not yet been transacted. The <code>orderID</code> is a unique identifier to cancel a particular order. <code>clOrderID</code> is a custom ID sent in by the trader. When cancel by <code>clOrderID</code>, all orders having the same ID will be cancelled. If <code>orderID</code> and <code>clOrderID</code> is not sent in, then cancellation will be for all orders in the current market.
 Requires <code>Trading</code> permission.</p>
-<h3 id='request-parameters-12'>Request Parameters</h3>
+<h3 id='request-parameters-13'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -2955,7 +3195,7 @@ Requires <code>Trading</code> permission.</p>
 <td>Client custom order ID. Mandatory when <code>orderID</code> is not provided.</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-12'>Response Content</h3>
+<h3 id='response-content-13'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3114,7 +3354,7 @@ Requires <code>Trading</code> permission.</p>
 <p><code>POST /api/v2.2/order/cancelAllAfter</code></p>
 
 <p>Dead-man&#39;s switch allows the trader to send in a timeout value which is a Time to live (TTL) value for an order. Extension of the timeout is done by sending another <code>cancelAllAfter</code> request. If the server does not receive another request before the timeout is reached, all orders will be cancelled. Requires <code>Trading</code> permission.</p>
-<h3 id='request-parameters-13'>Request Parameters</h3>
+<h3 id='request-parameters-14'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3130,7 +3370,7 @@ Requires <code>Trading</code> permission.</p>
 <td>Timeout value in milliseconds</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-13'>Response Content</h3>
+<h3 id='response-content-14'>Response Content</h3>
 <ul>
 <li>If set correctly, a HTTP 200 response code will be returned</li>
 </ul>
@@ -3197,7 +3437,7 @@ Requires <code>Trading</code> permission.</p>
 <p><code>GET /api/v2.2/user/open_orders</code></p>
 
 <p>Retrieves open orders that have not yet been matched or matched recently. Requires <code>Read</code> permission.</p>
-<h3 id='request-parameters-14'>Request Parameters</h3>
+<h3 id='request-parameters-15'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3225,7 +3465,7 @@ Requires <code>Trading</code> permission.</p>
 <td>Query using custom order ID. If <code>orderID</code> is provided, <code>clOrderID</code> will be ignored.</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-14'>Response Content</h3>
+<h3 id='response-content-15'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3495,7 +3735,7 @@ Requires <code>Trading</code> permission.</p>
 <p><code>GET /api/v2.2/user/trade_history</code></p>
 
 <p>Retrieves a user&#39;s trade history. Requires <code>Read</code> permission.</p>
-<h3 id='request-parameters-15'>Request Parameters</h3>
+<h3 id='request-parameters-16'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3592,7 +3832,7 @@ Requires <code>Trading</code> permission.</p>
 <td style="text-align: center">If neither start nor end time is specified, then <strong>7</strong> days before the <strong>current time</strong></td>
 </tr>
 </tbody></table>
-<h3 id='response-content-15'>Response Content</h3>
+<h3 id='response-content-16'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3825,7 +4065,7 @@ Requires <code>Trading</code> permission.</p>
 
 <p>Queries user&#39;s current position. When no symbol is specified, positions for all markets will be returned.
 Requires <code>Read</code> permission.</p>
-<h3 id='request-parameters-16'>Request Parameters</h3>
+<h3 id='request-parameters-17'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -3841,7 +4081,7 @@ Requires <code>Read</code> permission.</p>
 <td>Market symbol</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-16'>Response Content</h3>
+<h3 id='response-content-17'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4031,7 +4271,7 @@ Requires <code>Read</code> permission.</p>
 <p><code>POST /api/v2.2/order/close_position</code></p>
 
 <p>Closes a user&#39;s position for the particular market as specified by symbol. If type is specified as LIMIT, then price is mandatory. When type is MARKET, it closes the position at market price. Requires <code>Trading</code> permission.</p>
-<h3 id='request-parameters-17'>Request Parameters</h3>
+<h3 id='request-parameters-18'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4071,7 +4311,7 @@ Requires <code>Read</code> permission.</p>
 <td>The position ID that you want to close. Mandatory when positionMode is <code>HEDGE</code> or <code>ISOLATED</code></td>
 </tr>
 </tbody></table>
-<h3 id='response-content-17'>Response Content</h3>
+<h3 id='response-content-18'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4236,7 +4476,7 @@ Requires <code>Read</code> permission.</p>
 <p><code>GET /api/v2.2/risk_limit</code></p>
 
 <p>Query risk limit for the specified market. Requires <code>Read</code> permission.</p>
-<h3 id='request-parameters-18'>Request Parameters</h3>
+<h3 id='request-parameters-19'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4252,7 +4492,7 @@ Requires <code>Read</code> permission.</p>
 <td>Market symbol</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-18'>Response Content</h3>
+<h3 id='response-content-19'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4306,7 +4546,7 @@ Requires <code>Read</code> permission.</p>
 <p><code>POST /api/v2.2/risk_limit</code></p>
 
 <p>Changes risk limit for the specified market. Requires <code>Trading</code> permission.</p>
-<h3 id='request-parameters-19'>Request Parameters</h3>
+<h3 id='request-parameters-20'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4334,7 +4574,7 @@ Requires <code>Read</code> permission.</p>
 <td>ONE_WAY(default) or HEDGE. Mandatory when positionMode is <code>HEDGE</code> or <code>ISOLATED</code></td>
 </tr>
 </tbody></table>
-<h3 id='response-content-19'>Response Content</h3>
+<h3 id='response-content-20'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4408,7 +4648,7 @@ Requires <code>Read</code> permission.</p>
 <p><code>POST /api/v2.2/leverage</code></p>
 
 <p>Change leverage values for the specified market. Requires <code>Trading</code> permission.</p>
-<h3 id='request-parameters-20'>Request Parameters</h3>
+<h3 id='request-parameters-21'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4448,7 +4688,7 @@ Requires <code>Read</code> permission.</p>
 <td>CROSS or ISOLATED(default)</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-20'>Response Content</h3>
+<h3 id='response-content-21'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4510,7 +4750,7 @@ Requires <code>Read</code> permission.</p>
 <p><code>Get /api/v2.2/leverage</code></p>
 
 <p>Get leverage value for the specified market. Requires <code>Read</code> permission.</p>
-<h3 id='request-parameters-21'>Request Parameters</h3>
+<h3 id='request-parameters-22'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4526,7 +4766,7 @@ Requires <code>Read</code> permission.</p>
 <td>Market symbol</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-21'>Response Content</h3>
+<h3 id='response-content-22'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4590,7 +4830,7 @@ Requires <code>Read</code> permission.</p>
 <p><code>POST /api/v2.2/settle_in</code></p>
 
 <p>Changes the settlement currency for the position in the current market. Requires <code>Trading</code> permission.</p>
-<h3 id='request-parameters-22'>Request Parameters</h3>
+<h3 id='request-parameters-23'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4618,7 +4858,7 @@ Requires <code>Read</code> permission.</p>
 <td>The position ID that you want to set. Mandatory when positionMode is <code>HEDGE</code> or <code>ISOLATED</code></td>
 </tr>
 </tbody></table>
-<h3 id='response-content-22'>Response Content</h3>
+<h3 id='response-content-23'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4659,7 +4899,7 @@ Requires <code>Read</code> permission.</p>
 <p><code>GET /api/v2.2/user/fees</code></p>
 
 <p>Retrieve user&#39;s trading fees. Requires <code>Read</code> permission.</p>
-<h3 id='request-parameters-23'>Request Parameters</h3>
+<h3 id='request-parameters-24'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4675,7 +4915,7 @@ Requires <code>Read</code> permission.</p>
 <td>Market symbol</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-23'>Response Content</h3>
+<h3 id='response-content-24'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4750,7 +4990,7 @@ Requires <code>Read</code> permission.</p>
 <p><code>POST /api/v2.2/order/bind/tpsl</code></p>
 
 <p>Bind TP/SL with an existing position. Requires <code>Trading</code> permission.</p>
-<h3 id='request-parameters-24'>Request Parameters</h3>
+<h3 id='request-parameters-25'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4808,7 +5048,7 @@ Requires <code>Read</code> permission.</p>
 <td>The position ID that you want to bind. Mandatory when positionMode is <code>ISOLATED</code></td>
 </tr>
 </tbody></table>
-<h3 id='response-content-24'>Response Content</h3>
+<h3 id='response-content-25'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4974,7 +5214,7 @@ Requires <code>Read</code> permission.</p>
 <p><code>GET /api/v2.2/position_mode</code></p>
 
 <p>Retrieve user&#39;s position mode. Requires <code>Read</code> permission.</p>
-<h3 id='request-parameters-25'>Request Parameters</h3>
+<h3 id='request-parameters-26'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -4990,7 +5230,7 @@ Requires <code>Read</code> permission.</p>
 <td>Market symbol</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-25'>Response Content</h3>
+<h3 id='response-content-26'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5024,7 +5264,7 @@ Requires <code>Read</code> permission.</p>
 <p><code>POST /api/v2.2/position_mode</code></p>
 
 <p>Changes position mode. Requires <code>Trading</code> permission.</p>
-<h3 id='request-parameters-26'>Request Parameters</h3>
+<h3 id='request-parameters-27'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5046,7 +5286,7 @@ Requires <code>Read</code> permission.</p>
 <td>ONE_WAY, HEDGE or ISOLATED</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-26'>Response Content</h3>
+<h3 id='response-content-27'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5106,7 +5346,7 @@ Requires <code>Read</code> permission.</p>
 <p><code>GET /api/v2.2/user/margin_setting</code></p>
 
 <p>Queries user&#39;s initial margin percentage and maintenance margin percentage. When no symbol is specified, margin percentage for all markets will be returned. Requires <code>Read</code> permission.</p>
-<h3 id='request-parameters-27'>Request Parameters</h3>
+<h3 id='request-parameters-28'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5122,7 +5362,7 @@ Requires <code>Read</code> permission.</p>
 <td>Market symbol</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-27'>Response Content</h3>
+<h3 id='response-content-28'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5189,7 +5429,7 @@ Requires <code>Read</code> permission.</p>
 <p><code>GET /api/v2.2/user/wallet</code></p>
 
 <p>Query user&#39;s wallet balance. Requires <code>Read</code> permissions on the API key.</p>
-<h3 id='request-parameters-28'>Request Parameters</h3>
+<h3 id='request-parameters-29'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5205,7 +5445,7 @@ Requires <code>Read</code> permission.</p>
 <td>Wallet name<br/><code>CROSS@</code>: Cross wallet<br/><code>ISOLATED@market</code>: Market refers to the current symbol with <code>-USDT</code> appended. Eg. BTC-PERP isolated wallet would be <code>ISOLATED@BTC-PERP-USDT</code></td>
 </tr>
 </tbody></table>
-<h3 id='response-content-28'>Response Content</h3><h4 id='wallet'>Wallet</h4>
+<h3 id='response-content-29'>Response Content</h3><h4 id='wallet'>Wallet</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5351,7 +5591,7 @@ Requires <code>Read</code> permission.</p>
 <p><code>GET /api/v2.2/user/wallet_history</code></p>
 
 <p>Get user&#39;s wallet history records on the futures wallet. Requires <code>Read</code> permission.</p>
-<h3 id='request-parameters-29'>Request Parameters</h3>
+<h3 id='request-parameters-30'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5385,7 +5625,7 @@ Requires <code>Read</code> permission.</p>
 <td>Number of records to return</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-29'>Response Content</h3>
+<h3 id='response-content-30'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5469,7 +5709,7 @@ Requires <code>Read</code> permission.</p>
 <p><strong>This API is for the users who have upgraded wallet</strong></p>
 
 <p>Gets margin information for the specified wallet or position. Requires <code>Read</code> permission.</p>
-<h3 id='request-parameters-30'>Request Parameters</h3>
+<h3 id='request-parameters-31'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5618,7 +5858,7 @@ Requires <code>Read</code> permission.</p>
 
 <p>Gets margin information for the specified wallet so that users can know which wallet they are currently using in the market.
 Requires <code>Read</code> permission.</p>
-<h3 id='request-parameters-31'>Request Parameters</h3>
+<h3 id='request-parameters-32'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5634,7 +5874,7 @@ Requires <code>Read</code> permission.</p>
 <td>Market symbol</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-30'>Response Content</h3><h4 id='wallet-2'>Wallet</h4>
+<h3 id='response-content-31'>Response Content</h3><h4 id='wallet-2'>Wallet</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5815,7 +6055,7 @@ Requires <code>Read</code> permission.</p>
 <p><code>POST /api/v2.2/user/wallet/transfer</code></p>
 
 <p>Transfers funds between user&#39;s wallet. User can specify the source and target wallet to transfer funds. Requires <code>Transfer</code> permission.</p>
-<h3 id='request-parameters-32'>Request Parameters</h3><h4 id='wallet-request'>Wallet Request</h4>
+<h3 id='request-parameters-33'>Request Parameters</h3><h4 id='wallet-request'>Wallet Request</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5883,7 +6123,7 @@ Requires <code>Read</code> permission.</p>
 <td>The value of the balance is to be transferred, example: 10</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-31'>Response Content</h3><h4 id='wallet-3'>Wallet</h4>
+<h3 id='response-content-32'>Response Content</h3><h4 id='wallet-3'>Wallet</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -6010,7 +6250,7 @@ Requires <code>Read</code> permission.</p>
 
 <p>Transfers funds between user and sub-account wallet. User can specify the source and target wallet to transfer funds,
 <code>Wallet</code> permission is required. To get supported currency list please check <a href="#query-available-currency-list-for-wallet-action">Available currency list for action</a>.</p>
-<h3 id='request-parameters-33'>Request Parameters</h3><h4 id='wallet-request-2'>Wallet Request</h4>
+<h3 id='request-parameters-34'>Request Parameters</h3><h4 id='wallet-request-2'>Wallet Request</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -6090,7 +6330,7 @@ Requires <code>Read</code> permission.</p>
 <td>The value of the balance is to be transferred, example: 10</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-32'>Response Content</h3><h4 id='wallet-4'>Wallet</h4>
+<h3 id='response-content-33'>Response Content</h3><h4 id='wallet-4'>Wallet</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -6215,7 +6455,7 @@ Requires <code>Read</code> permission.</p>
 <li><code>symbol</code> indicates the market symbol</li>
 <li><code>grouping</code> indicates the grouping granularity. Valid values are 0-8.</li>
 </ul>
-<h3 id='response-content-33'>Response Content</h3><h4 id='orderbook-object'>Orderbook Object</h4>
+<h3 id='response-content-34'>Response Content</h3><h4 id='orderbook-object'>Orderbook Object</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -6237,7 +6477,7 @@ Requires <code>Read</code> permission.</p>
 <td>Refer to data object below</td>
 </tr>
 </tbody></table>
-<h4 id='data-object'>Data Object</h4>
+<h4 id='data-object-2'>Data Object</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -6376,7 +6616,7 @@ Requires <code>Read</code> permission.</p>
 <p>To ensure that the updates are received in sequence, <code>seqNum</code> indicates the current sequence and <code>prevSeqNum</code> refers to the packet before. <code>seqNum</code> will always be one after the <code>prevSeqNum</code>. If the sequence is out of order, you will need to unsubscribe and re-subscribe to the topic again.</p>
 
 <p>Also if <a href="https://en.wikipedia.org/wiki/Order_book#Crossed_book">crossed orderbook</a> ever occurs when the best bid higher or equal to the best ask, please unsubscribe and re-subscribe to the topic again.</p>
-<h3 id='response-content-34'>Response Content</h3><h4 id='orderbook-object-2'>Orderbook Object</h4>
+<h3 id='response-content-35'>Response Content</h3><h4 id='orderbook-object-2'>Orderbook Object</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -6398,7 +6638,7 @@ Requires <code>Read</code> permission.</p>
 <td>Refer to data object below</td>
 </tr>
 </tbody></table>
-<h4 id='data-object-2'>Data Object</h4>
+<h4 id='data-object-3'>Data Object</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -6531,7 +6771,7 @@ Requires <code>Read</code> permission.</p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>To subscribe to a websocket public trade fill</p>
-<h3 id='request-parameters-34'>Request Parameters</h3>
+<h3 id='request-parameters-35'>Request Parameters</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -6553,7 +6793,7 @@ Requires <code>Read</code> permission.</p>
 <td>Topics to subscribe to.</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-35'>Response Content</h3>
+<h3 id='response-content-36'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -6604,7 +6844,7 @@ Requires <code>Read</code> permission.</p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>Subscribe to recent trade feed for a market. The topic will be <code>tradeHistoryApiV2:&lt;market&gt;</code> where <code>&lt;market&gt;</code> is the market symbol.</p>
-<h3 id='response-content-36'>Response Content</h3><h4 id='tradehistory-object'>TradeHistory Object</h4>
+<h3 id='response-content-37'>Response Content</h3><h4 id='tradehistory-object'>TradeHistory Object</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -6626,7 +6866,7 @@ Requires <code>Read</code> permission.</p>
 <td>Refer to data object below</td>
 </tr>
 </tbody></table>
-<h4 id='data-object-3'>Data Object</h4>
+<h4 id='data-object-4'>Data Object</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -6694,7 +6934,7 @@ Requires <code>Read</code> permission.</p>
   "op":"authKeyExpires",
   "args":["4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x", "1624985375123", "c410d38c681579adb335885800cff24c66171b7cc8376cfe43da1408c581748156b89bcc5a115bb496413bda481139fb"]
 }
-</code></pre></div><h3 id='request-parameters-35'>Request Parameters</h3>
+</code></pre></div><h3 id='request-parameters-36'>Request Parameters</h3>
 <p>Below details the arguments needed to be sent in.</p>
 
 <table><thead>
@@ -6776,7 +7016,7 @@ Requires <code>Read</code> permission.</p>
 </span></code></pre></div>
 <p>To receive trade notifications, subscribe to the <code>notificationApiV2</code> or <code>notificationApiV3</code> topics. It is recommended to use <code>notificationApiV3</code>, which provides market symbols in a more intuitive format, such as BTC-PERP. The WebSocket feed will push real-time, trade-level notifications to authenticated subscribers.
 Please note, if the topic is subscribed to without proper authentication, no messages will be delivered.</p>
-<h3 id='response-content-37'>Response Content</h3>
+<h3 id='response-content-38'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -6940,7 +7180,7 @@ Please note, if the topic is subscribed to without proper authentication, no mes
 
 </span></code></pre></div>
 <p>When a trade has been transacted, this topic will send the trade information back to the subscriber.</p>
-<h3 id='response-content-38'>Response Content</h3>
+<h3 id='response-content-39'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -7147,7 +7387,7 @@ Please note, if the topic is subscribed to without proper authentication, no mes
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>All futures positions will be pushed via this topic once the position changes.</p>
-<h3 id='response-content-39'>Response Content</h3>
+<h3 id='response-content-40'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -7538,7 +7778,7 @@ Please note, if the topic is subscribed to without proper authentication, no mes
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>All futures positions will be pushed via this topic once the position changes. If the user reduces the position to 0, the topic will push data with the totalContracts value of 0 once.</p>
-<h3 id='response-content-40'>Response Content</h3>
+<h3 id='response-content-41'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
