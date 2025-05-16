@@ -13,6 +13,10 @@ headingLevel: 2
 
 # Change Log
 
+## Version 1.0.7 (14th May 2025)
+
+* Add API for querying [Default Market Setting](#market-risk-limit-setting), including initial margin and maintenance margin by each market and each risk limit level. This change will take effect on 28th May, 2025.
+
 ## Version 1.0.6 (9th April 2025)
 
 * Update the description for Request field `type` for [Amend order](#amend-order). This change will take effect on 18th May, 2025.
@@ -619,6 +623,146 @@ Get funding rate history for certain symbols
 | symbol    | string | Yes      | Market symbol                                     |
 | time      | long   | Yes      | The epoch timestamp in second of the funding rate |
 | rate      | double | Yes      | Funding rate                                      |
+
+
+## Market Risk Limit Setting
+
+> Response ( Successful )
+
+```json
+{
+    "code": 1,
+    "msg": "Success",
+    "time": 1747207591721,
+    "data": [
+        {
+            "symbol": "SOL-PERP",
+            "riskLevel": 1,
+            "riskLimitValue": 10000,
+            "initialMarginRate": 0.02,
+            "maintenanceMarginRate": 0.015,
+            "maxLeverage": 50
+        },
+        {
+            "symbol": "SOL-PERP",
+            "riskLevel": 2,
+            "riskLimitValue": 20000,
+            "initialMarginRate": 0.025,
+            "maintenanceMarginRate": 0.02,
+            "maxLeverage": 40
+        },
+        {
+            "symbol": "SOL-PERP",
+            "riskLevel": 3,
+            "riskLimitValue": 30000,
+            "initialMarginRate": 0.03,
+            "maintenanceMarginRate": 0.025,
+            "maxLeverage": 33.33
+        },
+        {
+            "symbol": "SOL-PERP",
+            "riskLevel": 4,
+            "riskLimitValue": 40000,
+            "initialMarginRate": 0.035,
+            "maintenanceMarginRate": 0.03,
+            "maxLeverage": 28.57
+        },
+        {
+            "symbol": "SOL-PERP",
+            "riskLevel": 5,
+            "riskLimitValue": 50000,
+            "initialMarginRate": 0.04,
+            "maintenanceMarginRate": 0.035,
+            "maxLeverage": 25
+        },
+        {
+            "symbol": "SOL-PERP",
+            "riskLevel": 6,
+            "riskLimitValue": 60000,
+            "initialMarginRate": 0.045,
+            "maintenanceMarginRate": 0.04,
+            "maxLeverage": 22.22
+        },
+        {
+            "symbol": "SOL-PERP",
+            "riskLevel": 7,
+            "riskLimitValue": 70000,
+            "initialMarginRate": 0.05,
+            "maintenanceMarginRate": 0.045,
+            "maxLeverage": 20
+        },
+        {
+            "symbol": "SOL-PERP",
+            "riskLevel": 8,
+            "riskLimitValue": 80000,
+            "initialMarginRate": 0.055,
+            "maintenanceMarginRate": 0.05,
+            "maxLeverage": 18.18
+        },
+        {
+            "symbol": "SOL-PERP",
+            "riskLevel": 9,
+            "riskLimitValue": 90000,
+            "initialMarginRate": 0.06,
+            "maintenanceMarginRate": 0.055,
+            "maxLeverage": 16.67
+        },
+        {
+            "symbol": "SOL-PERP",
+            "riskLevel": 10,
+            "riskLimitValue": 100000,
+            "initialMarginRate": 0.065,
+            "maintenanceMarginRate": 0.06,
+            "maxLeverage": 15.38
+        }
+    ],
+    "success": true
+}
+```
+
+> Response ( Failed to find the market )
+
+```json
+{
+    "code": -2,
+    "msg": "Invalid request parameters",
+    "time": 1747207833879,
+    "data": null,
+    "success": false
+}
+```
+
+`GET /api/v2.2/market/risk_limit`
+
+Gets all default market settings, including initial margin and maintenance margin by each market and each risk limit level. You'll retrieve all markets if no symbol parameter is sent.
+
+### Request Parameters
+
+| Name               | Type    | Required | Description                                                            |
+| ---                | ---     | ---      | ---                                                                    |
+| symbol             | string  | No       | Market symbol              |
+
+### Response Content
+
+| Name                     | Type     | Required | Description                                                                                           |
+| ---                      | ---      | ---      | ---                                                                                                   |
+| code                     | integer   | Yes     | Response code                                                                                                  |
+| msg                      | integer  | Yes      | Response message                                                                                               |
+| time                     | integer  | Yes      | Response Time                                                                                                  |
+| data                     | object   | No       |  Refer to data object below                                                                                                 |
+| success                  | boolean   | Yes      | Whether or not query is successful                                                                                                  |
+
+### Data Object
+
+| Name                     | Type     | Required | Description                                                                                           |
+| ---                      | ---      | ---      | ---                                                                                                   |
+| symbol                   | string   | Yes      | Market symbol                                                                                                |
+| riskLevel                | integer  | Yes      | Risk level                                                                                                 |
+| riskLimitValue           | integer  | Yes      | Risk limit value for current risk level in coin size                                                                                                  |
+| initialMarginRate        | double   | Yes      | Initial margin rate                                                                                     |
+| maintenanceMarginRate    | double   | Yes      | Maintenance margin rate                                                                                                  |
+| maxLeverage              | double   | Yes      | Max leverage for current risk level                                                                                                  |
+
 
 # Trade Endpoints
 
