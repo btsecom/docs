@@ -3115,11 +3115,22 @@ pong
 }
 ```
 
-> 响应
+> 响应 – 订阅确认
 
 ```json
 {
-  "topic": "tradeHistoryApiV2:BTC-PERP",
+  "event": "subscribe",
+  "channel": [
+    "tradeHistoryApiV2:BTC-PERP"
+  ]
+}
+```
+
+> 响应 – 数据通知
+
+```json
+{
+  "topic": "tradeHistoryApiV2",
   "data": [
   {
     "symbol": "BTC-PERP",
