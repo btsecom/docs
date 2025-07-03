@@ -3227,11 +3227,22 @@ pong
 }
 ```
 
-> 响应
+> 响应 - 订阅确认
 
 ```json
 {
-  "topic": "tradeHistoryApi:BTCPFC",
+  "event": "subscribe",
+  "channel": [
+    "tradeHistoryApi:BTCPFC"
+  ]
+}
+```
+
+> 响应 – 数据通知
+
+```json
+{
+  "topic": "tradeHistoryApi",
   "data": [
   {
     "symbol": "BTCPFC",

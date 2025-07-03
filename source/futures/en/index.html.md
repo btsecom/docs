@@ -3213,7 +3213,7 @@ To subscribe to a websocket public trade fill
 | Name    | Type   | Required | Description                                   |
 | ---     | ---    | ---      | ---                                           |
 | event   | string | Yes      | Respond with the event type                   |
-| channel | array  | Yes      | Topics which have been sucessfully subscribed |
+| channel | array  | Yes      | Topics which have been successfully subscribed |
 
 
 
@@ -3231,11 +3231,22 @@ To subscribe to a websocket public trade fill
 }
 ```
 
-> Response
+> Response - Subscription Acknowledged
 
 ```json
 {
-  "topic": "tradeHistoryApi:BTCPFC",
+  "event": "subscribe",
+  "channel": [
+    "tradeHistoryApi:BTCPFC"
+  ]
+}
+```
+
+> Response - Data Notification
+
+```json
+{
+  "topic": "tradeHistoryApi",
   "data": [
   {
     "symbol": "BTCPFC",
