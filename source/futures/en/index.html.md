@@ -15,7 +15,7 @@ headingLevel: 2
 
 ## Version 2.7.9 (9th April 2025)
 
-* Update the description for Request field `type` for [Amend order](#amend-order). This change will take effect on 18th May, 2025.
+* Update the description for Request field `type` for [`Amend order`](#amend-order). This change will take effect on 18th May, 2025.
 
 ## Version 2.7.8 (16th September 2024)
 
