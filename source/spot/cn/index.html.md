@@ -732,6 +732,19 @@ BTSE的速率限制如下:
 }
 ```
 
+> 请求（创建`MARKET STOP`订单）
+
+```json
+{
+  "symbol": "BTC-USD",
+  "size": 1,
+  "side": "BUY",
+  "type": "MARKET",
+  "txType": "Stop",
+  "triggerPrice": 32000
+}
+```
+
 > 请求（创建`LIMIT`订单）
 
 ```json
@@ -741,6 +754,20 @@ BTSE的速率限制如下:
   "price": 34000,
   "side": "BUY",
   "type": "LIMIT"
+}
+```
+
+> 请求（创建`LIMIT STOP`订单）
+
+```json
+{
+  "symbol": "BTC-USD",
+  "size": 1,
+  "price": 34000,
+  "side": "BUY",
+  "type": "LIMIT",
+  "txType": "Stop",
+  "triggerPrice": 32000
 }
 ```
 
@@ -870,9 +897,9 @@ BTSE的速率限制如下:
 | side          | string  | Yes      | 'BUY' 或 'SELL'                                                                                                                                                                                                                                                                                                                                         |
 | time_in_force | string  | No      | 订单的时间有效性<br/>GTC：有效直到取消<br/>IOC：立即取消<br/>FOK：全部成交或取消<br/>HALFMIN：订单有效时间为30秒<br/>FIVEMIN：订单有效时间为5分钟<br/>HOUR：订单有效时间为1小时<br/>TWELVEHOUR：订单有效时间为12小时<br/>DAY：订单有效时间为1天<br/>WEEK：订单有效时间为1周<br/>MONTH：订单有效时间为1个月 |
 | type          | string  | Yes      | 订单类型<br/>LIMIT：限价订单<br/>MARKET：市价订单<br/>OCO：一边成交后取消另一边<br/>PEG：价格根据指数价格偏差而定                                                                                                                                                                                        |
-| txType        | string  | No      | 用于止损单或触发单<br/>STOP：止损单，'stopPrice' 为是否必须项<br/>TRIGGER：触发单，'triggerPrice' 为是否必须项<br/>LIMIT：默认，当不是止损单或触发单时使用                                                                                                                                                  |
-| stopPrice     | double  | No      | 创建止损单或OCO订单时为是否必须项。表示触发价格                                                                                                                                                                                                                                                                                                    |
-| triggerPrice  | double  | No      | 创建触发单或OCO订单时为是否必须项。表示触发价格                                                                                                                                                                                                                                                                                                  |
+| txType        | string  | No      | 用于止损单或触发单<br/>STOP：止损单，'triggerPrice' 为必须项<br/>TRIGGER：触发单，'triggerPrice' 为必须项<br/>LIMIT：默认，当不是止损单或触发单时使用                                                                                                                                                  |
+| stopPrice     | double  | No      | 创建OCO订单时为必须项。表示触发价格                                                                                                                                                                                                                                                                                                    |
+| triggerPrice  | double  | No      | 创建止损单、触发单或OCO订单时为必须项。表示触发价格                                                                                                                                                                                                                                                                                                  |
 | trailValue    | double  | No      | 跟踪值                                                                                                                                                                                                                                                                                                                                                  |
 | postOnly      | boolean    | No      | boolean，指示是否为仅限挂单。对于仅限挂单，交易员将支付挂单方的费用                                                                                                                                                                                                                                                                     |
 | clOrderID     | string  | No      | 自定义订单ID                                                                                                                                                                                                                                                                                                                                            |

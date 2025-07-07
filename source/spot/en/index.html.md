@@ -745,6 +745,19 @@ Gets server time
 }
 ```
 
+> Request (create `MARKET STOP` order)
+
+```json
+{
+  "symbol": "BTC-USD",
+  "size": 1,
+  "side": "BUY",
+  "type": "MARKET",
+  "txType": "Stop",
+  "triggerPrice": 32000
+}
+```
+
 > Request (create `LIMIT` order)
 
 ```json
@@ -754,6 +767,20 @@ Gets server time
   "price": 34000,
   "side": "BUY",
   "type": "LIMIT"
+}
+```
+
+> Request (create `LIMIT STOP` order)
+
+```json
+{
+  "symbol": "BTC-USD",
+  "size": 1,
+  "price": 34000,
+  "side": "BUY",
+  "type": "LIMIT",
+  "txType": "Stop",
+  "triggerPrice": 32000
 }
 ```
 
@@ -883,9 +910,9 @@ Creates a new order. Requires `Trading` permission. Please note that Index Order
 | side          | string  | Yes      | 'BUY' or 'SELL'                                                                                                                                                                                                                                                                                                                                                    |
 | time_in_force | string  | No       | Time validity of the order<br/>GTC: Good till Cancel<br/>IOC: Immediate or Cancel<br/>FOK: Fill or Kill<br/>HALFMIN: Order valid for 30 seconds<br/>FIVEMIN: Order valid for 5 mins<br/> HOUR: Order valid for an hour<br/>TWELVEHOUR: Order valid for 12 hours<br/>DAY: Order valid for a day<br/>WEEK: Order valid for a week<br/>MONTH: Order valid for a month |
 | type          | string  | Yes      | Order type<br/>LIMIT: Limit Orders<br/>MARKET: Market Orders<br/>OCO: One cancel the other<br/>PEG: price is according to a deviation to the Index price                                                                                                                                                                                                           |
-| txType        | string  | No       | Used for Stop orders or trigger orders<br/>STOP: Stop Order, `stopPrice` is mandatory<br/>TRIGGER: Trigger order, `triggerPrice` is mandatory<br/>LIMIT: Default, used when its not a Stop order nor Trigger order                                                                                                                                                 |
-| stopPrice     | double  | No       | Mandatory when creating a Stop or OCO order. Indicates the stop price                                                                                                                                                                                                                                                                                              |
-| triggerPrice  | double  | No       | Mandatory when creating a Trigger or OCO order. Indicates the trigger price                                                                                                                                                                                                                                                                                        |
+| txType        | string  | No       | Used for Stop orders or trigger orders<br/>STOP: Stop Order, `triggerPrice` is mandatory<br/>TRIGGER: Trigger order, `triggerPrice` is mandatory<br/>LIMIT: Default, used when its not a Stop order nor Trigger order                                                                                                                                                 |
+| stopPrice     | double  | No       | Mandatory when creating an OCO order. Indicates the stop price                                                                                                                                                                                                                                                                                              |
+| triggerPrice  | double  | No       | Mandatory when creating a Stop, Trigger or OCO order. Indicates the trigger price                                                                                                                                                                                                                                                                                        |
 | trailValue    | double  | No       | Trail value                                                                                                                                                                                                                                                                                                                                                        |
 | postOnly      | boolean | No       | Boolean to indicate if this is a post only order. For post only orders, traders are charged maker fees                                                                                                                                                                                                                                                             |
 | clOrderID     | string  | No       | Custom order Id                                                                                                                                                                                                                                                                                                                                                    |
