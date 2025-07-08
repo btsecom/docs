@@ -37,7 +37,7 @@ headingLevel: 2
 
 * Add API for querying [`User Initial Margin Percentage And Maintenance Margin Percentage`](#query-user-initial-margin-percentage-and-maintenance-margin-percentage)
 
-## Version 1.0.1 (10th Jul 2024)
+## Version 1.0.1 (10th July 2024)
 
 * Add [`Rate Limit Mechanism Description`](#mechanism-description) description
 
