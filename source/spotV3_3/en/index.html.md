@@ -42,7 +42,7 @@ For the following endpoints, the fields `size`, `fillSize`, `originalSize` and `
   * [`Amend Order`](#amend-order)
   * [`Cancel Order`](#cancel-order)
 
-### Updated Fields for Query Order 
+### Updated Fields for Order Query Endpoints 
 
 To improve data structure clarity and consistency, the following legacy fields will be deprecated:
   * `size`
