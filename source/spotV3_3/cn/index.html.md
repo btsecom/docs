@@ -1671,14 +1671,14 @@ BTSE的速率限制如下:
 {
   "op": "subscribe",
   "args": [
-    "snapshotL1V2:BTC-USD"
+    "snapshotL1:BTC-USD"
   ]
 }
 
 {
   "op": "unsubscribe",
   "args": [
-    "snapshotL1V2:BTC-USD"
+    "snapshotL1:BTC-USD"
   ]
 }
 ```
@@ -1687,7 +1687,7 @@ BTSE的速率限制如下:
 
 ```json
 {
-  "topic": "snapshotL1V2:BTC-USD",
+  "topic": "snapshotL1:BTC-USD",
   "data": {
     "bids": [
       [
@@ -1701,7 +1701,7 @@ BTSE的速率限制如下:
           "1.34133"
       ]
     ],
-    "type": "snapshotL1V2",
+    "type": "snapshotL1",
     "symbol": "BTC-USD",
     "timestamp": 1680750154232
   }
@@ -1739,7 +1739,7 @@ BTSE的速率限制如下:
 {
   "op": "subscribe",
   "args": [
-    "updateV2:BTC-USD_0"
+    "update:BTC-USD_0"
   ]
 }
 ```
@@ -1748,7 +1748,7 @@ BTSE的速率限制如下:
 {
   "op": "unsubscribe",
   "args": [
-    "updateV2:BTC-USD_0"
+    "update:BTC-USD_0"
   ]
 }
 ```
@@ -1757,7 +1757,7 @@ BTSE的速率限制如下:
 
 ```json
 {
-  "topic": "updateV2:BTC-USD_0",
+  "topic": "update:BTC-USD_0",
   "data": {
     "bids": [
       [
@@ -1814,7 +1814,7 @@ BTSE的速率限制如下:
 
 ```json
 {
-  "topic": "updateV2:BTC-USD",
+  "topic": "update:BTC-USD",
   "data": {
     "bids": [],
     "asks": [
@@ -1836,7 +1836,7 @@ BTSE的速率限制如下:
 }
 ```
 
-通过端点 `wss://ws.btse.com/ws/oss/spot` 订阅订单簿的增量更新。主题的格式将为 `updateV2:symbol_grouping`（例如 `updateV2:BTC-USD_0`）。收到的第一个响应将是当前订单簿的快照（在 `type` 字段中指示），并返回50个级别。随后的数据包将发送增量更新，其类型为 `delta`。
+通过端点 `wss://ws.btse.com/ws/oss/spot` 订阅订单簿的增量更新。主题的格式将为 `update:symbol_grouping`（例如 `update:BTC-USD_0`）。收到的第一个响应将是当前订单簿的快照（在 `type` 字段中指示），并返回50个级别。随后的数据包将发送增量更新，其类型为 `delta`。
 
 买单和卖单将在 `price` 和 `size` 元组中发送。发送的大小将是价格的新更新大小。如果发送了 `0` 的值，则应从订单簿的本地副本中删除该价格。
 
@@ -1906,7 +1906,7 @@ pong
 {
   "op": "subscribe",
   "args": [
-    "tradeHistoryApiV2:BTC-USD"
+    "tradeHistoryApi:BTC-USD"
   ]
 }
 ```
@@ -1917,7 +1917,7 @@ pong
 {
   "event": "subscribe",
   "channel": [
-    "tradeHistoryApiV2:BTC-USD"
+    "tradeHistoryApi:BTC-USD"
   ]
 }
 ```
@@ -1949,7 +1949,7 @@ pong
 {
   "op": "subscribe",
   "args": [
-    "tradeHistoryApiV2:BTC-USD"
+    "tradeHistoryApi:BTC-USD"
   ]
 }
 ```
@@ -1958,7 +1958,7 @@ pong
 
 ```json
 {
-  "topic": "tradeHistoryApiV2:BTC-USD",
+  "topic": "tradeHistoryApi:BTC-USD",
   "data": [
   {
     "symbol": "BTC-USD",
@@ -1972,7 +1972,7 @@ pong
 }
 ```
 
-订阅市场的最近交易记录。主题将为 `tradeHistoryApiV2:<market>`，其中 `<market>` 是市场符号。
+订阅市场的最近交易记录。主题将为 `tradeHistoryApi:<market>`，其中 `<market>` 是市场符号。
 
 ### 响应内容
 
@@ -2125,7 +2125,7 @@ echo -n "/ws/spot1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6726
 ```json
 {
     "op":"subscribe",
-    "args":["fillsV2"]
+    "args":["fills"]
 }
 
 ```
@@ -2134,7 +2134,7 @@ echo -n "/ws/spot1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6726
 
 ```json
 {
-  "topic": "fillsV2",
+  "topic": "fills",
   "data": [{
     "orderId": "order id",
     "serialId": "serial ID after insertion into DB",

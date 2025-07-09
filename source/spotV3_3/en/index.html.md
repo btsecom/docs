@@ -1690,14 +1690,14 @@ Query investment history. Requires `Wallet` permission.
 {
   "op": "subscribe",
   "args": [
-    "snapshotL1V2:BTC-USD"
+    "snapshotL1:BTC-USD"
   ]
 }
 
 {
   "op": "unsubscribe",
   "args": [
-    "snapshotL1V2:BTC-USD"
+    "snapshotL1:BTC-USD"
   ]
 }
 ```
@@ -1706,7 +1706,7 @@ Query investment history. Requires `Wallet` permission.
 
 ```json
 {
-  "topic": "snapshotL1V2:BTC-USD",
+  "topic": "snapshotL1:BTC-USD",
   "data": {
     "bids": [
       [
@@ -1758,7 +1758,7 @@ Subscribe to the Level 1 Orderbook through the endpoint `wss://ws.btse.com/ws/os
 {
   "op": "subscribe",
   "args": [
-    "updateV2:BTC-USD_0"
+    "update:BTC-USD_0"
   ]
 }
 ```
@@ -1767,7 +1767,7 @@ Subscribe to the Level 1 Orderbook through the endpoint `wss://ws.btse.com/ws/os
 {
   "op": "unsubscribe",
   "args": [
-    "updateV2:BTC-USD_0"
+    "update:BTC-USD_0"
   ]
 }
 ```
@@ -1776,7 +1776,7 @@ Subscribe to the Level 1 Orderbook through the endpoint `wss://ws.btse.com/ws/os
 
 ```json
 {
-  "topic": "updateV2:BTC-USD_0",
+  "topic": "update:BTC-USD_0",
   "data": {
     "bids": [
       [
@@ -1833,7 +1833,7 @@ Subscribe to the Level 1 Orderbook through the endpoint `wss://ws.btse.com/ws/os
 
 ```json
 {
-  "topic": "updateV2:BTC-USD",
+  "topic": "update:BTC-USD",
   "data": {
     "bids": [],
     "asks": [
@@ -1855,7 +1855,7 @@ Subscribe to the Level 1 Orderbook through the endpoint `wss://ws.btse.com/ws/os
 }
 ```
 
-Subscribe to Orderbook incremental updates through the endpoint `wss://ws.btse.com/ws/oss/spot`. The format of topic will be `updateV2:symbol_grouping` (eg. `updateV2:BTC-USD_0`). The first response received will be a snapshot of the current orderbook (this is indicated in the `type` field) and 50 levels will be returned. Incremental updates will be sent in subsequent packets with type `delta`.
+Subscribe to Orderbook incremental updates through the endpoint `wss://ws.btse.com/ws/oss/spot`. The format of topic will be `update:symbol_grouping` (eg. `update:BTC-USD_0`). The first response received will be a snapshot of the current orderbook (this is indicated in the `type` field) and 50 levels will be returned. Incremental updates will be sent in subsequent packets with type `delta`.
 
 Bids and asks will be sent in `price` and `size` tuples. The size sent will be the new updated size for the price. If a value of `0` is sent, the price should be removed from the local copy of the orderbook.
 
@@ -1925,7 +1925,7 @@ pong
 {
   "op": "subscribe",
   "args": [
-    "tradeHistoryApiV2:BTC-USD"
+    "tradeHistoryApi:BTC-USD"
   ]
 }
 ```
@@ -1936,7 +1936,7 @@ pong
 {
   "event": "subscribe",
   "channel": [
-    "tradeHistoryApiV2:BTC-USD"
+    "tradeHistoryApi:BTC-USD"
   ]
 }
 ```
@@ -1968,7 +1968,7 @@ to subscribe to a websocket public trade fill
 {
   "op": "subscribe",
   "args": [
-    "tradeHistoryApiV2:BTC-USD"
+    "tradeHistoryApi:BTC-USD"
   ]
 }
 ```
@@ -1977,7 +1977,7 @@ to subscribe to a websocket public trade fill
 
 ```json
 {
-  "topic": "tradeHistoryApiV2:BTC-USD",
+  "topic": "tradeHistoryApi:BTC-USD",
   "data": [
   {
     "symbol": "BTC-USD",
@@ -1991,7 +1991,7 @@ to subscribe to a websocket public trade fill
 }
 ```
 
-Subscribe to recent trade feed for a market. The topic will be `tradeHistoryApiV2:<market>` where `<market>` is the market symbol.
+Subscribe to recent trade feed for a market. The topic will be `tradeHistoryApi:<market>` where `<market>` is the market symbol.
 
 ### Response Content
 
@@ -2144,7 +2144,7 @@ Receive trade notifications by subscribing to the topic `notificationApiV3`. The
 ```json
 {
     "op":"subscribe",
-    "args":["fillsV2"]
+    "args":["fills"]
 }
 
 ```
@@ -2153,7 +2153,7 @@ Receive trade notifications by subscribing to the topic `notificationApiV3`. The
 
 ```json
 {
-  "topic": "fillsV2",
+  "topic": "fills",
   "data": [{
     "orderId": "order id",
     "serialId": "serial ID after insertion into DB",

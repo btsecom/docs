@@ -3091,7 +3091,7 @@ pong
 {
   "op": "subscribe",
   "args": [
-    "tradeHistoryApiV3:BTC-PERP"
+    "tradeHistoryApiV2:BTC-PERP"
   ]
 }
 ```
@@ -3102,7 +3102,7 @@ pong
 {
   "event": "subscribe",
   "channel": [
-    "tradeHistoryApiV3:BTC-PERP"
+    "tradeHistoryApiV2:BTC-PERP"
   ]
 }
 ```
@@ -3134,7 +3134,7 @@ pong
 {
   "op": "subscribe",
   "args": [
-    "tradeHistoryApiV3:BTC-PERP"
+    "tradeHistoryApiV2:BTC-PERP"
   ]
 }
 ```
@@ -3145,7 +3145,7 @@ pong
 {
   "event": "subscribe",
   "channel": [
-    "tradeHistoryApiV3:BTC-PERP"
+    "tradeHistoryApiV2:BTC-PERP"
   ]
 }
 ```
@@ -3154,7 +3154,7 @@ pong
 
 ```json
 {
-  "topic": "tradeHistoryApiV3:BTC-PERP",
+  "topic": "tradeHistoryApiV2",
   "data": [
   {
     "symbol": "BTC-PERP",
@@ -3168,7 +3168,7 @@ pong
 }
 ```
 
-订阅市场的最近交易提要。主题将是 `tradeHistoryApiV3:<market>`，其中`<market>` 是市场符号。
+订阅市场的最近交易提要。主题将是 `tradeHistoryApiV2:<market>`，其中`<market>` 是市场符号。
 
 ### 响应内容
 
@@ -3315,7 +3315,7 @@ WebSocket 将向已认证的订阅者推送实时交易级别的通知。Websock
 ```json
 {
   "op":"subscribe",
-  "args":["fillsV3"]
+  "args":["fillsV2"]
 }
 ```
 
@@ -3323,7 +3323,7 @@ WebSocket 将向已认证的订阅者推送实时交易级别的通知。Websock
 
 ```json
 {
-    "topic": "fillsV3",
+    "topic": "fillsV2",
     "id": "",
     "data": [
         {
@@ -3379,7 +3379,7 @@ WebSocket 将向已认证的订阅者推送实时交易级别的通知。Websock
 ```json
 {
   "op":"subscribe",
-  "args":["allPositionV4"]
+  "args":["allPositionV3"]
 }
 ```
 
@@ -3387,7 +3387,7 @@ WebSocket 将向已认证的订阅者推送实时交易级别的通知。Websock
 
 ```json
 {
-  "topic": "allPositionV4",
+  "topic": "allPositionV3",
   "data": [{
     "requestId": 0,
     "username": "btse",
@@ -3533,14 +3533,14 @@ WebSocket 将向已认证的订阅者推送实时交易级别的通知。Websock
 ```json
 {
   "op":"subscribe",
-  "args":["positionsV3"]
+  "args":["positionsV2"]
 }
 ```
 > 响应
 
 ```json
 {
-  "topic": "positionsV3",
+  "topic": "positionsV2",
   "data": [{
     "orderID": null,
     "requestId": 0,
@@ -3637,7 +3637,7 @@ WebSocket 将向已认证的订阅者推送实时交易级别的通知。Websock
 
 ```json
 {
-  "topic": "positionsV3",
+  "topic": "positionsV2",
   "data": [{
     "requestId": 0,
     "username": "btse",
