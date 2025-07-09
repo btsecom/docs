@@ -700,8 +700,8 @@ Gets server time
     "currentOrderQuoteSize":null,
     "filledBaseSize":0,
     "totalFilledBaseSize":0,
-    "remainingBaseSize":10,
-    "remainingQuoteSize":null,
+    "remainingOrderBaseSize":10,
+    "remainingOrderQuoteSize":null,
     "orderCurrency":"base"
   }
 ]
@@ -735,8 +735,8 @@ Gets server time
         "currentOrderQuoteSize":null,
         "filledBaseSize":0,
         "totalFilledBaseSize":0,
-        "remainingBaseSize":10,
-        "remainingQuoteSize":null,
+        "remainingOrderBaseSize":10,
+        "remainingOrderQuoteSize":null,
         "orderCurrency":"base"
     },
     {
@@ -763,8 +763,8 @@ Gets server time
         "currentOrderQuoteSize":null,
         "filledBaseSize":0,
         "totalFilledBaseSize":0,
-        "remainingBaseSize":10,
-        "remainingQuoteSize":null,
+        "remainingOrderBaseSize":10,
+        "remainingOrderQuoteSize":null,
         "orderCurrency":"base"
     }
 ]
@@ -817,8 +817,8 @@ Creates a new order. Requires `Trading` permission. Please note that Index Order
 | deviation        | double  | Yes      | Deviation value of order                                                                                                                                                                                                                                                                            |
 | originalOrderBaseSize                 | Double  | Yes      | The original order quantity in base currency. This value will not change even if adjustments are made later.                                                                           |
 | originalOrderQuoteSize                 | Double  | Yes      | The original order quantity in quote currency. This value will not change even if adjustments are made later.                                                                           |
-| currentOrderBaseSize                 | Double  | Yes      | The original order quantity in base currency. This value will not change even if adjustments are made later.                                                                           |
-| currentOrderQuoteSize                 | Double  | Yes      | he latest order quantity in quote currency, which means the sum of the filled quantity and the remaining unfilled quantity.                                                                           |
+| currentOrderBaseSize                 | Double  | Yes      | The latest order quantity in base currency, which means the sum of the filled quantity and the remaining unfilled quantity.                                                                           |
+| currentOrderQuoteSize                 | Double  | Yes      | The latest order quantity in quote currency, which means the sum of the filled quantity and the remaining unfilled quantity.                                                                           |
 | remainingOrderBaseSize                 | Double  | Yes      | The remaining order quantity in base currency = Current Order Base Size - Filled Base Size.                                                                           |
 | remainingOrderQuoteSize                 | Double  | Yes      | The remaining order quantity in quote currency = Current Order Quote Size - Filled Quote Size.                                                                           |
 | filledBaseSize                 | Double  | Yes      | The quantity of the order in base currency that has been filled.                                                                           |
@@ -859,8 +859,8 @@ Creates a new order. Requires `Trading` permission. Please note that Index Order
   "currentOrderBaseSize":10,
   "currentOrderQuoteSize":null,
   "totalFilledBaseSize":0,
-  "remainingBaseSize":10,
-  "remainingQuoteSize":null,
+  "remainingOrderBaseSize":10,
+  "remainingOrderQuoteSize":null,
   "orderCurrency":"base"
 }
 ```
@@ -905,8 +905,8 @@ Please note that this API is `Trading` permission required.
 | averageFillPrice              | Double  | Yes      | Average filled price. Returns the average filled price for partially transacted orders |
 | originalOrderBaseSize                 | Double  | Yes      | The original order quantity in base currency. This value will not change even if adjustments are made later.                                                                           |
 | originalOrderQuoteSize                 | Double  | Yes      | The original order quantity in quote currency. This value will not change even if adjustments are made later.                                                                           |
-| currentOrderBaseSize                 | Double  | Yes      | The original order quantity in base currency. This value will not change even if adjustments are made later.                                                                           |
-| currentOrderQuoteSize                 | Double  | Yes      | he latest order quantity in quote currency, which means the sum of the filled quantity and the remaining unfilled quantity.                                                                           |
+| currentOrderBaseSize                 | Double  | Yes      | The latest order quantity in base currency, which means the sum of the filled quantity and the remaining unfilled quantity.                                                                           |
+| currentOrderQuoteSize                 | Double  | Yes      | The latest order quantity in quote currency, which means the sum of the filled quantity and the remaining unfilled quantity.                                                                           |
 | remainingOrderBaseSize                 | Double  | Yes      | The remaining order quantity in base currency = Current Order Base Size - Filled Base Size.                                                                           |
 | remainingOrderQuoteSize                 | Double  | Yes      | The remaining order quantity in quote currency = Current Order Quote Size - Filled Quote Size.                                                                           |
 | totalFilledBaseSize                 | Double  | Yes      | Cumulative filled quantity of this order in base currency.                                                                           |
@@ -990,8 +990,8 @@ Please note that this API is `Trading` permission required.
     "currentOrderQuoteSize":null,
     "filledBaseSize":0,
     "totalFilledBaseSize":0,
-    "remainingBaseSize":10,
-    "remainingQuoteSize":null,
+    "remainingOrderBaseSize":10,
+    "remainingOrderQuoteSize":null,
     "orderCurrency":"base"
   }
 ]
@@ -1037,8 +1037,8 @@ Amend the price or size or trigger price of an order. For trigger orders, if the
 | deviation        | double  | Yes      | Deviation value of order                                                                                                                                                                                                                                                                            |
 | originalOrderBaseSize                 | Double  | Yes      | The original order quantity in base currency. This value will not change even if adjustments are made later.                                                                           |
 | originalOrderQuoteSize                 | Double  | Yes      | The original order quantity in quote currency. This value will not change even if adjustments are made later.                                                                           |
-| currentOrderBaseSize                 | Double  | Yes      | The original order quantity in base currency. This value will not change even if adjustments are made later.                                                                           |
-| currentOrderQuoteSize                 | Double  | Yes      | he latest order quantity in quote currency, which means the sum of the filled quantity and the remaining unfilled quantity.                                                                           |
+| currentOrderBaseSize                 | Double  | Yes      | The latest order quantity in base currency, which means the sum of the filled quantity and the remaining unfilled quantity.                                                                           |
+| currentOrderQuoteSize                 | Double  | Yes      | The latest order quantity in quote currency, which means the sum of the filled quantity and the remaining unfilled quantity.                                                                           |
 | remainingOrderBaseSize                 | Double  | Yes      | The remaining order quantity in base currency = Current Order Base Size - Filled Base Size.                                                                           |
 | remainingOrderQuoteSize                 | Double  | Yes      | The remaining order quantity in quote currency = Current Order Quote Size - Filled Quote Size.                                                                           |
 | filledBaseSize                 | Double  | Yes      | The quantity of the order in base currency that has been filled.                                                                           |
@@ -1082,8 +1082,8 @@ Amend the price or size or trigger price of an order. For trigger orders, if the
     "currentOrderQuoteSize":null,
     "filledBaseSize":0,
     "totalFilledBaseSize":0,
-    "remainingBaseSize":10,
-    "remainingQuoteSize":null,
+    "remainingOrderBaseSize":10,
+    "remainingOrderQuoteSize":null,
     "orderCurrency":"base"
   }
 ]
@@ -1116,8 +1116,8 @@ Amend the price or size or trigger price of an order. For trigger orders, if the
     "currentOrderQuoteSize":null,
     "filledBaseSize":0,
     "totalFilledBaseSize":0,
-    "remainingBaseSize":10,
-    "remainingQuoteSize":null,
+    "remainingOrderBaseSize":10,
+    "remainingOrderQuoteSize":null,
     "orderCurrency":"base"
 
   },
@@ -1145,8 +1145,8 @@ Amend the price or size or trigger price of an order. For trigger orders, if the
     "currentOrderQuoteSize":null,
     "filledBaseSize":0,
     "totalFilledBaseSize":0,
-    "remainingBaseSize":10,
-    "remainingQuoteSize":null,
+    "remainingOrderBaseSize":10,
+    "remainingOrderQuoteSize":null,
     "orderCurrency":"base"
   }
 ]
@@ -1187,8 +1187,8 @@ Cancels pending orders that has not yet been transacted. The `orderID` is a uniq
 | deviation        | double  | Yes      | Deviation value of order                                                                                                                                                                                                                                                                        |
 | originalOrderBaseSize                 | Double  | Yes      | The original order quantity in base currency. This value will not change even if adjustments are made later.                                                                           |
 | originalOrderQuoteSize                 | Double  | Yes      | The original order quantity in quote currency. This value will not change even if adjustments are made later.                                                                           |
-| currentOrderBaseSize                 | Double  | Yes      | The original order quantity in base currency. This value will not change even if adjustments are made later.                                                                           |
-| currentOrderQuoteSize                 | Double  | Yes      | he latest order quantity in quote currency, which means the sum of the filled quantity and the remaining unfilled quantity.                                                                           |
+| currentOrderBaseSize                 | Double  | Yes      | The latest order quantity in base currency, which means the sum of the filled quantity and the remaining unfilled quantity.                                                                           |
+| currentOrderQuoteSize                 | Double  | Yes      | The latest order quantity in quote currency, which means the sum of the filled quantity and the remaining unfilled quantity.                                                                           |
 | remainingOrderBaseSize                 | Double  | Yes      | The remaining order quantity in base currency = Current Order Base Size - Filled Base Size.                                                                           |
 | remainingOrderQuoteSize                 | Double  | Yes      | The remaining order quantity in quote currency = Current Order Quote Size - Filled Quote Size.                                                                           |
 | filledBaseSize                 | Double  | Yes      | The quantity of the order in base currency that has been filled.                                                                           |
@@ -1255,8 +1255,8 @@ Dead-man's switch allows the trader to send in a timeout value which is a Time t
     "currentOrderBaseSize":10,
     "currentOrderQuoteSize":null,
     "totalFilledBaseSize":0,
-    "remainingBaseSize":10,
-    "remainingQuoteSize":null,
+    "remainingOrderBaseSize":10,
+    "remainingOrderQuoteSize":null,
     "orderCurrency":"base"
   }
 ]
@@ -1304,8 +1304,8 @@ Retrieves open orders that have not yet been matched or matched recently. Requir
 | triggered                  | bool   | Yes      | Indicate whether the order is triiggered                                               |
  originalOrderBaseSize                 | Double  | Yes      | The original order quantity in base currency. This value will not change even if adjustments are made later.                                                                           |
 | originalOrderQuoteSize                 | Double  | Yes      | The original order quantity in quote currency. This value will not change even if adjustments are made later.                                                                           |
-| currentOrderBaseSize                 | Double  | Yes      | The original order quantity in base currency. This value will not change even if adjustments are made later.                                                                           |
-| currentOrderQuoteSize                 | Double  | Yes      | he latest order quantity in quote currency, which means the sum of the filled quantity and the remaining unfilled quantity.                                                                           |
+| currentOrderBaseSize                 | Double  | Yes      | The latest order quantity in base currency, which means the sum of the filled quantity and the remaining unfilled quantity.                                                                           |
+| currentOrderQuoteSize                 | Double  | Yes      | The latest order quantity in quote currency, which means the sum of the filled quantity and the remaining unfilled quantity.                                                                           |
 | remainingOrderBaseSize                 | Double  | Yes      | The remaining order quantity in base currency = Current Order Base Size - Filled Base Size.                                                                           |
 | remainingOrderQuoteSize                 | Double  | Yes      | The remaining order quantity in quote currency = Current Order Quote Size - Filled Quote Size.                                                                           |
 | totalFilledBaseSize                 | Double  | Yes      | Cumulative filled quantity of this order in base currency.                                                                           |
@@ -2097,8 +2097,8 @@ echo -n "/ws/spot1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6726
       "currentOrderQuoteSize":null,
       "filledBaseSize":0,
       "totalFilledBaseSize":0,
-      "remainingBaseSize":10,
-      "remainingQuoteSize":null,
+      "remainingOrderBaseSize":10,
+      "remainingOrderQuoteSize":null,
       "orderCurrency":"base"
     }
 }
@@ -2129,8 +2129,8 @@ Receive trade notifications by subscribing to the topic `notificationApiV3`. The
 | txType            | integer  | Yes      | Used by trigger or OCO orders. </br>0: Limit</br>1: Stop</br>2: Trigger</br>3: OCO</br>STOP indicates its a Stop order, TAKEPROFIT indicates its a take profit order, and LIMIT is when its not any of the above    |
 | originalOrderBaseSize                 | Double  | Yes      | The original order quantity in base currency. This value will not change even if adjustments are made later.                                                                           |
 | originalOrderQuoteSize                 | Double  | Yes      | The original order quantity in quote currency. This value will not change even if adjustments are made later.                                                                           |
-| currentOrderBaseSize                 | Double  | Yes      | The original order quantity in base currency. This value will not change even if adjustments are made later.                                                                           |
-| currentOrderQuoteSize                 | Double  | Yes      | he latest order quantity in quote currency, which means the sum of the filled quantity and the remaining unfilled quantity.                                                                           |
+| currentOrderBaseSize                 | Double  | Yes      | The latest order quantity in base currency, which means the sum of the filled quantity and the remaining unfilled quantity.                                                                           |
+| currentOrderQuoteSize                 | Double  | Yes      | The latest order quantity in quote currency, which means the sum of the filled quantity and the remaining unfilled quantity.                                                                           |
 | remainingOrderBaseSize                 | Double  | Yes      | The remaining order quantity in base currency = Current Order Base Size - Filled Base Size.                                                                           |
 | remainingOrderQuoteSize                 | Double  | Yes      | The remaining order quantity in quote currency = Current Order Quote Size - Filled Quote Size.                                                                           |
 | filledBaseSize                 | Double  | Yes      | The quantity of the order in base currency that has been filled.                                                                           |

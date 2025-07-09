@@ -803,8 +803,8 @@ BTSE的速率限制如下:
 | deviation        | double  | Yes      | 订单的偏差值                                                                                                                                                                                                                                                                             |
 | originalOrderBaseSize         | Double | Yes | 以基础货币计算的原始订单数量。即使后续进行了调整，此数值也不会改变 |
 | originalOrderQuoteSize        | Double | Yes | 以报价货币计算的原始订单数量。即使后续进行了调整，此数值也不会改变 |
-| currentOrderBaseSize          | Double | Yes | 以基础货币计算的当前订单数量。即使后续进行了调整，此数值也不会改变 |
-| currentOrderQuoteSize         | Double | Yes | 以报价货币计算的最新订单数量，表示已成交数量与剩余未成交数量的总和 |
+| currentOrderBaseSize          | Double | Yes | 以基础货币计算的当前订单数量。表示已成交数量与剩余未成交数量的总和 |
+| currentOrderQuoteSize         | Double | Yes | 以报价货币计算的当前订单数量，表示已成交数量与剩余未成交数量的总和 |
 | remainingOrderBaseSize        | Double | Yes | 以基础货币计算的剩余订单数量 = 当前订单基础货币数量 - 已成交的基础货币数量 |
 | remainingOrderQuoteSize       | Double | Yes | 以报价货币计算的剩余订单数量 = 当前订单报价货币数量 - 已成交的报价货币数量 |
 | filledBaseSize                | Double | Yes | 订单中已成交的基础货币数量 |
@@ -891,8 +891,8 @@ BTSE的速率限制如下:
 | averageFillPrice              | Double  | Yes      | 平均成交价格。对于部分交易的订单，返回平均成交价格 |
 | originalOrderBaseSize         | Double | Yes | 以基础货币计算的原始订单数量。即使后续进行了调整，此数值也不会改变 |
 | originalOrderQuoteSize        | Double | Yes | 以报价货币计算的原始订单数量。即使后续进行了调整，此数值也不会改变 |
-| currentOrderBaseSize          | Double | Yes | 以基础货币计算的当前订单数量。即使后续进行了调整，此数值也不会改变 |
-| currentOrderQuoteSize         | Double | Yes | 以报价货币计算的最新订单数量，表示已成交数量与剩余未成交数量的总和 |
+| currentOrderBaseSize          | Double | Yes | 以基础货币计算的当前订单数量。表示已成交数量与剩余未成交数量的总和 |
+| currentOrderQuoteSize         | Double | Yes | 以报价货币计算的当前订单数量，表示已成交数量与剩余未成交数量的总和 |
 | remainingOrderBaseSize        | Double | Yes | 以基础货币计算的剩余订单数量 = 当前订单基础货币数量 - 已成交的基础货币数量 |
 | remainingOrderQuoteSize       | Double | Yes | 以报价货币计算的剩余订单数量 = 当前订单报价货币数量 - 已成交的报价货币数量 |
 | totalFilledBaseSize           | Double | Yes | 此订单以基础货币计算的累计成交数量 |
@@ -1023,8 +1023,8 @@ BTSE的速率限制如下:
 | deviation        | double  | Yes      | 订单的偏差值                                                                                                                                                                                                                                                                                 |
 | originalOrderBaseSize         | Double | Yes | 以基础货币计算的原始订单数量。即使后续进行了调整，此数值也不会改变 |
 | originalOrderQuoteSize        | Double | Yes | 以报价货币计算的原始订单数量。即使后续进行了调整，此数值也不会改变 |
-| currentOrderBaseSize          | Double | Yes | 以基础货币计算的当前订单数量。即使后续进行了调整，此数值也不会改变 |
-| currentOrderQuoteSize         | Double | Yes | 以报价货币计算的最新订单数量，表示已成交数量与剩余未成交数量的总和 |
+| currentOrderBaseSize          | Double | Yes | 以基础货币计算的当前订单数量。表示已成交数量与剩余未成交数量的总和 |
+| currentOrderQuoteSize         | Double | Yes | 以报价货币计算的当前订单数量，表示已成交数量与剩余未成交数量的总和 |
 | remainingOrderBaseSize        | Double | Yes | 以基础货币计算的剩余订单数量 = 当前订单基础货币数量 - 已成交的基础货币数量 |
 | remainingOrderQuoteSize       | Double | Yes | 以报价货币计算的剩余订单数量 = 当前订单报价货币数量 - 已成交的报价货币数量 |
 | filledBaseSize                | Double | Yes | 订单中已成交的基础货币数量 |
@@ -1173,8 +1173,8 @@ BTSE的速率限制如下:
 | deviation          | double   | Yes      | 订单的偏差值                                                                                                                                                                                                                                                                             |
 | originalOrderBaseSize         | Double | Yes | 以基础货币计算的原始订单数量。即使后续进行了调整，此数值也不会改变 |
 | originalOrderQuoteSize        | Double | Yes | 以报价货币计算的原始订单数量。即使后续进行了调整，此数值也不会改变 |
-| currentOrderBaseSize          | Double | Yes | 以基础货币计算的当前订单数量。即使后续进行了调整，此数值也不会改变 |
-| currentOrderQuoteSize         | Double | Yes | 以报价货币计算的最新订单数量，表示已成交数量与剩余未成交数量的总和 |
+| currentOrderBaseSize          | Double | Yes | 以基础货币计算的当前订单数量。表示已成交数量与剩余未成交数量的总和 |
+| currentOrderQuoteSize         | Double | Yes | 以报价货币计算的当前订单数量，表示已成交数量与剩余未成交数量的总和 |
 | remainingOrderBaseSize        | Double | Yes | 以基础货币计算的剩余订单数量 = 当前订单基础货币数量 - 已成交的基础货币数量 |
 | remainingOrderQuoteSize       | Double | Yes | 以报价货币计算的剩余订单数量 = 当前订单报价货币数量 - 已成交的报价货币数量 |
 | filledBaseSize                | Double | Yes | 订单中已成交的基础货币数量 |
@@ -1285,8 +1285,8 @@ BTSE的速率限制如下:
 | triggered                  | boolean | Yes      | 指示订单是否已触发                                                                   |
 | originalOrderBaseSize         | Double | Yes | 以基础货币计算的原始订单数量。即使后续进行了调整，此数值也不会改变 |
 | originalOrderQuoteSize        | Double | Yes | 以报价货币计算的原始订单数量。即使后续进行了调整，此数值也不会改变 |
-| currentOrderBaseSize          | Double | Yes | 以基础货币计算的当前订单数量。即使后续进行了调整，此数值也不会改变 |
-| currentOrderQuoteSize         | Double | Yes | 以报价货币计算的最新订单数量，表示已成交数量与剩余未成交数量的总和 |
+| currentOrderBaseSize          | Double | Yes | 以基础货币计算的当前订单数量。表示已成交数量与剩余未成交数量的总和 |
+| currentOrderQuoteSize         | Double | Yes | 以报价货币计算的当前订单数量，表示已成交数量与剩余未成交数量的总和 |
 | remainingOrderBaseSize        | Double | Yes | 以基础货币计算的剩余订单数量 = 当前订单基础货币数量 - 已成交的基础货币数量 |
 | remainingOrderQuoteSize       | Double | Yes | 以报价货币计算的剩余订单数量 = 当前订单报价货币数量 - 已成交的报价货币数量 |
 | totalFilledBaseSize           | Double | Yes | 此订单以基础货币计算的累计成交数量 |
@@ -2110,8 +2110,8 @@ echo -n "/ws/spot1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6726
 | triggerPrice      | double  | Yes      | 触发价格                                                            |
 | originalOrderBaseSize         | Double | Yes | 以基础货币计算的原始订单数量。即使后续进行了调整，此数值也不会改变 |
 | originalOrderQuoteSize        | Double | Yes | 以报价货币计算的原始订单数量。即使后续进行了调整，此数值也不会改变 |
-| currentOrderBaseSize          | Double | Yes | 以基础货币计算的当前订单数量。即使后续进行了调整，此数值也不会改变 |
-| currentOrderQuoteSize         | Double | Yes | 以报价货币计算的最新订单数量，表示已成交数量与剩余未成交数量的总和 |
+| currentOrderBaseSize          | Double | Yes | 以基础货币计算的当前订单数量。表示已成交数量与剩余未成交数量的总和 |
+| currentOrderQuoteSize         | Double | Yes | 以报价货币计算的当前订单数量，表示已成交数量与剩余未成交数量的总和 |
 | remainingOrderBaseSize        | Double | Yes | 以基础货币计算的剩余订单数量 = 当前订单基础货币数量 - 已成交的基础货币数量 |
 | remainingOrderQuoteSize       | Double | Yes | 以报价货币计算的剩余订单数量 = 当前订单报价货币数量 - 已成交的报价货币数量 |
 | filledBaseSize                | Double | Yes | 订单中已成交的基础货币数量 |
