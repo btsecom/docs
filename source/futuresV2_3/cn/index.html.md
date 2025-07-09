@@ -922,7 +922,7 @@ BTSE 的速率限制如下：
     "deviation": 100.0,
     "stealth": 100.0,
     "message": "",
-    "avgFillPrice": 21000.0,
+    "avgFilledPrice": 21000.0,
     "clOrderID": "",
     "postOnly": false,
     "remainingSize": 0.0,
@@ -955,7 +955,7 @@ BTSE 的速率限制如下：
     "deviation": 100.0,
     "stealth": 100.0,
     "message": "",
-    "avgFillPrice": 0.0,
+    "avgFilledPrice": 0.0,
     "clOrderID": "",
     "postOnly": false,
     "remainingSize": 0.0,
@@ -981,7 +981,7 @@ BTSE 的速率限制如下：
     "deviation": 100.0,
     "stealth": 100.0,
     "message": "",
-    "avgFillPrice": 0.0,
+    "avgFilledPrice": 0.0,
     "clOrderID": "",
     "postOnly": false,
     "remainingSize": 0.0,
@@ -1014,7 +1014,7 @@ BTSE 的速率限制如下：
     "deviation": 100.0,
     "stealth": 100.0,
     "message": "",
-    "avgFillPrice": 21000.0,
+    "avgFilledPrice": 21000.0,
     "clOrderID": "",
     "postOnly": false,
     "remainingSize": 0.0,
@@ -1074,7 +1074,7 @@ BTSE 的速率限制如下：
 | timestamp     | long    | Yes      | 订单时间戳                                                                                                                                                                                                                                                                                         |
 | trigger       | boolean | Yes      | 如果订单是触发订单的指示器                                                                                                                                                                                                                                                                        |
 | triggerPrice  | double  | Yes      | 订单触发价格，如果订单不是触发订单则返回0                                                                                                                                                                                                                                                          |
-| avgFillPrice  | double  | Yes      | 平均成交价格。对于部分交易的订单返回平均成交价格                                                                                                                                                                                                                                                  |
+| avgFilledPrice  | double  | Yes      | 平均成交价格。对于部分交易的订单返回平均成交价格                                                                                                                                                                                                                                                  |
 | message       | string  | Yes      | 交易消息                                                                                                                                                                                                                                                                                           |
 | stealth       | double  | Yes      | 仅对Algo订单有效                                                                                                                                                                                                                                                                                   |
 | deviation     | double  | Yes      | 仅对Algo订单有效                                                                                                                                                                                                                                                                                   |
@@ -1120,7 +1120,7 @@ BTSE 的速率限制如下：
     "deviation": -10.0,
     "stealth": 10.0,
     "message": "",
-    "avgFillPrice": 0.0,
+    "avgFilledPrice": 0.0,
     "clOrderID": "60a30188-f2a2-4498-b061-7d72126c18c2",
     "postOnly": false,
     "remainingSize": 0.0,
@@ -1175,7 +1175,7 @@ BTSE 的速率限制如下：
 | timestamp     | long    | Yes      | 订单时间戳                                                                                                                                                                                                                                                                                         |
 | trigger       | boolean | Yes      | 如果订单是触发订单的指示器                                                                                                                                                                                                                                                                        |
 | triggerPrice  | double  | Yes      | 订单触发价格，如果订单不是触发订单则返回0                                                                                                                                                                                                                                                          |
-| avgFillPrice  | double  | Yes      | 平均成交价格。对于部分交易的订单返回平均成交价格                                                                                                                                                                                                                                                  |
+| avgFilledPrice  | double  | Yes      | 平均成交价格。对于部分交易的订单返回平均成交价格                                                                                                                                                                                                                                                  |
 | message       | string  | Yes      | 交易消息                                                                                                                                                                                                                                                                                           |
 | stealth       | double  | Yes      | 订单的隐秘值                                                                                                                                                                                                                                                                                       |
 | deviation     | double  | Yes      | 订单的偏差值                                                                                                                                                                                                                                                                                       |
@@ -1341,7 +1341,7 @@ BTSE 的速率限制如下：
     "deviation": 100.0,
     "stealth": 100.0,
     "message": "",
-    "avgFillPrice": 0.0,
+    "avgFilledPrice": 0.0,
     "clOrderID": "",
     "postOnly": false,
     "remainingSize": 5.0,
@@ -1392,7 +1392,7 @@ BTSE 的速率限制如下：
 | timestamp     | long    | Yes      | 订单时间戳                                                                                                                                                                                                                                                                                         |
 | trigger       | string  | Yes      | 如果订单是触发订单的指示器                                                                                                                                                                                                                                                                        |
 | triggerPrice  | string  | Yes      | 订单触发价格，如果订单不是触发订单则返回0                                                                                                                                                                                                                                                          |
-| avgFillPrice  | string  | Yes      | 平均成交价格。对于部分交易的订单返回平均成交价格                                                                                                                                                                                                                                                  |
+| avgFilledPrice  | string  | Yes      | 平均成交价格。对于部分交易的订单返回平均成交价格                                                                                                                                                                                                                                                  |
 | message       | string  | Yes      | 交易消息                                                                                                                                                                                                                                                                                           |
 | stealth       | double  | Yes      | 订单的隐秘值                                                                                                                                                                                                                                                                                       |
 | deviation     | string  | Yes      | 订单的偏差值                                                                                                                                                                                                                                                                                       |
@@ -1430,7 +1430,7 @@ BTSE 的速率限制如下：
     "deviation": 100.0,
     "stealth": 100.0,
     "message": "",
-    "avgFillPrice": 0.0,
+    "avgFilledPrice": 0.0,
     "clOrderID": "string",
     "postOnly": false,
     "remainingSize": 10.0,
@@ -1475,7 +1475,7 @@ BTSE 的速率限制如下：
 | timestamp       | long    | Yes      | 订单时间戳                                                                                                                                                                                                                                                                                                |
 | trigger         | boolean | Yes      | 表明订单是否为触发订单的指示器                                                                                                                                                                                                                                                                            |
 | triggerPrice    | double  | Yes      | 订单触发价格，如果订单不是触发订单则返回0                                                                                                                                                                                                                                                                  |
-| avgFillPrice    | double  | Yes      | 平均成交价格。对于部分交易的订单返回平均成交价格                                                                                                                                                                                                                                                          |
+| avgFilledPrice    | double  | Yes      | 平均成交价格。对于部分交易的订单返回平均成交价格                                                                                                                                                                                                                                                          |
 | message         | string  | Yes      | 交易消息                                                                                                                                                                                                                                                                                                  |
 | stealth         | double  | Yes      | 订单的隐秘值                                                                                                                                                                                                                                                                                              |
 | deviation       | double  | Yes      | 订单的偏差值                                                                                                                                                                                                                                                                                              |
@@ -1878,7 +1878,7 @@ BTSE 的速率限制如下：
     "deviation": 100.0,
     "stealth": 100.0,
     "message": "",
-    "avgFillPrice": 24010.0,
+    "avgFilledPrice": 24010.0,
     "clOrderID": "",
     "postOnly": false,
     "remainingSize": 10.0,
@@ -1924,7 +1924,7 @@ BTSE 的速率限制如下：
 | timestamp      | long    | Yes      | 订单时间戳                                                                                                                                                                                                                                                                  |
 | trigger        | string  | Yes      | 指示订单是否为触发订单                                                                                                                                                                                                                                                      |
 | triggerPrice   | string  | Yes      | 订单触发价格，如果订单不是触发订单则返回0                                                                                                                                                                                                                                   |
-| avgFillPrice   | string  | Yes      | 平均成交价格。返回部分交易订单的平均成交价格                                                                                                                                                                                                                                |
+| avgFilledPrice   | string  | Yes      | 平均成交价格。返回部分交易订单的平均成交价格                                                                                                                                                                                                                                |
 | message        | string  | Yes      | 交易消息                                                                                                                                                                                                                                                                    |
 | stealth        | double  | Yes      | 订单的隐身值                                                                                                                                                                                                                                                                |
 | deviation      | string  | Yes      | 订单的偏差值                                                                                                                                                                                                                                                                |
@@ -2238,7 +2238,7 @@ BTSE 的速率限制如下：
         "deviation": 100.0,
         "stealth": 100.0,
         "message": "",
-        "avgFillPrice": 0.0,
+        "avgFilledPrice": 0.0,
         "fillSize": 0.0,
         "clOrderID": "",
         "originalSize": 100.0,
@@ -2286,7 +2286,7 @@ BTSE 的速率限制如下：
 | timestamp     | long  | Yes       | 订单时间戳  |
 | trigger       | boolean  | Yes       | 指示订单是否为触发订单 |
 | triggerPrice  | double  | Yes       | 订单触发价格，如果订单不是触发订单，则返回0 |
-| avgFillPrice  | double  | Yes       | 平均成交价格。对于部分成交订单，返回平均成交价格 |
+| avgFilledPrice  | double  | Yes       | 平均成交价格。对于部分成交订单，返回平均成交价格 |
 | message       | string  | Yes       | 交易消息  |
 | stealth       | string  | Yes       | 仅适用于算法订单 |
 | deviation     | double  | Yes       | 仅适用于算法订单 |
@@ -3257,7 +3257,7 @@ echo -n "/ws/futures1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6
       "side": "BUY",
       "type": 76,
       "price": "Order price or transacted price",
-      "avgFillPrice": 35000,
+      "avgFilledPrice": 35000,
       "status": "<Refer to Status description on the left>",
       "clOrderID": "<Client order ID>",
       "maker": "<Maker flag, if true indicates that trade is a maker trade>",
@@ -3417,7 +3417,7 @@ WebSocket 将向已认证的订阅者推送实时交易级别的通知。Websock
     "orderModeName": "MODE_BUY",
     "marginTypeName": "FUTURES_MARGIN_CROSS",
     "currentLeverage": 0.02,
-    "avgFillPrice": 0.0,
+    "avgFilledPrice": 0.0,
     "positionId": "BTC-PERP-USDT|SHORT",
     "positionMode": "HEDGE",
     "positionDirection": "SHORT",
@@ -3515,7 +3515,7 @@ WebSocket 将向已认证的订阅者推送实时交易级别的通知。Websock
 | totalValue              | double  | Yes      |                                                    |
 | adlScoreBucket          | double  | Yes      |                                                    |
 | currentLeverage         | double  | Yes      |                                                    |
-| avgFillPrice            | double  | Yes      |                                                    |
+| avgFilledPrice            | double  | Yes      |                                                    |
 | settleWithNonUSDAsset   | string  | Yes      |                                                    |
 | takeProfitOrder | TakeProfitOrder对象 | No | 止盈订单信息                                            |
 | stopLossOrder | StopLossOrder对象 | No | 止损订单信息                                                |
@@ -3571,7 +3571,7 @@ WebSocket 将向已认证的订阅者推送实时交易级别的通知。Websock
     "orderModeName": "MODE_BUY",
     "marginTypeName": "FUTURES_MARGIN_CROSS",
     "currentLeverage": 0.02,
-    "avgFillPrice": 0.0,
+    "avgFilledPrice": 0.0,
     "settleWithNonUSDAsset": "BTC",
     "contractSize": 0.001,
     "takeProfitOrder": {
@@ -3667,7 +3667,7 @@ WebSocket 将向已认证的订阅者推送实时交易级别的通知。Websock
     "orderModeName": null,
     "marginTypeName": null,
     "currentLeverage": 0,
-    "avgFillPrice": 0,
+    "avgFilledPrice": 0,
     "settleWithNonUSDAsset": "BTC",
     "contractSize": 0.001,
     "takeProfitOrder": null,

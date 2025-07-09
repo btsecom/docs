@@ -924,7 +924,7 @@ Gets all default market settings, including initial margin and maintenance margi
     "deviation": 100.0,
     "stealth": 100.0,
     "message": "",
-    "avgFillPrice": 21000.0,
+    "avgFilledPrice": 21000.0,
     "clOrderID": "",
     "postOnly": false,
     "remainingSize": 0.0,
@@ -957,7 +957,7 @@ Gets all default market settings, including initial margin and maintenance margi
     "deviation": 100.0,
     "stealth": 100.0,
     "message": "",
-    "avgFillPrice": 0.0,
+    "avgFilledPrice": 0.0,
     "clOrderID": "",
     "postOnly": false,
     "remainingSize": 0.0,
@@ -983,7 +983,7 @@ Gets all default market settings, including initial margin and maintenance margi
     "deviation": 100.0,
     "stealth": 100.0,
     "message": "",
-    "avgFillPrice": 0.0,
+    "avgFilledPrice": 0.0,
     "clOrderID": "",
     "postOnly": false,
     "remainingSize": 0.0,
@@ -3423,7 +3423,7 @@ When a trade has been transacted, this topic will send the trade information bac
     "orderModeName": "MODE_BUY",
     "marginTypeName": "FUTURES_MARGIN_CROSS",
     "currentLeverage": 0.02,
-    "avgFillPrice": 0.0,
+    "avgFilledPrice": 0.0,
     "positionId": "BTC-PERP-USDT|SHORT",
     "positionMode": "HEDGE",
     "positionDirection": "SHORT",
@@ -3521,7 +3521,7 @@ All futures positions will be pushed via this topic once the position changes.
 | totalValue              | double  | Yes      |                                                |
 | adlScoreBucket          | double  | Yes      |                                                |
 | currentLeverage         | double  | Yes      |                                                |
-| avgFillPrice            | double  | Yes      |                                                |
+| avgFilledPrice            | double  | Yes      |                                                |
 | settleWithNonUSDAsset   | string  | Yes      |                                                |
 | takeProfitOrder        | TakeProfitOrder object | No | Take profit order info                         |
 | stopLossOrder          | StopLossOrder object   | No | Stop loss order info                           |
@@ -3577,7 +3577,7 @@ All futures positions will be pushed via this topic once the position changes.
     "orderModeName": "MODE_BUY",
     "marginTypeName": "FUTURES_MARGIN_CROSS",
     "currentLeverage": 0.02,
-    "avgFillPrice": 0.0,
+    "avgFilledPrice": 0.0,
     "settleWithNonUSDAsset": "BTC",
     "contractSize": 0.001,
     "takeProfitOrder": {

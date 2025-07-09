@@ -2062,7 +2062,7 @@ echo -n "/ws/spot1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6726
       "side": "BUY",
       "orderType": "76",
       "price": "Order price or transacted price",
-      "avgFillPrice": 35000,
+      "avgFilledPrice": 35000,
       "status": "<Refer to Status description on the left>",
       "clOrderID": "<Client order ID>",
       "maker": "<Maker flag, if true indicates that trade is a maker trade>",
