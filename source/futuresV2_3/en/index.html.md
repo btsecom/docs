@@ -3098,7 +3098,7 @@ Here is an example for topic subscription.
 {
   "op": "subscribe",
   "args": [
-    "tradeHistoryApiV2:BTC-PERP"
+    "tradeHistoryApiV3:BTC-PERP"
   ]
 }
 ```
@@ -3109,7 +3109,7 @@ Here is an example for topic subscription.
 {
   "event": "subscribe",
   "channel": [
-    "tradeHistoryApiV2:BTC-PERP"
+    "tradeHistoryApiV3:BTC-PERP"
   ]
 }
 ```
@@ -3141,7 +3141,7 @@ To subscribe to a websocket public trade fill
 {
   "op": "subscribe",
   "args": [
-    "tradeHistoryApiV2:BTC-PERP"
+    "tradeHistoryApiV3:BTC-PERP"
   ]
 }
 ```
@@ -3152,7 +3152,7 @@ To subscribe to a websocket public trade fill
 {
   "event": "subscribe",
   "channel": [
-    "tradeHistoryApiV2:BTC-PERP"
+    "tradeHistoryApiV3:BTC-PERP"
   ]
 }
 ```
@@ -3161,7 +3161,7 @@ To subscribe to a websocket public trade fill
 
 ```json
 {
-  "topic": "tradeHistoryApiV2",
+  "topic": "tradeHistoryApiV3:BTC-PERP",
   "data": [
   {
     "symbol": "BTC-PERP",
@@ -3322,7 +3322,7 @@ Please note, if the topic is subscribed to without proper authentication, no mes
 ```json
 {
   "op":"subscribe",
-  "args":["fillsV2"]
+  "args":["fillsV3"]
 }
 ```
 
@@ -3330,7 +3330,7 @@ Please note, if the topic is subscribed to without proper authentication, no mes
 
 ```json
 {
-    "topic": "fillsV2",
+    "topic": "fillsV3",
     "id": "",
     "data": [
         {
@@ -3386,7 +3386,7 @@ When a trade has been transacted, this topic will send the trade information bac
 ```json
 {
   "op":"subscribe",
-  "args":["allPositionV3"]
+  "args":["allPositionV4"]
 }
 ```
 
@@ -3394,7 +3394,7 @@ When a trade has been transacted, this topic will send the trade information bac
 
 ```json
 {
-  "topic": "allPositionV3",
+  "topic": "allPositionV4",
   "data": [{
     "requestId": 0,
     "username": "btse",
@@ -3526,12 +3526,12 @@ All futures positions will be pushed via this topic once the position changes.
 | currentLeverage         | double  | Yes      |                                                |
 | avgFillPrice            | double  | Yes      |                                                |
 | settleWithNonUSDAsset   | string  | Yes      |                                                |
-| takeProfitOrder        | TakeProfitOrder object | No | Take profit order info                         |
-| stopLossOrder          | StopLossOrder object   | No | Stop loss order info                           |
+| takeProfitOrder        | TakeProfitOrder object | No | Take profit order info                 |
+| stopLossOrder          | StopLossOrder object   | No | Stop loss order info                   |
 | positionMode            | string  | Yes      | Position mode<br/>ONE_WAY, HEDGE or ISOLATED   |
 | positionDirection       | string  | Yes      | Position direction                             |
 | positionId              | string  | Yes      | Position id                                    |
-| contractSize            | double  | Yes      | The position contract size                   |
+| contractSize            | double  | Yes      | The position contract size                     |
 
 ## Positions
 
@@ -3540,14 +3540,14 @@ All futures positions will be pushed via this topic once the position changes.
 ```json
 {
   "op":"subscribe",
-  "args":["positionsV2"]
+  "args":["positionsV3"]
 }
 ```
 > Response
 
 ```json
 {
-  "topic": "positionsV2",
+  "topic": "positionsV3",
   "data": [{
     "orderID": null,
     "requestId": 0,
@@ -3644,7 +3644,7 @@ All futures positions will be pushed via this topic once the position changes.
 
 ```json
 {
-  "topic": "positionsV2",
+  "topic": "positionsV3",
   "data": [{
     "requestId": 0,
     "username": "btse",
