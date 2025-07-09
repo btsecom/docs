@@ -688,7 +688,7 @@ Gets server time
     "stopPrice": null,
     "trigger": false,
     "message": "",
-    "averageFillPrice": 0.0,
+    "avgFilledPrice": 0.0,
     "clOrderID": null,
     "stealth": 0.1,
     "deviation": -0.1,
@@ -723,7 +723,7 @@ Gets server time
         "stopPrice": null,
         "trigger": false,
         "message": "",
-        "averageFillPrice": 0.0,
+        "avgFilledPrice": 0.0,
         "clOrderID": null,
         "stealth": 1.0,
         "deviation": 1.0,
@@ -751,7 +751,7 @@ Gets server time
         "stopPrice": null,
         "trigger": true,
         "message": "",
-        "averageFillPrice": 0.0,
+        "avgFilledPrice": 0.0,
         "clOrderID": null,
         "stealth": 1.0,
         "deviation": 1.0,
@@ -811,7 +811,7 @@ Creates a new order. Requires `Trading` permission. Please note that Index Order
 | timestamp        | long  | Yes      | Order timestamp                                                                                                                                                                                                                                                                                     |
 | trigger          | boolean  | Yes      | Indicator if order is a trigger order                                                                                                                                                                                                                                                               |
 | triggerPrice     | double  | Yes      | Order trigger price, returns 0 if order is not a trigger order                                                                                                                                                                                                                                      |
-| averageFillPrice | double  | Yes      | Average filled price. Returns the average filled price for partially transacted orders                                                                                                                                                                                                              |
+| avgFilledPrice | double  | Yes      | Average filled price. Returns the average filled price for partially transacted orders                                                                                                                                                                                                              |
 | message          | string  | Yes      | Trade messages                                                                                                                                                                                                                                                                                      |
 | stealth          | double  | Yes      | Stealth value of order                                                                                                                                                                                                                                                                              |
 | deviation        | double  | Yes      | Deviation value of order                                                                                                                                                                                                                                                                            |
@@ -840,7 +840,7 @@ Creates a new order. Requires `Trading` permission. Please note that Index Order
   "side": "SELL",
   "orderValue": 0.300102,
   "trailValue": 0,
-  "averageFillPrice": 0,
+  "avgFilledPrice": 0,
   "clOrderID": "<Client OrderID>",
   "timeInForce": "GTC",
   "timestamp": 1697766317422,
@@ -902,7 +902,7 @@ Please note that this API is `Trading` permission required.
 | triggered                     | Boolean | Yes      | Indicate whether the order is triggered                                                |
 | trailValue                    | Double  | Yes      | Trail value                                                                            |
 | clOrderID                     | String  | Yes      | Customer tag sent in by trader                                                         |
-| averageFillPrice              | Double  | Yes      | Average filled price. Returns the average filled price for partially transacted orders |
+| avgFilledPrice              | Double  | Yes      | Average filled price. Returns the average filled price for partially transacted orders |
 | originalOrderBaseSize                 | Double  | Yes      | The original order quantity in base currency. This value will not change even if adjustments are made later.                                                                           |
 | originalOrderQuoteSize                 | Double  | Yes      | The original order quantity in quote currency. This value will not change even if adjustments are made later.                                                                           |
 | currentOrderBaseSize                 | Double  | Yes      | The latest order quantity in base currency, which means the sum of the filled quantity and the remaining unfilled quantity.                                                                           |
@@ -978,7 +978,7 @@ Please note that this API is `Trading` permission required.
     "stopPrice": null,
     "trigger": false,
     "message": "",
-    "averageFillPrice": 0.0,
+    "avgFilledPrice": 0.0,
     "clOrderID": "",
     "stealth": 0.0,
     "deviation": 0.0,
@@ -1031,7 +1031,7 @@ Amend the price or size or trigger price of an order. For trigger orders, if the
 | timestamp        | long  | Yes      | Order timestamp                                                                                                                                                                                                                                                                                     |
 | trigger          | boolean  | Yes      | Indicator if order is a trigger order                                                                                                                                                                                                                                                               |
 | triggerPrice     | double  | Yes      | Order trigger price, returns 0 if order is not a trigger order                                                                                                                                                                                                                                      |
-| averageFillPrice | double  | Yes      | Average filled price. Returns the average filled price for partially transacted orders                                                                                                                                                                                                              |
+| avgFilledPrice | double  | Yes      | Average filled price. Returns the average filled price for partially transacted orders                                                                                                                                                                                                              |
 | message          | string  | Yes      | Trade messages                                                                                                                                                                                                                                                                                      |
 | stealth          | double  | Yes      | Stealth value of order                                                                                                                                                                                                                                                                              |
 | deviation        | double  | Yes      | Deviation value of order                                                                                                                                                                                                                                                                            |
@@ -1070,7 +1070,7 @@ Amend the price or size or trigger price of an order. For trigger orders, if the
     "stopPrice": null,
     "trigger": false,
     "message": "",
-    "averageFillPrice": 0.0,
+    "avgFilledPrice": 0.0,
     "clOrderID": "jack-test-1",
     "stealth": 1.0,
     "deviation": 1.0,
@@ -1104,7 +1104,7 @@ Amend the price or size or trigger price of an order. For trigger orders, if the
     "stopPrice": null,
     "trigger": false,
     "message": "",
-    "averageFillPrice": 0.0,
+    "avgFilledPrice": 0.0,
     "clOrderID": "",
     "stealth": 1.0,
     "deviation": 1.0,
@@ -1133,7 +1133,7 @@ Amend the price or size or trigger price of an order. For trigger orders, if the
     "stopPrice": null,
     "trigger": true,
     "message": "",
-    "averageFillPrice": 0.0,
+    "avgFilledPrice": 0.0,
     "clOrderID": "",
     "stealth": 1.0,
     "deviation": 1.0,
@@ -1181,7 +1181,7 @@ Cancels pending orders that has not yet been transacted. The `orderID` is a uniq
 | timestamp        | long  | Yes      | Order timestamp                                                                                                                                                                                                                                                                                 |
 | trigger          | boolean  | Yes      | Indicator if order is a trigger order                                                                                                                                                                                                                                                           |
 | triggerPrice     | double  | Yes      | Order trigger price, returns 0 if order is not a trigger order                                                                                                                                                                                                                                  |
-| averageFillPrice | double  | Yes      | Average filled price. Returns the average filled price for partially transacted orders                                                                                                                                                                                                          |
+| avgFilledPrice | double  | Yes      | Average filled price. Returns the average filled price for partially transacted orders                                                                                                                                                                                                          |
 | message          | string  | Yes      | Trade messages                                                                                                                                                                                                                                                                                  |
 | stealth          | double  | Yes      | Stealth value of order                                                                                                                                                                                                                                                                          |
 | deviation        | double  | Yes      | Deviation value of order                                                                                                                                                                                                                                                                        |
@@ -1245,7 +1245,7 @@ Dead-man's switch allows the trader to send in a timeout value which is a Time t
     "triggerStopPrice": 0.0,
     "symbol": "BTC-USD",
     "trailValue": 0.0,
-    "averageFillPrice": 0.0,
+    "avgFilledPrice": 0.0,
     "clOrderID": "_yndef1660291619198",
     "orderState": "STATUS_ACTIVE",
     "timeInForce": "GTC",
@@ -1297,7 +1297,7 @@ Retrieves open orders that have not yet been matched or matched recently. Requir
 | triggerStopPrice           | double | Yes      | Stop price, Algo Order only                                                            |
 | symbol                     | string | Yes      | Market name (e.g. BTC-USD)                                                             |
 | trailValue                 | double | Yes      | Trail value                                                                            |
-| averageFillPrice           | double | Yes      | Average filled price. Returns the average filled price for partially transacted orders |
+| avgFilledPrice           | double | Yes      | Average filled price. Returns the average filled price for partially transacted orders |
 | clOrderID                  | string | Yes      | Customer order ID                                                                      |
 | orderState                 | string | Yes      | `STATUS_ACTIVE`, `STATUS_INACTIVE`                                                     |
 | timeInForce                | string | Yes      | Order validity                                                                         |
@@ -1340,7 +1340,7 @@ Retrieves open orders that have not yet been matched or matched recently. Requir
     "total": 0,
     "serialId": 94711228,
     "timestamp": 1698118893000,
-    "averageFillPrice": 34799.000000025
+    "avgFilledPrice": 34799.000000025
   }
 ]
 ```
@@ -1395,7 +1395,7 @@ Retrieves a user's trade history which includes funding fee data. Requires `Read
 | triggerType     | integer| yes      | 1001: Stop Loss 1002: Take Profit       |
 | triggerPrice    | double | yes      | Trigger price                           |
 | wallet          | string | yes      | SPOT@ for spot transactions             |
-| averageFillPrice| string | yes      | Average fill price                      |
+| avgFilledPrice| string | yes      | Average fill price                      |
 | username        | string | yes      | Username                                |
 
 

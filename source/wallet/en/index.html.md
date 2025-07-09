@@ -292,7 +292,7 @@ The response of `depositEnable` and `withdrawEnable` is true by default under th
 | msg              | string    | Yes        | Request status message. It will be set to `Success` when the request is processed successfully. When unsuccessful, there will be an error message.                 |
 | time             | long      | Yes        | Current unix timestamp.                                 |
 
-### Data Object
+### Data Object (CryptoNetworkItem)
 
 | Name                     | Type     | Required | Description                          |
 |--------------------------|----------|----------|--------------------------------------|

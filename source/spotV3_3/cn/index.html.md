@@ -674,7 +674,7 @@ BTSE的速率限制如下:
     "stopPrice": null,
     "trigger": false,
     "message": "",
-    "averageFillPrice": 0.0,
+    "avgFilledPrice": 0.0,
     "clOrderID": null,
     "stealth": 0.1,
     "deviation": -0.1,
@@ -709,7 +709,7 @@ BTSE的速率限制如下:
         "stopPrice": null,
         "trigger": false,
         "message": "",
-        "averageFillPrice": 0.0,
+        "avgFilledPrice": 0.0,
         "clOrderID": null,
         "stealth": 1.0,
         "deviation": 1.0,
@@ -737,7 +737,7 @@ BTSE的速率限制如下:
         "stopPrice": null,
         "trigger": true,
         "message": "",
-        "averageFillPrice": 0.0,
+        "avgFilledPrice": 0.0,
         "clOrderID": null,
         "stealth": 1.0,
         "deviation": 1.0,
@@ -797,7 +797,7 @@ BTSE的速率限制如下:
 | timestamp        | long  | Yes      | 订单时间戳                                                                                                                                                                                                                                                                                |
 | trigger          | boolean    | Yes      | 指示订单是否为触发订单的标志                                                                                                                                                                                                                                                         |
 | triggerPrice     | double  | Yes      | 订单触发价格，如果订单不是触发订单，则返回0                                                                                                                                                                                                                                      |
-| averageFillPrice | double  | Yes      | 部分成交订单的平均成交价格。返回部分成交订单的平均成交价格                                                                                                                                                                                                                                  |
+| avgFilledPrice | double  | Yes      | 部分成交订单的平均成交价格。返回部分成交订单的平均成交价格                                                                                                                                                                                                                                  |
 | message          | string  | Yes      | 交易信息                                                                                                                                                                                                                                                                                   |
 | stealth          | double  | Yes      | 订单的隐身值                                                                                                                                                                                                                                                                             |
 | deviation        | double  | Yes      | 订单的偏差值                                                                                                                                                                                                                                                                             |
@@ -831,7 +831,7 @@ BTSE的速率限制如下:
   "side": "SELL",
   "orderValue": 0.300102,
   "trailValue": 0,
-  "averageFillPrice": 0,
+  "avgFilledPrice": 0,
   "clOrderID": "<Client OrderID>",
   "timeInForce": "GTC",
   "timestamp": 1697766317422,
@@ -888,7 +888,7 @@ BTSE的速率限制如下:
 | triggered                     | Boolean | Yes      | 指示订单是否已触发                         |
 | trailValue                    | Double  | Yes      | 跟踪价值                                       |
 | clOrderID                     | String  | Yes      | 由交易员发送的客户标签                          |
-| averageFillPrice              | Double  | Yes      | 平均成交价格。对于部分交易的订单，返回平均成交价格 |
+| avgFilledPrice                | Double  | Yes      | 平均成交价格。对于部分交易的订单，返回平均成交价格 |
 | originalOrderBaseSize         | Double | Yes | 以基础货币计算的原始订单数量。即使后续进行了调整，此数值也不会改变 |
 | originalOrderQuoteSize        | Double | Yes | 以报价货币计算的原始订单数量。即使后续进行了调整，此数值也不会改变 |
 | currentOrderBaseSize          | Double | Yes | 以基础货币计算的当前订单数量。表示已成交数量与剩余未成交数量的总和 |
@@ -964,7 +964,7 @@ BTSE的速率限制如下:
     "stopPrice": null,
     "trigger": false,
     "message": "",
-    "averageFillPrice": 0.0,
+    "avgFilledPrice": 0.0,
     "clOrderID": "",
     "stealth": 0.0,
     "deviation": 0.0,
@@ -1017,7 +1017,7 @@ BTSE的速率限制如下:
 | timestamp        | long    | Yes      | 订单时间戳                                                                                                                                                                                                                                                                                   |
 | trigger          | boolean | Yes      | 指示订单是否为触发订单                                                                                                                                                                                                                                                                       |
 | triggerPrice     | double  | Yes      | 订单触发价格，如果订单不是触发订单则返回0                                                                                                                                                                                                                                                     |
-| averageFillPrice | double  | Yes      | 平均成交价格。对于部分交易的订单，返回平均成交价格                                                                                                                                                                                                                                           |
+| avgFilledPrice | double  | Yes      | 平均成交价格。对于部分交易的订单，返回平均成交价格                                                                                                                                                                                                                                           |
 | message          | string  | Yes      | 交易消息                                                                                                                                                                                                                                                                                      |
 | stealth          | double  | Yes      | 订单的隐身值                                                                                                                                                                                                                                                                                 |
 | deviation        | double  | Yes      | 订单的偏差值                                                                                                                                                                                                                                                                                 |
@@ -1056,7 +1056,7 @@ BTSE的速率限制如下:
     "stopPrice": null,
     "trigger": false,
     "message": "",
-    "averageFillPrice": 0.0,
+    "avgFilledPrice": 0.0,
     "clOrderID": "jack-test-1",
     "stealth": 1.0,
     "deviation": 1.0,
@@ -1090,7 +1090,7 @@ BTSE的速率限制如下:
     "stopPrice": null,
     "trigger": false,
     "message": "",
-    "averageFillPrice": 0.0,
+    "avgFilledPrice": 0.0,
     "clOrderID": "",
     "stealth": 1.0,
     "deviation": 1.0,
@@ -1119,7 +1119,7 @@ BTSE的速率限制如下:
     "stopPrice": null,
     "trigger": true,
     "message": "",
-    "averageFillPrice": 0.0,
+    "avgFilledPrice": 0.0,
     "clOrderID": "",
     "stealth": 1.0,
     "deviation": 1.0,
@@ -1167,7 +1167,7 @@ BTSE的速率限制如下:
 | timestamp          | long   | Yes      | 订单时间戳                                                                                                                                                                                                                                                                               |
 | trigger            | boolean   | Yes      | 表示订单是否为触发订单                                                                                                                                                                                                                                                                   |
 | triggerPrice       | double   | Yes      | 订单触发价格，如果订单不是触发订单则返回0                                                                                                                                                                                                                                               |
-| averageFillPrice   | double   | Yes      | 部分成交订单的平均成交价格。返回部分成交订单的平均成交价格                                                                                                                                                                                                                                   |
+| avgFilledPrice   | double   | Yes      | 部分成交订单的平均成交价格。返回部分成交订单的平均成交价格                                                                                                                                                                                                                                   |
 | message            | string   | Yes      | 交易消息                                                                                                                                                                                                                                                                                 |
 | stealth            | double   | Yes      | 订单的隐匿值                                                                                                                                                                                                                                                                             |
 | deviation          | double   | Yes      | 订单的偏差值                                                                                                                                                                                                                                                                             |
@@ -1233,7 +1233,7 @@ BTSE的速率限制如下:
     "triggerStopPrice": 0.0,
     "symbol": "BTC-USD",
     "trailValue": 0.0,
-    "averageFillPrice": 0.0,
+    "avgFilledPrice": 0.0,
     "fillSize": 0.0,
     "clOrderID": "_yndef1660291619198",
     "orderState": "STATUS_ACTIVE",
@@ -1278,7 +1278,7 @@ BTSE的速率限制如下:
 | triggerStopPrice           | double | Yes      | 止损价格，仅适用于算法订单                                                          |
 | symbol                     | string | Yes      | 市场名称（例如，BTC-USD）                                                           |
 | trailValue                 | double | Yes      | 跟踪价值                                                                               |
-| averageFillPrice           | double | Yes      | 平均成交价格。仅适用于部分成交订单                                                   |
+| avgFilledPrice           | double | Yes      | 平均成交价格。仅适用于部分成交订单                                                   |
 | clOrderID                  | string | Yes      | 客户订单ID                                                                           |
 | orderState                 | string | Yes      | `STATUS_ACTIVE`、`STATUS_INACTIVE`                                                      |
 | timeInForce                | string | Yes      | 订单有效期                                                                           |
@@ -1321,7 +1321,7 @@ BTSE的速率限制如下:
     "total": 0,
     "serialId": 94711228,
     "timestamp": 1698118893000,
-    "averageFillPrice": 34799.000000025
+    "avgFilledPrice": 34799.000000025
   }
 ]
 ```
@@ -1376,7 +1376,7 @@ BTSE的速率限制如下:
 | triggerType     | integer| yes      | 1001: 止损 1002: 止盈       |
 | triggerPrice    | double | yes      | 触发价格                           |
 | wallet          | string | yes      | SPOT@ 用于现货交易            |
-| averageFillPrice| string | yes      | 平均成交价                     |
+| avgFilledPrice  | string | yes      | 平均成交价                     |
 | username        | string | yes      | 用户名                                |
 
 ## 查询账户费用

@@ -290,7 +290,7 @@ BTSE 的速率限制如下：
 | msg              | string    | Yes        | 請求狀態訊息。當請求成功處理時，該欄位為 `Success`；失敗時會顯示錯誤訊息。                 |
 | time             | long      | Yes        | 當前的 unix 時間戳記。                                 |
 
-### 数据对象
+### 数据对象 (CryptoNetworkItem)
 
 | Name                     | Type     | Required | Description                          |
 |--------------------------|----------|----------|--------------------------------------|

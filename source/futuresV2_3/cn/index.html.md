@@ -1047,7 +1047,7 @@ BTSE 的速率限制如下：
 | txType        | string  | No       | 用于停止订单或触发订单<br/>STOP: 停止订单，`triggerPrice` 是必填项<br/>TRIGGER: 触发订单，`triggerPrice` 是必填项<br/>LIMIT: 默认值，当其既不是停止订单也不是触发订单时使用                                                                                                                                                                                              |
 | stopPrice     | double  | No       | 创建OCO订单时为必填。表示停止价格                                                                                                                                                                                                                                                                                                                                      |
 | triggerPrice  | double  | No       | 创建停止、触发、OCO订单时为必填。表示触发价格                                                                                                                                                                                                                                                                                                                          |
-| trailValue    | double  | No       | 跟踪值                                                                                                                                                                                                                                                                                                                                                                  |
+| trailValue    | double  | No       | 跟踪价值                                                                                                                                                                                                                                                                                                                                                                  |
 | postOnly      | boolean | No       | 布尔值，表示这是否只做Maker(Post only) 订单，交易者将支付Maker手续费                                                                                                                                                                                                                                                                                                  |
 | reduceOnly    | boolean | No       | 布尔值，将这笔订单设置为只减仓, 在双向持仓时，买方`BUY`减少空头仓位，卖方`SELL`则减少多头仓位                                                                                                                                                                                                                                                                                                                                       |
 | clOrderID     | string  | No       | 自定义订单ID                                                                                                                                                                                                                                                                                                                                                            |
@@ -1266,7 +1266,7 @@ BTSE 的速率限制如下：
 | triggered                     | Boolean | Yes      | 指示订单是否已触发                         |
 | trailValue                    | Double  | Yes      | 跟踪价值                                       |
 | clOrderID                     | String  | Yes      | 由交易员发送的客户标签                          |
-| averageFillPrice              | Double  | Yes      | 平均成交价格。对于部分交易的订单，返回平均成交价格 |
+| avgFilledPrice                | Double  | Yes      | 平均成交价格。对于部分交易的订单，返回平均成交价格 |
 | remainingSize                 | Double  | Yes      | 订单上剩余的大小                              |
 | status                        | Integer | Yes      | 订单状态。请参照[`API Enum`](#api-enum)      |
 | takeProfitOrder               | TakeProfitOrder object | No | 止盈订单信息 |
@@ -1558,7 +1558,6 @@ BTSE 的速率限制如下：
     "positionDirection": null,
     "positionId": "BTC-PERP-USDT",
     "timeInForce": "GTC",
-    "averageFillPrice": 0.0,
     "contractSize": 0.0001,
     "takeProfitOrder": {
         "orderId": "ea1ab233-c79a-4503-a475-f8633ecc9d79",
@@ -1615,12 +1614,11 @@ BTSE 的速率限制如下：
 | triggerPrice                 | double  | Yes      | 订单触发价格，如果订单不是触发订单则返回0                                              |
 | triggerOriginalPrice         | double  | Yes      | 原始触发价格                                                                           |
 | triggerOrderType             | string  | Yes      | 触发订单类型 <br/>1001: 触发止损 <br/>1002: 触发获利                                   |
-| triggerTrailingStopDeviation | double  | Yes      | 保留属性                                                                               |
-| triggerStopPrice             | double  | Yes      | 保留属性                                                                               |
-| trailValue                   | double  | Yes      | 保留属性                                                                               |
+| triggerTrailingStopDeviation | double  | Yes      | 保止损价格的百分比偏差                                                                               |
+| triggerStopPrice             | double  | Yes      | 保止损价格，仅适用于算法订单                                                                               |
+| trailValue                   | double  | Yes      | 跟踪价值                                                                               |
 | reduceOnly                   | bool    | Yes      | 指示此订单是否仅为减少                                                                 |
 | avgFilledPrice               | double  | Yes      | 平均成交价格。返回部分交易订单的平均成交价格                                           |
-| averageFillPrice             | double  | Yes      | 平均成交价                                                                             |
 | stealth                      | double  | Yes      | 订单的隐身值                                                                           |
 | orderState                   | string  | Yes      | `STATUS_ACTIVE`, `STATUS_INACTIVE`                                                     |
 | takeProfitOrder    | TakeProfitOrder对象  | No | 止盈订单信息 |
@@ -1650,7 +1648,7 @@ BTSE 的速率限制如下：
     "feeCurrency": "string",
     "filledPrice": 0,
     "filledSize": 0,
-    "averageFillPrice": 0,
+    "avgFilledPrice": 0,
     "orderId": "string",
     "orderType": 0,
     "price": 0,
@@ -1723,7 +1721,7 @@ BTSE 的速率限制如下：
 | feeAmount        | long    | Yes      | 费用金额                                                                                                                                                                            |
 | feeCurrency      | long    | Yes      | 费用货币                                                                                                                                                                            |
 | filledPrice      | double  | Yes      | 平均成交价格                                                                                                                                                                        |
-| averageFillPrice | double  | Yes      | 平均成交价格                                                                                                                                                                        |
+| avgFilledPrice | double  | Yes      | 平均成交价格                                                                                                                                                                        |
 | triggerPrice     | double  | Yes      | 触发价格                                                                                                                                                                            |
 | filledSize       | long    | Yes      | 成交大小                                                                                                                                                                            |
 | orderType        | integer | Yes      | 订单类型                                                                                                                                                                            |
@@ -3619,7 +3617,7 @@ WebSocket 将向已认证的订阅者推送实时交易级别的通知。Websock
         "orderModeName": "MODE_SELL",
         "marginTypeName": "FUTURES_MARGIN_CROSS",
         "currentLeverage": 0.1113820366,
-        "averageFillPrice": 0,
+        "avgFilledPrice": 0,
         "filledSize": 0,
         "contractSize": 0.001,
         "takeProfitOrder": null,
@@ -3717,7 +3715,7 @@ WebSocket 将向已认证的订阅者推送实时交易级别的通知。Websock
 | totalValue              | double  | Yes      |                                        |
 | adlScoreBucket          | double  | Yes      |                                        |
 | currentLeverage         | double  | Yes      |                                        |
-| avgFillPrice            | double  | Yes      |                                        |
+| avgFilledPrice            | double  | Yes      |                                        |
 | settleWithNonUSDAsset   | string  | Yes      |                                        |
 | takeProfitOrder         | TakeProfitOrder object | No       | 止盈订单信息              |
 | stopLossOrder           | StopLossOrder object   | No       | 止损订单信息              |
