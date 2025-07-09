@@ -107,7 +107,7 @@ We 我们将同步优化 WebSocket 的订阅请求与数据通知之间的字段
 
 ```shell
 $ echo -n "/api/v2.3/user/wallet1624984297330" | openssl dgst -sha384 -hmac "848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx"
-(stdin)= 72021c3b7b6f88dc1bbd1bde253f08d9bb12e4ba7d9b071ae801fee15bc2347a1bab2e3fa0a230ce5fadcd9c616fe44f
+(stdin)= 2c41ab59d24d4e807ab035ef2fd4619c928320cac319751e7be2ecd03e5bf6dd31a4c85db88535bbe3e012b22d312290
 ```
 
 * 获取钱包的端点是 `https://api.btse.com/futures/api/v2.3/user/wallet`
@@ -117,7 +117,7 @@ $ echo -n "/api/v2.3/user/wallet1624984297330" | openssl dgst -sha384 -hmac "848
   * secret: `848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx`
   * Path: `/api/v2.3/user/wallet`
 * 生成的签名将是:
-  * request-sign: `72021c3b7b6f88dc1bbd1bde253f08d9bb12e4ba7d9b071ae801fee15bc2347a1bab2e3fa0a230ce5fadcd9c616fe44f`
+  * request-sign: `2c41ab59d24d4e807ab035ef2fd4619c928320cac319751e7be2ecd03e5bf6dd31a4c85db88535bbe3e012b22d312290`
 
 ### 示例 2：下订单
 
@@ -125,7 +125,7 @@ $ echo -n "/api/v2.3/user/wallet1624984297330" | openssl dgst -sha384 -hmac "848
 
 ```shell
 $ echo -n "/api/v2.3/order1624985375123{\"postOnly\":false,\"price\":8500.0,\"reduceOnly\":false,\"side\":\"BUY\",\"size\":1,\"stopPrice\":0.0,\"symbol\":\"BTC-PERP\",\"time_in_force\":\"GTC\",\"trailValue\":0.0,\"triggerPrice\":0.0,\"txType\":\"LIMIT\",\"type\":\"LIMIT\"}" | openssl dgst -sha384 -hmac "848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx"
-(stdin)= 3b900afa243651ef07a61cb6f2a4a6779c6d28e9b0a0ff9ffa3524d4945fafaa864670e45559aa01f49e62c9fb96417e
+(stdin)= 1794da8c6090ed2d97a85f5b3bae89d7993b4f2db809da7abe24be5fb70b63fea7320b321929c4ee9e3eda083ecf837f
 ```
 
 * 下订单的端点是 `https://api.btse.com/futures/api/v2.3/order`
@@ -137,7 +137,7 @@ $ echo -n "/api/v2.3/order1624985375123{\"postOnly\":false,\"price\":8500.0,\"re
   * Body: `{"postOnly":false,"price":8500.0,"reduceOnly":false,"side":"BUY","size":1,"stopPrice":0.0,"symbol":"BTC-PERP","time_in_force":"GTC","trailValue":0.0,"triggerPrice":0.0,"txType":"LIMIT","type":"LIMIT"}`
   * Encrypted Text: `/api/v2.3/order1624985375123{"postOnly":false,"price":8500.0,"reduceOnly":false,"side":"BUY","size":1,"stopPrice":0.0,"symbol":"BTC-PERP","time_in_force":"GTC","trailValue":0.0,"triggerPrice":0.0,"txType":"LIMIT","type":"LIMIT"}`
 * 生成的签名将是：
-  * request-sign: `3b900afa243651ef07a61cb6f2a4a6779c6d28e9b0a0ff9ffa3524d4945fafaa864670e45559aa01f49e62c9fb96417e`
+  * request-sign: `1794da8c6090ed2d97a85f5b3bae89d7993b4f2db809da7abe24be5fb70b63fea7320b321929c4ee9e3eda083ecf837f`
 
 
 ## 速率限制
