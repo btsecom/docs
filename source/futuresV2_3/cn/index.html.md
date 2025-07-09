@@ -3154,7 +3154,7 @@ pong
 
 ```json
 {
-  "topic": "tradeHistoryApiV2",
+  "topic": "tradeHistoryApiV2:BTC-PERP",
   "data": [
   {
     "symbol": "BTC-PERP",

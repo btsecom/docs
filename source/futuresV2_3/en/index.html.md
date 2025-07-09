@@ -3161,7 +3161,7 @@ To subscribe to a websocket public trade fill
 
 ```json
 {
-  "topic": "tradeHistoryApiV2",
+  "topic": "tradeHistoryApiV2:BTC-PERP",
   "data": [
   {
     "symbol": "BTC-PERP",
