@@ -108,18 +108,18 @@ You will need to create an API key on the BTSE platform before you can use authe
 > **HMAC SHA384 Signature**
 
 ```shell
-$ echo -n "/api/v3.2/order1624985375123{\"postOnly\":false,\"price\":8500.0,\"side\":\"BUY\",\"size\":0.002,\"stopPrice\":0.0,\"symbol\":\"BTC-USD\",\"time_in_force\":\"GTC\",\"trailValue\":0.0,\"triggerPrice\":0.0,\"txType\":\"LIMIT\",\"type\":\"LIMIT\"}" | openssl dgst -sha384 -hmac "848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx"
+$ echo -n "/api/v3.3/order1624985375123{\"postOnly\":false,\"price\":8500.0,\"side\":\"BUY\",\"size\":0.002,\"stopPrice\":0.0,\"symbol\":\"BTC-USD\",\"time_in_force\":\"GTC\",\"trailValue\":0.0,\"triggerPrice\":0.0,\"txType\":\"LIMIT\",\"type\":\"LIMIT\"}" | openssl dgst -sha384 -hmac "848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx"
 (stdin)=e9cd0babdf497b536d1e48bc9cf1fadad3426b36406b5747d77ae4e3cdc9ab556863f2d0cf78e0228c39a064ad43afb7
 ```
 
-* Endpoint to place an order is `https://api.btse.com/spot/api/v3.2/order`
+* Endpoint to place an order is `https://api.btse.com/spot/api/v3.3/order`
 * Assume we have the values as follows:
   * request-nonce: `1624985375123`
   * request-api: `4e9536c79f0fdd72bf04f2430982d3f61d9d76c996f0175bbba470d69d59816x`
   * secret: `848db84ac252b6726e5f6e7a711d9c96d9fd77d020151b45839a5b59c37203bx`
-  * Path: `/api/v3.2/order`
+  * Path: `/api/v3.3/order`
   * Body: `{"postOnly":false,"price":8500.0,"side":"BUY","size":0.002,"stopPrice":0.0,"symbol":"BTC-USD","time_in_force":"GTC","trailValue":0.0,"triggerPrice":0.0,"txType":"LIMIT","type":"LIMIT"}`
-  * Encrypted Text: `/api/v3.2/order1624985375123{"postOnly":false,"price":8500.0,"side":"BUY","size":0.002,"stopPrice":0.0,"symbol":"BTC-USD","time_in_force":"GTC","trailValue":0.0,"triggerPrice":0.0,"txType":"LIMIT","type":"LIMIT"}`
+  * Encrypted Text: `/api/v3.3/order1624985375123{"postOnly":false,"price":8500.0,"side":"BUY","size":0.002,"stopPrice":0.0,"symbol":"BTC-USD","time_in_force":"GTC","trailValue":0.0,"triggerPrice":0.0,"txType":"LIMIT","type":"LIMIT"}`
 * Generated signature will be:
   * request-sign: `e9cd0babdf497b536d1e48bc9cf1fadad3426b36406b5747d77ae4e3cdc9ab556863f2d0cf78e0228c39a064ad43afb7`
 
@@ -269,7 +269,7 @@ When connecting up the BTSE API, you will come across number codes that represen
 ]
 ```
 
-`GET /api/v3.2/market_summary`
+`GET /api/v3.3/market_summary`
 
 Gets market summary information. If no symbol parameter is sent, then all markets will be retrieved.
 
@@ -344,7 +344,7 @@ Gets market summary information. If no symbol parameter is sent, then all market
 ]
 ```
 
-`GET /api/v3.2/ohlcv`
+`GET /api/v3.3/ohlcv`
 
 Gets candle stick charting data. Default of 300 data points will be returned at any one time.
 
@@ -387,7 +387,7 @@ Returns a 2D array with the indexes described in the table below
 ]
 ```
 
-`GET /api/v3.2/price`
+`GET /api/v3.3/price`
 
 Retrieve current prices on the platform. If no symbol specified, all symbols will be returned.
 
@@ -430,7 +430,7 @@ Retrieve current prices on the platform. If no symbol specified, all symbols wil
 }
 ```
 
-`GET /api/v3.2/orderbook`
+`GET /api/v3.3/orderbook`
 
 Retrieves a Level 2 snapshot of the orderbook and allows you to specify grouping and also bid / asks depth
 
@@ -485,7 +485,7 @@ Retrieves a Level 2 snapshot of the orderbook and allows you to specify grouping
 }
 ```
 
-`GET /api/v3.2/orderbook/L2`
+`GET /api/v3.3/orderbook/L2`
 
 Retrieves a Level 2 snapshot of the orderbook
 
@@ -532,7 +532,7 @@ Retrieves a Level 2 snapshot of the orderbook
 ]
 ```
 
-`GET /api/v3.2/trades`
+`GET /api/v3.3/trades`
 
 Get trade fills for the market specified by `symbol`
 
@@ -577,7 +577,7 @@ Get trade fills for the market specified by `symbol`
 }
 ```
 
-`GET /api/v3.2/time`
+`GET /api/v3.3/time`
 
 Gets server time
 
@@ -755,7 +755,7 @@ Gets server time
 ]
 ```
 
-`POST /api/v3.2/order` or `POST /api/v3.2/order/peg` (The 2 endpoints work identically)
+`POST /api/v3.3/order` or `POST /api/v3.3/order/peg` (The 2 endpoints work identically)
 
 Creates a new order. Requires `Trading` permission. Please note that Index Order only supports USD quotes.
 
@@ -785,13 +785,11 @@ Creates a new order. Requires `Trading` permission. Please note that Index Order
 | ---              | ---     | ---      | ---                                                                                                                                                                                                                                                                                                 |
 | symbol           | string  | Yes      | Market symbol                                                                                                                                                                                                                                                                                       |
 | clOrderID        | string  | Yes      | Customer tag sent in by trader                                                                                                                                                                                                                                                                      |
-| fillSize         | double  | Yes      | Trade filled size                                                                                                                                                                                                                                                                                   |
 | orderID          | string  | Yes      | Order ID                                                                                                                                                                                                                                                                                            |
 | orderType        | integer  | Yes      | Order type <br/>76: Limit order<br/>77: Market order<br/>80: Peg/Algo order                                                                                                                                                                                                                         |
 | postOnly         | boolean | Yes      | Indicates if order is a post only order                                                                                                                                                                                                                                                             |
 | price            | double  | Yes      | Order price                                                                                                                                                                                                                                                                                         |
 | side             | string  | Yes      | Order side<br/>BUY or SELL                                                                                                                                                                                                                                                                          |
-| size             | double  | Yes      | Order size                                                                                                                                                                                                                                                                                          |
 | status           | integer | Yes      | Order status<br/>	2: Order Inserted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>8: Insufficient Balance<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request Failed |
 | stopPrice        | double  | Yes      | Stop price                                                                                                                                                                                                                                                                                          |
 | time_in_force    | string  | Yes      | Order validity                                                                                                                                                                                                                                                                                      |
@@ -802,8 +800,15 @@ Creates a new order. Requires `Trading` permission. Please note that Index Order
 | message          | string  | Yes      | Trade messages                                                                                                                                                                                                                                                                                      |
 | stealth          | double  | Yes      | Stealth value of order                                                                                                                                                                                                                                                                              |
 | deviation        | double  | Yes      | Deviation value of order                                                                                                                                                                                                                                                                            |
-| remainingSize    | double  | Yes      | Size left to be transacted                                                                                                                                                                                                                                                                          |
-| originalSize     | double  | Yes      | Original order size                                                                                                                                                                                                                                                                                 |
+| originalOrderBaseSize                 | Double  | Yes      | The original order quantity in base currency. This value will not change even if adjustments are made later.                                                                           |
+| originalOrderQuoteSize                 | Double  | Yes      | The original order quantity in quote currency. This value will not change even if adjustments are made later.                                                                           |
+| currentOrderBaseSize                 | Double  | Yes      | The original order quantity in base currency. This value will not change even if adjustments are made later.                                                                           |
+| currentOrderQuoteSize                 | Double  | Yes      | he latest order quantity in quote currency, which means the sum of the filled quantity and the remaining unfilled quantity.                                                                           |
+| remainingOrderBaseSize                 | Double  | Yes      | The remaining order quantity in base currency = Current Order Base Size - Filled Base Size.                                                                           |
+| remainingOrderQuoteSize                 | Double  | Yes      | The remaining order quantity in quote currency = Current Order Quote Size - Filled Quote Size.                                                                           |
+| filledBaseSize                 | Double  | Yes      | The quantity of the order in base currency that has been filled.                                                                           |
+| totalFilledBaseSize                 | Double  | Yes      | Cumulative filled quantity of this order in base currency.                                                                           |
+| orderCurrency                 | Double  | Yes      | "base" or "quote"                                                                           |
 
 ## Query Order
 
@@ -841,7 +846,7 @@ Creates a new order. Requires `Trading` permission. Please note that Index Order
 ```
 
 
-`GET /api/v3.2/order`
+`GET /api/v3.3/order`
 
 Query order detail for a specified orderID/clOrderID, for the open orders and cancelled order which is cancelled in 30 minutes only.
 Please note that this API is `Trading` permission required.
@@ -863,9 +868,7 @@ Please note that this API is `Trading` permission required.
 | orderType                     | Integer | Yes      | Order type                                                                             |
 | side                          | String  | Yes      | Order side                                                                             |
 | price                         | Double  | Yes      | Order price                                                                            |
-| size                          | Double  | Yes      | Order size                                                                             |
 | orderValue                    | Double  | Yes      | Total value of of this order                                                           |
-| filledSize                    | Double  | Yes      | Filled Size                                                                            |
 | pegPriceMin                   | Double  | Yes      | Minimum possible peg price this takes precedence over pegPriceDeviation                |
 | pegPriceMax                   | Double  | Yes      | Peg Price Max (New Entry)                                                              |
 | pegPriceDeviation             | Double  | Yes      | Percentage deviation from Index price                                                  |
@@ -880,7 +883,14 @@ Please note that this API is `Trading` permission required.
 | trailValue                    | Double  | Yes      | Trail value                                                                            |
 | clOrderID                     | String  | Yes      | Customer tag sent in by trader                                                         |
 | averageFillPrice              | Double  | Yes      | Average filled price. Returns the average filled price for partially transacted orders |
-| remainingSize                 | Double  | Yes      | remainingSize                                                                          |
+| originalOrderBaseSize                 | Double  | Yes      | The original order quantity in base currency. This value will not change even if adjustments are made later.                                                                           |
+| originalOrderQuoteSize                 | Double  | Yes      | The original order quantity in quote currency. This value will not change even if adjustments are made later.                                                                           |
+| currentOrderBaseSize                 | Double  | Yes      | The original order quantity in base currency. This value will not change even if adjustments are made later.                                                                           |
+| currentOrderQuoteSize                 | Double  | Yes      | he latest order quantity in quote currency, which means the sum of the filled quantity and the remaining unfilled quantity.                                                                           |
+| remainingOrderBaseSize                 | Double  | Yes      | The remaining order quantity in base currency = Current Order Base Size - Filled Base Size.                                                                           |
+| remainingOrderQuoteSize                 | Double  | Yes      | The remaining order quantity in quote currency = Current Order Quote Size - Filled Quote Size.                                                                           |
+| totalFilledBaseSize                 | Double  | Yes      | Cumulative filled quantity of this order in base currency.                                                                           |
+| orderCurrency                 | Double  | Yes      | "base" or "quote"                                                                           |
 | status                        | Integer | Yes      | Order status. Please refer to [`API Enum`](#api-enum)                                  |
 | timeInForce                   | String  | Yes      | Order validity                                                                         |
 
@@ -962,7 +972,7 @@ Please note that this API is `Trading` permission required.
 ]
 ```
 
-`PUT /api/v3.2/order`
+`PUT /api/v3.3/order`
 
 Amend the price or size or trigger price of an order. For trigger orders, if the order has already been triggered, the trigger price cannot be further amended. Amend order _does not_ apply to algo orders. Requires `Trading` permission.
 
@@ -985,13 +995,11 @@ Amend the price or size or trigger price of an order. For trigger orders, if the
 | ---              | ---     | ---      | ---                                                                                                                                                                                                                                                                                                 |
 | symbol           | string  | Yes      | Market symbol                                                                                                                                                                                                                                                                                       |
 | clOrderID        | string  | Yes      | Customer tag sent in by trader                                                                                                                                                                                                                                                                      |
-| fillSize         | double  | Yes      | Trade filled size                                                                                                                                                                                                                                                                                   |
 | orderID          | string  | Yes      | Order ID                                                                                                                                                                                                                                                                                            |
 | orderType        | integer  | Yes      | Order type <br/>76: Limit order<br/>77: Market order<br/>80: Peg/Algo order                                                                                                                                                                                                                         |
 | postOnly         | boolean | Yes      | Indicates if order is a post only order                                                                                                                                                                                                                                                             |
 | price            | double  | Yes      | Order price                                                                                                                                                                                                                                                                                         |
 | side             | string  | Yes      | Order side<br/>BUY or SELL                                                                                                                                                                                                                                                                          |
-| size             | double  | Yes      | Order size                                                                                                                                                                                                                                                                                          |
 | status           | integer | Yes      | Order status<br/>	2: Order Inserted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>8: Insufficient Balance<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request Failed |
 | stopPrice        | double  | Yes      | Stop price                                                                                                                                                                                                                                                                                          |
 | time_in_force    | string  | Yes      | Order validity                                                                                                                                                                                                                                                                                      |
@@ -1002,6 +1010,15 @@ Amend the price or size or trigger price of an order. For trigger orders, if the
 | message          | string  | Yes      | Trade messages                                                                                                                                                                                                                                                                                      |
 | stealth          | double  | Yes      | Stealth value of order                                                                                                                                                                                                                                                                              |
 | deviation        | double  | Yes      | Deviation value of order                                                                                                                                                                                                                                                                            |
+| originalOrderBaseSize                 | Double  | Yes      | The original order quantity in base currency. This value will not change even if adjustments are made later.                                                                           |
+| originalOrderQuoteSize                 | Double  | Yes      | The original order quantity in quote currency. This value will not change even if adjustments are made later.                                                                           |
+| currentOrderBaseSize                 | Double  | Yes      | The original order quantity in base currency. This value will not change even if adjustments are made later.                                                                           |
+| currentOrderQuoteSize                 | Double  | Yes      | he latest order quantity in quote currency, which means the sum of the filled quantity and the remaining unfilled quantity.                                                                           |
+| remainingOrderBaseSize                 | Double  | Yes      | The remaining order quantity in base currency = Current Order Base Size - Filled Base Size.                                                                           |
+| remainingOrderQuoteSize                 | Double  | Yes      | The remaining order quantity in quote currency = Current Order Quote Size - Filled Quote Size.                                                                           |
+| filledBaseSize                 | Double  | Yes      | The quantity of the order in base currency that has been filled.                                                                           |
+| totalFilledBaseSize                 | Double  | Yes      | Cumulative filled quantity of this order in base currency.                                                                           |
+| orderCurrency                 | Double  | Yes      | "base" or "quote"                                                                           |
 
 
 ## Cancel Order
@@ -1009,7 +1026,7 @@ Amend the price or size or trigger price of an order. For trigger orders, if the
 > Request
 
 ```
-/api/v3.2/order?symbol=BTC-USD&clOrderID=my-order-id
+/api/v3.3/order?symbol=BTC-USD&clOrderID=my-order-id
 ```
 
 > Response (general)
@@ -1094,7 +1111,7 @@ Amend the price or size or trigger price of an order. For trigger orders, if the
 ]
 ```
 
-`DELETE /api/v3.2/order`
+`DELETE /api/v3.3/order`
 
 Cancels pending orders that has not yet been transacted. The `orderID` is a unique identifier to cancel a particular order. `clOrderID` is a custom ID sent in by the trader. When cancel by `clOrderID`, all orders having the same ID will be cancelled. If `orderID` and `clOrderID` is not sent in, then cancellation will be for all orders in the current market. Requires `Trading` permission.
 
@@ -1112,13 +1129,11 @@ Cancels pending orders that has not yet been transacted. The `orderID` is a uniq
 | ---              | ---     | ---      | ---                                                                                                                                                                                                                                                                                             |
 | symbol           | string  | Yes      | Market symbol                                                                                                                                                                                                                                                                                   |
 | clOrderID        | string  | Yes      | Customer tag sent in by trader                                                                                                                                                                                                                                                                  |
-| fillSize         | double  | Yes      | Trade filled size                                                                                                                                                                                                                                                                               |
 | orderID          | string  | Yes      | Order ID                                                                                                                                                                                                                                                                                        |
 | orderType        | integer  | Yes      | Order type <br/>76: Limit order<br/>77: Market order<br/>80: Peg/Algo order                                                                                                                                                                                                                     |
 | postOnly         | boolean | Yes      | Indicates if order is a post only order                                                                                                                                                                                                                                                         |
 | price            | double  | Yes      | Order price                                                                                                                                                                                                                                                                                     |
 | side             | string  | Yes      | Order side<br/>BUY or SELL                                                                                                                                                                                                                                                                      |
-| size             | double  | Yes      | Cancelled size                                                                                                                                                                                                                                                                                  |
 | status           | integer | Yes      | Order status<br/>	2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed |
 | stopPrice        | double  | Yes      | Stop price                                                                                                                                                                                                                                                                                      |
 | time_in_force    | string  | Yes      | Order validity                                                                                                                                                                                                                                                                                  |
@@ -1129,6 +1144,15 @@ Cancels pending orders that has not yet been transacted. The `orderID` is a uniq
 | message          | string  | Yes      | Trade messages                                                                                                                                                                                                                                                                                  |
 | stealth          | double  | Yes      | Stealth value of order                                                                                                                                                                                                                                                                          |
 | deviation        | double  | Yes      | Deviation value of order                                                                                                                                                                                                                                                                        |
+| originalOrderBaseSize                 | Double  | Yes      | The original order quantity in base currency. This value will not change even if adjustments are made later.                                                                           |
+| originalOrderQuoteSize                 | Double  | Yes      | The original order quantity in quote currency. This value will not change even if adjustments are made later.                                                                           |
+| currentOrderBaseSize                 | Double  | Yes      | The original order quantity in base currency. This value will not change even if adjustments are made later.                                                                           |
+| currentOrderQuoteSize                 | Double  | Yes      | he latest order quantity in quote currency, which means the sum of the filled quantity and the remaining unfilled quantity.                                                                           |
+| remainingOrderBaseSize                 | Double  | Yes      | The remaining order quantity in base currency = Current Order Base Size - Filled Base Size.                                                                           |
+| remainingOrderQuoteSize                 | Double  | Yes      | The remaining order quantity in quote currency = Current Order Quote Size - Filled Quote Size.                                                                           |
+| filledBaseSize                 | Double  | Yes      | The quantity of the order in base currency that has been filled.                                                                           |
+| totalFilledBaseSize                 | Double  | Yes      | Cumulative filled quantity of this order in base currency.                                                                           |
+| orderCurrency                 | Double  | Yes      | "base" or "quote"                                                                           |
 
 ## Dead Man's Switch (Cancel All After)
 
@@ -1140,7 +1164,7 @@ Cancels pending orders that has not yet been transacted. The `orderID` is a uniq
 }
 ```
 
-`POST /api/v3.2/order/cancelAllAfter`
+`POST /api/v3.3/order/cancelAllAfter`
 
 Dead-man's switch allows the trader to send in a timeout value which is a Time to live (TTL) value for an order. Extension of the timeout is done by sending another `cancelAllAfter` request. If the server does not receive another request before the timeout is reached, all orders will be cancelled. Requires `Trading` permission.
 
@@ -1192,7 +1216,7 @@ Dead-man's switch allows the trader to send in a timeout value which is a Time t
 ]
 ```
 
-`GET /api/v3.2/user/open_orders`
+`GET /api/v3.3/user/open_orders`
 
 Retrieves open orders that have not yet been matched or matched recently. Requires `Trading` permission.
 
@@ -1211,10 +1235,8 @@ Retrieves open orders that have not yet been matched or matched recently. Requir
 | ---                          | ---    | ---      | ---                                                                                  |
 | orderType                  | integer | Yes      | Order type <br/>76: Limit order<br/>77: Market order<br/>80: Peg/Algo order            |
 | price                      | double | Yes      | Order price                                                                            |
-| size                       | double | Yes      | Order size                                                                             |
 | side                       | string | Yes      | Order side<br/>`BUY` or `SELL`                                                         |
 | orderValue                 | double | Yes      | Total value of of this order                                                           |
-| filledSize                 | double | Yes      | Filled size                                                                            |
 | pegPriceMin                | double | Yes      | Minimum possible peg price this takes precedence over pegPriceDeviation                |
 | pegPriceMax                | double | Yes      | Maximum possible peg price this takes precedence over pegPriceDeviation                |
 | pegPriceDeviation          | double | Yes      | Percentage deviation from Index price                                                  |
@@ -1230,11 +1252,18 @@ Retrieves open orders that have not yet been matched or matched recently. Requir
 | symbol                     | string | Yes      | Market name (e.g. BTC-USD)                                                             |
 | trailValue                 | double | Yes      | Trail value                                                                            |
 | averageFillPrice           | double | Yes      | Average filled price. Returns the average filled price for partially transacted orders |
-| fillSize                   | double | Yes      | Fill size                                                                              |
 | clOrderID                  | string | Yes      | Customer order ID                                                                      |
 | orderState                 | string | Yes      | `STATUS_ACTIVE`, `STATUS_INACTIVE`                                                     |
 | timeInForce                | string | Yes      | Order validity                                                                         |
 | triggered                  | bool   | Yes      | Indicate whether the order is triiggered                                               |
+ originalOrderBaseSize                 | Double  | Yes      | The original order quantity in base currency. This value will not change even if adjustments are made later.                                                                           |
+| originalOrderQuoteSize                 | Double  | Yes      | The original order quantity in quote currency. This value will not change even if adjustments are made later.                                                                           |
+| currentOrderBaseSize                 | Double  | Yes      | The original order quantity in base currency. This value will not change even if adjustments are made later.                                                                           |
+| currentOrderQuoteSize                 | Double  | Yes      | he latest order quantity in quote currency, which means the sum of the filled quantity and the remaining unfilled quantity.                                                                           |
+| remainingOrderBaseSize                 | Double  | Yes      | The remaining order quantity in base currency = Current Order Base Size - Filled Base Size.                                                                           |
+| remainingOrderQuoteSize                 | Double  | Yes      | The remaining order quantity in quote currency = Current Order Quote Size - Filled Quote Size.                                                                           |
+| totalFilledBaseSize                 | Double  | Yes      | Cumulative filled quantity of this order in base currency.                                                                           |
+| orderCurrency                 | Double  | Yes      | "base" or "quote"                                                                           |
 
 ## Query User Trades Fills
 
@@ -1270,7 +1299,7 @@ Retrieves open orders that have not yet been matched or matched recently. Requir
 ]
 ```
 
-`GET /api/v3.2/user/trade_history`
+`GET /api/v3.3/user/trade_history`
 
 Retrieves a user's trade history which includes funding fee data. Requires `Read` permission.
 
@@ -1336,7 +1365,7 @@ Retrieves a user's trade history which includes funding fee data. Requires `Read
 }
 ```
 
-`GET /api/v3.2/user/fees`
+`GET /api/v3.3/user/fees`
 
 Retrieve user's trading fees. Requires `Read` permission.
 
@@ -1386,7 +1415,7 @@ Retrieve user's trading fees. Requires `Read` permission.
 ]
 ```
 
-`GET /api/v3.2/invest/products`
+`GET /api/v3.3/invest/products`
 
 Get all investment products. Requires `Read` permission.
 
@@ -1430,7 +1459,7 @@ Get all investment products. Requires `Read` permission.
 }
 ```
 
-`POST /api/v3.2/invest/deposit`
+`POST /api/v3.3/invest/deposit`
 
 Deposit an investment. Requires `Wallet` permission.
 
@@ -1462,7 +1491,7 @@ Deposit an investment. Requires `Wallet` permission.
 }
 ```
 
-`POST /api/v3.2/invest/renew`
+`POST /api/v3.3/invest/renew`
 
 Renew an investment order. Requires `Wallet` permission.
 
@@ -1492,7 +1521,7 @@ Renew an investment order. Requires `Wallet` permission.
 }
 ```
 
-`POST /api/v3.2/invest/redeem`
+`POST /api/v3.3/invest/redeem`
 
 Redeem an investment order. Requires `Wallet` permission.
 
@@ -1532,7 +1561,7 @@ Redeem an investment order. Requires `Wallet` permission.
 ]
 ```
 
-`GET /api/v3.2/invest/orders`
+`GET /api/v3.3/invest/orders`
 
 Query investment orders. Requires `Wallet` permission.
 
@@ -1579,7 +1608,7 @@ Query investment orders. Requires `Wallet` permission.
 ]
 ```
 
-`GET /api/v3.2/invest/history`
+`GET /api/v3.3/invest/history`
 
 Query investment history. Requires `Wallet` permission.
 
@@ -1990,7 +2019,7 @@ echo -n "/ws/spot1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6726
 {
   "op": "subscribe",
   "args": [
-    "notificationApiV2"
+    "notificationApiV3"
   ]
 }
 ```
@@ -1999,7 +2028,7 @@ echo -n "/ws/spot1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6726
 
 ```json
 {
-  "topic": "notificationApiV2",
+  "topic": "notificationApiV3",
   "data": {
       "symbol": "Market Symbol (eg. BTC-USD)",
       "orderID": "BTSE internal order ID",
@@ -2025,7 +2054,7 @@ echo -n "/ws/spot1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6726
 
 ```
 
-Receive trade notifications by subscribing to the topic `notificationApiV2`. The websocket feed will push trade level notifications to the subscriber. If topic is subscribed without being authenticated, no messages will be sent.
+Receive trade notifications by subscribing to the topic `notificationApiV3`. The websocket feed will push trade level notifications to the subscriber. If topic is subscribed without being authenticated, no messages will be sent.
 
 ### Response Content
 
@@ -2034,22 +2063,28 @@ Receive trade notifications by subscribing to the topic `notificationApiV2`. The
 | symbol            | string  | Yes      | Market symbol                                                                 |
 | orderID           | string  | Yes      | Internal order ID                                                             |
 | side              | string  | Yes      | Trade side. BUY or SELL                                                       |
-| type              | int     | Yes      | Order type. Valid values are:<br/>76: Limit order<br/>77: Market order<br/>80: Peg/Algo order  |
+| orderType              | int     | Yes      | Order type. Valid values are:<br/>76: Limit order<br/>77: Market order<br/>80: Peg/Algo order  |
 | price             | double  | Yes      | Order price or transcated price                                               |
-| size              | double  | Yes      | Order size or transacted size                                                 |
-| originalSize      | double  | Yes      | Original order size                                                           |
 | avgFilledPrice    | double  | Yes      | Average filled price                                                          |
-| fillSize          | double  | Yes      | Filled size of order                                                          |
 | status            | integer | Yes      | Status with values as follows:<br/>1: MARKET_UNAVAILABLE, Market is currently unavailable<br/>2: ORDER_INSERTED, Order is inserted successfully<br/>4: ORDER_FULLY_TRANSACTED, Order is fully transacted<br/>5: ORDER_PARTIALLY_TRANSACTED, Order is partially transacted<br/>6: ORDER_CANCELLED, Order is cancelled successfully<br/>8: INSUFFICIENT_BALANCE, Insufficient balance in account<br/>9: TRIGGER_INSERTED, Trigger Order is inserted successfully<br/>10: TRIGGER_ACTIVATED, Trigger Order is activated successfully<br/>12: ERROR_UPDATE_RISK_LIMIT, Error in updating risk limit<br/>15: ORDER_REJECTED, Change made to the order was unsuccessful<br/>27: TRANSFER_SUCCESSFUL, Transfer funds between futures and spot is successful<br/>28: TRANSFER_UNSUCCESSFUL, Transfer funds between spot and futures is unsuccessful<br/>41: ERROR_INVALID_RISK_LIMIT, Invalid risk limit was specified<br/>64: STATUS_LIQUIDATION, Account is undergoing liquidation<br/>101: FUTURES_ORDER_PRICE_OUTSIDE_LIQUIDATION_PRICE, Futures order is outside of liquidation price<br/>1003: ORDER_LIQUIDATION, Order is undergoing liquidation<br/>1004: ORDER_ADL, Order is undergoing ADL |
 | clOrderID         | string  | Yes      | Custom order ID                                                               |
 | maker             | boolean | Yes      | Indicator to indicate if trade is a maker trade                               |
 | remainingSize     | double  | Yes      | Remaining size on the order                                                   |
 | time_in_force     | string  | Yes      | Validity of the order                                                         |
 | timestamp         | long    | Yes      | Order timestamp or transacted timestamp                                       |
-| txType            | integer  | Yes      | Used by trigger or OCO orders. STOP indicates its a Stop order, TAKEPROFIT indicates its a take profit order, and LIMIT is when its not any of the above    |
 | stealth           | double  | Yes      | Percentage of orders to show on orderbook. Only for Algo orders               |
 | pegPriceDeviation | double  | Yes      | Deviation percentage. Only for Algo orders                                    |
 | triggerPrice      | double  | Yes      | Trigger Price                                                                 |
+| txType            | integer  | Yes      | Used by trigger or OCO orders. </br>0: Limit</br>1: Stop</br>2: Trigger</br>3: OCO</br>STOP indicates its a Stop order, TAKEPROFIT indicates its a take profit order, and LIMIT is when its not any of the above    |
+| originalOrderBaseSize                 | Double  | Yes      | The original order quantity in base currency. This value will not change even if adjustments are made later.                                                                           |
+| originalOrderQuoteSize                 | Double  | Yes      | The original order quantity in quote currency. This value will not change even if adjustments are made later.                                                                           |
+| currentOrderBaseSize                 | Double  | Yes      | The original order quantity in base currency. This value will not change even if adjustments are made later.                                                                           |
+| currentOrderQuoteSize                 | Double  | Yes      | he latest order quantity in quote currency, which means the sum of the filled quantity and the remaining unfilled quantity.                                                                           |
+| remainingOrderBaseSize                 | Double  | Yes      | The remaining order quantity in base currency = Current Order Base Size - Filled Base Size.                                                                           |
+| remainingOrderQuoteSize                 | Double  | Yes      | The remaining order quantity in quote currency = Current Order Quote Size - Filled Quote Size.                                                                           |
+| filledBaseSize                 | Double  | Yes      | The quantity of the order in base currency that has been filled.                                                                           |
+| totalFilledBaseSize                 | Double  | Yes      | Cumulative filled quantity of this order in base currency.                                                                           |
+| orderCurrency                 | Double  | Yes      | "base" or "quote"                                                                           |
 
 ## User Trade Fills
 

@@ -25,7 +25,7 @@ We are updating several order-related API endpoints to improve consistency and c
 
 ### Updated Fields for Order Actions 
 
-For the following endpoints, the fields `fillSize` and `originalSize` will be deprecated and replaced with the following:
+For the following endpoints, the fields `siez`, `fillSize` and `originalSize` will be deprecated and replaced with the following:
   * `originalOrderSize`
   * `currentOrderSize`
   * `filledSize`
