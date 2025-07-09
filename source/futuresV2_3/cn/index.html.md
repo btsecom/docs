@@ -778,7 +778,7 @@ BTSE 的速率限制如下：
 ```json
 {
   "symbol": "BTC-PERP",
-  "size": 1,
+  "size": 10,
   "side": "BUY",
   "type": "MARKET"
 }
@@ -788,7 +788,7 @@ BTSE 的速率限制如下：
 ```json
 {
   "symbol": "BTC-PERP",
-  "size": 1,
+  "size": 10,
   "price": 21000,
   "side": "BUY",
   "type": "LIMIT"
@@ -799,7 +799,7 @@ BTSE 的速率限制如下：
 ```json
 {
   "symbol": "BTC-PERP",
-  "size": 1,
+  "size": 10,
   "price": 21000,
   "side": "BUY",
   "type": "LIMIT",
@@ -812,7 +812,7 @@ BTSE 的速率限制如下：
 ```json
 {
   "symbol": "BTC-PERP",
-  "size": 1,
+  "size": 10,
   "price": 21000,
   "side": "BUY",
   "type": "LIMIT",
@@ -825,7 +825,7 @@ BTSE 的速率限制如下：
 ```json
 {
   "symbol": "BTC-PERP",
-  "size": 1,
+  "size": 10,
   "price": 21000,
   "side": "BUY",
   "type": "OCO",
@@ -883,7 +883,7 @@ BTSE 的速率限制如下：
 ```json
 {
   "symbol": "BTC-PERP",
-  "size": 1,
+  "size": 10,
   "side": "BUY",
   "type": "MARKET",
   "positionMode": "HEDGE"
@@ -896,7 +896,7 @@ BTSE 的速率限制如下：
 ```json
 {
   "symbol": "BTC-PERP",
-  "size": 1,
+  "size": 10,
   "side": "BUY",
   "type": "MARKET",
   "reduceOnly": true,
@@ -915,7 +915,6 @@ BTSE 的速率限制如下：
     "orderType": 76,
     "price": 21000.0,
     "side": "BUY",
-    "size": 1,
     "orderID": "abb3f457-fdc0-4bdb-a46b-8e4aa49a57c2",
     "timestamp": 1660558270207,
     "triggerPrice": 0.0,
@@ -924,11 +923,13 @@ BTSE 的速率限制如下：
     "stealth": 100.0,
     "message": "",
     "avgFillPrice": 21000.0,
-    "fillSize": 1.0,
     "clOrderID": "",
-    "originalSize": 1.0,
     "postOnly": false,
     "remainingSize": 0.0,
+    "originalOrderSize":10.0,
+    "currentOrderSize":10.0,
+    "filledSize":0.0,
+    "totalFilledSize":0.0,
     "positionMode": "ONE_WAY",
     "positionDirection": null,
     "positionId": "BTC-PERP-USDT",
@@ -947,7 +948,6 @@ BTSE 的速率限制如下：
     "orderType": 76,
     "price": 23000.0,
     "side": "BUY",
-    "size": 1,
     "orderID": "4c9d16c1-9869-4734-bfb8-56318e961ef2",
     "timestamp": 1660558185243,
     "triggerPrice": 30000.0,
@@ -956,11 +956,13 @@ BTSE 的速率限制如下：
     "stealth": 100.0,
     "message": "",
     "avgFillPrice": 0.0,
-    "fillSize": 0.0,
     "clOrderID": "",
-    "originalSize": 1.0,
     "postOnly": false,
-    "remainingSize": 1.0,
+    "remainingSize": 0.0,
+    "originalOrderSize":10.0,
+    "currentOrderSize":10.0,
+    "filledSize":0.0,
+    "totalFilledSize":0.0,
     "positionMode": "ONE_WAY",
     "positionDirection": null,
     "positionId": "BTC-PERP-USDT",
@@ -972,7 +974,6 @@ BTSE 的速率限制如下：
     "orderType": 76,
     "price": 21000.0,
     "side": "BUY",
-    "size": 1,
     "orderID": "53749446-39d3-4b72-87c9-92e9fc7e4b8c",
     "timestamp": 1660558185225,
     "triggerPrice": 0.0,
@@ -981,11 +982,13 @@ BTSE 的速率限制如下：
     "stealth": 100.0,
     "message": "",
     "avgFillPrice": 0.0,
-    "fillSize": 0.0,
     "clOrderID": "",
-    "originalSize": 1.0,
     "postOnly": false,
-    "remainingSize": 1.0,
+    "remainingSize": 0.0,
+    "originalOrderSize":10.0,
+    "currentOrderSize":10.0,
+    "filledSize":0.0,
+    "totalFilledSize":0.0,
     "positionMode": "ONE_WAY",
     "positionDirection": null,
     "positionId": "BTC-PERP-USDT",
@@ -1004,7 +1007,6 @@ BTSE 的速率限制如下：
     "orderType": 76,
     "price": 21000.0,
     "side": "BUY",
-    "size": 1,
     "orderID": "abb3f457-fdc0-4bdb-a46b-8e4aa49a57c2",
     "timestamp": 1660558270207,
     "triggerPrice": 0.0,
@@ -1013,11 +1015,13 @@ BTSE 的速率限制如下：
     "stealth": 100.0,
     "message": "",
     "avgFillPrice": 21000.0,
-    "fillSize": 1.0,
     "clOrderID": "",
-    "originalSize": 1.0,
     "postOnly": false,
     "remainingSize": 0.0,
+    "originalOrderSize":10.0,
+    "currentOrderSize":10.0,
+    "filledSize":0.0,
+    "totalFilledSize":0.0,
     "positionMode": "HEDGE",
     "positionDirection": "LONG",
     "positionId": "BTC-PERP-USDT|LONG",
@@ -1036,6 +1040,7 @@ BTSE 的速率限制如下：
 | ---           | ---     | ---      | ---                                                                                                                                                                                                                                                                                                                                                                     |
 | symbol        | string  | Yes      | 市场符号                                                                                                                                                                                                                                                                                                                                                                 |
 | price         | double  | No       | 除非创建市场订单，否则为必填。订单价格                                                                                                                                                                                                                                                                                                                                  |
+| size          | long    | Yes      | 订单尺寸以`合同大小`表示（即使在风险限额调整后也保持不变）                                                                                                                                                                                                                                                                                                               |
 | side          | string  | Yes      | `BUY` 或 `SELL`                                                                                                                                                                                                                                                                                                                                                        |
 | time_in_force | string  | No       | 订单的时间有效性<br/>GTC: 有效直至取消<br/>IOC: 立即或取消<br/>FOK: 全部成交或取消<br/>HALFMIN: 订单有效30秒<br/>FIVEMIN: 订单有效5分钟<br/>HOUR: 订单有效一个小时<br/>TWELVEHOUR: 订单有效12小时<br/>DAY: 订单有效一天<br/>WEEK: 订单有效一周<br/>MONTH: 订单有效一个月                                                                                                              |
 | type          | string  | Yes      | 订单类型<br/>LIMIT: 限价订单<br/>MARKET: 市价订单<br/>OCO: 一个取消另一个                                                                                                                                                                                                                                                                                               |
@@ -1090,7 +1095,7 @@ BTSE 的速率限制如下：
 {
   "symbol": "BTC-PERP",
   "price": 21500,
-  "size": 1,
+  "size": 10,
   "side": "BUY",
   "clOrderID": "60a30188-f2a2-4498-b061-7d72126c18c2",
   "stealth": 10,
@@ -1108,7 +1113,6 @@ BTSE 的速率限制如下：
     "orderType": 80,
     "price": 21500.0,
     "side": "BUY",
-    "size": 1,
     "orderID": "de9f94bb-0ca0-470b-830e-9bc2e109c719",
     "timestamp": 1660554373317,
     "triggerPrice": 0.0,
@@ -1117,11 +1121,13 @@ BTSE 的速率限制如下：
     "stealth": 10.0,
     "message": "",
     "avgFillPrice": 0.0,
-    "fillSize": 0.0,
     "clOrderID": "60a30188-f2a2-4498-b061-7d72126c18c2",
-    "originalSize": 1.0,
     "postOnly": false,
-    "remainingSize": 1.0,
+    "remainingSize": 0.0,
+    "originalOrderSize":10.0,
+    "currentOrderSize":10.0,
+    "filledSize":0.0,
+    "totalFilledSize":0.0,
     "positionMode": "ONE_WAY",
     "positionDirection": null,
     "positionId": "BTC-PERP-USDT",
@@ -1190,9 +1196,10 @@ BTSE 的速率限制如下：
 {
     "orderType": 76,
     "price": 1,
-    "size": 111,
+    "originalOrderSize":10,
+    "currentOrderSize":10,
+    "totalFilledSize":0,
     "side": "BUY",
-    "filledSize": 0,
     "orderValue": 0.111,
     "pegPriceMin": 0,
     "pegPriceMax": 0,
@@ -1209,7 +1216,6 @@ BTSE 的速率限制如下：
     "triggerStopPrice": 0,
     "symbol": "BTC-PERP",
     "trailValue": 0,
-    "remainingSize": 111,
     "clOrderID": "<Order clOrderID>",
     "reduceOnly": false,
     "status": 2,
@@ -1301,7 +1307,7 @@ BTSE 的速率限制如下：
   "orderID": "604c3ebf-d7fa-468d-9ff0-f6ad030221b4",
   "type": "ALL",
   "orderPrice": 30010,
-  "orderSize": 1,
+  "orderSize": 10,
   "triggerPrice": 30000
 }
 ```
@@ -1314,7 +1320,7 @@ BTSE 的速率限制如下：
   "orderID": "604c3ebf-d7fa-468d-9ff0-f6ad030221b4",
   "type": "ALL",
   "orderPrice": 30010,
-  "orderSize": 1
+  "orderSize": 10
 }
 ```
 
@@ -1328,7 +1334,6 @@ BTSE 的速率限制如下：
     "orderType": 76,
     "price": 20000.0,
     "side": "BUY",
-    "size": 1,
     "orderID": "604c3ebf-d7fa-468d-9ff0-f6ad030221b4",
     "timestamp": 1660639762254,
     "triggerPrice": 0.0,
@@ -1337,11 +1342,13 @@ BTSE 的速率限制如下：
     "stealth": 100.0,
     "message": "",
     "avgFillPrice": 0.0,
-    "fillSize": 0.0,
     "clOrderID": "",
-    "originalSize": 1.0,
     "postOnly": false,
-    "remainingSize": 1.0,
+    "remainingSize": 5.0,
+    "originalOrderSize":10.0,
+    "currentOrderSize":5.0,
+    "filledSize":0.0,
+    "totalFilledSize":0.0,
     "positionMode": "ONE_WAY",
     "positionDirection": null,
     "positionId": "BTC-PERP-USDT",
@@ -1416,7 +1423,6 @@ BTSE 的速率限制如下：
     "orderType": 76,
     "price": 19000.0,
     "side": "BUY",
-    "size": 1,
     "orderID": "ae5b1b27-d5fe-41e2-89f8-f17b60fb3def",
     "timestamp": 1660640879996,
     "triggerPrice": 0.0,
@@ -1425,11 +1431,13 @@ BTSE 的速率限制如下：
     "stealth": 100.0,
     "message": "",
     "avgFillPrice": 0.0,
-    "fillSize": 0.0,
     "clOrderID": "string",
-    "originalSize": 1.0,
     "postOnly": false,
-    "remainingSize": 1.0,
+    "remainingSize": 10.0,
+    "originalOrderSize":10.0,
+    "currentOrderSize":10.0,
+    "filledSize":0.0,
+    "totalFilledSize":0.0,
     "positionMode": "ONE_WAY",
     "positionDirection": null,
     "positionId": "BTC-PERP-USDT",
@@ -1520,9 +1528,10 @@ BTSE 的速率限制如下：
   {
     "orderType": 76,
     "price": 21000.0,
-    "size": 1,
+    "originalOrderSize":10,
+    "currentOrderSize":10,
+    "totalFilledSize":0,
     "side": "BUY",
-    "filledSize": 0,
     "orderValue": 21.0,
     "pegPriceMin": 0.0,
     "pegPriceMax": 0.0,
@@ -1864,7 +1873,6 @@ BTSE 的速率限制如下：
     "orderType": 76,
     "price": 24010.0,
     "side": "SELL",
-    "size": 1,
     "orderID": "93cf814a-595e-4b20-bba9-5c5340ca947d",
     "timestamp": 1660710188450,
     "triggerPrice": 0.0,
@@ -1873,11 +1881,13 @@ BTSE 的速率限制如下：
     "stealth": 100.0,
     "message": "",
     "avgFillPrice": 24010.0,
-    "fillSize": 1.0,
     "clOrderID": "",
-    "originalSize": 1.0,
     "postOnly": false,
-    "remainingSize": 0.0,
+    "remainingSize": 10.0,
+    "originalOrderSize":10.0,
+    "currentOrderSize":10.0,
+    "filledSize":0.0,
+    "totalFilledSize":0.0,
     "positionMode": "ONE_WAY",
     "positionDirection": null,
     "positionId": null,
@@ -3247,26 +3257,25 @@ echo -n "/ws/futures1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6
       "symbol": "Market Symbol (eg. BTC-PERP)",
       "orderID": "BTSE internal order ID",
       "side": "BUY",
-      "type": "76",
+      "type": 76,
       "price": "Order price or transacted price",
-      "size": "Order size or transacted size",
-      "originalSize": "Order size",
       "avgFillPrice": 35000,
-      "fillSize": 0.001,
       "status": "<Refer to Status description on the left>",
       "clOrderID": "<Client order ID>",
       "maker": "<Maker flag, if true indicates that trade is a maker trade>",
       "stealth": 1,
       "timestamp": 1624985375123,
       "pegPriceDeviation": "Indicate the deviation percentage. Valid for only algo orders.",
-      "remainingSize": "<Remaining size on the order>",
       "time_in_force": "<Time where this order is valid>",
       "txType": "STOP | TAKE_PROFIT",
       "positionId": "BTC-PERP-USDT",
-      "triggerPrice": "Trade Trigger Price"
+      "triggerPrice": "Trade Trigger Price",
+      "originalOrderSize":10,
+      "currentOrderSize":10,
+      "filledSize":0,
+      "totalFilledSize":0
     }
   ]
-
 }
 
 ```

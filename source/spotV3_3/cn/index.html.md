@@ -584,7 +584,7 @@ BTSE的速率限制如下:
 ```json
 {
   "symbol": "BTC-USD",
-  "size": 1,
+  "size": 10,
   "side": "BUY",
   "type": "MARKET"
 }
@@ -595,7 +595,7 @@ BTSE的速率限制如下:
 ```json
 {
   "symbol": "BTC-USD",
-  "size": 1,
+  "size": 10,
   "side": "BUY",
   "type": "MARKET",
   "txType": "Stop",
@@ -608,7 +608,7 @@ BTSE的速率限制如下:
 ```json
 {
   "symbol": "BTC-USD",
-  "size": 1,
+  "size": 10,
   "price": 34000,
   "side": "BUY",
   "type": "LIMIT"
@@ -620,7 +620,7 @@ BTSE的速率限制如下:
 ```json
 {
   "symbol": "BTC-USD",
-  "size": 1,
+  "size": 10,
   "price": 34000,
   "side": "BUY",
   "type": "LIMIT",
@@ -634,7 +634,7 @@ BTSE的速率限制如下:
 ```json
 {
   "symbol": "BTC-USD",
-  "size": 1,
+  "size": 10,
   "price": 24000,
   "side": "BUY",
   "type": "OCO",
@@ -649,7 +649,7 @@ BTSE的速率限制如下:
 ```json
 {
   "symbol": "BTC-USD",
-  "size": 1,
+  "size": 10,
   "price": 25000,
   "side": "BUY",
   "type": "PEG",
@@ -668,7 +668,6 @@ BTSE的速率限制如下:
     "orderType": 80,
     "price": 22062.5,
     "side": "BUY",
-    "size": 1.0,
     "orderID": "990db9b6-2ed4-4c68-b46e-827c88cc3884",
     "timestamp": 1660208800123,
     "triggerPrice": 0.0,
@@ -676,14 +675,20 @@ BTSE的速率限制如下:
     "trigger": false,
     "message": "",
     "averageFillPrice": 0.0,
-    "fillSize": 0.0,
     "clOrderID": null,
     "stealth": 0.1,
     "deviation": -0.1,
     "postOnly": false,
-    "originalSize": 1.0,
-    "remainingSize": 1.0,
-    "time_in_force": "GTC"
+    "time_in_force": "GTC",
+    "originalOrderBaseSize":10,
+    "originalOrderQuoteSize":null,
+    "currentOrderBaseSize":10,
+    "currentOrderQuoteSize":null,
+    "filledBaseSize":0,
+    "totalFilledBaseSize":0,
+    "remainingBaseSize":10,
+    "remainingQuoteSize":null,
+    "orderCurrency":"base"
   }
 ]
 ```
@@ -698,7 +703,6 @@ BTSE的速率限制如下:
         "orderType": 76,
         "price": 24000.0,
         "side": "BUY",
-        "size": 1.0,
         "orderID": "2b672b4b-77c1-4abf-ba30-df3e82a147b0",
         "timestamp": 1660211562864,
         "triggerPrice": 0.0,
@@ -706,14 +710,20 @@ BTSE的速率限制如下:
         "trigger": false,
         "message": "",
         "averageFillPrice": 0.0,
-        "fillSize": 0.0,
         "clOrderID": null,
         "stealth": 1.0,
         "deviation": 1.0,
         "postOnly": false,
-        "originalSize": 1.0,
-        "remainingSize": 1.0,
-        "time_in_force": "GTC"
+        "time_in_force": "GTC",
+        "originalOrderBaseSize":10,
+        "originalOrderQuoteSize":null,
+        "currentOrderBaseSize":10,
+        "currentOrderQuoteSize":null,
+        "filledBaseSize":0,
+        "totalFilledBaseSize":0,
+        "remainingBaseSize":10,
+        "remainingQuoteSize":null,
+        "orderCurrency":"base"
     },
     {
         "status": 9,
@@ -721,7 +731,6 @@ BTSE的速率限制如下:
         "orderType": 76,
         "price": 40010.0,
         "side": "BUY",
-        "size": 1.0,
         "orderID": "7ccf5398-fddd-4d07-a89c-a4f2e72b64ce",
         "timestamp": 1660211562864,
         "triggerPrice": 40000.0,
@@ -729,14 +738,20 @@ BTSE的速率限制如下:
         "trigger": true,
         "message": "",
         "averageFillPrice": 0.0,
-        "fillSize": 0.0,
         "clOrderID": null,
         "stealth": 1.0,
         "deviation": 1.0,
         "postOnly": false,
-        "originalSize": 1.0,
-        "remainingSize": 0.0,
-        "time_in_force": "GTC"
+        "time_in_force": "GTC",
+        "originalOrderBaseSize":10,
+        "originalOrderQuoteSize":null,
+        "currentOrderBaseSize":10,
+        "currentOrderQuoteSize":null,
+        "filledBaseSize":0,
+        "totalFilledBaseSize":0,
+        "remainingBaseSize":10,
+        "remainingQuoteSize":null,
+        "orderCurrency":"base"
     }
 ]
 ```
@@ -813,12 +828,9 @@ BTSE的速率限制如下:
   "status": 6,
   "orderType": 76,
   "price": 30000,
-  "size": 0.00001,
   "side": "SELL",
   "orderValue": 0.300102,
   "trailValue": 0,
-  "filledSize": 0,
-  "remainingSize": 0.00001,
   "averageFillPrice": 0,
   "clOrderID": "<Client OrderID>",
   "timeInForce": "GTC",
@@ -832,7 +844,15 @@ BTSE的速率限制如下:
   "triggerOrderType": 0,
   "triggerTrailingStopDeviation": 0,
   "triggerStopPrice": 0,
-  "triggered": false
+  "triggered": false,
+  "originalOrderBaseSize":10,
+  "originalOrderQuoteSize":null,
+  "currentOrderBaseSize":10,
+  "currentOrderQuoteSize":null,
+  "totalFilledBaseSize":0,
+  "remainingBaseSize":10,
+  "remainingQuoteSize":null,
+  "orderCurrency":"base"
 }
 ```
 
@@ -899,7 +919,7 @@ BTSE的速率限制如下:
 {
   "orderID": "689bf733-4879-4e32-8d1f-cb81f63d24d4",
   "type": "SIZE",
-  "value": 1.05,
+  "value": 10.05,
   "symbol": "BTC-USD"
 }
 ```
@@ -923,7 +943,7 @@ BTSE的速率限制如下:
   "orderID": "cb2785b0-558e-4b30-bf1f-8a8c56174d0c",
   "type": "ALL",
   "orderPrice": 40010,
-  "orderSize": 1.05,
+  "orderSize": 10.05,
   "triggerPrice": 40000
 }
 ```
@@ -938,7 +958,6 @@ BTSE的速率限制如下:
     "orderType": 0,
     "price": 0.0,
     "side": "BUY",
-    "size": 1.0,
     "orderID": "25248336-66d8-41ff-99fd-83489c4e6029",
     "timestamp": 1660277763249,
     "triggerPrice": 0.0,
@@ -946,14 +965,20 @@ BTSE的速率限制如下:
     "trigger": false,
     "message": "",
     "averageFillPrice": 0.0,
-    "fillSize": 0.0,
     "clOrderID": "",
     "stealth": 0.0,
     "deviation": 0.0,
     "postOnly": false,
-    "originalSize": 1.0,
-    "remainingSize": 1.0,
-    "time_in_force": "GTC"
+    "time_in_force": "GTC",
+    "originalOrderBaseSize":10,
+    "originalOrderQuoteSize":null,
+    "currentOrderBaseSize":10,
+    "currentOrderQuoteSize":null,
+    "filledBaseSize":0,
+    "totalFilledBaseSize":0,
+    "remainingBaseSize":10,
+    "remainingQuoteSize":null,
+    "orderCurrency":"base"
   }
 ]
 ```
@@ -1025,7 +1050,6 @@ BTSE的速率限制如下:
     "orderType": 76,
     "price": 24000.0,
     "side": "BUY",
-    "size": 1.0,
     "orderID": "9be4a6bb-bf56-4a81-a105-2a22c9629a48",
     "timestamp": 1660278598333,
     "triggerPrice": 0.0,
@@ -1033,14 +1057,20 @@ BTSE的速率限制如下:
     "trigger": false,
     "message": "",
     "averageFillPrice": 0.0,
-    "fillSize": 0.0,
     "clOrderID": "jack-test-1",
     "stealth": 1.0,
     "deviation": 1.0,
     "postOnly": false,
-    "originalSize": 1.0,
-    "remainingSize": 1.0,
-    "time_in_force": "GTC"
+    "time_in_force": "GTC",
+    "originalOrderBaseSize":10,
+    "originalOrderQuoteSize":null,
+    "currentOrderBaseSize":10,
+    "currentOrderQuoteSize":null,
+    "filledBaseSize":0,
+    "totalFilledBaseSize":0,
+    "remainingBaseSize":10,
+    "remainingQuoteSize":null,
+    "orderCurrency":"base"
   }
 ]
 ```
@@ -1054,7 +1084,6 @@ BTSE的速率限制如下:
     "orderType": 76,
     "price": 23000.0,
     "side": "BUY",
-    "size": 1.0,
     "orderID": "e3806536-776c-4d8f-8436-bde12a79620b",
     "timestamp": 1660286055127,
     "triggerPrice": 0.0,
@@ -1062,14 +1091,21 @@ BTSE的速率限制如下:
     "trigger": false,
     "message": "",
     "averageFillPrice": 0.0,
-    "fillSize": 0.0,
     "clOrderID": "",
     "stealth": 1.0,
     "deviation": 1.0,
     "postOnly": false,
-    "originalSize": 1.0,
-    "remainingSize": 1.0,
-    "time_in_force": "GTC"
+    "time_in_force": "GTC",
+    "originalOrderBaseSize":10,
+    "originalOrderQuoteSize":null,
+    "currentOrderBaseSize":10,
+    "currentOrderQuoteSize":null,
+    "filledBaseSize":0,
+    "totalFilledBaseSize":0,
+    "remainingBaseSize":10,
+    "remainingQuoteSize":null,
+    "orderCurrency":"base"
+
   },
   {
     "status": 6,
@@ -1077,7 +1113,6 @@ BTSE的速率限制如下:
     "orderType": 76,
     "price": 0.0,
     "side": "BUY",
-    "size": 1.0,
     "orderID": "ad4d0eeb-81a1-48f4-86c3-90436bb53718",
     "timestamp": 1660286055128,
     "triggerPrice": 40010.0,
@@ -1085,14 +1120,20 @@ BTSE的速率限制如下:
     "trigger": true,
     "message": "",
     "averageFillPrice": 0.0,
-    "fillSize": 0.0,
     "clOrderID": "",
     "stealth": 1.0,
     "deviation": 1.0,
     "postOnly": false,
-    "originalSize": 1.0,
-    "remainingSize": 0.0,
-    "time_in_force": "GTC"
+    "time_in_force": "GTC",
+    "originalOrderBaseSize":10,
+    "originalOrderQuoteSize":null,
+    "currentOrderBaseSize":10,
+    "currentOrderQuoteSize":null,
+    "filledBaseSize":0,
+    "totalFilledBaseSize":0,
+    "remainingBaseSize":10,
+    "remainingQuoteSize":null,
+    "orderCurrency":"base"
   }
 ]
 ```
@@ -2019,22 +2060,27 @@ echo -n "/ws/spot1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6726
       "symbol": "Market Symbol (eg. BTC-USD)",
       "orderID": "BTSE internal order ID",
       "side": "BUY",
-      "type": "76",
+      "orderType": "76",
       "price": "Order price or transacted price",
-      "size": "Order size or transacted size",
-      "originalSize": "Order size",
       "avgFillPrice": 35000,
-      "fillSize": 0.001,
       "status": "<Refer to Status description on the left>",
       "clOrderID": "<Client order ID>",
       "maker": "<Maker flag, if true indicates that trade is a maker trade>",
       "stealth": 1,
       "timestamp": 1624985375123,
       "pegPriceDeviation": "Indicate the deviation percentage. Valid for only algo orders.",
-      "remainingSize": "<Remaining size on the order>",
       "time_in_force": "<Time where this order is valid>",
       "txType": 0,
-      "triggerPrice": "Trade Trigger Price"
+      "triggerPrice": "Trade Trigger Price",
+      "originalOrderBaseSize":10,
+      "originalOrderQuoteSize":null,
+      "currentOrderBaseSize":10,
+      "currentOrderQuoteSize":null,
+      "filledBaseSize":0,
+      "totalFilledBaseSize":0,
+      "remainingBaseSize":10,
+      "remainingQuoteSize":null,
+      "orderCurrency":"base"
     }
 }
 

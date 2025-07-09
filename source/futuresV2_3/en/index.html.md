@@ -780,7 +780,7 @@ Gets all default market settings, including initial margin and maintenance margi
 ```json
 {
   "symbol": "BTC-PERP",
-  "size": 1,
+  "size": 10,
   "side": "BUY",
   "type": "MARKET"
 }
@@ -790,7 +790,7 @@ Gets all default market settings, including initial margin and maintenance margi
 ```json
 {
   "symbol": "BTC-PERP",
-  "size": 1,
+  "size": 10,
   "price": 21000,
   "side": "BUY",
   "type": "LIMIT"
@@ -801,7 +801,7 @@ Gets all default market settings, including initial margin and maintenance margi
 ```json
 {
   "symbol": "BTC-PERP",
-  "size": 1,
+  "size": 10,
   "price": 21000,
   "side": "BUY",
   "type": "LIMIT",
@@ -814,7 +814,7 @@ Gets all default market settings, including initial margin and maintenance margi
 ```json
 {
   "symbol": "BTC-PERP",
-  "size": 1,
+  "size": 10,
   "price": 21000,
   "side": "BUY",
   "type": "LIMIT",
@@ -827,7 +827,7 @@ Gets all default market settings, including initial margin and maintenance margi
 ```json
 {
   "symbol": "BTC-PERP",
-  "size": 1,
+  "size": 10,
   "price": 21000,
   "side": "BUY",
   "type": "OCO",
@@ -886,7 +886,7 @@ Gets all default market settings, including initial margin and maintenance margi
 ```json
 {
   "symbol": "BTC-PERP",
-  "size": 1,
+  "size": 10,
   "side": "BUY",
   "type": "MARKET",
   "positionMode": "HEDGE"
@@ -899,7 +899,7 @@ Gets all default market settings, including initial margin and maintenance margi
 ```json
 {
   "symbol": "BTC-PERP",
-  "size": 1,
+  "size": 10,
   "side": "BUY",
   "type": "MARKET",
   "reduceOnly": true,
@@ -917,7 +917,6 @@ Gets all default market settings, including initial margin and maintenance margi
     "orderType": 76,
     "price": 21000.0,
     "side": "BUY",
-    "size": 1,
     "orderID": "abb3f457-fdc0-4bdb-a46b-8e4aa49a57c2",
     "timestamp": 1660558270207,
     "triggerPrice": 0.0,
@@ -926,11 +925,13 @@ Gets all default market settings, including initial margin and maintenance margi
     "stealth": 100.0,
     "message": "",
     "avgFillPrice": 21000.0,
-    "fillSize": 1.0,
     "clOrderID": "",
-    "originalSize": 1.0,
     "postOnly": false,
     "remainingSize": 0.0,
+    "originalOrderSize":10.0,
+    "currentOrderSize":10.0,
+    "filledSize":0.0,
+    "totalFilledSize":0.0,
     "positionMode": "ONE_WAY",
     "positionDirection": null,
     "positionId": "BTC-PERP-USDT",
@@ -949,7 +950,6 @@ Gets all default market settings, including initial margin and maintenance margi
     "orderType": 76,
     "price": 23000.0,
     "side": "BUY",
-    "size": 1,
     "orderID": "4c9d16c1-9869-4734-bfb8-56318e961ef2",
     "timestamp": 1660558185243,
     "triggerPrice": 30000.0,
@@ -958,11 +958,13 @@ Gets all default market settings, including initial margin and maintenance margi
     "stealth": 100.0,
     "message": "",
     "avgFillPrice": 0.0,
-    "fillSize": 0.0,
     "clOrderID": "",
-    "originalSize": 1.0,
     "postOnly": false,
-    "remainingSize": 1.0,
+    "remainingSize": 0.0,
+    "originalOrderSize":10.0,
+    "currentOrderSize":10.0,
+    "filledSize":0.0,
+    "totalFilledSize":0.0,
     "positionMode": "ONE_WAY",
     "positionDirection": null,
     "positionId": "BTC-PERP-USDT",
@@ -974,7 +976,6 @@ Gets all default market settings, including initial margin and maintenance margi
     "orderType": 76,
     "price": 21000.0,
     "side": "BUY",
-    "size": 1,
     "orderID": "53749446-39d3-4b72-87c9-92e9fc7e4b8c",
     "timestamp": 1660558185225,
     "triggerPrice": 0.0,
@@ -983,11 +984,13 @@ Gets all default market settings, including initial margin and maintenance margi
     "stealth": 100.0,
     "message": "",
     "avgFillPrice": 0.0,
-    "fillSize": 0.0,
     "clOrderID": "",
-    "originalSize": 1.0,
     "postOnly": false,
-    "remainingSize": 1.0,
+    "remainingSize": 0.0,
+    "originalOrderSize":10.0,
+    "currentOrderSize":10.0,
+    "filledSize":0.0,
+    "totalFilledSize":0.0,
     "positionMode": "ONE_WAY",
     "positionDirection": null,
     "positionId": "BTC-PERP-USDT",
@@ -1006,7 +1009,6 @@ Gets all default market settings, including initial margin and maintenance margi
     "orderType": 76,
     "price": 21000.0,
     "side": "BUY",
-    "size": 1,
     "orderID": "abb3f457-fdc0-4bdb-a46b-8e4aa49a57c2",
     "timestamp": 1660558270207,
     "triggerPrice": 0.0,
@@ -1015,11 +1017,13 @@ Gets all default market settings, including initial margin and maintenance margi
     "stealth": 100.0,
     "message": "",
     "avgFillPrice": 21000.0,
-    "fillSize": 1.0,
     "clOrderID": "",
-    "originalSize": 1.0,
     "postOnly": false,
     "remainingSize": 0.0,
+    "originalOrderSize":10.0,
+    "currentOrderSize":10.0,
+    "filledSize":0.0,
+    "totalFilledSize":0.0,
     "positionMode": "HEDGE",
     "positionDirection": "LONG",
     "positionId": "BTC-PERP-USDT|LONG",
@@ -1038,6 +1042,7 @@ Creates a new order. Requires `Trading` permission.
 |---------------| ---     | ---      |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | symbol        | string  | Yes      | Market symbol                                                                                                                                                                                                                                                                                                                                                      |
 | price         | double  | No       | Mandatory unless creating a MARKET order. Order price                                                                                                                                                                                                                                                                                                              |
+| size          | long    | Yes      | Order size in `contract size` (this remains unchanged even after risk limit adjustment)                                                                                                                                                                                                                                                                            |
 | side          | string  | Yes      | 'BUY' or 'SELL'                                                                                                                                                                                                                                                                                                                                                    |
 | time_in_force | string  | No       | Time validity of the order<br/>GTC: Good till Cancel<br/>IOC: Immediate or Cancel<br/>FOK: Fill or Kill<br/>HALFMIN: Order valid for 30 seconds<br/>FIVEMIN: Order valid for 5 mins<br/> HOUR: Order valid for an hour<br/>TWELVEHOUR: Order valid for 12 hours<br/>DAY: Order valid for a day<br/>WEEK: Order valid for a week<br/>MONTH: Order valid for a month |
 | type          | string  | Yes      | Order type<br/>LIMIT: Limit Orders<br/>MARKET: Market Orders<br/>OCO: One cancel the other                                                                                                                                                                                                                                                                         |
@@ -1066,7 +1071,6 @@ Creates a new order. Requires `Trading` permission.
 | postOnly          | boolean | Yes      | Indicates if order is a post only order                                                                                                                                                                                                                                                         |
 | price             | double  | Yes      | Order price                                                                                                                                                                                                                                                                                     |
 | side              | string  | Yes      | Order side<br/>BUY or SELL                                                                                                                                                                                                                                                                      |
-| size              | long    | Yes      | Order size in `contract size` (this remains unchanged even after risk limit adjustment)                                                                                                                                                                                                         |
 | status            | long    | Yes      | Order status<br/> 2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed |
 | time_in_force     | string  | Yes      | Order validity                                                                                                                                                                                                                                                                                  |
 | timestamp         | long    | Yes      | Order timestamp                                                                                                                                                                                                                                                                                 |
@@ -1093,7 +1097,7 @@ Creates a new order. Requires `Trading` permission.
 {
   "symbol": "BTC-PERP",
   "price": 21500,
-  "size": 1,
+  "size": 10,
   "side": "BUY",
   "clOrderID": "60a30188-f2a2-4498-b061-7d72126c18c2",
   "stealth": 10,
@@ -1111,7 +1115,6 @@ Creates a new order. Requires `Trading` permission.
     "orderType": 80,
     "price": 21500.0,
     "side": "BUY",
-    "size": 1,
     "orderID": "de9f94bb-0ca0-470b-830e-9bc2e109c719",
     "timestamp": 1660554373317,
     "triggerPrice": 0.0,
@@ -1120,11 +1123,13 @@ Creates a new order. Requires `Trading` permission.
     "stealth": 10.0,
     "message": "",
     "avgFillPrice": 0.0,
-    "fillSize": 0.0,
     "clOrderID": "60a30188-f2a2-4498-b061-7d72126c18c2",
-    "originalSize": 1.0,
     "postOnly": false,
-    "remainingSize": 1.0,
+    "remainingSize": 0.0,
+    "originalOrderSize":10.0,
+    "currentOrderSize":10.0,
+    "filledSize":0.0,
+    "totalFilledSize":0.0,
     "positionMode": "ONE_WAY",
     "positionDirection": null,
     "positionId": "BTC-PERP-USDT",
@@ -1193,9 +1198,10 @@ This API Requires `Trading` permission.
 {
     "orderType": 76,
     "price": 1,
-    "size": 111,
+    "originalOrderSize":10,
+    "currentOrderSize":10,
+    "totalFilledSize":0,
     "side": "BUY",
-    "filledSize": 0,
     "orderValue": 0.111,
     "pegPriceMin": 0,
     "pegPriceMax": 0,
@@ -1212,7 +1218,6 @@ This API Requires `Trading` permission.
     "triggerStopPrice": 0,
     "symbol": "BTC-PERP",
     "trailValue": 0,
-    "remainingSize": 111,
     "clOrderID": "<Order clOrderID>",
     "reduceOnly": false,
     "status": 2,
@@ -1305,7 +1310,7 @@ Query order detail for a specified orderID/clOrderID, please note that a cancele
   "orderID": "604c3ebf-d7fa-468d-9ff0-f6ad030221b4",
   "type": "ALL",
   "orderPrice": 30010,
-  "orderSize": 1,
+  "orderSize": 10,
   "triggerPrice": 30000
 }
 ```
@@ -1318,7 +1323,7 @@ Query order detail for a specified orderID/clOrderID, please note that a cancele
   "orderID": "604c3ebf-d7fa-468d-9ff0-f6ad030221b4",
   "type": "ALL",
   "orderPrice": 30010,
-  "orderSize": 1
+  "orderSize": 10
 }
 ```
 
@@ -1332,7 +1337,6 @@ Query order detail for a specified orderID/clOrderID, please note that a cancele
     "orderType": 76,
     "price": 20000.0,
     "side": "BUY",
-    "size": 1,
     "orderID": "604c3ebf-d7fa-468d-9ff0-f6ad030221b4",
     "timestamp": 1660639762254,
     "triggerPrice": 0.0,
@@ -1341,11 +1345,13 @@ Query order detail for a specified orderID/clOrderID, please note that a cancele
     "stealth": 100.0,
     "message": "",
     "avgFillPrice": 0.0,
-    "fillSize": 0.0,
     "clOrderID": "",
-    "originalSize": 1.0,
     "postOnly": false,
-    "remainingSize": 1.0,
+    "remainingSize": 5.0,
+    "originalOrderSize":10.0,
+    "currentOrderSize":5.0,
+    "filledSize":0.0,
+    "totalFilledSize":0.0,
     "positionMode": "ONE_WAY",
     "positionDirection": null,
     "positionId": "BTC-PERP-USDT",
@@ -1420,7 +1426,6 @@ Amend the price or size or trigger price of an order. For trigger orders, if the
     "orderType": 76,
     "price": 19000.0,
     "side": "BUY",
-    "size": 1,
     "orderID": "ae5b1b27-d5fe-41e2-89f8-f17b60fb3def",
     "timestamp": 1660640879996,
     "triggerPrice": 0.0,
@@ -1429,11 +1434,13 @@ Amend the price or size or trigger price of an order. For trigger orders, if the
     "stealth": 100.0,
     "message": "",
     "avgFillPrice": 0.0,
-    "fillSize": 0.0,
     "clOrderID": "string",
-    "originalSize": 1.0,
     "postOnly": false,
-    "remainingSize": 1.0,
+    "remainingSize": 10.0,
+    "originalOrderSize":10.0,
+    "currentOrderSize":10.0,
+    "filledSize":0.0,
+    "totalFilledSize":0.0,
     "positionMode": "ONE_WAY",
     "positionDirection": null,
     "positionId": "BTC-PERP-USDT",
@@ -1525,9 +1532,10 @@ Dead-man's switch allows the trader to send in a timeout value which is a Time t
   {
     "orderType": 76,
     "price": 21000.0,
-    "size": 1,
+    "originalOrderSize":10,
+    "currentOrderSize":10,
+    "totalFilledSize":0,
     "side": "BUY",
-    "filledSize": 0,
     "orderValue": 21.0,
     "pegPriceMin": 0.0,
     "pegPriceMax": 0.0,
@@ -1872,7 +1880,6 @@ Requires `Read` permission.
     "orderType": 76,
     "price": 24010.0,
     "side": "SELL",
-    "size": 1,
     "orderID": "93cf814a-595e-4b20-bba9-5c5340ca947d",
     "timestamp": 1660710188450,
     "triggerPrice": 0.0,
@@ -1881,11 +1888,13 @@ Requires `Read` permission.
     "stealth": 100.0,
     "message": "",
     "avgFillPrice": 24010.0,
-    "fillSize": 1.0,
     "clOrderID": "",
-    "originalSize": 1.0,
     "postOnly": false,
-    "remainingSize": 0.0,
+    "remainingSize": 10.0,
+    "originalOrderSize":10.0,
+    "currentOrderSize":10.0,
+    "filledSize":0.0,
+    "totalFilledSize":0.0,
     "positionMode": "ONE_WAY",
     "positionDirection": null,
     "positionId": null,
@@ -3255,26 +3264,25 @@ echo -n "/ws/futures1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6
       "symbol": "Market Symbol (eg. BTC-PERP)",
       "orderID": "BTSE internal order ID",
       "side": "BUY",
-      "type": "76",
+      "type": 76,
       "price": "Order price or transacted price",
-      "size": "Order size or transacted size",
-      "originalSize": "Order size",
       "avgFillPrice": 35000,
-      "fillSize": 0.001,
       "status": "<Refer to Status description on the left>",
       "clOrderID": "<Client order ID>",
       "maker": "<Maker flag, if true indicates that trade is a maker trade>",
       "stealth": 1,
       "timestamp": 1624985375123,
       "pegPriceDeviation": "Indicate the deviation percentage. Valid for only algo orders.",
-      "remainingSize": "<Remaining size on the order>",
       "time_in_force": "<Time where this order is valid>",
       "txType": "STOP | TAKE_PROFIT",
       "positionId": "BTC-PERP-USDT",
-      "triggerPrice": "Trade Trigger Price"
+      "triggerPrice": "Trade Trigger Price",
+      "originalOrderSize":10,
+      "currentOrderSize":10,
+      "filledSize":0,
+      "totalFilledSize":0
     }
   ]
-
 }
 
 ```
