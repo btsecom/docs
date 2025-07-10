@@ -13,6 +13,19 @@ headingLevel: 2
 
 # Change Log
 
+## Version 1.1.3 (10th July 2025)
+
+* [**IMPORTANT**] BTSE will phase out support for two open API endpoints by **July 30, 2025**. The following endpoints will be deprecated:
+  - [`Query available crypto network list for currency`](#query-available-crypto-network-list-for-currency)
+  - [`Query exchange rate between assets`](#query-exchange-rate-between-assets)
+
+  We encourage developers to transition away from these endpoints as they will no longer be supported after the end of July.</br>
+  A new, improved endpoint to replace these can be accessed here:
+  
+  - [`Query crypto networks`](#query-crypto-networks)
+  - [`Query asset exchange rate`](#query-asset-exchange-rate)
+
+
 ## Version 1.1.2 (10th April 2024)
 
 * Update description of `status` and `type` in [`Query Wallet History`](#query-wallet-history)
@@ -65,6 +78,8 @@ You will need to create an API key on the BTSE platform before you can use authe
 * Production
   * HTTP
      * `https://api.btse.com/spot`
+  * HTTP (for [`Query crypto networks`](#query-crypto-networks) and [`Query asset exchange rate`](#query-asset-exchange-rate))
+     * `https://api.btse.com/`
   * Websocket
      * `wss://ws.btse.com/ws/spot`
   * Websocket (for orderbook stream)
@@ -72,6 +87,8 @@ You will need to create an API key on the BTSE platform before you can use authe
 * Testnet
   * HTTP
      * `https://testapi.btse.io/spot`
+  * HTTP (for [`Query crypto networks`](#query-crypto-networks) and [`Query asset exchange rate`](#query-asset-exchange-rate))
+     * `https://api.btse.io/`
   * Websocket
      * `wss://testws.btse.io/ws/spot`
   * Websocket (for orderbook stream)
@@ -132,7 +149,7 @@ Each API will return one of the following HTTP status:
 
 # Public Endpoints
 
-## Query available crypto network list for currency
+## Query available crypto network list for currency (Deprecated)
 
 > Response
 
@@ -145,7 +162,7 @@ Each API will return one of the following HTTP status:
 
 `GET /api/v3.2/availableCurrencyNetworks`
 
-Get available crypto network list for currency.
+Get available crypto network list for currency. This endpoint will be deprecated after **July 30, 2025**. Please replace this endpoint with [`Query crypto networks`](#query-crypto-networks).
 
 ### Request Parameters
 
@@ -159,7 +176,7 @@ Get available crypto network list for currency.
 | ---      | ---    | ---      | ---             |
 | $network | string | Yes      | Name of network |
 
-## Query exchange rate between assets
+## Query exchange rate between assets (Deprecated)
 
 > Response
 
@@ -175,7 +192,7 @@ Get available crypto network list for currency.
 
 `GET /api/v3.2/exchangeRate`
 
-Get the exchange rate between assets.
+Get the exchange rate between assets. This endpoint will be deprecated after **July 30, 2025**. Please replace this endpoint with [`Query asset exchange rate`](#query-asset-exchange-rate).
 
 ### Request Parameters
 
@@ -193,6 +210,154 @@ Get the exchange rate between assets.
 | time             | long      | Yes        | Unix timestamp                 |
 | data             | float     | Yes        | Exchange rate between assets   |
 | success          | boolean   | Yes        | True or False                  |
+
+## Query Crypto Networks
+
+> Response
+
+```json
+{
+  "success": true,
+  "code": 1,
+  "msg": "Success",
+  "time": 1624989977940,
+  "data": [
+    {
+      "network": "ERC20",
+      "name": "Ethereum (ERC20)",
+      "depositEnable": true,
+      "withdrawEnable": true,
+      "confirmationTime": 15,
+      "depositAmtMin": "0",
+      "depositFeeMin": "0",
+      "depositFeeRate": "0",
+      "depositExtFees": "0",
+      "depositExtFeeRate": "0",
+      "needAddressExtension": false,
+      "withdrawAmtMin": "36.41",
+      "withdrawFeeMin": "6.41",
+      "withdrawFeeRate": "0",
+      "withdrawExtFees": "0",
+      "withdrawExtFeeRate": "0"
+    },
+    {
+      "network": "RIPPLE",
+      "name": "Ripple",
+      "depositEnable": true,
+      "withdrawEnable": true,
+      "confirmationTime": 10,
+      "depositAmtMin": "0",
+      "depositFeeMin": "0",
+      "depositFeeRate": "0",
+      "depositExtFees": "0",
+      "depositExtFeeRate": "0",
+      "needAddressExtension": true,
+      "addressExtensionTypeName": "tag",
+      "withdrawAmtMin": "0.25",
+      "withdrawFeeMin": "20",
+      "withdrawFeeRate": "0",
+      "withdrawExtFees": "0",
+      "withdrawExtFeeRate": "0"
+    }
+  ]
+}
+```
+
+`GET /public-api/wallet/v1/crypto/networks`
+
+Get crypto network list with corresponding crypto.
+
+This API can be publicly accessed without any security headers to get a default network list.
+
+If you access with `Read` permission authentication, the result will be much more accurate by account setting.
+The response of `depositEnable` and `withdrawEnable` is true by default under the publicly accessed environment.
+
+* The total deposit fee is `max(depositFeeMin, (amount * depositFeeRate)) + (depositExtFees + depositExtFeeRate * amount)`.
+* The total withdrawal fee is `max(withdrawFeeMin, (amount * withdrawFeeRate)) + (withdrawExtFees + withdrawExtFeeRate * amount)`.
+
+### Request Parameters
+
+| Name             | Type     | Required   | Description   |
+| ---------------- | -------- | ---------- | ------------- |
+| crypto           | string   | Yes        | Ex: BTC       |
+
+
+### Response Content
+
+| Name             | Type      | Required   | Description                                             |
+| ---------------- | --------- | ---------- | ------------------------------------------------------- |
+| data             | object    | Yes        | Array of objects (CryptoNetworkItem)                    |
+| success          | boolean   | Yes        |Request validation is successful or not. It will be set to `true` when the HTTP status is `200.`                                                                        |
+| code             | integer   | Yes        | Request status code. It will be set to `1` when the request is processed successfully. When unsuccessful, there will be an error code.                               |
+| msg              | string    | Yes        | Request status message. It will be set to `Success` when the request is processed successfully. When unsuccessful, there will be an error message.                 |
+| time             | long      | Yes        | Current unix timestamp.                                 |
+
+### Data Object (CryptoNetworkItem)
+
+| Name                     | Type     | Required | Description                          |
+|--------------------------|----------|----------|--------------------------------------|
+| network                  | string   | Yes      | Network                              |
+| name                     | string   | Yes      | Network name                         |
+| depositEnable            | boolean  | Yes      | Allow to deposit                     |
+| withdrawEnable           | boolean  | Yes      | Allow to withdraw                    |
+| confirmationTime         | integer  | No       | Expected block confirmation time     |
+| depositAmtMin            | string   | Yes      | Minimum amount of deposit            |
+| depositFeeMin            | string   | Yes      | Minimum fees of deposit              |
+| depositFeeRate           | string   | Yes      | Fee rate of deposit                  |
+| depositExtFees           | string   | Yes      | Extra fees of deposit                |
+| depositExtFeeRate        | string   | Yes      | Extra fee rate of deposit            |
+| needAddressExtension     | boolean  | Yes      | Supported address extension          |
+| addressExtensionTypeName | string   | No       | Address extension type (e.g. tag)    |
+| withdrawAmtMin           | string   | Yes      | Minimum amount of withdrawal         |
+| withdrawFeeMin           | string   | Yes      | Minimum fees of withdraw             |
+| withdrawFeeRate          | string   | Yes      | Fee rate of withdrawal               |
+| withdrawExtFees          | string   | Yes      | Extra fees of withdraw               |
+| withdrawExtFeeRate       | string   | Yes      | Extra fee rate of withdraw           |
+
+## Query Asset Exchange Rate
+
+> Response
+
+```json
+{
+  "success": true,
+  "code": 1,
+  "msg": "Success",
+  "time": 1624989977940,
+  "data": {
+    "rate": "19026.12846161"
+  }
+}
+```
+
+`GET /public-api/wallet/v1/assets/exchangeRate`
+
+Retrieve exchange rate about a specific pair. For example, `baseCurrency` and `quoteCurrency`.
+
+### Request Parameters
+
+| Name             | Type     | Required   | Description                                                    |
+| ---------------- | -------- | ---------- | -------------------------------------------------------------  |
+| baseCurrency     | string   | Yes        | Example: baseCurrency=BTC</br>Base currency, such as BTC       |
+| amount           | string   | Yes        | Example: amount=2</br>The quantity of `baseCurrency` .         |
+| quoteCurrency    | string   | Yes        | Example: quoteCurrency=USDT</br>Quote currency, such as USDT.  |
+
+### Response Content
+
+### Response Content
+
+| Name             | Type      | Required   | Description                                             |
+| ---------------- | --------- | ---------- | ------------------------------------------------------- |
+| data             | object    | Yes        | Array of objects (CryptoNetworkItem)                    |
+| success          | boolean   | Yes        |Request validation is successful or not. It will be set to `true` when the HTTP status is `200.`                                                                        |
+| code             | integer   | Yes        | Request status code. It will be set to `1` when the request is processed successfully. When unsuccessful, there will be an error code.                               |
+| msg              | string    | Yes        | Request status message. It will be set to `Success` when the request is processed successfully. When unsuccessful, there will be an error message.                 |
+| time             | long      | Yes        | Current unix timestamp.                                 |
+
+### Data Object
+| Name                     | Type     | Required | Description                                        |
+|--------------------------|----------|----------|--------------------------------------------------- |
+| rate                     | string   | No       | The rate of base-currency to quote-currency.       |
 
 # Wallet Endpoints
 

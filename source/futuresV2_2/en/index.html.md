@@ -15,15 +15,15 @@ headingLevel: 2
 
 ## Version 1.0.7 (14th May 2025)
 
-* Add API for querying [Default Market Setting](#market-risk-limit-setting), including initial margin and maintenance margin by each market and each risk limit level. This change will take effect on 28th May, 2025.
+* Add API for querying [`Default Market Setting`](#market-risk-limit-setting), including initial margin and maintenance margin by each market and each risk limit level. This change will take effect on 28th May, 2025.
 
 ## Version 1.0.6 (9th April 2025)
 
-* Update the description for Request field `type` for [Amend order](#amend-order). This change will take effect on 18th May, 2025.
+* Update the description for Request field `type` for [`Amend order`](#amend-order). This change will take effect on 18th May, 2025.
 
 ## Version 1.0.5 (6th November 2024)
 
-* Add maximum days of trade history explanation for API [Query Trades Fills](#query-trades-fills-2)
+* Add maximum days of trade history explanation for API [`Query Trades Fills`](#query-trades-fills-2)
 
 ## Version 1.0.4 (16th September 2024)
 
@@ -37,7 +37,7 @@ headingLevel: 2
 
 * Add API for querying [`User Initial Margin Percentage And Maintenance Margin Percentage`](#query-user-initial-margin-percentage-and-maintenance-margin-percentage)
 
-## Version 1.0.1 (10th Jul 2024)
+## Version 1.0.1 (10th July 2024)
 
 * Add [`Rate Limit Mechanism Description`](#mechanism-description) description
 

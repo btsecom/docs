@@ -13,6 +13,17 @@ headingLevel: 2
 
 # 更新日志
 
+## 版本 1.1.3 (2025年7月10日)
+
+* [**重要**] BTSE 将于 2025年7月10日 起逐步停止支持以下两个 Open API 接口。以下接口将被弃用:
+  - [`查询货币的可用加密网络列表`](#40af277644)
+  - [`查询资产间的汇率`](#9dbf83fe7f)
+
+  我们鼓励开发者尽快停止使用这些接口，因为它们将在 7 月底之后不再受支持。可点击此处访问用于替代的全新升级接口：
+  
+  - [`查询加密货币网络信息`](#3526dbe03b)
+  - [`资产兑换汇率查询`](#52edd98764)
+
 ## 版本 1.1.2 (2024年4月10日)
 
 * 更新 [`查询钱包历史`](#bc1c4a9961) 中的 `status` 與 `type` 的描述
@@ -65,6 +76,8 @@ headingLevel: 2
 * 生产
   * HTTP
      * `https://api.btse.com/spot`
+  * HTTP (用于[`查询加密货币网络信息`](#3526dbe03b) and [`资产兑换汇率查询`](#52edd98764))
+       * `https://api.btse.com/`
   * Websocket
      * `wss://ws.btse.com/ws/spot`
   * Websocket (用于订单簿流)
@@ -72,6 +85,8 @@ headingLevel: 2
 * 测试网络
   * HTTP
      * `https://testapi.btse.io/spot`
+  * HTTP (用于[`查询加密货币网络信息`](#3526dbe03b) and [`资产兑换汇率查询`](#52edd98764))
+       * `https://api.btse.io/`
   * Websocket
      * `wss://testws.btse.io/ws/spot`
   * Websocket (用于订单簿流)
@@ -132,7 +147,7 @@ BTSE 的速率限制如下：
 
 # 公共端点
 
-## 查询货币的可用加密网络列表
+## 查询货币的可用加密网络列表（弃用）
 
 > 响应
 
@@ -159,7 +174,7 @@ BTSE 的速率限制如下：
 | ---      | ---    | ---  | ---         |
 | $network | string | Yes  | 网络名称    |
 
-## 查询资产间的汇率
+## 查询资产间的汇率（弃用）
 
 > 响应
 
@@ -186,13 +201,159 @@ BTSE 的速率限制如下：
 
 ### 响应内容
 
-| 名称             | 类型      | 必填   | 描述                      |
-| ---------------- | --------- | ------ | ------------------------ |
+| 名称              | 类型      | 必填   | 描述                       |
+| ---------------- | ----------| ------ | ------------------------ |
 | code             | integer   | Yes    | 返回码                    |
 | msg              | string    | Yes    | 返回消息                  |
 | time             | long      | Yes    | Unix时间戳                |
-| data             | float     | Yes    | 资产之间的汇率            |
+| data             | float     | Yes    | 资产之间的汇率             |
 | success          | boolean   | Yes    | 是 或 否                  |
+
+## 查询加密货币网络信息
+
+> 响应
+
+```json
+{
+  "success": true,
+  "code": 1,
+  "msg": "Success",
+  "time": 1624989977940,
+  "data": [
+    {
+      "network": "ERC20",
+      "name": "Ethereum (ERC20)",
+      "depositEnable": true,
+      "withdrawEnable": true,
+      "confirmationTime": 15,
+      "depositAmtMin": "0",
+      "depositFeeMin": "0",
+      "depositFeeRate": "0",
+      "depositExtFees": "0",
+      "depositExtFeeRate": "0",
+      "needAddressExtension": false,
+      "withdrawAmtMin": "36.41",
+      "withdrawFeeMin": "6.41",
+      "withdrawFeeRate": "0",
+      "withdrawExtFees": "0",
+      "withdrawExtFeeRate": "0"
+    },
+    {
+      "network": "RIPPLE",
+      "name": "Ripple",
+      "depositEnable": true,
+      "withdrawEnable": true,
+      "confirmationTime": 10,
+      "depositAmtMin": "0",
+      "depositFeeMin": "0",
+      "depositFeeRate": "0",
+      "depositExtFees": "0",
+      "depositExtFeeRate": "0",
+      "needAddressExtension": true,
+      "addressExtensionTypeName": "tag",
+      "withdrawAmtMin": "0.25",
+      "withdrawFeeMin": "20",
+      "withdrawFeeRate": "0",
+      "withdrawExtFees": "0",
+      "withdrawExtFeeRate": "0"
+    }
+  ]
+}
+```
+
+`GET /public-api/wallet/v1/crypto/networks`
+
+获取加密货币对应的加密网络列表。
+
+此 API 可在无需任何安全标头的情况下公开访问，以获取默认的网络列表。
+
+如果使用具有 `Read` 权限的身份验证访问，结果将根据账户设置更为准确。
+在公开访问环境下， `depositEnable` 和 `withdrawEnable` 的响应默认为 true。
+
+* 总的充值手续费为： `max(depositFeeMin, (amount * depositFeeRate)) + (depositExtFees + depositExtFeeRate * amount)`
+* 总的提现手续费为： `max(withdrawFeeMin, (amount * withdrawFeeRate)) + (withdrawExtFees + withdrawExtFeeRate * amount)`
+
+### 请求参数
+
+| Name             | Type     | Required   | Description   |
+| ---------------- | -------- | ---------- | ------------- |
+| crypto           | string   | Yes        | 示例：BTC       |
+
+
+### 响应内容
+
+| Name             | Type      | Required   | Description                                             |
+| ---------------- | --------- | ---------- | ------------------------------------------------------- |
+| data             | object    | Yes        | 物件陣列 (CryptoNetworkItem)                    |
+| success          | boolean   | Yes        |請求校驗是否成功。當 HTTP 狀態為 `200`  時，該欄位將設為 `true`                                                                        |
+| code             | integer   | Yes        | 請求狀態碼。當請求成功處理時，該欄位設為 `1`；失敗時則會返回錯誤碼。                               |
+| msg              | string    | Yes        | 請求狀態訊息。當請求成功處理時，該欄位為 `Success`；失敗時會顯示錯誤訊息。                 |
+| time             | long      | Yes        | 當前的 unix 時間戳記。                                 |
+
+### 数据对象 (CryptoNetworkItem)
+
+| Name                     | Type     | Required | Description                          |
+|--------------------------|----------|----------|--------------------------------------|
+| network                  | string   | Yes      | 网络                                  |
+| name                     | string   | Yes      | 网络名称                              |
+| depositEnable            | boolean  | Yes      | 是否允许充值                           |
+| withdrawEnable           | boolean  | Yes      | 是否允许提现                           |
+| confirmationTime         | integer  | No       | 区块确认预计时间                        |
+| depositAmtMin            | string   | Yes      | 最小充值金额                           |
+| depositFeeMin            | string   | Yes      | 最低充值手续费                         |
+| depositFeeRate           | string   | Yes      | 充值手续费率                           |
+| depositExtFees           | string   | Yes      | 额外充值手续费                         |
+| depositExtFeeRate        | string   | Yes      | 额外充值手续费率                       |
+| needAddressExtension     | boolean  | Yes      | 是否支持地址扩展                        |
+| addressExtensionTypeName | string   | No       | 地址扩展类型（如 `tag`）                |
+| withdrawAmtMin           | string   | Yes      | 最小提现金额                           |
+| withdrawFeeMin           | string   | Yes      | 最低提现手续费                         |
+| withdrawFeeRate          | string   | Yes      | 提现手续费率                           |
+| withdrawExtFees          | string   | Yes      | 额外提现手续费                         |
+| withdrawExtFeeRate       | string   | Yes      | 额外提现手续费率                        |
+
+## 资产兑换汇率查询
+
+> 响应
+
+```json
+{
+  "success": true,
+  "code": 1,
+  "msg": "Success",
+  "time": 1624989977940,
+  "data": {
+    "rate": "19026.12846161"
+  }
+}
+```
+
+`GET /public-api/wallet/v1/assets/exchangeRate`
+
+获取特定交易对的汇率。例如：`baseCurrency` 和 `quoteCurrency`.
+
+### Request Parameters
+
+| Name             | Type     | Required   | Description                                                    |
+| ---------------- | -------- | ---------- | -------------------------------------------------------------  |
+| baseCurrency     | string   | Yes        | 示例：baseCurrency=BTC</br>基础币种，例如:BTC                     |
+| amount           | string   | Yes        | 示例：amount=2</br>`baseCurrency` 的数量                         |
+| quoteCurrency    | string   | Yes        | 示例：quoteCurrency=USDT</br>报价币种，例如:USDT                   |
+
+### 响应内容
+
+| Name             | Type      | Required   | Description                                             |
+| ---------------- | --------- | ---------- | ------------------------------------------------------- |
+| data             | object    | Yes        | 物件陣列 (CryptoNetworkItem)                             |
+| success          | boolean   | Yes        |請求校驗是否成功。當 HTTP 狀態為 `200`  時，該欄位將設為 `true`                                                                                                |
+| code             | integer   | Yes        | 請求狀態碼。當請求成功處理時，該欄位設為 `1`；失敗時則會返回錯誤碼。                                                                                                   |
+| msg              | string    | Yes        | 請求狀態訊息。當請求成功處理時，該欄位為 `Success`；失敗時會顯示錯誤訊息。                                                                                                   |
+| time             | long      | Yes        | 當前的 unix 時間戳記。                                     |
+
+### Data Object
+| Name                     | Type     | Required | Description                                        |
+|--------------------------|----------|----------|--------------------------------------------------- |
+| rate                     | string   | No       | base-currency 对 quote-currency 的汇率              |
 
 # 钱包端点
 
