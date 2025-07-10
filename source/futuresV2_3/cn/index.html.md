@@ -3094,7 +3094,7 @@ pong
 {
   "op": "subscribe",
   "args": [
-    "tradeHistoryApiV2:BTC-PERP"
+    "tradeHistoryApiV3:BTC-PERP"
   ]
 }
 ```
@@ -3105,7 +3105,7 @@ pong
 {
   "event": "subscribe",
   "channel": [
-    "tradeHistoryApiV2:BTC-PERP"
+    "tradeHistoryApiV3:BTC-PERP"
   ]
 }
 ```
@@ -3137,7 +3137,7 @@ pong
 {
   "op": "subscribe",
   "args": [
-    "tradeHistoryApiV2:BTC-PERP"
+    "tradeHistoryApiV3:BTC-PERP"
   ]
 }
 ```
@@ -3148,7 +3148,7 @@ pong
 {
   "event": "subscribe",
   "channel": [
-    "tradeHistoryApiV2:BTC-PERP"
+    "tradeHistoryApiV3:BTC-PERP"
   ]
 }
 ```
@@ -3157,21 +3157,21 @@ pong
 
 ```json
 {
-  "topic": "tradeHistoryApiV2:BTC-PERP",
+  "topic": "tradeHistoryApiV3:BTC-PERP",
   "data": [
-  {
-    "symbol": "BTC-PERP",
-    "side": "SELL",
-    "size": 0.007,
-    "price": 5302.8,
-    "tradeId": 118974855,
-    "timestamp": 1584446020295
-  }
+    {
+      "price": 111144.8,
+      "size": 152,
+      "side": "SELL",
+      "symbol": "BTC-PERP",
+      "tradeId": 927002515,
+      "timestamp": 1752129545326
+    }
   ]
 }
 ```
 
-订阅市场的最近交易提要。主题将是 `tradeHistoryApiV2:<market>`，其中`<market>` 是市场符号。
+订阅市场的最近交易提要。主题将是 `tradeHistoryApiV3:<market>`，其中`<market>` 是市场符号。
 
 ### 响应内容
 
@@ -3257,26 +3257,30 @@ echo -n "/ws/futures1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6
   "topic": "notificationApiV4",
   "data": [
     {
-      "symbol": "Market Symbol (eg. BTC-PERP)",
-      "orderID": "BTSE internal order ID",
+      "symbol": "BTC-PERP",
+      "orderID": "7dd1a951-bdf5-4d32-a3ef-e5e39cae12af",
       "side": "BUY",
-      "type": 76,
-      "price": "Order price or transacted price",
-      "avgFilledPrice": 35000,
-      "status": "<Refer to Status description on the left>",
-      "clOrderID": "<Client order ID>",
-      "maker": "<Maker flag, if true indicates that trade is a maker trade>",
+      "orderType": 77,
+      "type": 0,
+      "price": 111091.6,
+      "triggerPrice": 0,
+      "pegPriceDeviation": 1,
       "stealth": 1,
-      "timestamp": 1624985375123,
-      "pegPriceDeviation": "Indicate the deviation percentage. Valid for only algo orders.",
-      "time_in_force": "<Time where this order is valid>",
-      "txType": "STOP | TAKE_PROFIT",
+      "status": 4,
+      "timestamp": 1752129830837,
+      "avgFillPrice": 111091.6,
+      "clOrderID": "",
+      "postOnly": false,
+      "maker": false,
       "positionId": "BTC-PERP-USDT",
-      "triggerPrice": "Trade Trigger Price",
-      "originalOrderSize":10,
-      "currentOrderSize":10,
-      "filledSize":0,
-      "totalFilledSize":0
+      "orderDetailType": null,
+      "orderUserInitiated": true,
+      "originalOrderSize": 900,
+      "currentOrderSize": 855,
+      "filledSize": 0,
+      "totalFilledSize": 900,
+      "remainingSize": 855,
+      "time_in_force": "GTC"
     }
   ]
 }
