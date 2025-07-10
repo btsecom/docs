@@ -16,8 +16,8 @@ headingLevel: 2
 ## Version 1.1.3 (10th July 2025)
 
 * [**IMPORTANT**] BTSE will phase out support for two open API endpoints by **July 30, 2025**. The following endpoints will be deprecated:
-  - [`Query available crypto network list for currency`](#query-available-crypto-network-list-for-currency)
-  - [`Query exchange rate between assets`](#query-exchange-rate-between-assets)
+  - [`Query available crypto network list for currency`](#query-available-crypto-network-list-for-currency-deprecated)
+  - [`Query exchange rate between assets`](#query-exchange-rate-between-assets-deprecated)
 
   We encourage developers to transition away from these endpoints as they will no longer be supported after the end of July.</br>
   A new, improved endpoint to replace these can be accessed here:
