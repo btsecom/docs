@@ -94,7 +94,7 @@ headingLevel: 2
 ## 身份验证
 
 * API密钥（request-api）
-  * 参数名称：`request-api`，位置：标头。API密钥以string形式从BTSE平台获取
+  * 参数名称：`request-api`，位置：标头。API密钥以String形式从BTSE平台获取
 
 * API密钥（request-nonce）
   * 参数名称：`request-nonce`，位置：标头。以长格式表示的当前时间戳
@@ -263,47 +263,47 @@ BTSE的速率限制如下:
 
 | 名称     | 类型     | 是否必须   | 描述     |
 | -------- | -------- | ---------- | --------------- |
-| symbol   | string   | No      | 市场符号   |
+| symbol   | String   | No      | 市场符号   |
 
 ### 回复内容
 
 | 名称                | 类型     | 是否必须   | 描述                                                 |
 | ------------------  | -------- | ---------- | -------------                                               |
-| symbol              | string   | Yes      | 市场符号                                               |
-| last                | double   | Yes      | 最后价格                                                |
-| lowestAsk           | double   | Yes      | 订单簿中的最低卖出价                            |
-| highestBid          | double   | Yes      | 订单簿中的最高买入价                            |
-| percentageChange    | double   | Yes      | 在过去24小时内与价格的百分比变化        |
-| volume              | double   | Yes      | 成交量                                                 |
-| high24Hr            | double   | Yes      | 过去24小时内的最高价格                           |
-| low24Hr             | double   | Yes      | 过去24小时内的最低价格                           |
-| base                | string   | Yes      | 基础货币                                               |
-| quote               | string   | Yes      | 报价货币                                               |
-| active              | boolean  | Yes      | 市场yes否活跃的指示                                 |
-| size                | double   | Yes      | 成交大小                                               |
-| minValidPrice       | double   | Yes      | 最小有效价格                                         |
-| minPriceIncrement   | double   | Yes      | 价格递增                                               |
-| minOrderSize        | double   | Yes      | 最小交易量                                             |
-| minSizeIncrement    | double   | Yes      | 交易量递增                                           |
-| maxOrderSize        | double   | Yes      | 最大订单大小                                         |
-| openInterest        | double   | No      | 不适用于现货市场                                    |
-| openInterestUSD     | double   | No      | 不适用于现货市场                                    |
+| symbol              | String   | Yes      | 市场符号                                               |
+| last                | Double   | Yes      | 最后价格                                                |
+| lowestAsk           | Double   | Yes      | 订单簿中的最低卖出价                            |
+| highestBid          | Double   | Yes      | 订单簿中的最高买入价                            |
+| percentageChange    | Double   | Yes      | 在过去24小时内与价格的百分比变化        |
+| volume              | Double   | Yes      | 成交量                                                 |
+| high24Hr            | Double   | Yes      | 过去24小时内的最高价格                           |
+| low24Hr             | Double   | Yes      | 过去24小时内的最低价格                           |
+| base                | String   | Yes      | 基础货币                                               |
+| quote               | String   | Yes      | 报价货币                                               |
+| active              | Boolean  | Yes      | 市场yes否活跃的指示                                 |
+| size                | Double   | Yes      | 成交大小                                               |
+| minValidPrice       | Double   | Yes      | 最小有效价格                                         |
+| minPriceIncrement   | Double   | Yes      | 价格递增                                               |
+| minOrderSize        | Double   | Yes      | 最小交易量                                             |
+| minSizeIncrement    | Double   | Yes      | 交易量递增                                           |
+| maxOrderSize        | Double   | Yes      | 最大订单大小                                         |
+| openInterest        | Double   | No      | 不适用于现货市场                                    |
+| openInterestUSD     | Double   | No      | 不适用于现货市场                                    |
 | contractStart       | date     | No      | 不适用于现货市场                                    |
 | contractEnd         | date     | No      | 不适用于现货市场                                    |
-| timeBasedContract   | boolean   | No      | 不适用于现货市场                                    |
+| timeBasedContract   | Boolean   | No      | 不适用于现货市场                                    |
 | openTime            | date     | Yes      | 市场开盘时间                                         |
 | closeTime           | date     | Yes      | 市场收盘时间                                         |
 | startMatching       | date     | Yes      | 匹配开始时间                                         |
 | inactiveTime        | date     | Yes      | 市场不活跃时间                                     |
-| fundingRate         | double   | No      | 不适用于现货市场                                    |
-| contractSize        | double   | No      | 不适用于现货市场                                    |
-| maxPosition         | double   | No      | 不适用于现货市场                                    |
-| minRiskLimit        | double   | No      | 不适用于现货市场                                    |
-| maxRiskLimit        | double   | No      | 不适用于现货市场                                    |
-| availableSettlement | array    | No      | 不适用于现货市场                                    |
-| futures             | boolean  | Yes      | 符号是否为期货合同的指示                         |
-| isMarketOpenToOtc   | boolean  | Yes        | 表示该市场是否对OTC（场外交易）开放                           |
-| isMarketOpenToSpot  | boolean  | Yes        | 表示该市场是否对现货交易开放                                  |
+| fundingRate         | Double   | No      | 不适用于现货市场                                    |
+| contractSize        | Double   | No      | 不适用于现货市场                                    |
+| maxPosition         | Double   | No      | 不适用于现货市场                                    |
+| minRiskLimit        | Double   | No      | 不适用于现货市场                                    |
+| maxRiskLimit        | Double   | No      | 不适用于现货市场                                    |
+| availableSettlement | Array    | No      | 不适用于现货市场                                    |
+| futures             | Boolean  | Yes      | 符号是否为期货合同的指示                         |
+| isMarketOpenToOtc   | Boolean  | Yes        | 表示该市场是否对OTC（场外交易）开放                           |
+| isMarketOpenToSpot  | Boolean  | Yes        | 表示该市场是否对现货交易开放                                  |
 
 ## 图表数据
 
@@ -338,10 +338,10 @@ BTSE的速率限制如下:
 
 | 名称        | 类型   | 是否必须   | 描述                                                                                                       |
 | ---         | ---    | ---      | ---                                                                                                       |
-| symbol      | string | Yes      | 市场符号                                                                                                 |
-| start       | long   | No      | 开始时间（毫秒）（例如：1624987283000）                                                                     |
-| end         | long   | No      | 结束时间（毫秒）（例如：1624987283000）                                                                     |
-| resolution  | string | Yes      | 支持的分辨率如下：<br/> 1: 1分钟<br/> 5: 5分钟<br/> 15: 15分钟<br/>30: 30分钟<br/>60: 60分钟<br/>240: 4小时<br/>360: 6小时<br/>1440: 1天<br/>10080: 1周<br/>43200: 1月 |
+| symbol      | String | Yes      | 市场符号                                                                                                 |
+| start       | Long   | No      | 开始时间（毫秒）（例如：1624987283000）                                                                     |
+| end         | Long   | No      | 结束时间（毫秒）（例如：1624987283000）                                                                     |
+| resolution  | String | Yes      | 支持的分辨率如下：<br/> 1: 1分钟<br/> 5: 5分钟<br/> 15: 15分钟<br/>30: 30分钟<br/>60: 60分钟<br/>240: 4小时<br/>360: 6小时<br/>1440: 1天<br/>10080: 1周<br/>43200: 1月 |
 
 
 ### 响应内容
@@ -350,12 +350,12 @@ BTSE的速率限制如下:
 
 | 索引 | 类型   | 是否必须   | 描述             |
 | ---  | ---    | ---      | ---             |
-| 0    | long   | Yes      | Unix 时间        |
-| 1    | double | Yes      | 开盘价           |
-| 2    | double | Yes      | 最高价           |
-| 3    | double | Yes      | 最低价           |
-| 4    | double | Yes      | 收盘价           |
-| 5    | double | Yes      | 成交量           |
+| 0    | Long   | Yes      | Unix 时间        |
+| 1    | Double | Yes      | 开盘价           |
+| 2    | Double | Yes      | 最高价           |
+| 3    | Double | Yes      | 最低价           |
+| 4    | Double | Yes      | 收盘价           |
+| 5    | Double | Yes      | 成交量           |
 
 
 ## 查询市场价格
@@ -381,17 +381,17 @@ BTSE的速率限制如下:
 
 | 名称   | 类型   | 是否必须   | 描述          |
 | ---    | ---    | ---      | ---          |
-| symbol | string | Yes      | 市场符号    |
+| symbol | String | Yes      | 市场符号    |
 
 
 ### 响应内容
 
 | Name       | 类型   | 是否必须 | Description           |
 | ---        | ---    | ---      | ---                   |
-| symbol     | double | Yes      | 市场符号            |
-| indexPrice | double | Yes      | 指数价格            |
-| lastPrice  | double | Yes      | 最后成交价格      |
-| markPrice  | double | Yes      | 现货市场不适用    |
+| symbol     | Double | Yes      | 市场符号            |
+| indexPrice | Double | Yes      | 指数价格            |
+| lastPrice  | Double | Yes      | 最后成交价格      |
+| markPrice  | Double | Yes      | 现货市场不适用    |
 
 ## 订单簿（按分组）
 
@@ -424,10 +424,10 @@ BTSE的速率限制如下:
 
 | 名称       | 类型    | 是否必须   | 描述                                                                                                                                                                                                                                                                 |
 | ---        | ---     | ---      |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| symbol     | string  | Yes      | 市场符号                                                                                                                                                                                                                                                          |
-| group      | integer    | No      | 订单簿分组。有效值为：<br/>0-8，其中0表示0级分组（例如，对于BTC，它将是0.1）<br/>BTC的一级分组为0.5<br/>BTC的一级分组为1<br/>  |
-| limit_bids | integer    | No      | 竞标方的订单簿深度                                                                                                                                                                                                                                                   |
-| limit_asks | integer    | No      | 询价方的订单簿深度                                                                                                                                                                                                                                                   |
+| symbol     | String  | Yes      | 市场符号                                                                                                                                                                                                                                                          |
+| group      | Integer    | No      | 订单簿分组。有效值为：<br/>0-8，其中0表示0级分组（例如，对于BTC，它将是0.1）<br/>BTC的一级分组为0.5<br/>BTC的一级分组为1<br/>  |
+| limit_bids | Integer    | No      | 竞标方的订单簿深度                                                                                                                                                                                                                                                   |
+| limit_asks | Integer    | No      | 询价方的订单簿深度                                                                                                                                                                                                                                                   |
 
 ### 响应内容
 
@@ -435,17 +435,17 @@ BTSE的速率限制如下:
 
 | 名称      | 类型   | 是否必须   | 描述            |
 | ---       | ---    | ---      | ---            |
-| symbol    | string | Yes      | 市场符号      |
+| symbol    | String | Yes      | 市场符号      |
 | buyQuote  | Quote  | Yes      | 竞买报价array  |
 | sellQuote | Quote  | Yes      | 竞卖报价array  |
-| timestamp | double | Yes      | 订单簿时间戳 |
+| timestamp | Double | Yes      | 订单簿时间戳 |
 
 #### 报价
 
 | 名称  | 类型   | 是否必须   | 描述         |
 | ---   | ---    | ---      | ---         |
-| price | double | Yes      | 订单价格   |
-| size  | double | Yes      | 订单大小   |
+| price | Double | Yes      | 订单价格   |
+| size  | Double | Yes      | 订单大小   |
 
 
 ## 订单簿
@@ -479,8 +479,8 @@ BTSE的速率限制如下:
 
 | 名称   | 类型    | 是否必须   | 描述             |
 | ---    | ---     | ---      | ---             |
-| symbol | string  | Yes      | 市场符号       |
-| depth  | integer    | No      | 订单簿深度   |
+| symbol | String  | Yes      | 市场符号       |
+| depth  | Integer    | No      | 订单簿深度   |
 
 ### 响应内容
 
@@ -488,17 +488,17 @@ BTSE的速率限制如下:
 
 | 名称      | 类型   | 是否必须   | 描述            |
 | ---       | ---    | ---      | ---            |
-| symbol    | string | Yes      | 市场符号      |
+| symbol    | String | Yes      | 市场符号      |
 | buyQuote  | Quote  | Yes      | 竞买报价array  |
 | sellQuote | Quote  | Yes      | 竞卖报价array  |
-| timestamp | double | Yes      | 订单簿时间戳 |
+| timestamp | Double | Yes      | 订单簿时间戳 |
 
 #### 报价
 
 | 名称  | 类型   | 是否必须   | 描述         |
 | ---   | ---    | ---      | ---         |
-| price | double | Yes      | 订单价格   |
-| size  | double | Yes      | 订单大小   |
+| price | Double | Yes      | 订单价格   |
+| size  | Double | Yes      | 订单大小   |
 
 
 ## 查询交易成交
@@ -526,10 +526,10 @@ BTSE的速率限制如下:
 
 | 名称       | 类型     | 是否必须  | 描述                               |
 | ---       | ---     | ---      | ---                                |
-| symbol    | string  | Yes      | 市场符号                            |
-| startTime | long    | No       | 开始时间（毫秒）（例如，1624987283000）|
-| endTime   | long    | No       | 结束时间（毫秒）（例如，1624987283000）|
-| count     | integer | No       | 要返回的记录数                       |
+| symbol    | String  | Yes      | 市场符号                            |
+| startTime | Long    | No       | 开始时间（毫秒）（例如，1624987283000）|
+| endTime   | Long    | No       | 结束时间（毫秒）（例如，1624987283000）|
+| count     | Integer | No       | 要返回的记录数                       |
 
 * 成交紀錄最大天数
 
@@ -544,12 +544,12 @@ BTSE的速率限制如下:
 
 | 名称       | 类型    | 是否必须   | 描述                              |
 | ---       | ---     | ---      | ---                               |
-| symbol    | string  | Yes      | 市场符号                           |
-| side      | string  | Yes      | 交易方向。可选值为：[`BUY`, `SELL`]  |
-| price     | double  | Yes      | 成交价格                           |
-| size      | double  | Yes      | 成交大小                           |
-| serialId  | double  | Yes      | 流水号，递增的序列号                 |
-| timestamp | double  | Yes      | 成交时间戳                         |
+| symbol    | String  | Yes      | 市场符号                           |
+| side      | String  | Yes      | 交易方向。可选值为：[`BUY`, `SELL`]  |
+| price     | Double  | Yes      | 成交价格                           |
+| size      | Double  | Yes      | 成交大小                           |
+| serialId  | Double  | Yes      | 流水号，递增的序列号                 |
+| timestamp | Double  | Yes      | 成交时间戳                         |
 
 
 ## 查询服务器时间
@@ -571,8 +571,8 @@ BTSE的速率限制如下:
 
 | 名称  | 类型 | 是否必须   | 描述                              |
 | ---   | ---  | ---      | ---                              |
-| iso   | long | Yes      | 以YYYY-MM-DDTHH24:MI:SS.Z格式的时间 |
-| epoch | long | Yes      | 返回的纪元时间戳
+| iso   | Long | Yes      | 以YYYY-MM-DDTHH24:MI:SS.Z格式的时间 |
+| epoch | Long | Yes      | 返回的纪元时间戳
 
 
 # 交易端点
@@ -764,43 +764,43 @@ BTSE的速率限制如下:
 
 | 名称          | 类型    | 是否必须 | 描述                                                                                                                                                                                                                                                                                                                                                        |
 | ---           | ---     | ---      | ---                                                                                                                                                                                                                                                                                                                                                        |
-| symbol        | string  | Yes      | 市场标志                                                                                                                                                                                                                                                                                                                                                 |
-| price         | double  | No      | 创建 MARKET 订单时除外。卖单的最低价格，这是用户愿意卖出的最低价格。买单的最高价格，这是用户愿意买入的最高价格。                                                                                                                                                                                                                    |
-| size          | double  | Yes      | 订单大小                                                                                                                                                                                                                                                                                                                                                  |
-| side          | string  | Yes      | 'BUY' 或 'SELL'                                                                                                                                                                                                                                                                                                                                         |
-| time_in_force | string  | No      | 订单的时间有效性<br/>GTC：有效直到取消<br/>IOC：立即取消<br/>FOK：全部成交或取消<br/>HALFMIN：订单有效时间为30秒<br/>FIVEMIN：订单有效时间为5分钟<br/>HOUR：订单有效时间为1小时<br/>TWELVEHOUR：订单有效时间为12小时<br/>DAY：订单有效时间为1天<br/>WEEK：订单有效时间为1周<br/>MONTH：订单有效时间为1个月 |
-| type          | string  | Yes      | 订单类型<br/>LIMIT：限价订单<br/>MARKET：市价订单<br/>OCO：一边成交后取消另一边<br/>PEG：价格根据指数价格偏差而定                                                                                                                                                                                        |
-| txType        | string  | No      | 用于止损单或触发单<br/>STOP：止损单，'triggerPrice' 为必须项<br/>TRIGGER：触发单，'triggerPrice' 为必须项<br/>LIMIT：默认，当不是止损单或触发单时使用                                                                                                                                                  |
-| stopPrice     | double  | No      | 创建OCO订单时为必须项。表示触发价格                                                                                                                                                                                                                                                                                                    |
-| triggerPrice  | double  | No      | 创建止损单、触发单或OCO订单时为必须项。表示触发价格                                                                                                                                                                                                                                                                                                  |
-| trailValue    | double  | No      | 跟踪值                                                                                                                                                                                                                                                                                                                                                  |
-| postOnly      | boolean    | No      | boolean，指示是否为仅限挂单。对于仅限挂单，交易员将支付挂单方的费用                                                                                                                                                                                                                                                                     |
-| clOrderID     | string  | No      | 自定义订单ID                                                                                                                                                                                                                                                                                                                                            |
-| stealth       | double  | No      | 创建 PEG 订单时为是否必须项。要在订单簿上显示多少百分比的订单。                                                                                                                                                                                                                                                                                               |
-| deviation     | double  | No      | 适用于 PEG 订单。订单价格应与指数价格相差多少。该值以百分比表示，范围从 -10 到 10                                                                                                                                                                                                                                                                      |
+| symbol        | String  | Yes      | 市场标志                                                                                                                                                                                                                                                                                                                                                 |
+| price         | Double  | No      | 创建 MARKET 订单时除外。卖单的最低价格，这是用户愿意卖出的最低价格。买单的最高价格，这是用户愿意买入的最高价格。                                                                                                                                                                                                                    |
+| size          | Double  | Yes      | 订单大小                                                                                                                                                                                                                                                                                                                                                  |
+| side          | String  | Yes      | 'BUY' 或 'SELL'                                                                                                                                                                                                                                                                                                                                         |
+| time_in_force | String  | No      | 订单的时间有效性<br/>GTC：有效直到取消<br/>IOC：立即取消<br/>FOK：全部成交或取消<br/>HALFMIN：订单有效时间为30秒<br/>FIVEMIN：订单有效时间为5分钟<br/>HOUR：订单有效时间为1小时<br/>TWELVEHOUR：订单有效时间为12小时<br/>DAY：订单有效时间为1天<br/>WEEK：订单有效时间为1周<br/>MONTH：订单有效时间为1个月 |
+| type          | String  | Yes      | 订单类型<br/>LIMIT：限价订单<br/>MARKET：市价订单<br/>OCO：一边成交后取消另一边<br/>PEG：价格根据指数价格偏差而定                                                                                                                                                                                        |
+| txType        | String  | No      | 用于止损单或触发单<br/>STOP：止损单，'triggerPrice' 为必须项<br/>TRIGGER：触发单，'triggerPrice' 为必须项<br/>LIMIT：默认，当不是止损单或触发单时使用                                                                                                                                                  |
+| stopPrice     | Double  | No      | 创建OCO订单时为必须项。表示触发价格                                                                                                                                                                                                                                                                                                    |
+| triggerPrice  | Double  | No      | 创建止损单、触发单或OCO订单时为必须项。表示触发价格                                                                                                                                                                                                                                                                                                  |
+| trailValue    | Double  | No      | 跟踪值                                                                                                                                                                                                                                                                                                                                                  |
+| postOnly      | Boolean    | No      | Boolean，指示是否为仅限挂单。对于仅限挂单，交易员将支付挂单方的费用                                                                                                                                                                                                                                                                     |
+| clOrderID     | String  | No      | 自定义订单ID                                                                                                                                                                                                                                                                                                                                            |
+| stealth       | Double  | No      | 创建 PEG 订单时为是否必须项。要在订单簿上显示多少百分比的订单。                                                                                                                                                                                                                                                                                               |
+| deviation     | Double  | No      | 适用于 PEG 订单。订单价格应与指数价格相差多少。该值以百分比表示，范围从 -10 到 10                                                                                                                                                                                                                                                                      |
 
 
 ### 响应内容
 
 | 名称             | 类型    | 是否必须 | 描述                                                                                                                                                                                                                                                                                         |
 | ---              | ---     | ---      | ---                                                                                                                                                                                                                                                                                         |
-| symbol           | string  | Yes      | 市场标志                                                                                                                                                                                                                                                                                   |
-| clOrderID        | string  | Yes      | 由交易员发送的客户标签                                                                                                                                                                                                                                                                      |
-| orderID          | string  | Yes      | 订单ID                                                                                                                                                                                                                                                                                      |
-| orderType        | integer    | Yes      | 订单类型 <br/>76: 限价订单<br/>77: 市价订单<br/>80: 挂单/算法订单                                                                                                                                                                                                                      |
-| postOnly         | boolean    | Yes      | 指示是否为仅限挂单的标志                                                                                                                                                                                                                                                              |
-| price            | double  | Yes      | 订单价格                                                                                                                                                                                                                                                                                   |
-| side             | string  | Yes      | 订单方向<br/>BUY 或 SELL                                                                                                                                                                                                                                                                   |
-| status           | integer    | Yes      | 订单状态<br/>2: 订单已插入<br/>4: 订单已完全成交<br/>5: 订单部分成交<br/>6: 订单已取消<br/>7: 订单已退款<br/>8: 余额不足<br/>9: 触发已插入<br>10: 触发已激活<br>15: 订单已拒绝<br>16: 订单未找到<br>17: 请求失败 |
-| stopPrice        | double  | Yes      | 止损价格                                                                                                                                                                                                                                                                                   |
-| time_in_force    | string  | Yes      | 订单有效性                                                                                                                                                                                                                                                                                 |
-| timestamp        | long  | Yes      | 订单时间戳                                                                                                                                                                                                                                                                                |
-| trigger          | boolean    | Yes      | 指示订单是否为触发订单的标志                                                                                                                                                                                                                                                         |
-| triggerPrice     | double  | Yes      | 订单触发价格，如果订单不是触发订单，则返回0                                                                                                                                                                                                                                      |
-| avgFilledPrice | double  | Yes      | 部分成交订单的平均成交价格。返回部分成交订单的平均成交价格                                                                                                                                                                                                                                  |
-| message          | string  | Yes      | 交易信息                                                                                                                                                                                                                                                                                   |
-| stealth          | double  | Yes      | 订单的隐身值                                                                                                                                                                                                                                                                             |
-| deviation        | double  | Yes      | 订单的偏差值                                                                                                                                                                                                                                                                             |
+| symbol           | String  | Yes      | 市场标志                                                                                                                                                                                                                                                                                   |
+| clOrderID        | String  | Yes      | 由交易员发送的客户标签                                                                                                                                                                                                                                                                      |
+| orderID          | String  | Yes      | 订单ID                                                                                                                                                                                                                                                                                      |
+| orderType        | Integer    | Yes      | 订单类型 <br/>76: 限价订单<br/>77: 市价订单<br/>80: 挂单/算法订单                                                                                                                                                                                                                      |
+| postOnly         | Boolean    | Yes      | 指示是否为仅限挂单的标志                                                                                                                                                                                                                                                              |
+| price            | Double  | Yes      | 订单价格                                                                                                                                                                                                                                                                                   |
+| side             | String  | Yes      | 订单方向<br/>BUY 或 SELL                                                                                                                                                                                                                                                                   |
+| status           | Integer    | Yes      | 订单状态<br/>2: 订单已插入<br/>4: 订单已完全成交<br/>5: 订单部分成交<br/>6: 订单已取消<br/>7: 订单已退款<br/>8: 余额不足<br/>9: 触发已插入<br>10: 触发已激活<br>15: 订单已拒绝<br>16: 订单未找到<br>17: 请求失败 |
+| stopPrice        | Double  | Yes      | 止损价格                                                                                                                                                                                                                                                                                   |
+| time_in_force    | String  | Yes      | 订单有效性                                                                                                                                                                                                                                                                                 |
+| timestamp        | Long  | Yes      | 订单时间戳                                                                                                                                                                                                                                                                                |
+| trigger          | Boolean    | Yes      | 指示订单是否为触发订单的标志                                                                                                                                                                                                                                                         |
+| triggerPrice     | Double  | Yes      | 订单触发价格，如果订单不是触发订单，则返回0                                                                                                                                                                                                                                      |
+| avgFilledPrice | Double  | Yes      | 部分成交订单的平均成交价格。返回部分成交订单的平均成交价格                                                                                                                                                                                                                                  |
+| message          | String  | Yes      | 交易信息                                                                                                                                                                                                                                                                                   |
+| stealth          | Double  | Yes      | 订单的隐身值                                                                                                                                                                                                                                                                             |
+| deviation        | Double  | Yes      | 订单的偏差值                                                                                                                                                                                                                                                                             |
 | originalOrderBaseSize         | Double | Yes | 以基础货币计算的原始订单数量。即使后续进行了调整，此数值也不会改变 |
 | originalOrderQuoteSize        | Double | Yes | 以报价货币计算的原始订单数量。即使后续进行了调整，此数值也不会改变 |
 | currentOrderBaseSize          | Double | Yes | 以基础货币计算的当前订单数量。表示已成交数量与剩余未成交数量的总和 |
@@ -991,36 +991,36 @@ BTSE的速率限制如下:
 
 | 名称          | 类型    | 是否必须     | 描述                        |
 | ---           | ---     | ---      | ---                        |
-| symbol        | string  | Yes      | 市场标识符                |
-| orderID       | string  | No      | 内部订单ID。当未提供`clOrderID`时必须提供。如果提供了`orderID`，则将忽略`clOrderID`。 |
-| clOrderID     | string  | No      | 自定义订单ID。当未提供`orderID`时必须提供。 |
-| type          | string  | Yes      | 修改类型<br/>`PRICE`: 修改订单价格<br/>`SIZE`: 修改订单大小<br/>`TRIGGERPRICE`: 修改触发价格，仅适用于触发单。<br/>`ALL`: 修改多个字段。注意：`TRIGGERPRICE` 仅可在订单为触发单时修改，意味着如果不是触发单，请不要传入`TRIGGERPRICE`。 |
-| value         | double  | No      | 对于类型：`PRICE`、`SIZE`、`TRIGGERPRICE`，是否必须项。要修改的值。值取决于设置的类型。 |
-| orderPrice    | double  | No      | 对于类型：`ALL`，要修改的订单价格。 |
-| orderSize     | double  | No      | 对于类型：`ALL`，要修改的订单大小。 |
-| triggerPrice  | double  | No      | 对于类型：`ALL`，要修改的触发价格。 |
+| symbol        | String  | Yes      | 市场标识符                |
+| orderID       | String  | No      | 内部订单ID。当未提供`clOrderID`时必须提供。如果提供了`orderID`，则将忽略`clOrderID`。 |
+| clOrderID     | String  | No      | 自定义订单ID。当未提供`orderID`时必须提供。 |
+| type          | String  | Yes      | 修改类型<br/>`PRICE`: 修改订单价格<br/>`SIZE`: 修改订单大小<br/>`TRIGGERPRICE`: 修改触发价格，仅适用于触发单。<br/>`ALL`: 修改多个字段。注意：`TRIGGERPRICE` 仅可在订单为触发单时修改，意味着如果不是触发单，请不要传入`TRIGGERPRICE`。 |
+| value         | Double  | No      | 对于类型：`PRICE`、`SIZE`、`TRIGGERPRICE`，是否必须项。要修改的值。值取决于设置的类型。 |
+| orderPrice    | Double  | No      | 对于类型：`ALL`，要修改的订单价格。 |
+| orderSize     | Double  | No      | 对于类型：`ALL`，要修改的订单大小。 |
+| triggerPrice  | Double  | No      | 对于类型：`ALL`，要修改的触发价格。 |
 
 ### 响应内容
 
 | 名称             | 类型    | 是否必须 | 说明                                                                                                                                                                                                                                                                                         |
 | ---              | ---     | ---      | ---                                                                                                                                                                                                                                                                                         |
-| symbol           | string  | Yes      | 市场符号                                                                                                                                                                                                                                                                                       |
-| clOrderID        | string  | Yes      | 由交易员发送的客户标签                                                                                                                                                                                                                                                                         |
-| orderID          | string  | Yes      | 订单ID                                                                                                                                                                                                                                                                                        |
-| orderType        | integer | Yes      | 订单类型<br/>76: 限价单<br/>77: 市价单<br/>80: Peg/Algo订单                                                                                                                                                                                                                                 |
-| postOnly         | boolean | Yes      | 表示订单是否仅为发布订单                                                                                                                                                                                                                                                                       |
-| price            | double  | Yes      | 订单价格                                                                                                                                                                                                                                                                                     |
-| side             | string  | Yes      | 订单方向<br/>BUY或SELL                                                                                                                                                                                                                                                                       |
-| status           | integer | Yes      | 订单状态<br/>2: 已插入订单<br/>4: 订单已完全成交<br/>5: 订单部分成交<br/>6: 订单已取消<br/>7: 订单已退款<br/>8: 余额不足<br/>9: 触发器已插入<br/>10: 触发器已激活<br/>15: 订单被拒绝<br/>16: 未找到订单<br/>17: 请求失败                                                                 |
-| stopPrice        | double  | Yes      | 停止价格                                                                                                                                                                                                                                                                                     |
-| time_in_force    | string  | Yes      | 订单有效期                                                                                                                                                                                                                                                                                   |
-| timestamp        | long    | Yes      | 订单时间戳                                                                                                                                                                                                                                                                                   |
-| trigger          | boolean | Yes      | 指示订单是否为触发订单                                                                                                                                                                                                                                                                       |
-| triggerPrice     | double  | Yes      | 订单触发价格，如果订单不是触发订单则返回0                                                                                                                                                                                                                                                     |
-| avgFilledPrice | double  | Yes      | 平均成交价格。对于部分交易的订单，返回平均成交价格                                                                                                                                                                                                                                           |
-| message          | string  | Yes      | 交易消息                                                                                                                                                                                                                                                                                      |
-| stealth          | double  | Yes      | 订单的隐身值                                                                                                                                                                                                                                                                                 |
-| deviation        | double  | Yes      | 订单的偏差值                                                                                                                                                                                                                                                                                 |
+| symbol           | String  | Yes      | 市场符号                                                                                                                                                                                                                                                                                       |
+| clOrderID        | String  | Yes      | 由交易员发送的客户标签                                                                                                                                                                                                                                                                         |
+| orderID          | String  | Yes      | 订单ID                                                                                                                                                                                                                                                                                        |
+| orderType        | Integer | Yes      | 订单类型<br/>76: 限价单<br/>77: 市价单<br/>80: Peg/Algo订单                                                                                                                                                                                                                                 |
+| postOnly         | Boolean | Yes      | 表示订单是否仅为发布订单                                                                                                                                                                                                                                                                       |
+| price            | Double  | Yes      | 订单价格                                                                                                                                                                                                                                                                                     |
+| side             | String  | Yes      | 订单方向<br/>BUY或SELL                                                                                                                                                                                                                                                                       |
+| status           | Integer | Yes      | 订单状态<br/>2: 已插入订单<br/>4: 订单已完全成交<br/>5: 订单部分成交<br/>6: 订单已取消<br/>7: 订单已退款<br/>8: 余额不足<br/>9: 触发器已插入<br/>10: 触发器已激活<br/>15: 订单被拒绝<br/>16: 未找到订单<br/>17: 请求失败                                                                 |
+| stopPrice        | Double  | Yes      | 停止价格                                                                                                                                                                                                                                                                                     |
+| time_in_force    | String  | Yes      | 订单有效期                                                                                                                                                                                                                                                                                   |
+| timestamp        | Long    | Yes      | 订单时间戳                                                                                                                                                                                                                                                                                   |
+| trigger          | Boolean | Yes      | 指示订单是否为触发订单                                                                                                                                                                                                                                                                       |
+| triggerPrice     | Double  | Yes      | 订单触发价格，如果订单不是触发订单则返回0                                                                                                                                                                                                                                                     |
+| avgFilledPrice | Double  | Yes      | 平均成交价格。对于部分交易的订单，返回平均成交价格                                                                                                                                                                                                                                           |
+| message          | String  | Yes      | 交易消息                                                                                                                                                                                                                                                                                      |
+| stealth          | Double  | Yes      | 订单的隐身值                                                                                                                                                                                                                                                                                 |
+| deviation        | Double  | Yes      | 订单的偏差值                                                                                                                                                                                                                                                                                 |
 | originalOrderBaseSize         | Double | Yes | 以基础货币计算的原始订单数量。即使后续进行了调整，此数值也不会改变 |
 | originalOrderQuoteSize        | Double | Yes | 以报价货币计算的原始订单数量。即使后续进行了调整，此数值也不会改变 |
 | currentOrderBaseSize          | Double | Yes | 以基础货币计算的当前订单数量。表示已成交数量与剩余未成交数量的总和 |
@@ -1146,31 +1146,31 @@ BTSE的速率限制如下:
 
 | 名称      | 类型   | 是否必须    | 描述                                                                                                                      |
 | ---       | ---    | ---      | ---                                                                                                                        |
-| symbol    | string | Yes      | 市场交易对的标识符                                                                                                        |
-| orderID   | string | No      | 订单的唯一标识符。当未提供 `clOrderID` 时为是否必须项。如果提供了 `orderID`，`clOrderID` 将被忽略。         |
-| clOrderID | string | No      | 客户自定义订单标识。当未提供 `orderID` 时为是否必须项。                                                               |
+| symbol    | String | Yes      | 市场交易对的标识符                                                                                                        |
+| orderID   | String | No      | 订单的唯一标识符。当未提供 `clOrderID` 时为是否必须项。如果提供了 `orderID`，`clOrderID` 将被忽略。         |
+| clOrderID | String | No      | 客户自定义订单标识。当未提供 `orderID` 时为是否必须项。                                                               |
 
 ### 响应内容
 
 | 名称               | 类型     | 是否必须    | 描述                                                                                                                                                                                                                                                                                      |
 | ---                | ---      | ---      | ---                                                                                                                                                                                                                                                                                      |
-| symbol             | string   | Yes      | 市场交易对的标识符                                                                                                                                                                                                                                                                       |
-| clOrderID          | string   | Yes      | 交易员发送的客户标签                                                                                                                                                                                                                                                                      |
-| orderID            | string   | Yes      | 订单 ID                                                                                                                                                                                                                                                                                   |
-| orderType          | integer     | Yes      | 订单类型 <br/>76: 限价订单<br/>77: 市价订单<br/>80: 挂单/算法订单                                                                                                                                                                                                                     |
-| postOnly           | boolean   | Yes      | 表示订单是否为只允许挂单                                                                                                                                                                                                                                                               |
-| price              | double   | Yes      | 订单价格                                                                                                                                                                                                                                                                                 |
-| side               | string   | Yes      | 订单方向<br/>BUY或SELL                                                                                                                                                                                                                                                                  |
-| status             | integer     | Yes      | 订单状态<br/>2: 订单已插入<br/>3: 订单已成交<br/>4: 订单已完全成交<br/>5: 订单已部分成交<br/>6: 订单已取消<br/>7: 订单已退款<br/>9: 触发已插入<br>10: 触发已激活<br>15: 订单已拒绝<br>16: 未找到订单<br>17: 请求失败 |
-| stopPrice          | double   | Yes      | 止损价格                                                                                                                                                                                                                                                                                  |
-| time_in_force      | string   | Yes      | 订单有效期                                                                                                                                                                                                                                                                               |
-| timestamp          | long   | Yes      | 订单时间戳                                                                                                                                                                                                                                                                               |
-| trigger            | boolean   | Yes      | 表示订单是否为触发订单                                                                                                                                                                                                                                                                   |
-| triggerPrice       | double   | Yes      | 订单触发价格，如果订单不是触发订单则返回0                                                                                                                                                                                                                                               |
-| avgFilledPrice   | double   | Yes      | 部分成交订单的平均成交价格。返回部分成交订单的平均成交价格                                                                                                                                                                                                                                   |
-| message            | string   | Yes      | 交易消息                                                                                                                                                                                                                                                                                 |
-| stealth            | double   | Yes      | 订单的隐匿值                                                                                                                                                                                                                                                                             |
-| deviation          | double   | Yes      | 订单的偏差值                                                                                                                                                                                                                                                                             |
+| symbol             | String   | Yes      | 市场交易对的标识符                                                                                                                                                                                                                                                                       |
+| clOrderID          | String   | Yes      | 交易员发送的客户标签                                                                                                                                                                                                                                                                      |
+| orderID            | String   | Yes      | 订单 ID                                                                                                                                                                                                                                                                                   |
+| orderType          | Integer     | Yes      | 订单类型 <br/>76: 限价订单<br/>77: 市价订单<br/>80: 挂单/算法订单                                                                                                                                                                                                                     |
+| postOnly           | Boolean   | Yes      | 表示订单是否为只允许挂单                                                                                                                                                                                                                                                               |
+| price              | Double   | Yes      | 订单价格                                                                                                                                                                                                                                                                                 |
+| side               | String   | Yes      | 订单方向<br/>BUY或SELL                                                                                                                                                                                                                                                                  |
+| status             | Integer     | Yes      | 订单状态<br/>2: 订单已插入<br/>3: 订单已成交<br/>4: 订单已完全成交<br/>5: 订单已部分成交<br/>6: 订单已取消<br/>7: 订单已退款<br/>9: 触发已插入<br>10: 触发已激活<br>15: 订单已拒绝<br>16: 未找到订单<br>17: 请求失败 |
+| stopPrice          | Double   | Yes      | 止损价格                                                                                                                                                                                                                                                                                  |
+| time_in_force      | String   | Yes      | 订单有效期                                                                                                                                                                                                                                                                               |
+| timestamp          | Long   | Yes      | 订单时间戳                                                                                                                                                                                                                                                                               |
+| trigger            | Boolean   | Yes      | 表示订单是否为触发订单                                                                                                                                                                                                                                                                   |
+| triggerPrice       | Double   | Yes      | 订单触发价格，如果订单不是触发订单则返回0                                                                                                                                                                                                                                               |
+| avgFilledPrice   | Double   | Yes      | 部分成交订单的平均成交价格。返回部分成交订单的平均成交价格                                                                                                                                                                                                                                   |
+| message            | String   | Yes      | 交易消息                                                                                                                                                                                                                                                                                 |
+| stealth            | Double   | Yes      | 订单的隐匿值                                                                                                                                                                                                                                                                             |
+| deviation          | Double   | Yes      | 订单的偏差值                                                                                                                                                                                                                                                                             |
 | originalOrderBaseSize         | Double | Yes | 以基础货币计算的原始订单数量。即使后续进行了调整，此数值也不会改变 |
 | originalOrderQuoteSize        | Double | Yes | 以报价货币计算的原始订单数量。即使后续进行了调整，此数值也不会改变 |
 | currentOrderBaseSize          | Double | Yes | 以基础货币计算的当前订单数量。表示已成交数量与剩余未成交数量的总和 |
@@ -1199,7 +1199,7 @@ BTSE的速率限制如下:
 
 | 名称    | 类型  | 是否必须    | 描述                   |
 | ---     | ---   | ---      | ---                   |
-| timeout | long | Yes      | 超时值（以毫秒为单位） |
+| timeout | Long | Yes      | 超时值（以毫秒为单位） |
 
 
 ### 响应内容
@@ -1251,38 +1251,38 @@ BTSE的速率限制如下:
 
 | 名称      | 类型   | 是否必须    | 描述                                                                         |
 | ---       | ---    | ---      | ---                                                                         |
-| symbol    | string | No      | 市场交易对标识符                                                           |
-| orderID   | string | No      | 使用内部订单ID进行查询                                                     |
-| clOrderID | string | No      | 使用自定义订单ID进行查询。如果提供了`orderID`，将忽略`clOrderID`。       |
+| symbol    | String | No      | 市场交易对标识符                                                           |
+| orderID   | String | No      | 使用内部订单ID进行查询                                                     |
+| clOrderID | String | No      | 使用自定义订单ID进行查询。如果提供了`orderID`，将忽略`clOrderID`。       |
 
 
 ### 响应内容
 
 | 名称                       | 类型   | 是否必须    | 描述                                                                                   |
 | ---                          | ---    | ---      | ---                                                                                     |
-| orderType                  | integer   | Yes      | 订单类型 <br/>76: 限价订单<br/>77: 市价订单<br/>80: 挂单/算法订单                  |
-| price                      | double | Yes      | 订单价格                                                                               |
-| side                       | string | Yes      | 订单方向<br/>`BUY` 或 `SELL`                                                        |
-| orderValue                 | double | Yes      | 该订单的总价值                                                                         |
-| pegPriceMin                | double | Yes      | 最小可能的挂单价格，优先于挂单价格偏差                                               |
-| pegPriceMax                | double | Yes      | 最大可能的挂单价格，优先于挂单价格偏差                                               |
-| pegPriceDeviation          | double | Yes      | 与指数价格的百分比偏差                                                              |
-| cancelDuration             | double | Yes      | 如果不为0，则为订单过期时间                                                           |
-| timestamp                  | long | Yes      | 下单时间                                                                              |
-| orderID                    | string | Yes      | 订单ID                                                                               |
-| triggerOrder               | boolean | Yes      | 指示订单是否为触发订单                                                               |
-| triggerPrice               | double | Yes      | 订单触发价格，如果订单不是触发订单则返回0                                          |
-| triggerOriginalPrice       | double | Yes      | 原始订单的价格。仅对触发订单有效                                                     |
-| triggerOrderType           | double | Yes      | 订单类型 <br/>`76: 限价订单`<br/>`77: 市价订单`<br/>`80: 挂单/算法订单`            |
-| triggerTrailingStopDeviation | double | Yes      | 止损价格的百分比偏差                                                               |
-| triggerStopPrice           | double | Yes      | 止损价格，仅适用于算法订单                                                          |
-| symbol                     | string | Yes      | 市场名称（例如，BTC-USD）                                                           |
-| trailValue                 | double | Yes      | 跟踪价值                                                                               |
-| avgFilledPrice           | double | Yes      | 平均成交价格。仅适用于部分成交订单                                                   |
-| clOrderID                  | string | Yes      | 客户订单ID                                                                           |
-| orderState                 | string | Yes      | `STATUS_ACTIVE`、`STATUS_INACTIVE`                                                      |
-| timeInForce                | string | Yes      | 订单有效期                                                                           |
-| triggered                  | boolean | Yes      | 指示订单是否已触发                                                                   |
+| orderType                  | Integer   | Yes      | 订单类型 <br/>76: 限价订单<br/>77: 市价订单<br/>80: 挂单/算法订单                  |
+| price                      | Double | Yes      | 订单价格                                                                               |
+| side                       | String | Yes      | 订单方向<br/>`BUY` 或 `SELL`                                                        |
+| orderValue                 | Double | Yes      | 该订单的总价值                                                                         |
+| pegPriceMin                | Double | Yes      | 最小可能的挂单价格，优先于挂单价格偏差                                               |
+| pegPriceMax                | Double | Yes      | 最大可能的挂单价格，优先于挂单价格偏差                                               |
+| pegPriceDeviation          | Double | Yes      | 与指数价格的百分比偏差                                                              |
+| cancelDuration             | Double | Yes      | 如果不为0，则为订单过期时间                                                           |
+| timestamp                  | Long | Yes      | 下单时间                                                                              |
+| orderID                    | String | Yes      | 订单ID                                                                               |
+| triggerOrder               | Boolean | Yes      | 指示订单是否为触发订单                                                               |
+| triggerPrice               | Double | Yes      | 订单触发价格，如果订单不是触发订单则返回0                                          |
+| triggerOriginalPrice       | Double | Yes      | 原始订单的价格。仅对触发订单有效                                                     |
+| triggerOrderType           | Double | Yes      | 订单类型 <br/>`76: 限价订单`<br/>`77: 市价订单`<br/>`80: 挂单/算法订单`            |
+| triggerTrailingStopDeviation | Double | Yes      | 止损价格的百分比偏差                                                               |
+| triggerStopPrice           | Double | Yes      | 止损价格，仅适用于算法订单                                                          |
+| symbol                     | String | Yes      | 市场名称（例如，BTC-USD）                                                           |
+| trailValue                 | Double | Yes      | 跟踪价值                                                                               |
+| avgFilledPrice           | Double | Yes      | 平均成交价格。仅适用于部分成交订单                                                   |
+| clOrderID                  | String | Yes      | 客户订单ID                                                                           |
+| orderState                 | String | Yes      | `STATUS_ACTIVE`、`STATUS_INACTIVE`                                                      |
+| timeInForce                | String | Yes      | 订单有效期                                                                           |
+| triggered                  | Boolean | Yes      | 指示订单是否已触发                                                                   |
 | originalOrderBaseSize         | Double | Yes | 以基础货币计算的原始订单数量。即使后续进行了调整，此数值也不会改变 |
 | originalOrderQuoteSize        | Double | Yes | 以报价货币计算的原始订单数量。即使后续进行了调整，此数值也不会改变 |
 | currentOrderBaseSize          | Double | Yes | 以基础货币计算的当前订单数量。表示已成交数量与剩余未成交数量的总和 |
@@ -1334,13 +1334,13 @@ BTSE的速率限制如下:
 
 | 名称          | 类型    | 是否必须    | 描述                                                                                       |
 | ---           | ---     | ---      | ---                                                                                       |
-| symbol        | string  | Yes      | 市场交易对标识符                                                                         |
-| startTime     | long  | No      | 开始时间（以毫秒为单位，例如：1624987283000）                                             |
-| endTime       | long  | No      | 结束时间（以毫秒为单位，例如：1624987283000）                                             |
-| count         | integer    | No      | 要返回的记录数                                                                           |
-| clOrderID     | string  | No      | 使用自定义订单ID查询交易历史                                                           |
-| orderID       | string  | No      | 使用订单ID查询交易历史                                                                 |
-| isMatchSymbol | boolean  | No      | 精确匹配 `symbol`。如果设置为True，只匹配该标的物的记录                                |
+| symbol        | String  | Yes      | 市场交易对标识符                                                                         |
+| startTime     | Long  | No      | 开始时间（以毫秒为单位，例如：1624987283000）                                             |
+| endTime       | Long  | No      | 结束时间（以毫秒为单位，例如：1624987283000）                                             |
+| count         | Integer    | No      | 要返回的记录数                                                                           |
+| clOrderID     | String  | No      | 使用自定义订单ID查询交易历史                                                           |
+| orderID       | String  | No      | 使用订单ID查询交易历史                                                                 |
+| isMatchSymbol | Boolean  | No      | 精确匹配 `symbol`。如果设置为True，只匹配该标的物的记录                                |
 
 * 交易历史纪录最大天数
 
@@ -1355,29 +1355,29 @@ BTSE的速率限制如下:
 
 | 名称        | 类型    | 是否必须    | 描述                       |
 | ---         | ---     | ---      | ---                       |
-| symbol      | string  | Yes      | 市场交易对标识符         |
-| side        | string  | Yes      | 交易方向。可选值：[`BUY`, `SELL`] |
-| price       | double  | Yes      | 成交价格                   |
-| size        | double  | Yes      | 原始订单数量                   |
-| serialId    | long  | Yes      | 序列ID，运行的序列号        |
-| tradeId     | string  | Yes      | 交易标识符                 |
-| timestamp   | long  | Yes      | 成交时间戳                 |
-| base        | long  | Yes      | 基础货币                   |
-| quote       | long  | Yes      | 报价货币                   |
-| clOrderID   | long  | Yes      | 自定义订单ID               |
-| orderId     | long  | Yes      | 订单ID                     |
-| feeAmount   | long  | Yes      | 手续费金额                 |
-| feeCurrency | long  | Yes      | 手续费货币                 |
-| filledPrice | long  | Yes      | 成交价格                   |
-| filledSize  | long  | Yes      | 成交数量                   |
-| orderType   | integer    | Yes      | 订单类型                   |
-| realizedPnl | long  | Yes      | 在现货交易中不使用         |
-| total       | long  | Yes      | 在现货交易中不使用         |
-| triggerType     | integer| yes      | 1001: 止损 1002: 止盈       |
-| triggerPrice    | double | yes      | 触发价格                           |
-| wallet          | string | yes      | SPOT@ 用于现货交易            |
-| avgFilledPrice  | string | yes      | 平均成交价                     |
-| username        | string | yes      | 用户名                                |
+| symbol      | String  | Yes      | 市场交易对标识符         |
+| side        | String  | Yes      | 交易方向。可选值：[`BUY`, `SELL`] |
+| price       | Double  | Yes      | 成交价格                   |
+| size        | Double  | Yes      | 原始订单数量                   |
+| serialId    | Long  | Yes      | 序列ID，运行的序列号        |
+| tradeId     | String  | Yes      | 交易标识符                 |
+| timestamp   | Long  | Yes      | 成交时间戳                 |
+| base        | Long  | Yes      | 基础货币                   |
+| quote       | Long  | Yes      | 报价货币                   |
+| clOrderID   | Long  | Yes      | 自定义订单ID               |
+| orderId     | Long  | Yes      | 订单ID                     |
+| feeAmount   | Long  | Yes      | 手续费金额                 |
+| feeCurrency | Long  | Yes      | 手续费货币                 |
+| filledPrice | Long  | Yes      | 成交价格                   |
+| filledSize  | Long  | Yes      | 成交数量                   |
+| orderType   | Integer    | Yes      | 订单类型                   |
+| realizedPnl | Long  | Yes      | 在现货交易中不使用         |
+| total       | Long  | Yes      | 在现货交易中不使用         |
+| triggerType     | Integer| yes      | 1001: 止损 1002: 止盈       |
+| triggerPrice    | Double | yes      | 触发价格                           |
+| wallet          | String | yes      | SPOT@ 用于现货交易            |
+| avgFilledPrice  | String | yes      | 平均成交价                     |
+| username        | String | yes      | 用户名                                |
 
 ## 查询账户费用
 
@@ -1399,15 +1399,15 @@ BTSE的速率限制如下:
 
 | 名称     | 类型     | 是否必须    | 描述                                   |
 | -------- | -------- | -------- | --------------------------------------- |
-| symbol   | string   | No      | 用于筛选特定市场的市场标识符         |
+| symbol   | String   | No      | 用于筛选特定市场的市场标识符         |
 
 ### 响应内容
 
 | 名称     | 类型     | 是否必须    | 描述             |
 | ---      | ---      | ---      | ---             |
-| symbol   | string   | Yes      | 市场标识符     |
-| makerfee | double   | Yes      | 创造者费用     |
-| takerfee | double   | Yes      | 接收者费用     |
+| symbol   | String   | Yes      | 市场标识符     |
+| makerfee | Double   | Yes      | 创造者费用     |
+| takerfee | Double   | Yes      | 接收者费用     |
 
 
 
@@ -1454,25 +1454,25 @@ BTSE的速率限制如下:
 
 | 名称               | 类型         | 是否必须    | 描述                                      |
 | ---                | ---          | ---      | ---                                      |
-| id                 | string       | Yes      | 产品ID                                   |
-| name               | string       | Yes      | 产品名称                                 |
-| currency           | string       | Yes      | 货币类型                                 |
-| type               | string       | Yes      | 产品类型                                 |
-| startdate          | long       | Yes      | 投资开始日期                             |
-| intereststartdate  | long       | Yes      | 利息开始日期                             |
+| id                 | String       | Yes      | 产品ID                                   |
+| name               | String       | Yes      | 产品名称                                 |
+| currency           | String       | Yes      | 货币类型                                 |
+| type               | String       | Yes      | 产品类型                                 |
+| startdate          | Long       | Yes      | 投资开始日期                             |
+| intereststartdate  | Long       | Yes      | 利息开始日期                             |
 | rates              | rateobject[]  | Yes      | 利率信息                                 |
-| compounding        | double       | Yes      | 是否复利                                 |
-| autorenewsupported | double       | Yes      | 是否支持自动续约                         |
-| dailylimit         | double       | Yes      | 每日投资金额限制                         |
-| minsize            | double       | Yes      | 最小投资额                               |
-| incrementalsize    | double       | Yes      | 投资递增步长                             |
+| compounding        | Double       | Yes      | 是否复利                                 |
+| autorenewsupported | Double       | Yes      | 是否支持自动续约                         |
+| dailylimit         | Double       | Yes      | 每日投资金额限制                         |
+| minsize            | Double       | Yes      | 最小投资额                               |
+| incrementalsize    | Double       | Yes      | 投资递增步长                             |
 
 ### 利率对象
 
 | 名称 | 类型    | 是否必须    | 描述              |
 | ---  | ---     | ---      | ---              |
-| days | integer    | Yes      | 天数              |
-| rate | double | Yes      | 利率              |
+| days | Integer    | Yes      | 天数              |
+| rate | Double | Yes      | 利率              |
 
 
 ## 存入投资
@@ -1494,8 +1494,8 @@ BTSE的速率限制如下:
 
 | 名称      | 类型    | 是否必须    | 描述                  |
 | ---       | ---     | ---      | ---                  |
-| productId | string  | Yes      | 投资产品ID           |
-| amount    | double  | Yes      | 投资金额             |
+| productId | String  | Yes      | 投资产品ID           |
+| amount    | Double  | Yes      | 投资金额             |
 
 
 ## 续投资
@@ -1526,15 +1526,15 @@ BTSE的速率限制如下:
 
 | 名称      | 类型    | 是否必须    | 描述                  |
 | ---       | ---     | ---      | ---                  |
-| orderId   | integer    | Yes      | 投资订单ID           |
-| autoRenew | boolean  | Yes      | 自动续投标志         |
+| orderId   | Integer    | Yes      | 投资订单ID           |
+| autoRenew | Boolean  | Yes      | 自动续投标志         |
 
 ### 响应内容
 
 | 名称      | 类型    | 是否必须    | 描述                      |
 | ---       | ---     | ---      | ---                      |
-| orderId   | integer    | Yes      | 投资订单ID              |
-| autoRenew | boolean  | Yes      | 自动续投标志的状态     |
+| orderId   | Integer    | Yes      | 投资订单ID              |
+| autoRenew | Boolean  | Yes      | 自动续投标志的状态     |
 
 
 ## 赎回投资
@@ -1556,8 +1556,8 @@ BTSE的速率限制如下:
 
 | 名称    | 类型    | 是否必须    | 描述                  |
 | ---     | ---     | ---      | ---                  |
-| orderId | integer    | Yes      | 投资订单ID           |
-| amount  | double  | Yes      | 赎回金额             |
+| orderId | Integer    | Yes      | 投资订单ID           |
+| amount  | Double  | Yes      | 赎回金额             |
 
 
 ## 查询投资订单
@@ -1596,22 +1596,22 @@ BTSE的速率限制如下:
 
 | 名称                   | 类型    | 是否必须    | 描述                               |
 | ---                    | ---     | ---      | ---                               |
-| id                     | integer    | Yes      | 订单ID                            |
-| name                   | string  | Yes      | 产品名称                           |
-| currency               | string  | Yes      | 货币类型                           |
-| type                   | string  | Yes      | 产品类型                           |
-| rate                   | double  | Yes      | 利率                               |
-| investment             | double  | Yes      | 投资金额                           |
-| interestearned         | double  | Yes      | 已获得利息                         |
-| nextinterestpayouttime | integer    | Yes      | 下次利息支付时间                   |
-| starttime              | integer    | Yes      | 开始时间                           |
-| endtime                | integer    | Yes      | 结束时间                           |
-| duration               | integer    | Yes      | 期限                               |
-| payoutlocktime         | integer    | Yes      | 支付锁定时间                       |
-| autorenew              | boolean  | Yes      | 自动续投                           |
-| compounding            | boolean  | Yes      | 复利                               |
-| autorenewsupported     | boolean  | Yes      | 支持自动续投                       |
-| redemptionprocessing   | boolean  | Yes      | 赎回处理中                         |
+| id                     | Integer    | Yes      | 订单ID                            |
+| name                   | String  | Yes      | 产品名称                           |
+| currency               | String  | Yes      | 货币类型                           |
+| type                   | String  | Yes      | 产品类型                           |
+| rate                   | Double  | Yes      | 利率                               |
+| investment             | Double  | Yes      | 投资金额                           |
+| interestearned         | Double  | Yes      | 已获得利息                         |
+| nextinterestpayouttime | Integer    | Yes      | 下次利息支付时间                   |
+| starttime              | Integer    | Yes      | 开始时间                           |
+| endtime                | Integer    | Yes      | 结束时间                           |
+| duration               | Integer    | Yes      | 期限                               |
+| payoutlocktime         | Integer    | Yes      | 支付锁定时间                       |
+| autorenew              | Boolean  | Yes      | 自动续投                           |
+| compounding            | Boolean  | Yes      | 复利                               |
+| autorenewsupported     | Boolean  | Yes      | 支持自动续投                       |
+| redemptionprocessing   | Boolean  | Yes      | 赎回处理中                         |
 
 
 ## 查询投资历史
@@ -1643,16 +1643,16 @@ BTSE的速率限制如下:
 
 | 名称           | 类型    | 是否必须    | 描述                             |
 | ---            | ---     | ---      | ---                             |
-| txntime        | integer    | Yes      | 交易时间                        |
-| name           | string  | Yes      | 产品名称                        |
-| currency       | string  | Yes      | 货币类型                        |
-| rate           | string  | Yes      | 利率                            |
-| type           | boolean  | Yes      | 产品类型                        |
-| txntype        | string  | Yes      | 交易类型                        |
-| amount         | double  | Yes      | 交易金额                        |
-| totalamount    | double  | Yes      | 投资总金额                      |
-| interestearned | double  | Yes      | 已赚得的利息                    |
-| duration       | boolean  | Yes      | 期限                            |
+| txntime        | Integer    | Yes      | 交易时间                        |
+| name           | String  | Yes      | 产品名称                        |
+| currency       | String  | Yes      | 货币类型                        |
+| rate           | String  | Yes      | 利率                            |
+| type           | Boolean  | Yes      | 产品类型                        |
+| txntype        | String  | Yes      | 交易类型                        |
+| amount         | Double  | Yes      | 交易金额                        |
+| totalamount    | Double  | Yes      | 投资总金额                      |
+| interestearned | Double  | Yes      | 已赚得的利息                    |
+| duration       | Boolean  | Yes      | 期限                            |
 
 
 # 订单簿 WebSocket 流
@@ -1718,7 +1718,7 @@ BTSE的速率限制如下:
 
 | 名称  | 类型        | 是否必须    | 描述                 |
 | ---   | ---         | ---      | ---                 |
-| topic | string      | Yes      | WebSocket 主题       |
+| topic | String      | Yes      | WebSocket 主题       |
 | data  | Data Object    | Yes      | 详细数据，请参考下方数据对象 |
 
 #### 数据对象
@@ -1727,9 +1727,9 @@ BTSE的速率限制如下:
 | ---       | ---          | ---      | ---            |
 | bids      | Quote Object    | Yes      | 买盘报价        |
 | asks      | Quote Object    | Yes      | 卖盘报价        |
-| symbol    | string      | Yes      | 市场标识符      |
-| type      | string      | Yes      | `snapshotL1` - L1 数据指的是交易对订单簿的最佳买盘/最佳卖盘。 |
-| timestamp | long      | Yes      | 订单簿时间戳    |
+| symbol    | String      | Yes      | 市场标识符      |
+| type      | String      | Yes      | `snapshotL1` - L1 数据指的是交易对订单簿的最佳买盘/最佳卖盘。 |
+| timestamp | Long      | Yes      | 订单簿时间戳    |
 
 ## 订单簿增量更新
 
@@ -1850,7 +1850,7 @@ BTSE的速率限制如下:
 
 | 名称  | 类型        | 是否必须    | 描述                 |
 | ---   | ---         | ---      | ---                 |
-| topic | string      | Yes      | WebSocket 主题       |
+| topic | String      | Yes      | WebSocket 主题       |
 | data  | Data Object    | Yes      | 详细数据，请参考下方数据对象 |
 
 #### 数据对象
@@ -1859,11 +1859,11 @@ BTSE的速率限制如下:
 | ---        | ---          | ---      | ---                                                                                                 |
 | bids       | Quote Object     | Yes      | 买盘报价                                                                                            |
 | asks       | Quote Object     | Yes      | 卖盘报价                                                                                            |
-| seqNum     | integer         | Yes      | 当前序列号                                                                                          |
-| prevSeqNum | integer         | Yes      | 前一个序列号                                                                                        |
-| type       | string       | Yes      | `snapshot` - 最多 50 层的订单簿快照<br/> `delta` -  订单簿的更新                           |
-| timestamp  | long       | Yes      | 订单簿时间戳                                                                                        |
-| symbol     | string       | Yes      | 订单簿标识符                                                                                      |
+| seqNum     | Integer         | Yes      | 当前序列号                                                                                          |
+| prevSeqNum | Integer         | Yes      | 前一个序列号                                                                                        |
+| type       | String       | Yes      | `snapshot` - 最多 50 层的订单簿快照<br/> `delta` -  订单簿的更新                           |
+| timestamp  | Long       | Yes      | 订单簿时间戳                                                                                        |
+| symbol     | String       | Yes      | 订单簿标识符                                                                                      |
 
 #### 订单簿错误响应
 
@@ -1928,15 +1928,15 @@ pong
 
 | 名称   | 类型   | 是否必须     | 描述                                     |
 | ---    | ---    | ---      | ---                                     |
-| op     | string | Yes      | 操作。`subscribe` 将订阅提供的主题。`unsubscribe` 将取消订阅主题。 |
-| args   | array   | Yes      | 要订阅的主题。                         |
+| op     | String | Yes      | 操作。`subscribe` 将订阅提供的主题。`unsubscribe` 将取消订阅主题。 |
+| args   | Array   | Yes      | 要订阅的主题。                         |
 
 ### 响应内容
 
 | 名称    | 类型   | 是否必须     | 描述                                      |
 | ---     | ---    | ---      | ---                                      |
-| event   | string | Yes      | 事件类型响应。                           |
-| channel | array   | Yes      | 已成功订阅的主题。                       |
+| event   | String | Yes      | 事件类型响应。                           |
+| channel | Array   | Yes      | 已成功订阅的主题。                       |
 
 
 
@@ -1980,19 +1980,19 @@ pong
 
 | 名称  | 类型        | 是否必须     | 描述                      |
 | ---   | ---         | ---      | ---                      |
-| topic | string      | Yes      | WebSocket 主题            |
+| topic | String      | Yes      | WebSocket 主题            |
 | data  | Data Object    | Yes      | 请参考下面的数据对象说明   |
 
 #### 数据对象
 
 | 名称      | 类型   | 是否必须     | 描述                   |
 | ---       | ---    | ---      | ---                   |
-| symbol    | string | Yes      | 市场符号               |
-| side      | string | Yes      | 交易方向，BUY或SELL   |
-| size      | double | Yes      | 交易的数量             |
-| price     | double | Yes      | 交易价格               |
-| tradeId   | long | Yes      | 交易序列号             |
-| timestamp | long | Yes      | 交易时间戳             |
+| symbol    | String | Yes      | 市场符号               |
+| side      | String | Yes      | 交易方向，BUY或SELL   |
+| size      | Double | Yes      | 交易的数量             |
+| price     | Double | Yes      | 交易价格               |
+| tradeId   | Long | Yes      | 交易序列号             |
+| timestamp | Long | Yes      | 交易时间戳             |
 
 ## 认证
 
@@ -2026,9 +2026,9 @@ pong
 
 | 索引 | 类型   | 是否必须     | 描述                                 |
 | ---  | ---    | ---      | ---                                 |
-| 0    | string | Yes      | 第一个参数是 API 密钥              |
-| 1    | long | Yes      | 随机数，即当前时间戳                |
-| 2    | string | Yes      | 生成的签名                         |
+| 0    | String | Yes      | 第一个参数是 API 密钥              |
+| 1    | Long | Yes      | 随机数，即当前时间戳                |
+| 2    | String | Yes      | 生成的签名                         |
 
 > 生成签名
 
@@ -2092,22 +2092,22 @@ echo -n "/ws/spot1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6726
 
 | 名称              | 类型    | 是否必须     | 描述                                                         |
 | ---               | ---     | ---      | ---                                                         |
-| symbol            | string  | Yes      | 市场符号                                                     |
-| orderID           | string  | Yes      | 内部订单ID                                                 |
-| side              | string  | Yes      | 交易方向，BUY或SELL                                     |
-| orderType         | integer | Yes   | 订单类型。有效值为：<br/>76: 限价单<br/>77: 市价单<br/>80: 挂单/算法单  |
-| price             | double  | Yes      | 订单价格或交易价格                                       |
-| avgFilledPrice    | double  | Yes      | 平均成交价格                                               |
-| status            | integer    | Yes      | 状态，具体值如下：<br/>1: 市场不可用，市场目前不可用<br/>2: 订单已插入，订单已成功插入<br/>4: 订单已完全成交，订单已完全成交<br/>5: 订单已部分成交，订单已部分成交<br/>6: 订单已取消，订单已成功取消<br/>8: 余额不足，账户余额不足<br/>9: 触发订单已插入，触发订单已成功插入<br/>10: 触发订单已激活，触发订单已成功激活<br/>12: 更新风险限额出错，更新风险限额出错<br/>15: 订单修改失败，对订单的修改未成功<br/>27: 转账成功，期货和现货之间的资金转账成功<br/>28: 转账失败，现货和期货之间的资金转账未成功<br/>41: 风险限额无效，指定的风险限额无效<br/>64: 处于清算状态，账户正在进行清算<br/>101: 期货订单价格超出清算价格，期货订单价格超出了清算价格<br/>1003: 订单清算，订单正在进行清算<br/>1004: 订单ADL，订单正在进行ADL |
-| clOrderID         | string  | Yes      | 自定义订单ID                                                       |
-| maker             | boolean | Yes      | 指示交易是否为做市商交易的指示器                                     |
-| time_in_force     | string  | Yes      | 订单的有效性                                                      |
-| timestamp         | long    | Yes      | 订单时间戳或已成交时间戳                                           |
-| txType            | integer    | Yes      | 用于触发或OCO订单的字段。</br>0: Limit</br>1: Stop</br>2: Trigger</br>3: OCO</br>STOP 表示停止订单，TAKEPROFIT 表示止盈订单，LIMIT 表示不是上述任何一种情况。 |
-| orderType         | integer | Yes      | 用于触发或OCO订单的字段。STOP 表示停止订单，TAKEPROFIT 表示止盈订单，LIMIT 表示不是上述任何一种情况。 |
-| stealth           | double  | Yes      | 在订单簿上显示的订单的百分比。仅用于算法订单。                        |
-| pegPriceDeviation | double  | Yes      | 偏差百分比。仅用于算法订单。                                         |
-| triggerPrice      | double  | Yes      | 触发价格                                                            |
+| symbol            | String  | Yes      | 市场符号                                                     |
+| orderID           | String  | Yes      | 内部订单ID                                                 |
+| side              | String  | Yes      | 交易方向，BUY或SELL                                     |
+| orderType         | Integer | Yes   | 订单类型。有效值为：<br/>76: 限价单<br/>77: 市价单<br/>80: 挂单/算法单  |
+| price             | Double  | Yes      | 订单价格或交易价格                                       |
+| avgFilledPrice    | Double  | Yes      | 平均成交价格                                               |
+| status            | Integer    | Yes      | 状态，具体值如下：<br/>1: 市场不可用，市场目前不可用<br/>2: 订单已插入，订单已成功插入<br/>4: 订单已完全成交，订单已完全成交<br/>5: 订单已部分成交，订单已部分成交<br/>6: 订单已取消，订单已成功取消<br/>8: 余额不足，账户余额不足<br/>9: 触发订单已插入，触发订单已成功插入<br/>10: 触发订单已激活，触发订单已成功激活<br/>12: 更新风险限额出错，更新风险限额出错<br/>15: 订单修改失败，对订单的修改未成功<br/>27: 转账成功，期货和现货之间的资金转账成功<br/>28: 转账失败，现货和期货之间的资金转账未成功<br/>41: 风险限额无效，指定的风险限额无效<br/>64: 处于清算状态，账户正在进行清算<br/>101: 期货订单价格超出清算价格，期货订单价格超出了清算价格<br/>1003: 订单清算，订单正在进行清算<br/>1004: 订单ADL，订单正在进行ADL |
+| clOrderID         | String  | Yes      | 自定义订单ID                                                       |
+| maker             | Boolean | Yes      | 指示交易是否为做市商交易的指示器                                     |
+| time_in_force     | String  | Yes      | 订单的有效性                                                      |
+| timestamp         | Long    | Yes      | 订单时间戳或已成交时间戳                                           |
+| txType            | Integer    | Yes      | 用于触发或OCO订单的字段。</br>0: Limit</br>1: Stop</br>2: Trigger</br>3: OCO</br>STOP 表示停止订单，TAKEPROFIT 表示止盈订单，LIMIT 表示不是上述任何一种情况。 |
+| orderType         | Integer | Yes      | 用于触发或OCO订单的字段。STOP 表示停止订单，TAKEPROFIT 表示止盈订单，LIMIT 表示不是上述任何一种情况。 |
+| stealth           | Double  | Yes      | 在订单簿上显示的订单的百分比。仅用于算法订单。                        |
+| pegPriceDeviation | Double  | Yes      | 偏差百分比。仅用于算法订单。                                         |
+| triggerPrice      | Double  | Yes      | 触发价格                                                            |
 | originalOrderBaseSize         | Double | Yes | 以基础货币计算的原始订单数量。即使后续进行了调整，此数值也不会改变 |
 | originalOrderQuoteSize        | Double | Yes | 以报价货币计算的原始订单数量。即使后续进行了调整，此数值也不会改变 |
 | currentOrderBaseSize          | Double | Yes | 以基础货币计算的当前订单数量。表示已成交数量与剩余未成交数量的总和 |
@@ -2163,20 +2163,20 @@ echo -n "/ws/spot1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6726
 
 | 名称        | 类型    | 是否必须     | 描述                                                                                          |
 | ---         | ---     | ---      | ---                                                                                          |
-| symbol      | string  | Yes      | 市场符号                                                                                    |
-| orderId     | string  | Yes      | 内部订单ID                                                                                  |
-| clOrderId   | string  | Yes      | 自定义订单ID                                                                                |
-| serialId    | string  | Yes      | 交易序列ID                                                                                |
-| tradeId     | string  | Yes      | 交易的唯一标识符                                                                           |
-| type        | integer    | Yes      | 订单类型。有效值为：<br/>76: 限价单<br/>77: 市价单<br/>80: 挂单/算法单                |
-| side        | string  | Yes      | 交易方向，BUY或SELL                                                                      |
-| price       | double  | Yes      | 成交价格                                                                                    |
-| size        | double  | Yes      | 成交数量                                                                                    |
-| feeAmount   | double  | Yes      | 手续费金额                                                                                  |
-| feeCurrency | string  | Yes      | 手续费货币                                                                                  |
-| base        | string  | Yes      | 基准货币                                                                                    |
-| quote       | string  | Yes      | 报价货币                                                                                    |
-| maker       | boolean  | Yes      | 指示交易是否为做市商交易                                                               |
-| timestamp   | long  | Yes      | 订单时间戳或成交时间戳                                                                   |
+| symbol      | String  | Yes      | 市场符号                                                                                    |
+| orderId     | String  | Yes      | 内部订单ID                                                                                  |
+| clOrderId   | String  | Yes      | 自定义订单ID                                                                                |
+| serialId    | String  | Yes      | 交易序列ID                                                                                |
+| tradeId     | String  | Yes      | 交易的唯一标识符                                                                           |
+| type        | Integer    | Yes      | 订单类型。有效值为：<br/>76: 限价单<br/>77: 市价单<br/>80: 挂单/算法单                |
+| side        | String  | Yes      | 交易方向，BUY或SELL                                                                      |
+| price       | Double  | Yes      | 成交价格                                                                                    |
+| size        | Double  | Yes      | 成交数量                                                                                    |
+| feeAmount   | Double  | Yes      | 手续费金额                                                                                  |
+| feeCurrency | String  | Yes      | 手续费货币                                                                                  |
+| base        | String  | Yes      | 基准货币                                                                                    |
+| quote       | String  | Yes      | 报价货币                                                                                    |
+| maker       | Boolean  | Yes      | 指示交易是否为做市商交易                                                               |
+| timestamp   | Long  | Yes      | 订单时间戳或成交时间戳                                                                   |
 
 </section>

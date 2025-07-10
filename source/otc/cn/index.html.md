@@ -174,12 +174,12 @@ BTSE的速率限制如下：
 ### 响应内容
 | 名称                   | 类型          | 是否必须      | 描述                        |
 | ---                    | ---           | ---      | ---                        |
-| assetName              | string        | Yes       | 资产名称                    |
-| maxOrderSizes          | double    | Yes       | 最大订单大小                |
-| maxOrderValues         | double    | Yes       | 最大订单名义价值            |
-| minOrderSizes          | double    | Yes       | 最小订单大小                |
-| minOrderValues         | double    | Yes       | 最小订单名义价值            |
-| supportQuoteCurrencies | string array    | Yes       | 支持的报价货币              |
+| assetName              | String        | Yes       | 资产名称                    |
+| maxOrderSizes          | Double    | Yes       | 最大订单大小                |
+| maxOrderValues         | Double    | Yes       | 最大订单名义价值            |
+| minOrderSizes          | Double    | Yes       | 最小订单大小                |
+| minOrderValues         | Double    | Yes       | 最小订单名义价值            |
+| supportQuoteCurrencies | String Array    | Yes       | 支持的报价货币              |
 
 ## 请求报价
 
@@ -202,7 +202,7 @@ BTSE的速率限制如下：
 {
   "markets": [
     {
-      "assetName": "string",
+      "assetName": "String",
       "id": 0,
       "maxOrderSizes": [
         0
@@ -226,7 +226,7 @@ BTSE的速率限制如下：
       "processingTimestamp": 0,
       "requestId": 0,
       "supportQuoteCurrencies": [
-        "string"
+        "String"
       ],
       "trackingID": 0
     }
@@ -252,28 +252,28 @@ BTSE的速率限制如下：
 
 | 名称                       | 类型          | 是否必须      | 描述                        |
 | ---                        | ---           | ---      | ---                        |
-| baseCurrency               | string        | Yes       | 基础货币 (例如 BTC)         |
-| orderCurrency              | string        | Yes       | 订单货币                   |
-| orderSizeInBaseCurrency    | double    | Yes       | 基础货币中的订单大小        |
-| orderAmountInOrderCurrency | double    | Yes       | 订单货币中的订单金额        |
-| clientOrderId              | double    | Yes       | 自定义客户订单ID            |
-| side                       | string        | Yes       | 订单方向，BUY或SELL         |
+| baseCurrency               | String        | Yes       | 基础货币 (例如 BTC)         |
+| orderCurrency              | String        | Yes       | 订单货币                   |
+| orderSizeInBaseCurrency    | Double    | Yes       | 基础货币中的订单大小        |
+| orderAmountInOrderCurrency | Double    | Yes       | 订单货币中的订单金额        |
+| clientOrderId              | Double    | Yes       | 自定义客户订单ID            |
+| side                       | String        | Yes       | 订单方向，BUY或SELL         |
 
 
 ### 响应内容
 | 名称                      | 类型    | 是否必须      | 描述                                                                                                                                                                                               |
 | ---                       | ---     | ---      | ---                                                                                                                                                                                               |
 | markets                   | 资产   | Yes       | 资产信息                                                                                                                                                                                          |
-| quoteAmountToDeduct       | double  | Yes       | 需要扣除的报价金额                                                                                                                                                                                |
-| quoteAmountToReceive      | double  | Yes       | 需要接收的报价金额                                                                                                                                                                                |
-| quoteCurrencyToDeductIn   | string  | Yes       | 扣除的报价货币                                                                                                                                                                                    |
-| quoteCurrencyToReceiveIn  | string  | Yes       | 接收的报价货币                                                                                                                                                                                    |
-| quoteId                   | string  | Yes       | 报价ID                                                                                                                                                                                            |
-| quotePriceInOrderCurrency | double  | Yes       | 订单货币中的报价价格                                                                                                                                                                              |
-| quotePriceInUSD           | long  | Yes       | 报价价格 (USD)                                                                                                                                                                                   |
-| quoteTimestamp            | long  | Yes       | 报价时间戳                                                                                                                                                                                       |
-| quoteValidDurationMs      | long  | Yes       | 报价有效期                                                                                                                                                                                        |
-| status                    | integer    | Yes       | 订单状态，具有以下值：<br/>8: 余额不足<br/>30001: 订单报价<br/>30008: OTC订单重新报价<br/>30007: OTC订单已成功完成<br/>40001: 服务不可用<br/>40003: 拒绝 |
+| quoteAmountToDeduct       | Double  | Yes       | 需要扣除的报价金额                                                                                                                                                                                |
+| quoteAmountToReceive      | Double  | Yes       | 需要接收的报价金额                                                                                                                                                                                |
+| quoteCurrencyToDeductIn   | String  | Yes       | 扣除的报价货币                                                                                                                                                                                    |
+| quoteCurrencyToReceiveIn  | String  | Yes       | 接收的报价货币                                                                                                                                                                                    |
+| quoteId                   | String  | Yes       | 报价ID                                                                                                                                                                                            |
+| quotePriceInOrderCurrency | Double  | Yes       | 订单货币中的报价价格                                                                                                                                                                              |
+| quotePriceInUSD           | Long  | Yes       | 报价价格 (USD)                                                                                                                                                                                   |
+| quoteTimestamp            | Long  | Yes       | 报价时间戳                                                                                                                                                                                       |
+| quoteValidDurationMs      | Long  | Yes       | 报价有效期                                                                                                                                                                                        |
+| status                    | Integer    | Yes       | 订单状态，具有以下值：<br/>8: 余额不足<br/>30001: 订单报价<br/>30008: OTC订单重新报价<br/>30007: OTC订单已成功完成<br/>40001: 服务不可用<br/>40003: 拒绝 |
 
 ## 接受报价
 
@@ -316,26 +316,26 @@ BTSE的速率限制如下：
 
 | 名称          | 类型     | 是否必须     | 描述                                     |
 | ------------- | -------- | -------- | ---------------------------------------- |
-| quoteId       | string   | Yes       | 作为路径参数提供的报价ID                |
-| baseAmount    | double   | No       | 接受报价的部分金额                      |
-| quoteAmount   | double   | No       | 接受报价的部分金额                      |
+| quoteId       | String   | Yes       | 作为路径参数提供的报价ID                |
+| baseAmount    | Double   | No       | 接受报价的部分金额                      |
+| quoteAmount   | Double   | No       | 接受报价的部分金额                      |
 
 ### 响应内容
 
 
 | 名称                      | 类型    | 是否必须  | 描述                                                                                                                                                                                               |
 | ------------------------ | ------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| status                   | integer | Yes       | 订单状态，其值为：<br/>8: 余额不足<br/>30001: 订单报价<br/>30008: OTC订单重新报价<br/>30007: OTC订单成功完成<br/>40001: 服务不可用<br/>40003: 被拒绝                                                   |
-| quoteId                  | string  | Yes       | 报价ID                                                                                                                                                                                              |
-| quoteValidDurationMs     | long    | Yes       | 报价有效期                                                                                                                                                                                          |
-| quoteAmountToReceive     | double  | Yes       | 应收报价金额                                                                                                                                                                                        |
-| quoteCurrencyToReceiveIn | string  | Yes       | 应收报价货币                                                                                                                                                                                        |
-| quoteAmountToDeduct      | double  | Yes       | 扣除的报价金额                                                                                                                                                                                      |
-| quoteCurrencyToDeductIn  | string  | Yes       | 扣除的报价货币                                                                                                                                                                                      |
-| quoteTimestamp           | long    | Yes       | 报价时间戳                                                                                                                                                                                          |
-| quotePriceInOrderCurrency| double  | Yes       | 订单货币中的报价价格                                                                                                                                                                                |
-| quotePriceInUSD          | long    | Yes       | USD中的报价价格                                                                                                                                                                                     |
-| side                     | string  | Yes       | BUY或SELL                                                                                                                                                                                              |
+| status                   | Integer | Yes       | 订单状态，其值为：<br/>8: 余额不足<br/>30001: 订单报价<br/>30008: OTC订单重新报价<br/>30007: OTC订单成功完成<br/>40001: 服务不可用<br/>40003: 被拒绝                                                   |
+| quoteId                  | String  | Yes       | 报价ID                                                                                                                                                                                              |
+| quoteValidDurationMs     | Long    | Yes       | 报价有效期                                                                                                                                                                                          |
+| quoteAmountToReceive     | Double  | Yes       | 应收报价金额                                                                                                                                                                                        |
+| quoteCurrencyToReceiveIn | String  | Yes       | 应收报价货币                                                                                                                                                                                        |
+| quoteAmountToDeduct      | Double  | Yes       | 扣除的报价金额                                                                                                                                                                                      |
+| quoteCurrencyToDeductIn  | String  | Yes       | 扣除的报价货币                                                                                                                                                                                      |
+| quoteTimestamp           | Long    | Yes       | 报价时间戳                                                                                                                                                                                          |
+| quotePriceInOrderCurrency| Double  | Yes       | 订单货币中的报价价格                                                                                                                                                                                |
+| quotePriceInUSD          | Long    | Yes       | USD中的报价价格                                                                                                                                                                                     |
+| side                     | String  | Yes       | BUY或SELL                                                                                                                                                                                              |
 
 
 ## 拒绝报价
@@ -345,7 +345,7 @@ BTSE的速率限制如下：
 ```json
 {
   "errorCode": -1,
-  "message": "string",
+  "message": "String",
   "status": 0
 }
 
@@ -359,7 +359,7 @@ BTSE的速率限制如下：
 
 | 名称     | 类型   | 是否必须     | 描述                              |
 | ---      | ---    | ---      | ---                             |
-| quoteId  | string | Yes       | 路径参数中提供的报价 ID             |
+| quoteId  | String | Yes       | 路径参数中提供的报价 ID             |
 
 ## 查询订单
 
@@ -369,7 +369,7 @@ BTSE的速率限制如下：
 {
   "markets": [
     {
-      "assetName": "string",
+      "assetName": "String",
       "id": 0,
       "maxOrderSizes": [
         0
@@ -393,7 +393,7 @@ BTSE的速率限制如下：
       "processingTimestamp": 0,
       "requestId": 0,
       "supportQuoteCurrencies": [
-        "string"
+        "String"
       ],
       "trackingID": 0
     }
@@ -419,23 +419,23 @@ BTSE的速率限制如下：
 
 | 名称     | 类型   | 是否必须     | 描述                              |
 | ---      | ---    | ---      | ---                             |
-| quoteId  | string | Yes       | 路径参数中提供的报价 ID             |
+| quoteId  | String | Yes       | 路径参数中提供的报价 ID             |
 
 ### 响应内容
 
 | 名称                      | 类型    | 是否必须     | 描述                                                                                                                                                                 |
 | ---                       | ---     | ---      | ---                                                                                                                                                                 |
 | markets                   | 资产   | Yes       | 资产信息                                                                                                                                                             |
-| quoteAmountToDeduct       | double | Yes       | 需要扣除的报价金额                                                                                                                                                     |
-| quoteAmountToReceive      | double | Yes       | 需要接收的报价金额                                                                                                                                                     |
-| quoteCurrencyToDeductIn   | string  | Yes       | 扣除的报价货币                                                                                                                                                         |
-| quoteCurrencyToReceiveIn  | string  | Yes       | 接收的报价货币                                                                                                                                                         |
-| quoteId                   | string  | Yes       | 报价 ID                                                                                                                                                              |
-| quotePriceInOrderCurrency | double | Yes       | 订单货币中的报价价格                                                                                                                                                     |
-| quotePriceInUSD           | long  | Yes       | 报价价格（美元）                                                                                                                                                       |
-| quoteTimestamp            | long  | Yes       | 报价时间戳                                                                                                                                                           |
-| quoteValidDurationMs      | long  | Yes       | 报价有效期                                                                                                                                                           |
-| status                    | integer   | Yes       | 具有以下值的订单状态：<br/>8: 余额不足<br/>30001: 订单报价<br/>30008: OTC 订单重新报价<br/>30007: OTC 订单成功完成<br/>40001: 服务不可用<br/>40003: 已拒绝 |
+| quoteAmountToDeduct       | Double | Yes       | 需要扣除的报价金额                                                                                                                                                     |
+| quoteAmountToReceive      | Double | Yes       | 需要接收的报价金额                                                                                                                                                     |
+| quoteCurrencyToDeductIn   | String  | Yes       | 扣除的报价货币                                                                                                                                                         |
+| quoteCurrencyToReceiveIn  | String  | Yes       | 接收的报价货币                                                                                                                                                         |
+| quoteId                   | String  | Yes       | 报价 ID                                                                                                                                                              |
+| quotePriceInOrderCurrency | Double | Yes       | 订单货币中的报价价格                                                                                                                                                     |
+| quotePriceInUSD           | Long  | Yes       | 报价价格（美元）                                                                                                                                                       |
+| quoteTimestamp            | Long  | Yes       | 报价时间戳                                                                                                                                                           |
+| quoteValidDurationMs      | Long  | Yes       | 报价有效期                                                                                                                                                           |
+| status                    | Integer   | Yes       | 具有以下值的订单状态：<br/>8: 余额不足<br/>30001: 订单报价<br/>30008: OTC 订单重新报价<br/>30007: OTC 订单成功完成<br/>40001: 服务不可用<br/>40003: 已拒绝 |
 
 # WebSocket 数据流
 
@@ -471,9 +471,9 @@ BTSE的速率限制如下：
 
 | 索引 | 类型   | 是否必须     | 描述                          |
 | ---  | ---    | ---      | ---                          |
-| 0    | string | Yes       | 第一个参数是 API 密钥        |
-| 1    | long | Yes       | Nonce，即当前时间戳           |
-| 2    | string | Yes       | 生成的签名                    |
+| 0    | String | Yes       | 第一个参数是 API 密钥        |
+| 1    | Long | Yes       | Nonce，即当前时间戳           |
+| 2    | String | Yes       | 生成的签名                    |
 
 > 生成签名
 
@@ -545,29 +545,29 @@ echo -n "/ws/otc1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6726e
 
 | 名称      | 类型   | 是否必须     | 描述                                                                                   |
 | ---       | ---    | ---      | ---                                                                                   |
-| op        | string | Yes       | 操作，此处为 `quote`、`unsubscribe-quote` 或 `unsubscribe-quote-all`                  |
-| symbol    | string | Yes       | 市场标志，参考 `getMarkets` API                                                        |
-| side      | string | No       | 报价方向，`buy` 或 `sell`，区分大小写。如果此字段为空/为null，则将返回两个方向的报价  |
-| clOrderId | string | No       | 客户自定义订单 ID                                                                     |
-| quantity  | double | Yes       | 订单数量                                                                             |
-| currency  | string | Yes       | 可以是基础货币或报价货币。如果指定基础货币，那么报价流将以响应形式返回 |
+| op        | String | Yes       | 操作，此处为 `quote`、`unsubscribe-quote` 或 `unsubscribe-quote-all`                  |
+| symbol    | String | Yes       | 市场标志，参考 `getMarkets` API                                                        |
+| side      | String | No       | 报价方向，`buy` 或 `sell`，区分大小写。如果此字段为空/为null，则将返回两个方向的报价  |
+| clOrderId | String | No       | 客户自定义订单 ID                                                                     |
+| quantity  | Double | Yes       | 订单数量                                                                             |
+| currency  | String | Yes       | 可以是基础货币或报价货币。如果指定基础货币，那么报价流将以响应形式返回 |
 
 ### 响应内容
 
 | 名称            | 类型   | 是否必须     | 描述                                                                                             |
 | ---             | ---    | ---      | ---                                                                                             |
-| topic           | string | Yes       | WebSocket 主题                                                                                  |
-| buyQuoteId      | string | No       | 买方的报价 ID。如果该值为空/为null，则表示您的 WebSocket 流未经身份验证或您未订阅此方向  |
-| sellQuoteId     | string | No       | 卖方的报价 ID。如果该值为空/为null，则表示您的 WebSocket 流未经身份验证或您未订阅此方向 |
-| clOrderId       | string | Yes       | 用户自定义订单 ID                                                                               |
-| buyQuantity     | double | No       | 基于报价请求的购买数量。如果该值为null，则表示您未订阅此方向                          |
-| buyUnitPrice    | double | No       | 基础符号每单位的单价。如果该值为null，则表示您未订阅此方向                         |
-| buyTotalAmount  | double | No       | 以报价货币支付的总价格。如果该值为null，则表示您未订阅此方向                      |
-| sellQuantity    | double | No       | 基于报价请求的销售数量。如果该值为null，则表示您未订阅此方向                      |
-| sellUnitPrice   | double | No       | 基础符号每单位的单价。如果该值为null，则表示您未订阅此方向                     |
-| sellTotalAmount | double | No       | 以报价货币支付的总价格。如果该值为null，则表示您未订阅此方向                   |
-| status          | string | No       | 响应状态。如果该值为null，则表示您未订阅此方向                                  |
-| reason          | string | No       | 如果返回错误，reason 字段将包含错误的原因                                      |
+| topic           | String | Yes       | WebSocket 主题                                                                                  |
+| buyQuoteId      | String | No       | 买方的报价 ID。如果该值为空/为null，则表示您的 WebSocket 流未经身份验证或您未订阅此方向  |
+| sellQuoteId     | String | No       | 卖方的报价 ID。如果该值为空/为null，则表示您的 WebSocket 流未经身份验证或您未订阅此方向 |
+| clOrderId       | String | Yes       | 用户自定义订单 ID                                                                               |
+| buyQuantity     | Double | No       | 基于报价请求的购买数量。如果该值为null，则表示您未订阅此方向                          |
+| buyUnitPrice    | Double | No       | 基础符号每单位的单价。如果该值为null，则表示您未订阅此方向                         |
+| buyTotalAmount  | Double | No       | 以报价货币支付的总价格。如果该值为null，则表示您未订阅此方向                      |
+| sellQuantity    | Double | No       | 基于报价请求的销售数量。如果该值为null，则表示您未订阅此方向                      |
+| sellUnitPrice   | Double | No       | 基础符号每单位的单价。如果该值为null，则表示您未订阅此方向                     |
+| sellTotalAmount | Double | No       | 以报价货币支付的总价格。如果该值为null，则表示您未订阅此方向                   |
+| status          | String | No       | 响应状态。如果该值为null，则表示您未订阅此方向                                  |
+| reason          | String | No       | 如果返回错误，reason 字段将包含错误的原因                                      |
 
 
 
