@@ -2149,33 +2149,34 @@ echo -n "/ws/spot1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6726
 {
   "topic": "notificationApiV3",
   "data": {
-      "symbol": "Market Symbol (eg. BTC-USD)",
-      "orderID": "BTSE internal order ID",
-      "side": "BUY",
-      "orderType": "76",
-      "price": "Order price or transacted price",
-      "avgFilledPrice": 35000,
-      "status": "<Refer to Status description on the left>",
-      "clOrderID": "<Client order ID>",
-      "maker": "<Maker flag, if true indicates that trade is a maker trade>",
-      "stealth": 1,
-      "timestamp": 1624985375123,
-      "pegPriceDeviation": "Indicate the deviation percentage. Valid for only algo orders.",
-      "time_in_force": "<Time where this order is valid>",
-      "txType": 0,
-      "triggerPrice": "Trade Trigger Price",
-      "originalOrderBaseSize":10,
-      "originalOrderQuoteSize":null,
-      "currentOrderBaseSize":10,
-      "currentOrderQuoteSize":null,
-      "filledBaseSize":0,
-      "totalFilledBaseSize":0,
-      "remainingBaseSize":10,
-      "remainingQuoteSize":null,
-      "orderCurrency":"base"
-    }
+    "symbol": "BTC-USDT",
+    "orderID": "789b05fa-dd43-43e8-8626-e229ae216ead",
+    "side": "MODE_BUY",
+    "orderType": 77,
+    "txType": 0,
+    "price": 111131,
+    "triggerPrice": 0,
+    "pegPriceDeviation": 1,
+    "stealth": 1,
+    "status": 5,
+    "timestamp": 1752147703368,
+    "avgFilledPrice": 111131,
+    "clOrderID": "_W_bjvf1752147703280",
+    "maker": false,
+    "postOnly": false,
+    "orderUserInitiated": true,
+    "originalOrderBaseSize": 0,
+    "originalOrderQuoteSize": 1000,
+    "currentOrderBaseSize": 0,
+    "currentOrderQuoteSize": 1000,
+    "filledBaseSize": 0.00899,
+    "totalFilledBaseSize": 0.00899,
+    "remainingBaseSize": 0,
+    "remainingQuoteSize": 0.93231,
+    "orderCurrency": "USDT",
+    "time_in_force": "GTC"
+  }
 }
-
 ```
 
 通过订阅主题 `notificationApiV3` 来接收交易通知。WebSocket订阅 将向订阅者推送交易级别的通知。如果在未经身份验证的情况下订阅主题，则不会发送任何消息。
