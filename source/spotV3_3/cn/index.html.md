@@ -1459,7 +1459,7 @@ BTSE的速率限制如下:
 | clOrderID   | Long  | Yes      | 自定义订单ID               |
 | orderId     | Long  | Yes      | 订单ID                     |
 | feeAmount   | Long  | Yes      | 手续费金额                 |
-| feeCurrency | Long  | Yes      | 手续费货币                 |
+| feeCurrency | String| Yes      | 手续费货币                 |
 | filledPrice | Long  | Yes      | 成交价格                   |
 | filledSize  | Long  | Yes      | 成交数量                   |
 | orderType   | Integer    | Yes      | 订单类型                   |

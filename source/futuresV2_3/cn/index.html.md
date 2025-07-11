@@ -595,7 +595,7 @@ BTSE 的速率限制如下：
 | side      | String  | Yes      | 交易方向。值包括：[`Buy`, `SELL`]            |
 | price     | Double  | Yes      | 交易价格                                     |
 | size      | Double  | Yes      | 交易尺寸                                     |
-| serialId  | Double  | Yes      | 序列ID，运行序列号                           |
+| serialId  | Long    | Yes      | 序列ID，运行序列号                           |
 | timestamp | Long    | Yes      | 交易时间戳                                   |
 
 
@@ -1722,8 +1722,8 @@ BTSE 的速率限制如下：
 | orderId          | String  | Yes      | 订单ID                                                                                                                                                                              |
 | username         | String  | Yes      | btse 用户名                                                                                                                                                                          |
 | triggerType      | Long    | Yes      | 触发类型<br/>1001: 止损<br/>1002: 获利                                                                                                                                              |
-| feeAmount        | Long    | Yes      | 费用金额                                                                                                                                                                            |
-| feeCurrency      | Long    | Yes      | 费用货币                                                                                                                                                                            |
+| feeAmount        | Double    | Yes      | 费用金额                                                                                                                                                                            |
+| feeCurrency      | String    | Yes      | 费用货币                                                                                                                                                                            |
 | filledPrice      | Double  | Yes      | 平均成交价格                                                                                                                                                                        |
 | avgFilledPrice | Double  | Yes      | 平均成交价格                                                                                                                                                                        |
 | triggerPrice     | Double  | Yes      | 触发价格                                                                                                                                                                            |
@@ -1826,7 +1826,7 @@ BTSE 的速率限制如下：
 | size                   | Long    | Yes      | 仓位大小                                                                                           |
 | entryPrice             | Double  | Yes      | 入场价格                                                                                           |
 | markPrice              | Double  | Yes      | 标记价格                                                                                           |
-| marginType             | Long    | Yes      | 保证金类型。值如下<br/>91: CROSS钱包<br/>92: 独立钱包                                                 |
+| marginType             | Integer    | Yes      | 保证金类型。值如下<br/>91: CROSS钱包<br/>92: 独立钱包                                                 |
 | orderValue             | Double  | Yes      | 名义价值                                                                                           |
 | settleWithAsset        | String  | Yes      | 结算货币                                                                                           |
 | totalMaintenanceMargin | Double  | Yes      | 维持保证金                                                                                         |
@@ -3393,7 +3393,7 @@ WebSocket 将向已认证的订阅者推送实时交易级别的通知。Websock
 | symbol      | String  | Yes      | 市场符号                                                                                                  |
 | orderId     | String  | Yes      | 内部订单ID                                                                                                |
 | clOrderId   | String  | Yes      | 自定义订单ID                                                                                              |
-| serialId    | String  | Yes      | 交易序列ID                                                                                                |
+| serialId    | Long    | Yes      | 交易序列ID                                                                                                |
 | tradeId     | String  | Yes      | 交易唯一标识符                                                                                            |
 | type        | Integer     | Yes      | 订单类型。有效值为：<br/>76: 限价订单<br/>77: 市价订单<br/>80: 算法订单                                   |
 | side        | String  | Yes      | 交易方向。BUY 或 SELL                                                                                     |

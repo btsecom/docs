@@ -1478,7 +1478,7 @@ Retrieves a user's trade history which includes funding fee data. Requires `Read
 | clOrderID       | Long   | yes      | Custom order id                         |
 | orderId         | Long   | yes      | Order id                                |
 | feeAmount       | Long   | yes      | Fee amount                              |
-| feeCurrency     | Long   | yes      | Fee currency                            |
+| feeCurrency     | String | yes      | Fee currency                            |
 | filledPrice     | Long   | yes      | Filled price                            |
 | filledSize      | Long   | yes      | Filled size                             |
 | orderType       | Integer| yes      | Order type                              |

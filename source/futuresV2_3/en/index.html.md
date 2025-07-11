@@ -595,7 +595,7 @@ Get trade fills for the market specified by `symbol`
 | side      | String | Yes      | Trade side. Values are: [`Buy`, `SELL`] |
 | price     | Double | Yes      | Transacted price                        |
 | size      | Double | Yes      | Transacted size                         |
-| serialId  | Double | Yes      | Serial Id, running sequence Double      |
+| serialId  | Long   | Yes      | Serial Id, running sequence Long      |
 | timestamp | Long   | Yes      | Transacted timestamp                    |
 
 
@@ -1717,7 +1717,7 @@ Retrieves a user's trade history. Requires `Read` permission.
 | side             | String  | Yes      | Trade side. Values are: [`BUY`, `SELL`]                                                                                                                                                 |
 | price            | Double  | Yes      | Transacted price                                                                                                                                                                        |
 | size             | Long    | Yes      | Original order size                                                                                                                                                                     |
-| serialId         | Long    | Yes      | Serial Id, running sequence Double                                                                                                                                                      |
+| serialId         | Long    | Yes      | Serial Id, running sequence Long                                                                                                                                                      |
 | tradeId          | String  | Yes      | Trade identifier                                                                                                                                                                        |
 | timestamp        | Long    | Yes      | Transacted timestamp                                                                                                                                                                    |
 | base             | String  | Yes      | Base currency                                                                                                                                                                           |
@@ -1727,8 +1727,8 @@ Retrieves a user's trade history. Requires `Read` permission.
 | orderId          | String  | Yes      | Order ID                                                                                                                                                                                |
 | username         | String  | Yes      | btse username                                                                                                                                                                           |
 | triggerType      | Long    | Yes      | Trigger type<br/>1001: Stop Loss<br/>1002: Take Profit                                                                                                                                  |
-| feeAmount        | Long    | Yes      | Fee amount                                                                                                                                                                              |
-| feeCurrency      | Long    | Yes      | Fee currency                                                                                                                                                                            |
+| feeAmount        | Double    | Yes      | Fee amount                                                                                                                                                                              |
+| feeCurrency      | String    | Yes      | Fee currency                                                                                                                                                                            |
 | filledPrice      | Double  | Yes      | Filled price                                                                                                                                                                            |
 | avgFilledPrice | Double  | Yes      | Average filled price                                                                                                                                                                    |
 | triggerPrice     | Double  | Yes      | Trigger price                                                                                                                                                                           |
@@ -1832,7 +1832,7 @@ Requires `Read` permission.
 | size                   | Long    | Yes      | Position size                                                               |
 | entryPrice             | Double  | Yes      | Entry price                                                                 |
 | markPrice              | Double  | Yes      | Mark price                                                                  |
-| marginType             | Long    | Yes      | Margin Type. Values as follows<br/>91: CROSS wallet<br/>92: Isolated wallet |
+| marginType             | Integer | Yes      | Margin Type. Values as follows<br/>91: CROSS wallet<br/>92: Isolated wallet |
 | orderValue             | Double  | Yes      | Notional value                                                              |
 | settleWithAsset        | String  | Yes      | Settlement currency                                                         |
 | totalMaintenanceMargin | Double  | Yes      | Maintenance margin                                                          |
@@ -3399,7 +3399,7 @@ When a trade has been transacted, this topic will send the trade information bac
 | symbol      | String  | Yes      | Market symbol                                                                              |
 | orderId     | String  | Yes      | Internal order ID                                                                          |
 | clOrderId   | String  | Yes      | Custom order ID                                                                            |
-| serialId    | String  | Yes      | Trade sequence ID                                                                          |
+| serialId    | Long    | Yes      | Trade sequence ID                                                                          |
 | tradeId     | String  | Yes      | Trade unique identifier                                                                    |
 | type        | Integer     | Yes      | Order type. Valid values are:<br/>76: Limit Order<br/>77: Market Order<br/>80: Algo orders |
 | side        | String  | Yes      | Trade side. BUY or SELL                                                                    |
