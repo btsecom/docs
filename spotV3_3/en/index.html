@@ -396,42 +396,60 @@
 <h1 id='overview'>Overview</h1><h2 id='migration-from-v3-2-to-v3-3'>Migration from v3.2 to v3.3</h2>
 <p>We are updating several order-related API endpoints to improve consistency and clarity in size-related fields. Please review the following changes carefully, as some existing fields will be deprecated and replaced with new ones.</p>
 <h3 id='updated-fields-for-order-actions'>Updated Fields for Order Actions</h3>
-<p>For the following endpoints, the fields <code>size</code>, <code>fillSize</code>, <code>originalSize</code> and <code>remainingSize</code> will be deprecated and replaced with the following:
-  * <code>originalOrderBaseSize</code>
-  * <code>originalOrderQuoteSize</code>
-  * <code>currentOrderBaseSize</code>
-  * <code>currentOrderQuoteSize</code>
-  * <code>remainingOrderBaseSize</code>
-  * <code>remainingOrderQuoteSize</code>
-  * <code>filledBaseSize</code>
-  * <code>totalFilledBaseSize</code>
-  * <code>orderCurrency</code> (&quot;base&quot; or &quot;quote&quot;)</p>
+<p>For the following endpoints, the fields <code>size</code>, <code>fillSize</code>, <code>originalSize</code> and <code>remainingSize</code> will be deprecated and replaced with the following:</p>
 
-<p><strong>Affected Endpoints</strong>
-  * <a href="#create-new-order"><code>Create New Order</code></a>
-    * Both <code>POST /api/v3.3/order</code> and <code>POST /api/v3.3/order/peg</code>
-  * <a href="#amend-order"><code>Amend Order</code></a>
-  * <a href="#cancel-order"><code>Cancel Order</code></a></p>
+<ul>
+<li><code>originalOrderBaseSize</code></li>
+<li><code>originalOrderQuoteSize</code></li>
+<li><code>currentOrderBaseSize</code></li>
+<li><code>currentOrderQuoteSize</code></li>
+<li><code>remainingOrderBaseSize</code></li>
+<li><code>remainingOrderQuoteSize</code></li>
+<li><code>filledBaseSize</code></li>
+<li><code>totalFilledBaseSize</code></li>
+<li><code>orderCurrency</code> (&quot;base&quot; or &quot;quote&quot;)</li>
+</ul>
+
+<p><strong>Affected Endpoints</strong></p>
+
+<ul>
+<li><a href="#create-new-order"><code>Create New Order</code></a>
+
+<ul>
+<li>Both <code>POST /api/v3.3/order</code> and <code>POST /api/v3.3/order/peg</code></li>
+</ul></li>
+<li><a href="#amend-order"><code>Amend Order</code></a></li>
+<li><a href="#cancel-order"><code>Cancel Order</code></a></li>
+</ul>
 <h3 id='updated-fields-for-order-query-endpoints'>Updated Fields for Order Query Endpoints</h3>
-<p>To improve data structure clarity and consistency, the following legacy fields will be deprecated:
-  * <code>size</code>
-  * <code>filledSize</code>
-  * <code>remainingSize</code> 
-  * In some endpoints: <code>fillSize</code> as well</p>
+<p>To improve data structure clarity and consistency, the following legacy fields will be deprecated:</p>
 
-<p>They will be replaced with the following enhanced fields:
-  * <code>originalOrderBaseSize</code>
-  * <code>originalOrderQuoteSize</code>
-  * <code>currentOrderBaseSize</code>
-  * <code>currentOrderQuoteSize</code>
-  * <code>remainingOrderBaseSize</code>
-  * <code>remainingOrderQuoteSize</code>
-  * <code>totalFilledBaseSize</code>
-  * <code>orderCurrency</code> (&quot;base&quot; or &quot;quote&quot;)</p>
+<ul>
+<li><code>size</code></li>
+<li><code>filledSize</code></li>
+<li><code>remainingSize</code> </li>
+<li>In some endpoints: <code>fillSize</code> as well</li>
+</ul>
 
-<p><strong>Affected Endpoints</strong>
-  * <a href="#query-order"><code>Query Order</code></a> - Replacing <code>size</code>, <code>filledSize</code>, <code>remainingSize</code> 
-  * <a href="#query-open-orders"><code>Query Open Orders</code></a> - Replacing <code>size</code>, <code>fillSize</code>, <code>filledSize</code>, <code>remainingSize</code> </p>
+<p>They will be replaced with the following enhanced fields:</p>
+
+<ul>
+<li><code>originalOrderBaseSize</code></li>
+<li><code>originalOrderQuoteSize</code></li>
+<li><code>currentOrderBaseSize</code></li>
+<li><code>currentOrderQuoteSize</code></li>
+<li><code>remainingOrderBaseSize</code></li>
+<li><code>remainingOrderQuoteSize</code></li>
+<li><code>totalFilledBaseSize</code></li>
+<li><code>orderCurrency</code> (&quot;base&quot; or &quot;quote&quot;)</li>
+</ul>
+
+<p><strong>Affected Endpoints</strong></p>
+
+<ul>
+<li><a href="#query-order"><code>Query Order</code></a> - Replacing <code>size</code>, <code>filledSize</code>, <code>remainingSize</code> </li>
+<li><a href="#query-open-orders"><code>Query Open Orders</code></a> - Replacing <code>size</code>, <code>fillSize</code>, <code>filledSize</code>, <code>remainingSize</code> </li>
+</ul>
 <h2 id='generating-api-key'>Generating API Key</h2>
 <p>You will need to create an API key on the BTSE platform before you can use authenticated APIs. To create API keys, you can follow the steps below:</p>
 
@@ -488,12 +506,12 @@
 <li><p>API Key (request-api)</p>
 
 <ul>
-<li>Parameter Name: <code>request-api</code>, in: header. API key is obtained from BTSE platform as a string</li>
+<li>Parameter Name: <code>request-api</code>, in: header. API key is obtained from BTSE platform as a String</li>
 </ul></li>
 <li><p>API Key (request-nonce)</p>
 
 <ul>
-<li>Parameter Name: <code>request-nonce</code>, in: header. Representation of current timestamp in long format</li>
+<li>Parameter Name: <code>request-nonce</code>, in: header. Representation of current timestamp in Long format</li>
 </ul></li>
 <li><p>API Key (request-sign)</p>
 
@@ -572,7 +590,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 <li>500 - Internal server error. Indicates that the server encountered an unexpected condition resulting in not being able to fulfill the request</li>
 </ul>
 <h2 id='api-enum'>API Enum</h2>
-<p>When connecting up the BTSE API, you will come across number codes that represents different states or status types in BTSE. The following section provides a list of codes that you are expecting to see.</p>
+<p>When connecting up the BTSE API, you will come across Double codes that represents different states or status types in BTSE. The following section provides a list of codes that you are expecting to see.</p>
 
 <ul>
 <li>-1: TIMEOUT= Request timeout, please check the order status</li>
@@ -683,7 +701,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </thead><tbody>
 <tr>
 <td>symbol</td>
-<td>string</td>
+<td>String</td>
 <td>no</td>
 <td>market symbol</td>
 </tr>
@@ -699,115 +717,115 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </thead><tbody>
 <tr>
 <td>symbol</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Market symbol</td>
 </tr>
 <tr>
 <td>last</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Last price</td>
 </tr>
 <tr>
 <td>lowestAsk</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Lowest ask price in the orderbook</td>
 </tr>
 <tr>
 <td>highestBid</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Highest bid price in the orderbook</td>
 </tr>
 <tr>
 <td>percentageChange</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Percentage change against the price within the last 24hours</td>
 </tr>
 <tr>
 <td>volume</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Transacted volume</td>
 </tr>
 <tr>
 <td>high24Hr</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Highest price over the last 24hours</td>
 </tr>
 <tr>
 <td>low24Hr</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Lowest price over the last 24hours</td>
 </tr>
 <tr>
 <td>base</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Base currency</td>
 </tr>
 <tr>
 <td>quote</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Quote currency</td>
 </tr>
 <tr>
 <td>active</td>
-<td>boolean</td>
+<td>Boolean</td>
 <td>Yes</td>
 <td>Indicator if market is active</td>
 </tr>
 <tr>
 <td>size</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Transacted size</td>
 </tr>
 <tr>
 <td>minValidPrice</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Minimum valid price</td>
 </tr>
 <tr>
 <td>minPriceIncrement</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Price increment</td>
 </tr>
 <tr>
 <td>minOrderSize</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Minimum tick size</td>
 </tr>
 <tr>
 <td>minSizeIncrement</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Tick size</td>
 </tr>
 <tr>
 <td>maxOrderSize</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Maximum order size</td>
 </tr>
 <tr>
 <td>openInterest</td>
-<td>double</td>
+<td>Double</td>
 <td>No</td>
 <td>Not valid for spot</td>
 </tr>
 <tr>
 <td>openInterestUSD</td>
-<td>double</td>
+<td>Double</td>
 <td>No</td>
 <td>Not valid for spot</td>
 </tr>
@@ -825,7 +843,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </tr>
 <tr>
 <td>timeBasedContract</td>
-<td>boolean</td>
+<td>Boolean</td>
 <td>No</td>
 <td>Not valid for spot</td>
 </tr>
@@ -855,55 +873,55 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </tr>
 <tr>
 <td>fundingRate</td>
-<td>double</td>
+<td>Double</td>
 <td>No</td>
 <td>Not valid for spot</td>
 </tr>
 <tr>
 <td>contractSize</td>
-<td>double</td>
+<td>Double</td>
 <td>No</td>
 <td>Not valid for spot</td>
 </tr>
 <tr>
 <td>maxPosition</td>
-<td>double</td>
+<td>Double</td>
 <td>No</td>
 <td>Not valid for spot</td>
 </tr>
 <tr>
 <td>minRiskLimit</td>
-<td>double</td>
+<td>Double</td>
 <td>No</td>
 <td>Not valid for spot</td>
 </tr>
 <tr>
 <td>maxRiskLimit</td>
-<td>double</td>
+<td>Double</td>
 <td>No</td>
 <td>Not valid for spot</td>
 </tr>
 <tr>
 <td>availableSettlement</td>
-<td>array</td>
+<td>Array</td>
 <td>No</td>
 <td>Not valid for spot</td>
 </tr>
 <tr>
 <td>futures</td>
-<td>boolean</td>
+<td>Boolean</td>
 <td>Yes</td>
 <td>Indicator if symbol is a futures contract</td>
 </tr>
 <tr>
 <td>isMarketOpenToOtc</td>
-<td>boolean</td>
+<td>Boolean</td>
 <td>Yes</td>
 <td>Indicator if market is open to otc</td>
 </tr>
 <tr>
 <td>isMarketOpenToSpot</td>
-<td>boolean</td>
+<td>Boolean</td>
 <td>Yes</td>
 <td>Indicator if market is open to spot</td>
 </tr>
@@ -945,25 +963,25 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </thead><tbody>
 <tr>
 <td>symbol</td>
-<td>string</td>
+<td>String</td>
 <td>yes</td>
 <td>market symbol</td>
 </tr>
 <tr>
 <td>start</td>
-<td>long</td>
+<td>Long</td>
 <td>no</td>
 <td>starting time in milliseconds (eg. 1624987283000)</td>
 </tr>
 <tr>
 <td>end</td>
-<td>long</td>
+<td>Long</td>
 <td>no</td>
 <td>ending time in milliseconds (eg. 1624987283000)</td>
 </tr>
 <tr>
 <td>resolution</td>
-<td>string</td>
+<td>String</td>
 <td>yes</td>
 <td>supported resolutions are: <br/> 1: 1 min<br/> 5: 5 mins<br/> 15: 15 mins<br/>30: 30 mins<br/>60: 60 mins<br/>240: 4 hours<br/>360: 6 hours<br/>1440: 1day<br/>10080: 1 week<br/>43200: 1 month</td>
 </tr>
@@ -981,37 +999,37 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </thead><tbody>
 <tr>
 <td>0</td>
-<td>long</td>
+<td>Long</td>
 <td>Yes</td>
 <td>Unix time</td>
 </tr>
 <tr>
 <td>1</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Open price</td>
 </tr>
 <tr>
 <td>2</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>High Price</td>
 </tr>
 <tr>
 <td>3</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Low price</td>
 </tr>
 <tr>
 <td>4</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Closing price</td>
 </tr>
 <tr>
 <td>5</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Volume</td>
 </tr>
@@ -1043,7 +1061,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </thead><tbody>
 <tr>
 <td>symbol</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Market symbol</td>
 </tr>
@@ -1059,25 +1077,25 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </thead><tbody>
 <tr>
 <td>symbol</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Market symbol</td>
 </tr>
 <tr>
 <td>indexPrice</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Index price</td>
 </tr>
 <tr>
 <td>lastPrice</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Last transacted price</td>
 </tr>
 <tr>
 <td>markPrice</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Not valid for spot</td>
 </tr>
@@ -1117,25 +1135,25 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </thead><tbody>
 <tr>
 <td>symbol</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Market symbol</td>
 </tr>
 <tr>
 <td>group</td>
-<td>integer</td>
+<td>Integer</td>
 <td>No</td>
 <td>Orderbook grouping. Valid values are: <br/>0-8 where 0 indicates level 0 grouping (eg. for BTC, it will be 0.1)<br/>Level 1 grouping for BTC would be 0.5<br/>Level 1 grouping for BTC would be 1<br/></td>
 </tr>
 <tr>
 <td>limit_bids</td>
-<td>integer</td>
+<td>Integer</td>
 <td>No</td>
 <td>Orderbook depth on the bid side</td>
 </tr>
 <tr>
 <td>limit_asks</td>
-<td>integer</td>
+<td>Integer</td>
 <td>No</td>
 <td>Orderbook depth on the ask side</td>
 </tr>
@@ -1151,7 +1169,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </thead><tbody>
 <tr>
 <td>symbol</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Market symbol</td>
 </tr>
@@ -1169,7 +1187,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </tr>
 <tr>
 <td>timestamp</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Timestamp of orderbook</td>
 </tr>
@@ -1185,13 +1203,13 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </thead><tbody>
 <tr>
 <td>price</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>order price</td>
 </tr>
 <tr>
 <td>size</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>order size</td>
 </tr>
@@ -1231,13 +1249,13 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </thead><tbody>
 <tr>
 <td>symbol</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Market symbol</td>
 </tr>
 <tr>
 <td>depth</td>
-<td>integer</td>
+<td>Integer</td>
 <td>No</td>
 <td>Orderbook depth</td>
 </tr>
@@ -1253,7 +1271,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </thead><tbody>
 <tr>
 <td>symbol</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Market symbol</td>
 </tr>
@@ -1271,7 +1289,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </tr>
 <tr>
 <td>timestamp</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Timestamp of orderbook</td>
 </tr>
@@ -1287,13 +1305,13 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </thead><tbody>
 <tr>
 <td>price</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>order price</td>
 </tr>
 <tr>
 <td>size</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>order size</td>
 </tr>
@@ -1327,25 +1345,25 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </thead><tbody>
 <tr>
 <td>symbol</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Market symbol</td>
 </tr>
 <tr>
 <td>startTime</td>
-<td>long</td>
+<td>Long</td>
 <td>No</td>
 <td>Starting time in milliseconds (eg. 1624987283000)</td>
 </tr>
 <tr>
 <td>endTime</td>
-<td>long</td>
+<td>Long</td>
 <td>No</td>
 <td>Ending time in milliseconds (eg. 1624987283000)</td>
 </tr>
 <tr>
 <td>count</td>
-<td>integer</td>
+<td>Integer</td>
 <td>No</td>
 <td>Number of records to return</td>
 </tr>
@@ -1394,37 +1412,37 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </thead><tbody>
 <tr>
 <td>symbol</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Market symbol</td>
 </tr>
 <tr>
 <td>side</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Trade side. Values are: [<code>BUY</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>price</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Transacted price</td>
 </tr>
 <tr>
 <td>size</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Transacted size</td>
 </tr>
 <tr>
 <td>serialId</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
-<td>Serial Id, running sequence number</td>
+<td>Serial Id, running sequence Double</td>
 </tr>
 <tr>
 <td>timestamp</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Transacted timestamp</td>
 </tr>
@@ -1452,13 +1470,13 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </thead><tbody>
 <tr>
 <td>iso</td>
-<td>long</td>
+<td>Long</td>
 <td>Yes</td>
 <td>Time in YYYY-MM-DDTHH24:MI:SS.Z format</td>
 </tr>
 <tr>
 <td>epoch</td>
-<td>long</td>
+<td>Long</td>
 <td>Yes</td>
 <td>Returns epoch timestamp</td>
 </tr>
@@ -1542,95 +1560,133 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
     </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USD"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">22062.5</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">77</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">111370.40932</span><span class="p">,</span><span class="w">
     </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"990db9b6-2ed4-4c68-b46e-827c88cc3884"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1660208800123</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c7884abe-21e6-4728-9825-157298cad88f"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1752129037800</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"stopPrice"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nl">"trigger"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"avgFilledPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"deviation"</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"deviation"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"originalOrderBaseSize"</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"originalOrderQuoteSize"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"currentOrderBaseSize"</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"currentOrderQuoteSize"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"filledBaseSize"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"totalFilledBaseSize"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"remainingOrderBaseSize"</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"remainingOrderQuoteSize"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"orderCurrency"</span><span class="p">:</span><span class="s2">"base"</span><span class="w">
+    </span><span class="nl">"orderDetailType"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"originalOrderBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0001</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"originalOrderQuoteSize"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currentOrderBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0001</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currentOrderQuoteSize"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"remainingOrderBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"remainingOrderQuoteSize"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"filledBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0001</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalFilledBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0001</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"base"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"avgFilledPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">111370.40932</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <blockquote>
+<p>Response (for <code>Quote Buy</code>)
+<code>json
+[
+  {
+    &quot;status&quot;: 5,
+    &quot;symbol&quot;: &quot;BTC-USD&quot;,
+    &quot;orderType&quot;: 77,
+    &quot;price&quot;: 111381.34601685,
+    &quot;side&quot;: &quot;BUY&quot;,
+    &quot;orderID&quot;: &quot;f4aa8d57-c062-4ba9-b22e-09c4249d53f5&quot;,
+    &quot;timestamp&quot;: 1752129085233,
+    &quot;triggerPrice&quot;: 0,
+    &quot;stopPrice&quot;: null,
+    &quot;trigger&quot;: false,
+    &quot;message&quot;: &quot;&quot;,
+    &quot;clOrderID&quot;: null,
+    &quot;stealth&quot;: 1,
+    &quot;deviation&quot;: 1,
+    &quot;postOnly&quot;: false,
+    &quot;orderDetailType&quot;: null,
+    &quot;originalOrderBaseSize&quot;: null,
+    &quot;originalOrderQuoteSize&quot;: 100,
+    &quot;currentOrderBaseSize&quot;: null,
+    &quot;currentOrderQuoteSize&quot;: 100,
+    &quot;remainingOrderBaseSize&quot;: null,
+    &quot;remainingOrderQuoteSize&quot;: 0.870602045,
+    &quot;filledBaseSize&quot;: 0.00089,
+    &quot;totalFilledBaseSize&quot;: 0.00089,
+    &quot;orderCurrency&quot;: &quot;quote&quot;,
+    &quot;avgFilledPrice&quot;: 111381.34601685,
+    &quot;time_in_force&quot;: &quot;GTC&quot;
+  }
+]
+</code></p>
+
 <p>Response (for <code>OCO</code> order)</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USD"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">24000.0</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2b672b4b-77c1-4abf-ba30-df3e82a147b0"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1660211562864</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"stopPrice"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"trigger"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"avgFilledPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"deviation"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"originalOrderBaseSize"</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"originalOrderQuoteSize"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"currentOrderBaseSize"</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"currentOrderQuoteSize"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"filledBaseSize"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"totalFilledBaseSize"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"remainingOrderBaseSize"</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"remainingOrderQuoteSize"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"orderCurrency"</span><span class="p">:</span><span class="s2">"base"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USD"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">40010.0</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7ccf5398-fddd-4d07-a89c-a4f2e72b64ce"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1660211562864</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">40000.0</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"stopPrice"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"trigger"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"avgFilledPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"deviation"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"originalOrderBaseSize"</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"originalOrderQuoteSize"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"currentOrderBaseSize"</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"currentOrderQuoteSize"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"filledBaseSize"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"totalFilledBaseSize"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"remainingOrderBaseSize"</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"remainingOrderQuoteSize"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"orderCurrency"</span><span class="p">:</span><span class="s2">"base"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USDT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">110000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54b3ab22-132b-4df0-9378-beacdc808e5c"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1752129347246</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stopPrice"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"trigger"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"_W_mcjffli1752129293688"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"deviation"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderDetailType"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"originalOrderBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0001</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"originalOrderQuoteSize"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currentOrderBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0001</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currentOrderQuoteSize"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"remainingOrderBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0001</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"remainingOrderQuoteSize"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"filledBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalFilledBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"base"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"avgFilledPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USDT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">111318.3</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fae47714-4c75-4956-9e6a-832cbf2d9a09"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1752129347246</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">120000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stopPrice"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"trigger"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"_W_mcjffli1752129293688"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"deviation"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderDetailType"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"originalOrderBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0001</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"originalOrderQuoteSize"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currentOrderBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0001</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currentOrderQuoteSize"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"remainingOrderBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"remainingOrderQuoteSize"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"filledBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalFilledBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"base"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"avgFilledPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <p><code>POST /api/v3.3/order</code> or <code>POST /api/v3.3/order/peg</code> (The 2 endpoints work identically)</p>
@@ -1647,85 +1703,85 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </thead><tbody>
 <tr>
 <td>symbol</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Market symbol</td>
 </tr>
 <tr>
 <td>price</td>
-<td>double</td>
+<td>Double</td>
 <td>No</td>
 <td>Mandatory unless creating a MARKET order. Minimum price for a sell order, this is the lowest price that a user is willing to sell at. Maximum price for a buy order, this is the maximum price a user is willing to buy at.</td>
 </tr>
 <tr>
 <td>size</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Order size</td>
 </tr>
 <tr>
 <td>side</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>&#39;BUY&#39; or &#39;SELL&#39;</td>
 </tr>
 <tr>
 <td>time_in_force</td>
-<td>string</td>
+<td>String</td>
 <td>No</td>
 <td>Time validity of the order<br/>GTC: Good till Cancel<br/>IOC: Immediate or Cancel<br/>FOK: Fill or Kill<br/>HALFMIN: Order valid for 30 seconds<br/>FIVEMIN: Order valid for 5 mins<br/> HOUR: Order valid for an hour<br/>TWELVEHOUR: Order valid for 12 hours<br/>DAY: Order valid for a day<br/>WEEK: Order valid for a week<br/>MONTH: Order valid for a month</td>
 </tr>
 <tr>
 <td>type</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Order type<br/>LIMIT: Limit Orders<br/>MARKET: Market Orders<br/>OCO: One cancel the other<br/>PEG: price is according to a deviation to the Index price</td>
 </tr>
 <tr>
 <td>txType</td>
-<td>string</td>
+<td>String</td>
 <td>No</td>
 <td>Used for Stop orders or trigger orders<br/>STOP: Stop Order, <code>triggerPrice</code> is mandatory<br/>TRIGGER: Trigger order, <code>triggerPrice</code> is mandatory<br/>LIMIT: Default, used when its not a Stop order nor Trigger order</td>
 </tr>
 <tr>
 <td>stopPrice</td>
-<td>double</td>
+<td>Double</td>
 <td>No</td>
 <td>Mandatory when creating an OCO order. Indicates the stop price</td>
 </tr>
 <tr>
 <td>triggerPrice</td>
-<td>double</td>
+<td>Double</td>
 <td>No</td>
 <td>Mandatory when creating a Stop, Trigger or OCO order. Indicates the trigger price</td>
 </tr>
 <tr>
 <td>trailValue</td>
-<td>double</td>
+<td>Double</td>
 <td>No</td>
 <td>Trail value</td>
 </tr>
 <tr>
 <td>postOnly</td>
-<td>boolean</td>
+<td>Boolean</td>
 <td>No</td>
 <td>Boolean to indicate if this is a post only order. For post only orders, traders are charged maker fees</td>
 </tr>
 <tr>
 <td>clOrderID</td>
-<td>string</td>
+<td>String</td>
 <td>No</td>
 <td>Custom order Id</td>
 </tr>
 <tr>
 <td>stealth</td>
-<td>double</td>
+<td>Double</td>
 <td>No</td>
 <td>Mandatory when creating a PEG order. How many percent of the order is to be displayed on the orderbook.</td>
 </tr>
 <tr>
 <td>deviation</td>
-<td>double</td>
+<td>Double</td>
 <td>No</td>
 <td>For PEG order. How much should the order price deviate from index price. Value is in percentage and can range from <code>-10</code> to <code>10</code></td>
 </tr>
@@ -1741,103 +1797,103 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </thead><tbody>
 <tr>
 <td>symbol</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Market symbol</td>
 </tr>
 <tr>
 <td>clOrderID</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Customer tag sent in by trader</td>
 </tr>
 <tr>
 <td>orderID</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Order ID</td>
 </tr>
 <tr>
 <td>orderType</td>
-<td>integer</td>
+<td>Integer</td>
 <td>Yes</td>
 <td>Order type <br/>76: Limit order<br/>77: Market order<br/>80: Peg/Algo order</td>
 </tr>
 <tr>
 <td>postOnly</td>
-<td>boolean</td>
+<td>Boolean</td>
 <td>Yes</td>
 <td>Indicates if order is a post only order</td>
 </tr>
 <tr>
 <td>price</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Order price</td>
 </tr>
 <tr>
 <td>side</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Order side<br/>BUY or SELL</td>
 </tr>
 <tr>
 <td>status</td>
-<td>integer</td>
+<td>Integer</td>
 <td>Yes</td>
 <td>Order status<br/> 2: Order Inserted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>8: Insufficient Balance<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request Failed</td>
 </tr>
 <tr>
 <td>stopPrice</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Stop price</td>
 </tr>
 <tr>
 <td>time_in_force</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Order validity</td>
 </tr>
 <tr>
 <td>timestamp</td>
-<td>long</td>
+<td>Long</td>
 <td>Yes</td>
 <td>Order timestamp</td>
 </tr>
 <tr>
 <td>trigger</td>
-<td>boolean</td>
+<td>Boolean</td>
 <td>Yes</td>
 <td>Indicator if order is a trigger order</td>
 </tr>
 <tr>
 <td>triggerPrice</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Order trigger price, returns 0 if order is not a trigger order</td>
 </tr>
 <tr>
 <td>avgFilledPrice</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Average filled price. Returns the average filled price for partially transacted orders</td>
 </tr>
 <tr>
 <td>message</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Trade messages</td>
 </tr>
 <tr>
 <td>stealth</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Stealth value of order</td>
 </tr>
 <tr>
 <td>deviation</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Deviation value of order</td>
 </tr>
@@ -1901,37 +1957,37 @@ Additionally, the calculation duration will be reset if the IP address or user d
 <p>Response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;Order UUID&gt;"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USDT"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"quote"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54b3ab22-132b-4df0-9378-beacdc808e5c"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">30000</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SELL"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"orderValue"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.300102</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"trailValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"avgFilledPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;Client OrderID&gt;"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"timeInForce"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1697766317422</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">110000</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderValue"</span><span class="p">:</span><span class="w"> </span><span class="mf">11.004378</span><span class="p">,</span><span class="w">
   </span><span class="nl">"pegPriceMin"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"pegPriceMax"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"pegPriceDeviation"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1752129347245</span><span class="p">,</span><span class="w">
   </span><span class="nl">"triggerOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"triggerOriginalPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"triggerOrderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"triggerTrailingStopDeviation"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"triggerStopPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"triggered"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"originalOrderBaseSize"</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"originalOrderQuoteSize"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"currentOrderBaseSize"</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"currentOrderQuoteSize"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"totalFilledBaseSize"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"remainingOrderBaseSize"</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"remainingOrderQuoteSize"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"orderCurrency"</span><span class="p">:</span><span class="s2">"base"</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USDT"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"trailValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"quote"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"_W_mcjffli1752129293688"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"timeInForce"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"originalOrderBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0001</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"originalOrderQuoteSize"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"currentOrderBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0001</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"currentOrderQuoteSize"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"remainingOrderBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0001</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"remainingOrderQuoteSize"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"totalFilledBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"base"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"avgFilledPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"triggered"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p><code>GET /api/v3.3/order</code></p>
@@ -2205,32 +2261,34 @@ Please note that this API is <code>Trading</code> permission required.</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-null"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">123</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USDT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">90000</span><span class="p">,</span><span class="w">
     </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"25248336-66d8-41ff-99fd-83489c4e6029"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1660277763249</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"56c03da5-3d7b-4c5c-8b13-1b3de5be2e33"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1752129948157</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"stopPrice"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nl">"trigger"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"avgFilledPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"deviation"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"originalOrderBaseSize"</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"originalOrderQuoteSize"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"currentOrderBaseSize"</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"currentOrderQuoteSize"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"filledBaseSize"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"totalFilledBaseSize"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"remainingOrderBaseSize"</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"remainingOrderQuoteSize"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"orderCurrency"</span><span class="p">:</span><span class="s2">"base"</span><span class="w">
+    </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"_W_ejrojwq1752129916234"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"deviation"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderDetailType"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"originalOrderBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00001</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"originalOrderQuoteSize"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currentOrderBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00001</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currentOrderQuoteSize"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"remainingOrderBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00001</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"remainingOrderQuoteSize"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"filledBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalFilledBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"base"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"avgFilledPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"originalPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">90000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
@@ -2248,49 +2306,49 @@ Please note that this API is <code>Trading</code> permission required.</p>
 </thead><tbody>
 <tr>
 <td>symbol</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Market symbol</td>
 </tr>
 <tr>
 <td>orderID</td>
-<td>string</td>
+<td>String</td>
 <td>No</td>
 <td>Internal order ID. Mandatory when <code>clOrderID</code> is not provided. If <code>orderID</code> is provided, <code>clOrderID</code> will be ignored.</td>
 </tr>
 <tr>
 <td>clOrderID</td>
-<td>string</td>
+<td>String</td>
 <td>No</td>
 <td>Custom order ID. Mandatory when <code>orderID</code> is not provided.</td>
 </tr>
 <tr>
 <td>type</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Type of amendment.<br/><code>PRICE</code>: To amend order price<br/><code>SIZE</code>: To amend order size<br/><code>TRIGGERPRICE</code>: To amend trigger price for trigger orders only.<br/><code>ALL</code>: To amend multiple fields. Note that the <code>TRIGGERPRICE</code> can only be amended if the order is a trigger order. Don&#39;t include <code>TRIGGERPRICE</code> if it is not a trigger order.</td>
 </tr>
 <tr>
 <td>value</td>
-<td>double</td>
+<td>Double</td>
 <td>No</td>
 <td>Mandatory for types: <code>PRICE</code>, <code>SIZE</code>, <code>TRIGGERPRICE</code>. The value to be amended to. Value depends on the type being set.</td>
 </tr>
 <tr>
 <td>orderPrice</td>
-<td>double</td>
+<td>Double</td>
 <td>No</td>
 <td>For type: <code>ALL</code>, order price to be amended</td>
 </tr>
 <tr>
 <td>orderSize</td>
-<td>double</td>
+<td>Double</td>
 <td>No</td>
 <td>For type: <code>ALL</code>, order size to be amended</td>
 </tr>
 <tr>
 <td>triggerPrice</td>
-<td>double</td>
+<td>Double</td>
 <td>No</td>
 <td>For type: <code>ALL</code>, trigger price to be amended</td>
 </tr>
@@ -2306,103 +2364,103 @@ Please note that this API is <code>Trading</code> permission required.</p>
 </thead><tbody>
 <tr>
 <td>symbol</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Market symbol</td>
 </tr>
 <tr>
 <td>clOrderID</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Customer tag sent in by trader</td>
 </tr>
 <tr>
 <td>orderID</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Order ID</td>
 </tr>
 <tr>
 <td>orderType</td>
-<td>integer</td>
+<td>Integer</td>
 <td>Yes</td>
 <td>Order type <br/>76: Limit order<br/>77: Market order<br/>80: Peg/Algo order</td>
 </tr>
 <tr>
 <td>postOnly</td>
-<td>boolean</td>
+<td>Boolean</td>
 <td>Yes</td>
 <td>Indicates if order is a post only order</td>
 </tr>
 <tr>
 <td>price</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Order price</td>
 </tr>
 <tr>
 <td>side</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Order side<br/>BUY or SELL</td>
 </tr>
 <tr>
 <td>status</td>
-<td>integer</td>
+<td>Integer</td>
 <td>Yes</td>
 <td>Order status<br/> 2: Order Inserted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>8: Insufficient Balance<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request Failed</td>
 </tr>
 <tr>
 <td>stopPrice</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Stop price</td>
 </tr>
 <tr>
 <td>time_in_force</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Order validity</td>
 </tr>
 <tr>
 <td>timestamp</td>
-<td>long</td>
+<td>Long</td>
 <td>Yes</td>
 <td>Order timestamp</td>
 </tr>
 <tr>
 <td>trigger</td>
-<td>boolean</td>
+<td>Boolean</td>
 <td>Yes</td>
 <td>Indicator if order is a trigger order</td>
 </tr>
 <tr>
 <td>triggerPrice</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Order trigger price, returns 0 if order is not a trigger order</td>
 </tr>
 <tr>
 <td>avgFilledPrice</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Average filled price. Returns the average filled price for partially transacted orders</td>
 </tr>
 <tr>
 <td>message</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Trade messages</td>
 </tr>
 <tr>
 <td>stealth</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Stealth value of order</td>
 </tr>
 <tr>
 <td>deviation</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Deviation value of order</td>
 </tr>
@@ -2473,31 +2531,32 @@ Please note that this API is <code>Trading</code> permission required.</p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USD"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USDT"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">24000.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">90000</span><span class="p">,</span><span class="w">
     </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9be4a6bb-bf56-4a81-a105-2a22c9629a48"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1660278598333</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"56c03da5-3d7b-4c5c-8b13-1b3de5be2e33"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1752130038115</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"stopPrice"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nl">"trigger"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"avgFilledPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jack-test-1"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"deviation"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"originalOrderBaseSize"</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"originalOrderQuoteSize"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"currentOrderBaseSize"</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"currentOrderQuoteSize"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"filledBaseSize"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"totalFilledBaseSize"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"remainingOrderBaseSize"</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"remainingOrderQuoteSize"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"orderCurrency"</span><span class="p">:</span><span class="s2">"base"</span><span class="w">
+    </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"_W_ejrojwq1752129916234"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"deviation"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderDetailType"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"originalOrderBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00001</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"originalOrderQuoteSize"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currentOrderBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00001</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currentOrderQuoteSize"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"remainingOrderBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00001</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"remainingOrderQuoteSize"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"filledBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalFilledBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"base"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"avgFilledPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
@@ -2507,60 +2566,61 @@ Please note that this API is <code>Trading</code> permission required.</p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USD"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USDT"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">23000.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">110000</span><span class="p">,</span><span class="w">
     </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e3806536-776c-4d8f-8436-bde12a79620b"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1660286055127</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54b3ab22-132b-4df0-9378-beacdc808e5c"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1752133730711</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"stopPrice"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nl">"trigger"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"avgFilledPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"deviation"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"_W_mcjffli1752129293688"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"deviation"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"originalOrderBaseSize"</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"originalOrderQuoteSize"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"currentOrderBaseSize"</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"currentOrderQuoteSize"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"filledBaseSize"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"totalFilledBaseSize"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"remainingOrderBaseSize"</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"remainingOrderQuoteSize"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"orderCurrency"</span><span class="p">:</span><span class="s2">"base"</span><span class="w">
-
+    </span><span class="nl">"orderDetailType"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"originalOrderBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0001</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"originalOrderQuoteSize"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currentOrderBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0001</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currentOrderQuoteSize"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"remainingOrderBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0001</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"remainingOrderQuoteSize"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"filledBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalFilledBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"base"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"avgFilledPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USD"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USDT"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ad4d0eeb-81a1-48f4-86c3-90436bb53718"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1660286055128</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">40010.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fae47714-4c75-4956-9e6a-832cbf2d9a09"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1752133730710</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">120000</span><span class="p">,</span><span class="w">
     </span><span class="nl">"stopPrice"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nl">"trigger"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
     </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"avgFilledPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"deviation"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"_W_mcjffli1752129293688"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"deviation"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
     </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"originalOrderBaseSize"</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"originalOrderQuoteSize"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"currentOrderBaseSize"</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"currentOrderQuoteSize"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"filledBaseSize"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"totalFilledBaseSize"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"remainingOrderBaseSize"</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"remainingOrderQuoteSize"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"orderCurrency"</span><span class="p">:</span><span class="s2">"base"</span><span class="w">
+    </span><span class="nl">"orderDetailType"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"originalOrderBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0001</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"originalOrderQuoteSize"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currentOrderBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0001</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currentOrderQuoteSize"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"remainingOrderBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"remainingOrderQuoteSize"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"filledBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalFilledBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"base"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"avgFilledPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
@@ -2578,19 +2638,19 @@ Please note that this API is <code>Trading</code> permission required.</p>
 </thead><tbody>
 <tr>
 <td>symbol</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Market symbol</td>
 </tr>
 <tr>
 <td>orderID</td>
-<td>string</td>
+<td>String</td>
 <td>No</td>
 <td>Unique identifier for an order. Mandatory when <code>clOrderID</code> is not provided. If <code>orderID</code> is provided, <code>clOrderID</code> will be ignored.</td>
 </tr>
 <tr>
 <td>clOrderID</td>
-<td>string</td>
+<td>String</td>
 <td>No</td>
 <td>Client custom order ID. Mandatory when <code>orderID</code> is not provided.</td>
 </tr>
@@ -2606,103 +2666,103 @@ Please note that this API is <code>Trading</code> permission required.</p>
 </thead><tbody>
 <tr>
 <td>symbol</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Market symbol</td>
 </tr>
 <tr>
 <td>clOrderID</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Customer tag sent in by trader</td>
 </tr>
 <tr>
 <td>orderID</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Order ID</td>
 </tr>
 <tr>
 <td>orderType</td>
-<td>integer</td>
+<td>Integer</td>
 <td>Yes</td>
 <td>Order type <br/>76: Limit order<br/>77: Market order<br/>80: Peg/Algo order</td>
 </tr>
 <tr>
 <td>postOnly</td>
-<td>boolean</td>
+<td>Boolean</td>
 <td>Yes</td>
 <td>Indicates if order is a post only order</td>
 </tr>
 <tr>
 <td>price</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Order price</td>
 </tr>
 <tr>
 <td>side</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Order side<br/>BUY or SELL</td>
 </tr>
 <tr>
 <td>status</td>
-<td>integer</td>
+<td>Integer</td>
 <td>Yes</td>
 <td>Order status<br/> 2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed</td>
 </tr>
 <tr>
 <td>stopPrice</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Stop price</td>
 </tr>
 <tr>
 <td>time_in_force</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Order validity</td>
 </tr>
 <tr>
 <td>timestamp</td>
-<td>long</td>
+<td>Long</td>
 <td>Yes</td>
 <td>Order timestamp</td>
 </tr>
 <tr>
 <td>trigger</td>
-<td>boolean</td>
+<td>Boolean</td>
 <td>Yes</td>
 <td>Indicator if order is a trigger order</td>
 </tr>
 <tr>
 <td>triggerPrice</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Order trigger price, returns 0 if order is not a trigger order</td>
 </tr>
 <tr>
 <td>avgFilledPrice</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Average filled price. Returns the average filled price for partially transacted orders</td>
 </tr>
 <tr>
 <td>message</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Trade messages</td>
 </tr>
 <tr>
 <td>stealth</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Stealth value of order</td>
 </tr>
 <tr>
 <td>deviation</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Deviation value of order</td>
 </tr>
@@ -2783,7 +2843,7 @@ Please note that this API is <code>Trading</code> permission required.</p>
 </thead><tbody>
 <tr>
 <td>timeout</td>
-<td>long</td>
+<td>Long</td>
 <td>Yes</td>
 <td>Timeout value in milliseconds</td>
 </tr>
@@ -2797,39 +2857,84 @@ Please note that this API is <code>Trading</code> permission required.</p>
 <p>Response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">35000.0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"orderValue"</span><span class="p">:</span><span class="w"> </span><span class="mf">350.0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"pegPriceMin"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"pegPriceMax"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"pegPriceDeviation"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"cancelDuration"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1660291619263</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3c9c9c1f-8fef-43d0-82c7-ccef67435b14"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"triggerOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"triggerOriginalPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"triggerOrderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"triggerTrailingStopDeviation"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"triggerStopPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USD"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"trailValue"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"avgFilledPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"_yndef1660291619198"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"orderState"</span><span class="p">:</span><span class="w"> </span><span class="s2">"STATUS_ACTIVE"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"timeInForce"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"triggered"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"originalOrderBaseSize"</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"originalOrderQuoteSize"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"currentOrderBaseSize"</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"currentOrderQuoteSize"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"totalFilledBaseSize"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"remainingOrderBaseSize"</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"remainingOrderQuoteSize"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"orderCurrency"</span><span class="p">:</span><span class="s2">"base"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fae47714-4c75-4956-9e6a-832cbf2d9a09"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"requestId"</span><span class="p">:</span><span class="w"> </span><span class="mi">9018830890442560439</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"vendorName"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"botID"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">111318.3</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"orderValue"</span><span class="p">:</span><span class="w"> </span><span class="mf">11.136338391</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"pegPriceMin"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"pegPriceMax"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"pegPriceDeviation"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"cancelDuration"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1752129347246</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"triggerOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">120048.6</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"triggerOriginalPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">120000</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"triggerOrderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">1001</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"triggerTrailingStopDeviation"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"triggerStopPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USDT"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"trailValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"quote"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"_W_mcjffli1752129293688"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"orderState"</span><span class="p">:</span><span class="w"> </span><span class="s2">"STATUS_ACTIVE"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"timeInForce"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"orderDetailType"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"orderDetail"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"originalOrderBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0001</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"originalOrderQuoteSize"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"currentOrderBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0001</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"currentOrderQuoteSize"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"remainingOrderBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0001</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"remainingOrderQuoteSize"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"totalFilledBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"orderCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"base"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"avgFilledPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"triggered"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"54b3ab22-132b-4df0-9378-beacdc808e5c"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"requestId"</span><span class="p">:</span><span class="w"> </span><span class="mi">3237203630362690520</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"vendorName"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"botID"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">110000</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"orderValue"</span><span class="p">:</span><span class="w"> </span><span class="mf">11.004455</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"pegPriceMin"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"pegPriceMax"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"pegPriceDeviation"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"cancelDuration"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1752129347245</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"triggerOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"triggerOriginalPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"triggerOrderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"triggerTrailingStopDeviation"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"triggerStopPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USDT"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"trailValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"quote"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"_W_mcjffli1752129293688"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"orderState"</span><span class="p">:</span><span class="w"> </span><span class="s2">"STATUS_ACTIVE"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"timeInForce"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"orderDetailType"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"orderDetail"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"originalOrderBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0001</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"originalOrderQuoteSize"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"currentOrderBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0001</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"currentOrderQuoteSize"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"remainingOrderBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0001</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"remainingOrderQuoteSize"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"totalFilledBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"orderCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"base"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"avgFilledPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"triggered"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <p><code>GET /api/v3.3/user/open_orders</code></p>
@@ -2846,19 +2951,19 @@ Please note that this API is <code>Trading</code> permission required.</p>
 </thead><tbody>
 <tr>
 <td>symbol</td>
-<td>string</td>
+<td>String</td>
 <td>No</td>
 <td>Market symbol</td>
 </tr>
 <tr>
 <td>orderID</td>
-<td>string</td>
+<td>String</td>
 <td>No</td>
 <td>Query using internal order ID</td>
 </tr>
 <tr>
 <td>clOrderID</td>
-<td>string</td>
+<td>String</td>
 <td>No</td>
 <td>Query using custom order ID. If <code>orderID</code> is provided, <code>clOrderID</code> will be ignored.</td>
 </tr>
@@ -2874,139 +2979,139 @@ Please note that this API is <code>Trading</code> permission required.</p>
 </thead><tbody>
 <tr>
 <td>orderType</td>
-<td>integer</td>
+<td>Integer</td>
 <td>Yes</td>
 <td>Order type <br/>76: Limit order<br/>77: Market order<br/>80: Peg/Algo order</td>
 </tr>
 <tr>
 <td>price</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Order price</td>
 </tr>
 <tr>
 <td>side</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Order side<br/><code>BUY</code> or <code>SELL</code></td>
 </tr>
 <tr>
 <td>orderValue</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Total value of of this order</td>
 </tr>
 <tr>
 <td>pegPriceMin</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Minimum possible peg price this takes precedence over pegPriceDeviation</td>
 </tr>
 <tr>
 <td>pegPriceMax</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Maximum possible peg price this takes precedence over pegPriceDeviation</td>
 </tr>
 <tr>
 <td>pegPriceDeviation</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Percentage deviation from Index price</td>
 </tr>
 <tr>
 <td>cancelDuration</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Order expiration time if not 0</td>
 </tr>
 <tr>
 <td>timestamp</td>
-<td>long</td>
+<td>Long</td>
 <td>Yes</td>
 <td>Order placement time</td>
 </tr>
 <tr>
 <td>orderID</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Order Id</td>
 </tr>
 <tr>
 <td>triggerOrder</td>
-<td>bool</td>
+<td>Boolean</td>
 <td>Yes</td>
 <td>Indicator if order is a trigger order</td>
 </tr>
 <tr>
 <td>triggerPrice</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Order trigger price, returns 0 if order is not a trigger order</td>
 </tr>
 <tr>
 <td>triggerOriginalPrice</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Price of the original order. Only valid if it&#39;s a triggered order</td>
 </tr>
 <tr>
 <td>triggerOrderType</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Order type <br/><code>76: Limit order</code><br/><code>77: Market order</code><br/><code>80: Peg/Algo order</code></td>
 </tr>
 <tr>
 <td>triggerTrailingStopDeviation</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Percentage deviation from stop price</td>
 </tr>
 <tr>
 <td>triggerStopPrice</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Stop price, Algo Order only</td>
 </tr>
 <tr>
 <td>symbol</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Market name (e.g. BTC-USD)</td>
 </tr>
 <tr>
 <td>trailValue</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Trail value</td>
 </tr>
 <tr>
 <td>avgFilledPrice</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Average filled price. Returns the average filled price for partially transacted orders</td>
 </tr>
 <tr>
 <td>clOrderID</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Customer order ID</td>
 </tr>
 <tr>
 <td>orderState</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td><code>STATUS_ACTIVE</code>, <code>STATUS_INACTIVE</code></td>
 </tr>
 <tr>
 <td>timeInForce</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Order validity</td>
 </tr>
 <tr>
 <td>triggered</td>
-<td>bool</td>
+<td>Boolean</td>
 <td>Yes</td>
 <td>Indicate whether the order is triiggered</td>
 </tr>
@@ -3065,29 +3170,29 @@ Please note that this API is <code>Trading</code> permission required.</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"tradeId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9c6d016f-fbe3-4f82-aecc-8163e9220397"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ba0b69ae-991e-494a-afcb-bfbaeb1adc55"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"_W_dmoryhbw1698118893191"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"tradeId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a85de513-4ddf-489b-8601-b1aa96d97ad6"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f4aa8d57-c062-4ba9-b22e-09c4249d53f5"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
     </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"btse"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">77</span><span class="p">,</span><span class="w">
     </span><span class="nl">"triggerType"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">34799.000000025</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.4</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"filledPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">34799.000000025</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"filledSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00001</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">111381.3460167</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"filledPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">111381.3460167</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"filledSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00089</span><span class="p">,</span><span class="w">
     </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"base"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"quote"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USDT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"quote"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USD"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"feeCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"feeAmount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.000000006</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"feeAmount"</span><span class="p">:</span><span class="w"> </span><span class="mf">5.34e-7</span><span class="p">,</span><span class="w">
     </span><span class="nl">"wallet"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SPOT@"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"realizedPnl"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"serialId"</span><span class="p">:</span><span class="w"> </span><span class="mi">94711228</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1698118893000</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"avgFilledPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">34799.000000025</span><span class="w">
+    </span><span class="nl">"serialId"</span><span class="p">:</span><span class="w"> </span><span class="mi">926957588</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1752129085233</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"avgFilledPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">111381.3460167</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
@@ -3105,43 +3210,43 @@ Please note that this API is <code>Trading</code> permission required.</p>
 </thead><tbody>
 <tr>
 <td>symbol</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Market symbol</td>
 </tr>
 <tr>
 <td>startTime</td>
-<td>long</td>
+<td>Long</td>
 <td>No</td>
 <td>Starting time in milliseconds (eg. 1624987283000)</td>
 </tr>
 <tr>
 <td>endTime</td>
-<td>long</td>
+<td>Long</td>
 <td>No</td>
 <td>Ending time in milliseconds (eg. 1624987283000)</td>
 </tr>
 <tr>
 <td>count</td>
-<td>integer</td>
+<td>Integer</td>
 <td>No</td>
 <td>Number of records to return</td>
 </tr>
 <tr>
 <td>clOrderID</td>
-<td>string</td>
+<td>String</td>
 <td>No</td>
 <td>Query trade history by custom order ID</td>
 </tr>
 <tr>
 <td>orderID</td>
-<td>string</td>
+<td>String</td>
 <td>No</td>
 <td>Query trade history by order ID</td>
 </tr>
 <tr>
 <td>isMatchSymbol</td>
-<td>boolean</td>
+<td>Boolean</td>
 <td>No</td>
 <td>Exact match on <code>symbol</code>. If this sets to true, will only match records for that symbol only</td>
 </tr>
@@ -3190,139 +3295,139 @@ Please note that this API is <code>Trading</code> permission required.</p>
 </thead><tbody>
 <tr>
 <td>symbol</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Market symbol</td>
 </tr>
 <tr>
 <td>side</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Trade side. Values are: [<code>BUY</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>price</td>
-<td>double</td>
+<td>Double</td>
 <td>yes</td>
 <td>Transacted price</td>
 </tr>
 <tr>
 <td>size</td>
-<td>double</td>
+<td>Double</td>
 <td>yes</td>
 <td>Original order size</td>
 </tr>
 <tr>
 <td>serialId</td>
-<td>long</td>
+<td>Long</td>
 <td>yes</td>
-<td>Serial id, running sequence number</td>
+<td>Serial id, running sequence Double</td>
 </tr>
 <tr>
 <td>tradeId</td>
-<td>string</td>
+<td>String</td>
 <td>yes</td>
 <td>Trade identifier</td>
 </tr>
 <tr>
 <td>timestamp</td>
-<td>long</td>
+<td>Long</td>
 <td>yes</td>
 <td>Transacted timestamp</td>
 </tr>
 <tr>
 <td>base</td>
-<td>long</td>
+<td>Long</td>
 <td>yes</td>
 <td>Base currency</td>
 </tr>
 <tr>
 <td>quote</td>
-<td>long</td>
+<td>Long</td>
 <td>yes</td>
 <td>Quote currency</td>
 </tr>
 <tr>
 <td>clOrderID</td>
-<td>long</td>
+<td>Long</td>
 <td>yes</td>
 <td>Custom order id</td>
 </tr>
 <tr>
 <td>orderId</td>
-<td>long</td>
+<td>Long</td>
 <td>yes</td>
 <td>Order id</td>
 </tr>
 <tr>
 <td>feeAmount</td>
-<td>long</td>
+<td>Long</td>
 <td>yes</td>
 <td>Fee amount</td>
 </tr>
 <tr>
 <td>feeCurrency</td>
-<td>long</td>
+<td>String</td>
 <td>yes</td>
 <td>Fee currency</td>
 </tr>
 <tr>
 <td>filledPrice</td>
-<td>long</td>
+<td>Long</td>
 <td>yes</td>
 <td>Filled price</td>
 </tr>
 <tr>
 <td>filledSize</td>
-<td>long</td>
+<td>Long</td>
 <td>yes</td>
 <td>Filled size</td>
 </tr>
 <tr>
 <td>orderType</td>
-<td>integer</td>
+<td>Integer</td>
 <td>yes</td>
 <td>Order type</td>
 </tr>
 <tr>
 <td>realizedPnl</td>
-<td>long</td>
+<td>Long</td>
 <td>yes</td>
 <td>Not used in spot</td>
 </tr>
 <tr>
 <td>total</td>
-<td>long</td>
+<td>Long</td>
 <td>yes</td>
 <td>Not used in spot</td>
 </tr>
 <tr>
 <td>triggerType</td>
-<td>integer</td>
+<td>Integer</td>
 <td>yes</td>
 <td>1001: Stop Loss 1002: Take Profit</td>
 </tr>
 <tr>
 <td>triggerPrice</td>
-<td>double</td>
+<td>Double</td>
 <td>yes</td>
 <td>Trigger price</td>
 </tr>
 <tr>
 <td>wallet</td>
-<td>string</td>
+<td>String</td>
 <td>yes</td>
 <td>SPOT@ for spot transactions</td>
 </tr>
 <tr>
 <td>avgFilledPrice</td>
-<td>string</td>
+<td>String</td>
 <td>yes</td>
 <td>Average fill price</td>
 </tr>
 <tr>
 <td>username</td>
-<td>string</td>
+<td>String</td>
 <td>yes</td>
 <td>Username</td>
 </tr>
@@ -3351,7 +3456,7 @@ Please note that this API is <code>Trading</code> permission required.</p>
 </thead><tbody>
 <tr>
 <td>symbol</td>
-<td>string</td>
+<td>String</td>
 <td>no</td>
 <td>market symbol to filter for specific market</td>
 </tr>
@@ -3367,19 +3472,19 @@ Please note that this API is <code>Trading</code> permission required.</p>
 </thead><tbody>
 <tr>
 <td>symbol</td>
-<td>string</td>
+<td>String</td>
 <td>yes</td>
 <td>market symbol</td>
 </tr>
 <tr>
 <td>makerfee</td>
-<td>double</td>
+<td>Double</td>
 <td>yes</td>
 <td>maker fees</td>
 </tr>
 <tr>
 <td>takerfee</td>
-<td>double</td>
+<td>Double</td>
 <td>yes</td>
 <td>taker fees</td>
 </tr>
@@ -3427,37 +3532,37 @@ Please note that this API is <code>Trading</code> permission required.</p>
 </thead><tbody>
 <tr>
 <td>id</td>
-<td>string</td>
+<td>String</td>
 <td>yes</td>
 <td>product id</td>
 </tr>
 <tr>
 <td>name</td>
-<td>string</td>
+<td>String</td>
 <td>yes</td>
 <td>product name</td>
 </tr>
 <tr>
 <td>currency</td>
-<td>string</td>
+<td>String</td>
 <td>yes</td>
 <td>currency</td>
 </tr>
 <tr>
 <td>type</td>
-<td>string</td>
+<td>String</td>
 <td>yes</td>
 <td>product type</td>
 </tr>
 <tr>
 <td>startdate</td>
-<td>long</td>
+<td>Long</td>
 <td>yes</td>
 <td>inventment start date</td>
 </tr>
 <tr>
 <td>intereststartdate</td>
-<td>long</td>
+<td>Long</td>
 <td>yes</td>
 <td>interest start date</td>
 </tr>
@@ -3469,31 +3574,31 @@ Please note that this API is <code>Trading</code> permission required.</p>
 </tr>
 <tr>
 <td>compounding</td>
-<td>double</td>
+<td>Double</td>
 <td>yes</td>
 <td>is product compounding</td>
 </tr>
 <tr>
 <td>autorenewsupported</td>
-<td>double</td>
+<td>Double</td>
 <td>yes</td>
 <td>is product supported renew automatically</td>
 </tr>
 <tr>
 <td>dailylimit</td>
-<td>double</td>
+<td>Double</td>
 <td>yes</td>
 <td>daily invent amount limit</td>
 </tr>
 <tr>
 <td>minsize</td>
-<td>double</td>
+<td>Double</td>
 <td>yes</td>
 <td>minimum invest size</td>
 </tr>
 <tr>
 <td>incrementalsize</td>
-<td>double</td>
+<td>Double</td>
 <td>yes</td>
 <td>invest step size</td>
 </tr>
@@ -3509,13 +3614,13 @@ Please note that this API is <code>Trading</code> permission required.</p>
 </thead><tbody>
 <tr>
 <td>days</td>
-<td>integer</td>
+<td>Integer</td>
 <td>yes</td>
 <td>duration in days</td>
 </tr>
 <tr>
 <td>rate</td>
-<td>double</td>
+<td>Double</td>
 <td>yes</td>
 <td>interest rate</td>
 </tr>
@@ -3543,13 +3648,13 @@ Please note that this API is <code>Trading</code> permission required.</p>
 </thead><tbody>
 <tr>
 <td>productId</td>
-<td>string</td>
+<td>String</td>
 <td>yes</td>
 <td>invest product id</td>
 </tr>
 <tr>
 <td>amount</td>
-<td>double</td>
+<td>Double</td>
 <td>yes</td>
 <td>invest amount</td>
 </tr>
@@ -3585,13 +3690,13 @@ Please note that this API is <code>Trading</code> permission required.</p>
 </thead><tbody>
 <tr>
 <td>orderId</td>
-<td>integer</td>
+<td>Integer</td>
 <td>yes</td>
 <td>investment order id</td>
 </tr>
 <tr>
 <td>autoRenew</td>
-<td>boolean</td>
+<td>Boolean</td>
 <td>yes</td>
 <td>renew automatically</td>
 </tr>
@@ -3607,13 +3712,13 @@ Please note that this API is <code>Trading</code> permission required.</p>
 </thead><tbody>
 <tr>
 <td>orderId</td>
-<td>integer</td>
+<td>Integer</td>
 <td>yes</td>
 <td>investment order id</td>
 </tr>
 <tr>
 <td>autoRenew</td>
-<td>boolean</td>
+<td>Boolean</td>
 <td>yes</td>
 <td>status of autoRenew flag</td>
 </tr>
@@ -3641,13 +3746,13 @@ Please note that this API is <code>Trading</code> permission required.</p>
 </thead><tbody>
 <tr>
 <td>orderId</td>
-<td>integer</td>
+<td>Integer</td>
 <td>yes</td>
 <td>investment order id</td>
 </tr>
 <tr>
 <td>amount</td>
-<td>double</td>
+<td>Double</td>
 <td>yes</td>
 <td>redeem amount</td>
 </tr>
@@ -3692,97 +3797,97 @@ Please note that this API is <code>Trading</code> permission required.</p>
 </thead><tbody>
 <tr>
 <td>id</td>
-<td>integer</td>
+<td>Integer</td>
 <td>yes</td>
 <td>order id</td>
 </tr>
 <tr>
 <td>name</td>
-<td>string</td>
+<td>String</td>
 <td>yes</td>
 <td>product name</td>
 </tr>
 <tr>
 <td>currency</td>
-<td>string</td>
+<td>String</td>
 <td>yes</td>
 <td>currency</td>
 </tr>
 <tr>
 <td>type</td>
-<td>string</td>
+<td>String</td>
 <td>yes</td>
 <td>product type</td>
 </tr>
 <tr>
 <td>rate</td>
-<td>double</td>
+<td>Double</td>
 <td>yes</td>
 <td>interest rate</td>
 </tr>
 <tr>
 <td>investment</td>
-<td>double</td>
+<td>Double</td>
 <td>yes</td>
 <td>amount</td>
 </tr>
 <tr>
 <td>interestearned</td>
-<td>double</td>
+<td>Double</td>
 <td>yes</td>
 <td>intereset earned</td>
 </tr>
 <tr>
 <td>nextinterestpayouttime</td>
-<td>integer</td>
+<td>Integer</td>
 <td>yes</td>
 <td>next interest payout time</td>
 </tr>
 <tr>
 <td>starttime</td>
-<td>integer</td>
+<td>Integer</td>
 <td>yes</td>
 <td>start time</td>
 </tr>
 <tr>
 <td>endtime</td>
-<td>integer</td>
+<td>Integer</td>
 <td>yes</td>
 <td>end time</td>
 </tr>
 <tr>
 <td>duration</td>
-<td>integer</td>
+<td>Integer</td>
 <td>yes</td>
 <td>duration</td>
 </tr>
 <tr>
 <td>payoutlocktime</td>
-<td>integer</td>
+<td>Integer</td>
 <td>yes</td>
 <td>lock time of payout</td>
 </tr>
 <tr>
 <td>autorenew</td>
-<td>boolean</td>
+<td>Boolean</td>
 <td>yes</td>
 <td>renew automatically</td>
 </tr>
 <tr>
 <td>compounding</td>
-<td>boolean</td>
+<td>Boolean</td>
 <td>yes</td>
 <td>is compounding</td>
 </tr>
 <tr>
 <td>autorenewsupported</td>
-<td>boolean</td>
+<td>Boolean</td>
 <td>yes</td>
 <td>is renew automatically supported</td>
 </tr>
 <tr>
 <td>redemptionprocessing</td>
-<td>boolean</td>
+<td>Boolean</td>
 <td>yes</td>
 <td>is redemption processing</td>
 </tr>
@@ -3820,61 +3925,61 @@ Please note that this API is <code>Trading</code> permission required.</p>
 </thead><tbody>
 <tr>
 <td>txntime</td>
-<td>integer</td>
+<td>Integer</td>
 <td>yes</td>
 <td>transaction time</td>
 </tr>
 <tr>
 <td>name</td>
-<td>string</td>
+<td>String</td>
 <td>yes</td>
 <td>product name</td>
 </tr>
 <tr>
 <td>currency</td>
-<td>string</td>
+<td>String</td>
 <td>yes</td>
 <td>currency</td>
 </tr>
 <tr>
 <td>rate</td>
-<td>string</td>
+<td>String</td>
 <td>yes</td>
 <td>interest rate</td>
 </tr>
 <tr>
 <td>type</td>
-<td>boolean</td>
+<td>Boolean</td>
 <td>yes</td>
 <td>product type</td>
 </tr>
 <tr>
 <td>txntype</td>
-<td>string</td>
+<td>String</td>
 <td>yes</td>
 <td>transaction type</td>
 </tr>
 <tr>
 <td>amount</td>
-<td>double</td>
+<td>Double</td>
 <td>yes</td>
 <td>transaction amount</td>
 </tr>
 <tr>
 <td>totalamount</td>
-<td>double</td>
+<td>Double</td>
 <td>yes</td>
 <td>total amount of the investment</td>
 </tr>
 <tr>
 <td>interestearned</td>
-<td>double</td>
+<td>Double</td>
 <td>yes</td>
 <td>interest earned</td>
 </tr>
 <tr>
 <td>duration</td>
-<td>boolean</td>
+<td>Boolean</td>
 <td>yes</td>
 <td>duration</td>
 </tr>
@@ -3950,7 +4055,7 @@ Please note that this API is <code>Trading</code> permission required.</p>
 </thead><tbody>
 <tr>
 <td>topic</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Websocket topic</td>
 </tr>
@@ -3984,19 +4089,19 @@ Please note that this API is <code>Trading</code> permission required.</p>
 </tr>
 <tr>
 <td>symbol</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Market symbol</td>
 </tr>
 <tr>
 <td>type</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td><code>snapshotL1</code> - L1 data refers to the best bid / best ask of a trading pair’s order book.</td>
 </tr>
 <tr>
 <td>timestamp</td>
-<td>long</td>
+<td>Long</td>
 <td>Yes</td>
 <td>Orderbook timestamp</td>
 </tr>
@@ -4115,7 +4220,7 @@ Please note that this API is <code>Trading</code> permission required.</p>
 </thead><tbody>
 <tr>
 <td>topic</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Websocket topic</td>
 </tr>
@@ -4149,31 +4254,31 @@ Please note that this API is <code>Trading</code> permission required.</p>
 </tr>
 <tr>
 <td>seqNum</td>
-<td>int</td>
+<td>Integer</td>
 <td>Yes</td>
-<td>Current sequence number</td>
+<td>Current sequence Double</td>
 </tr>
 <tr>
 <td>prevSeqNum</td>
-<td>int</td>
+<td>Integer</td>
 <td>Yes</td>
-<td>Previous sequence number</td>
+<td>Previous sequence Double</td>
 </tr>
 <tr>
 <td>type</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td><code>snapshot</code> - Snapshot of the orderbook with a maximum of 50 levels<br/> <code>delta</code> -  Updates of the orderbook</td>
 </tr>
 <tr>
 <td>timestamp</td>
-<td>long</td>
+<td>Long</td>
 <td>Yes</td>
 <td>Timestamp of the orderbook</td>
 </tr>
 <tr>
 <td>symbol</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Orderbook symbol</td>
 </tr>
@@ -4268,13 +4373,13 @@ Please note that this API is <code>Trading</code> permission required.</p>
 </thead><tbody>
 <tr>
 <td>op</td>
-<td>string</td>
+<td>String</td>
 <td>yes</td>
 <td>operation. <code>subscribe</code> will subscribe to the topics provided in <code>args</code>. <code>unsubscribe</code> will unsubscribe from the topics</td>
 </tr>
 <tr>
 <td>args</td>
-<td>array</td>
+<td>Array</td>
 <td>yes</td>
 <td>topics to subscribe to.</td>
 </tr>
@@ -4290,13 +4395,13 @@ Please note that this API is <code>Trading</code> permission required.</p>
 </thead><tbody>
 <tr>
 <td>event</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Respond with the event type</td>
 </tr>
 <tr>
 <td>channel</td>
-<td>array</td>
+<td>Array</td>
 <td>Yes</td>
 <td>Topics which have been sucessfully subscribed</td>
 </tr>
@@ -4341,7 +4446,7 @@ Please note that this API is <code>Trading</code> permission required.</p>
 </thead><tbody>
 <tr>
 <td>topic</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Websocket topic</td>
 </tr>
@@ -4363,37 +4468,37 @@ Please note that this API is <code>Trading</code> permission required.</p>
 </thead><tbody>
 <tr>
 <td>symbol</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Market symbol</td>
 </tr>
 <tr>
 <td>side</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Trade Side, BUY or SELL</td>
 </tr>
 <tr>
 <td>size</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Transacted size</td>
 </tr>
 <tr>
 <td>price</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Transacted price</td>
 </tr>
 <tr>
 <td>tradeId</td>
-<td>long</td>
+<td>Long</td>
 <td>Yes</td>
 <td>Trade sequence Id</td>
 </tr>
 <tr>
 <td>timestamp</td>
-<td>long</td>
+<td>Long</td>
 <td>Yes</td>
 <td>Trade timestamp</td>
 </tr>
@@ -4433,19 +4538,19 @@ Please note that this API is <code>Trading</code> permission required.</p>
 </thead><tbody>
 <tr>
 <td>0</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>First argument is the API key</td>
 </tr>
 <tr>
 <td>1</td>
-<td>long</td>
+<td>Long</td>
 <td>Yes</td>
 <td>Nonce which is the current timestamp</td>
 </tr>
 <tr>
 <td>2</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Generated signature</td>
 </tr>
@@ -4473,33 +4578,34 @@ Please note that this API is <code>Trading</code> permission required.</p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"notificationApiV3"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Market Symbol (eg. BTC-USD)"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTSE internal order ID"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"76"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Order price or transacted price"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"avgFilledPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">35000</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;Refer to Status description on the left&gt;"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;Client order ID&gt;"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"maker"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;Maker flag, if true indicates that trade is a maker trade&gt;"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1624985375123</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"pegPriceDeviation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Indicate the deviation percentage. Valid for only algo orders."</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;Time where this order is valid&gt;"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"txType"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Trade Trigger Price"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"originalOrderBaseSize"</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"originalOrderQuoteSize"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"currentOrderBaseSize"</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"currentOrderQuoteSize"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"filledBaseSize"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"totalFilledBaseSize"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"remainingOrderBaseSize"</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"remainingOrderQuoteSize"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"orderCurrency"</span><span class="p">:</span><span class="s2">"base"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USDT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"789b05fa-dd43-43e8-8626-e229ae216ead"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MODE_BUY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">77</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"txType"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">111131</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"pegPriceDeviation"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1752147703368</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"avgFilledPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">111131</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"_W_bjvf1752147703280"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"maker"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderUserInitiated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"originalOrderBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"originalOrderQuoteSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currentOrderBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currentOrderQuoteSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"filledBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00899</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalFilledBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00899</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"remainingBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"remainingQuoteSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.93231</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-
 </span></code></pre></div>
 <p>Receive trade notifications by subscribing to the topic <code>notificationApiV3</code>. The websocket feed will push trade level notifications to the subscriber. If topic is subscribed without being authenticated, no messages will be sent.</p>
 <h3 id='response-content-24'>Response Content</h3>
@@ -4513,97 +4619,97 @@ Please note that this API is <code>Trading</code> permission required.</p>
 </thead><tbody>
 <tr>
 <td>symbol</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Market symbol</td>
 </tr>
 <tr>
 <td>orderID</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Internal order ID</td>
 </tr>
 <tr>
 <td>side</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Trade side. BUY or SELL</td>
 </tr>
 <tr>
 <td>orderType</td>
-<td>int</td>
+<td>Integer</td>
 <td>Yes</td>
 <td>Order type. Valid values are:<br/>76: Limit order<br/>77: Market order<br/>80: Peg/Algo order</td>
 </tr>
 <tr>
 <td>price</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Order price or transcated price</td>
 </tr>
 <tr>
 <td>avgFilledPrice</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Average filled price</td>
 </tr>
 <tr>
 <td>status</td>
-<td>integer</td>
+<td>Integer</td>
 <td>Yes</td>
 <td>Status with values as follows:<br/>1: MARKET_UNAVAILABLE, Market is currently unavailable<br/>2: ORDER_INSERTED, Order is inserted successfully<br/>4: ORDER_FULLY_TRANSACTED, Order is fully transacted<br/>5: ORDER_PARTIALLY_TRANSACTED, Order is partially transacted<br/>6: ORDER_CANCELLED, Order is cancelled successfully<br/>8: INSUFFICIENT_BALANCE, Insufficient balance in account<br/>9: TRIGGER_INSERTED, Trigger Order is inserted successfully<br/>10: TRIGGER_ACTIVATED, Trigger Order is activated successfully<br/>12: ERROR_UPDATE_RISK_LIMIT, Error in updating risk limit<br/>15: ORDER_REJECTED, Change made to the order was unsuccessful<br/>27: TRANSFER_SUCCESSFUL, Transfer funds between futures and spot is successful<br/>28: TRANSFER_UNSUCCESSFUL, Transfer funds between spot and futures is unsuccessful<br/>41: ERROR_INVALID_RISK_LIMIT, Invalid risk limit was specified<br/>64: STATUS_LIQUIDATION, Account is undergoing liquidation<br/>101: FUTURES_ORDER_PRICE_OUTSIDE_LIQUIDATION_PRICE, Futures order is outside of liquidation price<br/>1003: ORDER_LIQUIDATION, Order is undergoing liquidation<br/>1004: ORDER_ADL, Order is undergoing ADL</td>
 </tr>
 <tr>
 <td>clOrderID</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Custom order ID</td>
 </tr>
 <tr>
 <td>maker</td>
-<td>boolean</td>
+<td>Boolean</td>
 <td>Yes</td>
 <td>Indicator to indicate if trade is a maker trade</td>
 </tr>
 <tr>
 <td>remainingSize</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Remaining size on the order</td>
 </tr>
 <tr>
 <td>time_in_force</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Validity of the order</td>
 </tr>
 <tr>
 <td>timestamp</td>
-<td>long</td>
+<td>Long</td>
 <td>Yes</td>
 <td>Order timestamp or transacted timestamp</td>
 </tr>
 <tr>
 <td>stealth</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Percentage of orders to show on orderbook. Only for Algo orders</td>
 </tr>
 <tr>
 <td>pegPriceDeviation</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Deviation percentage. Only for Algo orders</td>
 </tr>
 <tr>
 <td>triggerPrice</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Trigger Price</td>
 </tr>
 <tr>
 <td>txType</td>
-<td>integer</td>
+<td>Integer</td>
 <td>Yes</td>
 <td>Used by trigger or OCO orders. </br>0: Limit</br>1: Stop</br>2: Trigger</br>3: OCO</br>STOP indicates its a Stop order, TAKEPROFIT indicates its a take profit order, and LIMIT is when its not any of the above</td>
 </tr>
@@ -4710,91 +4816,91 @@ Please note that this API is <code>Trading</code> permission required.</p>
 </thead><tbody>
 <tr>
 <td>symbol</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Market symbol</td>
 </tr>
 <tr>
 <td>orderId</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Internal order ID</td>
 </tr>
 <tr>
 <td>clOrderId</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Custom order ID</td>
 </tr>
 <tr>
 <td>serialId</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Trade sequence ID</td>
 </tr>
 <tr>
 <td>tradeId</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Trade unique identifier</td>
 </tr>
 <tr>
 <td>type</td>
-<td>int</td>
+<td>Integer</td>
 <td>Yes</td>
 <td>Order type. Valid values are:<br/>76: Limit order<br/>77: Market order<br/>80: Peg/Algo order</td>
 </tr>
 <tr>
 <td>side</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Trade side. BUY or SELL</td>
 </tr>
 <tr>
 <td>price</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Transcated price</td>
 </tr>
 <tr>
 <td>size</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Transacted size</td>
 </tr>
 <tr>
 <td>feeAmount</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Fee amount charged</td>
 </tr>
 <tr>
 <td>feeCurrency</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Fee currency</td>
 </tr>
 <tr>
 <td>base</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Base currency</td>
 </tr>
 <tr>
 <td>quote</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Quote currency</td>
 </tr>
 <tr>
 <td>maker</td>
-<td>boolean</td>
+<td>Boolean</td>
 <td>Yes</td>
 <td>Indicator to indicate if trade is a maker trade</td>
 </tr>
 <tr>
 <td>timestamp</td>
-<td>long</td>
+<td>Long</td>
 <td>Yes</td>
 <td>Order timestamp or transacted timestamp</td>
 </tr>

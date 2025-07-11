@@ -505,7 +505,7 @@
 </thead><tbody>
 <tr>
 <td>assetName</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Asset name</td>
 </tr>
@@ -535,7 +535,7 @@
 </tr>
 <tr>
 <td>supportQuoteCurrencies</td>
-<td>string Array</td>
+<td>String Array</td>
 <td>Yes</td>
 <td>Supported quote currencies</td>
 </tr>
@@ -559,7 +559,7 @@
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"markets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"assetName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"assetName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"String"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"maxOrderSizes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="mi">0</span><span class="w">
@@ -583,7 +583,7 @@
       </span><span class="nl">"processingTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"requestId"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"supportQuoteCurrencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="s2">"string"</span><span class="w">
+        </span><span class="s2">"String"</span><span class="w">
       </span><span class="p">],</span><span class="w">
       </span><span class="nl">"trackingID"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -614,13 +614,13 @@
 </thead><tbody>
 <tr>
 <td>baseCurrency</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Base currency (eg. BTC)</td>
 </tr>
 <tr>
 <td>orderCurrency</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Order currency</td>
 </tr>
@@ -644,7 +644,7 @@
 </tr>
 <tr>
 <td>side</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Order side, BUY or SELL</td>
 </tr>
@@ -666,61 +666,61 @@
 </tr>
 <tr>
 <td>quoteAmountToDeduct</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Quote amount to deduct</td>
 </tr>
 <tr>
 <td>quoteAmountToReceive</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Quote amount to receive</td>
 </tr>
 <tr>
 <td>quoteCurrencyToDeductIn</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Quote currency to deduct in</td>
 </tr>
 <tr>
 <td>quoteCurrencyToReceiveIn</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Quote currency to receive</td>
 </tr>
 <tr>
 <td>quoteId</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Quote ID</td>
 </tr>
 <tr>
 <td>quotePriceInOrderCurrency</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Quote price in order currency</td>
 </tr>
 <tr>
 <td>quotePriceInUSD</td>
-<td>long</td>
+<td>Long</td>
 <td>Yes</td>
 <td>Quote price in USD</td>
 </tr>
 <tr>
 <td>quoteTimestamp</td>
-<td>long</td>
+<td>Long</td>
 <td>Yes</td>
 <td>Quote timestamp</td>
 </tr>
 <tr>
 <td>quoteValidDurationMs</td>
-<td>long</td>
+<td>Long</td>
 <td>Yes</td>
 <td>Quote validity</td>
 </tr>
 <tr>
 <td>status</td>
-<td>integer</td>
+<td>Integer</td>
 <td>Yes</td>
 <td>Order status with values: <br/>8: Insufficient Balance<br/>30001: Order Quote<br/>30008: OTC Order Requote<br/>30007: OTC Order completed successfully<br/>40001: Service Unavailable<br/>40003: Rejected</td>
 </tr>
@@ -757,7 +757,7 @@
 <p>Accepts a quote.
 The quote is allowed to be <strong>partially accepted</strong> by taking <code>baseAmount</code> or <code>quoteAmount</code> in the request body,
 which corresponds to <code>orderSizeInBaseCurrency</code> and <code>orderAmountInOrderCurrency</code> in <a href="#request-for-quote"><code>quote</code></a>, respectively.
-Note that if the amount is larger than the the number you quote, only the quoted number will be accepted.
+Note that if the amount is larger than the the Double you quote, only the quoted Double will be accepted.
 Requires <code>Trading</code> permission.</p>
 <h3 id='request-parameter'>Request Parameter</h3>
 <table><thead>
@@ -770,19 +770,19 @@ Requires <code>Trading</code> permission.</p>
 </thead><tbody>
 <tr>
 <td>quoteId</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Quote ID to supplied as a path parameter</td>
 </tr>
 <tr>
 <td>baseAmount</td>
-<td>double</td>
+<td>Double</td>
 <td>No</td>
 <td>The partial amount to accept the quote</td>
 </tr>
 <tr>
 <td>quoteAmount</td>
-<td>double</td>
+<td>Double</td>
 <td>No</td>
 <td>The partial amount to accept the quote</td>
 </tr>
@@ -798,67 +798,67 @@ Requires <code>Trading</code> permission.</p>
 </thead><tbody>
 <tr>
 <td>status</td>
-<td>integer</td>
+<td>Integer</td>
 <td>Yes</td>
 <td>Order status with values: <br/>8: Insufficient Balance<br/>30001: Order Quote<br/>30008: OTC Order Requote<br/>30007: OTC Order completed successfully<br/>40001: Service Unavailable<br/>40003: Rejected</td>
 </tr>
 <tr>
 <td>quoteId</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Quote ID</td>
 </tr>
 <tr>
 <td>quoteValidDurationMs</td>
-<td>long</td>
+<td>Long</td>
 <td>Yes</td>
 <td>Quote validity</td>
 </tr>
 <tr>
 <td>quoteAmountToReceive</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Quote amount to receive</td>
 </tr>
 <tr>
 <td>quoteCurrencyToReceiveIn</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Quote currency to receive</td>
 </tr>
 <tr>
 <td>quoteAmountToDeduct</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Quote amount to deduct</td>
 </tr>
 <tr>
 <td>quoteCurrencyToDeductIn</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Quote currency to deduct in</td>
 </tr>
 <tr>
 <td>quoteTimestamp</td>
-<td>long</td>
+<td>Long</td>
 <td>Yes</td>
 <td>Quote timestamp</td>
 </tr>
 <tr>
 <td>quotePriceInOrderCurrency</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Quote price in order currency</td>
 </tr>
 <tr>
 <td>quotePriceInUSD</td>
-<td>long</td>
+<td>Long</td>
 <td>Yes</td>
 <td>Quote price in USD</td>
 </tr>
 <tr>
 <td>side</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Buy or sell</td>
 </tr>
@@ -869,7 +869,7 @@ Requires <code>Trading</code> permission.</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"errorCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"String"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
@@ -888,7 +888,7 @@ Requires <code>Trading</code> permission.</p>
 </thead><tbody>
 <tr>
 <td>quoteId</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Quote ID to supplied as a path parameter</td>
 </tr>
@@ -900,7 +900,7 @@ Requires <code>Trading</code> permission.</p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"markets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"assetName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"assetName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"String"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"maxOrderSizes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="mi">0</span><span class="w">
@@ -924,7 +924,7 @@ Requires <code>Trading</code> permission.</p>
       </span><span class="nl">"processingTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"requestId"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"supportQuoteCurrencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="s2">"string"</span><span class="w">
+        </span><span class="s2">"String"</span><span class="w">
       </span><span class="p">],</span><span class="w">
       </span><span class="nl">"trackingID"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -955,7 +955,7 @@ Requires <code>Trading</code> permission.</p>
 </thead><tbody>
 <tr>
 <td>quoteId</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Quote ID to supplied as a path parameter</td>
 </tr>
@@ -977,61 +977,61 @@ Requires <code>Trading</code> permission.</p>
 </tr>
 <tr>
 <td>quoteAmountToDeduct</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Quote amount to deduct</td>
 </tr>
 <tr>
 <td>quoteAmountToReceive</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Quote amount to receive</td>
 </tr>
 <tr>
 <td>quoteCurrencyToDeductIn</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Quote currency to deduct in</td>
 </tr>
 <tr>
 <td>quoteCurrencyToReceiveIn</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Quote currency to receive</td>
 </tr>
 <tr>
 <td>quoteId</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Quote ID</td>
 </tr>
 <tr>
 <td>quotePriceInOrderCurrency</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Quote price in order currency</td>
 </tr>
 <tr>
 <td>quotePriceInUSD</td>
-<td>long</td>
+<td>Long</td>
 <td>Yes</td>
 <td>Quote price in USD</td>
 </tr>
 <tr>
 <td>quoteTimestamp</td>
-<td>long</td>
+<td>Long</td>
 <td>Yes</td>
 <td>Quote timestamp</td>
 </tr>
 <tr>
 <td>quoteValidDurationMs</td>
-<td>long</td>
+<td>Long</td>
 <td>Yes</td>
 <td>Quote validity</td>
 </tr>
 <tr>
 <td>status</td>
-<td>integer</td>
+<td>Integer</td>
 <td>Yes</td>
 <td>Order status with values: <br/>8: Insufficient Balance<br/>30001: Order Quote<br/>30008: OTC Order Requote<br/>30007: OTC Order completed successfully<br/>40001: Service Unavailable<br/>40003: Rejected</td>
 </tr>
@@ -1071,19 +1071,19 @@ Requires <code>Trading</code> permission.</p>
 </thead><tbody>
 <tr>
 <td>0</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>First argument is the API key</td>
 </tr>
 <tr>
 <td>1</td>
-<td>long</td>
+<td>Long</td>
 <td>Yes</td>
 <td>Nonce which is the current timestamp</td>
 </tr>
 <tr>
 <td>2</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Generated signature</td>
 </tr>
@@ -1152,37 +1152,37 @@ Requires <code>Trading</code> permission.</p>
 </thead><tbody>
 <tr>
 <td>op</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Operation, in this case it is <code>quote</code>, <code>unsubscribe-quote</code>, or <code>unsubscribe-quote-all</code></td>
 </tr>
 <tr>
 <td>symbol</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Market symbol, refer to <code>getMarkets</code> API</td>
 </tr>
 <tr>
 <td>side</td>
-<td>string</td>
+<td>String</td>
 <td>No</td>
 <td>Quote side, <code>buy</code> or <code>sell</code>, case sensitive. Both sides will be returned when this field is empty/null</td>
 </tr>
 <tr>
 <td>clOrderId</td>
-<td>string</td>
+<td>String</td>
 <td>No</td>
 <td>Client custom order Id</td>
 </tr>
 <tr>
 <td>quantity</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Order quantity</td>
 </tr>
 <tr>
 <td>currency</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Can be either in the base or quote currency. If specified in the base currency, then the quote stream will respond with</td>
 </tr>
@@ -1198,73 +1198,73 @@ Requires <code>Trading</code> permission.</p>
 </thead><tbody>
 <tr>
 <td>topic</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Websocket topic</td>
 </tr>
 <tr>
 <td>buyQuoteId</td>
-<td>string</td>
+<td>String</td>
 <td>No</td>
 <td>Quote Id for the buy side. If the value is empty / null, it means that you websocket stream is not authenticated or you doesn&#39;t subscribe this side</td>
 </tr>
 <tr>
 <td>sellQuoteId</td>
-<td>string</td>
+<td>String</td>
 <td>No</td>
 <td>Quote Id for the sell side. If the value is empty / null, it means that you websocket stream is not authenticated or you doesn&#39;t subscribe this side</td>
 </tr>
 <tr>
 <td>clOrderId</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>User customer Order Id</td>
 </tr>
 <tr>
 <td>buyQuantity</td>
-<td>double</td>
+<td>Double</td>
 <td>No</td>
 <td>Quantity to purchase based on the quote request. If the value is null, it means that you doesn&#39;t subscribe this side</td>
 </tr>
 <tr>
 <td>buyUnitPrice</td>
-<td>double</td>
+<td>Double</td>
 <td>No</td>
 <td>Unit price per unit of the base symbol. If the value is null, it means that you doesn&#39;t subscribe this side</td>
 </tr>
 <tr>
 <td>buyTotalAmount</td>
-<td>double</td>
+<td>Double</td>
 <td>No</td>
 <td>Total price to pay in quote currency. If the value is null, it means that you doesn&#39;t subscribe this side</td>
 </tr>
 <tr>
 <td>sellQuantity</td>
-<td>double</td>
+<td>Double</td>
 <td>No</td>
 <td>Quantity to sell based on the quote request. If the value is null, it means that you doesn&#39;t subscribe this side</td>
 </tr>
 <tr>
 <td>sellUnitPrice</td>
-<td>double</td>
+<td>Double</td>
 <td>No</td>
 <td>Unit price per unit of the base symbol. If the value is null, it means that you doesn&#39;t subscribe this side</td>
 </tr>
 <tr>
 <td>sellTotalAmount</td>
-<td>double</td>
+<td>Double</td>
 <td>No</td>
 <td>Total price to pay in quote currency. If the value is null, it means that you doesn&#39;t subscribe this side</td>
 </tr>
 <tr>
 <td>status</td>
-<td>string</td>
+<td>String</td>
 <td>No</td>
 <td>Status of the response. If the value is null, it means that you doesn&#39;t subscribe this side</td>
 </tr>
 <tr>
 <td>reason</td>
-<td>string</td>
+<td>String</td>
 <td>No</td>
 <td>If an error is returned, the reason field will contain the reasons for the error</td>
 </tr>

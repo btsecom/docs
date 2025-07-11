@@ -346,8 +346,8 @@
 <li>[<strong>IMPORTANT</strong>] BTSE will phase out support for two open API endpoints by <strong>July 30, 2025</strong>. The following endpoints will be deprecated:
 
 <ul>
-<li><a href="#query-available-crypto-network-list-for-currency"><code>Query available crypto network list for currency</code></a></li>
-<li><a href="#query-exchange-rate-between-assets"><code>Query exchange rate between assets</code></a></li>
+<li><a href="#query-available-crypto-network-list-for-currency-deprecated"><code>Query available crypto network list for currency</code></a></li>
+<li><a href="#query-exchange-rate-between-assets-deprecated"><code>Query exchange rate between assets</code></a></li>
 </ul></li>
 </ul>
 
@@ -459,12 +459,12 @@
 <li><p>API Key (request-api)</p>
 
 <ul>
-<li>Parameter Name: <code>request-api</code>, in: header. API key is obtained from BTSE platform as a string</li>
+<li>Parameter Name: <code>request-api</code>, in: header. API key is obtained from BTSE platform as a String</li>
 </ul></li>
 <li><p>API Key (request-nonce)</p>
 
 <ul>
-<li>Parameter Name: <code>request-nonce</code>, in: header. Representation of current timestamp in long format</li>
+<li>Parameter Name: <code>request-nonce</code>, in: header. Representation of current timestamp in Long format</li>
 </ul></li>
 <li><p>API Key (request-sign)</p>
 
@@ -544,7 +544,7 @@
 </thead><tbody>
 <tr>
 <td>currency</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Ex: BTC</td>
 </tr>
@@ -560,7 +560,7 @@
 </thead><tbody>
 <tr>
 <td>$network</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Name of network</td>
 </tr>
@@ -591,13 +591,13 @@
 </thead><tbody>
 <tr>
 <td>srcCurrency</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Ex: BTC</td>
 </tr>
 <tr>
 <td>targetCurrency</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Ex: USD</td>
 </tr>
@@ -613,31 +613,31 @@
 </thead><tbody>
 <tr>
 <td>code</td>
-<td>integer</td>
+<td>Integer</td>
 <td>Yes</td>
 <td>Return code</td>
 </tr>
 <tr>
 <td>msg</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Return message</td>
 </tr>
 <tr>
 <td>time</td>
-<td>long</td>
+<td>Long</td>
 <td>Yes</td>
 <td>Unix timestamp</td>
 </tr>
 <tr>
 <td>data</td>
-<td>float</td>
+<td>Float</td>
 <td>Yes</td>
 <td>Exchange rate between assets</td>
 </tr>
 <tr>
 <td>success</td>
-<td>boolean</td>
+<td>Boolean</td>
 <td>Yes</td>
 <td>True or False</td>
 </tr>
@@ -716,7 +716,7 @@ The response of <code>depositEnable</code> and <code>withdrawEnable</code> is tr
 </thead><tbody>
 <tr>
 <td>crypto</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Ex: BTC</td>
 </tr>
@@ -732,31 +732,31 @@ The response of <code>depositEnable</code> and <code>withdrawEnable</code> is tr
 </thead><tbody>
 <tr>
 <td>data</td>
-<td>object</td>
+<td>Object</td>
 <td>Yes</td>
 <td>Array of objects (CryptoNetworkItem)</td>
 </tr>
 <tr>
 <td>success</td>
-<td>boolean</td>
+<td>Boolean</td>
 <td>Yes</td>
 <td>Request validation is successful or not. It will be set to <code>true</code> when the HTTP status is <code>200.</code></td>
 </tr>
 <tr>
 <td>code</td>
-<td>integer</td>
+<td>Integer</td>
 <td>Yes</td>
 <td>Request status code. It will be set to <code>1</code> when the request is processed successfully. When unsuccessful, there will be an error code.</td>
 </tr>
 <tr>
 <td>msg</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Request status message. It will be set to <code>Success</code> when the request is processed successfully. When unsuccessful, there will be an error message.</td>
 </tr>
 <tr>
 <td>time</td>
-<td>long</td>
+<td>Long</td>
 <td>Yes</td>
 <td>Current unix timestamp.</td>
 </tr>
@@ -772,103 +772,103 @@ The response of <code>depositEnable</code> and <code>withdrawEnable</code> is tr
 </thead><tbody>
 <tr>
 <td>network</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Network</td>
 </tr>
 <tr>
 <td>name</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Network name</td>
 </tr>
 <tr>
 <td>depositEnable</td>
-<td>boolean</td>
+<td>Boolean</td>
 <td>Yes</td>
 <td>Allow to deposit</td>
 </tr>
 <tr>
 <td>withdrawEnable</td>
-<td>boolean</td>
+<td>Boolean</td>
 <td>Yes</td>
 <td>Allow to withdraw</td>
 </tr>
 <tr>
 <td>confirmationTime</td>
-<td>integer</td>
+<td>Integer</td>
 <td>No</td>
 <td>Expected block confirmation time</td>
 </tr>
 <tr>
 <td>depositAmtMin</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Minimum amount of deposit</td>
 </tr>
 <tr>
 <td>depositFeeMin</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Minimum fees of deposit</td>
 </tr>
 <tr>
 <td>depositFeeRate</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Fee rate of deposit</td>
 </tr>
 <tr>
 <td>depositExtFees</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Extra fees of deposit</td>
 </tr>
 <tr>
 <td>depositExtFeeRate</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Extra fee rate of deposit</td>
 </tr>
 <tr>
 <td>needAddressExtension</td>
-<td>boolean</td>
+<td>Boolean</td>
 <td>Yes</td>
 <td>Supported address extension</td>
 </tr>
 <tr>
 <td>addressExtensionTypeName</td>
-<td>string</td>
+<td>String</td>
 <td>No</td>
 <td>Address extension type (e.g. tag)</td>
 </tr>
 <tr>
 <td>withdrawAmtMin</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Minimum amount of withdrawal</td>
 </tr>
 <tr>
 <td>withdrawFeeMin</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Minimum fees of withdraw</td>
 </tr>
 <tr>
 <td>withdrawFeeRate</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Fee rate of withdrawal</td>
 </tr>
 <tr>
 <td>withdrawExtFees</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Extra fees of withdraw</td>
 </tr>
 <tr>
 <td>withdrawExtFeeRate</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Extra fee rate of withdraw</td>
 </tr>
@@ -901,19 +901,19 @@ The response of <code>depositEnable</code> and <code>withdrawEnable</code> is tr
 </thead><tbody>
 <tr>
 <td>baseCurrency</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Example: baseCurrency=BTC</br>Base currency, such as BTC</td>
 </tr>
 <tr>
 <td>amount</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Example: amount=2</br>The quantity of <code>baseCurrency</code> .</td>
 </tr>
 <tr>
 <td>quoteCurrency</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Example: quoteCurrency=USDT</br>Quote currency, such as USDT.</td>
 </tr>
@@ -929,31 +929,31 @@ The response of <code>depositEnable</code> and <code>withdrawEnable</code> is tr
 </thead><tbody>
 <tr>
 <td>data</td>
-<td>object</td>
+<td>Object</td>
 <td>Yes</td>
 <td>Array of objects (CryptoNetworkItem)</td>
 </tr>
 <tr>
 <td>success</td>
-<td>boolean</td>
+<td>Boolean</td>
 <td>Yes</td>
 <td>Request validation is successful or not. It will be set to <code>true</code> when the HTTP status is <code>200.</code></td>
 </tr>
 <tr>
 <td>code</td>
-<td>integer</td>
+<td>Integer</td>
 <td>Yes</td>
 <td>Request status code. It will be set to <code>1</code> when the request is processed successfully. When unsuccessful, there will be an error code.</td>
 </tr>
 <tr>
 <td>msg</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Request status message. It will be set to <code>Success</code> when the request is processed successfully. When unsuccessful, there will be an error message.</td>
 </tr>
 <tr>
 <td>time</td>
-<td>long</td>
+<td>Long</td>
 <td>Yes</td>
 <td>Current unix timestamp.</td>
 </tr>
@@ -969,7 +969,7 @@ The response of <code>depositEnable</code> and <code>withdrawEnable</code> is tr
 </thead><tbody>
 <tr>
 <td>rate</td>
-<td>string</td>
+<td>String</td>
 <td>No</td>
 <td>The rate of base-currency to quote-currency.</td>
 </tr>
@@ -1000,19 +1000,19 @@ The response of <code>depositEnable</code> and <code>withdrawEnable</code> is tr
 </thead><tbody>
 <tr>
 <td>currency</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Currency</td>
 </tr>
 <tr>
 <td>total</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Total balance</td>
 </tr>
 <tr>
 <td>available</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Available balance</td>
 </tr>
@@ -1025,7 +1025,7 @@ The response of <code>depositEnable</code> and <code>withdrawEnable</code> is tr
   </span><span class="p">{</span><span class="w">
     </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">21.35823825</span><span class="p">,</span><span class="w">
     </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"String"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"fees"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.06</span><span class="p">,</span><span class="w">
     </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="mi">20181213000239</span><span class="p">,</span><span class="w">
     </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COMPLETED"</span><span class="p">,</span><span class="w">
@@ -1052,31 +1052,31 @@ The response of <code>depositEnable</code> and <code>withdrawEnable</code> is tr
 </thead><tbody>
 <tr>
 <td>currency</td>
-<td>string</td>
+<td>String</td>
 <td>No</td>
 <td>Currency, if not specified will return all currencies</td>
 </tr>
 <tr>
 <td>startTime</td>
-<td>long</td>
+<td>Long</td>
 <td>No</td>
 <td>Starting time in milliseconds (eg. 1624987283000)</td>
 </tr>
 <tr>
 <td>endTime</td>
-<td>long</td>
+<td>Long</td>
 <td>No</td>
 <td>Ending time in milliseconds (eg. 1624987283000)</td>
 </tr>
 <tr>
 <td>count</td>
-<td>integer</td>
+<td>Integer</td>
 <td>No</td>
 <td>Number of records to return</td>
 </tr>
 <tr>
 <td>useNewSymbolNaming</td>
-<td>boolean</td>
+<td>Boolean</td>
 <td>No</td>
 <td>True to return futures market name in the new format, default to False</td>
 </tr>
@@ -1092,49 +1092,49 @@ The response of <code>depositEnable</code> and <code>withdrawEnable</code> is tr
 </thead><tbody>
 <tr>
 <td>currency</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Currency</td>
 </tr>
 <tr>
 <td>amount</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Amount in the record</td>
 </tr>
 <tr>
 <td>fees</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>Fees charged if any</td>
 </tr>
 <tr>
 <td>orderId</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Internal wallet order ID</td>
 </tr>
 <tr>
 <td>wallet</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Wallet type. For spot will return <code>@SPOT</code></td>
 </tr>
 <tr>
 <td>description</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Description of the transaction</td>
 </tr>
 <tr>
 <td>status</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>The status of the record is as follows<br/><code>PROCESSING</code><br/><code>CANCELLED</code><br/><code>COMPLETED</code><br/><code>EXPIRED</code><br/><code>FAILURE</code><br/><code>PENDING</code></td>
 </tr>
 <tr>
 <td>type</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>The type of the record is as follows<br/><code>Deposit</code><br/><code>Withdraw</code><br/><code>Convert fiat</code><br/><code>Transfer_Out</code><br/><code>Transfer_In</code><br/><code>ReferralEarning</code><br/><code>Trading Fee Stake Freeze</code><br/><code>Trading Fee Stake Unfreeze</code><br/><code>Sub Account Transfer In</code><br/><code>Sub Account Transfer Out</code><br/><code>express buy</code><br/><code>Strategy Income</code><br/><code>Strategy Pay</code><br/><code>token voucher in</code><br/><code>spot trading fee rebate</code><br/><code>futures trading fee rebat</code><br/><code>trial fund</code><br/><code>general trading fee rebate</code><br/><code>token voucher out</code></td>
 </tr>
@@ -1144,7 +1144,8 @@ The response of <code>depositEnable</code> and <code>withdrawEnable</code> is tr
 <p>Request</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-LIQUID"</span><span class="w">
+  </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"network"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LIQUID"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
@@ -1157,7 +1158,7 @@ The response of <code>depositEnable</code> and <code>withdrawEnable</code> is tr
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
-<p><code>POST /api/v3.2/user/wallet/address</code></p>
+<p><code>POST /api/v3.2/user/wallet/address</code> or <code>POST /api/v3.3/user/wallet/address</code></p>
 
 <p>Creates a wallet address. If the address created has not been used before, a 400 error will return with the existing unused address. To use this API, <code>Wallet</code> permission is required.</p>
 <h3 id='request-parameters-6'>Request Parameters</h3>
@@ -1171,13 +1172,13 @@ The response of <code>depositEnable</code> and <code>withdrawEnable</code> is tr
 </thead><tbody>
 <tr>
 <td>currency</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Ex: BTC</td>
 </tr>
 <tr>
 <td>network</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Ex: BITCOIN</td>
 </tr>
@@ -1193,13 +1194,13 @@ The response of <code>depositEnable</code> and <code>withdrawEnable</code> is tr
 </thead><tbody>
 <tr>
 <td>address</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Blockchain address</td>
 </tr>
 <tr>
 <td>created</td>
-<td>long</td>
+<td>Long</td>
 <td>Yes</td>
 <td>Created timestamp</td>
 </tr>
@@ -1214,7 +1215,7 @@ The response of <code>depositEnable</code> and <code>withdrawEnable</code> is tr
   </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Blockchain address"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p><code>DELETE /api/v3.2/user/wallet/address</code></p>
+<p><code>DELETE /api/v3.2/user/wallet/address</code> or <code>DELETE /api/v3.3/user/wallet/address</code></p>
 
 <p>Delete  wallet address. If the address has been delete, a 400 error will return. To use this API, <code>Wallet</code> permission is required.</p>
 <h3 id='request-parameters-7'>Request Parameters</h3>
@@ -1228,19 +1229,19 @@ The response of <code>depositEnable</code> and <code>withdrawEnable</code> is tr
 </thead><tbody>
 <tr>
 <td>currency</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Ex: BTC</td>
 </tr>
 <tr>
 <td>network</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Ex: BITCOIN</td>
 </tr>
 <tr>
 <td>address</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Ex: Blockchain address</td>
 </tr>
@@ -1264,7 +1265,7 @@ The response of <code>depositEnable</code> and <code>withdrawEnable</code> is tr
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
-<p><code>GET /api/v3.2/user/wallet/address</code></p>
+<p><code>GET /api/v3.2/user/wallet/address</code> or <code>GET /api/v3.3/user/wallet/address</code></p>
 
 <p>Gets a wallet address. To use this API, <code>Wallet</code> permission is required.</p>
 <h3 id='request-parameters-8'>Request Parameters</h3>
@@ -1278,13 +1279,13 @@ The response of <code>depositEnable</code> and <code>withdrawEnable</code> is tr
 </thead><tbody>
 <tr>
 <td>currency</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Ex: BTC</td>
 </tr>
 <tr>
 <td>network</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Ex: BITCOIN</td>
 </tr>
@@ -1300,13 +1301,13 @@ The response of <code>depositEnable</code> and <code>withdrawEnable</code> is tr
 </thead><tbody>
 <tr>
 <td>address</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Blockchain address</td>
 </tr>
 <tr>
 <td>created</td>
-<td>long</td>
+<td>Long</td>
 <td>Yes</td>
 <td>Created timestamp</td>
 </tr>
@@ -1329,7 +1330,7 @@ The response of <code>depositEnable</code> and <code>withdrawEnable</code> is tr
   </span><span class="nl">"withdraw_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;withdrawal ID&gt;"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p><code>POST /api/v3.2/user/wallet/withdraw</code></p>
+<p><code>POST /api/v3.2/user/wallet/withdraw</code> or <code>POST /api/v3.3/user/wallet/withdraw</code></p>
 
 <p>Performs a wallet withdrawal. To use this API, <code>Withdraw</code> permission is required.</p>
 <h3 id='request-parameters-9'>Request Parameters</h3>
@@ -1343,31 +1344,31 @@ The response of <code>depositEnable</code> and <code>withdrawEnable</code> is tr
 </thead><tbody>
 <tr>
 <td>currency</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Currency-Network pair <br> Currency list can be retrieved from <a href="#query-available-currency-list-for-wallet-action">Available currency list for action</a> <br> Network list can be retrieved from <a href="#query-available-crypto-network-list-for-currency">Available network list for currency</a></td>
 </tr>
 <tr>
 <td>address</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Blockchain address</td>
 </tr>
 <tr>
 <td>tag</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Tag, used only by some blockchain (eg. XRP)</td>
 </tr>
 <tr>
 <td>amount</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Amount to withdraw (Max decimal supported is <code>8</code> for all currencies). Will return Invalid withdraw amount (code: 3506) if exceeds</td>
 </tr>
 <tr>
 <td>includeWithdrawFee</td>
-<td>boolean</td>
+<td>Boolean</td>
 <td>No</td>
 <td>If true or the field doesn&#39;t exist, the fee is included in amount. Otherwise, the fee is extra added and the deducted amount can be larger than the amount claimed</td>
 </tr>
@@ -1383,7 +1384,7 @@ The response of <code>depositEnable</code> and <code>withdrawEnable</code> is tr
 </thead><tbody>
 <tr>
 <td>withdraw_id</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Internal withdrawal ID. References the <code>orderID</code> field in <code>wallet_history</code> API. As withdrawal will not be processed immediately. User can query the wallet history API to check on the status of the withdrawal</td>
 </tr>
@@ -1430,7 +1431,7 @@ The response of <code>depositEnable</code> and <code>withdrawEnable</code> is tr
 </thead><tbody>
 <tr>
 <td>$currencyName</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Name of currency</td>
 </tr>
@@ -1470,19 +1471,19 @@ The response of <code>depositEnable</code> and <code>withdrawEnable</code> is tr
 </thead><tbody>
 <tr>
 <td>amount</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>amount of currency to convert</td>
 </tr>
 <tr>
 <td>fromAsset</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>source currency to be converted</td>
 </tr>
 <tr>
 <td>toAsset</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>destination currency</td>
 </tr>
@@ -1498,31 +1499,31 @@ The response of <code>depositEnable</code> and <code>withdrawEnable</code> is tr
 </thead><tbody>
 <tr>
 <td>amount</td>
-<td>float</td>
+<td>Float</td>
 <td>Yes</td>
 <td>amount of source currency to be converted</td>
 </tr>
 <tr>
 <td>settlementAmount</td>
-<td>float</td>
+<td>Float</td>
 <td>Yes</td>
 <td>amount of converted destination currency</td>
 </tr>
 <tr>
 <td>amountCurrency</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>source currency</td>
 </tr>
 <tr>
 <td>settlementCurrency</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>destination currency</td>
 </tr>
 <tr>
 <td>rate</td>
-<td>float</td>
+<td>Float</td>
 <td>Yes</td>
 <td>exchange rate</td>
 </tr>
@@ -1548,7 +1549,7 @@ The response of <code>depositEnable</code> and <code>withdrawEnable</code> is tr
   </span><span class="nl">"toUserMail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"james.bond@google.com"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p><code>POST /api/v3.2/user/wallet/transfer</code></p>
+<p><code>POST /api/v3.2/user/wallet/transfer</code> or <code>POST /api/v3.3/user/wallet/transfer</code></p>
 
 <p>Performs a internal currency transfer to other user from wallet. To use this API, <code>Transfer</code> permission is required. To get supported currency list please check <a href="#query-available-currency-list-for-wallet-action">Available currency list for action</a></p>
 <h3 id='request-parameters-12'>Request Parameters</h3>
@@ -1562,31 +1563,31 @@ The response of <code>depositEnable</code> and <code>withdrawEnable</code> is tr
 </thead><tbody>
 <tr>
 <td>amount</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>amount of currency to transfer</td>
 </tr>
 <tr>
 <td>asset</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>currency to be transferred</td>
 </tr>
 <tr>
 <td>toUser</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>receiver account</td>
 </tr>
 <tr>
 <td>toUserMail</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>receiver email</td>
 </tr>
 <tr>
 <td>useNewSymbolNaming</td>
-<td>boolean</td>
+<td>Boolean</td>
 <td>No</td>
 <td>True if use new futures market name in asset field, default to False</td>
 </tr>
@@ -1602,25 +1603,25 @@ The response of <code>depositEnable</code> and <code>withdrawEnable</code> is tr
 </thead><tbody>
 <tr>
 <td>amount</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>amount of currency to transfer</td>
 </tr>
 <tr>
 <td>asset</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>currency to be transferred</td>
 </tr>
 <tr>
 <td>toUser</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>receiver account</td>
 </tr>
 <tr>
 <td>toUserMail</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>receiver email</td>
 </tr>
@@ -1665,25 +1666,25 @@ The response of <code>depositEnable</code> and <code>withdrawEnable</code> is tr
 </thead><tbody>
 <tr>
 <td>startTime</td>
-<td>long</td>
+<td>Long</td>
 <td>No</td>
 <td>Starting time in milliseconds (eg. 1624987283000)</td>
 </tr>
 <tr>
 <td>endTime</td>
-<td>long</td>
+<td>Long</td>
 <td>No</td>
 <td>Ending time in milliseconds (eg. 1624987283000)</td>
 </tr>
 <tr>
 <td>page</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Page number to query, default to 1 (1-based)</td>
 </tr>
 <tr>
 <td>pageSize</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Number of records in a page, default to 10, maximum 50</td>
 </tr>
@@ -1699,49 +1700,49 @@ The response of <code>depositEnable</code> and <code>withdrawEnable</code> is tr
 </thead><tbody>
 <tr>
 <td>totalRows</td>
-<td>integer</td>
+<td>Integer</td>
 <td>Yes</td>
 <td>Total records</td>
 </tr>
 <tr>
 <td>pageSize</td>
-<td>integer</td>
+<td>Integer</td>
 <td>Yes</td>
 <td>Number of records in a page</td>
 </tr>
 <tr>
 <td>currentPage</td>
-<td>integer</td>
+<td>Integer</td>
 <td>Yes</td>
 <td>current page number</td>
 </tr>
 <tr>
 <td>timestamp</td>
-<td>integer</td>
+<td>Integer</td>
 <td>Yes</td>
 <td>Unix timestamp</td>
 </tr>
 <tr>
 <td>fromUser</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>sender account</td>
 </tr>
 <tr>
 <td>receiver</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>receiver account</td>
 </tr>
 <tr>
 <td>currency</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>currency of transferred</td>
 </tr>
 <tr>
 <td>amount</td>
-<td>integer</td>
+<td>Integer</td>
 <td>Yes</td>
 <td>amount of currency</td>
 </tr>

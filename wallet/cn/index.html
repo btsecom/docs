@@ -346,8 +346,8 @@
 <li>[<strong>重要</strong>] BTSE 将于 2025年7月10日 起逐步停止支持以下两个 Open API 接口。以下接口将被弃用:
 
 <ul>
-<li><a href="#40af277644"><code>查询货币的可用加密网络列表</code></a></li>
-<li><a href="#9dbf83fe7f"><code>查询资产间的汇率</code></a></li>
+<li><a href="#77705abe66"><code>查询货币的可用加密网络列表</code></a></li>
+<li><a href="#0afe40d4b6"><code>查询资产间的汇率</code></a></li>
 </ul></li>
 </ul>
 
@@ -543,7 +543,7 @@
 </thead><tbody>
 <tr>
 <td>currency</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>示例：BTC</td>
 </tr>
@@ -559,7 +559,7 @@
 </thead><tbody>
 <tr>
 <td>$network</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>网络名称</td>
 </tr>
@@ -590,13 +590,13 @@
 </thead><tbody>
 <tr>
 <td>srcCurrency</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>示例：BTC</td>
 </tr>
 <tr>
 <td>targetCurrency</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>示例：USD</td>
 </tr>
@@ -612,31 +612,31 @@
 </thead><tbody>
 <tr>
 <td>code</td>
-<td>integer</td>
+<td>Integer</td>
 <td>Yes</td>
 <td>返回码</td>
 </tr>
 <tr>
 <td>msg</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>返回消息</td>
 </tr>
 <tr>
 <td>time</td>
-<td>long</td>
+<td>Long</td>
 <td>Yes</td>
 <td>Unix时间戳</td>
 </tr>
 <tr>
 <td>data</td>
-<td>float</td>
+<td>Float</td>
 <td>Yes</td>
 <td>资产之间的汇率</td>
 </tr>
 <tr>
 <td>success</td>
-<td>boolean</td>
+<td>Boolean</td>
 <td>Yes</td>
 <td>是 或 否</td>
 </tr>
@@ -715,7 +715,7 @@
 </thead><tbody>
 <tr>
 <td>crypto</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>示例：BTC</td>
 </tr>
@@ -731,31 +731,31 @@
 </thead><tbody>
 <tr>
 <td>data</td>
-<td>object</td>
+<td>Object</td>
 <td>Yes</td>
 <td>物件陣列 (CryptoNetworkItem)</td>
 </tr>
 <tr>
 <td>success</td>
-<td>boolean</td>
+<td>Boolean</td>
 <td>Yes</td>
 <td>請求校驗是否成功。當 HTTP 狀態為 <code>200</code>  時，該欄位將設為 <code>true</code></td>
 </tr>
 <tr>
 <td>code</td>
-<td>integer</td>
+<td>Integer</td>
 <td>Yes</td>
 <td>請求狀態碼。當請求成功處理時，該欄位設為 <code>1</code>；失敗時則會返回錯誤碼。</td>
 </tr>
 <tr>
 <td>msg</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>請求狀態訊息。當請求成功處理時，該欄位為 <code>Success</code>；失敗時會顯示錯誤訊息。</td>
 </tr>
 <tr>
 <td>time</td>
-<td>long</td>
+<td>Long</td>
 <td>Yes</td>
 <td>當前的 unix 時間戳記。</td>
 </tr>
@@ -771,103 +771,103 @@
 </thead><tbody>
 <tr>
 <td>network</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>网络</td>
 </tr>
 <tr>
 <td>name</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>网络名称</td>
 </tr>
 <tr>
 <td>depositEnable</td>
-<td>boolean</td>
+<td>Boolean</td>
 <td>Yes</td>
 <td>是否允许充值</td>
 </tr>
 <tr>
 <td>withdrawEnable</td>
-<td>boolean</td>
+<td>Boolean</td>
 <td>Yes</td>
 <td>是否允许提现</td>
 </tr>
 <tr>
 <td>confirmationTime</td>
-<td>integer</td>
+<td>Integer</td>
 <td>No</td>
 <td>区块确认预计时间</td>
 </tr>
 <tr>
 <td>depositAmtMin</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>最小充值金额</td>
 </tr>
 <tr>
 <td>depositFeeMin</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>最低充值手续费</td>
 </tr>
 <tr>
 <td>depositFeeRate</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>充值手续费率</td>
 </tr>
 <tr>
 <td>depositExtFees</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>额外充值手续费</td>
 </tr>
 <tr>
 <td>depositExtFeeRate</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>额外充值手续费率</td>
 </tr>
 <tr>
 <td>needAddressExtension</td>
-<td>boolean</td>
+<td>Boolean</td>
 <td>Yes</td>
 <td>是否支持地址扩展</td>
 </tr>
 <tr>
 <td>addressExtensionTypeName</td>
-<td>string</td>
+<td>String</td>
 <td>No</td>
 <td>地址扩展类型（如 <code>tag</code>）</td>
 </tr>
 <tr>
 <td>withdrawAmtMin</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>最小提现金额</td>
 </tr>
 <tr>
 <td>withdrawFeeMin</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>最低提现手续费</td>
 </tr>
 <tr>
 <td>withdrawFeeRate</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>提现手续费率</td>
 </tr>
 <tr>
 <td>withdrawExtFees</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>额外提现手续费</td>
 </tr>
 <tr>
 <td>withdrawExtFeeRate</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>额外提现手续费率</td>
 </tr>
@@ -900,19 +900,19 @@
 </thead><tbody>
 <tr>
 <td>baseCurrency</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>示例：baseCurrency=BTC</br>基础币种，例如:BTC</td>
 </tr>
 <tr>
 <td>amount</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>示例：amount=2</br><code>baseCurrency</code> 的数量</td>
 </tr>
 <tr>
 <td>quoteCurrency</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>示例：quoteCurrency=USDT</br>报价币种，例如:USDT</td>
 </tr>
@@ -928,31 +928,31 @@
 </thead><tbody>
 <tr>
 <td>data</td>
-<td>object</td>
+<td>Object</td>
 <td>Yes</td>
 <td>物件陣列 (CryptoNetworkItem)</td>
 </tr>
 <tr>
 <td>success</td>
-<td>boolean</td>
+<td>Boolean</td>
 <td>Yes</td>
 <td>請求校驗是否成功。當 HTTP 狀態為 <code>200</code>  時，該欄位將設為 <code>true</code></td>
 </tr>
 <tr>
 <td>code</td>
-<td>integer</td>
+<td>Integer</td>
 <td>Yes</td>
 <td>請求狀態碼。當請求成功處理時，該欄位設為 <code>1</code>；失敗時則會返回錯誤碼。</td>
 </tr>
 <tr>
 <td>msg</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>請求狀態訊息。當請求成功處理時，該欄位為 <code>Success</code>；失敗時會顯示錯誤訊息。</td>
 </tr>
 <tr>
 <td>time</td>
-<td>long</td>
+<td>Long</td>
 <td>Yes</td>
 <td>當前的 unix 時間戳記。</td>
 </tr>
@@ -968,7 +968,7 @@
 </thead><tbody>
 <tr>
 <td>rate</td>
-<td>string</td>
+<td>String</td>
 <td>No</td>
 <td>base-currency 对 quote-currency 的汇率</td>
 </tr>
@@ -999,19 +999,19 @@
 </thead><tbody>
 <tr>
 <td>currency</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>货币</td>
 </tr>
 <tr>
 <td>total</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>总余额</td>
 </tr>
 <tr>
 <td>available</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>可用余额</td>
 </tr>
@@ -1024,7 +1024,7 @@
   </span><span class="p">{</span><span class="w">
     </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">21.35823825</span><span class="p">,</span><span class="w">
     </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"String"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"fees"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.06</span><span class="p">,</span><span class="w">
     </span><span class="nl">"orderId"</span><span class="p">:</span><span class="w"> </span><span class="mi">20181213000239</span><span class="p">,</span><span class="w">
     </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COMPLETED"</span><span class="p">,</span><span class="w">
@@ -1051,31 +1051,31 @@
 </thead><tbody>
 <tr>
 <td>currency</td>
-<td>string</td>
+<td>String</td>
 <td>No</td>
 <td>货币，如果未指定则返回所有货币</td>
 </tr>
 <tr>
 <td>startTime</td>
-<td>long</td>
+<td>Long</td>
 <td>No</td>
 <td>起始时间（以毫秒为单位，例如 1624987283000）</td>
 </tr>
 <tr>
 <td>endTime</td>
-<td>long</td>
+<td>Long</td>
 <td>No</td>
 <td>结束时间（以毫秒为单位，例如 1624987283000）</td>
 </tr>
 <tr>
 <td>count</td>
-<td>integer</td>
+<td>Integer</td>
 <td>No</td>
 <td>要返回的记录数</td>
 </tr>
 <tr>
 <td>useNewSymbolNaming</td>
-<td>boolean</td>
+<td>Boolean</td>
 <td>No</td>
 <td>如果为 True，则以新格式返回期货市场名称，默认为 False</td>
 </tr>
@@ -1091,49 +1091,49 @@
 </thead><tbody>
 <tr>
 <td>currency</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>货币</td>
 </tr>
 <tr>
 <td>amount</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>记录中的金额</td>
 </tr>
 <tr>
 <td>fees</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>如有，将收取的费用</td>
 </tr>
 <tr>
 <td>orderId</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>内部钱包订单 ID</td>
 </tr>
 <tr>
 <td>wallet</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>钱包类型。对于现货将返回 <code>@SPOT</code></td>
 </tr>
 <tr>
 <td>description</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>交易描述</td>
 </tr>
 <tr>
 <td>status</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>记录的状态如下<br/><code>PROCESSING</code><br/><code>CANCELLED</code><br/><code>COMPLETED</code><br/><code>EXPIRED</code><br/><code>FAILURE</code><br/><code>PENDING</code></td>
 </tr>
 <tr>
 <td>type</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>记录的类型如下<br/><code>Deposit</code><br/><code>Withdraw</code><br/><code>Convert fiat</code><br/><code>Transfer_Out</code><br/><code>Transfer_In</code><br/><code>ReferralEarning</code><br/><code>Trading Fee Stake Freeze</code><br/><code>Trading Fee Stake Unfreeze</code><br/><code>Sub Account Transfer In</code><br/><code>Sub Account Transfer Out</code><br/><code>express buy</code><br/><code>Strategy Income</code><br/><code>Strategy Pay</code><br/><code>token voucher in</code><br/><code>spot trading fee rebate</code><br/><code>futures trading fee rebat</code><br/><code>trial fund</code><br/><code>general trading fee rebate</code><br/><code>token voucher out</code></td>
 </tr>
@@ -1143,7 +1143,8 @@
 <p>请求</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-LIQUID"</span><span class="w">
+  </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"network"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LIQUID"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
@@ -1156,7 +1157,7 @@
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
-<p><code>POST /api/v3.2/user/wallet/address</code></p>
+<p><code>POST /api/v3.2/user/wallet/address</code> or <code>POST /api/v3.3/user/wallet/address</code></p>
 
 <p>创建钱包地址。如果创建的地址之前未被使用，将返回一个400错误，并带有现有的未使用地址。要使用此API，需要<code>钱包</code>权限。</p>
 <h3 id='1f9ac54b15-5'>请求参数</h3>
@@ -1170,13 +1171,13 @@
 </thead><tbody>
 <tr>
 <td>currency</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>例如：BTC</td>
 </tr>
 <tr>
 <td>network</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>例如：BITCOIN</td>
 </tr>
@@ -1192,13 +1193,13 @@
 </thead><tbody>
 <tr>
 <td>address</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>区块链地址</td>
 </tr>
 <tr>
 <td>created</td>
-<td>long</td>
+<td>Long</td>
 <td>Yes</td>
 <td>创建的时间戳</td>
 </tr>
@@ -1213,7 +1214,7 @@
   </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Blockchain address"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p><code>DELETE /api/v3.2/user/wallet/address</code></p>
+<p><code>DELETE /api/v3.2/user/wallet/address</code> or <code>DELETE /api/v3.3/user/wallet/address</code></p>
 
 <p>删除地址。如果删除的地址已经被删除 ，将返回一个400错误。要使用此API，需要<code>钱包</code>权限。</p>
 <h3 id='1f9ac54b15-6'>请求参数</h3>
@@ -1227,19 +1228,19 @@
 </thead><tbody>
 <tr>
 <td>currency</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Ex: BTC</td>
 </tr>
 <tr>
 <td>network</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Ex: BITCOIN</td>
 </tr>
 <tr>
 <td>address</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>Ex: 地址</td>
 </tr>
@@ -1263,7 +1264,7 @@
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
-<p><code>GET /api/v3.2/user/wallet/address</code></p>
+<p><code>GET /api/v3.2/user/wallet/address</code> or <code>GET /api/v3.3/user/wallet/address</code></p>
 
 <p>获取钱包地址。要使用此API，需要<code>钱包</code>权限。</p>
 <h3 id='1f9ac54b15-7'>请求参数</h3>
@@ -1277,13 +1278,13 @@
 </thead><tbody>
 <tr>
 <td>currency</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>例如：BTC</td>
 </tr>
 <tr>
 <td>network</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>例如：BITCOIN</td>
 </tr>
@@ -1299,13 +1300,13 @@
 </thead><tbody>
 <tr>
 <td>address</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>区块链地址</td>
 </tr>
 <tr>
 <td>created</td>
-<td>long</td>
+<td>Long</td>
 <td>Yes</td>
 <td>创建的时间戳</td>
 </tr>
@@ -1328,7 +1329,7 @@
   </span><span class="nl">"withdraw_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;withdrawal ID&gt;"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p><code>POST /api/v3.2/user/wallet/withdraw</code></p>
+<p><code>POST /api/v3.2/user/wallet/withdraw</code> or <code>POST /api/v3.3/user/wallet/withdraw</code></p>
 
 <p>执行钱包提款。要使用此API，需要<code>提币</code>权限。</p>
 <h3 id='1f9ac54b15-8'>请求参数</h3>
@@ -1342,31 +1343,31 @@
 </thead><tbody>
 <tr>
 <td>currency</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>币种-网络对 <br> 币种列表可以从<a href="#query-available-currency-list-for-wallet-action">可用的币种列表中获取操作</a> <br> 网络列表可以从<a href="#query-available-crypto-network-list-for-currency">获取货币的可用网络列表</a>中检索</td>
 </tr>
 <tr>
 <td>address</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>区块链地址</td>
 </tr>
 <tr>
 <td>tag</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>标签，仅由某些区块链使用（例如：XRP）</td>
 </tr>
 <tr>
 <td>amount</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>提款金额（所有货币的最大小数位为<code>8</code>）。如果超出，将返回无效的提现金额（代码：3506）</td>
 </tr>
 <tr>
 <td>includeWithdrawFee</td>
-<td>boolean</td>
+<td>Boolean</td>
 <td>No</td>
 <td>如果为true或字段不存在，则费用包含在金额中。否则，费用会额外增加，扣除的金额可能大于所声明的金额</td>
 </tr>
@@ -1382,7 +1383,7 @@
 </thead><tbody>
 <tr>
 <td>withdraw_id</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>内部提款ID。参考<code>wallet_history</code> API中的<code>orderID</code>字段。由于提现不会立即处理。用户可以查询钱包历史API来检查提现的状态</td>
 </tr>
@@ -1429,7 +1430,7 @@
 </thead><tbody>
 <tr>
 <td>$currencyName</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>货币的名称</td>
 </tr>
@@ -1469,19 +1470,19 @@
 </thead><tbody>
 <tr>
 <td>amount</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>要转换的货币金额</td>
 </tr>
 <tr>
 <td>fromAsset</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>要转换的源货币</td>
 </tr>
 <tr>
 <td>toAsset</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>目标货币</td>
 </tr>
@@ -1497,31 +1498,31 @@
 </thead><tbody>
 <tr>
 <td>amount</td>
-<td>float</td>
+<td>Float</td>
 <td>Yes</td>
 <td>要转换的源货币金额</td>
 </tr>
 <tr>
 <td>settlementAmount</td>
-<td>float</td>
+<td>Float</td>
 <td>Yes</td>
 <td>转换后的目标货币金额</td>
 </tr>
 <tr>
 <td>amountCurrency</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>源货币</td>
 </tr>
 <tr>
 <td>settlementCurrency</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>目标货币</td>
 </tr>
 <tr>
 <td>rate</td>
-<td>float</td>
+<td>Float</td>
 <td>Yes</td>
 <td>汇率</td>
 </tr>
@@ -1547,7 +1548,7 @@
   </span><span class="nl">"toUserMail"</span><span class="p">:</span><span class="w"> </span><span class="s2">"james.bond@google.com"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p><code>POST /api/v3.2/user/wallet/transfer</code></p>
+<p><code>POST /api/v3.2/user/wallet/transfer</code> or <code>POST /api/v3.3/user/wallet/transfer</code></p>
 
 <p>执行钱包内的货币转给其他用户的操作。要使用此API，需要<code>转账</code>权限。要获取支持的货币列表，请查看<a href="#0ab39c1d97">查询钱包操作的可用货币列表</a></p>
 <h3 id='1f9ac54b15-11'>请求参数</h3>
@@ -1561,31 +1562,31 @@
 </thead><tbody>
 <tr>
 <td>amount</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>要转账的货币金额</td>
 </tr>
 <tr>
 <td>asset</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>要转账的货币</td>
 </tr>
 <tr>
 <td>toUser</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>接收者的账号</td>
 </tr>
 <tr>
 <td>toUserMail</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>接收者的电子邮件</td>
 </tr>
 <tr>
 <td>useNewSymbolNaming</td>
-<td>boolean</td>
+<td>Boolean</td>
 <td>No</td>
 <td>若使用新的期货市场名称在资产字段中为真，默认为假</td>
 </tr>
@@ -1601,25 +1602,25 @@
 </thead><tbody>
 <tr>
 <td>amount</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>要转账的货币金额</td>
 </tr>
 <tr>
 <td>asset</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>要转账的货币</td>
 </tr>
 <tr>
 <td>toUser</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>接收者的账号</td>
 </tr>
 <tr>
 <td>toUserMail</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>接收者的电子邮件</td>
 </tr>
@@ -1664,25 +1665,25 @@
 </thead><tbody>
 <tr>
 <td>startTime</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>要转账的货币金额</td>
 </tr>
 <tr>
 <td>endTime</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>要转账的货币</td>
 </tr>
 <tr>
 <td>page</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>接收者的账号</td>
 </tr>
 <tr>
 <td>pageSize</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>接收者的电子邮件</td>
 </tr>
@@ -1698,49 +1699,49 @@
 </thead><tbody>
 <tr>
 <td>totalRows</td>
-<td>integer</td>
+<td>Integer</td>
 <td>Yes</td>
 <td>接收者的电子邮件</td>
 </tr>
 <tr>
 <td>pageSize</td>
-<td>integer</td>
+<td>Integer</td>
 <td>Yes</td>
 <td>接收者的电子邮件</td>
 </tr>
 <tr>
 <td>currentPage</td>
-<td>integer</td>
+<td>Integer</td>
 <td>Yes</td>
 <td>目前页数</td>
 </tr>
 <tr>
 <td>timestamp</td>
-<td>integer</td>
+<td>Integer</td>
 <td>Yes</td>
 <td>发送时间</td>
 </tr>
 <tr>
 <td>fromUser</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>发送者的账号</td>
 </tr>
 <tr>
 <td>receiver</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>接收者的账号</td>
 </tr>
 <tr>
 <td>currency</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>转账的货币</td>
 </tr>
 <tr>
 <td>amount</td>
-<td>integer</td>
+<td>Integer</td>
 <td>Yes</td>
 <td>转账的货币金额</td>
 </tr>

@@ -505,37 +505,37 @@
 </thead><tbody>
 <tr>
 <td>assetName</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>资产名称</td>
 </tr>
 <tr>
 <td>maxOrderSizes</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>最大订单大小</td>
 </tr>
 <tr>
 <td>maxOrderValues</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>最大订单名义价值</td>
 </tr>
 <tr>
 <td>minOrderSizes</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>最小订单大小</td>
 </tr>
 <tr>
 <td>minOrderValues</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>最小订单名义价值</td>
 </tr>
 <tr>
 <td>supportQuoteCurrencies</td>
-<td>string array</td>
+<td>String Array</td>
 <td>Yes</td>
 <td>支持的报价货币</td>
 </tr>
@@ -559,7 +559,7 @@
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"markets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"assetName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"assetName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"String"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"maxOrderSizes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="mi">0</span><span class="w">
@@ -583,7 +583,7 @@
       </span><span class="nl">"processingTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"requestId"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"supportQuoteCurrencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="s2">"string"</span><span class="w">
+        </span><span class="s2">"String"</span><span class="w">
       </span><span class="p">],</span><span class="w">
       </span><span class="nl">"trackingID"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -614,37 +614,37 @@
 </thead><tbody>
 <tr>
 <td>baseCurrency</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>基础货币 (例如 BTC)</td>
 </tr>
 <tr>
 <td>orderCurrency</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>订单货币</td>
 </tr>
 <tr>
 <td>orderSizeInBaseCurrency</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>基础货币中的订单大小</td>
 </tr>
 <tr>
 <td>orderAmountInOrderCurrency</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>订单货币中的订单金额</td>
 </tr>
 <tr>
 <td>clientOrderId</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>自定义客户订单ID</td>
 </tr>
 <tr>
 <td>side</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>订单方向，BUY或SELL</td>
 </tr>
@@ -666,61 +666,61 @@
 </tr>
 <tr>
 <td>quoteAmountToDeduct</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>需要扣除的报价金额</td>
 </tr>
 <tr>
 <td>quoteAmountToReceive</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>需要接收的报价金额</td>
 </tr>
 <tr>
 <td>quoteCurrencyToDeductIn</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>扣除的报价货币</td>
 </tr>
 <tr>
 <td>quoteCurrencyToReceiveIn</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>接收的报价货币</td>
 </tr>
 <tr>
 <td>quoteId</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>报价ID</td>
 </tr>
 <tr>
 <td>quotePriceInOrderCurrency</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>订单货币中的报价价格</td>
 </tr>
 <tr>
 <td>quotePriceInUSD</td>
-<td>long</td>
+<td>Long</td>
 <td>Yes</td>
 <td>报价价格 (USD)</td>
 </tr>
 <tr>
 <td>quoteTimestamp</td>
-<td>long</td>
+<td>Long</td>
 <td>Yes</td>
 <td>报价时间戳</td>
 </tr>
 <tr>
 <td>quoteValidDurationMs</td>
-<td>long</td>
+<td>Long</td>
 <td>Yes</td>
 <td>报价有效期</td>
 </tr>
 <tr>
 <td>status</td>
-<td>integer</td>
+<td>Integer</td>
 <td>Yes</td>
 <td>订单状态，具有以下值：<br/>8: 余额不足<br/>30001: 订单报价<br/>30008: OTC订单重新报价<br/>30007: OTC订单已成功完成<br/>40001: 服务不可用<br/>40003: 拒绝</td>
 </tr>
@@ -769,19 +769,19 @@
 </thead><tbody>
 <tr>
 <td>quoteId</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>作为路径参数提供的报价ID</td>
 </tr>
 <tr>
 <td>baseAmount</td>
-<td>double</td>
+<td>Double</td>
 <td>No</td>
 <td>接受报价的部分金额</td>
 </tr>
 <tr>
 <td>quoteAmount</td>
-<td>double</td>
+<td>Double</td>
 <td>No</td>
 <td>接受报价的部分金额</td>
 </tr>
@@ -797,67 +797,67 @@
 </thead><tbody>
 <tr>
 <td>status</td>
-<td>integer</td>
+<td>Integer</td>
 <td>Yes</td>
 <td>订单状态，其值为：<br/>8: 余额不足<br/>30001: 订单报价<br/>30008: OTC订单重新报价<br/>30007: OTC订单成功完成<br/>40001: 服务不可用<br/>40003: 被拒绝</td>
 </tr>
 <tr>
 <td>quoteId</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>报价ID</td>
 </tr>
 <tr>
 <td>quoteValidDurationMs</td>
-<td>long</td>
+<td>Long</td>
 <td>Yes</td>
 <td>报价有效期</td>
 </tr>
 <tr>
 <td>quoteAmountToReceive</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>应收报价金额</td>
 </tr>
 <tr>
 <td>quoteCurrencyToReceiveIn</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>应收报价货币</td>
 </tr>
 <tr>
 <td>quoteAmountToDeduct</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>扣除的报价金额</td>
 </tr>
 <tr>
 <td>quoteCurrencyToDeductIn</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>扣除的报价货币</td>
 </tr>
 <tr>
 <td>quoteTimestamp</td>
-<td>long</td>
+<td>Long</td>
 <td>Yes</td>
 <td>报价时间戳</td>
 </tr>
 <tr>
 <td>quotePriceInOrderCurrency</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>订单货币中的报价价格</td>
 </tr>
 <tr>
 <td>quotePriceInUSD</td>
-<td>long</td>
+<td>Long</td>
 <td>Yes</td>
 <td>USD中的报价价格</td>
 </tr>
 <tr>
 <td>side</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>BUY或SELL</td>
 </tr>
@@ -868,7 +868,7 @@
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"errorCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"String"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
@@ -887,7 +887,7 @@
 </thead><tbody>
 <tr>
 <td>quoteId</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>路径参数中提供的报价 ID</td>
 </tr>
@@ -899,7 +899,7 @@
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"markets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"assetName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"assetName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"String"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"maxOrderSizes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="mi">0</span><span class="w">
@@ -923,7 +923,7 @@
       </span><span class="nl">"processingTimestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"requestId"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"supportQuoteCurrencies"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="s2">"string"</span><span class="w">
+        </span><span class="s2">"String"</span><span class="w">
       </span><span class="p">],</span><span class="w">
       </span><span class="nl">"trackingID"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -954,7 +954,7 @@
 </thead><tbody>
 <tr>
 <td>quoteId</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>路径参数中提供的报价 ID</td>
 </tr>
@@ -976,61 +976,61 @@
 </tr>
 <tr>
 <td>quoteAmountToDeduct</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>需要扣除的报价金额</td>
 </tr>
 <tr>
 <td>quoteAmountToReceive</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>需要接收的报价金额</td>
 </tr>
 <tr>
 <td>quoteCurrencyToDeductIn</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>扣除的报价货币</td>
 </tr>
 <tr>
 <td>quoteCurrencyToReceiveIn</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>接收的报价货币</td>
 </tr>
 <tr>
 <td>quoteId</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>报价 ID</td>
 </tr>
 <tr>
 <td>quotePriceInOrderCurrency</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>订单货币中的报价价格</td>
 </tr>
 <tr>
 <td>quotePriceInUSD</td>
-<td>long</td>
+<td>Long</td>
 <td>Yes</td>
 <td>报价价格（美元）</td>
 </tr>
 <tr>
 <td>quoteTimestamp</td>
-<td>long</td>
+<td>Long</td>
 <td>Yes</td>
 <td>报价时间戳</td>
 </tr>
 <tr>
 <td>quoteValidDurationMs</td>
-<td>long</td>
+<td>Long</td>
 <td>Yes</td>
 <td>报价有效期</td>
 </tr>
 <tr>
 <td>status</td>
-<td>integer</td>
+<td>Integer</td>
 <td>Yes</td>
 <td>具有以下值的订单状态：<br/>8: 余额不足<br/>30001: 订单报价<br/>30008: OTC 订单重新报价<br/>30007: OTC 订单成功完成<br/>40001: 服务不可用<br/>40003: 已拒绝</td>
 </tr>
@@ -1070,19 +1070,19 @@
 </thead><tbody>
 <tr>
 <td>0</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>第一个参数是 API 密钥</td>
 </tr>
 <tr>
 <td>1</td>
-<td>long</td>
+<td>Long</td>
 <td>Yes</td>
 <td>Nonce，即当前时间戳</td>
 </tr>
 <tr>
 <td>2</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>生成的签名</td>
 </tr>
@@ -1151,37 +1151,37 @@
 </thead><tbody>
 <tr>
 <td>op</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>操作，此处为 <code>quote</code>、<code>unsubscribe-quote</code> 或 <code>unsubscribe-quote-all</code></td>
 </tr>
 <tr>
 <td>symbol</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>市场标志，参考 <code>getMarkets</code> API</td>
 </tr>
 <tr>
 <td>side</td>
-<td>string</td>
+<td>String</td>
 <td>No</td>
 <td>报价方向，<code>buy</code> 或 <code>sell</code>，区分大小写。如果此字段为空/为null，则将返回两个方向的报价</td>
 </tr>
 <tr>
 <td>clOrderId</td>
-<td>string</td>
+<td>String</td>
 <td>No</td>
 <td>客户自定义订单 ID</td>
 </tr>
 <tr>
 <td>quantity</td>
-<td>double</td>
+<td>Double</td>
 <td>Yes</td>
 <td>订单数量</td>
 </tr>
 <tr>
 <td>currency</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>可以是基础货币或报价货币。如果指定基础货币，那么报价流将以响应形式返回</td>
 </tr>
@@ -1197,73 +1197,73 @@
 </thead><tbody>
 <tr>
 <td>topic</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>WebSocket 主题</td>
 </tr>
 <tr>
 <td>buyQuoteId</td>
-<td>string</td>
+<td>String</td>
 <td>No</td>
 <td>买方的报价 ID。如果该值为空/为null，则表示您的 WebSocket 流未经身份验证或您未订阅此方向</td>
 </tr>
 <tr>
 <td>sellQuoteId</td>
-<td>string</td>
+<td>String</td>
 <td>No</td>
 <td>卖方的报价 ID。如果该值为空/为null，则表示您的 WebSocket 流未经身份验证或您未订阅此方向</td>
 </tr>
 <tr>
 <td>clOrderId</td>
-<td>string</td>
+<td>String</td>
 <td>Yes</td>
 <td>用户自定义订单 ID</td>
 </tr>
 <tr>
 <td>buyQuantity</td>
-<td>double</td>
+<td>Double</td>
 <td>No</td>
 <td>基于报价请求的购买数量。如果该值为null，则表示您未订阅此方向</td>
 </tr>
 <tr>
 <td>buyUnitPrice</td>
-<td>double</td>
+<td>Double</td>
 <td>No</td>
 <td>基础符号每单位的单价。如果该值为null，则表示您未订阅此方向</td>
 </tr>
 <tr>
 <td>buyTotalAmount</td>
-<td>double</td>
+<td>Double</td>
 <td>No</td>
 <td>以报价货币支付的总价格。如果该值为null，则表示您未订阅此方向</td>
 </tr>
 <tr>
 <td>sellQuantity</td>
-<td>double</td>
+<td>Double</td>
 <td>No</td>
 <td>基于报价请求的销售数量。如果该值为null，则表示您未订阅此方向</td>
 </tr>
 <tr>
 <td>sellUnitPrice</td>
-<td>double</td>
+<td>Double</td>
 <td>No</td>
 <td>基础符号每单位的单价。如果该值为null，则表示您未订阅此方向</td>
 </tr>
 <tr>
 <td>sellTotalAmount</td>
-<td>double</td>
+<td>Double</td>
 <td>No</td>
 <td>以报价货币支付的总价格。如果该值为null，则表示您未订阅此方向</td>
 </tr>
 <tr>
 <td>status</td>
-<td>string</td>
+<td>String</td>
 <td>No</td>
 <td>响应状态。如果该值为null，则表示您未订阅此方向</td>
 </tr>
 <tr>
 <td>reason</td>
-<td>string</td>
+<td>String</td>
 <td>No</td>
 <td>如果返回错误，reason 字段将包含错误的原因</td>
 </tr>
