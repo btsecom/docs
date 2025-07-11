@@ -1078,7 +1078,7 @@ BTSE 的速率限制如下：
 | postOnly      | Boolean | Yes      | 表明订单是否为只做Maker(Post only) 订单                                                                                                                                                                                                                                                                           |
 | price         | Double  | Yes      | 订单价格                                                                                                                                                                                                                                                                                           |
 | side          | String  | Yes      | 订单方向<br/>BUY 或 SELL                                                                                                                                                                                                                                                                           |
-| status        | Long    | Yes      | 订单状态<br/>2: 订单已插入<br/>3: 订单已交易<br/>4: 订单已完全交易<br/>5: 订单部分交易<br/>6: 订单已取消<br/>7: 订单已退款<br/>9: 触发已插入<br>10: 触发已激活<br/>15: 订单被拒绝<br/>16: 订单未找到<br/>17: 请求失败<br/>請参照[`API Enum`](#api-enum)                                                                                        |
+| status        | Integer    | Yes      | 订单状态<br/>2: 订单已插入<br/>3: 订单已交易<br/>4: 订单已完全交易<br/>5: 订单部分交易<br/>6: 订单已取消<br/>7: 订单已退款<br/>9: 触发已插入<br>10: 触发已激活<br/>15: 订单被拒绝<br/>16: 订单未找到<br/>17: 请求失败<br/>請参照[`API Enum`](#api-enum)                                                                                        |
 | time_in_force | String  | Yes      | 订单有效性                                                                                                                                                                                                                                                                                         |
 | timestamp     | Long    | Yes      | 订单时间戳                                                                                                                                                                                                                                                                                         |
 | trigger       | Boolean | Yes      | 如果订单是触发订单的指示器                                                                                                                                                                                                                                                                        |
@@ -1180,7 +1180,7 @@ BTSE 的速率限制如下：
 | price         | Double  | Yes      | 订单价格                                                                                                                                                                                                                                                                                           |
 | side          | String  | Yes      | 订单方向<br/>BUY 或 SELL                                                                                                                                                                                                                                                                           |
 | size          | Long    | Yes      | 订单大小以`合同大小`表示（即使在风险限额调整后也保持不变）                                                                                                                                                                                                                                          |
-| status        | Long    | Yes      | 订单状态<br/>2: 订单已插入<br/>3: 订单已交易<br/>4: 订单已完全交易<br/>5: 订单部分交易<br/>6: 订单已取消<br/>7: 订单已退款<br/>9: 触发已插入<br>10: 触发已激活<br/>15: 订单被拒绝<br/>16: 订单未找到<br/>17: 请求失败<br/>請参照[`API Enum`](#api-enum)                                                                                        |
+| status        | Integer    | Yes      | 订单状态<br/>2: 订单已插入<br/>3: 订单已交易<br/>4: 订单已完全交易<br/>5: 订单部分交易<br/>6: 订单已取消<br/>7: 订单已退款<br/>9: 触发已插入<br>10: 触发已激活<br/>15: 订单被拒绝<br/>16: 订单未找到<br/>17: 请求失败<br/>請参照[`API Enum`](#api-enum)                                                                                        |
 | time_in_force | String  | Yes      | 订单有效性                                                                                                                                                                                                                                                                                         |
 | timestamp     | Long    | Yes      | 订单时间戳                                                                                                                                                                                                                                                                                         |
 | trigger       | Boolean | Yes      | 如果订单是触发订单的指示器                                                                                                                                                                                                                                                                        |
@@ -1397,7 +1397,7 @@ BTSE 的速率限制如下：
 | postOnly      | Boolean | Yes      | 表明订单是否为只做Maker(Post only) 订单                                                                                                                                                                                                                                                                           |
 | price         | Double  | Yes      | 订单价格                                                                                                                                                                                                                                                                                           |
 | side          | String  | Yes      | 订单方向<br/>BUY 或 SELL                                                                                                                                                                                                                                                                           |
-| status        | Long    | Yes      | 订单状态<br/>2: 订单已插入<br/>3: 订单已交易<br/>4: 订单已完全交易<br/>5: 订单部分交易<br/>6: 订单已取消<br/>7: 订单已退款<br/>9: 触发已插入<br>10: 触发已激活<br/>15: 订单被拒绝<br/>16: 订单未找到<br/>17: 请求失败<br/>請参照[`API Enum`](#api-enum)                                                                                        |
+| status        | Integer    | Yes      | 订单状态<br/>2: 订单已插入<br/>3: 订单已交易<br/>4: 订单已完全交易<br/>5: 订单部分交易<br/>6: 订单已取消<br/>7: 订单已退款<br/>9: 触发已插入<br>10: 触发已激活<br/>15: 订单被拒绝<br/>16: 订单未找到<br/>17: 请求失败<br/>請参照[`API Enum`](#api-enum)                                                                                        |
 | time_in_force | String  | Yes      | 订单有效性                                                                                                                                                                                                                                                                                         |
 | timestamp     | Long    | Yes      | 订单时间戳                                                                                                                                                                                                                                                                                         |
 | trigger       | String  | Yes      | 如果订单是触发订单的指示器                                                                                                                                                                                                                                                                        |
@@ -1481,7 +1481,7 @@ BTSE 的速率限制如下：
 | postOnly        | Boolean | Yes      | 表明订单是否为只做Maker(Post only) 订单                                                                                                                                                                                                                                                                                   |
 | price           | Double  | Yes      | 订单价格                                                                                                                                                                                                                                                                                                   |
 | side            | String  | Yes      | 订单方向<br/>BUY 或 SELL                                                                                                                                                                                                                                                                                   |
-| status          | Long    | Yes      | 订单状态<br/>2: 订单已插入<br/>3: 订单已交易<br/>4: 订单已完全交易<br/>5: 订单部分交易<br/>6: 订单已取消<br/>7: 订单已退款<br/>9: 触发已插入<br>10: 触发已激活<br/>15: 订单被拒绝<br/>16: 订单未找到<br/>17: 请求失败<br/>請参照[`API Enum`](#api-enum)                                                                                              |
+| status          | Integer    | Yes      | 订单状态<br/>2: 订单已插入<br/>3: 订单已交易<br/>4: 订单已完全交易<br/>5: 订单部分交易<br/>6: 订单已取消<br/>7: 订单已退款<br/>9: 触发已插入<br>10: 触发已激活<br/>15: 订单被拒绝<br/>16: 订单未找到<br/>17: 请求失败<br/>請参照[`API Enum`](#api-enum)                                                                                              |
 | time_in_force   | String  | Yes      | 订单有效性                                                                                                                                                                                                                                                                                                |
 | timestamp       | Long    | Yes      | 订单时间戳                                                                                                                                                                                                                                                                                                |
 | trigger         | Boolean | Yes      | 表明订单是否为触发订单的指示器                                                                                                                                                                                                                                                                            |
@@ -1923,7 +1923,7 @@ BTSE 的速率限制如下：
 | postOnly       | Boolean | Yes      | 表示订单是否仅为只做Maker(Post only) 订单                                                                                                                                                                                                                                                     |
 | price          | Double  | Yes      | 订单价格                                                                                                                                                                                                                                                                     |
 | side           | String  | Yes      | 订单方向<br/>BUY 或 SELL                                                                                                                                                                                                                                                    |
-| status         | Long    | Yes      | 订单状态<br/>2: 已插入订单<br/>3: 已交易订单<br/>4: 订单已全部交易<br/>5: 订单部分交易<br/>6: 已取消订单<br/>7: 已退款订单<br/>9: 触发器已插入<br>10: 触发器已激活<br/>15: 订单被拒绝<br/>16: 找不到订单<br/>17: 请求失败<br/>請参照[`API Enum`](#api-enum)                                                   |
+| status         | Integer    | Yes      | 订单状态<br/>2: 已插入订单<br/>3: 已交易订单<br/>4: 订单已全部交易<br/>5: 订单部分交易<br/>6: 已取消订单<br/>7: 已退款订单<br/>9: 触发器已插入<br>10: 触发器已激活<br/>15: 订单被拒绝<br/>16: 找不到订单<br/>17: 请求失败<br/>請参照[`API Enum`](#api-enum)                                                   |
 | time_in_force  | String  | Yes      | 订单有效性                                                                                                                                                                                                                                                                  |
 | timestamp      | Long    | Yes      | 订单时间戳                                                                                                                                                                                                                                                                  |
 | trigger        | String  | Yes      | 指示订单是否为触发订单                                                                                                                                                                                                                                                      |
@@ -2025,7 +2025,7 @@ BTSE 的速率限制如下：
 | 名称       | 类型    | 是否必须 | 描述                                                                                                                                                     |
 | ---        | ---     | ---      | ---                                                                                                                                                      |
 | symbol     | String  | Yes      | 市场符号                                                                                                                                                 |
-| status     | Long    | Yes      | 请求的状态。可取值为：<br/>8: 余额不足<br/>12: 更新风险限额时出错<br/>20: 成功<br/>41: 风险限额无效                                                                                          |
+| status     | Integer    | Yes      | 请求的状态。可取值为：<br/>8: 余额不足<br/>12: 更新风险限额时出错<br/>20: 成功<br/>41: 风险限额无效                                                                                          |
 | type       | Double  | Yes      | 值将为94，表示类型为`风险限额`                                                                                                                           |
 | timestamp  | Long    | Yes      | 设置风险限额的时间戳                                                                                                                                      |
 | message    | Long    | Yes      | 消息                                                                                                                                                     |
@@ -2084,7 +2084,7 @@ BTSE 的速率限制如下：
 | 名称       | 类型    | 是否必须 | 描述                                                                                                                                                          |
 | ---        | ---     | ---      | ---                                                                                                                                                           |
 | symbol     | String  | Yes      | 市场符号                                                                                                                                                      |
-| status     | Long    | Yes      | 请求的状态。可取值为：<br/>8: 余额不足<br/>13: 无效的杠杆<br/>20: 成功<br/>64: 正在进行的清算                                                                                             |
+| status     | Integer    | Yes      | 请求的状态。可取值为：<br/>8: 余额不足<br/>13: 无效的杠杆<br/>20: 成功<br/>64: 正在进行的清算                                                                                             |
 | type       | Double  | Yes      | 值将为93，表示类型为`杠杆`                                                                                                                                    |
 | timestamp  | Long    | Yes      | 设置杠杆的时间戳                                                                                                                                               |
 | message    | Long    | Yes      | 消息                                                                                                                                                          |
@@ -2176,7 +2176,7 @@ BTSE 的速率限制如下：
 
 | 名称       | 类型    | 是否必须 | 描述                                                    |
 | ---        | ---     | ---      | ---                                                     |
-| status     | Long    | No       | 状态。仅在发生错误时可用。                                |
+| status     | Integer    | No       | 状态。仅在发生错误时可用。                                |
 | errorCode  | Long    | No       | 错误代码。仅在发生错误时可用。                            |
 | message    | String  | No       | 响应消息。仅在发生错误时可用。                            |
 
@@ -2313,7 +2313,7 @@ BTSE 的速率限制如下：
 | postOnly      | Boolean  | Yes       | 指示订单是否为只做Maker(Post only) 订单  |
 | price         | Double  | Yes       | 订单价格 |
 | side          | String  | Yes       | 订单方向<br/>BUY 或 SELL |
-| status        | Long  | Yes       | 订单状态<br/>2: 订单已插入<br/>3: 订单已成交<br/>4: 订单已完全成交<br/>5: 订单部分成交<br/>6: 订单已取消<br/>7: 订单已退款<br/>9: 触发已插入<br>10: 触发已激活<br>15: 订单已拒绝<br>16: 未找到订单<br>17: 请求失败<br/>請参照[`API Enum`](#api-enum) |
+| status        | Integer  | Yes       | 订单状态<br/>2: 订单已插入<br/>3: 订单已成交<br/>4: 订单已完全成交<br/>5: 订单部分成交<br/>6: 订单已取消<br/>7: 订单已退款<br/>9: 触发已插入<br>10: 触发已激活<br>15: 订单已拒绝<br>16: 未找到订单<br>17: 请求失败<br/>請参照[`API Enum`](#api-enum) |
 | time_in_force | String  | Yes       | 订单有效期 |
 | timestamp     | Long  | Yes       | 订单时间戳  |
 | trigger       | Boolean  | Yes       | 指示订单是否为触发订单 |
@@ -2393,7 +2393,7 @@ BTSE 的速率限制如下：
 | ---       | ---     | ---      |-----------------------|
 | symbol    | String  | Yes      | 市场交易对                 |
 | timestamp | Long    | No       | 订单时间戳                 |
-| status    | String  | No       | 订单状态 <br>20: 成功       |
+| status    | Integer  | No       | 订单状态 <br>20: 成功       |
 | type      | String  | No       | 数值为129，表示为“期货仓位模式更改”。 |
 | message   | String  | No       | 交易消息                  |
 
