@@ -174,12 +174,12 @@ Gets OTC market information
 ### Response Content
 | Name                   | Type         | Required | Description                  |
 | ---                    | ---          | ---      | ---                          |
-| assetName              | string       | Yes      | Asset name                   |
+| assetName              | String       | Yes      | Asset name                   |
 | maxOrderSizes          | Double Array | Yes      | Maximum order size           |
 | maxOrderValues         | Double Array | Yes      | Maximum order notional value |
 | minOrderSizes          | Double Array | Yes      | Minimum order size           |
 | minOrderValues         | Double Array | Yes      | Minimum order notional value |
-| supportQuoteCurrencies | string Array | Yes      | Supported quote currencies   |
+| supportQuoteCurrencies | String Array | Yes      | Supported quote currencies   |
 
 ## Request for Quote
 
@@ -202,7 +202,7 @@ Gets OTC market information
 {
   "markets": [
     {
-      "assetName": "string",
+      "assetName": "String",
       "id": 0,
       "maxOrderSizes": [
         0
@@ -226,7 +226,7 @@ Gets OTC market information
       "processingTimestamp": 0,
       "requestId": 0,
       "supportQuoteCurrencies": [
-        "string"
+        "String"
       ],
       "trackingID": 0
     }
@@ -252,28 +252,28 @@ Request for a quote. Requires `Trading` permission.
 
 | Name                       | Type         | Required | Description                    |
 | ---                        | ---          | ---      | ---                            |
-| baseCurrency               | string       | Yes      | Base currency (eg. BTC)        |
-| orderCurrency              | string       | Yes      | Order currency                 |
+| baseCurrency               | String       | Yes      | Base currency (eg. BTC)        |
+| orderCurrency              | String       | Yes      | Order currency                 |
 | orderSizeInBaseCurrency    | Double Array | Yes      | Size of order in base currency |
 | orderAmountInOrderCurrency | Double Array | Yes      | Order amount in order currency |
 | clientOrderId              | Double Array | Yes      | Custom client order ID         |
-| side                       | string       | Yes      | Order side, BUY or SELL        |
+| side                       | String       | Yes      | Order side, BUY or SELL        |
 
 
 ### Response Content
 | Name                      | Type    | Required | Description                                                                                                                                                                                               |
 | ---                       | ---     | ---      | ---                                                                                                                                                                                                       |
 | markets                   | Asset   | Yes      | Asset information                                                                                                                                                                                         |
-| quoteAmountToDeduct       | double  | Yes      | Quote amount to deduct                                                                                                                                                                                    |
-| quoteAmountToReceive      | double  | Yes      | Quote amount to receive                                                                                                                                                                                   |
-| quoteCurrencyToDeductIn   | string  | Yes      | Quote currency to deduct in                                                                                                                                                                               |
-| quoteCurrencyToReceiveIn  | string  | Yes      | Quote currency to receive                                                                                                                                                                                 |
-| quoteId                   | string  | Yes      | Quote ID                                                                                                                                                                                                  |
-| quotePriceInOrderCurrency | double  | Yes      | Quote price in order currency                                                                                                                                                                             |
-| quotePriceInUSD           | long    | Yes      | Quote price in USD                                                                                                                                                                                        |
-| quoteTimestamp            | long    | Yes      | Quote timestamp                                                                                                                                                                                           |
-| quoteValidDurationMs      | long    | Yes      | Quote validity                                                                                                                                                                                            |
-| status                    | integer | Yes      | Order status with values: <br/>8: Insufficient Balance<br/>30001: Order Quote<br/>30008: OTC Order Requote<br/>30007: OTC Order completed successfully<br/>40001: Service Unavailable<br/>40003: Rejected |
+| quoteAmountToDeduct       | Double  | Yes      | Quote amount to deduct                                                                                                                                                                                    |
+| quoteAmountToReceive      | Double  | Yes      | Quote amount to receive                                                                                                                                                                                   |
+| quoteCurrencyToDeductIn   | String  | Yes      | Quote currency to deduct in                                                                                                                                                                               |
+| quoteCurrencyToReceiveIn  | String  | Yes      | Quote currency to receive                                                                                                                                                                                 |
+| quoteId                   | String  | Yes      | Quote ID                                                                                                                                                                                                  |
+| quotePriceInOrderCurrency | Double  | Yes      | Quote price in order currency                                                                                                                                                                             |
+| quotePriceInUSD           | Long    | Yes      | Quote price in USD                                                                                                                                                                                        |
+| quoteTimestamp            | Long    | Yes      | Quote timestamp                                                                                                                                                                                           |
+| quoteValidDurationMs      | Long    | Yes      | Quote validity                                                                                                                                                                                            |
+| status                    | Integer | Yes      | Order status with values: <br/>8: Insufficient Balance<br/>30001: Order Quote<br/>30008: OTC Order Requote<br/>30007: OTC Order completed successfully<br/>40001: Service Unavailable<br/>40003: Rejected |
 
 ## Accept Quote
 
@@ -310,32 +310,32 @@ Request for a quote. Requires `Trading` permission.
 Accepts a quote.
 The quote is allowed to be **partially accepted** by taking `baseAmount` or `quoteAmount` in the request body,
 which corresponds to `orderSizeInBaseCurrency` and `orderAmountInOrderCurrency` in [`quote`](#request-for-quote), respectively.
-Note that if the amount is larger than the the number you quote, only the quoted number will be accepted.
+Note that if the amount is larger than the the Double you quote, only the quoted Double will be accepted.
 Requires `Trading` permission.
 
 ### Request Parameter
 
 | Name          | Type     | Required   | Description                                |
 | ------------- | -------- | ---------- | ------------------------------------------ |
-| quoteId       | string   | Yes        | Quote ID to supplied as a path parameter   |
-| baseAmount    | double   | No         | The partial amount to accept the quote     |
-| quoteAmount   | double   | No         | The partial amount to accept the quote     |
+| quoteId       | String   | Yes        | Quote ID to supplied as a path parameter   |
+| baseAmount    | Double   | No         | The partial amount to accept the quote     |
+| quoteAmount   | Double   | No         | The partial amount to accept the quote     |
 
 ### Response Content
 
 | Name                      | Type    | Required | Description                                                                                                                                                                                               |
 | ---                       | ---     | ---      | ---                                                                                                                                                                                                       |
-| status                    | integer | Yes      | Order status with values: <br/>8: Insufficient Balance<br/>30001: Order Quote<br/>30008: OTC Order Requote<br/>30007: OTC Order completed successfully<br/>40001: Service Unavailable<br/>40003: Rejected |
-| quoteId                   | string  | Yes      | Quote ID                                                                                                                                                                                                  |
-| quoteValidDurationMs      | long    | Yes      | Quote validity                                                                                                                                                                                            |
-| quoteAmountToReceive      | double  | Yes      | Quote amount to receive                                                                                                                                                                                   |
-| quoteCurrencyToReceiveIn  | string  | Yes      | Quote currency to receive                                                                                                                                                                                 |
-| quoteAmountToDeduct       | double  | Yes      | Quote amount to deduct                                                                                                                                                                                    |
-| quoteCurrencyToDeductIn   | string  | Yes      | Quote currency to deduct in                                                                                                                                                                               |
-| quoteTimestamp            | long    | Yes      | Quote timestamp                                                                                                                                                                                           |
-| quotePriceInOrderCurrency | double  | Yes      | Quote price in order currency                                                                                                                                                                             |
-| quotePriceInUSD           | long    | Yes      | Quote price in USD                                                                                                                                                                                        |
-| side                      | string  | Yes      | Buy or sell                                                                                                                                                                                               |
+| status                    | Integer | Yes      | Order status with values: <br/>8: Insufficient Balance<br/>30001: Order Quote<br/>30008: OTC Order Requote<br/>30007: OTC Order completed successfully<br/>40001: Service Unavailable<br/>40003: Rejected |
+| quoteId                   | String  | Yes      | Quote ID                                                                                                                                                                                                  |
+| quoteValidDurationMs      | Long    | Yes      | Quote validity                                                                                                                                                                                            |
+| quoteAmountToReceive      | Double  | Yes      | Quote amount to receive                                                                                                                                                                                   |
+| quoteCurrencyToReceiveIn  | String  | Yes      | Quote currency to receive                                                                                                                                                                                 |
+| quoteAmountToDeduct       | Double  | Yes      | Quote amount to deduct                                                                                                                                                                                    |
+| quoteCurrencyToDeductIn   | String  | Yes      | Quote currency to deduct in                                                                                                                                                                               |
+| quoteTimestamp            | Long    | Yes      | Quote timestamp                                                                                                                                                                                           |
+| quotePriceInOrderCurrency | Double  | Yes      | Quote price in order currency                                                                                                                                                                             |
+| quotePriceInUSD           | Long    | Yes      | Quote price in USD                                                                                                                                                                                        |
+| side                      | String  | Yes      | Buy or sell                                                                                                                                                                                               |
 
 
 
@@ -346,7 +346,7 @@ Requires `Trading` permission.
 ```json
 {
   "errorCode": -1,
-  "message": "string",
+  "message": "String",
   "status": 0
 }
 
@@ -360,7 +360,7 @@ Reject current quote. Requires `Trading` permission.
 
 | Name    | Type   | Required | Description                              |
 | ---     | ---    | ---      | ---                                      |
-| quoteId | string | Yes      | Quote ID to supplied as a path parameter |
+| quoteId | String | Yes      | Quote ID to supplied as a path parameter |
 
 ## Query Order
 
@@ -370,7 +370,7 @@ Reject current quote. Requires `Trading` permission.
 {
   "markets": [
     {
-      "assetName": "string",
+      "assetName": "String",
       "id": 0,
       "maxOrderSizes": [
         0
@@ -394,7 +394,7 @@ Reject current quote. Requires `Trading` permission.
       "processingTimestamp": 0,
       "requestId": 0,
       "supportQuoteCurrencies": [
-        "string"
+        "String"
       ],
       "trackingID": 0
     }
@@ -420,23 +420,23 @@ Query order information. Requires `Read` permission.
 
 | Name    | Type   | Required | Description                              |
 | ---     | ---    | ---      | ---                                      |
-| quoteId | string | Yes      | Quote ID to supplied as a path parameter |
+| quoteId | String | Yes      | Quote ID to supplied as a path parameter |
 
 ### Response Content
 
 | Name                      | Type    | Required | Description                                                                                                                                                                                               |
 | ---                       | ---     | ---      | ---                                                                                                                                                                                                       |
 | markets                   | Asset   | Yes      | Asset information                                                                                                                                                                                         |
-| quoteAmountToDeduct       | double  | Yes      | Quote amount to deduct                                                                                                                                                                                    |
-| quoteAmountToReceive      | double  | Yes      | Quote amount to receive                                                                                                                                                                                   |
-| quoteCurrencyToDeductIn   | string  | Yes      | Quote currency to deduct in                                                                                                                                                                               |
-| quoteCurrencyToReceiveIn  | string  | Yes      | Quote currency to receive                                                                                                                                                                                 |
-| quoteId                   | string  | Yes      | Quote ID                                                                                                                                                                                                  |
-| quotePriceInOrderCurrency | double  | Yes      | Quote price in order currency                                                                                                                                                                             |
-| quotePriceInUSD           | long    | Yes      | Quote price in USD                                                                                                                                                                                        |
-| quoteTimestamp            | long    | Yes      | Quote timestamp                                                                                                                                                                                           |
-| quoteValidDurationMs      | long    | Yes      | Quote validity                                                                                                                                                                                            |
-| status                    | integer | Yes      | Order status with values: <br/>8: Insufficient Balance<br/>30001: Order Quote<br/>30008: OTC Order Requote<br/>30007: OTC Order completed successfully<br/>40001: Service Unavailable<br/>40003: Rejected |
+| quoteAmountToDeduct       | Double  | Yes      | Quote amount to deduct                                                                                                                                                                                    |
+| quoteAmountToReceive      | Double  | Yes      | Quote amount to receive                                                                                                                                                                                   |
+| quoteCurrencyToDeductIn   | String  | Yes      | Quote currency to deduct in                                                                                                                                                                               |
+| quoteCurrencyToReceiveIn  | String  | Yes      | Quote currency to receive                                                                                                                                                                                 |
+| quoteId                   | String  | Yes      | Quote ID                                                                                                                                                                                                  |
+| quotePriceInOrderCurrency | Double  | Yes      | Quote price in order currency                                                                                                                                                                             |
+| quotePriceInUSD           | Long    | Yes      | Quote price in USD                                                                                                                                                                                        |
+| quoteTimestamp            | Long    | Yes      | Quote timestamp                                                                                                                                                                                           |
+| quoteValidDurationMs      | Long    | Yes      | Quote validity                                                                                                                                                                                            |
+| status                    | Integer | Yes      | Order status with values: <br/>8: Insufficient Balance<br/>30001: Order Quote<br/>30008: OTC Order Requote<br/>30007: OTC Order completed successfully<br/>40001: Service Unavailable<br/>40003: Rejected |
 
 # Websocket Streams
 
@@ -472,9 +472,9 @@ Below details the arguments needed to be sent in.
 
 | Index | Type   | Required | Description                          |
 | ---   | ---    | ---      | ---                                  |
-| 0     | string | Yes      | First argument is the API key        |
-| 1     | long   | Yes      | Nonce which is the current timestamp |
-| 2     | string | Yes      | Generated signature                  |
+| 0     | String | Yes      | First argument is the API key        |
+| 1     | Long   | Yes      | Nonce which is the current timestamp |
+| 2     | String | Yes      | Generated signature                  |
 
 > Generating a signature
 
@@ -546,29 +546,29 @@ Receive quote streams by subscribing to the `quote` websocket. The websocket top
 
 | Name      | Type   | Required | Description                                                                                                             |
 | ---       | ---    | ---      | ---                                                                                                                     |
-| op        | string | Yes      | Operation, in this case it is `quote`, `unsubscribe-quote`, or `unsubscribe-quote-all`                                  |
-| symbol    | string | Yes      | Market symbol, refer to `getMarkets` API                                                                                |
-| side      | string | No       | Quote side, `buy` or `sell`, case sensitive. Both sides will be returned when this field is empty/null                  |
-| clOrderId | string | No       | Client custom order Id                                                                                                  |
-| quantity  | double | Yes      | Order quantity                                                                                                          |
-| currency  | string | Yes      | Can be either in the base or quote currency. If specified in the base currency, then the quote stream will respond with |
+| op        | String | Yes      | Operation, in this case it is `quote`, `unsubscribe-quote`, or `unsubscribe-quote-all`                                  |
+| symbol    | String | Yes      | Market symbol, refer to `getMarkets` API                                                                                |
+| side      | String | No       | Quote side, `buy` or `sell`, case sensitive. Both sides will be returned when this field is empty/null                  |
+| clOrderId | String | No       | Client custom order Id                                                                                                  |
+| quantity  | Double | Yes      | Order quantity                                                                                                          |
+| currency  | String | Yes      | Can be either in the base or quote currency. If specified in the base currency, then the quote stream will respond with |
 
 ### Response Content
 
 | Name            | Type   | Required | Description                                                                                                                                         |
 | ---             | ---    | ---      | ---                                                                                                                                                 |
-| topic           | string | Yes      | Websocket topic                                                                                                                                     |
-| buyQuoteId      | string | No       | Quote Id for the buy side. If the value is empty / null, it means that you websocket stream is not authenticated or you doesn't subscribe this side |
-| sellQuoteId     | string | No       | Quote Id for the sell side. If the value is empty / null, it means that you websocket stream is not authenticated or you doesn't subscribe this side|
-| clOrderId       | string | Yes      | User customer Order Id                                                                                                                              |
-| buyQuantity     | double | No       | Quantity to purchase based on the quote request. If the value is null, it means that you doesn't subscribe this side                                |
-| buyUnitPrice    | double | No       | Unit price per unit of the base symbol. If the value is null, it means that you doesn't subscribe this side                                         |
-| buyTotalAmount  | double | No       | Total price to pay in quote currency. If the value is null, it means that you doesn't subscribe this side                                           |
-| sellQuantity    | double | No       | Quantity to sell based on the quote request. If the value is null, it means that you doesn't subscribe this side                                    |
-| sellUnitPrice   | double | No       | Unit price per unit of the base symbol. If the value is null, it means that you doesn't subscribe this side                                         |
-| sellTotalAmount | double | No       | Total price to pay in quote currency. If the value is null, it means that you doesn't subscribe this side                                           |
-| status          | string | No       | Status of the response. If the value is null, it means that you doesn't subscribe this side                                                         |
-| reason          | string | No       | If an error is returned, the reason field will contain the reasons for the error                                                                    |
+| topic           | String | Yes      | Websocket topic                                                                                                                                     |
+| buyQuoteId      | String | No       | Quote Id for the buy side. If the value is empty / null, it means that you websocket stream is not authenticated or you doesn't subscribe this side |
+| sellQuoteId     | String | No       | Quote Id for the sell side. If the value is empty / null, it means that you websocket stream is not authenticated or you doesn't subscribe this side|
+| clOrderId       | String | Yes      | User customer Order Id                                                                                                                              |
+| buyQuantity     | Double | No       | Quantity to purchase based on the quote request. If the value is null, it means that you doesn't subscribe this side                                |
+| buyUnitPrice    | Double | No       | Unit price per unit of the base symbol. If the value is null, it means that you doesn't subscribe this side                                         |
+| buyTotalAmount  | Double | No       | Total price to pay in quote currency. If the value is null, it means that you doesn't subscribe this side                                           |
+| sellQuantity    | Double | No       | Quantity to sell based on the quote request. If the value is null, it means that you doesn't subscribe this side                                    |
+| sellUnitPrice   | Double | No       | Unit price per unit of the base symbol. If the value is null, it means that you doesn't subscribe this side                                         |
+| sellTotalAmount | Double | No       | Total price to pay in quote currency. If the value is null, it means that you doesn't subscribe this side                                           |
+| status          | String | No       | Status of the response. If the value is null, it means that you doesn't subscribe this side                                                         |
+| reason          | String | No       | If an error is returned, the reason field will contain the reasons for the error                                                                    |
 
 
 </section>
