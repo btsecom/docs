@@ -486,14 +486,14 @@ BTSE 的速率限制如下：
 
 #### 订单簿
 
-| 名称       | 类型   | 是否必须 | 描述                    |
-| ---       | ---    | ---      | ---                    |
-| symbol    | String | Yes      | 市场符号                |
-| buyQuote  | Quote  | Yes      | 买入报价的数组          |
-| sellQuote | Quote  | Yes      | 卖出报价的数组          |
-| timestamp | Long   | Yes      | 订单簿的时间戳          |
+| 名称       | 类型          | 是否必须 | 描述                    |
+| ---       | ---           | ---      | ---                    |
+| symbol    | String        | Yes      | 市场符号                |
+| buyQuote  | Quote Object  | Yes      | 买入报价的数组          |
+| sellQuote | Quote Object  | Yes      | 卖出报价的数组          |
+| timestamp | Long          | Yes      | 订单簿的时间戳          |
 
-#### 报价
+#### 报价物件
 
 | 名称   | 类型    | 是否必须 | 描述      |
 | ---   | ---     | ---      | ---       |
@@ -539,14 +539,14 @@ BTSE 的速率限制如下：
 
 #### 订单簿
 
-| 名称       | 类型   | 是否必须 | 描述                    |
-| ---       | ---    | ---      | ---                    |
-| symbol    | String | Yes      | 市场符号                |
-| buyQuote  | Quote  | Yes      | 购买报价的数组          |
-| sellQuote | Quote  | Yes      | 出售报价的数组          |
-| timestamp | Long   | Yes      | 订单簿的时间戳          |
+| 名称       | 类型         | 是否必须 | 描述                    |
+| ---       | ---          | ---      | ---                    |
+| symbol    | String       | Yes      | 市场符号                |
+| buyQuote  | Quote Object | Yes      | 购买报价的数组          |
+| sellQuote | Quote Object | Yes      | 出售报价的数组          |
+| timestamp | Long         | Yes      | 订单簿的时间戳          |
 
-#### 报价
+#### 报价物件
 
 | 名称   | 类型    | 是否必须 | 描述      |
 | ---   | ---     | ---      | ---       |

@@ -486,14 +486,14 @@ Retrieves a snapshot of the orderbook.
 
 #### Orderbook
 
-| Name      | Type   | Required | Description            |
-| ---       | ---    | ---      | ---                    |
-| symbol    | String | Yes      | Market symbol          |
-| buyQuote  | Quote  | Yes      | Array of Buy quotes    |
-| sellQuote | Quote  | Yes      | Array of Sell quotes   |
-| timestamp | Long   | Yes      | Timestamp of orderbook |
+| Name      | Type          | Required | Description            |
+| ---       | ---           | ---      | ---                    |
+| symbol    | String        | Yes      | Market symbol          |
+| buyQuote  | Quote Object  | Yes      | Array of Buy quotes    |
+| sellQuote | Quote Object  | Yes      | Array of Sell quotes   |
+| timestamp | Long          | Yes      | Timestamp of orderbook |
 
-#### Quote
+#### Quote Object
 
 | Name  | Type   | Required | Description |
 | ---   | ---    | ---      | ---         |
@@ -539,14 +539,14 @@ Retrieves a Level 2 snapshot of the orderbook
 
 #### Orderbook
 
-| Name      | Type   | Required | Description            |
-| ---       | ---    | ---      | ---                    |
-| symbol    | String | Yes      | Market symbol          |
-| buyQuote  | Quote  | Yes      | Array of Buy quotes    |
-| sellQuote | Quote  | Yes      | Array of Sell quotes   |
-| timestamp | Long   | Yes      | Timestamp of orderbook |
+| Name      | Type          | Required | Description            |
+| ---       | ---           | ---      | ---                    |
+| symbol    | String | Yes  | Market symbol          |
+| buyQuote  | Quote Object  | Yes      | Array of Buy quotes    |
+| sellQuote | Quote Object  | Yes      | Array of Sell quotes   |
+| timestamp | Long          | Yes      | Timestamp of orderbook |
 
-#### Quote
+#### Quote Object
 
 | Name  | Type   | Required | Description |
 | ---   | ---    | ---      | ---         |
