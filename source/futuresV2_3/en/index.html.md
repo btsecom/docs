@@ -443,7 +443,7 @@ Retrieve current prices on the platform. If no symbol specified, all symbols wil
 
 | Name       | Type   | Required | Description           |
 | ---        | ---    | ---      | ---                   |
-| symbol     | Double | Yes      | Market symbol         |
+| symbol     | String | Yes      | Market symbol         |
 | indexPrice | Double | Yes      | Index price           |
 | lastPrice  | Double | Yes      | Last transacted price |
 | markPrice  | Double | Yes      | Mark price            |
@@ -541,7 +541,7 @@ Retrieves a Level 2 snapshot of the orderbook
 
 | Name      | Type          | Required | Description            |
 | ---       | ---           | ---      | ---                    |
-| symbol    | String | Yes  | Market symbol          |
+| symbol    | String        | Yes  | Market symbol          |
 | buyQuote  | Quote Object  | Yes      | Array of Buy quotes    |
 | sellQuote | Quote Object  | Yes      | Array of Sell quotes   |
 | timestamp | Long          | Yes      | Timestamp of orderbook |
@@ -760,7 +760,7 @@ Gets all default market settings, including initial margin and maintenance margi
 | ---                      | ---      | ---      | ---                                                                                                   |
 | code                     | Integer   | Yes     | Response code                                                                                                  |
 | msg                      | Integer  | Yes      | Response message                                                                                               |
-| time                     | Integer  | Yes      | Response Time                                                                                                  |
+| time                     | Long  | Yes      | Response Time                                                                                                  |
 | data                     | Object   | No       |  Refer to data object below                                                                                                 |
 | success                  | Boolean   | Yes      | Whether or not query is successful                                                                                                  |
 
@@ -2860,7 +2860,7 @@ Transfers funds between user and sub-account wallet. User can specify the source
 |----------------------|----------|----------|---------------------|
 | code                 | Integer  | Yes      | Response code       |
 | msg                  | String   | Yes      | Response message    |
-| time                 | Integer  | Yes      | Response Time       |
+| time                 | Long   | Yes      | Response Time       |
 | data                 | Object   | No       |                     |
 | success              | Boolean  | Yes      | Is transfer success |
 
