@@ -443,7 +443,7 @@ BTSE 的速率限制如下：
 
 | 名称       | 类型   | 是否必须 | 描述                 |
 | ---        | ---    | ---      | ---                  |
-| symbol     | Double | Yes      | 市场符号              |
+| symbol     | String | Yes      | 市场符号              |
 | indexPrice | Double | Yes      | 指数价格              |
 | lastPrice  | Double | Yes      | 最后成交价格           |
 | markPrice  | Double | Yes      | 标记价格              |
