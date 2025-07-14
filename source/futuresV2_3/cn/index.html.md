@@ -1382,7 +1382,7 @@ BTSE 的速率限制如下：
 | type         | String  | Yes      | 修改类型<br/>`PRICE`: 修改订单价格<br/>`SIZE`: 修改订单大小<br/>`TRIGGERPRICE`: 修改触发价格，仅适用于触发单。<br/>`ALL`: 修改多个字段。注意：`TRIGGERPRICE` 仅可在订单为触发单时修改，意味着如果不是触发单，请不要传入`TRIGGERPRICE`。                                                                                     |
 | value        | Double  | Yes      | 要修改的值。其值取决于设置的类型。                                                                                                                                                                       |
 | orderPrice   | Double  | No       | 对于类型：`ALL`，要修改的订单价格                                                                                                                                                                        |
-| orderSize    | Double  | No       | 对于类型：`ALL`，要修改的合同大小订单尺寸                                                                                                                                                                |
+| orderSize    | Integer  | No       | 对于类型：`ALL`，要修改的合同大小订单尺寸                                                                                                                                                                |
 | triggerPrice | Double  | No       | 对于类型：`ALL`，要修改的触发价格                                                                                                                                                                        |
 
 
@@ -3215,7 +3215,7 @@ pong
 | ---       | ---    | ---      | ---                     |
 | symbol    | String | Yes      | 市场符号                 |
 | side      | String | Yes      | 交易方向: [`BUY`, `SELL`]   |
-| size      | Double | Yes      | 交易量                   |
+| size      | Integer | Yes      | 交易量                   |
 | price     | Double | Yes      | 交易价格                 |
 | tradeId   | Long   | Yes      | 交易序列号               |
 | timestamp | Long   | Yes      | 交易时间戳               |

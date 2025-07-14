@@ -1385,7 +1385,7 @@ Amend the price or size or trigger price of an order. For trigger orders, if the
 | type         | String  | Yes      | Type of amendment.<br/>`PRICE`: To amend order price<br/>`SIZE`: To amend order size<br/>`TRIGGERPRICE`: To amend trigger price for trigger orders only.<br/>`ALL`: To amend multiple fields. Note that the `TRIGGERPRICE` can only be amended if the order is a trigger order. Don't include `TRIGGERPRICE` if it is not a trigger order. |
 | value        | Double  | Yes      | The value to be amended to. Value depends on the type being set.                                                                                                   |
 | orderPrice   | Double  | No       | For type: `ALL`, order price to be amended.                                                                                                                         |
-| orderSize    | Double  | No       | For type: `ALL`, order size in contract size to be amended.                                                                                                         |
+| orderSize    | Integer  | No       | For type: `ALL`, order size in contract size to be amended.                                                                                                         |
 | triggerPrice | Double  | No       | For type: `ALL`, trigger price to be amended.                                                                                                                       |
 
 
@@ -2984,42 +2984,42 @@ Subscribe to the Level 1 Orderbook through the endpoint `wss://ws.btse.com/ws/os
   "data": {
     "bids": [
       [
-        "59252.5",
-        "0.06865"
+        "122160.1",
+        "69350"
       ],
       [
-        "59249.0",
-        "0.24000"
+        "122159.9",
+        "226150"
       ],
       [
-        "59235.5",
-        "0.16073"
+        "122159.5",
+        "63050"
       ],
       [
-        "59235.0",
-        "0.26626"
+        "122159.3",
+        "109800"
       ],
       [
-        "59233.0",
-        "0.50000"
+        "122159.2",
+        "104050"
       ]
     ],
     "asks": [
       [
-        "59292.0",
-        "0.50000"
+        "122133.3",
+        "1000"
       ],
       [
-        "59285.5",
-        "0.24000"
+        "122124.0",
+        "343410"
       ],
       [
-        "59285.0",
-        "0.15598"
+        "122123.9",
+        "78500"
       ],
       [
-        "59278.5",
-        "0.01472"
+        "122123.8",
+        "98500"
       ]
     ],
     "seqNum": 628282,
@@ -3038,12 +3038,12 @@ Subscribe to the Level 1 Orderbook through the endpoint `wss://ws.btse.com/ws/os
     "bids": [],
     "asks": [
       [
-        "59367.5",
-        "2.15622"
+        "122123.9",
+        "78500"
       ],
       [
-        "59325.5",
-        "0"
+        "122123.8",
+        "98500"
       ]
     ],
     "seqNum": 628283,
@@ -3222,7 +3222,7 @@ Subscribe to recent trade feed for a market. The topic will be `tradeHistoryApiV
 | ---       | ---    | ---      | ---                                     |
 | symbol    | String | Yes      | Market symbol                           |
 | side      | String | Yes      | Trade side. Values are: [`Buy`, `SELL`] |
-| size      | Double | Yes      | Transacted size                         |
+| size      | Integer | Yes      | Transacted size                         |
 | price     | Double | Yes      | Transacted price                        |
 | tradeId   | Long   | Yes      | Trade sequence Id                       |
 | timestamp | Long   | Yes      | Trade timestamp                         |
