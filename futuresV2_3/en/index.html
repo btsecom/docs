@@ -2021,35 +2021,36 @@ Additionally, the calculation duration will be reset if the IP address or user d
 <blockquote>
 <p>Response (for hedge mode order)</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>  {
-    "status": 2,
-    "symbol": "BTC-PERP",
-    "orderType": 76,
-    "price": 110078.1,
-    "side": "BUY",
-    "orderID": "738ef757-88e1-46d4-87b2-b24dd43e01db",
-    "timestamp": 1752141497172,
-    "triggerPrice": 0,
-    "trigger": false,
-    "deviation": 100,
-    "stealth": 100,
-    "message": "",
-    "avgFilledPrice": 0,
-    "clOrderID": "",
-    "originalOrderSize": 1,
-    "currentOrderSize": 1,
-    "filledSize": 0,
-    "totalFilledSize": 0,
-    "remainingSize": 1,
-    "postOnly": false,
-    "orderDetailType": null,
-    "positionMode": "HEDGE",
-    "positionDirection": "LONG",
-    "positionId": "BTC-PERP-USDT|LONG",
-    "time_in_force": "GTC"
-  }
-]
-</code></pre></div>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-PERP"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">76</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">110078.1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"738ef757-88e1-46d4-87b2-b24dd43e01db"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1752141497172</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"trigger"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"deviation"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"avgFilledPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"originalOrderSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currentOrderSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"filledSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalFilledSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"remainingSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderDetailType"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HEDGE"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionDirection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LONG"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"positionId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-PERP-USDT|LONG"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
 <p><code>POST /api/v2.3/order</code></p>
 
 <p>Creates a new order. Requires <code>Trading</code> permission.</p>
@@ -2084,7 +2085,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td>&#39;BUY&#39; or &#39;SELL&#39;</td>
+<td>Trade side. Values are: [<code>Buy</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>time_in_force</td>
@@ -2226,7 +2227,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td>Order side<br/>BUY or SELL</td>
+<td>Trade side. Values are: [<code>Buy</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>status</td>
@@ -2420,7 +2421,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td>Order side<br/>BUY or SELL</td>
+<td>Trade side. Values are: [<code>Buy</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>clOrderID</td>
@@ -2496,7 +2497,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td>Order side<br/>BUY or SELL</td>
+<td>Trade side. Values are: [<code>Buy</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>status</td>
@@ -2702,7 +2703,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td>Order side</td>
+<td>Trade side. Values are: [<code>Buy</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>price</td>
@@ -3048,7 +3049,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td>Order side<br/>BUY or SELL</td>
+<td>Trade side. Values are: [<code>Buy</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>status</td>
@@ -3273,7 +3274,7 @@ Requires <code>Trading</code> permission.</p>
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td>Order side<br/>BUY or SELL</td>
+<td>Trade side. Values are: [<code>Buy</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>status</td>
@@ -3573,7 +3574,7 @@ Requires <code>Trading</code> permission.</p>
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td>Order side<br/>BUY or SELL</td>
+<td>Trade side. Values are: [<code>Buy</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>originalOrderSize</td>
@@ -3834,30 +3835,30 @@ Requires <code>Trading</code> permission.</p>
 
 <table><thead>
 <tr>
-<th style="text-align: center">Time Interval</th>
-<th style="text-align: right">Maximum Days</th>
-<th style="text-align: center">Explanation</th>
+<th>Time Interval</th>
+<th style="text-align: center">Maximum Days</th>
+<th>Explanation</th>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: center">startTime / endTime</td>
-<td style="text-align: right">7</td>
-<td style="text-align: center">Maximum <strong>7</strong> days within the specified interval. If specified interval exceeds <strong>7</strong> days, the <strong>start time</strong> will be set to <strong>7</strong> days before the <strong>end time</strong></td>
+<td>startTime / endTime</td>
+<td style="text-align: center">7</td>
+<td>Maximum <strong>7</strong> days within the specified interval. If specified interval exceeds <strong>7</strong> days, the <strong>start time</strong> will be set to <strong>7</strong> days before the <strong>end time</strong></td>
 </tr>
 <tr>
-<td style="text-align: center">startTime /    -</td>
-<td style="text-align: right">7</td>
-<td style="text-align: center">If the <strong>end time</strong> is not specified, then <strong>7</strong> days after the <strong>start time</strong></td>
+<td>startTime /    -</td>
+<td style="text-align: center">7</td>
+<td>If the <strong>end time</strong> is not specified, then <strong>7</strong> days after the <strong>start time</strong></td>
 </tr>
 <tr>
-<td style="text-align: center">-    / endTime</td>
-<td style="text-align: right">7</td>
-<td style="text-align: center">If the <strong>start time</strong> is not specified, then <strong>7</strong> days before the <strong>end time</strong></td>
+<td>-    / endTime</td>
+<td style="text-align: center">7</td>
+<td>If the <strong>start time</strong> is not specified, then <strong>7</strong> days before the <strong>end time</strong></td>
 </tr>
 <tr>
-<td style="text-align: center">-    /    -</td>
-<td style="text-align: right">7</td>
-<td style="text-align: center">If neither start nor end time is specified, then <strong>7</strong> days before the <strong>current time</strong></td>
+<td>-    /    -</td>
+<td style="text-align: center">7</td>
+<td>If neither start nor end time is specified, then <strong>7</strong> days before the <strong>current time</strong></td>
 </tr>
 </tbody></table>
 <h3 id='response-content-16'>Response Content</h3>
@@ -4128,7 +4129,7 @@ Requires <code>Read</code> permission.</p>
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td>Position side. Values are: [<code>Buy</code>, <code>SELL</code>]</td>
+<td>Trade side. Values are: [<code>Buy</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>size</td>
@@ -4389,7 +4390,7 @@ Requires <code>Read</code> permission.</p>
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td>Order side<br/>BUY or SELL</td>
+<td>Trade side. Values are: [<code>Buy</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>status</td>
@@ -5160,7 +5161,7 @@ Requires <code>Read</code> permission.</p>
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td>Order side<br/>BUY or SELL</td>
+<td>Trade side. Values are: [<code>Buy</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>status</td>
@@ -6964,7 +6965,7 @@ Requires <code>Read</code> permission.</p>
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td>Trade Side, BUY or SELL</td>
+<td>Trade side. Values are: [<code>Buy</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>size</td>
@@ -7123,7 +7124,7 @@ Please note, if the topic is subscribed to without proper authentication, no mes
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td>Trade side. BUY or SELL</td>
+<td>Trade side. Values are: [<code>Buy</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>type</td>
@@ -7317,7 +7318,7 @@ Please note, if the topic is subscribed to without proper authentication, no mes
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td>Trade side. BUY or SELL</td>
+<td>Trade side. Values are: [<code>Buy</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>price</td>

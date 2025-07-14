@@ -1352,30 +1352,30 @@
 
 <table><thead>
 <tr>
-<th style="text-align: center">时间区间</th>
-<th style="text-align: right">最大天数</th>
-<th style="text-align: center">说明</th>
+<th>时间区间</th>
+<th style="text-align: center">最大天数</th>
+<th>说明</th>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: center">startTime / endTime</td>
-<td style="text-align: right">30</td>
-<td style="text-align: center">在指定区间中最多<strong>30</strong>天记录</td>
+<td>startTime / endTime</td>
+<td style="text-align: center">30</td>
+<td>在指定区间中最多<strong>30</strong>天记录</td>
 </tr>
 <tr>
-<td style="text-align: center">startTime /    -</td>
-<td style="text-align: right">3</td>
-<td style="text-align: center">未指定<strong>结束时间</strong>, 则从<strong>开始时间</strong>往后<strong>3</strong>天</td>
+<td>startTime /    -</td>
+<td style="text-align: center">3</td>
+<td>未指定<strong>结束时间</strong>, 则从<strong>开始时间</strong>往后<strong>3</strong>天</td>
 </tr>
 <tr>
-<td style="text-align: center">-    / endTime</td>
-<td style="text-align: right">3</td>
-<td style="text-align: center">未指定<strong>开始时间</strong>, 则从<strong>结束时间</strong>往前<strong>3</strong>天</td>
+<td>-    / endTime</td>
+<td style="text-align: center">3</td>
+<td>未指定<strong>开始时间</strong>, 则从<strong>结束时间</strong>往前<strong>3</strong>天</td>
 </tr>
 <tr>
-<td style="text-align: center">-    /    -</td>
-<td style="text-align: right">3</td>
-<td style="text-align: center">都未指定时间, 则使用<strong>当前时间</strong>作为<strong>结束时间</strong>往前<strong>3</strong>天</td>
+<td>-    /    -</td>
+<td style="text-align: center">3</td>
+<td>都未指定时间, 则使用<strong>当前时间</strong>作为<strong>结束时间</strong>往前<strong>3</strong>天</td>
 </tr>
 </tbody></table>
 <h3 id='05a22d5a79-5'>响应内容</h3>
@@ -1397,7 +1397,7 @@
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td>交易方向。可选值为：[<code>BUY</code>, <code>SELL</code>]</td>
+<td>交易方向：[<code>BUY</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>price</td>
@@ -1568,41 +1568,41 @@
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <blockquote>
-<p>响应（用于<code>Quote Buy</code>订单）
-<code>json
-[
-  {
-    &quot;status&quot;: 5,
-    &quot;symbol&quot;: &quot;BTC-USD&quot;,
-    &quot;orderType&quot;: 77,
-    &quot;price&quot;: 111381.34601685,
-    &quot;side&quot;: &quot;BUY&quot;,
-    &quot;orderID&quot;: &quot;f4aa8d57-c062-4ba9-b22e-09c4249d53f5&quot;,
-    &quot;timestamp&quot;: 1752129085233,
-    &quot;triggerPrice&quot;: 0,
-    &quot;stopPrice&quot;: null,
-    &quot;trigger&quot;: false,
-    &quot;message&quot;: &quot;&quot;,
-    &quot;clOrderID&quot;: null,
-    &quot;stealth&quot;: 1,
-    &quot;deviation&quot;: 1,
-    &quot;postOnly&quot;: false,
-    &quot;orderDetailType&quot;: null,
-    &quot;originalOrderBaseSize&quot;: null,
-    &quot;originalOrderQuoteSize&quot;: 100,
-    &quot;currentOrderBaseSize&quot;: null,
-    &quot;currentOrderQuoteSize&quot;: 100,
-    &quot;remainingOrderBaseSize&quot;: null,
-    &quot;remainingOrderQuoteSize&quot;: 0.870602045,
-    &quot;filledBaseSize&quot;: 0.00089,
-    &quot;totalFilledBaseSize&quot;: 0.00089,
-    &quot;orderCurrency&quot;: &quot;quote&quot;,
-    &quot;avgFilledPrice&quot;: 111381.34601685,
-    &quot;time_in_force&quot;: &quot;GTC&quot;
-  }
-]
-</code></p>
-
+<p>响应（用于<code>Quote Buy</code>订单）</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USD"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">77</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">111381.34601685</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f4aa8d57-c062-4ba9-b22e-09c4249d53f5"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1752129085233</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stopPrice"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"trigger"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"deviation"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderDetailType"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"originalOrderBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"originalOrderQuoteSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currentOrderBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currentOrderQuoteSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"remainingOrderBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"remainingOrderQuoteSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.870602045</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"filledBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00089</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalFilledBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00089</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"quote"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"avgFilledPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">111381.34601685</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<blockquote>
 <p>响应（用于<code>OCO</code>订单）</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
@@ -1700,7 +1700,7 @@
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td>&#39;BUY&#39; 或 &#39;SELL&#39;</td>
+<td>交易方向：[<code>BUY</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>time_in_force</td>
@@ -1812,7 +1812,7 @@
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td>订单方向<br/>BUY 或 SELL</td>
+<td>交易方向：[<code>BUY</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>status</td>
@@ -2030,7 +2030,7 @@
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td>订单方向</td>
+<td>交易方向：[<code>BUY</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>price</td>
@@ -2090,7 +2090,7 @@
 <td>triggerOrderType</td>
 <td>Integer</td>
 <td>Yes</td>
-<td>订单类型</td>
+<td>订单类型 <br/><code>76: 限价订单</code><br/><code>77: 市价订单</code><br/><code>80: 挂单/算法订单</code></td>
 </tr>
 <tr>
 <td>triggerTrailingStopDeviation</td>
@@ -2379,7 +2379,7 @@
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td>订单方向<br/>BUY或SELL</td>
+<td>交易方向：[<code>BUY</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>status</td>
@@ -2681,7 +2681,7 @@
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td>订单方向<br/>BUY或SELL</td>
+<td>交易方向：[<code>BUY</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>status</td>
@@ -2970,7 +2970,7 @@
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td>订单方向<br/><code>BUY</code> 或 <code>SELL</code></td>
+<td>交易方向：[<code>BUY</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>orderValue</td>
@@ -3280,7 +3280,7 @@
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td>交易方向。可选值：[<code>BUY</code>, <code>SELL</code>]</td>
+<td>交易方向：[<code>BUY</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>price</td>
@@ -4453,7 +4453,7 @@
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td>交易方向，BUY或SELL</td>
+<td>交易方向：[<code>BUY</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>size</td>
@@ -4610,7 +4610,7 @@
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td>交易方向，BUY或SELL</td>
+<td>交易方向：[<code>BUY</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>orderType</td>
@@ -4831,7 +4831,7 @@
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td>交易方向，BUY或SELL</td>
+<td>交易方向：[<code>BUY</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>price</td>

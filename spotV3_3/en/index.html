@@ -693,10 +693,10 @@ Additionally, the calculation duration will be reset if the IP address or user d
 <h3 id='request-parameters'>Request Parameters</h3>
 <table><thead>
 <tr>
-<th>name</th>
-<th>type</th>
-<th>required</th>
-<th>description</th>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
@@ -955,10 +955,10 @@ Additionally, the calculation duration will be reset if the IP address or user d
 <h3 id='request-parameters-2'>Request Parameters</h3>
 <table><thead>
 <tr>
-<th>name</th>
-<th>type</th>
-<th>required</th>
-<th>description</th>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
@@ -1591,41 +1591,41 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
 <blockquote>
-<p>Response (for <code>Quote Buy</code>)
-<code>json
-[
-  {
-    &quot;status&quot;: 5,
-    &quot;symbol&quot;: &quot;BTC-USD&quot;,
-    &quot;orderType&quot;: 77,
-    &quot;price&quot;: 111381.34601685,
-    &quot;side&quot;: &quot;BUY&quot;,
-    &quot;orderID&quot;: &quot;f4aa8d57-c062-4ba9-b22e-09c4249d53f5&quot;,
-    &quot;timestamp&quot;: 1752129085233,
-    &quot;triggerPrice&quot;: 0,
-    &quot;stopPrice&quot;: null,
-    &quot;trigger&quot;: false,
-    &quot;message&quot;: &quot;&quot;,
-    &quot;clOrderID&quot;: null,
-    &quot;stealth&quot;: 1,
-    &quot;deviation&quot;: 1,
-    &quot;postOnly&quot;: false,
-    &quot;orderDetailType&quot;: null,
-    &quot;originalOrderBaseSize&quot;: null,
-    &quot;originalOrderQuoteSize&quot;: 100,
-    &quot;currentOrderBaseSize&quot;: null,
-    &quot;currentOrderQuoteSize&quot;: 100,
-    &quot;remainingOrderBaseSize&quot;: null,
-    &quot;remainingOrderQuoteSize&quot;: 0.870602045,
-    &quot;filledBaseSize&quot;: 0.00089,
-    &quot;totalFilledBaseSize&quot;: 0.00089,
-    &quot;orderCurrency&quot;: &quot;quote&quot;,
-    &quot;avgFilledPrice&quot;: 111381.34601685,
-    &quot;time_in_force&quot;: &quot;GTC&quot;
-  }
-]
-</code></p>
-
+<p>Response (for <code>Quote Buy</code>)</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USD"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderType"</span><span class="p">:</span><span class="w"> </span><span class="mi">77</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">111381.34601685</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f4aa8d57-c062-4ba9-b22e-09c4249d53f5"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1752129085233</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stopPrice"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"trigger"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"clOrderID"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"stealth"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"deviation"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"postOnly"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderDetailType"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"originalOrderBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"originalOrderQuoteSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currentOrderBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"currentOrderQuoteSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"remainingOrderBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"remainingOrderQuoteSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.870602045</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"filledBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00089</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalFilledBaseSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00089</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"orderCurrency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"quote"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"avgFilledPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">111381.34601685</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"time_in_force"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GTC"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<blockquote>
 <p>Response (for <code>OCO</code> order)</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
@@ -1723,7 +1723,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td>&#39;BUY&#39; or &#39;SELL&#39;</td>
+<td>Trade side. Values are: [<code>BUY</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>time_in_force</td>
@@ -1835,7 +1835,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td>Order side<br/>BUY or SELL</td>
+<td>Trade side. Values are: [<code>BUY</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>status</td>
@@ -2053,7 +2053,7 @@ Please note that this API is <code>Trading</code> permission required.</p>
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td>Order side</td>
+<td>Trade side. Values are: [<code>BUY</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>price</td>
@@ -2113,7 +2113,7 @@ Please note that this API is <code>Trading</code> permission required.</p>
 <td>triggerOrderType</td>
 <td>Integer</td>
 <td>Yes</td>
-<td>Order type</td>
+<td>Order type <br/><code>76: Limit order</code><br/><code>77: Market order</code><br/><code>80: Peg/Algo order</code></td>
 </tr>
 <tr>
 <td>triggerTrailingStopDeviation</td>
@@ -2402,7 +2402,7 @@ Please note that this API is <code>Trading</code> permission required.</p>
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td>Order side<br/>BUY or SELL</td>
+<td>Trade side. Values are: [<code>BUY</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>status</td>
@@ -2704,7 +2704,7 @@ Please note that this API is <code>Trading</code> permission required.</p>
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td>Order side<br/>BUY or SELL</td>
+<td>Trade side. Values are: [<code>BUY</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>status</td>
@@ -2993,7 +2993,7 @@ Please note that this API is <code>Trading</code> permission required.</p>
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td>Order side<br/><code>BUY</code> or <code>SELL</code></td>
+<td>Trade side. Values are: [<code>BUY</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>orderValue</td>
@@ -3258,30 +3258,30 @@ Please note that this API is <code>Trading</code> permission required.</p>
 
 <table><thead>
 <tr>
-<th style="text-align: center">Time Interval</th>
-<th style="text-align: right">Maximum Days</th>
-<th style="text-align: center">Explanation</th>
+<th>Time Interval</th>
+<th style="text-align: center">Maximum Days</th>
+<th>Explanation</th>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: center">startTime / endTime</td>
-<td style="text-align: right">7</td>
-<td style="text-align: center">Maximum <strong>7</strong> days within the specified interval. If specified interval exceeds <strong>7</strong> days, the <strong>start time</strong> will be set to <strong>7</strong> days before the <strong>end time</strong></td>
+<td>startTime / endTime</td>
+<td style="text-align: center">7</td>
+<td>Maximum <strong>7</strong> days within the specified interval. If specified interval exceeds <strong>7</strong> days, the <strong>start time</strong> will be set to <strong>7</strong> days before the <strong>end time</strong></td>
 </tr>
 <tr>
-<td style="text-align: center">startTime /    -</td>
-<td style="text-align: right">7</td>
-<td style="text-align: center">If the <strong>end time</strong> is not specified, then <strong>7</strong> days after the <strong>start time</strong></td>
+<td>startTime /    -</td>
+<td style="text-align: center">7</td>
+<td>If the <strong>end time</strong> is not specified, then <strong>7</strong> days after the <strong>start time</strong></td>
 </tr>
 <tr>
-<td style="text-align: center">-    / endTime</td>
-<td style="text-align: right">7</td>
-<td style="text-align: center">If the <strong>start time</strong> is not specified, then <strong>7</strong> days before the <strong>end time</strong></td>
+<td>-    / endTime</td>
+<td style="text-align: center">7</td>
+<td>If the <strong>start time</strong> is not specified, then <strong>7</strong> days before the <strong>end time</strong></td>
 </tr>
 <tr>
-<td style="text-align: center">-    /    -</td>
-<td style="text-align: right">7</td>
-<td style="text-align: center">If neither start nor end time is specified, then <strong>7</strong> days before the <strong>current time</strong></td>
+<td>-    /    -</td>
+<td style="text-align: center">7</td>
+<td>If neither start nor end time is specified, then <strong>7</strong> days before the <strong>current time</strong></td>
 </tr>
 </tbody></table>
 <h3 id='response-content-14'>Response Content</h3>
@@ -3448,10 +3448,10 @@ Please note that this API is <code>Trading</code> permission required.</p>
 <h3 id='request-parameters-14'>request parameters</h3>
 <table><thead>
 <tr>
-<th>name</th>
-<th>type</th>
-<th>required</th>
-<th>description</th>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
@@ -3464,10 +3464,10 @@ Please note that this API is <code>Trading</code> permission required.</p>
 <h3 id='response-content-15'>response content</h3>
 <table><thead>
 <tr>
-<th>name</th>
-<th>type</th>
-<th>required</th>
-<th>description</th>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
@@ -3524,10 +3524,10 @@ Please note that this API is <code>Trading</code> permission required.</p>
 <h3 id='response-content-16'>response content</h3>
 <table><thead>
 <tr>
-<th>name</th>
-<th>type</th>
-<th>required</th>
-<th>description</th>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
@@ -3606,10 +3606,10 @@ Please note that this API is <code>Trading</code> permission required.</p>
 <h3 id='rateobject'>rateobject</h3>
 <table><thead>
 <tr>
-<th>name</th>
-<th>type</th>
-<th>required</th>
-<th>description</th>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
@@ -3640,10 +3640,10 @@ Please note that this API is <code>Trading</code> permission required.</p>
 <h3 id='request-parameters-16'>request parameters</h3>
 <table><thead>
 <tr>
-<th>name</th>
-<th>type</th>
-<th>required</th>
-<th>description</th>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
@@ -3682,10 +3682,10 @@ Please note that this API is <code>Trading</code> permission required.</p>
 <h3 id='request-parameters-17'>request parameters</h3>
 <table><thead>
 <tr>
-<th>name</th>
-<th>type</th>
-<th>required</th>
-<th>description</th>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
@@ -3704,10 +3704,10 @@ Please note that this API is <code>Trading</code> permission required.</p>
 <h3 id='response-content-17'>response content</h3>
 <table><thead>
 <tr>
-<th>name</th>
-<th>type</th>
-<th>required</th>
-<th>description</th>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
@@ -3738,10 +3738,10 @@ Please note that this API is <code>Trading</code> permission required.</p>
 <h3 id='request-parameters-18'>request parameters</h3>
 <table><thead>
 <tr>
-<th>name</th>
-<th>type</th>
-<th>required</th>
-<th>description</th>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
@@ -3789,10 +3789,10 @@ Please note that this API is <code>Trading</code> permission required.</p>
 <h3 id='response-content-18'>response content</h3>
 <table><thead>
 <tr>
-<th>name</th>
-<th>type</th>
-<th>required</th>
-<th>description</th>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
@@ -3917,10 +3917,10 @@ Please note that this API is <code>Trading</code> permission required.</p>
 <h3 id='response-content-19'>response content</h3>
 <table><thead>
 <tr>
-<th>name</th>
-<th>type</th>
-<th>required</th>
-<th>description</th>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
@@ -4365,10 +4365,10 @@ Please note that this API is <code>Trading</code> permission required.</p>
 <h3 id='request-parameters-19'>request parameters</h3>
 <table><thead>
 <tr>
-<th>name</th>
-<th>type</th>
-<th>required</th>
-<th>description</th>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
@@ -4476,7 +4476,7 @@ Please note that this API is <code>Trading</code> permission required.</p>
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td>Trade Side, BUY or SELL</td>
+<td>Trade side. Values are: [<code>BUY</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>size</td>
@@ -4633,7 +4633,7 @@ Please note that this API is <code>Trading</code> permission required.</p>
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td>Trade side. BUY or SELL</td>
+<td>Trade side. Values are: [<code>BUY</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>orderType</td>
@@ -4854,7 +4854,7 @@ Please note that this API is <code>Trading</code> permission required.</p>
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td>Trade side. BUY or SELL</td>
+<td>Trade side. Values are: [<code>BUY</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>price</td>

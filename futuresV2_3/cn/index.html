@@ -1483,7 +1483,7 @@
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td>交易方向。值包括：[<code>Buy</code>, <code>SELL</code>]</td>
+<td>交易方向: [<code>BUY</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>price</td>
@@ -2085,7 +2085,7 @@
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td><code>BUY</code> 或 <code>SELL</code></td>
+<td>交易方向: [<code>BUY</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>time_in_force</td>
@@ -2227,7 +2227,7 @@
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td>订单方向<br/>BUY 或 SELL</td>
+<td>交易方向: [<code>BUY</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>status</td>
@@ -2415,7 +2415,7 @@
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td>订单方向<br/>BUY 或 SELL</td>
+<td>交易方向: [<code>BUY</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>clOrderID</td>
@@ -2491,7 +2491,7 @@
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td>订单方向<br/>BUY 或 SELL</td>
+<td>交易方向: [<code>BUY</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>size</td>
@@ -2703,7 +2703,7 @@
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td>订单方向</td>
+<td>交易方向: [<code>BUY</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>price</td>
@@ -3043,7 +3043,7 @@
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td>订单方向<br/>BUY 或 SELL</td>
+<td>交易方向: [<code>BUY</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>status</td>
@@ -3267,7 +3267,7 @@
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td>订单方向<br/>BUY 或 SELL</td>
+<td>交易方向: [<code>BUY</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>status</td>
@@ -3571,7 +3571,7 @@
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td>订单方向<br/>BUY 或 SELL</td>
+<td>交易方向: [<code>BUY</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>originalOrderSize</td>
@@ -3832,30 +3832,30 @@
 
 <table><thead>
 <tr>
-<th style="text-align: center">时间区间</th>
-<th style="text-align: right">最大天数</th>
-<th style="text-align: center">说明</th>
+<th>时间区间</th>
+<th style="text-align: center">最大天数</th>
+<th>说明</th>
 </tr>
 </thead><tbody>
 <tr>
-<td style="text-align: center">startTime / endTime</td>
-<td style="text-align: right">7</td>
-<td style="text-align: center">在指定区间中最多<strong>7</strong>天记录，若指定区间超过<strong>7</strong>天，则<strong>开始时间</strong>将设为<strong>结束时间</strong>的前<strong>7</strong>天</td>
+<td>startTime / endTime</td>
+<td style="text-align: center">7</td>
+<td>在指定区间中最多<strong>7</strong>天记录，若指定区间超过<strong>7</strong>天，则<strong>开始时间</strong>将设为<strong>结束时间</strong>的前<strong>7</strong>天</td>
 </tr>
 <tr>
-<td style="text-align: center">startTime /    -</td>
-<td style="text-align: right">7</td>
-<td style="text-align: center">未指定<strong>结束时间</strong>, 则从<strong>开始时间</strong>往后<strong>7</strong>天</td>
+<td>startTime /    -</td>
+<td style="text-align: center">7</td>
+<td>未指定<strong>结束时间</strong>, 则从<strong>开始时间</strong>往后<strong>7</strong>天</td>
 </tr>
 <tr>
-<td style="text-align: center">-    / endTime</td>
-<td style="text-align: right">7</td>
-<td style="text-align: center">未指定<strong>开始时间</strong>, 则从<strong>结束时间</strong>往前<strong>7</strong>天</td>
+<td>-    / endTime</td>
+<td style="text-align: center">7</td>
+<td>未指定<strong>开始时间</strong>, 则从<strong>结束时间</strong>往前<strong>7</strong>天</td>
 </tr>
 <tr>
-<td style="text-align: center">-    /    -</td>
-<td style="text-align: right">7</td>
-<td style="text-align: center">都未指定时间, 则使用<strong>当前时间</strong>作为<strong>结束时间</strong>往前<strong>7</strong>天</td>
+<td>-    /    -</td>
+<td style="text-align: center">7</td>
+<td>都未指定时间, 则使用<strong>当前时间</strong>作为<strong>结束时间</strong>往前<strong>7</strong>天</td>
 </tr>
 </tbody></table>
 <h3 id='05a22d5a79-13'>响应内容</h3>
@@ -3877,7 +3877,7 @@
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td>交易方向。可取值为: [<code>BUY</code>, <code>SELL</code>]</td>
+<td>交易方向: [<code>BUY</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>price</td>
@@ -4125,7 +4125,7 @@
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td>仓位方向。可取值为: [<code>Buy</code>, <code>SELL</code>]</td>
+<td>交易方向: [<code>BUY</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>size</td>
@@ -4386,7 +4386,7 @@
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td>订单方向<br/>BUY 或 SELL</td>
+<td>交易方向: [<code>BUY</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>status</td>
@@ -5157,7 +5157,7 @@
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td>订单方向<br/>BUY 或 SELL</td>
+<td>交易方向: [<code>BUY</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>status</td>
@@ -6956,7 +6956,7 @@
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td>交易方向，BUY 或 SELL</td>
+<td>交易方向: [<code>BUY</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>size</td>
@@ -7115,7 +7115,7 @@ WebSocket 将向已认证的订阅者推送实时交易级别的通知。Websock
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td>交易方向。BUY 或 SELL</td>
+<td>交易方向: [<code>BUY</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>type</td>
@@ -7309,7 +7309,7 @@ WebSocket 将向已认证的订阅者推送实时交易级别的通知。Websock
 <td>side</td>
 <td>String</td>
 <td>Yes</td>
-<td>交易方向。BUY 或 SELL</td>
+<td>交易方向: [<code>BUY</code>, <code>SELL</code>]</td>
 </tr>
 <tr>
 <td>price</td>
