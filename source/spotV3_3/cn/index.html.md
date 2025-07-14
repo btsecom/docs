@@ -534,7 +534,7 @@ BTSE的速率限制如下:
 * 成交紀錄最大天数
 
 | 时间区间             | 最大天数     | 说明                                                  |
-| :---:               | ---:        | :---:                                                |
+| ---                 | :---:      | ---                                                   |
 | startTime / endTime | 30          | 在指定区间中最多**30**天记录                            |
 | startTime /    -    | 3           | 未指定**结束时间**, 则从**开始时间**往后**3**天           |
 |      -    / endTime | 3           | 未指定**开始时间**, 则从**结束时间**往前**3**天           |
@@ -545,7 +545,7 @@ BTSE的速率限制如下:
 | 名称       | 类型    | 是否必须   | 描述                              |
 | ---       | ---     | ---      | ---                               |
 | symbol    | String  | Yes      | 市场符号                           |
-| side      | String  | Yes      | 交易方向。可选值为：[`BUY`, `SELL`]  |
+| side      | String  | Yes      | 交易方向：[`BUY`, `SELL`]          |
 | price     | Double  | Yes      | 成交价格                           |
 | size      | Double  | Yes      | 成交大小                           |
 | serialId  | Double  | Yes      | 流水号，递增的序列号                 |
@@ -694,7 +694,8 @@ BTSE的速率限制如下:
 ]
 ```
 
->响应（用于`Quote Buy`订单）
+> 响应（用于`Quote Buy`订单）
+
 ```json
 [
   {
@@ -805,7 +806,7 @@ BTSE的速率限制如下:
 | symbol        | String  | Yes      | 市场标志                                                                                                                                                                                                                                                                                                                                                 |
 | price         | Double  | No      | 创建 MARKET 订单时除外。卖单的最低价格，这是用户愿意卖出的最低价格。买单的最高价格，这是用户愿意买入的最高价格。                                                                                                                                                                                                                    |
 | size          | Double  | Yes      | 订单大小                                                                                                                                                                                                                                                                                                                                                  |
-| side          | String  | Yes      | 'BUY' 或 'SELL'                                                                                                                                                                                                                                                                                                                                         |
+| side          | String  | Yes      | 交易方向：[`BUY`, `SELL`]                                                                                                                                                                                                                                                                                                                                         |
 | time_in_force | String  | No      | 订单的时间有效性<br/>GTC：有效直到取消<br/>IOC：立即取消<br/>FOK：全部成交或取消<br/>HALFMIN：订单有效时间为30秒<br/>FIVEMIN：订单有效时间为5分钟<br/>HOUR：订单有效时间为1小时<br/>TWELVEHOUR：订单有效时间为12小时<br/>DAY：订单有效时间为1天<br/>WEEK：订单有效时间为1周<br/>MONTH：订单有效时间为1个月 |
 | type          | String  | Yes      | 订单类型<br/>LIMIT：限价订单<br/>MARKET：市价订单<br/>OCO：一边成交后取消另一边<br/>PEG：价格根据指数价格偏差而定                                                                                                                                                                                        |
 | txType        | String  | No      | 用于止损单或触发单<br/>STOP：止损单，'triggerPrice' 为必须项<br/>TRIGGER：触发单，'triggerPrice' 为必须项<br/>LIMIT：默认，当不是止损单或触发单时使用                                                                                                                                                  |
@@ -828,7 +829,7 @@ BTSE的速率限制如下:
 | orderType        | Integer    | Yes      | 订单类型 <br/>76: 限价订单<br/>77: 市价订单<br/>80: 挂单/算法订单                                                                                                                                                                                                                      |
 | postOnly         | Boolean    | Yes      | 指示是否为仅限挂单的标志                                                                                                                                                                                                                                                              |
 | price            | Double  | Yes      | 订单价格                                                                                                                                                                                                                                                                                   |
-| side             | String  | Yes      | 订单方向<br/>BUY 或 SELL                                                                                                                                                                                                                                                                   |
+| side             | String  | Yes      | 交易方向：[`BUY`, `SELL`]                                                                                                                                                                                                                                                                   |
 | status           | Integer    | Yes      | 订单状态<br/>2: 订单已插入<br/>4: 订单已完全成交<br/>5: 订单部分成交<br/>6: 订单已取消<br/>7: 订单已退款<br/>8: 余额不足<br/>9: 触发已插入<br>10: 触发已激活<br>15: 订单已拒绝<br>16: 订单未找到<br>17: 请求失败 |
 | stopPrice        | Double  | Yes      | 止损价格                                                                                                                                                                                                                                                                                   |
 | time_in_force    | String  | Yes      | 订单有效性                                                                                                                                                                                                                                                                                 |
@@ -910,7 +911,7 @@ BTSE的速率限制如下:
 | symbol                        | String  | Yes      | 市场交易对标识符                                   |
 | quote                         | String  | Yes      | 报价货币的符号                                   |
 | orderType                     | Integer | Yes      | 订单类型                                      |
-| side                          | String  | Yes      | 订单方向                                      |
+| side                          | String  | Yes      | 交易方向：[`BUY`, `SELL`]                     |
 | price                         | Double  | Yes      | 订单价格                                      |
 | orderValue                    | Double  | Yes      | 此订单的总价值                                 |
 | pegPriceMin                   | Double  | Yes      | 最小可能的挂单价格，优先于挂单价格偏差             |
@@ -920,7 +921,7 @@ BTSE的速率限制如下:
 | triggerOrder                  | Boolean | Yes      | 指示订单是否为触发订单                          |
 | triggerPrice                  | Double  | Yes      | 订单触发价格，如果订单不是触发订单则返回0          |
 | triggerOriginalPrice          | Double  | Yes      | 原始订单的价格。仅对触发订单有效                 |
-| triggerOrderType              | Integer | Yes      | 订单类型                                      |
+| triggerOrderType              | Integer | Yes      | 订单类型 <br/>`76: 限价订单`<br/>`77: 市价订单`<br/>`80: 挂单/算法订单`                                      |
 | triggerTrailingStopDeviation  | Double  | Yes      | 止损价格的百分比偏差                           |
 | triggerStopPrice              | Double  | Yes      | 止损价格，仅适用于算法订单                       |
 | triggered                     | Boolean | Yes      | 指示订单是否已触发                         |
@@ -1050,7 +1051,7 @@ BTSE的速率限制如下:
 | orderType        | Integer | Yes      | 订单类型<br/>76: 限价单<br/>77: 市价单<br/>80: Peg/Algo订单                                                                                                                                                                                                                                 |
 | postOnly         | Boolean | Yes      | 表示订单是否仅为发布订单                                                                                                                                                                                                                                                                       |
 | price            | Double  | Yes      | 订单价格                                                                                                                                                                                                                                                                                     |
-| side             | String  | Yes      | 订单方向<br/>BUY或SELL                                                                                                                                                                                                                                                                       |
+| side             | String  | Yes      | 交易方向：[`BUY`, `SELL`]                                                                                                                                                                                                                                                                       |
 | status           | Integer | Yes      | 订单状态<br/>2: 已插入订单<br/>4: 订单已完全成交<br/>5: 订单部分成交<br/>6: 订单已取消<br/>7: 订单已退款<br/>8: 余额不足<br/>9: 触发器已插入<br/>10: 触发器已激活<br/>15: 订单被拒绝<br/>16: 未找到订单<br/>17: 请求失败                                                                 |
 | stopPrice        | Double  | Yes      | 停止价格                                                                                                                                                                                                                                                                                     |
 | time_in_force    | String  | Yes      | 订单有效期                                                                                                                                                                                                                                                                                   |
@@ -1202,7 +1203,7 @@ BTSE的速率限制如下:
 | orderType          | Integer     | Yes      | 订单类型 <br/>76: 限价订单<br/>77: 市价订单<br/>80: 挂单/算法订单                                                                                                                                                                                                                     |
 | postOnly           | Boolean   | Yes      | 表示订单是否为只允许挂单                                                                                                                                                                                                                                                               |
 | price              | Double   | Yes      | 订单价格                                                                                                                                                                                                                                                                                 |
-| side               | String   | Yes      | 订单方向<br/>BUY或SELL                                                                                                                                                                                                                                                                  |
+| side               | String   | Yes      | 交易方向：[`BUY`, `SELL`]                                                                                                                                                                                                                                                                  |
 | status             | Integer     | Yes      | 订单状态<br/>2: 订单已插入<br/>3: 订单已成交<br/>4: 订单已完全成交<br/>5: 订单已部分成交<br/>6: 订单已取消<br/>7: 订单已退款<br/>9: 触发已插入<br>10: 触发已激活<br>15: 订单已拒绝<br>16: 未找到订单<br>17: 请求失败 |
 | stopPrice          | Double   | Yes      | 止损价格                                                                                                                                                                                                                                                                                  |
 | time_in_force      | String   | Yes      | 订单有效期                                                                                                                                                                                                                                                                               |
@@ -1354,7 +1355,7 @@ BTSE的速率限制如下:
 | ---                          | ---    | ---      | ---                                                                                     |
 | orderType                  | Integer   | Yes      | 订单类型 <br/>76: 限价订单<br/>77: 市价订单<br/>80: 挂单/算法订单                  |
 | price                      | Double | Yes      | 订单价格                                                                               |
-| side                       | String | Yes      | 订单方向<br/>`BUY` 或 `SELL`                                                        |
+| side                       | String | Yes      | 交易方向：[`BUY`, `SELL`]                         |
 | orderValue                 | Double | Yes      | 该订单的总价值                                                                         |
 | pegPriceMin                | Double | Yes      | 最小可能的挂单价格，优先于挂单价格偏差                                               |
 | pegPriceMax                | Double | Yes      | 最大可能的挂单价格，优先于挂单价格偏差                                               |
@@ -1448,7 +1449,7 @@ BTSE的速率限制如下:
 | 名称        | 类型    | 是否必须    | 描述                       |
 | ---         | ---     | ---      | ---                       |
 | symbol      | String  | Yes      | 市场交易对标识符         |
-| side        | String  | Yes      | 交易方向。可选值：[`BUY`, `SELL`] |
+| side        | String  | Yes      | 交易方向：[`BUY`, `SELL`] |
 | price       | Double  | Yes      | 成交价格                   |
 | size        | Double  | Yes      | 原始订单数量                   |
 | serialId    | Long  | Yes      | 序列ID，运行的序列号        |
@@ -2080,11 +2081,11 @@ pong
 | 名称      | 类型   | 是否必须     | 描述                   |
 | ---       | ---    | ---      | ---                   |
 | symbol    | String | Yes      | 市场符号               |
-| side      | String | Yes      | 交易方向，BUY或SELL   |
+| side      | String | Yes      | 交易方向：[`BUY`, `SELL`]   |
 | size      | Double | Yes      | 交易的数量             |
 | price     | Double | Yes      | 交易价格               |
-| tradeId   | Long | Yes      | 交易序列号             |
-| timestamp | Long | Yes      | 交易时间戳             |
+| tradeId   | Long   | Yes      | 交易序列号             |
+| timestamp | Long   | Yes      | 交易时间戳             |
 
 ## 认证
 
@@ -2187,7 +2188,7 @@ echo -n "/ws/spot1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6726
 | ---               | ---     | ---      | ---                                                         |
 | symbol            | String  | Yes      | 市场符号                                                     |
 | orderID           | String  | Yes      | 内部订单ID                                                 |
-| side              | String  | Yes      | 交易方向，BUY或SELL                                     |
+| side              | String  | Yes      | 交易方向：[`BUY`, `SELL`]                                     |
 | orderType         | Integer | Yes   | 订单类型。有效值为：<br/>76: 限价单<br/>77: 市价单<br/>80: 挂单/算法单  |
 | price             | Double  | Yes      | 订单价格或交易价格                                       |
 | avgFilledPrice    | Double  | Yes      | 平均成交价格                                               |
@@ -2262,7 +2263,7 @@ echo -n "/ws/spot1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6726
 | serialId    | String  | Yes      | 交易序列ID                                                                                |
 | tradeId     | String  | Yes      | 交易的唯一标识符                                                                           |
 | type        | Integer    | Yes      | 订单类型。有效值为：<br/>76: 限价单<br/>77: 市价单<br/>80: 挂单/算法单                |
-| side        | String  | Yes      | 交易方向，BUY或SELL                                                                      |
+| side        | String  | Yes      | 交易方向：[`BUY`, `SELL`]                                                                      |
 | price       | Double  | Yes      | 成交价格                                                                                    |
 | size        | Double  | Yes      | 成交数量                                                                                    |
 | feeAmount   | Double  | Yes      | 手续费金额                                                                                  |
