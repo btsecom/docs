@@ -280,7 +280,7 @@ Gets market summary information. If no symbol parameter is sent, then all market
 
 ### Request Parameters
 
-| name     | type     | required   | description     |
+| Name     | Type     | Required   | Description     |
 | -------- | -------- | ---------- | --------------- |
 | symbol   | String   | no         | market symbol   |
 
@@ -355,7 +355,7 @@ Gets candle stick charting data. Default of 300 data points will be returned at 
 
 ### Request Parameters
 
-| name       | type   | required | description                                                                                                                         |
+| Name       | Type   | Required | Description                                                                                                                         |
 | ---        | ---    | ---      | ---                                                                                                                                 |
 | symbol     | String | yes      | market symbol                                                                                                                       |
 | start      | Long   | no       | starting time in milliseconds (eg. 1624987283000)                                                                                   |
@@ -714,6 +714,7 @@ Gets server time
 ```
 
 > Response (for `Quote Buy`)
+
 ```json
 [
   {
@@ -824,7 +825,7 @@ Creates a new order. Requires `Trading` permission. Please note that Index Order
 | symbol        | String  | Yes      | Market symbol                                                                                                                                                                                                                                                                                                                                                      |
 | price         | Double  | No       | Mandatory unless creating a MARKET order. Minimum price for a sell order, this is the lowest price that a user is willing to sell at. Maximum price for a buy order, this is the maximum price a user is willing to buy at.                                                                                                                                        |
 | size          | Double  | Yes      | Order size                                                                                                                                                                                                                                                                                                                                                         |
-| side          | String  | Yes      | 'BUY' or 'SELL'                                                                                                                                                                                                                                                                                                                                                    |
+| side          | String  | Yes      | Trade side. Values are: [`BUY`, `SELL`]                                                                                                                                                                                                                                                                                                                                                    |
 | time_in_force | String  | No       | Time validity of the order<br/>GTC: Good till Cancel<br/>IOC: Immediate or Cancel<br/>FOK: Fill or Kill<br/>HALFMIN: Order valid for 30 seconds<br/>FIVEMIN: Order valid for 5 mins<br/> HOUR: Order valid for an hour<br/>TWELVEHOUR: Order valid for 12 hours<br/>DAY: Order valid for a day<br/>WEEK: Order valid for a week<br/>MONTH: Order valid for a month |
 | type          | String  | Yes      | Order type<br/>LIMIT: Limit Orders<br/>MARKET: Market Orders<br/>OCO: One cancel the other<br/>PEG: price is according to a deviation to the Index price                                                                                                                                                                                                           |
 | txType        | String  | No       | Used for Stop orders or trigger orders<br/>STOP: Stop Order, `triggerPrice` is mandatory<br/>TRIGGER: Trigger order, `triggerPrice` is mandatory<br/>LIMIT: Default, used when its not a Stop order nor Trigger order                                                                                                                                                 |
@@ -847,7 +848,7 @@ Creates a new order. Requires `Trading` permission. Please note that Index Order
 | orderType        | Integer  | Yes      | Order type <br/>76: Limit order<br/>77: Market order<br/>80: Peg/Algo order                                                                                                                                                                                                                         |
 | postOnly         | Boolean | Yes      | Indicates if order is a post only order                                                                                                                                                                                                                                                             |
 | price            | Double  | Yes      | Order price                                                                                                                                                                                                                                                                                         |
-| side             | String  | Yes      | Order side<br/>BUY or SELL                                                                                                                                                                                                                                                                          |
+| side             | String  | Yes      | Trade side. Values are: [`BUY`, `SELL`]                                                                                                                                                                                                                                                                          |
 | status           | Integer | Yes      | Order status<br/>	2: Order Inserted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>8: Insufficient Balance<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request Failed |
 | stopPrice        | Double  | Yes      | Stop price                                                                                                                                                                                                                                                                                          |
 | time_in_force    | String  | Yes      | Order validity                                                                                                                                                                                                                                                                                      |
@@ -929,7 +930,7 @@ Please note that this API is `Trading` permission required.
 | symbol                        | String  | Yes      | Market symbol                                                                          |
 | quote                         | String  | Yes      | Quote symbol                                                                           |
 | orderType                     | Integer | Yes      | Order type                                                                             |
-| side                          | String  | Yes      | Order side                                                                             |
+| side                          | String  | Yes      | Trade side. Values are: [`BUY`, `SELL`]                                                                             |
 | price                         | Double  | Yes      | Order price                                                                            |
 | orderValue                    | Double  | Yes      | Total value of of this order                                                           |
 | pegPriceMin                   | Double  | Yes      | Minimum possible peg price this takes precedence over pegPriceDeviation                |
@@ -939,7 +940,7 @@ Please note that this API is `Trading` permission required.
 | triggerOrder                  | Boolean | Yes      | Indicator if order is a trigger order                                                  |
 | triggerPrice                  | Double  | Yes      | Order trigger price, returns 0 if order is not a trigger order                         |
 | triggerOriginalPrice          | Double  | Yes      | Price of the original order. Only valid if it's a triggered order                      |
-| triggerOrderType              | Integer | Yes      | Order type                                                                             |
+| triggerOrderType              | Integer | Yes      | Order type <br/>`76: Limit order`<br/>`77: Market order`<br/>`80: Peg/Algo order`                                                                             |
 | triggerTrailingStopDeviation  | Double  | Yes      | Percentage deviation from stop price                                                   |
 | triggerStopPrice              | Double  | Yes      | Stop price, Algo Order only                                                            |
 | triggered                     | Boolean | Yes      | Indicate whether the order is triggered                                                |
@@ -1069,7 +1070,7 @@ Amend the price or size or trigger price of an order. For trigger orders, if the
 | orderType        | Integer  | Yes      | Order type <br/>76: Limit order<br/>77: Market order<br/>80: Peg/Algo order                                                                                                                                                                                                                         |
 | postOnly         | Boolean | Yes      | Indicates if order is a post only order                                                                                                                                                                                                                                                             |
 | price            | Double  | Yes      | Order price                                                                                                                                                                                                                                                                                         |
-| side             | String  | Yes      | Order side<br/>BUY or SELL                                                                                                                                                                                                                                                                          |
+| side             | String  | Yes      | Trade side. Values are: [`BUY`, `SELL`]                                                                                                                                                                                                                                                                          |
 | status           | Integer | Yes      | Order status<br/>	2: Order Inserted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>8: Insufficient Balance<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request Failed |
 | stopPrice        | Double  | Yes      | Stop price                                                                                                                                                                                                                                                                                          |
 | time_in_force    | String  | Yes      | Order validity                                                                                                                                                                                                                                                                                      |
@@ -1221,7 +1222,7 @@ Cancels pending orders that has not yet been transacted. The `orderID` is a uniq
 | orderType        | Integer  | Yes      | Order type <br/>76: Limit order<br/>77: Market order<br/>80: Peg/Algo order                                                                                                                                                                                                                     |
 | postOnly         | Boolean | Yes      | Indicates if order is a post only order                                                                                                                                                                                                                                                         |
 | price            | Double  | Yes      | Order price                                                                                                                                                                                                                                                                                     |
-| side             | String  | Yes      | Order side<br/>BUY or SELL                                                                                                                                                                                                                                                                      |
+| side             | String  | Yes      | Trade side. Values are: [`BUY`, `SELL`]                                                                                                                                                                                                                                                                      |
 | status           | Integer | Yes      | Order status<br/>	2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed |
 | stopPrice        | Double  | Yes      | Stop price                                                                                                                                                                                                                                                                                      |
 | time_in_force    | String  | Yes      | Order validity                                                                                                                                                                                                                                                                                  |
@@ -1373,7 +1374,7 @@ Retrieves open orders that have not yet been matched or matched recently. Requir
 | ---                          | ---    | ---      | ---                                                                                  |
 | orderType                  | Integer | Yes      | Order type <br/>76: Limit order<br/>77: Market order<br/>80: Peg/Algo order            |
 | price                      | Double | Yes      | Order price                                                                            |
-| side                       | String | Yes      | Order side<br/>`BUY` or `SELL`                                                         |
+| side                       | String | Yes      | Trade side. Values are: [`BUY`, `SELL`]                                                         |
 | orderValue                 | Double | Yes      | Total value of of this order                                                           |
 | pegPriceMin                | Double | Yes      | Minimum possible peg price this takes precedence over pegPriceDeviation                |
 | pegPriceMax                | Double | Yes      | Maximum possible peg price this takes precedence over pegPriceDeviation                |
@@ -1456,7 +1457,7 @@ Retrieves a user's trade history which includes funding fee data. Requires `Read
 * maximum days of trade history
 
 | Time Interval       | Maximum Days  | Explanation                                                                             |
-| :---:               | ---:          | :---:                                                                                   |
+| ---                 | :---:         | ---                                                                                   |
 | startTime / endTime | 7            | Maximum **7** days within the specified interval. If specified interval exceeds **7** days, the **start time** will be set to **7** days before the **end time**                                    |
 | startTime /    -    | 7             | If the **end time** is not specified, then **7** days after the **start time**          |
 |      -    / endTime | 7             | If the **start time** is not specified, then **7** days before the **end time**         |
@@ -1509,13 +1510,13 @@ Retrieve user's trading fees. Requires `Read` permission.
 
 ### request parameters
 
-| name     | type     | required | description                                   |
+| Name     | Type     | Required | Description                                   |
 | -------- | -------- | -------- | --------------------------------------------- |
 | symbol   | String   | no       | market symbol to filter for specific market   |
 
 ### response content
 
-| name     | type   | required | description   |
+| Name     | Type   | Required | Description   |
 | ---      | ---    | ---      | ---           |
 | symbol   | String | yes      | market symbol |
 | makerfee | Double | yes      | maker fees    |
@@ -1563,7 +1564,7 @@ Get all investment products. Requires `Read` permission.
 
 ### response content
 
-| name               | type         | required | description                              |
+| Name               | Type         | Required | Description                              |
 | ---                | ---          | ---      | ---                                      |
 | id                 | String       | yes      | product id                               |
 | name               | String       | yes      | product name                             |
@@ -1580,7 +1581,7 @@ Get all investment products. Requires `Read` permission.
 
 ### rateobject
 
-| name | type    | required | description      |
+| Name | Type    | Required | Description      |
 | ---  | ---     | ---      | ---              |
 | days | Integer | yes      | duration in days |
 | rate | Double  | yes      | interest rate    |
@@ -1603,7 +1604,7 @@ Deposit an investment. Requires `Wallet` permission.
 
 ### request parameters
 
-| name      | type    | required | description         |
+| Name      | Type    | Required | Description         |
 | ---       | ---     | ---      | ---                 |
 | productId | String  | yes      | invest product id   |
 | amount    | Double  | yes      | invest amount       |
@@ -1635,14 +1636,14 @@ Renew an investment order. Requires `Wallet` permission.
 
 ### request parameters
 
-| name      | type    | required | description         |
+| Name      | Type    | Required | Description         |
 | ---       | ---     | ---      | ---                 |
 | orderId   | Integer | yes      | investment order id |
 | autoRenew | Boolean | yes      | renew automatically |
 
 ### response content
 
-| name      | type    | required | description              |
+| Name      | Type    | Required | Description              |
 | ---       | ---     | ---      | ---                      |
 | orderId   | Integer | yes      | investment order id      |
 | autoRenew | Boolean | yes      | status of autoRenew flag |
@@ -1665,7 +1666,7 @@ Redeem an investment order. Requires `Wallet` permission.
 
 ### request parameters
 
-| name    | type    | required | description         |
+| Name    | Type    | Required | Description         |
 | ---     | ---     | ---      | ---                 |
 | orderId | Integer | yes      | investment order id |
 | amount  | Double  | yes      | redeem amount       |
@@ -1705,7 +1706,7 @@ Query investment orders. Requires `Wallet` permission.
 
 ### response content
 
-| name                   | type    | required | description                      |
+| Name                   | Type    | Required | Description                      |
 | ---                    | ---     | ---      | ---                              |
 | id                     | Integer | yes      | order id                         |
 | name                   | String  | yes      | product name                     |
@@ -1752,7 +1753,7 @@ Query investment history. Requires `Wallet` permission.
 
 ### response content
 
-| name           | type    | required | description                    |
+| Name           | Type    | Required | Description                    |
 | ---            | ---     | ---      | ---                            |
 | txntime        | Integer | yes      | transaction time               |
 | name           | String  | yes      | product name                   |
@@ -2037,7 +2038,7 @@ to subscribe to a websocket public trade fill
 
 ### request parameters
 
-| name | type   | required | description                                                                                                            |
+| Name | Type   | Required | Description                                                                                                            |
 | ---  | ---    | ---      | ---                                                                                                                    |
 | op   | String | yes      | operation. `subscribe` will subscribe to the topics provided in `args`. `unsubscribe` will unsubscribe from the topics |
 | args | Array  | yes      | topics to subscribe to.                                                                                                |
@@ -2096,14 +2097,14 @@ Subscribe to recent trade feed for a market. The topic will be `tradeHistoryApi:
 
 #### Data Object
 
-| Name      | Type   | Required | Description             |
-| ---       | ---    | ---      | ---                     |
-| symbol    | String | Yes      | Market symbol           |
-| side      | String | Yes      | Trade Side, BUY or SELL |
-| size      | Double | Yes      | Transacted size         |
-| price     | Double | Yes      | Transacted price        |
-| tradeId   | Long   | Yes      | Trade sequence Id       |
-| timestamp | Long   | Yes      | Trade timestamp         |
+| Name      | Type   | Required | Description                             |
+| ---       | ---    | ---      | ---                                     |
+| symbol    | String | Yes      | Market symbol                           |
+| side      | String | Yes      | Trade side. Values are: [`BUY`, `SELL`] |
+| size      | Double | Yes      | Transacted size                         |
+| price     | Double | Yes      | Transacted price                        |
+| tradeId   | Long   | Yes      | Trade sequence Id                       |
+| timestamp | Long   | Yes      | Trade timestamp                         |
 
 ## Authentication
 
@@ -2202,11 +2203,11 @@ Receive trade notifications by subscribing to the topic `notificationApiV3`. The
 
 ### Response Content
 
-| Name              | Type    | Required | Description                                                                   |
-| ---               | ---     | ---      | ---                                                                           |
+| Name              | Type    | Required | Description                                               |
+| ---               | ---     | ---      | ---                                                       |
 | symbol            | String  | Yes      | Market symbol                                                                 |
 | orderID           | String  | Yes      | Internal order ID                                                             |
-| side              | String  | Yes      | Trade side. BUY or SELL                                                       |
+| side              | String  | Yes      | Trade side. Values are: [`BUY`, `SELL`]                                                       |
 | orderType              | Integer     | Yes      | Order type. Valid values are:<br/>76: Limit order<br/>77: Market order<br/>80: Peg/Algo order  |
 | price             | Double  | Yes      | Order price or transcated price                                               |
 | avgFilledPrice    | Double  | Yes      | Average filled price                                                          |
@@ -2281,7 +2282,7 @@ When a trade has been transacted, this topic will send the trade information bac
 | serialId    | String  | Yes      | Trade sequence ID                                                                             |
 | tradeId     | String  | Yes      | Trade unique identifier                                                                       |
 | type        | Integer     | Yes      | Order type. Valid values are:<br/>76: Limit order<br/>77: Market order<br/>80: Peg/Algo order |
-| side        | String  | Yes      | Trade side. BUY or SELL                                                                       |
+| side        | String  | Yes      | Trade side. Values are: [`BUY`, `SELL`]                                                                       |
 | price       | Double  | Yes      | Transcated price                                                                              |
 | size        | Double  | Yes      | Transacted size                                                                               |
 | feeAmount   | Double  | Yes      | Fee amount charged                                                                            |
