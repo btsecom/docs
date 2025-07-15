@@ -867,7 +867,7 @@ Creates a new order. Requires `Trading` permission. Please note that Index Order
 | remainingOrderQuoteSize                 | Double  | Yes      | The remaining order quantity in quote currency = Current Order Quote Size - Filled Quote Size.                                                                           |
 | filledBaseSize                 | Double  | Yes      | The quantity of the order in base currency that has been filled.                                                                           |
 | totalFilledBaseSize                 | Double  | Yes      | Cumulative filled quantity of this order in base currency.                                                                           |
-| orderCurrency                 | Double  | Yes      | "base" or "quote"                                                                           |
+| orderCurrency                 | String  | Yes      | "base" or "quote"                                                                           |
 
 ## Query Order
 
@@ -954,7 +954,7 @@ Please note that this API is `Trading` permission required.
 | remainingOrderBaseSize                 | Double  | Yes      | The remaining order quantity in base currency = Current Order Base Size - Filled Base Size.                                                                           |
 | remainingOrderQuoteSize                 | Double  | Yes      | The remaining order quantity in quote currency = Current Order Quote Size - Filled Quote Size.                                                                           |
 | totalFilledBaseSize                 | Double  | Yes      | Cumulative filled quantity of this order in base currency.                                                                           |
-| orderCurrency                 | Double  | Yes      | "base" or "quote"                                                                           |
+| orderCurrency                 | String  | Yes      | "base" or "quote"                                                                           |
 | status                        | Integer | Yes      | Order status. Please refer to [`API Enum`](#api-enum)                                  |
 | timeInForce                   | String  | Yes      | Order validity                                                                         |
 
@@ -1089,7 +1089,7 @@ Amend the price or size or trigger price of an order. For trigger orders, if the
 | remainingOrderQuoteSize                 | Double  | Yes      | The remaining order quantity in quote currency = Current Order Quote Size - Filled Quote Size.                                                                           |
 | filledBaseSize                 | Double  | Yes      | The quantity of the order in base currency that has been filled.                                                                           |
 | totalFilledBaseSize                 | Double  | Yes      | Cumulative filled quantity of this order in base currency.                                                                           |
-| orderCurrency                 | Double  | Yes      | "base" or "quote"                                                                           |
+| orderCurrency                 | String  | Yes      | "base" or "quote"                                                                           |
 
 
 ## Cancel Order
@@ -1241,7 +1241,7 @@ Cancels pending orders that has not yet been transacted. The `orderID` is a uniq
 | remainingOrderQuoteSize                 | Double  | Yes      | The remaining order quantity in quote currency = Current Order Quote Size - Filled Quote Size.                                                                           |
 | filledBaseSize                 | Double  | Yes      | The quantity of the order in base currency that has been filled.                                                                           |
 | totalFilledBaseSize                 | Double  | Yes      | Cumulative filled quantity of this order in base currency.                                                                           |
-| orderCurrency                 | Double  | Yes      | "base" or "quote"                                                                           |
+| orderCurrency                 | String  | Yes      | "base" or "quote"                                                                           |
 
 ## Dead Man's Switch (Cancel All After)
 
@@ -1402,7 +1402,7 @@ Retrieves open orders that have not yet been matched or matched recently. Requir
 | remainingOrderBaseSize                 | Double  | Yes      | The remaining order quantity in base currency = Current Order Base Size - Filled Base Size.                                                                           |
 | remainingOrderQuoteSize                 | Double  | Yes      | The remaining order quantity in quote currency = Current Order Quote Size - Filled Quote Size.                                                                           |
 | totalFilledBaseSize                 | Double  | Yes      | Cumulative filled quantity of this order in base currency.                                                                           |
-| orderCurrency                 | Double  | Yes      | "base" or "quote"                                                                           |
+| orderCurrency                 | String  | Yes      | "base" or "quote"                                                                           |
 
 ## Query User Trades Fills
 
@@ -2229,7 +2229,7 @@ Receive trade notifications by subscribing to the topic `notificationApiV3`. The
 | remainingOrderQuoteSize                 | Double  | Yes      | The remaining order quantity in quote currency = Current Order Quote Size - Filled Quote Size.                                                                           |
 | filledBaseSize                 | Double  | Yes      | The quantity of the order in base currency that has been filled.                                                                           |
 | totalFilledBaseSize                 | Double  | Yes      | Cumulative filled quantity of this order in base currency.                                                                           |
-| orderCurrency                 | Double  | Yes      | "base" or "quote"                                                                           |
+| orderCurrency                 | String  | Yes      | "base" or "quote"                                                                           |
 
 ## User Trade Fills
 

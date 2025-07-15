@@ -848,7 +848,7 @@ BTSE的速率限制如下:
 | remainingOrderQuoteSize       | Double | Yes | 以报价货币计算的剩余订单数量 = 当前订单报价货币数量 - 已成交的报价货币数量 |
 | filledBaseSize                | Double | Yes | 订单中已成交的基础货币数量 |
 | totalFilledBaseSize           | Double | Yes | 此订单以基础货币计算的累计成交数量 |
-| orderCurrency                 | Double | Yes | "base" 或 "quote" |
+| orderCurrency                 | String | Yes | "base" 或 "quote" |
 
 ## 查询订单
 
@@ -935,7 +935,7 @@ BTSE的速率限制如下:
 | remainingOrderBaseSize        | Double | Yes | 以基础货币计算的剩余订单数量 = 当前订单基础货币数量 - 已成交的基础货币数量 |
 | remainingOrderQuoteSize       | Double | Yes | 以报价货币计算的剩余订单数量 = 当前订单报价货币数量 - 已成交的报价货币数量 |
 | totalFilledBaseSize           | Double | Yes | 此订单以基础货币计算的累计成交数量 |
-| orderCurrency                 | Double | Yes | "base" 或 "quote" |
+| orderCurrency                 | String | Yes | "base" 或 "quote" |
 | status                        | Integer | Yes      | 订单状态。请参照[`API Enum`](#api-enum)      |
 | timeInForce                   | String  | Yes      | 订单有效期                                    |
 
@@ -1070,7 +1070,7 @@ BTSE的速率限制如下:
 | remainingOrderQuoteSize       | Double | Yes | 以报价货币计算的剩余订单数量 = 当前订单报价货币数量 - 已成交的报价货币数量 |
 | filledBaseSize                | Double | Yes | 订单中已成交的基础货币数量 |
 | totalFilledBaseSize           | Double | Yes | 此订单以基础货币计算的累计成交数量 |
-| orderCurrency                 | Double | Yes | "base" 或 "quote" |
+| orderCurrency                 | String | Yes | "base" 或 "quote" |
 
 
 ## 取消订单
@@ -1222,7 +1222,7 @@ BTSE的速率限制如下:
 | remainingOrderQuoteSize       | Double | Yes | 以报价货币计算的剩余订单数量 = 当前订单报价货币数量 - 已成交的报价货币数量 |
 | filledBaseSize                | Double | Yes | 订单中已成交的基础货币数量 |
 | totalFilledBaseSize           | Double | Yes | 此订单以基础货币计算的累计成交数量 |
-| orderCurrency                 | Double | Yes | "base" 或 "quote" |
+| orderCurrency                 | String | Yes | "base" 或 "quote" |
 
 ## 延时自动取消所有
 
@@ -1383,7 +1383,7 @@ BTSE的速率限制如下:
 | remainingOrderBaseSize        | Double | Yes | 以基础货币计算的剩余订单数量 = 当前订单基础货币数量 - 已成交的基础货币数量 |
 | remainingOrderQuoteSize       | Double | Yes | 以报价货币计算的剩余订单数量 = 当前订单报价货币数量 - 已成交的报价货币数量 |
 | totalFilledBaseSize           | Double | Yes | 此订单以基础货币计算的累计成交数量 |
-| orderCurrency                 | Double | Yes | "base" 或 "quote" |
+| orderCurrency                 | String | Yes | "base" 或 "quote" |
 
 ## 查询用户交易成交
 
@@ -2210,7 +2210,7 @@ echo -n "/ws/spot1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6726
 | remainingOrderQuoteSize       | Double | Yes | 以报价货币计算的剩余订单数量 = 当前订单报价货币数量 - 已成交的报价货币数量 |
 | filledBaseSize                | Double | Yes | 订单中已成交的基础货币数量 |
 | totalFilledBaseSize           | Double | Yes | 此订单以基础货币计算的累计成交数量 |
-| orderCurrency                 | Double | Yes | "base" 或 "quote" |
+| orderCurrency                 | String | Yes | "base" 或 "quote" |
 
 ## 用户交易成交
 
