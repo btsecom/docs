@@ -208,7 +208,7 @@ BTSE 的速率限制如下：
 * 41: ERROR_INVALID_RISK_LIMIT = 指定了无效的风险限额
 * 51: QUERY_GET_ORDERS_WITH_LIMIT = 查询获取带有限制的订单
 * 64: STATUS_LIQUIDATION = 帐户正在清算
-* 65: STATUS_ACITVE = 订单处于活动状态
+* 65: STATUS_ACTIVE = 订单处于活动状态
 * 66: MODE_BUY = 购买模式
 * 76: ORDER_TYPE_LIMIT = 限价订单
 * 77: ORDER_TYPE_MARKET = 市价订单

@@ -432,7 +432,7 @@ BTSE 的速率限制如下：
 | wallet      | String  | Yes  | 钱包类型。对于现货将返回 `@SPOT` |
 | description | String  | Yes  | 交易描述                      |
 | status      | String  | Yes  | 记录的状态如下<br/>`PROCESSING`<br/>`CANCELLED`<br/>`COMPLETED`<br/>`EXPIRED`<br/>`FAILURE`<br/>`PENDING` |
-| type        | String  | Yes  | 记录的类型如下<br/>`Deposit`<br/>`Withdraw`<br/>`Convert fiat`<br/>`Transfer_Out`<br/>`Transfer_In`<br/>`ReferralEarning`<br/>`Trading Fee Stake Freeze`<br/>`Trading Fee Stake Unfreeze`<br/>`Sub Account Transfer In`<br/>`Sub Account Transfer Out`<br/>`express buy`<br/>`Strategy Income`<br/>`Strategy Pay`<br/>`token voucher in`<br/>`spot trading fee rebate`<br/>`futures trading fee rebat`<br/>`trial fund`<br/>`general trading fee rebate`<br/>`token voucher out` |
+| type        | String  | Yes  | 记录的类型如下<br/>`Deposit`<br/>`Withdraw`<br/>`Convert fiat`<br/>`Transfer_Out`<br/>`Transfer_In`<br/>`ReferralEarning`<br/>`Trading Fee Stake Freeze`<br/>`Trading Fee Stake Unfreeze`<br/>`Sub Account Transfer In`<br/>`Sub Account Transfer Out`<br/>`express buy`<br/>`Strategy Income`<br/>`Strategy Pay`<br/>`token voucher in`<br/>`spot trading fee rebate`<br/>`futures trading fee rebate`<br/>`trial fund`<br/>`general trading fee rebate`<br/>`token voucher out` |
 
 ## 创建钱包地址
 

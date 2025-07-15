@@ -203,7 +203,7 @@ When connecting up the BTSE API, you will come across Double codes that represen
 * 41: ERROR_INVALID_RISK_LIMIT = Invalid risk limit was specified
 * 51: QUERY_GET_ORDERS_WITH_LIMIT
 * 64: STATUS_LIQUIDATION = Account is undergoing liquidation
-* 65: STATUS_ACITVE = Order is active
+* 65: STATUS_ACTIVE = Order is active
 * 66: MODE_BUY
 * 76: ORDER_TYPE_LIMIT = Limit order
 * 77: ORDER_TYPE_MARKET = Market order
@@ -1394,7 +1394,7 @@ Retrieves open orders that have not yet been matched or matched recently. Requir
 | clOrderID                  | String | Yes      | Customer order ID                                                                      |
 | orderState                 | String | Yes      | `STATUS_ACTIVE`, `STATUS_INACTIVE`                                                     |
 | timeInForce                | String | Yes      | Order validity                                                                         |
-| triggered                  | Boolean   | Yes      | Indicate whether the order is triiggered                                               |
+| triggered                  | Boolean   | Yes      | Indicate whether the order is triggered                                               |
  originalOrderBaseSize                 | Double  | Yes      | The original order quantity in base currency. This value will not change even if adjustments are made later.                                                                           |
 | originalOrderQuoteSize                 | Double  | Yes      | The original order quantity in quote currency. This value will not change even if adjustments are made later.                                                                           |
 | currentOrderBaseSize                 | Double  | Yes      | The latest order quantity in base currency, which means the sum of the filled quantity and the remaining unfilled quantity.                                                                           |
@@ -1488,7 +1488,7 @@ Retrieves a user's trade history which includes funding fee data. Requires `Read
 | triggerType     | Integer| yes      | 1001: Stop Loss 1002: Take Profit       |
 | triggerPrice    | Double | yes      | Trigger price                           |
 | wallet          | String | yes      | SPOT@ for spot transactions             |
-| avgFilledPrice| String | yes      | Average fill price                      |
+| avgFilledPrice  | Double | yes      | Average fill price                      |
 | username        | String | yes      | Username                                |
 
 
@@ -1498,9 +1498,9 @@ Retrieves a user's trade history which includes funding fee data. Requires `Read
 
 ```json
 {
-  "makerfee": 0,
+  "makerFee": 0,
   "symbol": "btc-usd",
-  "takerfee": 0
+  "takerFee": 0
 }
 ```
 
@@ -1519,8 +1519,8 @@ Retrieve user's trading fees. Requires `Read` permission.
 | Name     | Type   | Required | Description   |
 | ---      | ---    | ---      | ---           |
 | symbol   | String | yes      | market symbol |
-| makerfee | Double | yes      | maker fees    |
-| takerfee | Double | yes      | taker fees    |
+| makerFee | Double | yes      | maker fees    |
+| takerFee | Double | yes      | taker fees    |
 
 
 # Investment Endpoints
@@ -1536,8 +1536,8 @@ Retrieve user's trading fees. Requires `Read` permission.
     "name": "eth flex savings",
     "currency": "eth",
     "type": "flex",
-    "startdate": 1610685918000,
-    "intereststartdate": 1610719200000,
+    "startDate": 1610685918000,
+    "interestStartDate": 1610719200000,
     "rates":
     [
       {
@@ -1546,10 +1546,10 @@ Retrieve user's trading fees. Requires `Read` permission.
       }
     ],
     "compounding": true,
-    "autorenewsupported": false,
-    "dailylimit": 10.0,
+    "autoRenewSupported": false,
+    "dailyLimit": 10.0,
     "minsize": 1.00000000,
-    "incrementalsize": 1.00000000
+    "incrementalSize": 1.00000000
   }
 ]
 ```
@@ -1566,20 +1566,20 @@ Get all investment products. Requires `Read` permission.
 
 | Name               | Type         | Required | Description                              |
 | ---                | ---          | ---      | ---                                      |
-| id                 | String       | yes      | product id                               |
-| name               | String       | yes      | product name                             |
-| currency           | String       | yes      | currency                                 |
-| type               | String       | yes      | product type                             |
-| startdate          | Long         | yes      | inventment start date                    |
-| intereststartdate  | Long         | yes      | interest start date                      |
-| rates              | rateobject[] | yes      | interest rate information                |
-| compounding        | Double       | yes      | is product compounding                   |
-| autorenewsupported | Double       | yes      | is product supported renew automatically |
-| dailylimit         | Double       | yes      | daily invent amount limit                |
-| minsize            | Double       | yes      | minimum invest size                      |
-| incrementalsize    | Double       | yes      | invest step size                         |
+| id                 | String       | yes      | Product id                               |
+| name               | String       | yes      | Product name                             |
+| currency           | String       | yes      | Currency                                 |
+| type               | String       | yes      | Product type                             |
+| startDate          | Long         | yes      | Investment start date                    |
+| interestStartDate  | Long         | yes      | Interest start date                      |
+| rates              | Rate Object  | yes      | Interest rate information                |
+| compounding        | Double       | yes      | Is product compounding                   |
+| autoRenewSupported | Double       | yes      | Is product supported renew automatically |
+| dailyLimit         | Double       | yes      | Daily invent amount limit                |
+| minsize            | Double       | yes      | Minimum invest size                      |
+| incrementalSize    | Double       | yes      | Invest step size                         |
 
-### rateobject
+### Rate Object
 
 | Name | Type    | Required | Description      |
 | ---  | ---     | ---      | ---              |
@@ -1684,18 +1684,17 @@ Redeem an investment order. Requires `Wallet` permission.
     "currency": "eth",
     "type": "flex",
     "rate": 1.15,
-    "investamt": 10.00000000,
-    "interestearned": 0.00031507,
-    "nextinterestpayouttime": 1610632800000,
+    "investAmt": 10.00000000,
+    "interestEarned": 0.00031507,
+    "nextInterestPayOutTime": 1610632800000,
     "starttime": 0,
     "endtime": 0,
     "duration": 86400000,
-    "payoutlocktime": 300000,
-    "autorenew": false,
+    "payoutLockTime": 300000,
+    "autoRenew": false,
     "compounding": true,
-    "autorenewsupported": false,
-    "dailylimit": 0,
-    "redemptionprocessing": false
+    "autoRenewSupported": false,
+    "redemptionProcessing": false
   }
 ]
 ```
@@ -1708,22 +1707,22 @@ Query investment orders. Requires `Wallet` permission.
 
 | Name                   | Type    | Required | Description                      |
 | ---                    | ---     | ---      | ---                              |
-| id                     | Integer | yes      | order id                         |
-| name                   | String  | yes      | product name                     |
-| currency               | String  | yes      | currency                         |
-| type                   | String  | yes      | product type                     |
-| rate                   | Double  | yes      | interest rate                    |
-| investment             | Double  | yes      | amount                           |
-| interestearned         | Double  | yes      | intereset earned                 |
-| nextinterestpayouttime | Integer | yes      | next interest payout time        |
-| starttime              | Integer | yes      | start time                       |
-| endtime                | Integer | yes      | end time                         |
-| duration               | Integer | yes      | duration                         |
-| payoutlocktime         | Integer | yes      | lock time of payout              |
-| autorenew              | Boolean | yes      | renew automatically              |
-| compounding            | Boolean  | yes      | is compounding                   |
-| autorenewsupported     | Boolean | yes      | is renew automatically supported |
-| redemptionprocessing   | Boolean | yes      | is redemption processing         |
+| id                     | Integer | yes      | Order id                         |
+| name                   | String  | yes      | Product name                     |
+| currency               | String  | yes      | Currency                         |
+| type                   | String  | yes      | Product type                     |
+| rate                   | Double  | yes      | Interest rate                    |
+| investment             | Double  | yes      | Amount                           |
+| interestEarned         | Double  | yes      | Interest earned                 |
+| nextInterestPayoutTime | Integer | yes      | Next interest payout time        |
+| starttime              | Integer | yes      | Start time                       |
+| endtime                | Integer | yes      | End time                         |
+| duration               | Integer | yes      | Duration                         |
+| payoutLockTime         | Integer | yes      | Lock time of payout              |
+| autoRenew              | Boolean | yes      | Renew automatically              |
+| compounding            | Boolean | yes      | Is compounding                   |
+| autoRenewSupported     | Boolean | yes      | Is renew automatically supported |
+| redemptionProcessing   | Boolean | yes      | Is redemption processing         |
 
 
 ## Query Investment History
@@ -1733,15 +1732,14 @@ Query investment orders. Requires `Wallet` permission.
 ```json
 [
   {
-    "txntime": 1598918400000,
+    "txnTime": 1598918400000,
     "name": "usdt flex savings",
     "currency": "usdt",
     "rate": 0.5,
     "type": "flex",
-    "txntype": "invest_service_type_deposit",
+    "txnType": "invest_service_type_deposit",
     "amount": 100,
-    "totalamount": 2000,
-    "interestearned": 1.22,
+    "totalAmount": 2000,
     "duration": 0
   }
 ]
@@ -1755,16 +1753,15 @@ Query investment history. Requires `Wallet` permission.
 
 | Name           | Type    | Required | Description                    |
 | ---            | ---     | ---      | ---                            |
-| txntime        | Integer | yes      | transaction time               |
-| name           | String  | yes      | product name                   |
-| currency       | String  | yes      | currency                       |
-| rate           | String  | yes      | interest rate                  |
-| type           | Boolean | yes      | product type                   |
-| txntype        | String  | yes      | transaction type               |
-| amount         | Double  | yes      | transaction amount             |
-| totalamount    | Double  | yes      | total amount of the investment |
-| interestearned | Double  | yes      | interest earned                |
-| duration       | Boolean | yes      | duration                       |
+| txnTime        | Integer | yes      | Transaction time               |
+| name           | String  | yes      | Product name                   |
+| currency       | String  | yes      | Currency                       |
+| rate           | String  | yes      | Interest rate                  |
+| type           | Boolean | yes      | Product type                   |
+| txnType        | String  | yes      | Transaction type               |
+| amount         | Double  | yes      | Transaction amount             |
+| totalAmount    | Double  | yes      | Total amount of the investment |
+| duration       | Boolean | yes      | Duration                       |
 
 
 # Order Book Websocket Streams
@@ -2048,7 +2045,7 @@ to subscribe to a websocket public trade fill
 | Name    | Type   | Required | Description                                   |
 | ---     | ---    | ---      | ---                                           |
 | event   | String | Yes      | Respond with the event type                   |
-| channel | Array  | Yes      | Topics which have been sucessfully subscribed |
+| channel | Array  | Yes      | Topics which have been successfully subscribed |
 
 
 
@@ -2209,7 +2206,7 @@ Receive trade notifications by subscribing to the topic `notificationApiV3`. The
 | orderID           | String  | Yes      | Internal order ID                                                             |
 | side              | String  | Yes      | Trade side. Values are: [`BUY`, `SELL`]                                                       |
 | orderType              | Integer     | Yes      | Order type. Valid values are:<br/>76: Limit order<br/>77: Market order<br/>80: Peg/Algo order  |
-| price             | Double  | Yes      | Order price or transcated price                                               |
+| price             | Double  | Yes      | Order price or transacted price                                               |
 | avgFilledPrice    | Double  | Yes      | Average filled price                                                          |
 | status            | Integer | Yes      | Status with values as follows:<br/>1: MARKET_UNAVAILABLE, Market is currently unavailable<br/>2: ORDER_INSERTED, Order is inserted successfully<br/>4: ORDER_FULLY_TRANSACTED, Order is fully transacted<br/>5: ORDER_PARTIALLY_TRANSACTED, Order is partially transacted<br/>6: ORDER_CANCELLED, Order is cancelled successfully<br/>8: INSUFFICIENT_BALANCE, Insufficient balance in account<br/>9: TRIGGER_INSERTED, Trigger Order is inserted successfully<br/>10: TRIGGER_ACTIVATED, Trigger Order is activated successfully<br/>12: ERROR_UPDATE_RISK_LIMIT, Error in updating risk limit<br/>15: ORDER_REJECTED, Change made to the order was unsuccessful<br/>27: TRANSFER_SUCCESSFUL, Transfer funds between futures and spot is successful<br/>28: TRANSFER_UNSUCCESSFUL, Transfer funds between spot and futures is unsuccessful<br/>41: ERROR_INVALID_RISK_LIMIT, Invalid risk limit was specified<br/>64: STATUS_LIQUIDATION, Account is undergoing liquidation<br/>101: FUTURES_ORDER_PRICE_OUTSIDE_LIQUIDATION_PRICE, Futures order is outside of liquidation price<br/>1003: ORDER_LIQUIDATION, Order is undergoing liquidation<br/>1004: ORDER_ADL, Order is undergoing ADL |
 | clOrderID         | String  | Yes      | Custom order ID                                                               |
@@ -2283,7 +2280,7 @@ When a trade has been transacted, this topic will send the trade information bac
 | tradeId     | String  | Yes      | Trade unique identifier                                                                       |
 | type        | Integer     | Yes      | Order type. Valid values are:<br/>76: Limit order<br/>77: Market order<br/>80: Peg/Algo order |
 | side        | String  | Yes      | Trade side. Values are: [`BUY`, `SELL`]                                                                       |
-| price       | Double  | Yes      | Transcated price                                                                              |
+| price       | Double  | Yes      | Transacted price                                                                              |
 | size        | Double  | Yes      | Transacted size                                                                               |
 | feeAmount   | Double  | Yes      | Fee amount charged                                                                            |
 | feeCurrency | String  | Yes      | Fee currency                                                                                  |

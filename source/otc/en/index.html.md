@@ -27,7 +27,7 @@ headingLevel: 2
 
 ## Version 1.1.1 (24th November 2021)
 
-* Addition of `unsubcribe-quote` and `unsubscribe-quote-all` op code to unsubscribe streaming OTC quote.
+* Addition of `unsubscribe-quote` and `unsubscribe-quote-all` op code to unsubscribe streaming OTC quote.
 
 ## Version 1.1.0 (17th September 2021)
 

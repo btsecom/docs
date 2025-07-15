@@ -220,7 +220,7 @@ BTSE 的速率限制如下：
 * 41: ERROR_INVALID_RISK_LIMIT = 指定了无效的风险限额
 * 51: QUERY_GET_ORDERS_WITH_LIMIT = 查询获取带有限制的订单
 * 64: STATUS_LIQUIDATION = 帐户正在清算
-* 65: STATUS_ACITVE = 订单处于活动状态
+* 65: STATUS_ACTIVE = 订单处于活动状态
 * 66: MODE_BUY = 购买模式
 * 76: ORDER_TYPE_LIMIT = 限价订单
 * 77: ORDER_TYPE_MARKET = 市价订单
@@ -1402,7 +1402,7 @@ BTSE 的速率限制如下：
 | timestamp     | Long    | Yes      | 订单时间戳                                                                                                                                                                                                                                                                                         |
 | trigger       | String  | Yes      | 如果订单是触发订单的指示器                                                                                                                                                                                                                                                                        |
 | triggerPrice  | String  | Yes      | 订单触发价格，如果订单不是触发订单则返回0                                                                                                                                                                                                                                                          |
-| avgFilledPrice  | String  | Yes      | 平均成交价格。对于部分交易的订单返回平均成交价格                                                                                                                                                                                                                                                  |
+| avgFilledPrice  | Double  | Yes      | 平均成交价格。对于部分交易的订单返回平均成交价格                                                                                                                                                                                                                                                  |
 | message       | String  | Yes      | 交易消息                                                                                                                                                                                                                                                                                           |
 | stealth       | Double  | Yes      | 订单的隐秘值                                                                                                                                                                                                                                                                                       |
 | deviation     | String  | Yes      | 订单的偏差值                                                                                                                                                                                                                                                                                       |
@@ -1928,7 +1928,7 @@ BTSE 的速率限制如下：
 | timestamp      | Long    | Yes      | 订单时间戳                                                                                                                                                                                                                                                                  |
 | trigger        | String  | Yes      | 指示订单是否为触发订单                                                                                                                                                                                                                                                      |
 | triggerPrice   | String  | Yes      | 订单触发价格，如果订单不是触发订单则返回0                                                                                                                                                                                                                                   |
-| avgFilledPrice   | String  | Yes      | 平均成交价格。返回部分交易订单的平均成交价格                                                                                                                                                                                                                                |
+| avgFilledPrice   | Double  | Yes      | 平均成交价格。返回部分交易订单的平均成交价格                                                                                                                                                                                                                                |
 | message        | String  | Yes      | 交易消息                                                                                                                                                                                                                                                                    |
 | stealth        | Double  | Yes      | 订单的隐身值                                                                                                                                                                                                                                                                |
 | deviation      | String  | Yes      | 订单的偏差值                                                                                                                                                                                                                                                                |
@@ -3447,7 +3447,7 @@ WebSocket 将向已认证的订阅者推送实时交易级别的通知。Websock
       "vendorName": null,
       "botID": null,
       "maxStealthDisplayAmount": 0,
-      "sellexchangeRate": 0,
+      "sellExchangeRate": 0,
       "tag": null,
       "triggerPrice": 116682.3,
       "closeOrder": true,
@@ -3524,7 +3524,7 @@ WebSocket 将向已认证的订阅者推送实时交易级别的通知。Websock
 | stealth                 | Double  | Yes      | 用于peg订单                                         |
 | orderID                 | String  | Yes      | 订单ID                                              |
 | maxStealthDisplayAmount | Double  | Yes      | 用于peg订单                                         |
-| sellexchangeRate        | Double  | Yes      |                                                    |
+| sellExchangeRate        | Double  | Yes      |                                                    |
 | triggerPrice            | Double  | Yes      | OCO订单                                             |
 | closeOrder              | Boolean | Yes      | 是否有关闭此持仓的订单
 | liquidationInProgress   | Boolean | Yes      | 是否正在清算                                        |
@@ -3590,7 +3590,7 @@ WebSocket 将向已认证的订阅者推送实时交易级别的通知。Websock
       "vendorName": null,
       "botID": null,
       "maxStealthDisplayAmount": 0,
-      "sellexchangeRate": 0,
+      "sellExchangeRate": 0,
       "tag": null,
       "triggerPrice": 0,
       "closeOrder": false,
@@ -3666,7 +3666,7 @@ WebSocket 将向已认证的订阅者推送实时交易级别的通知。Websock
       "vendorName": null,
       "botID": null,
       "maxStealthDisplayAmount": 0,
-      "sellexchangeRate": 0,
+      "sellExchangeRate": 0,
       "tag": null,
       "triggerPrice": 0,
       "closeOrder": false,
@@ -3733,7 +3733,7 @@ WebSocket 将向已认证的订阅者推送实时交易级别的通知。Websock
 | stealth                 | Double  | Yes      | 用于peg订单                           |
 | orderID                 | String  | Yes      | 订单ID                                |
 | maxStealthDisplayAmount | Double  | Yes      | 用于peg订单                           |
-| sellexchangeRate        | Double  | Yes      |                                        |
+| sellExchangeRate        | Double  | Yes      |                                        |
 | triggerPrice            | Double  | Yes      | OCO订单                               |
 | closeOrder              | Boolean | Yes      | 是否有一个订单来关闭此仓位            |
 | liquidationInProgress   | Boolean | Yes      | 是否正在进行清算                      |
