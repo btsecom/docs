@@ -1924,7 +1924,7 @@
 </tr>
 <tr>
 <td>orderCurrency</td>
-<td>Double</td>
+<td>String</td>
 <td>Yes</td>
 <td>&quot;base&quot; 或 &quot;quote&quot;</td>
 </tr>
@@ -2172,7 +2172,7 @@
 </tr>
 <tr>
 <td>orderCurrency</td>
-<td>Double</td>
+<td>String</td>
 <td>Yes</td>
 <td>&quot;base&quot; 或 &quot;quote&quot;</td>
 </tr>
@@ -2491,7 +2491,7 @@
 </tr>
 <tr>
 <td>orderCurrency</td>
-<td>Double</td>
+<td>String</td>
 <td>Yes</td>
 <td>&quot;base&quot; 或 &quot;quote&quot;</td>
 </tr>
@@ -2793,7 +2793,7 @@
 </tr>
 <tr>
 <td>orderCurrency</td>
-<td>Double</td>
+<td>String</td>
 <td>Yes</td>
 <td>&quot;base&quot; 或 &quot;quote&quot;</td>
 </tr>
@@ -3136,7 +3136,7 @@
 </tr>
 <tr>
 <td>orderCurrency</td>
-<td>Double</td>
+<td>String</td>
 <td>Yes</td>
 <td>&quot;base&quot; 或 &quot;quote&quot;</td>
 </tr>
@@ -3398,7 +3398,7 @@
 </tr>
 <tr>
 <td>avgFilledPrice</td>
-<td>String</td>
+<td>Double</td>
 <td>yes</td>
 <td>平均成交价</td>
 </tr>
@@ -3414,9 +3414,9 @@
 <p>响应</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"makerfee"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"makerFee"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"btc-usd"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"takerfee"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="nl">"takerFee"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p><code>GET /api/v3.3/user/fees</code></p>
@@ -3454,13 +3454,13 @@
 <td>市场标识符</td>
 </tr>
 <tr>
-<td>makerfee</td>
+<td>makerFee</td>
 <td>Double</td>
 <td>Yes</td>
 <td>创造者费用</td>
 </tr>
 <tr>
-<td>takerfee</td>
+<td>takerFee</td>
 <td>Double</td>
 <td>Yes</td>
 <td>接收者费用</td>
@@ -3476,8 +3476,8 @@
     </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eth flex savings"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eth"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"flex"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"startdate"</span><span class="p">:</span><span class="w"> </span><span class="mi">1610685918000</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"intereststartdate"</span><span class="p">:</span><span class="w"> </span><span class="mi">1610719200000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"startDate"</span><span class="p">:</span><span class="w"> </span><span class="mi">1610685918000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"interestStartDate"</span><span class="p">:</span><span class="w"> </span><span class="mi">1610719200000</span><span class="p">,</span><span class="w">
     </span><span class="nl">"rates"</span><span class="p">:</span><span class="w">
     </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
@@ -3486,10 +3486,10 @@
       </span><span class="p">}</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="nl">"compounding"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"autorenewsupported"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"dailylimit"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"autoRenewSupported"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"dailyLimit"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"minsize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.00000000</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"incrementalsize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.00000000</span><span class="w">
+    </span><span class="nl">"incrementalSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.00000000</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
@@ -3532,20 +3532,20 @@
 <td>产品类型</td>
 </tr>
 <tr>
-<td>startdate</td>
+<td>startDate</td>
 <td>Long</td>
 <td>Yes</td>
 <td>投资开始日期</td>
 </tr>
 <tr>
-<td>intereststartdate</td>
+<td>interestStartDate</td>
 <td>Long</td>
 <td>Yes</td>
 <td>利息开始日期</td>
 </tr>
 <tr>
 <td>rates</td>
-<td>rateobject[]</td>
+<td>Rate Object</td>
 <td>Yes</td>
 <td>利率信息</td>
 </tr>
@@ -3556,13 +3556,13 @@
 <td>是否复利</td>
 </tr>
 <tr>
-<td>autorenewsupported</td>
+<td>autoRenewSupported</td>
 <td>Double</td>
 <td>Yes</td>
 <td>是否支持自动续约</td>
 </tr>
 <tr>
-<td>dailylimit</td>
+<td>dailyLimit</td>
 <td>Double</td>
 <td>Yes</td>
 <td>每日投资金额限制</td>
@@ -3574,7 +3574,7 @@
 <td>最小投资额</td>
 </tr>
 <tr>
-<td>incrementalsize</td>
+<td>incrementalSize</td>
 <td>Double</td>
 <td>Yes</td>
 <td>投资递增步长</td>
@@ -3745,18 +3745,17 @@
     </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eth"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"flex"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.15</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"investamt"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.00000000</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"interestearned"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00031507</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"nextinterestpayouttime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1610632800000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"investAmt"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.00000000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"interestEarned"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00031507</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"nextInterestPayoutTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1610632800000</span><span class="p">,</span><span class="w">
     </span><span class="nl">"starttime"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"endtime"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"duration"</span><span class="p">:</span><span class="w"> </span><span class="mi">86400000</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"payoutlocktime"</span><span class="p">:</span><span class="w"> </span><span class="mi">300000</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"autorenew"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"payoutLockTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">300000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"autoRenew"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="nl">"compounding"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"autorenewsupported"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"dailylimit"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"redemptionprocessing"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="nl">"autoRenewSupported"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"redemptionProcessing"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
@@ -3809,13 +3808,13 @@
 <td>投资金额</td>
 </tr>
 <tr>
-<td>interestearned</td>
+<td>interestEarned</td>
 <td>Double</td>
 <td>Yes</td>
 <td>已获得利息</td>
 </tr>
 <tr>
-<td>nextinterestpayouttime</td>
+<td>nextInterestPayoutTime</td>
 <td>Integer</td>
 <td>Yes</td>
 <td>下次利息支付时间</td>
@@ -3839,13 +3838,13 @@
 <td>期限</td>
 </tr>
 <tr>
-<td>payoutlocktime</td>
+<td>payoutLockTime</td>
 <td>Integer</td>
 <td>Yes</td>
 <td>支付锁定时间</td>
 </tr>
 <tr>
-<td>autorenew</td>
+<td>autoRenew</td>
 <td>Boolean</td>
 <td>Yes</td>
 <td>自动续投</td>
@@ -3857,13 +3856,13 @@
 <td>复利</td>
 </tr>
 <tr>
-<td>autorenewsupported</td>
+<td>autoRenewSupported</td>
 <td>Boolean</td>
 <td>Yes</td>
 <td>支持自动续投</td>
 </tr>
 <tr>
-<td>redemptionprocessing</td>
+<td>redemptionProcessing</td>
 <td>Boolean</td>
 <td>Yes</td>
 <td>赎回处理中</td>
@@ -3875,15 +3874,14 @@
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"txntime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1598918400000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"txnTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1598918400000</span><span class="p">,</span><span class="w">
     </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"usdt flex savings"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"usdt"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w">
     </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"flex"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"txntype"</span><span class="p">:</span><span class="w"> </span><span class="s2">"invest_service_type_deposit"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"txnType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"invest_service_type_deposit"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"totalamount"</span><span class="p">:</span><span class="w"> </span><span class="mi">2000</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"interestearned"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.22</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalAmount"</span><span class="p">:</span><span class="w"> </span><span class="mi">2000</span><span class="p">,</span><span class="w">
     </span><span class="nl">"duration"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
@@ -3901,7 +3899,7 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>txntime</td>
+<td>txnTime</td>
 <td>Integer</td>
 <td>Yes</td>
 <td>交易时间</td>
@@ -3931,7 +3929,7 @@
 <td>产品类型</td>
 </tr>
 <tr>
-<td>txntype</td>
+<td>txnType</td>
 <td>String</td>
 <td>Yes</td>
 <td>交易类型</td>
@@ -3943,16 +3941,10 @@
 <td>交易金额</td>
 </tr>
 <tr>
-<td>totalamount</td>
+<td>totalAmount</td>
 <td>Double</td>
 <td>Yes</td>
 <td>投资总金额</td>
-</tr>
-<tr>
-<td>interestearned</td>
-<td>Double</td>
-<td>Yes</td>
-<td>已赚得的利息</td>
 </tr>
 <tr>
 <td>duration</td>
@@ -4740,7 +4732,7 @@
 </tr>
 <tr>
 <td>orderCurrency</td>
-<td>Double</td>
+<td>String</td>
 <td>Yes</td>
 <td>&quot;base&quot; 或 &quot;quote&quot;</td>
 </tr>
@@ -4901,6 +4893,10 @@ const TAB_MAP = {
     en: 'Spot',
     cn: '现货'
   },
+  spotV3_3: {
+    en: 'SpotV3.3',
+    cn: '现货V3.3'
+  },
   futures: {
     en: 'Futures',
     cn: '期货'
@@ -4908,6 +4904,10 @@ const TAB_MAP = {
   futuresV2_2: {
     en: 'FuturesV2.2',
     cn: '期货V2.2'
+  },
+  futuresV2_3: {
+    en: 'FuturesV2.3',
+    cn: '期货V2.3'
   },
   otc: {
     en: 'OTC',

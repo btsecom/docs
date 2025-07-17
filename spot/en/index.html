@@ -583,8 +583,8 @@
 </ul>
 <h2 id='version-3-4-0-12th-april-2023'>Version 3.4.0 (12th April 2023)</h2>
 <ul>
-<li>Deprecated two websokcet topics <code>Orderbook Snapshot (By grouping)</code> and <code>Orderbook Snapshot (By depth)</code> today.
-Please use the following websokcet topic through the endpoint <code>wss://ws.btse.com/ws/oss/spot</code> to get orderbook data
+<li>Deprecated two websocket topics <code>Orderbook Snapshot (By grouping)</code> and <code>Orderbook Snapshot (By depth)</code> today.
+Please use the following websocket topic through the endpoint <code>wss://ws.btse.com/ws/oss/spot</code> to get orderbook data
 
 <ul>
 <li><a href="#orderbook-incremental-updates">Orderbook Incremental Updates</a></li>
@@ -642,7 +642,7 @@ Please use the following websokcet topic through the endpoint <code>wss://ws.bts
 </ul>
 <h2 id='version-3-2-8-8th-december-2021'>Version 3.2.8 (8th December 2021)</h2><h2 id='version-3-2-7-23rd-november-2021'>Version 3.2.7 (23rd November 2021)</h2>
 <ul>
-<li>Update orderbook incremental updates decription <a href="#orderbook-incremental-updates">Orderbook websocket feed</a></li>
+<li>Update orderbook incremental updates description <a href="#orderbook-incremental-updates">Orderbook websocket feed</a></li>
 </ul>
 <h2 id='version-3-2-6-19th-november-2021'>Version 3.2.6 (19th November 2021)</h2>
 <ul>
@@ -868,7 +868,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 <li>41: ERROR_INVALID_RISK_LIMIT = Invalid risk limit was specified</li>
 <li>51: QUERY_GET_ORDERS_WITH_LIMIT</li>
 <li>64: STATUS_LIQUIDATION = Account is undergoing liquidation</li>
-<li>65: STATUS_ACITVE = Order is active</li>
+<li>65: STATUS_ACTIVE = Order is active</li>
 <li>66: MODE_BUY</li>
 <li>76: ORDER_TYPE_LIMIT = Limit order</li>
 <li>77: ORDER_TYPE_MARKET = Market order</li>
@@ -3101,7 +3101,7 @@ Please note that this API is <code>Trading</code> permission required.</p>
 <td>triggered</td>
 <td>Boolean</td>
 <td>Yes</td>
-<td>Indicate whether the order is triiggered</td>
+<td>Indicate whether the order is triggered</td>
 </tr>
 </tbody></table>
 <h2 id='query-user-trades-fills'>Query User Trades Fills</h2>
@@ -3377,9 +3377,9 @@ Please note that this API is <code>Trading</code> permission required.</p>
 <p>response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"makerfee"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"makerFee"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
   </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"btc-usd"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"takerfee"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="nl">"takerFee"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p><code>GET /api/v3.2/user/fees</code></p>
@@ -3417,13 +3417,13 @@ Please note that this API is <code>Trading</code> permission required.</p>
 <td>market symbol</td>
 </tr>
 <tr>
-<td>makerfee</td>
+<td>makerFee</td>
 <td>Double</td>
 <td>yes</td>
 <td>maker fees</td>
 </tr>
 <tr>
-<td>takerfee</td>
+<td>takerFee</td>
 <td>Double</td>
 <td>yes</td>
 <td>taker fees</td>
@@ -3439,8 +3439,8 @@ Please note that this API is <code>Trading</code> permission required.</p>
     </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eth flex savings"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eth"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"flex"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"startdate"</span><span class="p">:</span><span class="w"> </span><span class="mi">1610685918000</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"intereststartdate"</span><span class="p">:</span><span class="w"> </span><span class="mi">1610719200000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"startDate"</span><span class="p">:</span><span class="w"> </span><span class="mi">1610685918000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"interestStartDate"</span><span class="p">:</span><span class="w"> </span><span class="mi">1610719200000</span><span class="p">,</span><span class="w">
     </span><span class="nl">"rates"</span><span class="p">:</span><span class="w">
     </span><span class="p">[</span><span class="w">
       </span><span class="p">{</span><span class="w">
@@ -3449,10 +3449,10 @@ Please note that this API is <code>Trading</code> permission required.</p>
       </span><span class="p">}</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="nl">"compounding"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"autorenewsupported"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"dailylimit"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.0</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"autoRenewSupported"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"dailyLimit"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"minsize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.00000000</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"incrementalsize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.00000000</span><span class="w">
+    </span><span class="nl">"incrementalSize"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.00000000</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
@@ -3495,20 +3495,20 @@ Please note that this API is <code>Trading</code> permission required.</p>
 <td>product type</td>
 </tr>
 <tr>
-<td>startdate</td>
+<td>startDate</td>
 <td>Long</td>
 <td>yes</td>
-<td>inventment start date</td>
+<td>investment start date</td>
 </tr>
 <tr>
-<td>intereststartdate</td>
+<td>interestStartDate</td>
 <td>Long</td>
 <td>yes</td>
 <td>interest start date</td>
 </tr>
 <tr>
 <td>rates</td>
-<td>rateobject[]</td>
+<td>Rate Object</td>
 <td>yes</td>
 <td>interest rate information</td>
 </tr>
@@ -3519,13 +3519,13 @@ Please note that this API is <code>Trading</code> permission required.</p>
 <td>is product compounding</td>
 </tr>
 <tr>
-<td>autorenewsupported</td>
+<td>autoRenewSupported</td>
 <td>Double</td>
 <td>yes</td>
 <td>is product supported renew automatically</td>
 </tr>
 <tr>
-<td>dailylimit</td>
+<td>dailyLimit</td>
 <td>Double</td>
 <td>yes</td>
 <td>daily invent amount limit</td>
@@ -3537,13 +3537,13 @@ Please note that this API is <code>Trading</code> permission required.</p>
 <td>minimum invest size</td>
 </tr>
 <tr>
-<td>incrementalsize</td>
+<td>incrementalSize</td>
 <td>Double</td>
 <td>yes</td>
 <td>invest step size</td>
 </tr>
 </tbody></table>
-<h3 id='rateobject'>rateobject</h3>
+<h3 id='rate-object'>Rate Object</h3>
 <table><thead>
 <tr>
 <th>name</th>
@@ -3708,18 +3708,17 @@ Please note that this API is <code>Trading</code> permission required.</p>
     </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eth"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"flex"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.15</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"investamt"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.00000000</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"interestearned"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00031507</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"nextinterestpayouttime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1610632800000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"investAmt"</span><span class="p">:</span><span class="w"> </span><span class="mf">10.00000000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"interestEarned"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00031507</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"nextInterestPayoutTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1610632800000</span><span class="p">,</span><span class="w">
     </span><span class="nl">"starttime"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"endtime"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
     </span><span class="nl">"duration"</span><span class="p">:</span><span class="w"> </span><span class="mi">86400000</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"payoutlocktime"</span><span class="p">:</span><span class="w"> </span><span class="mi">300000</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"autorenew"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"payoutLockTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">300000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"autoRenew"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="nl">"compounding"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"autorenewsupported"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"dailylimit"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"redemptionprocessing"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="nl">"autoRenewSupported"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"redemptionProcessing"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre></div>
@@ -3739,97 +3738,97 @@ Please note that this API is <code>Trading</code> permission required.</p>
 <td>id</td>
 <td>Integer</td>
 <td>yes</td>
-<td>order id</td>
+<td>Order id</td>
 </tr>
 <tr>
 <td>name</td>
 <td>String</td>
 <td>yes</td>
-<td>product name</td>
+<td>Product name</td>
 </tr>
 <tr>
 <td>currency</td>
 <td>String</td>
 <td>yes</td>
-<td>currency</td>
+<td>Currency</td>
 </tr>
 <tr>
 <td>type</td>
 <td>String</td>
 <td>yes</td>
-<td>product type</td>
+<td>Product type</td>
 </tr>
 <tr>
 <td>rate</td>
 <td>Double</td>
 <td>yes</td>
-<td>interest rate</td>
+<td>Interest rate</td>
 </tr>
 <tr>
 <td>investment</td>
 <td>Double</td>
 <td>yes</td>
-<td>amount</td>
+<td>Amount</td>
 </tr>
 <tr>
-<td>interestearned</td>
+<td>interestEarned</td>
 <td>Double</td>
 <td>yes</td>
-<td>intereset earned</td>
+<td>Interest earned</td>
 </tr>
 <tr>
-<td>nextinterestpayouttime</td>
+<td>nextInterestPayoutTime</td>
 <td>Integer</td>
 <td>yes</td>
-<td>next interest payout time</td>
+<td>Next interest payout time</td>
 </tr>
 <tr>
 <td>starttime</td>
 <td>Integer</td>
 <td>yes</td>
-<td>start time</td>
+<td>Start time</td>
 </tr>
 <tr>
 <td>endtime</td>
 <td>Integer</td>
 <td>yes</td>
-<td>end time</td>
+<td>End time</td>
 </tr>
 <tr>
 <td>duration</td>
 <td>Integer</td>
 <td>yes</td>
-<td>duration</td>
+<td>Duration</td>
 </tr>
 <tr>
-<td>payoutlocktime</td>
+<td>payoutLockTime</td>
 <td>Integer</td>
 <td>yes</td>
-<td>lock time of payout</td>
+<td>Lock time of payout</td>
 </tr>
 <tr>
-<td>autorenew</td>
+<td>autoRenew</td>
 <td>Boolean</td>
 <td>yes</td>
-<td>renew automatically</td>
+<td>Renew automatically</td>
 </tr>
 <tr>
 <td>compounding</td>
 <td>Boolean</td>
 <td>yes</td>
-<td>is compounding</td>
+<td>Is compounding</td>
 </tr>
 <tr>
-<td>autorenewsupported</td>
+<td>autoRenewSupported</td>
 <td>Boolean</td>
 <td>yes</td>
-<td>is renew automatically supported</td>
+<td>Is renew automatically supported</td>
 </tr>
 <tr>
-<td>redemptionprocessing</td>
+<td>redemptionProcessing</td>
 <td>Boolean</td>
 <td>yes</td>
-<td>is redemption processing</td>
+<td>Is redemption processing</td>
 </tr>
 </tbody></table>
 <h2 id='query-investment-history'>Query Investment History</h2>
@@ -3838,15 +3837,14 @@ Please note that this API is <code>Trading</code> permission required.</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"txntime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1598918400000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"txnTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1598918400000</span><span class="p">,</span><span class="w">
     </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"usdt flex savings"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"usdt"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w">
     </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"flex"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"txntype"</span><span class="p">:</span><span class="w"> </span><span class="s2">"invest_service_type_deposit"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"txnType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"invest_service_type_deposit"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"totalamount"</span><span class="p">:</span><span class="w"> </span><span class="mi">2000</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"interestearned"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.22</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"totalAmount"</span><span class="p">:</span><span class="w"> </span><span class="mi">2000</span><span class="p">,</span><span class="w">
     </span><span class="nl">"duration"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
@@ -3864,64 +3862,58 @@ Please note that this API is <code>Trading</code> permission required.</p>
 </tr>
 </thead><tbody>
 <tr>
-<td>txntime</td>
+<td>txnTime</td>
 <td>Integer</td>
 <td>yes</td>
-<td>transaction time</td>
+<td>Transaction time</td>
 </tr>
 <tr>
 <td>name</td>
 <td>String</td>
 <td>yes</td>
-<td>product name</td>
+<td>Product name</td>
 </tr>
 <tr>
 <td>currency</td>
 <td>String</td>
 <td>yes</td>
-<td>currency</td>
+<td>Currency</td>
 </tr>
 <tr>
 <td>rate</td>
 <td>String</td>
 <td>yes</td>
-<td>interest rate</td>
+<td>Interest rate</td>
 </tr>
 <tr>
 <td>type</td>
 <td>Boolean</td>
 <td>yes</td>
-<td>product type</td>
+<td>Product type</td>
 </tr>
 <tr>
-<td>txntype</td>
+<td>txnType</td>
 <td>String</td>
 <td>yes</td>
-<td>transaction type</td>
+<td>Transaction type</td>
 </tr>
 <tr>
 <td>amount</td>
 <td>Double</td>
 <td>yes</td>
-<td>transaction amount</td>
+<td>Transaction amount</td>
 </tr>
 <tr>
-<td>totalamount</td>
+<td>totalAmount</td>
 <td>Double</td>
 <td>yes</td>
-<td>total amount of the investment</td>
-</tr>
-<tr>
-<td>interestearned</td>
-<td>Double</td>
-<td>yes</td>
-<td>interest earned</td>
+<td>Total amount of the investment</td>
 </tr>
 <tr>
 <td>duration</td>
 <td>Boolean</td>
 <td>yes</td>
-<td>duration</td>
+<td>Duration</td>
 </tr>
 </tbody></table>
 <h1 id='order-book-websocket-streams'>Order Book Websocket Streams</h1><h2 id='endpoints-2'>Endpoints</h2>
@@ -4343,7 +4335,7 @@ Please note that this API is <code>Trading</code> permission required.</p>
 <td>channel</td>
 <td>Array</td>
 <td>Yes</td>
-<td>Topics which have been sucessfully subscribed</td>
+<td>Topics which have been successfully subscribed</td>
 </tr>
 </tbody></table>
 <h2 id='public-trade-fills'>Public Trade Fills</h2>
@@ -4579,7 +4571,7 @@ Please note that this API is <code>Trading</code> permission required.</p>
 <td>price</td>
 <td>Double</td>
 <td>Yes</td>
-<td>Order price or transcated price</td>
+<td>Order price or transacted price</td>
 </tr>
 <tr>
 <td>size</td>
@@ -4758,7 +4750,7 @@ Please note that this API is <code>Trading</code> permission required.</p>
 <td>price</td>
 <td>Double</td>
 <td>Yes</td>
-<td>Transcated price</td>
+<td>Transacted price</td>
 </tr>
 <tr>
 <td>size</td>
@@ -4822,6 +4814,10 @@ const TAB_MAP = {
     en: 'Spot',
     cn: '现货'
   },
+  spotV3_3: {
+    en: 'SpotV3.3',
+    cn: '现货V3.3'
+  },
   futures: {
     en: 'Futures',
     cn: '期货'
@@ -4829,6 +4825,10 @@ const TAB_MAP = {
   futuresV2_2: {
     en: 'FuturesV2.2',
     cn: '期货V2.2'
+  },
+  futuresV2_3: {
+    en: 'FuturesV2.3',
+    cn: '期货V2.3'
   },
   otc: {
     en: 'OTC',

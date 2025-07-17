@@ -783,8 +783,8 @@
 </ul>
 <h2 id='version-2-5-8-12th-april-2023'>Version 2.5.8 (12th April 2023)</h2>
 <ul>
-<li>Deprecated two websokcet topics <code>Orderbook Snapshot (By grouping)</code> and <code>Orderbook Snapshot (By depth)</code> today.
-Please use the following websokcet topic through the endpoint <code>wss://ws.btse.com/ws/oss/futures</code> to get orderbook data
+<li>Deprecated two websocket topics <code>Orderbook Snapshot (By grouping)</code> and <code>Orderbook Snapshot (By depth)</code> today.
+Please use the following websocket topic through the endpoint <code>wss://ws.btse.com/ws/oss/futures</code> to get orderbook data
 
 <ul>
 <li><a href="#orderbook-incremental-updates">Orderbook Incremental Updates</a></li>
@@ -1161,7 +1161,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 <li>41: ERROR_INVALID_RISK_LIMIT = Invalid risk limit was specified</li>
 <li>51: QUERY_GET_ORDERS_WITH_LIMIT</li>
 <li>64: STATUS_LIQUIDATION = Account is undergoing liquidation</li>
-<li>65: STATUS_ACITVE = Order is active</li>
+<li>65: STATUS_ACTIVE = Order is active</li>
 <li>66: MODE_BUY</li>
 <li>76: ORDER_TYPE_LIMIT = Limit order</li>
 <li>77: ORDER_TYPE_MARKET = Market order</li>
@@ -5325,7 +5325,7 @@ Requires <code>Read</code> permission.</p>
 <td>side</td>
 <td>String</td>
 <td>yes</td>
-<td>&quot;BUY&quot; or &quot;SELL&quot; Mandatory when positionMode is <code>HEDGE</code>, in hedge mode, it is used to clsoe the specified position, ex: sell to close Long position, buy to close short position</td>
+<td>&quot;BUY&quot; or &quot;SELL&quot; Mandatory when positionMode is <code>HEDGE</code>, in hedge mode, it is used to close the specified position, ex: sell to close Long position, buy to close short position</td>
 </tr>
 <tr>
 <td>takeProfitPrice</td>
@@ -7288,7 +7288,7 @@ Requires <code>Transfer</code> permission.</p>
 <td>price</td>
 <td>Double</td>
 <td>Yes</td>
-<td>Order price or transcated price</td>
+<td>Order price or transacted price</td>
 </tr>
 <tr>
 <td>size</td>
@@ -7734,7 +7734,7 @@ Requires <code>Transfer</code> permission.</p>
 <td>marginType</td>
 <td>Integer</td>
 <td>Yes</td>
-<td>WALLET TYPE:<br/>91: CROSS<br/>92: ISOLDATED</td>
+<td>WALLET TYPE:<br/>91: CROSS<br/>92: ISOLATED</td>
 </tr>
 <tr>
 <td>marginTypeName</td>
@@ -8125,7 +8125,7 @@ Requires <code>Transfer</code> permission.</p>
 <td>marginType</td>
 <td>Integer</td>
 <td>Yes</td>
-<td>WALLET TYPE:<br/>91: CROSS<br/>92: ISOLDATED</td>
+<td>WALLET TYPE:<br/>91: CROSS<br/>92: ISOLATED</td>
 </tr>
 <tr>
 <td>marginTypeName</td>
@@ -8267,6 +8267,10 @@ const TAB_MAP = {
     en: 'Spot',
     cn: '现货'
   },
+  spotV3_3: {
+    en: 'SpotV3.3',
+    cn: '现货V3.3'
+  },
   futures: {
     en: 'Futures',
     cn: '期货'
@@ -8274,6 +8278,10 @@ const TAB_MAP = {
   futuresV2_2: {
     en: 'FuturesV2.2',
     cn: '期货V2.2'
+  },
+  futuresV2_3: {
+    en: 'FuturesV2.3',
+    cn: '期货V2.3'
   },
   otc: {
     en: 'OTC',

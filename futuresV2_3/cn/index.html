@@ -685,7 +685,7 @@
 <li>41: ERROR_INVALID_RISK_LIMIT = 指定了无效的风险限额</li>
 <li>51: QUERY_GET_ORDERS_WITH_LIMIT = 查询获取带有限制的订单</li>
 <li>64: STATUS_LIQUIDATION = 帐户正在清算</li>
-<li>65: STATUS_ACITVE = 订单处于活动状态</li>
+<li>65: STATUS_ACTIVE = 订单处于活动状态</li>
 <li>66: MODE_BUY = 购买模式</li>
 <li>76: ORDER_TYPE_LIMIT = 限价订单</li>
 <li>77: ORDER_TYPE_MARKET = 市价订单</li>
@@ -2983,7 +2983,7 @@
 </tr>
 <tr>
 <td>orderSize</td>
-<td>Double</td>
+<td>Integer</td>
 <td>No</td>
 <td>对于类型：<code>ALL</code>，要修改的合同大小订单尺寸</td>
 </tr>
@@ -3077,7 +3077,7 @@
 </tr>
 <tr>
 <td>avgFilledPrice</td>
-<td>String</td>
+<td>Double</td>
 <td>Yes</td>
 <td>平均成交价格。对于部分交易的订单返回平均成交价格</td>
 </tr>
@@ -4420,7 +4420,7 @@
 </tr>
 <tr>
 <td>avgFilledPrice</td>
-<td>String</td>
+<td>Double</td>
 <td>Yes</td>
 <td>平均成交价格。返回部分交易订单的平均成交价格</td>
 </tr>
@@ -6960,7 +6960,7 @@
 </tr>
 <tr>
 <td>size</td>
-<td>Double</td>
+<td>Integer</td>
 <td>Yes</td>
 <td>交易量</td>
 </tr>
@@ -7130,7 +7130,7 @@ WebSocket 将向已认证的订阅者推送实时交易级别的通知。Websock
 <td>订单价格或交易价格</td>
 </tr>
 <tr>
-<td>originalOrdersize</td>
+<td>originalOrderSize</td>
 <td>Integer</td>
 <td>Yes</td>
 <td>原始订单数量。即使后续有调整，此值也不会变化</td>
@@ -7399,7 +7399,7 @@ WebSocket 将向已认证的订阅者推送实时交易级别的通知。Websock
       </span><span class="nl">"vendorName"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="nl">"botID"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="nl">"maxStealthDisplayAmount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"sellexchangeRate"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"sellExchangeRate"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"tag"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mf">116682.3</span><span class="p">,</span><span class="w">
       </span><span class="nl">"closeOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
@@ -7545,7 +7545,7 @@ WebSocket 将向已认证的订阅者推送实时交易级别的通知。Websock
 <td>用于peg订单</td>
 </tr>
 <tr>
-<td>sellexchangeRate</td>
+<td>sellExchangeRate</td>
 <td>Double</td>
 <td>Yes</td>
 <td></td>
@@ -7734,7 +7734,7 @@ WebSocket 将向已认证的订阅者推送实时交易级别的通知。Websock
       </span><span class="nl">"vendorName"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="nl">"botID"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="nl">"maxStealthDisplayAmount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"sellexchangeRate"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"sellExchangeRate"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"tag"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"closeOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
@@ -7809,7 +7809,7 @@ WebSocket 将向已认证的订阅者推送实时交易级别的通知。Websock
       </span><span class="nl">"vendorName"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="nl">"botID"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="nl">"maxStealthDisplayAmount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"sellexchangeRate"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"sellExchangeRate"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"tag"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nl">"closeOrder"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
@@ -7945,7 +7945,7 @@ WebSocket 将向已认证的订阅者推送实时交易级别的通知。Websock
 <td>用于peg订单</td>
 </tr>
 <tr>
-<td>sellexchangeRate</td>
+<td>sellExchangeRate</td>
 <td>Double</td>
 <td>Yes</td>
 <td></td>
@@ -8114,6 +8114,10 @@ const TAB_MAP = {
     en: 'Spot',
     cn: '现货'
   },
+  spotV3_3: {
+    en: 'SpotV3.3',
+    cn: '现货V3.3'
+  },
   futures: {
     en: 'Futures',
     cn: '期货'
@@ -8121,6 +8125,10 @@ const TAB_MAP = {
   futuresV2_2: {
     en: 'FuturesV2.2',
     cn: '期货V2.2'
+  },
+  futuresV2_3: {
+    en: 'FuturesV2.3',
+    cn: '期货V2.3'
   },
   otc: {
     en: 'OTC',

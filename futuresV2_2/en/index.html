@@ -693,7 +693,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 <li>41: ERROR_INVALID_RISK_LIMIT = Invalid risk limit was specified</li>
 <li>51: QUERY_GET_ORDERS_WITH_LIMIT</li>
 <li>64: STATUS_LIQUIDATION = Account is undergoing liquidation</li>
-<li>65: STATUS_ACITVE = Order is active</li>
+<li>65: STATUS_ACTIVE = Order is active</li>
 <li>66: MODE_BUY</li>
 <li>76: ORDER_TYPE_LIMIT = Limit order</li>
 <li>77: ORDER_TYPE_MARKET = Market order</li>
@@ -3045,7 +3045,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 <td>status</td>
 <td>Long</td>
 <td>Yes</td>
-<td>Order status<br/> 2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request faile<br/> For more status, please refer to <a href="#api-enum"><code>API Enum</code></a></td>
+<td>Order status<br/> 2: Order Inserted<br/>3: Order Transacted<br/>4: Order Fully Transacted<br/>5: Order Partially Transacted<br/>6: Order Cancelled<br/>7: Order Refunded<br/>9: Trigger Inserted<br>10: Trigger Activated<br/>15: Order Rejected<br/>16: Order Not Found<br/>17: Request failed<br/> For more status, please refer to <a href="#api-enum"><code>API Enum</code></a></td>
 </tr>
 <tr>
 <td>time_in_force</td>
@@ -5009,7 +5009,7 @@ Requires <code>Read</code> permission.</p>
 <td>side</td>
 <td>String</td>
 <td>yes</td>
-<td>&quot;BUY&quot; or &quot;SELL&quot; Mandatory when positionMode is <code>HEDGE</code>, in hedge mode, it is used to clsoe the specified position, ex: sell to close Long position, buy to close short position</td>
+<td>&quot;BUY&quot; or &quot;SELL&quot; Mandatory when positionMode is <code>HEDGE</code>, in hedge mode, it is used to close the specified position, ex: sell to close Long position, buy to close short position</td>
 </tr>
 <tr>
 <td>takeProfitPrice</td>
@@ -5731,7 +5731,7 @@ Requires <code>Read</code> permission.</p>
 <td>Position unique id</td>
 </tr>
 </tbody></table>
-<h3 id='response-contnet'>Response Contnet</h3>
+<h3 id='response-content-31'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5874,7 +5874,7 @@ Requires <code>Read</code> permission.</p>
 <td>Market symbol</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-31'>Response Content</h3><h4 id='wallet-2'>Wallet</h4>
+<h3 id='response-content-32'>Response Content</h3><h4 id='wallet-2'>Wallet</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -6123,7 +6123,7 @@ Requires <code>Read</code> permission.</p>
 <td>The value of the balance is to be transferred, example: 10</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-32'>Response Content</h3><h4 id='wallet-3'>Wallet</h4>
+<h3 id='response-content-33'>Response Content</h3><h4 id='wallet-3'>Wallet</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -6330,7 +6330,7 @@ Requires <code>Read</code> permission.</p>
 <td>The value of the balance is to be transferred, example: 10</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-33'>Response Content</h3><h4 id='wallet-4'>Wallet</h4>
+<h3 id='response-content-34'>Response Content</h3><h4 id='wallet-4'>Wallet</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -6455,7 +6455,7 @@ Requires <code>Read</code> permission.</p>
 <li><code>symbol</code> indicates the market symbol</li>
 <li><code>grouping</code> indicates the grouping granularity. Valid values are 0-8.</li>
 </ul>
-<h3 id='response-content-34'>Response Content</h3><h4 id='orderbook-object'>Orderbook Object</h4>
+<h3 id='response-content-35'>Response Content</h3><h4 id='orderbook-object'>Orderbook Object</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -6616,7 +6616,7 @@ Requires <code>Read</code> permission.</p>
 <p>To ensure that the updates are received in sequence, <code>seqNum</code> indicates the current sequence and <code>prevSeqNum</code> refers to the packet before. <code>seqNum</code> will always be one after the <code>prevSeqNum</code>. If the sequence is out of order, you will need to unsubscribe and re-subscribe to the topic again.</p>
 
 <p>Also if <a href="https://en.wikipedia.org/wiki/Order_book#Crossed_book">crossed orderbook</a> ever occurs when the best bid higher or equal to the best ask, please unsubscribe and re-subscribe to the topic again.</p>
-<h3 id='response-content-35'>Response Content</h3><h4 id='orderbook-object-2'>Orderbook Object</h4>
+<h3 id='response-content-36'>Response Content</h3><h4 id='orderbook-object-2'>Orderbook Object</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -6793,7 +6793,7 @@ Requires <code>Read</code> permission.</p>
 <td>Topics to subscribe to.</td>
 </tr>
 </tbody></table>
-<h3 id='response-content-36'>Response Content</h3>
+<h3 id='response-content-37'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -6854,7 +6854,7 @@ Requires <code>Read</code> permission.</p>
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>Subscribe to recent trade feed for a market. The topic will be <code>tradeHistoryApiV2:&lt;market&gt;</code> where <code>&lt;market&gt;</code> is the market symbol.</p>
-<h3 id='response-content-37'>Response Content</h3><h4 id='tradehistory-object'>TradeHistory Object</h4>
+<h3 id='response-content-38'>Response Content</h3><h4 id='tradehistory-object'>TradeHistory Object</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -7026,7 +7026,7 @@ Requires <code>Read</code> permission.</p>
 </span></code></pre></div>
 <p>To receive trade notifications, subscribe to the <code>notificationApiV2</code> or <code>notificationApiV3</code> topics. It is recommended to use <code>notificationApiV3</code>, which provides market symbols in a more intuitive format, such as BTC-PERP. The WebSocket feed will push real-time, trade-level notifications to authenticated subscribers.
 Please note, if the topic is subscribed to without proper authentication, no messages will be delivered.</p>
-<h3 id='response-content-38'>Response Content</h3>
+<h3 id='response-content-39'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -7063,7 +7063,7 @@ Please note, if the topic is subscribed to without proper authentication, no mes
 <td>price</td>
 <td>Double</td>
 <td>Yes</td>
-<td>Order price or transcated price</td>
+<td>Order price or transacted price</td>
 </tr>
 <tr>
 <td>size</td>
@@ -7190,7 +7190,7 @@ Please note, if the topic is subscribed to without proper authentication, no mes
 
 </span></code></pre></div>
 <p>When a trade has been transacted, this topic will send the trade information back to the subscriber.</p>
-<h3 id='response-content-39'>Response Content</h3>
+<h3 id='response-content-40'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -7245,7 +7245,7 @@ Please note, if the topic is subscribed to without proper authentication, no mes
 <td>price</td>
 <td>Double</td>
 <td>Yes</td>
-<td>Transcated price</td>
+<td>Transacted price</td>
 </tr>
 <tr>
 <td>size</td>
@@ -7397,7 +7397,7 @@ Please note, if the topic is subscribed to without proper authentication, no mes
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>All futures positions will be pushed via this topic once the position changes.</p>
-<h3 id='response-content-40'>Response Content</h3>
+<h3 id='response-content-41'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -7512,7 +7512,7 @@ Please note, if the topic is subscribed to without proper authentication, no mes
 <td>marginType</td>
 <td>Integer</td>
 <td>Yes</td>
-<td>WALLET TYPE:<br/>91: CROSS<br/>92: ISOLDATED</td>
+<td>WALLET TYPE:<br/>91: CROSS<br/>92: ISOLATED</td>
 </tr>
 <tr>
 <td>marginTypeName</td>
@@ -7788,7 +7788,7 @@ Please note, if the topic is subscribed to without proper authentication, no mes
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>All futures positions will be pushed via this topic once the position changes. If the user reduces the position to 0, the topic will push data with the totalContracts value of 0 once.</p>
-<h3 id='response-content-41'>Response Content</h3>
+<h3 id='response-content-42'>Response Content</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -7903,7 +7903,7 @@ Please note, if the topic is subscribed to without proper authentication, no mes
 <td>marginType</td>
 <td>Integer</td>
 <td>Yes</td>
-<td>WALLET TYPE:<br/>91: CROSS<br/>92: ISOLDATED</td>
+<td>WALLET TYPE:<br/>91: CROSS<br/>92: ISOLATED</td>
 </tr>
 <tr>
 <td>marginTypeName</td>
@@ -8045,6 +8045,10 @@ const TAB_MAP = {
     en: 'Spot',
     cn: '现货'
   },
+  spotV3_3: {
+    en: 'SpotV3.3',
+    cn: '现货V3.3'
+  },
   futures: {
     en: 'Futures',
     cn: '期货'
@@ -8052,6 +8056,10 @@ const TAB_MAP = {
   futuresV2_2: {
     en: 'FuturesV2.2',
     cn: '期货V2.2'
+  },
+  futuresV2_3: {
+    en: 'FuturesV2.3',
+    cn: '期货V2.3'
   },
   otc: {
     en: 'OTC',
