@@ -37,7 +37,7 @@ jobs:
 
     - name: Bundle install
       run: |
-        gem install nokogiri -v '1.11.3' --source
+        gem install nokogiri -v '1.11.3' --source https://rubygems.org/
         bundle install
 
     - run: bundle config set deployment 'true'
