@@ -1,4 +1,4 @@
-ruby '>= 3.3'
+ruby '>= 2.5'
 source 'https://rubygems.org'
 
 # Middleman
