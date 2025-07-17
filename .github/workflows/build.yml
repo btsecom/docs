@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        ruby-version: [3.3]
+        ruby-version: [3.2]
 
     steps:
     - uses: actions/checkout@v2
@@ -32,6 +32,11 @@ jobs:
     # necessary to get ruby 2.3 to work nicely with bundler vendor/bundle cache
     # can remove once ruby 2.3 is no longer supported
     - run: gem update --system
+    - name: Install system deps
+      run: sudo apt-get update && sudo apt-get install -y build-essential libxml2-dev libxslt1-dev zlib1g-dev
+
+    - name: Bundle install
+      run: bundle install
 
     - run: bundle config set deployment 'true'
     - name: bundle install
