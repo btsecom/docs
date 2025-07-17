@@ -36,7 +36,9 @@ jobs:
       run: sudo apt-get update && sudo apt-get install -y build-essential libxml2-dev libxslt1-dev zlib1g-dev
 
     - name: Bundle install
-      run: bundle install
+      run: |
+        gem install nokogiri -v '1.11.3' --source
+        bundle install
 
     - run: bundle config set deployment 'true'
     - name: bundle install
