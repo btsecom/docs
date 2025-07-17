@@ -848,7 +848,7 @@ BTSE的速率限制如下:
 | remainingOrderQuoteSize       | Double | Yes | 以报价货币计算的剩余订单数量 = 当前订单报价货币数量 - 已成交的报价货币数量 |
 | filledBaseSize                | Double | Yes | 订单中已成交的基础货币数量 |
 | totalFilledBaseSize           | Double | Yes | 此订单以基础货币计算的累计成交数量 |
-| orderCurrency                 | Double | Yes | "base" 或 "quote" |
+| orderCurrency                 | String | Yes | "base" 或 "quote" |
 
 ## 查询订单
 
@@ -935,7 +935,7 @@ BTSE的速率限制如下:
 | remainingOrderBaseSize        | Double | Yes | 以基础货币计算的剩余订单数量 = 当前订单基础货币数量 - 已成交的基础货币数量 |
 | remainingOrderQuoteSize       | Double | Yes | 以报价货币计算的剩余订单数量 = 当前订单报价货币数量 - 已成交的报价货币数量 |
 | totalFilledBaseSize           | Double | Yes | 此订单以基础货币计算的累计成交数量 |
-| orderCurrency                 | Double | Yes | "base" 或 "quote" |
+| orderCurrency                 | String | Yes | "base" 或 "quote" |
 | status                        | Integer | Yes      | 订单状态。请参照[`API Enum`](#api-enum)      |
 | timeInForce                   | String  | Yes      | 订单有效期                                    |
 
@@ -1070,7 +1070,7 @@ BTSE的速率限制如下:
 | remainingOrderQuoteSize       | Double | Yes | 以报价货币计算的剩余订单数量 = 当前订单报价货币数量 - 已成交的报价货币数量 |
 | filledBaseSize                | Double | Yes | 订单中已成交的基础货币数量 |
 | totalFilledBaseSize           | Double | Yes | 此订单以基础货币计算的累计成交数量 |
-| orderCurrency                 | Double | Yes | "base" 或 "quote" |
+| orderCurrency                 | String | Yes | "base" 或 "quote" |
 
 
 ## 取消订单
@@ -1222,7 +1222,7 @@ BTSE的速率限制如下:
 | remainingOrderQuoteSize       | Double | Yes | 以报价货币计算的剩余订单数量 = 当前订单报价货币数量 - 已成交的报价货币数量 |
 | filledBaseSize                | Double | Yes | 订单中已成交的基础货币数量 |
 | totalFilledBaseSize           | Double | Yes | 此订单以基础货币计算的累计成交数量 |
-| orderCurrency                 | Double | Yes | "base" 或 "quote" |
+| orderCurrency                 | String | Yes | "base" 或 "quote" |
 
 ## 延时自动取消所有
 
@@ -1383,7 +1383,7 @@ BTSE的速率限制如下:
 | remainingOrderBaseSize        | Double | Yes | 以基础货币计算的剩余订单数量 = 当前订单基础货币数量 - 已成交的基础货币数量 |
 | remainingOrderQuoteSize       | Double | Yes | 以报价货币计算的剩余订单数量 = 当前订单报价货币数量 - 已成交的报价货币数量 |
 | totalFilledBaseSize           | Double | Yes | 此订单以基础货币计算的累计成交数量 |
-| orderCurrency                 | Double | Yes | "base" 或 "quote" |
+| orderCurrency                 | String | Yes | "base" 或 "quote" |
 
 ## 查询用户交易成交
 
@@ -1469,7 +1469,7 @@ BTSE的速率限制如下:
 | triggerType     | Integer| yes      | 1001: 止损 1002: 止盈       |
 | triggerPrice    | Double | yes      | 触发价格                           |
 | wallet          | String | yes      | SPOT@ 用于现货交易            |
-| avgFilledPrice  | String | yes      | 平均成交价                     |
+| avgFilledPrice  | Double | yes      | 平均成交价                     |
 | username        | String | yes      | 用户名                                |
 
 ## 查询账户费用
@@ -1478,9 +1478,9 @@ BTSE的速率限制如下:
 
 ```json
 {
-  "makerfee": 0,
+  "makerFee": 0,
   "symbol": "btc-usd",
-  "takerfee": 0
+  "takerFee": 0
 }
 ```
 
@@ -1499,8 +1499,8 @@ BTSE的速率限制如下:
 | 名称     | 类型     | 是否必须    | 描述             |
 | ---      | ---      | ---      | ---             |
 | symbol   | String   | Yes      | 市场标识符     |
-| makerfee | Double   | Yes      | 创造者费用     |
-| takerfee | Double   | Yes      | 接收者费用     |
+| makerFee | Double   | Yes      | 创造者费用     |
+| takerFee | Double   | Yes      | 接收者费用     |
 
 
 
@@ -1517,8 +1517,8 @@ BTSE的速率限制如下:
     "name": "eth flex savings",
     "currency": "eth",
     "type": "flex",
-    "startdate": 1610685918000,
-    "intereststartdate": 1610719200000,
+    "startDate": 1610685918000,
+    "interestStartDate": 1610719200000,
     "rates":
     [
       {
@@ -1527,10 +1527,10 @@ BTSE的速率限制如下:
       }
     ],
     "compounding": true,
-    "autorenewsupported": false,
-    "dailylimit": 10.0,
+    "autoRenewSupported": false,
+    "dailyLimit": 10.0,
     "minsize": 1.00000000,
-    "incrementalsize": 1.00000000
+    "incrementalSize": 1.00000000
   }
 ]
 ```
@@ -1545,20 +1545,20 @@ BTSE的速率限制如下:
 
 ### 响应内容
 
-| 名称               | 类型         | 是否必须    | 描述                                      |
+| 名称                | 类型         | 是否必须    | 描述                                      |
 | ---                | ---          | ---      | ---                                      |
 | id                 | String       | Yes      | 产品ID                                   |
 | name               | String       | Yes      | 产品名称                                 |
 | currency           | String       | Yes      | 货币类型                                 |
 | type               | String       | Yes      | 产品类型                                 |
-| startdate          | Long       | Yes      | 投资开始日期                             |
-| intereststartdate  | Long       | Yes      | 利息开始日期                             |
-| rates              | rateobject[]  | Yes      | 利率信息                                 |
+| startDate          | Long         | Yes      | 投资开始日期                             |
+| interestStartDate  | Long         | Yes      | 利息开始日期                             |
+| rates              | Rate Object  | Yes      | 利率信息                                 |
 | compounding        | Double       | Yes      | 是否复利                                 |
-| autorenewsupported | Double       | Yes      | 是否支持自动续约                         |
-| dailylimit         | Double       | Yes      | 每日投资金额限制                         |
+| autoRenewSupported | Double       | Yes      | 是否支持自动续约                         |
+| dailyLimit         | Double       | Yes      | 每日投资金额限制                         |
 | minsize            | Double       | Yes      | 最小投资额                               |
-| incrementalsize    | Double       | Yes      | 投资递增步长                             |
+| incrementalSize    | Double       | Yes      | 投资递增步长                             |
 
 ### 利率对象
 
@@ -1665,18 +1665,17 @@ BTSE的速率限制如下:
     "currency": "eth",
     "type": "flex",
     "rate": 1.15,
-    "investamt": 10.00000000,
-    "interestearned": 0.00031507,
-    "nextinterestpayouttime": 1610632800000,
+    "investAmt": 10.00000000,
+    "interestEarned": 0.00031507,
+    "nextInterestPayoutTime": 1610632800000,
     "starttime": 0,
     "endtime": 0,
     "duration": 86400000,
-    "payoutlocktime": 300000,
-    "autorenew": false,
+    "payoutLockTime": 300000,
+    "autoRenew": false,
     "compounding": true,
-    "autorenewsupported": false,
-    "dailylimit": 0,
-    "redemptionprocessing": false
+    "autoRenewSupported": false,
+    "redemptionProcessing": false
   }
 ]
 ```
@@ -1695,16 +1694,16 @@ BTSE的速率限制如下:
 | type                   | String  | Yes      | 产品类型                           |
 | rate                   | Double  | Yes      | 利率                               |
 | investment             | Double  | Yes      | 投资金额                           |
-| interestearned         | Double  | Yes      | 已获得利息                         |
-| nextinterestpayouttime | Integer    | Yes      | 下次利息支付时间                   |
+| interestEarned         | Double  | Yes      | 已获得利息                         |
+| nextInterestPayoutTime | Integer    | Yes      | 下次利息支付时间                   |
 | starttime              | Integer    | Yes      | 开始时间                           |
 | endtime                | Integer    | Yes      | 结束时间                           |
 | duration               | Integer    | Yes      | 期限                               |
-| payoutlocktime         | Integer    | Yes      | 支付锁定时间                       |
-| autorenew              | Boolean  | Yes      | 自动续投                           |
+| payoutLockTime         | Integer    | Yes      | 支付锁定时间                       |
+| autoRenew              | Boolean  | Yes      | 自动续投                           |
 | compounding            | Boolean  | Yes      | 复利                               |
-| autorenewsupported     | Boolean  | Yes      | 支持自动续投                       |
-| redemptionprocessing   | Boolean  | Yes      | 赎回处理中                         |
+| autoRenewSupported     | Boolean  | Yes      | 支持自动续投                       |
+| redemptionProcessing   | Boolean  | Yes      | 赎回处理中                         |
 
 
 ## 查询投资历史
@@ -1714,15 +1713,14 @@ BTSE的速率限制如下:
 ```json
 [
   {
-    "txntime": 1598918400000,
+    "txnTime": 1598918400000,
     "name": "usdt flex savings",
     "currency": "usdt",
     "rate": 0.5,
     "type": "flex",
-    "txntype": "invest_service_type_deposit",
+    "txnType": "invest_service_type_deposit",
     "amount": 100,
-    "totalamount": 2000,
-    "interestearned": 1.22,
+    "totalAmount": 2000,
     "duration": 0
   }
 ]
@@ -1736,15 +1734,14 @@ BTSE的速率限制如下:
 
 | 名称           | 类型    | 是否必须    | 描述                             |
 | ---            | ---     | ---      | ---                             |
-| txntime        | Integer    | Yes      | 交易时间                        |
+| txnTime        | Integer    | Yes      | 交易时间                        |
 | name           | String  | Yes      | 产品名称                        |
 | currency       | String  | Yes      | 货币类型                        |
 | rate           | String  | Yes      | 利率                            |
 | type           | Boolean  | Yes      | 产品类型                        |
-| txntype        | String  | Yes      | 交易类型                        |
+| txnType        | String  | Yes      | 交易类型                        |
 | amount         | Double  | Yes      | 交易金额                        |
-| totalamount    | Double  | Yes      | 投资总金额                      |
-| interestearned | Double  | Yes      | 已赚得的利息                    |
+| totalAmount    | Double  | Yes      | 投资总金额                      |
 | duration       | Boolean  | Yes      | 期限                            |
 
 
@@ -2210,7 +2207,7 @@ echo -n "/ws/spot1624985375123"  | openssl dgst -sha384 -hmac "848db84ac252b6726
 | remainingOrderQuoteSize       | Double | Yes | 以报价货币计算的剩余订单数量 = 当前订单报价货币数量 - 已成交的报价货币数量 |
 | filledBaseSize                | Double | Yes | 订单中已成交的基础货币数量 |
 | totalFilledBaseSize           | Double | Yes | 此订单以基础货币计算的累计成交数量 |
-| orderCurrency                 | Double | Yes | "base" 或 "quote" |
+| orderCurrency                 | String | Yes | "base" 或 "quote" |
 
 ## 用户交易成交
 

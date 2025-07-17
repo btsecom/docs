@@ -220,7 +220,7 @@ BTSE 的速率限制如下：
 * 41: ERROR_INVALID_RISK_LIMIT = 指定了无效的风险限额
 * 51: QUERY_GET_ORDERS_WITH_LIMIT = 查询获取带有限制的订单
 * 64: STATUS_LIQUIDATION = 帐户正在清算
-* 65: STATUS_ACITVE = 订单处于活动状态
+* 65: STATUS_ACTIVE = 订单处于活动状态
 * 66: MODE_BUY = 购买模式
 * 76: ORDER_TYPE_LIMIT = 限价订单
 * 77: ORDER_TYPE_MARKET = 市价订单
@@ -1382,7 +1382,7 @@ BTSE 的速率限制如下：
 | type         | String  | Yes      | 修改类型<br/>`PRICE`: 修改订单价格<br/>`SIZE`: 修改订单大小<br/>`TRIGGERPRICE`: 修改触发价格，仅适用于触发单。<br/>`ALL`: 修改多个字段。注意：`TRIGGERPRICE` 仅可在订单为触发单时修改，意味着如果不是触发单，请不要传入`TRIGGERPRICE`。                                                                                     |
 | value        | Double  | Yes      | 要修改的值。其值取决于设置的类型。                                                                                                                                                                       |
 | orderPrice   | Double  | No       | 对于类型：`ALL`，要修改的订单价格                                                                                                                                                                        |
-| orderSize    | Double  | No       | 对于类型：`ALL`，要修改的合同大小订单尺寸                                                                                                                                                                |
+| orderSize    | Integer  | No       | 对于类型：`ALL`，要修改的合同大小订单尺寸                                                                                                                                                                |
 | triggerPrice | Double  | No       | 对于类型：`ALL`，要修改的触发价格                                                                                                                                                                        |
 
 
@@ -1402,7 +1402,7 @@ BTSE 的速率限制如下：
 | timestamp     | Long    | Yes      | 订单时间戳                                                                                                                                                                                                                                                                                         |
 | trigger       | String  | Yes      | 如果订单是触发订单的指示器                                                                                                                                                                                                                                                                        |
 | triggerPrice  | String  | Yes      | 订单触发价格，如果订单不是触发订单则返回0                                                                                                                                                                                                                                                          |
-| avgFilledPrice  | String  | Yes      | 平均成交价格。对于部分交易的订单返回平均成交价格                                                                                                                                                                                                                                                  |
+| avgFilledPrice  | Double  | Yes      | 平均成交价格。对于部分交易的订单返回平均成交价格                                                                                                                                                                                                                                                  |
 | message       | String  | Yes      | 交易消息                                                                                                                                                                                                                                                                                           |
 | stealth       | Double  | Yes      | 订单的隐秘值                                                                                                                                                                                                                                                                                       |
 | deviation     | String  | Yes      | 订单的偏差值                                                                                                                                                                                                                                                                                       |
@@ -1928,7 +1928,7 @@ BTSE 的速率限制如下：
 | timestamp      | Long    | Yes      | 订单时间戳                                                                                                                                                                                                                                                                  |
 | trigger        | String  | Yes      | 指示订单是否为触发订单                                                                                                                                                                                                                                                      |
 | triggerPrice   | String  | Yes      | 订单触发价格，如果订单不是触发订单则返回0                                                                                                                                                                                                                                   |
-| avgFilledPrice   | String  | Yes      | 平均成交价格。返回部分交易订单的平均成交价格                                                                                                                                                                                                                                |
+| avgFilledPrice   | Double  | Yes      | 平均成交价格。返回部分交易订单的平均成交价格                                                                                                                                                                                                                                |
 | message        | String  | Yes      | 交易消息                                                                                                                                                                                                                                                                    |
 | stealth        | Double  | Yes      | 订单的隐身值                                                                                                                                                                                                                                                                |
 | deviation      | String  | Yes      | 订单的偏差值                                                                                                                                                                                                                                                                |
@@ -3215,7 +3215,7 @@ pong
 | ---       | ---    | ---      | ---                     |
 | symbol    | String | Yes      | 市场符号                 |
 | side      | String | Yes      | 交易方向: [`BUY`, `SELL`]   |
-| size      | Double | Yes      | 交易量                   |
+| size      | Integer | Yes      | 交易量                   |
 | price     | Double | Yes      | 交易价格                 |
 | tradeId   | Long   | Yes      | 交易序列号               |
 | timestamp | Long   | Yes      | 交易时间戳               |
@@ -3326,7 +3326,7 @@ WebSocket 将向已认证的订阅者推送实时交易级别的通知。Websock
 | side              | String  | Yes      | 交易方向: [`BUY`, `SELL`]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | type              | Integer     | Yes      | 订单类型。有效值为：<br/>76: 限价订单<br/>77: 市价订单<br/>80: 算法订单                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | price             | Double  | Yes      | 订单价格或交易价格                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| originalOrdersize              | Integer  | Yes      | 原始订单数量。即使后续有调整，此值也不会变化                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| originalOrderSize              | Integer  | Yes      | 原始订单数量。即使后续有调整，此值也不会变化                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 | currentOrderSize      | Integer  | Yes      | 当前最新的订单数量，表示已成交数量与未成交剩余数量的总和                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | avgFilledPrice    | Double  | Yes      | 平均成交价格                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | filledSize          | Integer  | Yes      | 订单已成交的数量                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
@@ -3447,7 +3447,7 @@ WebSocket 将向已认证的订阅者推送实时交易级别的通知。Websock
       "vendorName": null,
       "botID": null,
       "maxStealthDisplayAmount": 0,
-      "sellexchangeRate": 0,
+      "sellExchangeRate": 0,
       "tag": null,
       "triggerPrice": 116682.3,
       "closeOrder": true,
@@ -3524,7 +3524,7 @@ WebSocket 将向已认证的订阅者推送实时交易级别的通知。Websock
 | stealth                 | Double  | Yes      | 用于peg订单                                         |
 | orderID                 | String  | Yes      | 订单ID                                              |
 | maxStealthDisplayAmount | Double  | Yes      | 用于peg订单                                         |
-| sellexchangeRate        | Double  | Yes      |                                                    |
+| sellExchangeRate        | Double  | Yes      |                                                    |
 | triggerPrice            | Double  | Yes      | OCO订单                                             |
 | closeOrder              | Boolean | Yes      | 是否有关闭此持仓的订单
 | liquidationInProgress   | Boolean | Yes      | 是否正在清算                                        |
@@ -3590,7 +3590,7 @@ WebSocket 将向已认证的订阅者推送实时交易级别的通知。Websock
       "vendorName": null,
       "botID": null,
       "maxStealthDisplayAmount": 0,
-      "sellexchangeRate": 0,
+      "sellExchangeRate": 0,
       "tag": null,
       "triggerPrice": 0,
       "closeOrder": false,
@@ -3666,7 +3666,7 @@ WebSocket 将向已认证的订阅者推送实时交易级别的通知。Websock
       "vendorName": null,
       "botID": null,
       "maxStealthDisplayAmount": 0,
-      "sellexchangeRate": 0,
+      "sellExchangeRate": 0,
       "tag": null,
       "triggerPrice": 0,
       "closeOrder": false,
@@ -3733,7 +3733,7 @@ WebSocket 将向已认证的订阅者推送实时交易级别的通知。Websock
 | stealth                 | Double  | Yes      | 用于peg订单                           |
 | orderID                 | String  | Yes      | 订单ID                                |
 | maxStealthDisplayAmount | Double  | Yes      | 用于peg订单                           |
-| sellexchangeRate        | Double  | Yes      |                                        |
+| sellExchangeRate        | Double  | Yes      |                                        |
 | triggerPrice            | Double  | Yes      | OCO订单                               |
 | closeOrder              | Boolean | Yes      | 是否有一个订单来关闭此仓位            |
 | liquidationInProgress   | Boolean | Yes      | 是否正在进行清算                      |

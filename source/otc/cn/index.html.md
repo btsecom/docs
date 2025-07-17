@@ -27,7 +27,7 @@ headingLevel: 2
 
 ## 版本 1.1.1 (2021年11月24日)
 
-* 添加了 `unsubcribe-quote` 和 `unsubscribe-quote-all` 操作代码以取消订阅场外交易报价的流。
+* 添加了 `unsubscribe-quote` 和 `unsubscribe-quote-all` 操作代码以取消订阅场外交易报价的流。
 
 ## 版本 1.1.0 (2021年9月17日)
 

@@ -436,7 +436,7 @@ Get user's wallet history records on the spot wallet
 | wallet      | String  | Yes      | Wallet type. For spot will return `@SPOT`  |
 | description | String  | Yes      | Description of the transaction             |
 | status      | String  | Yes      | The status of the record is as follows<br/>`PROCESSING`<br/>`CANCELLED`<br/>`COMPLETED`<br/>`EXPIRED`<br/>`FAILURE`<br/>`PENDING` |
-| type        | String  | Yes      | The type of the record is as follows<br/>`Deposit`<br/>`Withdraw`<br/>`Convert fiat`<br/>`Transfer_Out`<br/>`Transfer_In`<br/>`ReferralEarning`<br/>`Trading Fee Stake Freeze`<br/>`Trading Fee Stake Unfreeze`<br/>`Sub Account Transfer In`<br/>`Sub Account Transfer Out`<br/>`express buy`<br/>`Strategy Income`<br/>`Strategy Pay`<br/>`token voucher in`<br/>`spot trading fee rebate`<br/>`futures trading fee rebat`<br/>`trial fund`<br/>`general trading fee rebate`<br/>`token voucher out` |
+| type        | String  | Yes      | The type of the record is as follows<br/>`Deposit`<br/>`Withdraw`<br/>`Convert fiat`<br/>`Transfer_Out`<br/>`Transfer_In`<br/>`ReferralEarning`<br/>`Trading Fee Stake Freeze`<br/>`Trading Fee Stake Unfreeze`<br/>`Sub Account Transfer In`<br/>`Sub Account Transfer Out`<br/>`express buy`<br/>`Strategy Income`<br/>`Strategy Pay`<br/>`token voucher in`<br/>`spot trading fee rebate`<br/>`futures trading fee rebate`<br/>`trial fund`<br/>`general trading fee rebate`<br/>`token voucher out` |
 
 ## Create Wallet Address
 
