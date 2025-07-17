@@ -20,6 +20,7 @@ jobs:
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby-version }}
+        bundler-cache: true
 
     - uses: actions/cache@v4
       with:
@@ -34,12 +35,10 @@ jobs:
     - run: gem update --system
     - name: Install system deps
       run: sudo apt-get update && sudo apt-get install -y build-essential libxml2-dev libxslt1-dev zlib1g-dev
-
-    - name: Bundle nokogiri
-      run: |
-        gem 'nokogiri', '~> 1.15'
-        bundle update nokogiri
-
+    - name: Install net-ftp (needed for old Nokogiri, but safe to install for newer too)
+      run: gem install net-ftp
+    - name: Bundle update nokogiri
+      run: bundle update nokogiri
 
     - run: bundle config set deployment 'true'
     - name: bundle install
