@@ -88,7 +88,7 @@ You will need to create an API key on the BTSE platform before you can use authe
   * HTTP
      * `https://testapi.btse.io/spot`
   * HTTP (for [`Query crypto networks`](#query-crypto-networks) and [`Query asset exchange rate`](#query-asset-exchange-rate))
-     * `https://api.btse.io/`
+     * `https://testapi.btse.io/`
   * Websocket
      * `wss://testws.btse.io/ws/spot`
   * Websocket (for orderbook stream)
