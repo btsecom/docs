@@ -86,7 +86,7 @@ headingLevel: 2
   * HTTP
      * `https://testapi.btse.io/spot`
   * HTTP (用于[`查询加密货币网络信息`](#3526dbe03b) and [`资产兑换汇率查询`](#52edd98764))
-       * `https://api.btse.io/`
+       * `https://testapi.btse.io/`
   * Websocket
      * `wss://testws.btse.io/ws/spot`
   * Websocket (用于订单簿流)
