@@ -1438,7 +1438,7 @@ Requires `Trading` permission.
 ### Request Parameters
 
 | Name      | Type   | Required | Description                     |
-| ---       | ---    | ---      |                                 |
+| ---       | ---    | ---      | ---                             |
 | symbol    | String | Yes      | Market                          |
 | orderID   | String | No       | Unique identifier for an order. |
 | clOrderID | String | No       | Client custom order ID.         |
