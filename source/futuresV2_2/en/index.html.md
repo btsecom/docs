@@ -1437,11 +1437,11 @@ Requires `Trading` permission.
 
 ### Request Parameters
 
-| Name      | Type   | Required | Description                                                                                                                        |
-| ---       | ---    | ---      | ---                                                                                                                                |
-| symbol    | String | Yes      | Market symbol                                                                                                                      |
-| orderID   | String | No       | Unique identifier for an order. Mandatory when `clOrderID` is not provided. If `orderID` is provided, `clOrderID` will be ignored. |
-| clOrderID | String | No       | Client custom order ID. Mandatory when `orderID` is not provided.                                                                  |
+| Name      | Type   | Required | Description                     |
+| ---       | ---    | ---      |                                 |
+| symbol    | String | Yes      | Market                          |
+| orderID   | String | No       | Unique identifier for an order. |
+| clOrderID | String | No       | Client custom order ID.         |
 
 
 ### Response Content

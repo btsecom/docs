@@ -1187,11 +1187,11 @@ BTSE的速率限制如下:
 
 ### 请求参数
 
-| 名称      | 类型   | 是否必须    | 描述                                                                                                                      |
-| ---       | ---    | ---      | ---                                                                                                                        |
-| symbol    | String | Yes      | 市场交易对的标识符                                                                                                        |
-| orderID   | String | No      | 订单的唯一标识符。当未提供 `clOrderID` 时为是否必须项。如果提供了 `orderID`，`clOrderID` 将被忽略。         |
-| clOrderID | String | No      | 客户自定义订单标识。当未提供 `orderID` 时为是否必须项。                                                               |
+| 名称       | 类型   | 是否必须  | 描述                           |
+| ---       | ---    | ---     | ---                            |
+| symbol    | String | Yes     | 市场交易对的标识符                |
+| orderID   | String | No      | 订单的唯一标识符                  |
+| clOrderID | String | No      | 客户自定义订单标识                |
 
 ### 响应内容
 
