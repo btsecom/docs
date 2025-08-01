@@ -732,7 +732,7 @@ BTSE 的速率限制如下：
 }
 ```
 
-`POST /api/v3.2/subaccount/wallet/history`
+`GET /api/v3.2/subaccount/wallet/history`
 
 查询子帐号转帐历史纪录
 
