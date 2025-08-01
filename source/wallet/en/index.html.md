@@ -736,7 +736,7 @@ Performs a internal currency transfer to other user from wallet. To use this API
 }
 ```
 
-`POST /api/v3.2/subaccount/wallet/history`
+`GET /api/v3.2/subaccount/wallet/history`
 
 Query transfer history for subaccounts
 
