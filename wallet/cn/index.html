@@ -1326,7 +1326,7 @@
 <p>响应</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"withdraw_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;withdrawal ID&gt;"</span><span class="w">
+  </span><span class="nl">"withdrawId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;withdrawal ID&gt;"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p><code>POST /api/v3.2/user/wallet/withdraw</code> or <code>POST /api/v3.3/user/wallet/withdraw</code></p>
@@ -1382,7 +1382,7 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>withdraw_id</td>
+<td>withdrawId</td>
 <td>String</td>
 <td>Yes</td>
 <td>内部提款ID。参考<code>wallet_history</code> API中的<code>orderID</code>字段。由于提现不会立即处理。用户可以查询钱包历史API来检查提现的状态</td>

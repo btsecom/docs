@@ -1327,7 +1327,7 @@ The response of <code>depositEnable</code> and <code>withdrawEnable</code> is tr
 <p>Response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"withdraw_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;withdrawal ID&gt;"</span><span class="w">
+  </span><span class="nl">"withdrawId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;withdrawal ID&gt;"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p><code>POST /api/v3.2/user/wallet/withdraw</code> or <code>POST /api/v3.3/user/wallet/withdraw</code></p>
@@ -1383,7 +1383,7 @@ The response of <code>depositEnable</code> and <code>withdrawEnable</code> is tr
 </tr>
 </thead><tbody>
 <tr>
-<td>withdraw_id</td>
+<td>withdrawId</td>
 <td>String</td>
 <td>Yes</td>
 <td>Internal withdrawal ID. References the <code>orderID</code> field in <code>wallet_history</code> API. As withdrawal will not be processed immediately. User can query the wallet history API to check on the status of the withdrawal</td>
