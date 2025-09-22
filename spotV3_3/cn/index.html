@@ -234,6 +234,9 @@
             <a href="#3f3e207288" class="toc-h1 toc-link" data-title="更改日志">更改日志</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#1-0-1-2025-9-22" class="toc-h2 toc-link" data-title="版本 1.0.1 (2025年9月22日)">版本 1.0.1 (2025年9月22日)</a>
+                  </li>
+                  <li>
                     <a href="#1-0-0-2025-7-10" class="toc-h2 toc-link" data-title="版本 1.0.0（2025年7月10日）">版本 1.0.0（2025年7月10日）</a>
                   </li>
               </ul>
@@ -395,7 +398,22 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='3f3e207288'>更改日志</h1><h2 id='1-0-0-2025-7-10'>版本 1.0.0（2025年7月10日）</h2>
+        <h1 id='3f3e207288'>更改日志</h1><h2 id='1-0-1-2025-9-22'>版本 1.0.1 (2025年9月22日)</h2>
+<ul>
+<li>在 API <a href="#8be954be0d"><code>创建新订单</code></a> 中，新增请求字段 <code>triggerPriceType</code> ，对于以下订单类型，用户现在可以指定触发价格基于 <code>INDEX_PRICE</code> 或 <code>LAST_PRICE</code>（默认：<code>INDEX_PRICE</code>）：
+
+<ul>
+<li>止损限价单</li>
+<li>止损市价单</li>
+<li>止盈限价单</li>
+<li>止盈市价单</li>
+<li>跟踪止损市价单</li>
+<li>OCO（双向委托单）</li>
+</ul></li>
+</ul>
+
+<p>此更改将于2025年9月24日生效。</p>
+<h2 id='1-0-0-2025-7-10'>版本 1.0.0（2025年7月10日）</h2>
 <ul>
 <li>释出 v3.3 API。此更改将于2025年7月16日生效。</li>
 </ul>
@@ -1761,6 +1779,12 @@
 <td>Double</td>
 <td>No</td>
 <td>适用于 PEG 订单。订单价格应与指数价格相差多少。该值以百分比表示，范围从 -10 到 10</td>
+</tr>
+<tr>
+<td>triggerPriceType</td>
+<td>String</td>
+<td>No</td>
+<td>对于以下订单类型，用户现在可以指定触发价格基于 <code>INDEX_PRICE</code> 或 <code>LASTPRICE</code>，默认为 <code>INDEX_PRICE</code> :<br/>止损限价单<br/>止损市价单<br/>止盈限价单<br/>止盈市价单<br/>跟踪止损市价单<br/>OCO（双向委托单）<br/></td>
 </tr>
 </tbody></table>
 <h3 id='05a22d5a79-7'>响应内容</h3>

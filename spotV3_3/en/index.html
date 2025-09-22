@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-1-0-1-22th-september-2025" class="toc-h2 toc-link" data-title="Version 1.0.1 (22th September 2025)">Version 1.0.1 (22th September 2025)</a>
+                  </li>
+                  <li>
                     <a href="#version-1-0-0-10th-july-2025" class="toc-h2 toc-link" data-title="Version 1.0.0 (10th July 2025)">Version 1.0.0 (10th July 2025)</a>
                   </li>
               </ul>
@@ -389,7 +392,23 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-1-0-0-10th-july-2025'>Version 1.0.0 (10th July 2025)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-1-0-1-22th-september-2025'>Version 1.0.1 (22th September 2025)</h2>
+<ul>
+<li>In the API <a href="#create-new-order">Create new order</a>
+, a new request field triggerPriceType has been added. For the following order types, users can now specify whether the trigger price is based on <code>INDEX_PRICE</code> or <code>LAST_PRICE</code> (default: <code>INDEX_PRICE</code>):
+
+<ul>
+<li>Stop Limit</li>
+<li>Stop Market</li>
+<li>Take Profit Limit</li>
+<li>Take Profit Market</li>
+<li>Trailing Stop Market</li>
+<li>OCO (One Cancels the Other)</li>
+</ul></li>
+</ul>
+
+<p>This change will take effect on September 24, 2025.</p>
+<h2 id='version-1-0-0-10th-july-2025'>Version 1.0.0 (10th July 2025)</h2>
 <ul>
 <li>Release V3.3 API. This change will take effect on 16th July, 2025.</li>
 </ul>
@@ -1784,6 +1803,12 @@ Additionally, the calculation duration will be reset if the IP address or user d
 <td>Double</td>
 <td>No</td>
 <td>For PEG order. How much should the order price deviate from index price. Value is in percentage and can range from <code>-10</code> to <code>10</code></td>
+</tr>
+<tr>
+<td>triggerPriceType</td>
+<td>String</td>
+<td>No</td>
+<td>For the following order types, users can specify whether the trigger price is based on <code>INDEX_PRICE</code> or <code>LAST_PRICE</code> (default: <code>INDEX_PRICE</code>):<br/>Stop Limit<br/>Stop Market<br/>Take Profit Limit<br/>Take Profit Market<br/>Trailing Stop Market<br/>OCO (One Cancels the Other)<br/></td>
 </tr>
 </tbody></table>
 <h3 id='response-content-8'>Response Content</h3>
