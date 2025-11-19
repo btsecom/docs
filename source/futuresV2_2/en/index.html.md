@@ -13,6 +13,19 @@ headingLevel: 2
 
 # Change Log
 
+## Version 1.0.8 (28th Nov 2025, these changes will take effect on early January 2026.)
+
+* Update the description for the following response fields in [`Market Summary`](#market-summary):
+  * `minRiskLimit`, `maxRiskLimit`, `maxPosition` will now be represented in notional value instead of contract-based units.
+* For [`Market Risk Limit Setting`](#market-risk-limit-setting):
+  * `riskLimitValue` will now be represented in notional value instead of contract-based units.
+* For [`Get Risk Limit`](#get-risk-limit):
+  * `riskLimit` will now be represented in notional value instead of contract-based units.
+  * A new field `riskLimitLevel` will be added to the response to indicate the current risk limit tier.
+* For [`Set Risk Limit`](#set-risk-limit):
+  * A new required request field `riskLimitLevel` will be added to specify which risk limit tier should be applied. 
+  * `riskLimit` will be no longer accepted in the request; please use `riskLimitLevel` instead.
+
 ## Version 1.0.7 (14th May 2025)
 
 * Add API for querying [`Default Market Setting`](#market-risk-limit-setting), including initial margin and maintenance margin by each market and each risk limit level. This change will take effect on 28th May, 2025.
@@ -341,9 +354,9 @@ Gets market summary information. If no symbol parameter is sent, then all market
 | inactiveTime        | Long    | Yes      | Time where market is inactive                                                                         |
 | fundingRate         | Double  | No       | The funding rate                                                                      |
 | contractSize        | Double  | No       | Size of one contract                                                                                  |
-| maxPosition         | Double  | No       | Maximum position a user is allowed to have `Will no longer be applicable after risk limit adjustment` |
-| minRiskLimit        | Double  | No       | Minimum risk limit in contract size  `Will be changed to USD value`                                   |
-| maxRiskLimit        | Double  | No       | Maximum risk limit int contract size `Will be changed to USD value`                                   |
+| maxPosition         | Double  | No       | Maximum position in notional value that each user is allowed to have. |
+| minRiskLimit        | Double  | No       | Minimum risk limit in notional value                                   |
+| maxRiskLimit        | Double  | No       | Maximum risk limit in notional value                                   |
 | availableSettlement | Array   | No       | Currencies available for settlement                                                                   |
 | futures             | Boolean | Yes      | Indicator if symbol is a futures contract                                                             |
 | fundingIntervalMinutes             | Integer | No      | Funding interval, only display when param `listFullAttributes` is true|
@@ -758,8 +771,8 @@ Gets all default market settings, including initial margin and maintenance margi
 | ---                      | ---      | ---      | ---                                                                                                   |
 | symbol                   | String   | Yes      | Market symbol                                                                                                |
 | riskLevel                | Integer  | Yes      | Risk level                                                                                                 |
-| riskLimitValue           | Integer  | Yes      | Risk limit value for current risk level in coin size                                                                                                  |
-| initialMarginRate        | Double   | Yes      | Initial margin rate                                                                                     |
+| riskLimitValue       | Integer  | Yes      | Risk limit value in notional value  |
+| initialMarginRate    | Double   | Yes      | Initial margin rate                                                                                     |
 | maintenanceMarginRate    | Double   | Yes      | Maintenance margin rate                                                                                                  |
 | maxLeverage              | Double   | Yes      | Max leverage for current risk level                                                                                                  |
 
@@ -1936,7 +1949,8 @@ Closes a user's position for the particular market as specified by symbol. If ty
 ```json
 {
     "symbol": "BTC-PERP",
-    "riskLimit": 100000
+    "riskLimit": 100000,
+    "riskLimitLevel": 1
 }
 ```
 `GET /api/v2.2/risk_limit`
@@ -1951,10 +1965,11 @@ Query risk limit for the specified market. Requires `Read` permission.
 
 ### Response Content
 
-| Name      | Type    | Required | Description|
-| ---       | ---     | ---      | --- |
-| symbol    | String  | Yes      | Market symbol  |
-| riskLimit | Long    | Yes      | Risk limit value now in position size, but will be changed to USD value aLong with futures market name change |
+| Name           | Type    | Required | Description|
+| ---            | ---     | ---      | --- |
+| symbol         | String  | Yes      | Market symbol  |
+| riskLimit      | Long    | Yes      | Risk limit value in notional value |
+| riskLimitLevel | Integer | Yes      | Current Risk Limit Tier |
 
 ## Set Risk Limit
 
@@ -1963,7 +1978,7 @@ Query risk limit for the specified market. Requires `Read` permission.
 ```json
 {
   "symbol": "BTC-PERP",
-  "riskLimit": 0
+  "riskLimitLevel": 2
 }
 ```
 
@@ -1972,7 +1987,7 @@ Query risk limit for the specified market. Requires `Read` permission.
 ```json
 {
     "symbol": "BTC-PERP",
-    "riskLimit": 100000,
+    "riskLimitLevel": 3,
     "positionMode": "HEDGE"
 }
 ```
@@ -1998,7 +2013,8 @@ Changes risk limit for the specified market. Requires `Trading` permission.
 | Name               | Type    | Required | Description                                                                               |
 | ---                | ---     | ---      |-------------------------------------------------------------------------------------------|
 | symbol             | String  | Yes      | Market symbol                                                                             |
-| riskLimit          | Long    | Yes      | Risk limit value now in position size, but it will be changed to USD value in the future. |
+| riskLimit `(Deprecated)`         | Long    | Yes      | Risk limit value  |
+| riskLimitLevel                   | Integer | Yes      | Risk limit level now need to be applied  |
 | positionMode       | String  | no       | ONE_WAY(default) or HEDGE. Mandatory when positionMode is `HEDGE` or `ISOLATED`                         |
 
 ### Response Content

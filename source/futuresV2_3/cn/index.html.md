@@ -13,6 +13,19 @@ headingLevel: 2
 
 # 更新日志
 
+## Version 1.0.1（2025年11月28日，这些更改将于 2026 年 1 月初生效）
+
+* 更新 [市场摘要](#7335b2436c) 中以下响应字段的描述：
+  * `minRiskLimit`、`maxRiskLimit`、`maxPosition` 将从原本的合约单位调整为以名义价值表示
+* For [`查询市场风险限额设置`](#d91925f00e):
+  * `riskLimitValue` 将从原本的合约单位调整为以名义价值表示
+* 更新 [获取风险限制](#420063dd1a) 中以下响应字段的描述：
+  * `riskLimit` 将从原本的合约单位调整为以名义价值表示
+  * 响应中将新增字段 `riskLimitLevel`，用于表示当前的风险限额级别
+* 更新 [设置风险限制](#f233c937b2) 中以下响应字段的描述：
+  * 请求中将新增必填字段 `riskLimitLevel`，用于指定要应用的风险限额级别
+  * 请求将不再支持 `riskLimit` 字段，请改用 `riskLimitLevel`
+
 ## 版本 1.0.0（2025年7月10日）
 
 * 释出 v2.3 API。此更改将于2025年7月16日生效。
@@ -353,9 +366,9 @@ BTSE 的速率限制如下：
 | inactiveTime        | Long    | Yes      | 市场不活跃时间                                                                                          |
 | fundingRate         | Double  | No       | 资金费率                                                                                    |
 | contractSize        | Double  | No       | 一个合同的尺寸                                                                                          |
-| maxPosition         | Double  | No       | 用户允许拥有的最大头寸 `风险限额调整后将不再适用`                                                         |
-| minRiskLimit        | Double  | No       | 合同大小的最小风险限额 `将更改为美元价值`                                                                 |
-| maxRiskLimit        | Double  | No       | 合同大小的最大风险限额 `将更改为美元价值`                                                                 |
+ maxPosition         | Double  | No       | 每位用户所允许持有的最大名义价值仓位                                                         |
+| minRiskLimit        | Double  | No       | 最小名义价值风险限额                                                                 |
+| maxRiskLimit        | Double  | No       | 最大名义价值风险限额                                                                 |
 | availableSettlement | Array   | No       | 用于结算的可用货币                                                                                      |
 | futures             | Boolean | Yes      | 符号是否为期货合同的指标                                                                                  |
 | fundingIntervalMinutes             | Integer | No      | 资金费率间隔，仅在参数 listFullAttributes 为 true 时显示|
@@ -769,7 +782,7 @@ BTSE 的速率限制如下：
 | ---                      | ---      | ---      | ---                                                                                                   |
 | symbol                   | String   | Yes      | 市场符号                                                                                                    |
 | riskLevel                | Integer  | Yes      | 风险等级                                                                                                    |
-| riskLimitValue           | Integer  | Yes      | 当前风险等级下的风险限额（以币本位计算）                                                                                                  |
+| riskLimitValue           | Integer  | Yes      | 当名义价值的风险限额数值                                                                                                    |
 | initialMarginRate        | Double   | Yes      | 初始保证金率                                                                                                    |
 | maintenanceMarginRate    | Double   | Yes      | 维持保证金率                                                                                                    |
 | maxLeverage              | Double   | Yes      | 当前风险等级下的最大杠杆倍数 
@@ -1955,7 +1968,8 @@ BTSE 的速率限制如下：
 ```json
 {
     "symbol": "BTC-PERP",
-    "riskLimit": 100000
+    "riskLimit": 100000,
+    "riskLimitLevel": 1
 }
 ```
 `GET /api/v2.3/risk_limit`
@@ -1970,10 +1984,11 @@ BTSE 的速率限制如下：
 
 ### 响应内容
 
-| 名称       | 类型    | 是否必须 | 描述                                                                                                         |
-| ---        | ---     | ---      | ---                                                                                                          |
-| symbol     | String  | Yes      | 市场符号                                                                                                     |
-| riskLimit  | Long    | Yes      | 当前的风险限制值以仓位大小表示，但随着期货市场名称的变化，它将转变为USD值                                      |
+| 名称            | 类型    | 是否必须   | 描述                    |
+| ---            | ---     | ---      | ---                     |
+| symbol         | String  | Yes      | 市场符号                 |
+| riskLimit      | Long    | Yes      | 当名义价值的风险限额数值    |
+| riskLimitLevel | Integer | Yes      | 当前的风险限额等级         |
 
 ## 设置风险限制
 
@@ -1982,7 +1997,7 @@ BTSE 的速率限制如下：
 ```json
 {
   "symbol": "BTC-PERP",
-  "riskLimit": 0
+  "riskLimitLevel": 1
 }
 ```
 
@@ -1991,7 +2006,7 @@ BTSE 的速率限制如下：
 ```json
 {
     "symbol": "BTC-PERP",
-    "riskLimit": 100000,
+    "riskLimitLevel": 3,
     "positionMode": "HEDGE"
 }
 ```
@@ -2014,11 +2029,13 @@ BTSE 的速率限制如下：
 
 ### 请求参数
 
-| 名称               | 类型    | 是否必须 | 描述                                                                                                                                   |
-| ---                | ---     | ---      | ---                                                                                                                                    |
-| symbol             | String  | Yes      | 市场符号                                                                                                                               |
-| riskLimit          | Long    | Yes      | 当前的风险限制值以仓位大小表示，但它将在将来转变为USD值。                                                                                  |
-| positionMode       | String  | no       | 单向持仓`ONE_WAY`（默认）或  双向持仓`HEDGE` 或 逐仓保证金模式`ISOLATED`, 在非单向持仓时为必填项                                                            |
+| 名称               | 类型    | 是否必须   | 描述                     |
+| ---               | ---     | ---      | ---                      |
+| symbol            | String  | Yes      | 市场符号                  |
+| riskLimit (`弃用`) | Long    | Yes      | 当前的风险限制值           |
+| riskLimitLevel    | Integer | Yes      | 当现在需要应用的风险限额等级 |
+| positionMode      | String  | no       | 
+单向持仓`ONE_WAY`（默认）或  双向持仓`HEDGE` 或 逐仓保证金模式`ISOLATED`, 在非单向持仓时为必填项                                                             |
 
 ### 响应内容
 

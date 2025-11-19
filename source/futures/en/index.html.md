@@ -13,6 +13,17 @@ headingLevel: 2
 
 # Change Log
 
+## Version 2.7.10 (28th Nov 2025, these changes will take effect on early January 2026.)
+
+* Update the description for the following response fields in [`Market Summary`](#market-summary):
+  * `minRiskLimit`, `maxRiskLimit`, `maxPosition` will now be represented in notional value instead of contract-based units.
+* For [`Get Risk Limit`](#get-risk-limit):
+  * `riskLimit` will now be represented in notional value instead of contract-based units.
+  * A new field `riskLimitLevel` will be added to the response to indicate the current risk limit tier.
+* For [`Set Risk Limit`](#set-risk-limit):
+  * A new required request field `riskLimitLevel` will be added to specify which risk limit tier should be applied. 
+  * `riskLimit` will be no longer accepted in the request; please use `riskLimitLevel` instead.
+
 ## Version 2.7.9 (9th April 2025)
 
 * Update the description for Request field `type` for [`Amend order`](#amend-order). This change will take effect on 18th May, 2025.
@@ -641,9 +652,9 @@ Gets market summary information. If no symbol parameter is sent, then all market
 | inactiveTime        | Long    | Yes      | Time where market is inactive                                                                         |
 | fundingRate         | Double  | No       | The funding rate                                                                      |
 | contractSize        | Double  | No       | Size of one contract                                                                                  |
-| maxPosition         | Double  | No       | Maximum position a user is allowed to have `Will no longer be applicable after risk limit adjustment` |
-| minRiskLimit        | Double  | No       | Minimum risk limit in contract size  `Will be changed to USD value`                                   |
-| maxRiskLimit        | Double  | No       | Maximum risk limit int contract size `Will be changed to USD value`                                   |
+| maxPosition         | Double  | No       | Maximum position in notional value that each user is allowed to have. |
+| minRiskLimit        | Double  | No       | Minimum risk limit in notional value                                   |
+| maxRiskLimit        | Double  | No       | Maximum risk limit in notional value                                   |
 | availableSettlement | Array   | No       | Currencies available for settlement                                                                   |
 | futures             | Boolean | Yes      | Indicator if symbol is a futures contract                                                             |
 | fundingIntervalMinutes             | Integer | No      | Funding interval, only display when param `listFullAttributes` is true|
@@ -2102,7 +2113,8 @@ Closes a user's position for the particular market as specified by symbol. If ty
 ```json
 {
     "symbol": "BTCPFC",
-    "riskLimit": 100000
+    "riskLimit": 100000,
+    "riskLimitLevel": 1
 }
 ```
 `GET /api/v2.1/risk_limit`
@@ -2117,10 +2129,11 @@ Query risk limit for the specified market. Requires `Read` permission.
 
 ### Response Content
 
-| Name      | Type    | Required | Description|
-| ---       | ---     | ---      | --- |
-| symbol    | String  | Yes      | Market symbol  |
-| riskLimit | Long    | Yes      | Risk limit value now in position size, but will be changed to USD value aLong with futures market name change |
+| Name           | Type    | Required | Description|
+| ---            | ---     | ---      | --- |
+| symbol         | String  | Yes      | Market symbol  |
+| riskLimit      | Long    | Yes      | Risk limit value in notional value |
+| riskLimitLevel | Integer | Yes      | Current Risk Limit Tier |
 
 ## Set Risk Limit
 
@@ -2129,7 +2142,7 @@ Query risk limit for the specified market. Requires `Read` permission.
 ```json
 {
   "symbol": "BTCPFC",
-  "riskLimit": 0
+  "riskLimitLevel": 2
 }
 ```
 
@@ -2138,7 +2151,7 @@ Query risk limit for the specified market. Requires `Read` permission.
 ```json
 {
     "symbol": "BTCPFC",
-    "riskLimit": 100000,
+    "riskLimitLevel": 3,
     "positionMode": "HEDGE"
 }
 ```
@@ -2161,12 +2174,13 @@ Changes risk limit for the specified market. Requires `Trading` permission.
 
 ### Request Parameters
 
-| Name               | Type    | Required | Description                                                                               |
-| ---                | ---     | ---      |-------------------------------------------------------------------------------------------|
-| symbol             | String  | Yes      | Market symbol                                                                             |
-| riskLimit          | Long    | Yes      | Risk limit value now in position size, but it will be changed to USD value in the future. |
-| positionMode       | String  | no       | ONE_WAY(default) or HEDGE. Mandatory when positionMode is `HEDGE`                         |
-| useNewSymbolNaming | Boolean | No       | True if use new futures market name as symbol , default to False                          |
+| Name                             | Type    | Required | Description                                                                               |
+| ---                              | ---     | ---      |-------------------------------------------------------------------------------------------|
+| symbol                           | String  | Yes      | Market symbol                                                                             |
+| riskLimit `(Deprecated)`         | Long    | Yes      | Risk limit value  |
+| riskLimitLevel                   | Integer | Yes      | Risk limit level now need to be applied  |
+| positionMode                     | String  | no       | ONE_WAY(default) or HEDGE. Mandatory when positionMode is `HEDGE`                         |
+| useNewSymbolNaming               | Boolean | No       | True if use new futures market name as symbol , default to False                          |
 
 ### Response Content
 
