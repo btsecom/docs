@@ -662,82 +662,82 @@ BTSE 的速率限制如下：
         {
             "symbol": "SOL-PERP",
             "riskLevel": 1,
-            "riskLimitValue": 10000,
-            "initialMarginRate": 0.02,
-            "maintenanceMarginRate": 0.015,
-            "maxLeverage": 50
+            "riskLimitValue": 50000,
+            "initialMarginRate": 0.01,
+            "maintenanceMarginRate": 0.005,
+            "maxLeverage": 100
         },
         {
             "symbol": "SOL-PERP",
             "riskLevel": 2,
-            "riskLimitValue": 20000,
-            "initialMarginRate": 0.025,
-            "maintenanceMarginRate": 0.02,
-            "maxLeverage": 40
+            "riskLimitValue": 400000,
+            "initialMarginRate": 0.0133,
+            "maintenanceMarginRate": 0.0073,
+            "maxLeverage": 75
         },
         {
             "symbol": "SOL-PERP",
             "riskLevel": 3,
-            "riskLimitValue": 30000,
-            "initialMarginRate": 0.03,
-            "maintenanceMarginRate": 0.025,
-            "maxLeverage": 33.33
+            "riskLimitValue": 1000000,
+            "initialMarginRate": 0.02,
+            "maintenanceMarginRate": 0.012,
+            "maxLeverage": 50
         },
         {
             "symbol": "SOL-PERP",
             "riskLevel": 4,
-            "riskLimitValue": 40000,
-            "initialMarginRate": 0.035,
-            "maintenanceMarginRate": 0.03,
-            "maxLeverage": 28.57
-        },
-        {
-            "symbol": "SOL-PERP",
-            "riskLevel": 5,
-            "riskLimitValue": 50000,
-            "initialMarginRate": 0.04,
-            "maintenanceMarginRate": 0.035,
-            "maxLeverage": 25
-        },
-        {
-            "symbol": "SOL-PERP",
-            "riskLevel": 6,
-            "riskLimitValue": 60000,
-            "initialMarginRate": 0.045,
-            "maintenanceMarginRate": 0.04,
-            "maxLeverage": 22.22
-        },
-        {
-            "symbol": "SOL-PERP",
-            "riskLevel": 7,
-            "riskLimitValue": 70000,
+            "riskLimitValue": 6000000,
             "initialMarginRate": 0.05,
-            "maintenanceMarginRate": 0.045,
+            "maintenanceMarginRate": 0.033,
             "maxLeverage": 20
         },
         {
             "symbol": "SOL-PERP",
+            "riskLevel": 5,
+            "riskLimitValue": 40000000,
+            "initialMarginRate": 0.1,
+            "maintenanceMarginRate": 0.068,
+            "maxLeverage": 10
+        },
+        {
+            "symbol": "SOL-PERP",
+            "riskLevel": 6,
+            "riskLimitValue": 100000000,
+            "initialMarginRate": 0.20,
+            "maintenanceMarginRate": 0.138,
+            "maxLeverage": 5
+        },
+        {
+            "symbol": "SOL-PERP",
+            "riskLevel": 7,
+            "riskLimitValue": 175000000,
+            "initialMarginRate": 0.25,
+            "maintenanceMarginRate": 0.173,
+            "maxLeverage": 4
+        },
+        {
+            "symbol": "SOL-PERP",
             "riskLevel": 8,
-            "riskLimitValue": 80000,
-            "initialMarginRate": 0.055,
-            "maintenanceMarginRate": 0.05,
-            "maxLeverage": 18.18
+            "riskLimitValue": 225000000,
+            "initialMarginRate": 0.3333,
+            "maintenanceMarginRate": 0.2313,
+            "maxLeverage": 3
         },
         {
             "symbol": "SOL-PERP",
             "riskLevel": 9,
-            "riskLimitValue": 90000,
-            "initialMarginRate": 0.06,
-            "maintenanceMarginRate": 0.055,
-            "maxLeverage": 16.67
+            "riskLimitValue": 300000000,
+            "initialMarginRate": 0.50,
+            "maintenanceMarginRate": 0.348,
+            "maxLeverage": 2
         },
         {
             "symbol": "SOL-PERP",
             "riskLevel": 10,
-            "riskLimitValue": 100000,
-            "initialMarginRate": 0.065,
-            "maintenanceMarginRate": 0.06,
-            "maxLeverage": 15.38
+            "riskLimitValue": 400000000,
+            "initialMarginRate": 1.00,
+            "maintenanceMarginRate": 0.698,
+            "maxLeverage": 1
         }
     ],
     "success": true
@@ -1968,7 +1968,7 @@ BTSE 的速率限制如下：
 ```json
 {
     "symbol": "BTC-PERP",
-    "riskLimit": 100000,
+    "riskLimit": 3000000,
     "riskLimitLevel": 1
 }
 ```

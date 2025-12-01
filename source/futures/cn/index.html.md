@@ -2111,7 +2111,7 @@ BTSE 的速率限制如下：
 ```json
 {
     "symbol": "BTCPFC",
-    "riskLimit": 100000,
+    "riskLimit": 3000000,
     "riskLimitLevel": 1
 }
 ```

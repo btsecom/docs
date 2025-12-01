@@ -2113,7 +2113,7 @@ Closes a user's position for the particular market as specified by symbol. If ty
 ```json
 {
     "symbol": "BTCPFC",
-    "riskLimit": 100000,
+    "riskLimit": 3000000,
     "riskLimitLevel": 1
 }
 ```
