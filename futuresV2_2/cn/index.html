@@ -234,6 +234,9 @@
             <a href="#185368440e" class="toc-h1 toc-link" data-title="更新日志">更新日志</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-1-0-8-2025-12-2-2026-1-11" class="toc-h2 toc-link" data-title="Version 1.0.8（2025年12月2日，这些更改将于 2026 年 1 月 11 日生效）">Version 1.0.8（2025年12月2日，这些更改将于 2026 年 1 月 11 日生效）</a>
+                  </li>
+                  <li>
                     <a href="#1-0-7-2025-5-14" class="toc-h2 toc-link" data-title="版本 1.0.7 (2025年5月14日)">版本 1.0.7 (2025年5月14日)</a>
                   </li>
                   <li>
@@ -458,7 +461,32 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='185368440e'>更新日志</h1><h2 id='1-0-7-2025-5-14'>版本 1.0.7 (2025年5月14日)</h2>
+        <h1 id='185368440e'>更新日志</h1><h2 id='version-1-0-8-2025-12-2-2026-1-11'>Version 1.0.8（2025年12月2日，这些更改将于 2026 年 1 月 11 日生效）</h2>
+<ul>
+<li>更新 <a href="#7335b2436c">市场摘要</a> 中以下响应字段的描述：
+
+<ul>
+<li><code>minRiskLimit</code>、<code>maxRiskLimit</code>、<code>maxPosition</code> 将从原本的合约单位调整为以名义价值表示</li>
+</ul></li>
+<li>For <a href="#d91925f00e"><code>查询市场风险限额设置</code></a>:
+
+<ul>
+<li><code>riskLimitValue</code> 将从原本的合约单位调整为以名义价值表示</li>
+</ul></li>
+<li>更新 <a href="#420063dd1a">获取风险限制</a> 中以下响应字段的描述：
+
+<ul>
+<li><code>riskLimit</code> 将从原本的合约单位调整为以名义价值表示</li>
+<li>响应中将新增字段 <code>riskLimitLevel</code>，用于表示当前的风险限额级别</li>
+</ul></li>
+<li>更新 <a href="#f233c937b2">设置风险限制</a> 中以下响应字段的描述：
+
+<ul>
+<li>请求中将新增必填字段 <code>riskLimitLevel</code>，用于指定要应用的风险限额级别</li>
+<li>请求将不再支持 <code>riskLimit</code> 字段，请改用 <code>riskLimitLevel</code></li>
+</ul></li>
+</ul>
+<h2 id='1-0-7-2025-5-14'>版本 1.0.7 (2025年5月14日)</h2>
 <ul>
 <li>新增API<a href="#d91925f00e"><code>查询市场风险限额设置</code></a>，包括每个市场和每个风险等级的初始保证金率和维持保证金率。此更改将于2025年5月28日生效。</li>
 </ul>
@@ -985,19 +1013,19 @@
 <td>maxPosition</td>
 <td>Double</td>
 <td>No</td>
-<td>用户允许拥有的最大头寸 <code>风险限额调整后将不再适用</code></td>
+<td>每位用户所允许持有的最大名义价值仓位</td>
 </tr>
 <tr>
 <td>minRiskLimit</td>
 <td>Double</td>
 <td>No</td>
-<td>合同大小的最小风险限额 <code>将更改为美元价值</code></td>
+<td>最小名义价值风险限额</td>
 </tr>
 <tr>
 <td>maxRiskLimit</td>
 <td>Double</td>
 <td>No</td>
-<td>合同大小的最大风险限额 <code>将更改为美元价值</code></td>
+<td>最大名义价值风险限额</td>
 </tr>
 <tr>
 <td>availableSettlement</td>
@@ -1609,82 +1637,82 @@
         </span><span class="p">{</span><span class="w">
             </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOL-PERP"</span><span class="p">,</span><span class="w">
             </span><span class="nl">"riskLevel"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"riskLimitValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"initialMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.02</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"maintenanceMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.015</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"maxLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
+            </span><span class="nl">"riskLimitValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">50000</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"initialMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.01</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maintenanceMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.005</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maxLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
             </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOL-PERP"</span><span class="p">,</span><span class="w">
             </span><span class="nl">"riskLevel"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"riskLimitValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">20000</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"initialMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.025</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"maintenanceMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.02</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"maxLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="w">
+            </span><span class="nl">"riskLimitValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">400000</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"initialMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0133</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maintenanceMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0073</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maxLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mi">75</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
             </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOL-PERP"</span><span class="p">,</span><span class="w">
             </span><span class="nl">"riskLevel"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"riskLimitValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">30000</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"initialMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.03</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"maintenanceMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.025</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"maxLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mf">33.33</span><span class="w">
+            </span><span class="nl">"riskLimitValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000000</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"initialMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.02</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maintenanceMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.012</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maxLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
             </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOL-PERP"</span><span class="p">,</span><span class="w">
             </span><span class="nl">"riskLevel"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"riskLimitValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">40000</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"initialMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.035</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"maintenanceMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.03</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"maxLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mf">28.57</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOL-PERP"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"riskLevel"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"riskLimitValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">50000</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"initialMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.04</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"maintenanceMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.035</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"maxLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOL-PERP"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"riskLevel"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"riskLimitValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">60000</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"initialMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.045</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"maintenanceMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.04</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"maxLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mf">22.22</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOL-PERP"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"riskLevel"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"riskLimitValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">70000</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"riskLimitValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">6000000</span><span class="p">,</span><span class="w">
             </span><span class="nl">"initialMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.05</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"maintenanceMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.045</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maintenanceMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.033</span><span class="p">,</span><span class="w">
             </span><span class="nl">"maxLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
             </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOL-PERP"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"riskLevel"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"riskLimitValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">40000000</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"initialMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maintenanceMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.068</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maxLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOL-PERP"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"riskLevel"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"riskLimitValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">100000000</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"initialMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.20</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maintenanceMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.138</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maxLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOL-PERP"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"riskLevel"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"riskLimitValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">175000000</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"initialMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.25</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maintenanceMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.173</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maxLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOL-PERP"</span><span class="p">,</span><span class="w">
             </span><span class="nl">"riskLevel"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"riskLimitValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">80000</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"initialMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.055</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"maintenanceMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.05</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"maxLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mf">18.18</span><span class="w">
+            </span><span class="nl">"riskLimitValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">225000000</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"initialMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.3333</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maintenanceMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.2313</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maxLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
             </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOL-PERP"</span><span class="p">,</span><span class="w">
             </span><span class="nl">"riskLevel"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"riskLimitValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">90000</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"initialMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.06</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"maintenanceMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.055</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"maxLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mf">16.67</span><span class="w">
+            </span><span class="nl">"riskLimitValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">300000000</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"initialMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.50</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maintenanceMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.348</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maxLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="p">{</span><span class="w">
             </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOL-PERP"</span><span class="p">,</span><span class="w">
             </span><span class="nl">"riskLevel"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"riskLimitValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">100000</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"initialMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.065</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"maintenanceMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.06</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"maxLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mf">15.38</span><span class="w">
+            </span><span class="nl">"riskLimitValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">400000000</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"initialMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.00</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maintenanceMarginRate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.698</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"maxLeverage"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
         </span><span class="p">}</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
@@ -1785,7 +1813,7 @@
 <td>riskLimitValue</td>
 <td>Integer</td>
 <td>Yes</td>
-<td>当前风险等级下的风险限额（以币本位计算）</td>
+<td>当名义价值的风险限额数值</td>
 </tr>
 <tr>
 <td>initialMarginRate</td>
@@ -4472,7 +4500,8 @@
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-PERP"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"riskLimit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100000</span><span class="w">
+    </span><span class="nl">"riskLimit"</span><span class="p">:</span><span class="w"> </span><span class="mi">3000000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"riskLimitLevel"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p><code>GET /api/v2.2/risk_limit</code></p>
@@ -4513,7 +4542,13 @@
 <td>riskLimit</td>
 <td>Long</td>
 <td>Yes</td>
-<td>当前的风险限制值以仓位大小表示，但随着期货市场名称的变化，它将转变为USD值</td>
+<td>当名义价值的风险限额数值</td>
+</tr>
+<tr>
+<td>riskLimitLevel</td>
+<td>Integer</td>
+<td>Yes</td>
+<td>当前的风险限额等级</td>
 </tr>
 </tbody></table>
 <h2 id='f233c937b2'>设置风险限制</h2>
@@ -4522,7 +4557,7 @@
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-PERP"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"riskLimit"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="nl">"riskLimitLevel"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
@@ -4530,7 +4565,7 @@
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-PERP"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"riskLimit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"riskLimitLevel"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
     </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HEDGE"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
@@ -4564,10 +4599,16 @@
 <td>市场符号</td>
 </tr>
 <tr>
-<td>riskLimit</td>
+<td>riskLimit (<code>弃用</code>)</td>
 <td>Long</td>
 <td>Yes</td>
-<td>当前的风险限制值以仓位大小表示，但它将在将来转变为USD值。</td>
+<td>当前的风险限制值</td>
+</tr>
+<tr>
+<td>riskLimitLevel</td>
+<td>Integer</td>
+<td>Yes</td>
+<td>当现在需要应用的风险限额等级</td>
 </tr>
 <tr>
 <td>positionMode</td>

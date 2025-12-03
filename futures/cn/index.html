@@ -234,6 +234,9 @@
             <a href="#185368440e" class="toc-h1 toc-link" data-title="更新日志">更新日志</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-2-7-10-2025-12-2-2026-1-11" class="toc-h2 toc-link" data-title="Version 2.7.10（2025年12月2日，这些更改将于 2026 年 1 月 11 日生效）">Version 2.7.10（2025年12月2日，这些更改将于 2026 年 1 月 11 日生效）</a>
+                  </li>
+                  <li>
                     <a href="#2-7-9-2025-4-9" class="toc-h2 toc-link" data-title="版本 2.7.9 (2025年4月9日)">版本 2.7.9 (2025年4月9日)</a>
                   </li>
                   <li>
@@ -572,7 +575,27 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='185368440e'>更新日志</h1><h2 id='2-7-9-2025-4-9'>版本 2.7.9 (2025年4月9日)</h2>
+        <h1 id='185368440e'>更新日志</h1><h2 id='version-2-7-10-2025-12-2-2026-1-11'>Version 2.7.10（2025年12月2日，这些更改将于 2026 年 1 月 11 日生效）</h2>
+<ul>
+<li>更新 <a href="#7335b2436c">市场摘要</a> 中以下响应字段的描述：
+
+<ul>
+<li><code>minRiskLimit</code>、<code>maxRiskLimit</code>、<code>maxPosition</code> 将从原本的合约单位调整为以名义价值表示</li>
+</ul></li>
+<li>更新 <a href="#420063dd1a">获取风险限制</a> 中以下响应字段的描述：
+
+<ul>
+<li><code>riskLimit</code> 将从原本的合约单位调整为以名义价值表示</li>
+<li>响应中将新增字段 <code>riskLimitLevel</code>，用于表示当前的风险限额级别</li>
+</ul></li>
+<li>更新 <a href="#f233c937b2">设置风险限制</a> 中以下响应字段的描述：
+
+<ul>
+<li>请求中将新增必填字段 <code>riskLimitLevel</code>，用于指定要应用的风险限额级别</li>
+<li>请求将不再支持 <code>riskLimit</code> 字段，请改用 <code>riskLimitLevel</code></li>
+</ul></li>
+</ul>
+<h2 id='2-7-9-2025-4-9'>版本 2.7.9 (2025年4月9日)</h2>
 <ul>
 <li>更新了 <a href="#89e5b08e91"><code>修改订单</code></a> 中请求字段 <code>type</code> 的描述。此更改将于2025年5月18日生效。</li>
 </ul>
@@ -1459,19 +1482,19 @@
 <td>maxPosition</td>
 <td>Double</td>
 <td>No</td>
-<td>用户允许拥有的最大头寸 <code>风险限额调整后将不再适用</code></td>
+<td>每位用户所允许持有的最大名义价值仓位</td>
 </tr>
 <tr>
 <td>minRiskLimit</td>
 <td>Double</td>
 <td>No</td>
-<td>合同大小的最小风险限额 <code>将更改为美元价值</code></td>
+<td>最小名义价值风险限额</td>
 </tr>
 <tr>
 <td>maxRiskLimit</td>
 <td>Double</td>
 <td>No</td>
-<td>合同大小的最大风险限额 <code>将更改为美元价值</code></td>
+<td>最大名义价值风险限额</td>
 </tr>
 <tr>
 <td>availableSettlement</td>
@@ -4785,7 +4808,8 @@
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"riskLimit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100000</span><span class="w">
+    </span><span class="nl">"riskLimit"</span><span class="p">:</span><span class="w"> </span><span class="mi">3000000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"riskLimitLevel"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p><code>GET /api/v2.1/risk_limit</code></p>
@@ -4826,7 +4850,13 @@
 <td>riskLimit</td>
 <td>Long</td>
 <td>Yes</td>
-<td>当前的风险限制值以仓位大小表示，但随着期货市场名称的变化，它将转变为USD值</td>
+<td>当名义价值的风险限额数值</td>
+</tr>
+<tr>
+<td>riskLimitLevel</td>
+<td>Integer</td>
+<td>Yes</td>
+<td>当前的风险限额等级</td>
 </tr>
 </tbody></table>
 <h2 id='f233c937b2'>设置风险限制</h2>
@@ -4835,7 +4865,7 @@
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"riskLimit"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="nl">"riskLimitLevel"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
@@ -4843,7 +4873,7 @@
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPFC"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"riskLimit"</span><span class="p">:</span><span class="w"> </span><span class="mi">100000</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"riskLimitLevel"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
     </span><span class="nl">"positionMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HEDGE"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
@@ -4877,10 +4907,16 @@
 <td>市场符号</td>
 </tr>
 <tr>
-<td>riskLimit</td>
+<td>riskLimit (<code>弃用</code>)</td>
 <td>Long</td>
 <td>Yes</td>
-<td>当前的风险限制值以仓位大小表示，但它将在将来转变为USD值。</td>
+<td>当前的风险限制值</td>
+</tr>
+<tr>
+<td>riskLimitLevel</td>
+<td>Integer</td>
+<td>Yes</td>
+<td>当现在需要应用的风险限额等级</td>
 </tr>
 <tr>
 <td>positionMode</td>
