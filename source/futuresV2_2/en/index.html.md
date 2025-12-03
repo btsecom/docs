@@ -13,7 +13,7 @@ headingLevel: 2
 
 # Change Log
 
-## Version 1.0.8 (28th Nov 2025, these changes will take effect on early January 2026.)
+## Version 1.0.8 (3rd December 2025, these changes will take effect on 11th January 2026.)
 
 * Update the description for the following response fields in [`Market Summary`](#market-summary):
   * `minRiskLimit`, `maxRiskLimit`, `maxPosition` will now be represented in notional value instead of contract-based units.
