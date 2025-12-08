@@ -149,9 +149,9 @@ Each API will return one of the following HTTP status:
 
 # Public Endpoints
 
-对于价格较小的加密货币，[`市场摘要`](https://btsecom.github.io/docs/futuresV2_3/cn/#7335b2436c) 会在 `symbol` 字段中使用 K/M/B 前缀进行展示，并按对应数量进行交易处理。（例如：`K_PEIPEI`）
+For crypto with small prices, the [Market Summary](https://btsecom.github.io/docs/futuresV2_3/en/#market-summary) API displays them using K/M/B prefixes in `symbol` field and process trades with the corresponding quantities. (ex. `K_PEIPEI`) 
 
-然而，与钱包相关的 API 会展示实际的加密货币信息，因此无论是请求或响应都将使用原始加密货币名称，与 [`市场摘要`](https://btsecom.github.io/docs/futuresV2_3/cn/#7335b2436c) 中的 `base` 字段一致。（例如：`PEIPEI`）
+However, Wallet-related APIs display the actual crypto information, so both requests and responses will use the original crypto name, same as `base` field in [Market Summary](https://btsecom.github.io/docs/futuresV2_3/en/#market-summary) API. (ex. `PEIPEI`)
 
 ## Query available crypto network list for currency (Deprecated)
 
