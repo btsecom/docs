@@ -13,6 +13,12 @@ headingLevel: 2
 
 # Change Log
 
+## Version 1.1.4 (8th December 2025)
+
+* Updated documentation to clarify the behavior difference in symbol representation between Market and Wallet-related APIs.
+  - The [Market Summary](https://btsecom.github.io/docs/futuresV2_3/en/#market-summary) API uses K/M/B prefixed symbols in the symbol field for crypto assets with small prices and processes trade quantities accordingly. Example: `K_PEIPEI`
+  - Wallet-related APIs here now consistently use the original crypto name (without K/M/B prefix) for both request and response payloads. This matches the base field shown in the [Market Summary](https://btsecom.github.io/docs/futuresV2_3/en/#market-summary) API. Example: `PEIPEI`
+
 ## Version 1.1.3 (10th July 2025)
 
 * [**IMPORTANT**] BTSE will phase out support for two open API endpoints by **July 30, 2025**. The following endpoints will be deprecated:
