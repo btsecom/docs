@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-1-1-4-8th-december-2025" class="toc-h2 toc-link" data-title="Version 1.1.4 (8th December 2025)">Version 1.1.4 (8th December 2025)</a>
+                  </li>
+                  <li>
                     <a href="#version-1-1-3-10th-july-2025" class="toc-h2 toc-link" data-title="Version 1.1.3 (10th July 2025)">Version 1.1.3 (10th July 2025)</a>
                   </li>
                   <li>
@@ -341,7 +344,16 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-1-1-3-10th-july-2025'>Version 1.1.3 (10th July 2025)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-1-1-4-8th-december-2025'>Version 1.1.4 (8th December 2025)</h2>
+<ul>
+<li>Updated documentation to clarify the behavior difference in symbol representation between Market and Wallet-related APIs.
+
+<ul>
+<li>The <a href="https://btsecom.github.io/docs/futuresV2_3/en/#market-summary">Market Summary</a> API uses K/M/B prefixed symbols in the symbol field for crypto assets with small prices and processes trade quantities accordingly. Example: <code>K_PEIPEI</code></li>
+<li>Wallet-related APIs here now consistently use the original crypto name (without K/M/B prefix) for both request and response payloads. This matches the base field shown in the <a href="https://btsecom.github.io/docs/futuresV2_3/en/#market-summary">Market Summary</a> API. Example: <code>PEIPEI</code></li>
+</ul></li>
+</ul>
+<h2 id='version-1-1-3-10th-july-2025'>Version 1.1.3 (10th July 2025)</h2>
 <ul>
 <li>[<strong>IMPORTANT</strong>] BTSE will phase out support for two open API endpoints by <strong>July 30, 2025</strong>. The following endpoints will be deprecated:
 
@@ -521,7 +533,11 @@
 <li>429 - Too many requests. Indicates that the client has exceeded the rates limits set by the server. Refer to Rate Limits for more details</li>
 <li>500 - Internal server error. Indicates that the server encountered an unexpected condition resulting in not being able to fulfill the request</li>
 </ul>
-<h1 id='public-endpoints'>Public Endpoints</h1><h2 id='query-available-crypto-network-list-for-currency-deprecated'>Query available crypto network list for currency (Deprecated)</h2>
+<h1 id='public-endpoints'>Public Endpoints</h1>
+<p>For crypto with small prices, the <a href="https://btsecom.github.io/docs/futuresV2_3/en/#market-summary">Market Summary</a> API displays them using K/M/B prefixes in <code>symbol</code> field and process trades with the corresponding quantities. (ex. <code>K_PEIPEI</code>) </p>
+
+<p>However, Wallet-related APIs display the actual crypto information, so both requests and responses will use the original crypto name, same as <code>base</code> field in <a href="https://btsecom.github.io/docs/futuresV2_3/en/#market-summary">Market Summary</a> API. (ex. <code>PEIPEI</code>)</p>
+<h2 id='query-available-crypto-network-list-for-currency-deprecated'>Query available crypto network list for currency (Deprecated)</h2>
 <blockquote>
 <p>Response</p>
 </blockquote>
