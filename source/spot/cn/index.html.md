@@ -13,6 +13,10 @@ headingLevel: 2
 
 # 更改日志
 
+## 版本 3.4.17 (2026年3月13日)
+
+* 更新 [`创建新订单`](#8be954be0d) 中 `price` 的说明，以及买入止损市价单的范例。
+
 ## 版本 3.4.16 (2025年9月22日)
 
 * 在 API [`创建新订单`](#8be954be0d) 中，新增请求字段 `triggerPriceType` ，对于以下订单类型，用户现在可以指定触发价格基于 `INDEX_PRICE` 或 `LAST_PRICE`（默认：`INDEX_PRICE`）：
@@ -749,7 +753,7 @@ BTSE的速率限制如下:
 ```json
 {
   "symbol": "BTC-USD",
-  "size": 1,
+  "price": 10,
   "side": "BUY",
   "type": "MARKET",
   "txType": "Stop",
@@ -904,7 +908,7 @@ BTSE的速率限制如下:
 | 名称          | 类型    | 是否必须 | 描述                                                                                                                                                                                                                                                                                                                                                        |
 | ---           | ---     | ---      | ---                                                                                                                                                                                                                                                                                                                                                        |
 | symbol        | String  | Yes      | 市场标志                                                                                                                                                                                                                                                                                                                                                 |
-| price         | Double  | No      | 创建 MARKET 订单时除外。卖单的最低价格，这是用户愿意卖出的最低价格。买单的最高价格，这是用户愿意买入的最高价格。                                                                                                                                                                                                                    |
+| price         | Double  | No      | 创建 MARKET 订单时除外。卖单的最低价格，这是用户愿意卖出的最低价格。买单的最高价格，这是用户愿意买入的最高价格; <br/>对于`BUY`市价单，此字段表示在当前市场价格下可用于买入基础资产的最高报价币种金额。最终买入的基础资产数量将取决于实际成交价格。                                                               |
 | size          | Double  | Yes      | 订单大小                                                                                                                                                                                                                                                                                                                                                  |
 | side          | String  | Yes      | 'BUY' 或 'SELL'                                                                                                                                                                                                                                                                                                                                         |
 | time_in_force | String  | No      | 订单的时间有效性<br/>GTC：有效直到取消<br/>IOC：立即取消<br/>FOK：全部成交或取消<br/>HALFMIN：订单有效时间为30秒<br/>FIVEMIN：订单有效时间为5分钟<br/>HOUR：订单有效时间为1小时<br/>TWELVEHOUR：订单有效时间为12小时<br/>DAY：订单有效时间为1天<br/>WEEK：订单有效时间为1周<br/>MONTH：订单有效时间为1个月 |
