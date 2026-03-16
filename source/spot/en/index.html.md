@@ -15,7 +15,11 @@ headingLevel: 2
 
 ## Version 3.4.17 (16th March 2026)
 
-* Update the `price` description and the buy stop market order example for [Create new order](#create-new-order)
+* In the API [Create new order](#create-new-order)
+  * Update the `price` description
+  * Update the `BUY MARKET STOP` example
+  * Add the `BUY MARKET TAKE PROFIT` example
+  * Add the `BUY TRAILING STOP MARKET` example
 
 ## Version 3.4.16 (22th September 2025)
 
@@ -766,12 +770,25 @@ Gets server time
 
 ```json
 {
-  "symbol": "BTC-USD",
-  "price": 10,
+  "symbol": "BTC-USDT",
+  "price": 1000,
   "side": "BUY",
   "type": "MARKET",
   "txType": "Stop",
-  "triggerPrice": 32000
+  "triggerPrice": 75000
+}
+```
+
+> Request (create `MARKET TAKE PROFIT` order)
+
+```json
+{
+  "symbol": "BTC-USDT",
+  "price": 1000,
+  "side": "BUY",
+  "type": "MARKET",
+  "txType": "TRIGGER",
+  "triggerPrice": 64000
 }
 ```
 
@@ -813,6 +830,19 @@ Gets server time
   "txType": "LIMIT",
   "stopPrice": 40010,
   "triggerPrice": 40000
+}
+```
+
+> Request (create `TRAILING STOP MARKET` order)
+
+```json
+{
+  "symbol": "BTC-USDT",
+  "side": "BUY",
+  "type": "MARKET",
+  "txType": "STOP",
+  "price": 1000,
+  "trailValue": 10
 }
 ```
 
@@ -922,7 +952,7 @@ Creates a new order. Requires `Trading` permission. Please note that Index Order
 | Name          | Type    | Required | Description                                                                                                                                                                                                                                                                                                                                                        |
 | ---           | ---     | ---      | ---                                                                                                                                                                                                                                                                                                                                                                |
 | symbol        | String  | Yes      | Market symbol                                                                                                                                                                                                                                                                                                                                                      |
-| price         | Double  | No       | Mandatory unless creating a MARKET order. Minimum price for a sell order, this is the lowest price that a user is willing to sell at. Maximum price for a buy order, this is the maximum price a user is willing to buy at.<br/>For a `BUY` market order, this field specifies the maximum quote currency amount to be spent to purchase the base asset at the current market price. The final base asset size will depend on the execution price.  |
+| price         | Double  | No       | Refer to [price for order type](#price-for-order-type) |
 | size          | Double  | Yes      | Order size                                                                                                                                                                                                                                                                                                                                                         |
 | side          | String  | Yes      | 'BUY' or 'SELL'                                                                                                                                                                                                                                                                                                                                                    |
 | time_in_force | String  | No       | Time validity of the order<br/>GTC: Good till Cancel<br/>IOC: Immediate or Cancel<br/>FOK: Fill or Kill<br/>HALFMIN: Order valid for 30 seconds<br/>FIVEMIN: Order valid for 5 mins<br/> HOUR: Order valid for an hour<br/>TWELVEHOUR: Order valid for 12 hours<br/>DAY: Order valid for a day<br/>WEEK: Order valid for a week<br/>MONTH: Order valid for a month |
@@ -937,7 +967,23 @@ Creates a new order. Requires `Trading` permission. Please note that Index Order
 | deviation     | Double  | No       | For PEG order. How much should the order price deviate from index price. Value is in percentage and can range from `-10` to `10`                                                                                                                                                                                                                                   |
 | triggerPriceType     | String  | No      | For the following order types, users can specify whether the trigger price is based on `INDEX_PRICE` or `LAST_PRICE` (default: `INDEX_PRICE`):<br/>Stop Limit<br/>Stop Market<br/>Take Profit Limit<br/>Take Profit Market<br/>Trailing Stop Market<br/>OCO (One Cancels the Other)<br/> |
 
+### `price` for order type
 
+* `LIMIT Order`
+    * `BUY`: Maximum price (in quote currency, e.g. USDT) the user is willing to pay per unit of base asset
+    * `SELL`: Minimum price (in quote currency, e.g. USDT) the user is willing to accept per unit of base asset
+* `MARKET Order`
+    * `BUY`: Maximum total amount (in quote currency, e.g. USDT) the user is willing to spend
+    * `SELL`: Not applicable
+* `TRIGGER LIMIT Order`
+    * `BUY`: Maximum price (in quote currency, e.g. USDT) the user is willing to pay per unit of base asset
+    * `SELL`: Minimum price (in quote currency, e.g. USDT) the user is willing to accept per unit of base asset
+* `TRIGGER MARKET Order`
+    * `BUY`: Maximum total amount (in quote currency, e.g. USDT) the user is willing to spend
+    * `SELL`: Not applicable
+* `TRAILING STOP MARKET Order`
+    * `BUY`: Maximum total amount (in quote currency, e.g. USDT) the user is willing to spend
+    * `SELL`: Not applicable
 
 ### Response Content
 

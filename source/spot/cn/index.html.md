@@ -15,7 +15,11 @@ headingLevel: 2
 
 ## 版本 3.4.17 (2026年3月16日)
 
-* 更新 [`创建新订单`](#8be954be0d) 中 `price` 的说明，以及买入止损市价单的范例。
+* API [创建新订单](#8be954be0d)
+  * 更新 `price` 字段说明
+  * 更新 `买入止损市价 (BUY MARKET STOP)` 示例
+  * 新增 `买入止盈市价 (BUY MARKET TAKE PROFIT)` 示例
+  * 新增 `买入追踪止损市价单 (BUY TRAILING STOP MARKET)` 示例
 
 ## 版本 3.4.16 (2025年9月22日)
 
@@ -752,12 +756,25 @@ BTSE的速率限制如下:
 
 ```json
 {
-  "symbol": "BTC-USD",
-  "price": 10,
+  "symbol": "BTC-USDT",
+  "price": 1000,
   "side": "BUY",
   "type": "MARKET",
   "txType": "Stop",
-  "triggerPrice": 32000
+  "triggerPrice": 75000
+}
+```
+
+> 请求（创建`MARKET TAKE PROFIT`订单）
+
+```json
+{
+  "symbol": "BTC-USDT",
+  "price": 1000,
+  "side": "BUY",
+  "type": "MARKET",
+  "txType": "TRIGGER",
+  "triggerPrice": 64000
 }
 ```
 
@@ -799,6 +816,19 @@ BTSE的速率限制如下:
   "txType": "LIMIT",
   "stopPrice": 40010,
   "triggerPrice": 40000
+}
+```
+
+> 请求（创建`TRAILING STOP MARKET`订单）
+
+```json
+{
+  "symbol": "BTC-USDT",
+  "side": "BUY",
+  "type": "MARKET",
+  "txType": "STOP",
+  "price": 1000,
+  "trailValue": 10
 }
 ```
 
@@ -908,7 +938,7 @@ BTSE的速率限制如下:
 | 名称          | 类型    | 是否必须 | 描述                                                                                                                                                                                                                                                                                                                                                        |
 | ---           | ---     | ---      | ---                                                                                                                                                                                                                                                                                                                                                        |
 | symbol        | String  | Yes      | 市场标志                                                                                                                                                                                                                                                                                                                                                 |
-| price         | Double  | No      | 创建 MARKET 订单时除外。卖单的最低价格，这是用户愿意卖出的最低价格。买单的最高价格，这是用户愿意买入的最高价格; <br/>对于`BUY`市价单，此字段表示在当前市场价格下可用于买入基础资产的最高报价币种金额。最终买入的基础资产数量将取决于实际成交价格。                                                               |
+| price         | Double  | No      | 请参考 [各订单类型的 price 说明](#price-for-order-type-cn) |
 | size          | Double  | Yes      | 订单大小                                                                                                                                                                                                                                                                                                                                                  |
 | side          | String  | Yes      | 'BUY' 或 'SELL'                                                                                                                                                                                                                                                                                                                                         |
 | time_in_force | String  | No      | 订单的时间有效性<br/>GTC：有效直到取消<br/>IOC：立即取消<br/>FOK：全部成交或取消<br/>HALFMIN：订单有效时间为30秒<br/>FIVEMIN：订单有效时间为5分钟<br/>HOUR：订单有效时间为1小时<br/>TWELVEHOUR：订单有效时间为12小时<br/>DAY：订单有效时间为1天<br/>WEEK：订单有效时间为1周<br/>MONTH：订单有效时间为1个月 |
@@ -922,6 +952,26 @@ BTSE的速率限制如下:
 | stealth       | Double  | No      | 创建 PEG 订单时为是否必须项。要在订单簿上显示多少百分比的订单。                                                                                                                                                                                                                                                                                               |
 | deviation     | Double  | No      | 适用于 PEG 订单。订单价格应与指数价格相差多少。该值以百分比表示，范围从 -10 到 10                                                                                                                                                                                                                                                                      |
 | triggerPriceType     | String  | No      | 对于以下订单类型，用户现在可以指定触发价格基于 `INDEX_PRICE` 或 `LAST_PRICE`，默认为 `INDEX_PRICE` :<br/>止损限价单<br/>止损市价单<br/>止盈限价单<br/>止盈市价单<br/>跟踪止损市价单<br/>OCO（双向委托单）<br/>                                                                                                                                                                                                                                                                      |
+
+<a name="price-for-order-type-cn"></a>
+
+### 各订单类型的 `price` 说明
+
+* `限价单 (LIMIT Order)`
+    * `买入 (BUY)`: 用户愿意支付的最高单价（以计价货币计，例如 USDT）
+    * `卖出 (SELL)`: 用户愿意接受的最低单价（以计价货币计，例如 USDT）
+* `市价单 (MARKET Order)`
+    * `买入 (BUY)`: 用户愿意花费的最大总金额（以计价货币计，例如 USDT）
+    * `卖出 (SELL)`: 不适用
+* `条件限价单 (TRIGGER LIMIT Order)`
+    * `买入 (BUY)`: 用户愿意支付的最高单价（以计价货币计，例如 USDT）
+    * `卖出 (SELL)`: 用户愿意接受的最低单价（以计价货币计，例如 USDT）
+* `条件市价单 (TRIGGER MARKET Order)`
+    * `买入 (BUY)`: 用户愿意花费的最大总金额（以计价货币计，例如 USDT）
+    * `卖出 (SELL)`: 不适用
+* `追踪止损市价单 (TRAILING STOP MARKET Order)`
+    * `买入 (BUY)`: 用户愿意花费的最大总金额（以计价货币计，例如 USDT）
+    * `卖出 (SELL)`: 不适用
 
 
 ### 响应内容
