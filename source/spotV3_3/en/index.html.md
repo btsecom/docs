@@ -13,7 +13,7 @@ headingLevel: 2
 
 # Change Log
 
-## Version 1.0.2 (13th March 2026)
+## Version 1.0.2 (16th March 2026)
 
 * Update the `price` description and the buy stop market order example for [Create new order](#create-new-order)
 
