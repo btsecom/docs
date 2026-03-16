@@ -234,6 +234,9 @@
             <a href="#3f3e207288" class="toc-h1 toc-link" data-title="更改日志">更改日志</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#3-4-17-2026-3-16" class="toc-h2 toc-link" data-title="版本 3.4.17 (2026年3月16日)">版本 3.4.17 (2026年3月16日)</a>
+                  </li>
+                  <li>
                     <a href="#3-4-16-2025-9-22" class="toc-h2 toc-link" data-title="版本 3.4.16 (2025年9月22日)">版本 3.4.16 (2025年9月22日)</a>
                   </li>
                   <li>
@@ -494,7 +497,18 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='3f3e207288'>更改日志</h1><h2 id='3-4-16-2025-9-22'>版本 3.4.16 (2025年9月22日)</h2>
+        <h1 id='3f3e207288'>更改日志</h1><h2 id='3-4-17-2026-3-16'>版本 3.4.17 (2026年3月16日)</h2>
+<ul>
+<li>API <a href="#8be954be0d">创建新订单</a>
+
+<ul>
+<li>更新 <code>price</code> 字段说明</li>
+<li>更新 <code>买入止损市价 (BUY MARKET STOP)</code> 示例</li>
+<li>新增 <code>买入止盈市价 (BUY MARKET TAKE PROFIT)</code> 示例</li>
+<li>新增 <code>买入追踪止损市价单 (BUY TRAILING STOP MARKET)</code> 示例</li>
+</ul></li>
+</ul>
+<h2 id='3-4-16-2025-9-22'>版本 3.4.16 (2025年9月22日)</h2>
 <ul>
 <li>在 API <a href="#8be954be0d"><code>创建新订单</code></a> 中，新增请求字段 <code>triggerPriceType</code> ，对于以下订单类型，用户现在可以指定触发价格基于 <code>INDEX_PRICE</code> 或 <code>LAST_PRICE</code>（默认：<code>INDEX_PRICE</code>）：
 
@@ -1750,12 +1764,24 @@
 <p>请求（创建<code>MARKET STOP</code>订单）</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USD"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USDT"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">
   </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MARKET"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"txType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Stop"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">32000</span><span class="w">
+  </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">75000</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>请求（创建<code>MARKET TAKE PROFIT</code>订单）</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USDT"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MARKET"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"txType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TRIGGER"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">64000</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
@@ -1794,6 +1820,18 @@
   </span><span class="nl">"txType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LIMIT"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"stopPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">40010</span><span class="p">,</span><span class="w">
   </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">40000</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>请求（创建<code>TRAILING STOP MARKET</code>订单）</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USDT"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MARKET"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"txType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"STOP"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"trailValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
@@ -1912,7 +1950,7 @@
 <td>price</td>
 <td>Double</td>
 <td>No</td>
-<td>创建 MARKET 订单时除外。卖单的最低价格，这是用户愿意卖出的最低价格。买单的最高价格，这是用户愿意买入的最高价格。</td>
+<td>请参考 <a href="#price-for-order-type-cn">各订单类型的 price 说明</a></td>
 </tr>
 <tr>
 <td>size</td>
@@ -1993,6 +2031,41 @@
 <td>对于以下订单类型，用户现在可以指定触发价格基于 <code>INDEX_PRICE</code> 或 <code>LAST_PRICE</code>，默认为 <code>INDEX_PRICE</code> :<br/>止损限价单<br/>止损市价单<br/>止盈限价单<br/>止盈市价单<br/>跟踪止损市价单<br/>OCO（双向委托单）<br/></td>
 </tr>
 </tbody></table>
+
+<p><a name="price-for-order-type-cn"></a></p>
+<h3 id='price'>各订单类型的 <code>price</code> 说明</h3>
+<ul>
+<li><code>限价单 (LIMIT Order)</code>
+
+<ul>
+<li><code>买入 (BUY)</code>: 用户愿意支付的最高单价（以计价货币计，例如 USDT）</li>
+<li><code>卖出 (SELL)</code>: 用户愿意接受的最低单价（以计价货币计，例如 USDT）</li>
+</ul></li>
+<li><code>市价单 (MARKET Order)</code>
+
+<ul>
+<li><code>买入 (BUY)</code>: 用户愿意花费的最大总金额（以计价货币计，例如 USDT）</li>
+<li><code>卖出 (SELL)</code>: 不适用</li>
+</ul></li>
+<li><code>条件限价单 (TRIGGER LIMIT Order)</code>
+
+<ul>
+<li><code>买入 (BUY)</code>: 用户愿意支付的最高单价（以计价货币计，例如 USDT）</li>
+<li><code>卖出 (SELL)</code>: 用户愿意接受的最低单价（以计价货币计，例如 USDT）</li>
+</ul></li>
+<li><code>条件市价单 (TRIGGER MARKET Order)</code>
+
+<ul>
+<li><code>买入 (BUY)</code>: 用户愿意花费的最大总金额（以计价货币计，例如 USDT）</li>
+<li><code>卖出 (SELL)</code>: 不适用</li>
+</ul></li>
+<li><code>追踪止损市价单 (TRAILING STOP MARKET Order)</code>
+
+<ul>
+<li><code>买入 (BUY)</code>: 用户愿意花费的最大总金额（以计价货币计，例如 USDT）</li>
+<li><code>卖出 (SELL)</code>: 不适用</li>
+</ul></li>
+</ul>
 <h3 id='05a22d5a79-7'>响应内容</h3>
 <table><thead>
 <tr>

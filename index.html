@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-3-4-17-16th-march-2026" class="toc-h2 toc-link" data-title="Version 3.4.17 (16th March 2026)">Version 3.4.17 (16th March 2026)</a>
+                  </li>
+                  <li>
                     <a href="#version-3-4-16-22th-september-2025" class="toc-h2 toc-link" data-title="Version 3.4.16 (22th September 2025)">Version 3.4.16 (22th September 2025)</a>
                   </li>
                   <li>
@@ -494,7 +497,18 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-3-4-16-22th-september-2025'>Version 3.4.16 (22th September 2025)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-3-4-17-16th-march-2026'>Version 3.4.17 (16th March 2026)</h2>
+<ul>
+<li>In the API <a href="#create-new-order">Create new order</a>
+
+<ul>
+<li>Update the <code>price</code> description</li>
+<li>Update the <code>BUY MARKET STOP</code> example</li>
+<li>Add the <code>BUY MARKET TAKE PROFIT</code> example</li>
+<li>Add the <code>BUY TRAILING STOP MARKET</code> example</li>
+</ul></li>
+</ul>
+<h2 id='version-3-4-16-22th-september-2025'>Version 3.4.16 (22th September 2025)</h2>
 <ul>
 <li>In the API <a href="#create-new-order">Create new order</a>
 , a new request field triggerPriceType has been added. For the following order types, users can now specify whether the trigger price is based on <code>INDEX_PRICE</code> or LAST_PRICE (default: <code>INDEX_PRICE</code>):
@@ -1762,12 +1776,24 @@ Additionally, the calculation duration will be reset if the IP address or user d
 <p>Request (create <code>MARKET STOP</code> order)</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USD"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USDT"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">
   </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MARKET"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"txType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Stop"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">32000</span><span class="w">
+  </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">75000</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Request (create <code>MARKET TAKE PROFIT</code> order)</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USDT"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MARKET"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"txType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TRIGGER"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">64000</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
@@ -1806,6 +1832,18 @@ Additionally, the calculation duration will be reset if the IP address or user d
   </span><span class="nl">"txType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LIMIT"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"stopPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">40010</span><span class="p">,</span><span class="w">
   </span><span class="nl">"triggerPrice"</span><span class="p">:</span><span class="w"> </span><span class="mi">40000</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>Request (create <code>TRAILING STOP MARKET</code> order)</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-USDT"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MARKET"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"txType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"STOP"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"trailValue"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>
@@ -1924,7 +1962,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 <td>price</td>
 <td>Double</td>
 <td>No</td>
-<td>Mandatory unless creating a MARKET order. Minimum price for a sell order, this is the lowest price that a user is willing to sell at. Maximum price for a buy order, this is the maximum price a user is willing to buy at.</td>
+<td>Refer to <a href="#price-for-order-type">price for order type</a></td>
 </tr>
 <tr>
 <td>size</td>
@@ -2005,6 +2043,39 @@ Additionally, the calculation duration will be reset if the IP address or user d
 <td>For the following order types, users can specify whether the trigger price is based on <code>INDEX_PRICE</code> or <code>LAST_PRICE</code> (default: <code>INDEX_PRICE</code>):<br/>Stop Limit<br/>Stop Market<br/>Take Profit Limit<br/>Take Profit Market<br/>Trailing Stop Market<br/>OCO (One Cancels the Other)<br/></td>
 </tr>
 </tbody></table>
+<h3 id='price-for-order-type'><code>price</code> for order type</h3>
+<ul>
+<li><code>LIMIT Order</code>
+
+<ul>
+<li><code>BUY</code>: Maximum price (in quote currency, e.g. USDT) the user is willing to pay per unit of base asset</li>
+<li><code>SELL</code>: Minimum price (in quote currency, e.g. USDT) the user is willing to accept per unit of base asset</li>
+</ul></li>
+<li><code>MARKET Order</code>
+
+<ul>
+<li><code>BUY</code>: Maximum total amount (in quote currency, e.g. USDT) the user is willing to spend</li>
+<li><code>SELL</code>: Not applicable</li>
+</ul></li>
+<li><code>TRIGGER LIMIT Order</code>
+
+<ul>
+<li><code>BUY</code>: Maximum price (in quote currency, e.g. USDT) the user is willing to pay per unit of base asset</li>
+<li><code>SELL</code>: Minimum price (in quote currency, e.g. USDT) the user is willing to accept per unit of base asset</li>
+</ul></li>
+<li><code>TRIGGER MARKET Order</code>
+
+<ul>
+<li><code>BUY</code>: Maximum total amount (in quote currency, e.g. USDT) the user is willing to spend</li>
+<li><code>SELL</code>: Not applicable</li>
+</ul></li>
+<li><code>TRAILING STOP MARKET Order</code>
+
+<ul>
+<li><code>BUY</code>: Maximum total amount (in quote currency, e.g. USDT) the user is willing to spend</li>
+<li><code>SELL</code>: Not applicable</li>
+</ul></li>
+</ul>
 <h3 id='response-content-8'>Response Content</h3>
 <table><thead>
 <tr>
