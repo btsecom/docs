@@ -393,7 +393,9 @@ def rebuild_llms(
     parts = [header.rstrip(), ""]
     for key in section_order:
         if key in sections:
-            parts += [sections[key].rstrip(), ""]
+            # Two empty strings = two blank lines between sections,
+            # matching the spacing produced by build_llms_full.
+            parts += [sections[key].rstrip(), "", ""]
 
     if changes:
         parts.append(changes.rstrip())
