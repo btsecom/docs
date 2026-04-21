@@ -1,0 +1,156 @@
+# BTSE REST API
+
+> BTSE is a cryptocurrency exchange. This file lists all REST API endpoints for use by LLM agents, AI code-generation tools, and automated integrations.
+
+## Authentication
+
+All private endpoints require HMAC-SHA384 request signing. Include these three headers in every authenticated request:
+
+- `request-api`: your API key (string)
+- `request-nonce`: current timestamp in milliseconds (integer as string)
+- `request-sign`: HMAC-SHA384(secret, urlpath + nonce + body)
+
+Public (market-data) endpoints require no authentication.
+
+---
+
+<!-- generated: 2026-04-20T09:30:36Z | total: 16 endpoints -->
+
+## Wallet API
+# source: wallet/en/index.html.md
+
+Base URL: https://api.btse.com/spot
+
+### Query available crypto network list for currency
+
+GET /api/v3.2/availableCurrencyNetworks
+Full URL: https://api.btse.com/spot/api/v3.2/availableCurrencyNetworks
+Auth: None (public)
+Description: Get available crypto network list for currency.
+Required params: currency
+
+### Query exchange rate between assets
+
+GET /api/v3.2/exchangeRate
+Full URL: https://api.btse.com/spot/api/v3.2/exchangeRate
+Auth: None (public)
+Description: Get the exchange rate between assets.
+Required params: srcCurrency, targetCurrency
+
+### Query Wallet Balance
+
+GET /api/v3.2/user/wallet
+Full URL: https://api.btse.com/spot/api/v3.2/user/wallet
+Auth: HMAC-SHA384  Permission: Read
+Description: Query user's wallet balance. Requires `Read` permissions on the API key.
+Required params: none
+
+### Query Wallet History
+
+GET /api/v3.2/user/wallet_history
+Full URL: https://api.btse.com/spot/api/v3.2/user/wallet_history
+Auth: None (public)
+Description: Get user's wallet history records on the spot wallet
+Required params: none
+
+### Create Wallet Address
+
+POST /api/v3.2/user/wallet/address
+Full URL: https://api.btse.com/spot/api/v3.2/user/wallet/address
+Auth: HMAC-SHA384  Permission: Wallet
+Description: Creates a wallet address. If the address created has not been used before, a 400 error will return with the existing unused address. To use this API, `Wallet` permission is required.
+Required params: currency, network
+
+### Delete Wallet Address
+
+DELETE /api/v3.2/user/wallet/address
+Full URL: https://api.btse.com/spot/api/v3.2/user/wallet/address
+Auth: HMAC-SHA384  Permission: Wallet
+Description: Delete  wallet address. If the address has been delete, a 400 error will return. To use this API, `Wallet` permission is required.
+Required params: currency, network, address
+
+### Get Wallet Address
+
+GET /api/v3.2/user/wallet/address
+Full URL: https://api.btse.com/spot/api/v3.2/user/wallet/address
+Auth: HMAC-SHA384  Permission: Wallet
+Description: Gets a wallet address. To use this API, `Wallet` permission is required.
+Required params: currency, network
+
+### Withdraw Funds
+
+POST /api/v3.2/user/wallet/withdraw
+Full URL: https://api.btse.com/spot/api/v3.2/user/wallet/withdraw
+Auth: None (public)
+Description: Performs a wallet withdrawal. To use this API, `Withdraw` permission is required.
+Required params: currency, address, tag, amount
+
+### Query available currency list for wallet action
+
+GET /api/v3.2/availableCurrencies
+Full URL: https://api.btse.com/spot/api/v3.2/availableCurrencies
+Auth: None (public)
+Description: Get available currency list for wallet action.
+Required params: action
+
+### Convert funds
+
+POST /api/v3.2/user/wallet/convert
+Full URL: https://api.btse.com/spot/api/v3.2/user/wallet/convert
+Auth: HMAC-SHA384  Permission: Wallet
+Description: Performs a currency conversion from wallet. To use this API, `Wallet` permission is required. To get supported currency list please check [Available currency list for action](#query-available-currency-list-for-wallet-action)
+Required params: amount, fromAsset, toAsset
+
+### Transfer Funds
+
+POST /api/v3.2/user/wallet/transfer
+Full URL: https://api.btse.com/spot/api/v3.2/user/wallet/transfer
+Auth: HMAC-SHA384  Permission: Transfer
+Description: Performs a internal currency transfer to other user from wallet. To use this API, `Transfer` permission is required. To get supported currency list please check [Available currency list for action](#query-available-currency-list-for-wallet-action)
+Required params: amount, asset, toUser, toUserMail
+
+### Subaccount transfer history
+
+POST /api/v3.2/subaccount/wallet/history
+Full URL: https://api.btse.com/spot/api/v3.2/subaccount/wallet/history
+Auth: None (public)
+Description: Query transfer history for subaccounts
+Required params: page, pageSize
+
+
+## OTC API
+# source: otc/en/index.html.md
+
+Base URL: https://api.btse.com/otc
+
+### Market Summary
+
+GET /api/v1/getMarket
+Full URL: https://api.btse.com/otc/api/v1/getMarket
+Auth: None (public)
+Description: Gets OTC market information
+Required params: none
+
+### Request for Quote
+
+POST /api/v1/quote
+Full URL: https://api.btse.com/otc/api/v1/quote
+Auth: HMAC-SHA384  Permission: Trading
+Description: Request for a quote. Requires `Trading` permission.
+Required params: baseCurrency, orderCurrency, orderSizeInBaseCurrency, orderAmountInOrderCurrency, clientOrderId, side
+
+### Accept Quote
+
+POST /api/v1/accept/{quoteId}
+Full URL: https://api.btse.com/otc/api/v1/accept/{quoteId}
+Auth: HMAC-SHA384  Permission: Trading
+Description: Accepts a quote.
+Required params: none
+
+### Query Order
+
+POST /api/v1/queryOrder/{quoteId}
+Full URL: https://api.btse.com/otc/api/v1/queryOrder/{quoteId}
+Auth: HMAC-SHA384  Permission: Read
+Description: Query order information. Requires `Read` permission.
+Required params: none
