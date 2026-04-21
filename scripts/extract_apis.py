@@ -658,8 +658,8 @@ def main() -> None:
     )
     parser.add_argument("--source-dir", default="source",
                         help="Path to the Slate source directory (default: source)")
-    parser.add_argument("--output", default="llms.txt",
-                        help="Output file (default: llms.txt)")
+    parser.add_argument("--output", default="source/llms.txt",
+                        help="Output file (default: source/llms.txt)")
     parser.add_argument(
         "--base-ref",
         help="Git ref to diff against for incremental update "
