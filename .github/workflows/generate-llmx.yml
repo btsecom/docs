@@ -42,7 +42,7 @@ jobs:
             BASE_REF="${{ github.event.before }}"
           fi
 
-          if [ -n "$BASE_REF" ] && [ -f llms.txt ]; then
+          if [ -n "$BASE_REF" ] && [ -f source/llms.txt ]; then
             python scripts/extract_apis.py --base-ref "$BASE_REF"
           else
             python scripts/extract_apis.py
@@ -57,7 +57,7 @@ jobs:
         with:
           script: |
             const fs = require('fs');
-            const content = fs.readFileSync('llms.txt', 'utf8');
+            const content = fs.readFileSync('source/llms.txt', 'utf8');
 
             // Extract the most recent entry from ## Recent Changes
             const changesIdx = content.indexOf('## Recent Changes');
@@ -110,6 +110,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add llms.txt
+          git add source/llms.txt
           git diff --cached --quiet || git commit -m "chore: update llms.txt [skip ci]"
           git push
