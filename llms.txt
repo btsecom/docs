@@ -14,28 +14,460 @@ Public (market-data) endpoints require no authentication.
 
 ---
 
-<!-- generated: 2026-04-20T09:30:36Z | total: 16 endpoints -->
+<!-- generated: 2026-04-21T02:04:27Z | total: 69 endpoints -->
+
+## Spot API v3.3
+# source: spotV3_3/en/index.html.md
+
+Base URL: https://api.btse.com/spot
+
+### Market Summary
+
+GET /api/v3.3/market_summary
+Full URL: https://api.btse.com/spot/api/v3.3/market_summary
+Auth: None (public)
+Description: Gets market summary information. If no symbol parameter is sent, then all markets will be retrieved.
+Required params: none
+
+### Charting Data
+
+GET /api/v3.3/ohlcv
+Full URL: https://api.btse.com/spot/api/v3.3/ohlcv
+Auth: None (public)
+Description: Gets candle stick charting data. Default of 300 data points will be returned at any one time.
+Required params: symbol, resolution
+
+### Query Market price
+
+GET /api/v3.3/price
+Full URL: https://api.btse.com/spot/api/v3.3/price
+Auth: None (public)
+Description: Retrieve current prices on the platform. If no symbol specified, all symbols will be returned.
+Required params: symbol
+
+### Orderbook (By grouping)
+
+GET /api/v3.3/orderbook
+Full URL: https://api.btse.com/spot/api/v3.3/orderbook
+Auth: None (public)
+Description: Retrieves a Level 2 snapshot of the orderbook and allows you to specify grouping and also bid / asks depth
+Required params: symbol
+
+### Orderbook
+
+GET /api/v3.3/orderbook/L2
+Full URL: https://api.btse.com/spot/api/v3.3/orderbook/L2
+Auth: None (public)
+Description: Retrieves a Level 2 snapshot of the orderbook
+Required params: symbol
+
+### Query Trades Fills
+
+GET /api/v3.3/trades
+Full URL: https://api.btse.com/spot/api/v3.3/trades
+Auth: None (public)
+Description: Get trade fills for the market specified by `symbol`
+Required params: symbol
+
+### Query Server Time
+
+GET /api/v3.3/time
+Full URL: https://api.btse.com/spot/api/v3.3/time
+Auth: None (public)
+Description: Gets server time
+Required params: none
+
+### Create New Order
+
+POST /api/v3.3/order
+Full URL: https://api.btse.com/spot/api/v3.3/order
+Auth: HMAC-SHA384  Permission: Trading
+Description: Creates a new order. Requires `Trading` permission. Please note that Index Order only supports USD quotes.
+Required params: symbol, size, side, type
+
+POST /api/v3.3/order/peg
+Full URL: https://api.btse.com/spot/api/v3.3/order/peg
+Auth: HMAC-SHA384  Permission: Trading
+Description: Creates a new order. Requires `Trading` permission. Please note that Index Order only supports USD quotes.
+Required params: symbol, size, side, type
+
+### Query Order
+
+GET /api/v3.3/order
+Full URL: https://api.btse.com/spot/api/v3.3/order
+Auth: HMAC-SHA384  Permission: Trading
+Description: Query order detail for a specified orderID/clOrderID, for the open orders and cancelled order which is cancelled in 30 minutes only.
+Required params: none
+
+### Amend Order
+
+PUT /api/v3.3/order
+Full URL: https://api.btse.com/spot/api/v3.3/order
+Auth: HMAC-SHA384  Permission: Trading
+Description: Amend the price or size or trigger price of an order. For trigger orders, if the order has already been triggered, the trigger price cannot be further amended. Amend order _does not_ apply to algo orders. Requires `Trading` permission.
+Required params: symbol, type
+
+### Cancel Order
+
+DELETE /api/v3.3/order
+Full URL: https://api.btse.com/spot/api/v3.3/order
+Auth: HMAC-SHA384  Permission: Trading
+Description: Cancels pending orders that has not yet been transacted. The `orderID` is a unique identifier to cancel a particular order. `clOrderID` is a custom ID sent in by the trader. When cancel by `clOrderID`, all orders having the same ID will be cancelled. If `orderID` and `clOrderID` is not sent in, then cancellation will be for all orders in the current market. Requires `Trading` permission.
+Required params: symbol
+
+### Dead Man's Switch (Cancel All After)
+
+POST /api/v3.3/order/cancelAllAfter
+Full URL: https://api.btse.com/spot/api/v3.3/order/cancelAllAfter
+Auth: HMAC-SHA384  Permission: Trading
+Description: Dead-man's switch allows the trader to send in a timeout value which is a Time to live (TTL) value for an order. Extension of the timeout is done by sending another `cancelAllAfter` request. If the server does not receive another request before the timeout is reached, all orders will be cancelled. Requires `Trading` permission.
+Required params: timeout
+
+### Query Open Orders
+
+GET /api/v3.3/user/open_orders
+Full URL: https://api.btse.com/spot/api/v3.3/user/open_orders
+Auth: HMAC-SHA384  Permission: Trading
+Description: Retrieves open orders that have not yet been matched or matched recently. Requires `Trading` permission.
+Required params: none
+
+### Query User Trades Fills
+
+GET /api/v3.3/user/trade_history
+Full URL: https://api.btse.com/spot/api/v3.3/user/trade_history
+Auth: HMAC-SHA384  Permission: Read
+Description: Retrieves a user's trade history which includes funding fee data. Requires `Read` permission.
+Required params: symbol
+
+### query account fees
+
+GET /api/v3.3/user/fees
+Full URL: https://api.btse.com/spot/api/v3.3/user/fees
+Auth: HMAC-SHA384  Permission: Read
+Description: Retrieve user's trading fees. Requires `Read` permission.
+Required params: none
+
+### Query Investment Products
+
+GET /api/v3.3/invest/products
+Full URL: https://api.btse.com/spot/api/v3.3/invest/products
+Auth: HMAC-SHA384  Permission: Read
+Description: Get all investment products. Requires `Read` permission.
+Required params: none
+
+### Deposit Investment
+
+POST /api/v3.3/invest/deposit
+Full URL: https://api.btse.com/spot/api/v3.3/invest/deposit
+Auth: HMAC-SHA384  Permission: Wallet
+Description: Deposit an investment. Requires `Wallet` permission.
+Required params: productId, amount
+
+### Renew Investment
+
+POST /api/v3.3/invest/renew
+Full URL: https://api.btse.com/spot/api/v3.3/invest/renew
+Auth: HMAC-SHA384  Permission: Wallet
+Description: Renew an investment order. Requires `Wallet` permission.
+Required params: orderId, autoRenew
+
+### Redeem Investment
+
+POST /api/v3.3/invest/redeem
+Full URL: https://api.btse.com/spot/api/v3.3/invest/redeem
+Auth: HMAC-SHA384  Permission: Wallet
+Description: Redeem an investment order. Requires `Wallet` permission.
+Required params: orderId, amount
+
+### Query Investment Orders
+
+GET /api/v3.3/invest/orders
+Full URL: https://api.btse.com/spot/api/v3.3/invest/orders
+Auth: HMAC-SHA384  Permission: Wallet
+Description: Query investment orders. Requires `Wallet` permission.
+Required params: none
+
+### Query Investment History
+
+GET /api/v3.3/invest/history
+Full URL: https://api.btse.com/spot/api/v3.3/invest/history
+Auth: HMAC-SHA384  Permission: Wallet
+Description: Query investment history. Requires `Wallet` permission.
+Required params: none
+
+
+## Futures API v2.3
+# source: futuresV2_3/en/index.html.md
+
+Base URL: https://api.btse.com/futures
+
+### Market Summary
+
+GET /api/v2.3/market_summary
+Full URL: https://api.btse.com/futures/api/v2.3/market_summary
+Auth: None (public)
+Description: Gets market summary information. If no symbol parameter is sent, then all markets will be retrieved.
+Required params: none
+
+### Charting Data
+
+GET /api/v2.3/ohlcv
+Full URL: https://api.btse.com/futures/api/v2.3/ohlcv
+Auth: None (public)
+Description: Gets candle stick charting data. Default of 300 data points will be returned at any one time.
+Required params: symbol, resolution
+
+### Query Market price
+
+GET /api/v2.3/price
+Full URL: https://api.btse.com/futures/api/v2.3/price
+Auth: None (public)
+Description: Retrieve current prices on the platform. If no symbol specified, all symbols will be returned.
+Required params: symbol
+
+### Orderbook (By grouping)
+
+GET /api/v2.3/orderbook
+Full URL: https://api.btse.com/futures/api/v2.3/orderbook
+Auth: None (public)
+Description: Retrieves a snapshot of the orderbook.
+Required params: symbol
+
+### Orderbook
+
+GET /api/v2.3/orderbook/L2
+Full URL: https://api.btse.com/futures/api/v2.3/orderbook/L2
+Auth: None (public)
+Description: Retrieves a Level 2 snapshot of the orderbook
+Required params: symbol
+
+### Query Trades Fills
+
+GET /api/v2.3/trades
+Full URL: https://api.btse.com/futures/api/v2.3/trades
+Auth: None (public)
+Description: Get trade fills for the market specified by `symbol`
+Required params: symbol, count, includeOld
+
+GET /api/v2.3/user/trade_history
+Full URL: https://api.btse.com/futures/api/v2.3/user/trade_history
+Auth: HMAC-SHA384  Permission: Read
+Description: Retrieves a user's trade history. Requires `Read` permission.
+Required params: none
+
+### Funding History
+
+GET /api/v2.3/funding_history
+Full URL: https://api.btse.com/futures/api/v2.3/funding_history
+Auth: None (public)
+Description: Get funding rate history for certain symbols
+Required params: none
+
+### Market Risk Limit Setting
+
+GET /api/v2.3/market/risk_limit
+Full URL: https://api.btse.com/futures/api/v2.3/market/risk_limit
+Auth: None (public)
+Description: Gets all default market settings, including initial margin and maintenance margin by each market and each risk limit level. You'll retrieve all markets if no symbol parameter is sent.
+Required params: none
+
+### Create New Order
+
+POST /api/v2.3/order
+Full URL: https://api.btse.com/futures/api/v2.3/order
+Auth: HMAC-SHA384  Permission: Trading
+Description: Creates a new order. Requires `Trading` permission.
+Required params: symbol, size, side, type
+
+### Create New Algo Order
+
+POST /api/v2.3/order/peg
+Full URL: https://api.btse.com/futures/api/v2.3/order/peg
+Auth: HMAC-SHA384  Permission: Trading
+Description: Creates a new algo order. Algo order is an order that price will change according to market price. To create an algo order, user will need to enter additional parameters:
+Required params: symbol, price, size, side
+
+### Query Order
+
+GET /api/v2.3/order
+Full URL: https://api.btse.com/futures/api/v2.3/order
+Auth: HMAC-SHA384  Permission: Trading
+Description: Query order detail for a specified orderID/clOrderID, please note that a canceled order will only exist for 30 minutes. Requires `Trading` permission.
+Required params: none
+
+### Amend Order
+
+PUT /api/v2.3/order
+Full URL: https://api.btse.com/futures/api/v2.3/order
+Auth: None (public)
+Description: Amend the price or size or trigger price of an order. For trigger orders, if the order has already been triggered, the trigger price cannot be further amended. Amend order _does not_ apply to algo orders
+Required params: symbol, type, value
+
+### Cancel Order
+
+DELETE /api/v2.3/order
+Full URL: https://api.btse.com/futures/api/v2.3/order
+Auth: HMAC-SHA384  Permission: Trading
+Description: Cancels pending orders that has not yet been transacted. The `orderID` is a unique identifier to cancel a particular order. `clOrderID` is a custom ID sent in by the trader. When cancel by `clOrderID`, all orders having the same ID will be cancelled. If `orderID` and `clOrderID` is not sent in, then cancellation will be for all orders in the current market.
+Required params: symbol
+
+### Dead Man's Switch (Cancel All After)
+
+POST /api/v2.3/order/cancelAllAfter
+Full URL: https://api.btse.com/futures/api/v2.3/order/cancelAllAfter
+Auth: HMAC-SHA384  Permission: Trading
+Description: Dead-man's switch allows the trader to send in a timeout value which is a Time to live (TTL) value for an order. Extension of the timeout is done by sending another `cancelAllAfter` request. If the server does not receive another request before the timeout is reached, all orders will be cancelled. Requires `Trading` permission.
+Required params: timeout
+
+### Query Open Orders
+
+GET /api/v2.3/user/open_orders
+Full URL: https://api.btse.com/futures/api/v2.3/user/open_orders
+Auth: HMAC-SHA384  Permission: Read
+Description: Retrieves open orders that have not yet been matched or matched recently. Requires `Read` permission.
+Required params: none
+
+### Query Position
+
+GET /api/v2.3/user/positions
+Full URL: https://api.btse.com/futures/api/v2.3/user/positions
+Auth: HMAC-SHA384  Permission: Read
+Description: Queries user's current position. When no symbol is specified, positions for all markets will be returned.
+Required params: none
+
+### Close Position
+
+POST /api/v2.3/order/close_position
+Full URL: https://api.btse.com/futures/api/v2.3/order/close_position
+Auth: HMAC-SHA384  Permission: Trading
+Description: Closes a user's position for the particular market as specified by symbol. If type is specified as LIMIT, then price is mandatory. When type is MARKET, it closes the position at market price. Requires `Trading` permission.
+Required params: symbol, type
+
+### Get Risk Limit
+
+GET /api/v2.3/risk_limit
+Full URL: https://api.btse.com/futures/api/v2.3/risk_limit
+Auth: HMAC-SHA384  Permission: Read
+Description: Query risk limit for the specified market. Requires `Read` permission.
+Required params: symbol
+
+### Set Risk Limit
+
+POST /api/v2.3/risk_limit
+Full URL: https://api.btse.com/futures/api/v2.3/risk_limit
+Auth: HMAC-SHA384  Permission: Trading
+Description: Changes risk limit for the specified market. Requires `Trading` permission.
+Required params: symbol, riskLimit `(Deprecated), riskLimitLevel
+
+### Set Leverage
+
+POST /api/v2.3/leverage
+Full URL: https://api.btse.com/futures/api/v2.3/leverage
+Auth: HMAC-SHA384  Permission: Trading
+Description: Change leverage values for the specified market. Requires `Trading` permission.
+Required params: symbol, leverage
+
+### Change Contract Settlement Currency
+
+POST /api/v2.3/settle_in
+Full URL: https://api.btse.com/futures/api/v2.3/settle_in
+Auth: HMAC-SHA384  Permission: Trading
+Description: Changes the settlement currency for the position in the current market. Requires `Trading` permission.
+Required params: symbol, currency
+
+### Query Account Fee
+
+GET /api/v2.3/user/fees
+Full URL: https://api.btse.com/futures/api/v2.3/user/fees
+Auth: HMAC-SHA384  Permission: Read
+Description: Retrieve user's trading fees. Requires `Read` permission.
+Required params: none
+
+### Bind TP/SL
+
+POST /api/v2.3/order/bind/tpsl
+Full URL: https://api.btse.com/futures/api/v2.3/order/bind/tpsl
+Auth: HMAC-SHA384  Permission: Trading
+Description: Bind TP/SL with an existing position. Requires `Trading` permission.
+Required params: symbol, side
+
+### Query Position Mode
+
+GET /api/v2.3/position_mode
+Full URL: https://api.btse.com/futures/api/v2.3/position_mode
+Auth: HMAC-SHA384  Permission: Read
+Description: Retrieve user's position mode. Requires `Read` permission.
+Required params: none
+
+### Change Position Mode
+
+POST /api/v2.3/position_mode
+Full URL: https://api.btse.com/futures/api/v2.3/position_mode
+Auth: HMAC-SHA384  Permission: Trading
+Description: Changes position mode. Requires `Trading` permission.
+Required params: symbol, positionMode
+
+### Query User Initial Margin Percentage And Maintenance Margin Percentage
+
+GET /api/v2.3/user/margin_setting
+Full URL: https://api.btse.com/futures/api/v2.3/user/margin_setting
+Auth: HMAC-SHA384  Permission: Read
+Description: Queries user's initial margin percentage and maintenance margin percentage. When no symbol is specified, margin percentage for all markets will be returned. Requires `Read` permission.
+Required params: none
+
+### Query Wallet Balance
+
+GET /api/v2.3/user/wallet
+Full URL: https://api.btse.com/futures/api/v2.3/user/wallet
+Auth: HMAC-SHA384  Permission: Read
+Description: Query user's wallet balance. Requires `Read` permissions on the API key.
+Required params: wallet
+
+### Query Wallet History
+
+GET /api/v2.3/user/wallet_history
+Full URL: https://api.btse.com/futures/api/v2.3/user/wallet_history
+Auth: HMAC-SHA384  Permission: Read
+Description: Get user's wallet history records on the futures wallet. Requires `Read` permission.
+Required params: none
+
+### Query Unified Wallet Margin
+
+GET /api/v2.3/user/unifiedWallet/margin
+Full URL: https://api.btse.com/futures/api/v2.3/user/unifiedWallet/margin
+Auth: HMAC-SHA384  Permission: Read
+Description: **This API is for the users who have upgraded wallet**
+Required params: none
+
+### Query Wallet Margin
+
+GET /api/v2.3/user/margin
+Full URL: https://api.btse.com/futures/api/v2.3/user/margin
+Auth: HMAC-SHA384  Permission: Read
+Description: The users who have upgraded wallet to unified wallet are not allow to use this API. Please use [`Query Unified Wallet Margin`](#query-unified-wallet-margin).
+Required params: symbol
+
+### Transfer funds between Futures wallet
+
+POST /api/v2.3/user/wallet/transfer
+Full URL: https://api.btse.com/futures/api/v2.3/user/wallet/transfer
+Auth: HMAC-SHA384  Permission: Transfer
+Description: Transfers funds between user's wallet. User can specify the source and target wallet to transfer funds. Requires `Transfer` permission.
+Required params: walletSrcType, walletDestType, apiWallets, currency, allBalance
+
+### Sub-Account Wallet Transfer
+
+POST /api/v2.3/subaccount/wallet/transfer
+Full URL: https://api.btse.com/futures/api/v2.3/subaccount/wallet/transfer
+Auth: HMAC-SHA384  Permission: Wallet
+Description: Transfers funds between user and sub-account wallet. User can specify the source and target wallet to transfer funds,
+Required params: walletSrcType, walletDestType, fromUser, receiver, apiWallets, currency, allBalance
+
 
 ## Wallet API
 # source: wallet/en/index.html.md
 
 Base URL: https://api.btse.com/spot
-
-### Query available crypto network list for currency
-
-GET /api/v3.2/availableCurrencyNetworks
-Full URL: https://api.btse.com/spot/api/v3.2/availableCurrencyNetworks
-Auth: None (public)
-Description: Get available crypto network list for currency.
-Required params: currency
-
-### Query exchange rate between assets
-
-GET /api/v3.2/exchangeRate
-Full URL: https://api.btse.com/spot/api/v3.2/exchangeRate
-Auth: None (public)
-Description: Get the exchange rate between assets.
-Required params: srcCurrency, targetCurrency
 
 ### Query Wallet Balance
 
@@ -55,32 +487,32 @@ Required params: none
 
 ### Create Wallet Address
 
-POST /api/v3.2/user/wallet/address
-Full URL: https://api.btse.com/spot/api/v3.2/user/wallet/address
+POST /api/v3.3/user/wallet/address
+Full URL: https://api.btse.com/spot/api/v3.3/user/wallet/address
 Auth: HMAC-SHA384  Permission: Wallet
 Description: Creates a wallet address. If the address created has not been used before, a 400 error will return with the existing unused address. To use this API, `Wallet` permission is required.
 Required params: currency, network
 
 ### Delete Wallet Address
 
-DELETE /api/v3.2/user/wallet/address
-Full URL: https://api.btse.com/spot/api/v3.2/user/wallet/address
+DELETE /api/v3.3/user/wallet/address
+Full URL: https://api.btse.com/spot/api/v3.3/user/wallet/address
 Auth: HMAC-SHA384  Permission: Wallet
 Description: Delete  wallet address. If the address has been delete, a 400 error will return. To use this API, `Wallet` permission is required.
 Required params: currency, network, address
 
 ### Get Wallet Address
 
-GET /api/v3.2/user/wallet/address
-Full URL: https://api.btse.com/spot/api/v3.2/user/wallet/address
+GET /api/v3.3/user/wallet/address
+Full URL: https://api.btse.com/spot/api/v3.3/user/wallet/address
 Auth: HMAC-SHA384  Permission: Wallet
 Description: Gets a wallet address. To use this API, `Wallet` permission is required.
 Required params: currency, network
 
 ### Withdraw Funds
 
-POST /api/v3.2/user/wallet/withdraw
-Full URL: https://api.btse.com/spot/api/v3.2/user/wallet/withdraw
+POST /api/v3.3/user/wallet/withdraw
+Full URL: https://api.btse.com/spot/api/v3.3/user/wallet/withdraw
 Auth: None (public)
 Description: Performs a wallet withdrawal. To use this API, `Withdraw` permission is required.
 Required params: currency, address, tag, amount
@@ -103,15 +535,15 @@ Required params: amount, fromAsset, toAsset
 
 ### Transfer Funds
 
-POST /api/v3.2/user/wallet/transfer
-Full URL: https://api.btse.com/spot/api/v3.2/user/wallet/transfer
+POST /api/v3.3/user/wallet/transfer
+Full URL: https://api.btse.com/spot/api/v3.3/user/wallet/transfer
 Auth: HMAC-SHA384  Permission: Transfer
 Description: Performs a internal currency transfer to other user from wallet. To use this API, `Transfer` permission is required. To get supported currency list please check [Available currency list for action](#query-available-currency-list-for-wallet-action)
 Required params: amount, asset, toUser, toUserMail
 
 ### Subaccount transfer history
 
-POST /api/v3.2/subaccount/wallet/history
+GET /api/v3.2/subaccount/wallet/history
 Full URL: https://api.btse.com/spot/api/v3.2/subaccount/wallet/history
 Auth: None (public)
 Description: Query transfer history for subaccounts
