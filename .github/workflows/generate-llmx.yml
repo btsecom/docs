@@ -26,7 +26,8 @@ jobs:
           fetch-depth: 0
            # For pull_request_target, default checkout is the base branch (main).
            # Explicitly check out the PR head so we parse the PR's source changes.
-          ref: ${{ github.event_name == 'pull_request_target' && github.event.pull_request.head.sha || github.sha }}
+           # For push events, use the branch ref (not SHA) to avoid detached HEAD.
+          ref: ${{ github.event_name == 'pull_request_target' && github.event.pull_request.head.sha || github.ref }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -114,5 +115,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add source/llms.txt
-          git diff --cached --quiet || git commit -m "chore: update llms.txt [skip ci]"
-          git push
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: update llms.txt [skip ci]"
+            git push
+          fi
