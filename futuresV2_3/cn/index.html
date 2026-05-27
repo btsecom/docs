@@ -234,6 +234,9 @@
             <a href="#185368440e" class="toc-h1 toc-link" data-title="更新日志">更新日志</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-1-0-2-2026-5-27-2026-7-1" class="toc-h2 toc-link" data-title="Version 1.0.2（2026年5月27日，这些更改将于 2026 年 7 月 1 日生效）">Version 1.0.2（2026年5月27日，这些更改将于 2026 年 7 月 1 日生效）</a>
+                  </li>
+                  <li>
                     <a href="#version-1-0-1-2025-12-2-2026-1-11" class="toc-h2 toc-link" data-title="Version 1.0.1（2025年12月2日，这些更改将于 2026 年 1 月 11 日生效）">Version 1.0.1（2025年12月2日，这些更改将于 2026 年 1 月 11 日生效）</a>
                   </li>
                   <li>
@@ -394,7 +397,7 @@
                     <a href="#2a1cad5f9e-2" class="toc-h2 toc-link" data-title="端点">端点</a>
                   </li>
                   <li>
-                    <a href="#oss-l1" class="toc-h2 toc-link" data-title="OSS L1 快照 (按分组)">OSS L1 快照 (按分组)</a>
+                    <a href="#bbo-snapshot" class="toc-h2 toc-link" data-title="订单簿最佳买卖价快照（BBO Snapshot）">订单簿最佳买卖价快照（BBO Snapshot）</a>
                   </li>
                   <li>
                     <a href="#bb4b2c51b6" class="toc-h2 toc-link" data-title="订单簿增量更新">订单簿增量更新</a>
@@ -440,7 +443,18 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='185368440e'>更新日志</h1><h2 id='version-1-0-1-2025-12-2-2026-1-11'>Version 1.0.1（2025年12月2日，这些更改将于 2026 年 1 月 11 日生效）</h2>
+        <h1 id='185368440e'>更新日志</h1><h2 id='version-1-0-2-2026-5-27-2026-7-1'>Version 1.0.2（2026年5月27日，这些更改将于 2026 年 7 月 1 日生效）</h2>
+<ul>
+<li>更新 <code>订单簿最佳买卖价快照（BBO Snapshot）</code> (#470de25952) 的描述。
+
+<ul>
+<li>移除 snapshotL1` topic 中的 grouping 逻辑。BBO 快照不支持价格层级分组；先前文档中的相关描述有误。</li>
+<li>新增 <code>Topic</code> 格式说明。订阅 topic 格式为 <code>snapshotL1:&lt;symbol&gt;</code>（例如 <code>snapshotL1:BTC-PERP</code>）。</li>
+</ul></li>
+<li>更新 <code>订单簿增量更新</code> (#bb4b2c51b6) 的描述。</li>
+<li>在 <code>订单簿错误响应</code> (#6796fd1409) 中新增错误代码 <code>1009</code>，用于提示 <code>snapshotL1</code> topic 不支持 grouping。仍使用 grouping 后缀的客户端（例如 <code>snapshotL1:BTC-PERP_0</code>）将收到此错误。</li>
+</ul>
+<h2 id='version-1-0-1-2025-12-2-2026-1-11'>Version 1.0.1（2025年12月2日，这些更改将于 2026 年 1 月 11 日生效）</h2>
 <ul>
 <li>更新 <a href="#7335b2436c">市场摘要</a> 中以下响应字段的描述：
 
@@ -6515,21 +6529,20 @@
 <li><code>wss://testws.btse.io/ws/oss/futures</code></li>
 </ul></li>
 </ul>
-<h2 id='oss-l1'>OSS L1 快照 (按分组)</h2>
+<h2 id='bbo-snapshot'>订单簿最佳买卖价快照（BBO Snapshot）</h2>
 <blockquote>
 <p>请求</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"op"</span><span class="p">:</span><span class="w"> </span><span class="s2">"subscribe"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"snapshotL1:BTC-PERP_0"</span><span class="w">
+    </span><span class="s2">"snapshotL1:BTC-PERP"</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-
-</span><span class="p">{</span><span class="w">
+</span></code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"op"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unsubscribe"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"snapshotL1:BTC-PERP_0"</span><span class="w">
+    </span><span class="s2">"snapshotL1:BTC-PERP"</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
@@ -6537,92 +6550,93 @@
 <p>响应</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"snapshotL1:BTC-PERP_0"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"snapshotL1:BTC-PERP"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"bids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">[</span><span class="w">
-          </span><span class="s2">"28064.9"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"1268"</span><span class="w">
+        </span><span class="s2">"122160.1"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"69350"</span><span class="w">
       </span><span class="p">]</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="nl">"asks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">[</span><span class="w">
-          </span><span class="s2">"28065.0"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"1015"</span><span class="w">
+        </span><span class="s2">"122133.3"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"1000"</span><span class="w">
       </span><span class="p">]</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"snapshotL1"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-PERP"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1680751558529</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1565135165600</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-PERP"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>通过端点<code>wss://ws.btse.com/ws/oss/futures</code>订阅Level 1订单簿。订阅的格式将为<code>symbol_grouping</code>。</p>
+<p>通过 <code>snapshotL1</code> 主题订阅订单簿最佳买卖价（Best Bid / Best Ask, BBO）快照。Topic 格式为 <code>snapshotL1:symbol</code>（例如 <code>snapshotL1:BTC-PERP</code>）。</p>
 
-<ul>
-<li><code>symbol</code>表示市场符号</li>
-<li><code>grouping</code>表示分组的粒度。有效值为0-8。</li>
-</ul>
+<p>每条消息都是当前最佳买卖价的完整快照。<code>bids</code> 与 <code>asks</code> 各只包含一组 <code>[价格, 数量]</code> tuple，代表盘口最佳价位，<code>type</code> 字段固定为 <code>snapshotL1</code>。</p>
+
+<p><code>bids</code> 与 <code>asks</code> 的价格与数量均以字符串类型传送，以避免浮点精度损失；客户端应使用高精度类型（例如 <code>BigDecimal</code>、<code>decimal.js</code>）解析后再进行运算。</p>
+
+<p>由于每条推送都是完整快照，客户端只需在收到消息时覆盖本地状态即可，无序号（sequence number）需跟踪，也不需执行增量合并逻辑。若连接中断，重新订阅该主题即可恢复接收。</p>
 <h3 id='05a22d5a79-29'>响应内容</h3><h4 id='5e08dfe292'>订单簿对象</h4>
 <table><thead>
 <tr>
-<th>名称</th>
+<th>字段</th>
 <th>类型</th>
-<th>是否必须</th>
-<th>描述</th>
+<th>必填</th>
+<th>说明</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>topic</td>
 <td>String</td>
-<td>Yes</td>
-<td>Websocket主题</td>
+<td>是</td>
+<td>WebSocket 主题</td>
 </tr>
 <tr>
 <td>data</td>
 <td>数据对象</td>
-<td>Yes</td>
-<td>参见下面的数据对象</td>
+<td>是</td>
+<td>详见下方数据对象</td>
 </tr>
 </tbody></table>
 <h4 id='30655043cf-2'>数据对象</h4>
 <table><thead>
 <tr>
-<th>名称</th>
+<th>字段</th>
 <th>类型</th>
-<th>是否必须</th>
-<th>描述</th>
+<th>必填</th>
+<th>说明</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>bids</td>
 <td>报价对象</td>
-<td>Yes</td>
-<td>买入报价</td>
+<td>是</td>
+<td>最佳买入报价，格式为 <code>[价格, 数量]</code> tuple</td>
 </tr>
 <tr>
 <td>asks</td>
 <td>报价对象</td>
-<td>Yes</td>
-<td>卖出报价</td>
-</tr>
-<tr>
-<td>symbol</td>
-<td>String</td>
-<td>Yes</td>
-<td>市场符号</td>
+<td>是</td>
+<td>最佳卖出报价，格式为 <code>[价格, 数量]</code> tuple</td>
 </tr>
 <tr>
 <td>type</td>
 <td>String</td>
-<td>Yes</td>
-<td><code>snapshotL1</code> - L1数据指的是交易对订单簿的最佳买入/最佳卖出价。</td>
+<td>是</td>
+<td>固定为 <code>snapshotL1</code></td>
 </tr>
 <tr>
 <td>timestamp</td>
 <td>Long</td>
-<td>Yes</td>
-<td>订单簿时间戳</td>
+<td>是</td>
+<td>快照生成时的时间戳（毫秒）</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>String</td>
+<td>是</td>
+<td>交易对代码</td>
 </tr>
 </tbody></table>
 <h2 id='bb4b2c51b6'>订单簿增量更新</h2>
@@ -6717,13 +6731,17 @@
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>通过端点<code>wss://ws.btse.com/ws/oss/futures</code>订阅订单簿增量更新。主题的格式将为<code>update:symbol_grouping</code>（例如<code>update:BTC-PERP_0</code>）。首次收到的响应将是当前订单簿的快照（这在<code>type</code>字段中有标示），并将返回50个级别。随后的数据包中将发送增量更新，类型为<code>delta</code>。</p>
+<p>通过 <code>update</code> 主题订阅订单簿增量更新。Topic 格式为 <code>update:symbol_grouping</code>（例如 <code>update:BTC-PERP_0</code>）。</p>
 
-<p>买入和卖出将以<code>price</code>和<code>size</code>的元组形式发送。发送的大小将是价格的新更新大小。如果发送了一个<code>0</code>的值，则应从订单簿的本地副本中删除该价格。</p>
+<p><code>_grouping</code> 后缀表示分组的粒度，有效值为 <code>0</code>–<code>8</code>。若省略该后缀（例如 <code>update:BTC-PERP</code>），将默认使用 <code>_0</code>。不同的 grouping 值对应独立的主题订阅与缓存。</p>
 
-<p>为确保按顺序接收到更新，<code>seqNum</code>指示当前序列，而<code>prevSeqNum</code>指前一个数据包。<code>seqNum</code>总是在<code>prevSeqNum</code>之后。如果序列是乱序的，您将需要取消订阅并再次订阅该主题。</p>
+<p>首次收到的消息为当前订单簿的完整快照（由 <code>type</code> 字段标识为 <code>snapshot</code>），最多返回 50 档；后续消息将以 <code>delta</code> 类型推送增量更新。</p>
 
-<p>如果当最佳买入价高于或等于最佳卖出价时发生<a href="https://en.wikipedia.org/wiki/Order_book#Crossed_book">交叉订单簿</a>，请取消订阅并重新订阅该主题。</p>
+<p><code>bids</code> 与 <code>asks</code> 均以 <code>[价格, 数量]</code> tuple 形式传送。<code>数量</code> 表示该价位在此次更新后的最新挂单量；若 <code>数量</code> 为 <code>0</code>，代表该价位已被移除，客户端应从本地订单簿中删除该价位。</p>
+
+<p>为确保更新有序，<code>seqNum</code> 代表当前序号，<code>prevSeqNum</code> 代表上一笔的序号；<code>seqNum</code> 必定为 <code>prevSeqNum + 1</code>。若发现序号不连续，应取消订阅并重新订阅该主题。</p>
+
+<p>此外，若出现 <a href="https://en.wikipedia.org/wiki/Order_book#Crossed_book">crossed orderbook</a>（最佳买价 ≥ 最佳卖价）的情况，亦应取消订阅并重新订阅该主题。</p>
 <h3 id='05a22d5a79-30'>响应内容</h3><h4 id='5e08dfe292-2'>订单簿对象</h4>
 <table><thead>
 <tr>
@@ -6828,6 +6846,10 @@
 <tr>
 <td>1008</td>
 <td>达到最大失败尝试，关闭会话。</td>
+</tr>
+<tr>
+<td>1009</td>
+<td>一級數據不支援價格分組。請訂閱時不要加入分組後綴。</td>
 </tr>
 </tbody></table>
 <h1 id='websocket-3'>Websocket流</h1><h2 id='2a1cad5f9e-3'>端点</h2>

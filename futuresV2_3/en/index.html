@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-1-0-2-27th-may-2026-these-changes-will-take-effect-on-1st-july-2026" class="toc-h2 toc-link" data-title="Version 1.0.2 (27th May 2026, these changes will take effect on 1st July 2026.)">Version 1.0.2 (27th May 2026, these changes will take effect on 1st July 2026.)</a>
+                  </li>
+                  <li>
                     <a href="#version-1-0-1-3rd-december-2025-these-changes-will-take-effect-on-11th-january-2026" class="toc-h2 toc-link" data-title="Version 1.0.1 (3rd December 2025, these changes will take effect on 11th January 2026.)">Version 1.0.1 (3rd December 2025, these changes will take effect on 11th January 2026.)</a>
                   </li>
                   <li>
@@ -394,7 +397,7 @@
                     <a href="#endpoints-2" class="toc-h2 toc-link" data-title="Endpoints">Endpoints</a>
                   </li>
                   <li>
-                    <a href="#oss-l1-snapshot-by-grouping" class="toc-h2 toc-link" data-title="OSS L1 Snapshot (By grouping)">OSS L1 Snapshot (By grouping)</a>
+                    <a href="#orderbook-best-bid-best-ask-bbo-snapshot" class="toc-h2 toc-link" data-title="Orderbook Best Bid / Best Ask (BBO) Snapshot">Orderbook Best Bid / Best Ask (BBO) Snapshot</a>
                   </li>
                   <li>
                     <a href="#orderbook-incremental-updates" class="toc-h2 toc-link" data-title="Orderbook Incremental Updates">Orderbook Incremental Updates</a>
@@ -440,7 +443,18 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-1-0-1-3rd-december-2025-these-changes-will-take-effect-on-11th-january-2026'>Version 1.0.1 (3rd December 2025, these changes will take effect on 11th January 2026.)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-1-0-2-27th-may-2026-these-changes-will-take-effect-on-1st-july-2026'>Version 1.0.2 (27th May 2026, these changes will take effect on 1st July 2026.)</h2>
+<ul>
+<li>Update the description in <a href="#orderbook-best-bid--best-ask-bbo-snapshot"><code>Orderbook Best Bid / Best Ask (BBO) Snapshot</code></a>.
+
+<ul>
+<li>Remove the grouping logic from <code>snapshotL1</code> topic. The BBO snapshot does not support price-level grouping; the previous documentation incorrectly referenced it.</li>
+<li>Add <code>Topic</code> format description. The subscription topic follows the pattern <code>snapshotL1:&lt;symbol&gt;</code>(e.g. <code>snapshotL1:BTC-PERP</code>)</li>
+</ul></li>
+<li>Update the description in <a href="#orderbook-incremental-updates"><code>Orderbook Incremental Updates</code></a></li>
+<li>Add the error response <code>1009</code> in <a href="#orderbook-error-response"><code>Orderbook Error Response</code></a> to indicate that the <code>snapshotL1</code> topic does not support grouping. Clients still sending a grouping suffix (e.g. <code>snapshotL1:BTC-PERP_0</code>) will receive this error. </li>
+</ul>
+<h2 id='version-1-0-1-3rd-december-2025-these-changes-will-take-effect-on-11th-january-2026'>Version 1.0.1 (3rd December 2025, these changes will take effect on 11th January 2026.)</h2>
 <ul>
 <li>Update the description for the following response fields in <a href="#market-summary"><code>Market Summary</code></a>:
 
@@ -6518,21 +6532,20 @@ Requires <code>Read</code> permission.</p>
 <li><code>wss://testws.btse.io/ws/oss/futures</code></li>
 </ul></li>
 </ul>
-<h2 id='oss-l1-snapshot-by-grouping'>OSS L1 Snapshot (By grouping)</h2>
+<h2 id='orderbook-best-bid-best-ask-bbo-snapshot'>Orderbook Best Bid / Best Ask (BBO) Snapshot</h2>
 <blockquote>
 <p>Request</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"op"</span><span class="p">:</span><span class="w"> </span><span class="s2">"subscribe"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"snapshotL1:BTC-PERP_0"</span><span class="w">
+    </span><span class="s2">"snapshotL1:BTC-PERP"</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-
-</span><span class="p">{</span><span class="w">
+</span></code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"op"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unsubscribe"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"snapshotL1:BTC-PERP_0"</span><span class="w">
+    </span><span class="s2">"snapshotL1:BTC-PERP"</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
@@ -6540,32 +6553,33 @@ Requires <code>Read</code> permission.</p>
 <p>Response</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"snapshotL1:BTC-PERP_0"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"snapshotL1:BTC-PERP"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"bids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">[</span><span class="w">
-          </span><span class="s2">"28064.9"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"1268"</span><span class="w">
+        </span><span class="s2">"122160.1"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"69350"</span><span class="w">
       </span><span class="p">]</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="nl">"asks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">[</span><span class="w">
-          </span><span class="s2">"28065.0"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"1015"</span><span class="w">
+        </span><span class="s2">"122133.3"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"1000"</span><span class="w">
       </span><span class="p">]</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"snapshotL1"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-PERP"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1680751558529</span><span class="w">
+    </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1565135165600</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"symbol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC-PERP"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>Subscribe to the Level 1 Orderbook through the endpoint <code>wss://ws.btse.com/ws/oss/futures</code>. The format to subscribe to will be <code>symbol_grouping</code>.</p>
+<p>Subscribe to Orderbook BBO snapshots through the <code>snapshotL1</code> topic. The format of topic will be <code>snapshotL1:symbol</code> (eg. <code>snapshotL1:BTC-PERP</code>).</p>
 
-<ul>
-<li><code>symbol</code> indicates the market symbol</li>
-<li><code>grouping</code> indicates the grouping granularity. Valid values are 0-8.</li>
-</ul>
+<p>Each message is a full snapshot of the current best bid / best ask. The <code>bids</code> and <code>asks</code> arrays each contain a single <code>[price, size]</code> tuple representing the top of book, and the <code>type</code> field is always <code>snapshotL1</code>.</p>
+
+<p>Bids and asks are sent in <code>price</code> and <code>size</code> tuples as strings to preserve precision; clients should parse them with a high-precision type (eg. <code>BigDecimal</code>, <code>decimal.js</code>) before performing arithmetic.</p>
+
+<p>Because every push is a full snapshot, clients can simply overwrite the local copy on each message — there is no sequence number, and no delta merging is required. If the connection drops, re-subscribe to the topic to resume receiving updates.</p>
 <h3 id='response-content-35'>Response Content</h3><h4 id='orderbook-object'>Orderbook Object</h4>
 <table><thead>
 <tr>
@@ -6601,31 +6615,31 @@ Requires <code>Read</code> permission.</p>
 <td>bids</td>
 <td>Quote Object</td>
 <td>Yes</td>
-<td>Bid quotes</td>
+<td>Best bid quote as a <code>[price, size]</code> tuple</td>
 </tr>
 <tr>
 <td>asks</td>
 <td>Quote Object</td>
 <td>Yes</td>
-<td>Asks quotes</td>
-</tr>
-<tr>
-<td>symbol</td>
-<td>String</td>
-<td>Yes</td>
-<td>Market symbol</td>
+<td>Best ask quote as a <code>[price, size]</code> tuple</td>
 </tr>
 <tr>
 <td>type</td>
 <td>String</td>
 <td>Yes</td>
-<td><code>snapshotL1</code> - L1 data refers to the best bid / best ask of a trading pair’s order book.</td>
+<td>Always <code>snapshotL1</code></td>
 </tr>
 <tr>
 <td>timestamp</td>
 <td>Long</td>
 <td>Yes</td>
-<td>Orderbook timestamp</td>
+<td>Timestamp of the snapshot</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>String</td>
+<td>Yes</td>
+<td>Orderbook symbol</td>
 </tr>
 </tbody></table>
 <h2 id='orderbook-incremental-updates'>Orderbook Incremental Updates</h2>
@@ -6720,13 +6734,17 @@ Requires <code>Read</code> permission.</p>
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>Subscribe to Orderbook incremental updates through the endpoint <code>wss://ws.btse.com/ws/oss/futures</code>. The format of topic will be <code>update:symbol_grouping</code> (eg. <code>update:BTC-PERP_0</code>). The first response received will be a snapshot of the current orderbook (this is indicated in the <code>type</code> field) and 50 levels will be returned. Incremental updates will be sent in subsequent packets with type <code>delta</code>.</p>
+<p>Subscribe to Orderbook incremental updates through the <code>update</code> topic. The format of topic is <code>update:symbol_grouping</code> (eg. <code>update:BTC-PERP_0</code>).</p>
+
+<p>The <code>_grouping</code> suffix represents the granularity of price-level aggregation. Valid values are <code>0</code> to <code>8</code>. If the suffix is omitted (eg. <code>update:BTC-PERP</code>), <code>_0</code> is used by default. Different grouping values produce independent topic subscriptions and caches.</p>
+
+<p>The first response received will be a snapshot of the current orderbook (indicated by the <code>type</code> field) with up to 50 levels. Incremental updates will be sent in subsequent packets with type <code>delta</code>.</p>
 
 <p>Bids and asks will be sent in <code>price</code> and <code>size</code> tuples. The size sent will be the new updated size for the price. If a value of <code>0</code> is sent, the price should be removed from the local copy of the orderbook.</p>
 
-<p>To ensure that the updates are received in sequence, <code>seqNum</code> indicates the current sequence and <code>prevSeqNum</code> refers to the packet before. <code>seqNum</code> will always be one after the <code>prevSeqNum</code>. If the sequence is out of order, you will need to unsubscribe and re-subscribe to the topic again.</p>
+<p>To ensure that the updates are received in sequence, <code>seqNum</code> indicates the current sequence and <code>prevSeqNum</code> refers to the packet before. <code>seqNum</code> will always be one after the <code>prevSeqNum</code>. If the sequence is out of order, unsubscribe and re-subscribe to the topic again.</p>
 
-<p>Also if <a href="https://en.wikipedia.org/wiki/Order_book#Crossed_book">crossed orderbook</a> ever occurs when the best bid higher or equal to the best ask, please unsubscribe and re-subscribe to the topic again.</p>
+<p>Also, if a <a href="https://en.wikipedia.org/wiki/Order_book#Crossed_book">crossed orderbook</a> ever occurs (best bid is higher than or equal to best ask), unsubscribe and re-subscribe to the topic again.</p>
 <h3 id='response-content-36'>Response Content</h3><h4 id='orderbook-object-2'>Orderbook Object</h4>
 <table><thead>
 <tr>
@@ -6831,6 +6849,10 @@ Requires <code>Read</code> permission.</p>
 <tr>
 <td>1008</td>
 <td>Reached maximum failed attempts, closing the session.</td>
+</tr>
+<tr>
+<td>1009</td>
+<td>Price grouping is not supported for Level 1 data. Please subscribe without grouping suffix.</td>
 </tr>
 </tbody></table>
 <h1 id='websocket-streams'>Websocket Streams</h1><h2 id='endpoints-3'>Endpoints</h2>

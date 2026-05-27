@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-2-7-11-27th-may-2026-these-changes-will-take-effect-on-1st-july-2026" class="toc-h2 toc-link" data-title="Version 2.7.11 (27th May 2026, these changes will take effect on 1st July 2026.)">Version 2.7.11 (27th May 2026, these changes will take effect on 1st July 2026.)</a>
+                  </li>
+                  <li>
                     <a href="#version-2-7-10-3rd-december-2025-these-changes-will-take-effect-on-11th-january-2026" class="toc-h2 toc-link" data-title="Version 2.7.10 (3rd December 2025, these changes will take effect on 11th January 2026.)">Version 2.7.10 (3rd December 2025, these changes will take effect on 11th January 2026.)</a>
                   </li>
                   <li>
@@ -575,7 +578,18 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-2-7-10-3rd-december-2025-these-changes-will-take-effect-on-11th-january-2026'>Version 2.7.10 (3rd December 2025, these changes will take effect on 11th January 2026.)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-2-7-11-27th-may-2026-these-changes-will-take-effect-on-1st-july-2026'>Version 2.7.11 (27th May 2026, these changes will take effect on 1st July 2026.)</h2>
+<ul>
+<li>Update the description in <a href="#orderbook-best-bid--best-ask-bbo-snapshot"><code>Orderbook Best Bid / Best Ask (BBO) Snapshot</code></a>.
+
+<ul>
+<li>Remove the grouping logic from <code>snapshotL1</code> topic. The BBO snapshot does not support price-level grouping; the previous documentation incorrectly referenced it.</li>
+<li>Add <code>Topic</code> format description. The subscription topic follows the pattern <code>snapshotL1:&lt;symbol&gt;</code>(e.g. <code>snapshotL1:BTC-PERP</code>)</li>
+</ul></li>
+<li>Update the description in <a href="#orderbook-incremental-updates"><code>Orderbook Incremental Updates</code></a></li>
+<li>Add the error response <code>1009</code> in <a href="#orderbook-error-response"><code>Orderbook Error Response</code></a> to indicate that the <code>snapshotL1</code> topic does not support grouping. Clients still sending a grouping suffix (e.g. <code>snapshotL1:BTC-PERP_0</code>) will receive this error. </li>
+</ul>
+<h2 id='version-2-7-10-3rd-december-2025-these-changes-will-take-effect-on-11th-january-2026'>Version 2.7.10 (3rd December 2025, these changes will take effect on 11th January 2026.)</h2>
 <ul>
 <li>Update the description for the following response fields in <a href="#market-summary"><code>Market Summary</code></a>:
 
@@ -6871,13 +6885,17 @@ Requires <code>Transfer</code> permission.</p>
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>Subscribe to Orderbook incremental updates through the endpoint <code>wss://ws.btse.com/ws/oss/futures</code>. The format of topic will be <code>update:symbol_grouping</code> (eg. <code>update:BTCPFC_0</code>). The first response received will be a snapshot of the current orderbook (this is indicated in the <code>type</code> field) and 50 levels will be returned. Incremental updates will be sent in subsequent packets with type <code>delta</code>.</p>
+<p>Subscribe to Orderbook incremental updates through the <code>update</code> topic. The format of topic is <code>update:symbol_grouping</code> (eg. <code>update:BTC-PERP_0</code>).</p>
+
+<p>The <code>_grouping</code> suffix represents the granularity of price-level aggregation. Valid values are <code>0</code> to <code>8</code>. If the suffix is omitted (eg. <code>update:BTC-PERP</code>), <code>_0</code> is used by default. Different grouping values produce independent topic subscriptions and caches.</p>
+
+<p>The first response received will be a snapshot of the current orderbook (indicated by the <code>type</code> field) with up to 50 levels. Incremental updates will be sent in subsequent packets with type <code>delta</code>.</p>
 
 <p>Bids and asks will be sent in <code>price</code> and <code>size</code> tuples. The size sent will be the new updated size for the price. If a value of <code>0</code> is sent, the price should be removed from the local copy of the orderbook.</p>
 
-<p>To ensure that the updates are received in sequence, <code>seqNum</code> indicates the current sequence and <code>prevSeqNum</code> refers to the packet before. <code>seqNum</code> will always be one after the <code>prevSeqNum</code>. If the sequence is out of order, you will need to unsubscribe and re-subscribe to the topic again.</p>
+<p>To ensure that the updates are received in sequence, <code>seqNum</code> indicates the current sequence and <code>prevSeqNum</code> refers to the packet before. <code>seqNum</code> will always be one after the <code>prevSeqNum</code>. If the sequence is out of order, unsubscribe and re-subscribe to the topic again.</p>
 
-<p>Also if <a href="https://en.wikipedia.org/wiki/Order_book#Crossed_book">crossed orderbook</a> ever occurs when the best bid higher or equal to the best ask, please unsubscribe and re-subscribe to the topic again.</p>
+<p>Also, if a <a href="https://en.wikipedia.org/wiki/Order_book#Crossed_book">crossed orderbook</a> ever occurs (best bid is higher than or equal to best ask), unsubscribe and re-subscribe to the topic again.</p>
 <h3 id='response-content-34'>Response Content</h3><h4 id='orderbook-object-2'>Orderbook Object</h4>
 <table><thead>
 <tr>

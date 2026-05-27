@@ -234,6 +234,9 @@
             <a href="#185368440e" class="toc-h1 toc-link" data-title="更新日志">更新日志</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-2-7-11-2026-5-27-2026-7-1" class="toc-h2 toc-link" data-title="Version 2.7.11（2026年5月27日，这些更改将于 2026 年 7 月 1 日生效）">Version 2.7.11（2026年5月27日，这些更改将于 2026 年 7 月 1 日生效）</a>
+                  </li>
+                  <li>
                     <a href="#version-2-7-10-2025-12-2-2026-1-11" class="toc-h2 toc-link" data-title="Version 2.7.10（2025年12月2日，这些更改将于 2026 年 1 月 11 日生效）">Version 2.7.10（2025年12月2日，这些更改将于 2026 年 1 月 11 日生效）</a>
                   </li>
                   <li>
@@ -575,7 +578,18 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='185368440e'>更新日志</h1><h2 id='version-2-7-10-2025-12-2-2026-1-11'>Version 2.7.10（2025年12月2日，这些更改将于 2026 年 1 月 11 日生效）</h2>
+        <h1 id='185368440e'>更新日志</h1><h2 id='version-2-7-11-2026-5-27-2026-7-1'>Version 2.7.11（2026年5月27日，这些更改将于 2026 年 7 月 1 日生效）</h2>
+<ul>
+<li>更新 <code>订单簿最佳买卖价快照（BBO Snapshot）</code> (#470de25952) 的描述。
+
+<ul>
+<li>移除 snapshotL1` topic 中的 grouping 逻辑。BBO 快照不支持价格层级分组；先前文档中的相关描述有误。</li>
+<li>新增 <code>Topic</code> 格式说明。订阅 topic 格式为 <code>snapshotL1:&lt;symbol&gt;</code>（例如 <code>snapshotL1:BTC-PERP</code>）。</li>
+</ul></li>
+<li>更新 <code>订单簿增量更新</code> (#bb4b2c51b6) 的描述。</li>
+<li>在 <code>订单簿错误响应</code> (#6796fd1409) 中新增错误代码 <code>1009</code>，用于提示 <code>snapshotL1</code> topic 不支持 grouping。仍使用 grouping 后缀的客户端（例如 <code>snapshotL1:BTC-PERP_0</code>）将收到此错误。</li>
+</ul>
+<h2 id='version-2-7-10-2025-12-2-2026-1-11'>Version 2.7.10（2025年12月2日，这些更改将于 2026 年 1 月 11 日生效）</h2>
 <ul>
 <li>更新 <a href="#7335b2436c">市场摘要</a> 中以下响应字段的描述：
 
@@ -6866,13 +6880,17 @@
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>通过端点<code>wss://ws.btse.com/ws/oss/futures</code>订阅订单簿增量更新。主题的格式将为<code>update:symbol_grouping</code>（例如<code>update:BTCPFC_0</code>）。首次收到的响应将是当前订单簿的快照（这在<code>type</code>字段中有标示），并将返回50个级别。随后的数据包中将发送增量更新，类型为<code>delta</code>。</p>
+<p>通过 <code>update</code> 主题订阅订单簿增量更新。Topic 格式为 <code>update:symbol_grouping</code>（例如 <code>update:BTC-PERP_0</code>）。</p>
 
-<p>买入和卖出将以<code>price</code>和<code>size</code>的元组形式发送。发送的大小将是价格的新更新大小。如果发送了一个<code>0</code>的值，则应从订单簿的本地副本中删除该价格。</p>
+<p><code>_grouping</code> 后缀表示分组的粒度，有效值为 <code>0</code>–<code>8</code>。若省略该后缀（例如 <code>update:BTC-PERP</code>），将默认使用 <code>_0</code>。不同的 grouping 值对应独立的主题订阅与缓存。</p>
 
-<p>为确保按顺序接收到更新，<code>seqNum</code>指示当前序列，而<code>prevSeqNum</code>指前一个数据包。<code>seqNum</code>总是在<code>prevSeqNum</code>之后。如果序列是乱序的，您将需要取消订阅并再次订阅该主题。</p>
+<p>首次收到的消息为当前订单簿的完整快照（由 <code>type</code> 字段标识为 <code>snapshot</code>），最多返回 50 档；后续消息将以 <code>delta</code> 类型推送增量更新。</p>
 
-<p>如果当最佳买入价高于或等于最佳卖出价时发生<a href="https://en.wikipedia.org/wiki/Order_book#Crossed_book">交叉订单簿</a>，请取消订阅并重新订阅该主题。</p>
+<p><code>bids</code> 与 <code>asks</code> 均以 <code>[价格, 数量]</code> tuple 形式传送。<code>数量</code> 表示该价位在此次更新后的最新挂单量；若 <code>数量</code> 为 <code>0</code>，代表该价位已被移除，客户端应从本地订单簿中删除该价位。</p>
+
+<p>为确保更新有序，<code>seqNum</code> 代表当前序号，<code>prevSeqNum</code> 代表上一笔的序号；<code>seqNum</code> 必定为 <code>prevSeqNum + 1</code>。若发现序号不连续，应取消订阅并重新订阅该主题。</p>
+
+<p>此外，若出现 <a href="https://en.wikipedia.org/wiki/Order_book#Crossed_book">crossed orderbook</a>（最佳买价 ≥ 最佳卖价）的情况，亦应取消订阅并重新订阅该主题。</p>
 <h3 id='05a22d5a79-29'>响应内容</h3><h4 id='5e08dfe292-2'>订单簿对象</h4>
 <table><thead>
 <tr>
