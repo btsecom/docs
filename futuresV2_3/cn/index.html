@@ -481,7 +481,9 @@
 </ul>
 <h2 id='1-0-0-2025-7-10'>版本 1.0.0（2025年7月10日）</h2>
 <ul>
-<li>释出 v2.3 API。此更改将于2025年7月16日生效。</li>
+<li>释出 v2.3 API。此更改将于2025年7月16日生效, 更多细节请参阅 <a href="#5060421d15">概览</a></li>
+<li>添加 <a href="#pingpong">Ping/Pong</a> 机制的说明。</li>
+<li>释出<code>notificationApiV4</code> 於 <a href="#7a66c0d036">通知</a></li>
 </ul>
 <h1 id='5060421d15'>概览</h1><h2 id='v2-2-v2-3'>从 v2.2 到 v2.3 的迁移</h2>
 <p>我们正在更新多个与订单相关的 API 接口，以提升字段的一致性与清晰度。请仔细查阅以下变更内容，部分现有字段将被弃用并由新字段取代。</p>
@@ -6866,7 +6868,7 @@
 </ul></li>
 </ul>
 <h2 id='ping-pong'>Ping/Pong</h2>
-<p>对于我们所有的WebSocket服务器，只需发送一个&#39;ping&#39;消息，如果WebSocket连接已建立并处于活动状态，WebSocket服务器将以&#39;pong&#39;消息进行响应。</p>
+<p>为了进行连接检查，我们将每 3 分钟发送一个 ping 帧消息，您需要向我们回复 pong 帧消息以供检查。如果 pong 帧消息未能在 10 分钟内正确回复给我们，我们将强制断开连接。</p>
 
 <blockquote>
 <p>请求</p>
@@ -7157,7 +7159,7 @@
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre></div>
-<p>接收交易通知，请订阅 <code>notificationApiV3</code>或 <code>notificationApiV4</code> 主题。建议使用 <code>notificationApiV4</code>，它包含与订单数量变动（例如：原始数量、已成交数量、剩余数量）相关的结构化且定义清晰的字段，有助于与最新的 API 字段更新保持更好的一致性。
+<p>接收交易通知，请订阅 <code>notificationApiV4</code> 主题，它包含与订单数量变动（例如：原始数量、已成交数量、剩余数量）相关的结构化且定义清晰的字段，有助于与最新的 API 字段更新保持更好的一致性。
 WebSocket 将向已认证的订阅者推送实时交易级别的通知。Websocket将向订阅者推送交易级别的通知。如果在未经认证的情况下订阅主题，将不会发送任何消息。</p>
 <h3 id='05a22d5a79-33'>响应内容</h3>
 <table><thead>

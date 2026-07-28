@@ -481,7 +481,9 @@
 </ul>
 <h2 id='version-1-0-0-10th-july-2025'>Version 1.0.0 (10th July 2025)</h2>
 <ul>
-<li>Release V2.3 API. This change will take effect on 16th July, 2025.</li>
+<li>Release V2.3 API. This change will take effect on 16th July, 2025. For more details, please refer to <a href="#overview"><code>Overview</code></a></li>
+<li>Add description for <a href="#pingpong"><code>Ping/Pong</code></a> mechanism.</li>
+<li>Release <code>notificationApiV4</code> in <a href="#notifications"><code>Notifications</code></a></li>
 </ul>
 <h1 id='overview'>Overview</h1><h2 id='migration-from-v2-2-to-v2-3'>Migration from v2.2 to v2.3</h2>
 <p>We are updating several order-related API endpoints to improve consistency and clarity in size-related fields. Please review the following changes carefully, as some existing fields will be deprecated and replaced with new ones.</p>
@@ -6869,7 +6871,7 @@ Requires <code>Read</code> permission.</p>
 </ul></li>
 </ul>
 <h2 id='ping-pong'>Ping/Pong</h2>
-<p>For all our WebSocket servers, simply send a &#39;ping&#39; message, and the WebSocket server will respond with a &#39;pong&#39; message if the WebSocket connection is established and active.</p>
+<p>For connectivity checking, we will send a ping frame message every 3 minutes and you will need to respond pong frame message to us for checking, if the pong frame message doesn&#39;t correctly respond to us in 10 minutes, we will force to disconnect the connection.</p>
 
 <blockquote>
 <p>Request</p>
@@ -7160,7 +7162,7 @@ Requires <code>Read</code> permission.</p>
 </span><span class="p">}</span><span class="w">
 
 </span></code></pre></div>
-<p>To receive trade notifications, subscribe to the <code>notificationApiV3</code> or <code>notificationApiV4</code> topics. It is recommended to use <code>notificationApiV4</code>, which includes structured and clearly defined fields related to order size changes (e.g., original, filled, remaining). This ensures better consistency with recent API field updates. The WebSocket feed will push real-time, trade-level notifications to authenticated subscribers.
+<p>To receive trade notifications, subscribe to the <code>notificationApiV4</code> topics, which includes structured and clearly defined fields related to order size changes (e.g., original, filled, remaining). This ensures better consistency with recent API field updates. The WebSocket feed will push real-time, trade-level notifications to authenticated subscribers.
 Please note, if the topic is subscribed to without proper authentication, no messages will be delivered.</p>
 <h3 id='response-content-39'>Response Content</h3>
 <table><thead>
