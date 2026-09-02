@@ -13,6 +13,10 @@ headingLevel: 2
 
 # Change Log
 
+## Version 1.0.3 (2nd September 2026)
+
+* Add the error response `1009` in [`Orderbook Error Response`](#orderbook-error-response) to indicate that the `snapshotL1` topic does not support grouping. Clients still sending a grouping suffix (e.g. `snapshotL1:BTC-USD_0`) will receive this error.
+
 ## Version 1.0.2 (16th March 2026)
 
 * In the API [Create new order](#create-new-order)
@@ -465,7 +469,7 @@ Retrieves a Level 2 snapshot of the orderbook and allows you to specify grouping
 | Name       | Type    | Required | Description                                                                                                                                                                                             |
 | ---        | ---     | ---      |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | symbol     | String  | Yes      | Market symbol                                                                                                                                                                                           |
-| group      | Integer | No       | Orderbook grouping. Valid values are: <br/>0-8 where 0 indicates level 0 grouping (eg. for BTC, it will be 0.1)<br/>Level 1 grouping for BTC would be 0.5<br/>Level 1 grouping for BTC would be 1<br/>  |
+| group      | Integer | No       | Orderbook grouping. Valid values are: <br/>0-8 where 0 indicates level 0 grouping (eg. for BTC, it will be 0.1)<br/>Level 1 grouping for BTC would be 0.5<br/>Level 2 grouping for BTC would be 1<br/>  |
 | limit_bids | Integer | No       | Orderbook depth on the bid side                                                                                                                                                                         |
 | limit_asks | Integer | No       | Orderbook depth on the ask side                                                                                                                                                                         |
 
@@ -531,7 +535,7 @@ Retrieves a Level 2 snapshot of the orderbook
 | symbol    | String | Yes      | Market symbol          |
 | buyQuote  | Quote  | Yes      | Array of Buy quotes    |
 | sellQuote | Quote  | Yes      | Array of Sell quotes   |
-| timestamp | Double | Yes      | Timestamp of orderbook |
+| timestamp | Long   | Yes      | Timestamp of orderbook |
 
 #### Quote
 
@@ -2034,8 +2038,8 @@ Also if [crossed orderbook](https://en.wikipedia.org/wiki/Order_book#Crossed_boo
 | ---        | ---          | ---      | ---                                                                                                         |
 | bids       | Quote Object | Yes      | Bid quotes                                                                                                  |
 | asks       | Quote Object | Yes      | Asks quotes                                                                                                 |
-| seqNum     | Integer          | Yes      | Current sequence Double                                                                                     |
-| prevSeqNum | Integer          | Yes      | Previous sequence Double                                                                                    |
+| seqNum     | Integer          | Yes      | Current sequence number                                                                                     |
+| prevSeqNum | Integer          | Yes      | Previous sequence number                                                                                    |
 | type       | String       | Yes      | `snapshot` - Snapshot of the orderbook with a maximum of 50 levels<br/> `delta` -  Updates of the orderbook |
 | timestamp  | Long         | Yes      | Timestamp of the orderbook                                                                                  |
 | symbol     | String       | Yes      | Orderbook symbol                                                                                            |
@@ -2050,6 +2054,7 @@ Also if [crossed orderbook](https://en.wikipedia.org/wiki/Order_book#Crossed_boo
 | 1005       | Topic provided does not exist.                                                         |
 | 1007       | User message buffer is full.                                                           |
 | 1008       | Reached maximum failed attempts, closing the session.                                  |
+| 1009       | Price grouping is not supported for Level 1 data. Please subscribe without grouping suffix.|
 
 # Websocket Streams
 
