@@ -13,8 +13,9 @@ headingLevel: 2
 
 # Change Log
 
-## Version 1.0.3 (2nd September 2026)
+## Version 1.0.3 (3rd September 2026)
 
+* Fix typos and correct field types in OSS API documentation.
 * Add the error response `1009` in [`Orderbook Error Response`](#orderbook-error-response) to indicate that the `snapshotL1` topic does not support grouping. Clients still sending a grouping suffix (e.g. `snapshotL1:BTC-USD_0`) will receive this error.
 
 ## Version 1.0.2 (16th March 2026)

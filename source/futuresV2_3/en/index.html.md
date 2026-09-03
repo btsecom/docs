@@ -13,6 +13,10 @@ headingLevel: 2
 
 # Change Log
 
+## Version 1.0.3 (3rd September 2026)
+
+* Fix typos and correct field types in OSS API documentation.
+
 ## Version 1.0.2 (27th May 2026, these changes will take effect on 1st July 2026.)
 
 * Update the description in [`Orderbook Best Bid / Best Ask (BBO) Snapshot`](#orderbook-best-bid--best-ask-bbo-snapshot).
