@@ -13,7 +13,7 @@ headingLevel: 2
 
 # Change Log
 
-## Version 1.0.3 (3rd September 2026)
+## Version 1.0.3 (4th September 2026)
 
 * Fix typos and correct field types in OSS API documentation.
 
