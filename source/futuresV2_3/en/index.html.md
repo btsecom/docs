@@ -13,6 +13,10 @@ headingLevel: 2
 
 # Change Log
 
+## Version 1.0.3 (4th September 2026)
+
+* Fix typos and correct field types in OSS API documentation.
+
 ## Version 1.0.2 (27th May 2026, these changes will take effect on 1st July 2026.)
 
 * Update the description in [`Orderbook Best Bid / Best Ask (BBO) Snapshot`](#orderbook-best-bid--best-ask-bbo-snapshot).
@@ -556,7 +560,7 @@ Retrieves a Level 2 snapshot of the orderbook
 | Name               | Type    | Required | Description                                                            |
 | ---                | ---     | ---      | ---                                                                    |
 | symbol             | String  | Yes      | Market symbol                                                          |
-| depth              | Long    | No       | Orderbook depth                                                        |
+| depth              | Integer | No       | Orderbook depth                                                        |
 
 ### Response Content
 
@@ -3065,7 +3069,7 @@ Because every push is a full snapshot, clients can simply overwrite the local co
 
 ```json
 {
-  "topic": "update:BTC-PERP",
+  "topic": "update:BTC-PERP_0",
   "data": {
     "bids": [],
     "asks": [
@@ -3114,8 +3118,8 @@ Also, if a [crossed orderbook](https://en.wikipedia.org/wiki/Order_book#Crossed_
 | ---        | ---          | ---      | ---                                                                                                         |
 | bids       | Quote Object | Yes      | Bid quotes                                                                                                  |
 | asks       | Quote Object | Yes      | Asks quotes                                                                                                 |
-| seqNum     | Integer          | Yes      | Current sequence Double                                                                                     |
-| prevSeqNum | Integer          | Yes      | Previous sequence Double                                                                                    |
+| seqNum     | Integer          | Yes      | Current sequence number                                                                                     |
+| prevSeqNum | Integer          | Yes      | Previous sequence number                                                                                    |
 | type       | String       | Yes      | `snapshot` - Snapshot of the orderbook with a maximum of 50 levels<br/> `delta` -  Updates of the orderbook |
 | timestamp  | Long         | Yes      | Timestamp of the orderbook                                                                                  |
 | symbol     | String       | Yes      | Orderbook symbol                                                                                            |

@@ -13,6 +13,11 @@ headingLevel: 2
 
 # 更改日志
 
+## 版本 1.0.3 (2026年9月4日)
+
+* 修正 OSS API 文档中的笔误与字段类型错误。
+* 在 [`订单簿错误响应`](#订单簿错误响应) 中新增错误代码 `1009`，用于提示 `snapshotL1` topic 不支持 grouping。仍使用 grouping 后缀的客户端（例如 `snapshotL1:BTC-USD_0`）将收到此错误。
+
 ## 版本 1.0.2 (2026年3月16日)
 
 * API [创建新订单](#8be954be0d)
@@ -406,9 +411,9 @@ BTSE的速率限制如下:
 
 ### 响应内容
 
-| Name       | 类型   | 是否必须 | Description           |
+| 名称       | 类型   | 是否必须 | 描述                  |
 | ---        | ---    | ---      | ---                   |
-| symbol     | Double | Yes      | 市场符号            |
+| symbol     | String | Yes      | 市场符号            |
 | indexPrice | Double | Yes      | 指数价格            |
 | lastPrice  | Double | Yes      | 最后成交价格      |
 | markPrice  | Double | Yes      | 现货市场不适用    |
@@ -445,7 +450,7 @@ BTSE的速率限制如下:
 | 名称       | 类型    | 是否必须   | 描述                                                                                                                                                                                                                                                                 |
 | ---        | ---     | ---      |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | symbol     | String  | Yes      | 市场符号                                                                                                                                                                                                                                                          |
-| group      | Integer    | No      | 订单簿分组。有效值为：<br/>0-8，其中0表示0级分组（例如，对于BTC，它将是0.1）<br/>BTC的一级分组为0.5<br/>BTC的一级分组为1<br/>  |
+| group      | Integer    | No      | 订单簿分组。有效值为：<br/>0-8，其中0表示0级分组（例如，对于BTC，它将是0.1）<br/>BTC的一级分组为0.5<br/>BTC的二级分组为1<br/>  |
 | limit_bids | Integer    | No      | 竞标方的订单簿深度                                                                                                                                                                                                                                                   |
 | limit_asks | Integer    | No      | 询价方的订单簿深度                                                                                                                                                                                                                                                   |
 
@@ -458,7 +463,7 @@ BTSE的速率限制如下:
 | symbol    | String | Yes      | 市场符号      |
 | buyQuote  | Quote  | Yes      | 竞买报价array  |
 | sellQuote | Quote  | Yes      | 竞卖报价array  |
-| timestamp | Double | Yes      | 订单簿时间戳 |
+| timestamp | Long   | Yes      | 订单簿时间戳 |
 
 #### 报价
 
@@ -511,7 +516,7 @@ BTSE的速率限制如下:
 | symbol    | String | Yes      | 市场符号      |
 | buyQuote  | Quote  | Yes      | 竞买报价array  |
 | sellQuote | Quote  | Yes      | 竞卖报价array  |
-| timestamp | Double | Yes      | 订单簿时间戳 |
+| timestamp | Long   | Yes      | 订单簿时间戳 |
 
 #### 报价
 
@@ -1831,7 +1836,9 @@ BTSE的速率限制如下:
     "snapshotL1:BTC-USD"
   ]
 }
+```
 
+```json
 {
   "op": "unsubscribe",
   "args": [
@@ -1865,9 +1872,13 @@ BTSE的速率限制如下:
 }
 ```
 
-通过端点 `wss://ws.btse.com/ws/oss/spot` 订阅Level 1订单簿。订阅的格式将为 `symbol`。
+通过 `snapshotL1` 主题订阅订单簿最佳买卖价（Best Bid / Best Ask, BBO）快照。Topic 格式为 `snapshotL1:symbol`（例如 `snapshotL1:BTC-USD`）。
 
-* `symbol` 表示市场符号
+每条消息都是当前最佳买卖价的完整快照。`bids` 与 `asks` 各只包含一组 `[价格, 数量]` tuple，代表盘口最佳价位，`type` 字段固定为 `snapshotL1`。
+
+`bids` 与 `asks` 的价格与数量均以字符串类型传送，以避免浮点精度损失；客户端应使用高精度类型（例如 `BigDecimal`、`decimal.js`）解析后再进行运算。
+
+由于每条推送都是完整快照，客户端只需在收到消息时覆盖本地状态即可，无序号（sequence number）需跟踪，也不需执行增量合并逻辑。若连接中断，重新订阅该主题即可恢复接收。
 
 ### 响应内容
 
@@ -1880,13 +1891,13 @@ BTSE的速率限制如下:
 
 #### 数据对象
 
-| 名称      | 类型         | 是否必须    | 描述            |
-| ---       | ---          | ---      | ---            |
-| bids      | Quote Object    | Yes      | 买盘报价        |
-| asks      | Quote Object    | Yes      | 卖盘报价        |
-| symbol    | String      | Yes      | 市场标识符      |
-| type      | String      | Yes      | `snapshotL1` - L1 数据指的是交易对订单簿的最佳买盘/最佳卖盘。 |
-| timestamp | Long      | Yes      | 订单簿时间戳    |
+| 名称      | 类型         | 是否必须    | 描述                                              |
+| ---       | ---          | ---      | ---                                               |
+| bids      | Quote Object    | Yes      | 最佳买入报价，格式为 `[价格, 数量]` tuple         |
+| asks      | Quote Object    | Yes      | 最佳卖出报价，格式为 `[价格, 数量]` tuple         |
+| type      | String      | Yes      | 固定为 `snapshotL1`                               |
+| timestamp | Long      | Yes      | 快照生成时的时间戳                                |
+| symbol    | String      | Yes      | 订单簿标识符                                      |
 
 ## 订单簿增量更新
 
@@ -1971,7 +1982,7 @@ BTSE的速率限制如下:
 
 ```json
 {
-  "topic": "update:BTC-USD",
+  "topic": "update:BTC-USD_0",
   "data": {
     "bids": [],
     "asks": [
@@ -1993,13 +2004,17 @@ BTSE的速率限制如下:
 }
 ```
 
-通过端点 `wss://ws.btse.com/ws/oss/spot` 订阅订单簿的增量更新。主题的格式将为 `update:symbol_grouping`（例如 `update:BTC-USD_0`）。收到的第一个响应将是当前订单簿的快照（在 `type` 字段中指示），并返回50个级别。随后的数据包将发送增量更新，其类型为 `delta`。
+通过 `update` 主题订阅订单簿增量更新。Topic 格式为 `update:symbol_grouping`（例如 `update:BTC-USD_0`）。
 
-买单和卖单将在 `price` 和 `size` 元组中发送。发送的大小将是价格的新更新大小。如果发送了 `0` 的值，则应从订单簿的本地副本中删除该价格。
+`_grouping` 后缀表示分组的粒度，有效值为 `0`–`8`。若省略该后缀（例如 `update:BTC-USD`），将默认使用 `_0`。不同的 grouping 值对应独立的主题订阅与缓存。
 
-为确保按顺序接收更新，`seqNum` 表示当前序列，`prevSeqNum` 指的是之前的数据包。`seqNum` 将始终在 `prevSeqNum` 之后一个。如果序列是乱序的，您将需要取消订阅并再次重新订阅该主题。
+首次收到的消息为当前订单簿的完整快照（由 `type` 字段标识为 `snapshot`），最多返回 50 档；后续消息将以 `delta` 类型推送增量更新。
 
-此外，如果当最佳出价高于或等于最佳要价时发生[交叉订单簿](https://en.wikipedia.org/wiki/Order_book#Crossed_book)，请取消订阅并重新订阅该主题。
+`bids` 与 `asks` 均以 `[价格, 数量]` tuple 形式传送。`数量` 表示该价位在此次更新后的最新挂单量；若 `数量` 为 `0`，代表该价位已被移除，客户端应从本地订单簿中删除该价位。
+
+为确保更新有序，`seqNum` 代表当前序号，`prevSeqNum` 代表上一笔的序号；`seqNum` 必定为 `prevSeqNum + 1`。若发现序号不连续，应取消订阅并重新订阅该主题。
+
+此外，若出现 [crossed orderbook](https://en.wikipedia.org/wiki/Order_book#Crossed_book)（最佳买价 ≥ 最佳卖价）的情况，亦应取消订阅并重新订阅该主题。
 
 ### 响应内容
 
@@ -2032,6 +2047,7 @@ BTSE的速率限制如下:
 | 1005     | 提供的主题不存在。                                                             |
 | 1007     | 用户消息缓冲区已满。                                                           |
 | 1008     | 达到最大失败尝试次数，正在关闭会话。                                           |
+| 1009     | 一级数据不支持价格分组。请订阅时不要加入分组后缀。                             |
 
 # Websocket 流
 

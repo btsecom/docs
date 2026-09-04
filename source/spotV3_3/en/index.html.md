@@ -13,6 +13,11 @@ headingLevel: 2
 
 # Change Log
 
+## Version 1.0.3 (4th September 2026)
+
+* Fix typos and correct field types in OSS API documentation.
+* Add the error response `1009` in [`Orderbook Error Response`](#orderbook-error-response) to indicate that the `snapshotL1` topic does not support grouping. Clients still sending a grouping suffix (e.g. `snapshotL1:BTC-USD_0`) will receive this error.
+
 ## Version 1.0.2 (16th March 2026)
 
 * In the API [Create new order](#create-new-order)
@@ -428,7 +433,7 @@ Retrieve current prices on the platform. If no symbol specified, all symbols wil
 
 | Name       | Type   | Required | Description           |
 | ---        | ---    | ---      | ---                   |
-| symbol     | Double | Yes      | Market symbol         |
+| symbol     | String | Yes      | Market symbol         |
 | indexPrice | Double | Yes      | Index price           |
 | lastPrice  | Double | Yes      | Last transacted price |
 | markPrice  | Double | Yes      | Not valid for spot    |
@@ -465,7 +470,7 @@ Retrieves a Level 2 snapshot of the orderbook and allows you to specify grouping
 | Name       | Type    | Required | Description                                                                                                                                                                                             |
 | ---        | ---     | ---      |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | symbol     | String  | Yes      | Market symbol                                                                                                                                                                                           |
-| group      | Integer | No       | Orderbook grouping. Valid values are: <br/>0-8 where 0 indicates level 0 grouping (eg. for BTC, it will be 0.1)<br/>Level 1 grouping for BTC would be 0.5<br/>Level 1 grouping for BTC would be 1<br/>  |
+| group      | Integer | No       | Orderbook grouping. Valid values are: <br/>0-8 where 0 indicates level 0 grouping (eg. for BTC, it will be 0.1)<br/>Level 1 grouping for BTC would be 0.5<br/>Level 2 grouping for BTC would be 1<br/>  |
 | limit_bids | Integer | No       | Orderbook depth on the bid side                                                                                                                                                                         |
 | limit_asks | Integer | No       | Orderbook depth on the ask side                                                                                                                                                                         |
 
@@ -478,7 +483,7 @@ Retrieves a Level 2 snapshot of the orderbook and allows you to specify grouping
 | symbol    | String | Yes      | Market symbol          |
 | buyQuote  | Quote  | Yes      | Array of Buy quotes    |
 | sellQuote | Quote  | Yes      | Array of Sell quotes   |
-| timestamp | Double | Yes      | Timestamp of orderbook |
+| timestamp | Long   | Yes      | Timestamp of orderbook |
 
 #### Quote
 
@@ -531,7 +536,7 @@ Retrieves a Level 2 snapshot of the orderbook
 | symbol    | String | Yes      | Market symbol          |
 | buyQuote  | Quote  | Yes      | Array of Buy quotes    |
 | sellQuote | Quote  | Yes      | Array of Sell quotes   |
-| timestamp | Double | Yes      | Timestamp of orderbook |
+| timestamp | Long   | Yes      | Timestamp of orderbook |
 
 #### Quote
 
@@ -1849,7 +1854,9 @@ Query investment history. Requires `Wallet` permission.
     "snapshotL1:BTC-USD"
   ]
 }
+```
 
+```json
 {
   "op": "unsubscribe",
   "args": [
@@ -1883,9 +1890,13 @@ Query investment history. Requires `Wallet` permission.
 }
 ```
 
-Subscribe to the Level 1 Orderbook through the endpoint `wss://ws.btse.com/ws/oss/spot`. The format to subscribe to will be `symbol`.
+Subscribe to Orderbook BBO snapshots through the `snapshotL1` topic. The format of topic will be `snapshotL1:symbol` (eg. `snapshotL1:BTC-USD`).
 
-* `symbol` indicates the market symbol
+Each message is a full snapshot of the current best bid / best ask. The `bids` and `asks` arrays each contain a single `[price, size]` tuple representing the top of book, and the `type` field is always `snapshotL1`.
+
+Bids and asks are sent in `price` and `size` tuples as strings to preserve precision; clients should parse them with a high-precision type (eg. `BigDecimal`, `decimal.js`) before performing arithmetic.
+
+Because every push is a full snapshot, clients can simply overwrite the local copy on each message — there is no sequence number, and no delta merging is required. If the connection drops, re-subscribe to the topic to resume receiving updates.
 
 ### Response Content
 
@@ -1898,13 +1909,13 @@ Subscribe to the Level 1 Orderbook through the endpoint `wss://ws.btse.com/ws/os
 
 #### Data Object
 
-| Name      | Type         | Required | Description         |
-| ---       | ---          | ---      | ---                 |
-| bids      | Quote Object | Yes      | Bid quotes          |
-| asks      | Quote Object | Yes      | Asks quotes         |
-| symbol    | String       | Yes      | Market symbol       |
-| type      | String       | Yes      | `snapshotL1` - L1 data refers to the best bid / best ask of a trading pair’s order book.   |
-| timestamp | Long         | Yes      | Orderbook timestamp |
+| Name      | Type         | Required | Description                                       |
+| ---       | ---          | ---      | ---                                               |
+| bids      | Quote Object | Yes      | Best bid quote as a `[price, size]` tuple         |
+| asks      | Quote Object | Yes      | Best ask quote as a `[price, size]` tuple         |
+| type      | String       | Yes      | Always `snapshotL1`                               |
+| timestamp | Long         | Yes      | Timestamp of the snapshot                         |
+| symbol    | String       | Yes      | Orderbook symbol                                  |
 
 ## Orderbook Incremental Updates
 
@@ -1989,7 +2000,7 @@ Subscribe to the Level 1 Orderbook through the endpoint `wss://ws.btse.com/ws/os
 
 ```json
 {
-  "topic": "update:BTC-USD",
+  "topic": "update:BTC-USD_0",
   "data": {
     "bids": [],
     "asks": [
@@ -2011,7 +2022,11 @@ Subscribe to the Level 1 Orderbook through the endpoint `wss://ws.btse.com/ws/os
 }
 ```
 
-Subscribe to Orderbook incremental updates through the endpoint `wss://ws.btse.com/ws/oss/spot`. The format of topic will be `update:symbol_grouping` (eg. `update:BTC-USD_0`). The first response received will be a snapshot of the current orderbook (this is indicated in the `type` field) and 50 levels will be returned. Incremental updates will be sent in subsequent packets with type `delta`.
+Subscribe to Orderbook incremental updates through the `update` topic. The format of topic is `update:symbol_grouping` (eg. `update:BTC-USD_0`).
+
+The `_grouping` suffix represents the granularity of price-level aggregation. Valid values are `0` to `8`. If the suffix is omitted (eg. `update:BTC-USD`), `_0` is used by default. Different grouping values produce independent topic subscriptions and caches.
+
+The first response received will be a snapshot of the current orderbook (indicated by the `type` field) with up to 50 levels. Incremental updates will be sent in subsequent packets with type `delta`.
 
 Bids and asks will be sent in `price` and `size` tuples. The size sent will be the new updated size for the price. If a value of `0` is sent, the price should be removed from the local copy of the orderbook.
 
@@ -2034,8 +2049,8 @@ Also if [crossed orderbook](https://en.wikipedia.org/wiki/Order_book#Crossed_boo
 | ---        | ---          | ---      | ---                                                                                                         |
 | bids       | Quote Object | Yes      | Bid quotes                                                                                                  |
 | asks       | Quote Object | Yes      | Asks quotes                                                                                                 |
-| seqNum     | Integer          | Yes      | Current sequence Double                                                                                     |
-| prevSeqNum | Integer          | Yes      | Previous sequence Double                                                                                    |
+| seqNum     | Integer          | Yes      | Current sequence number                                                                                     |
+| prevSeqNum | Integer          | Yes      | Previous sequence number                                                                                    |
 | type       | String       | Yes      | `snapshot` - Snapshot of the orderbook with a maximum of 50 levels<br/> `delta` -  Updates of the orderbook |
 | timestamp  | Long         | Yes      | Timestamp of the orderbook                                                                                  |
 | symbol     | String       | Yes      | Orderbook symbol                                                                                            |
@@ -2050,6 +2065,7 @@ Also if [crossed orderbook](https://en.wikipedia.org/wiki/Order_book#Crossed_boo
 | 1005       | Topic provided does not exist.                                                         |
 | 1007       | User message buffer is full.                                                           |
 | 1008       | Reached maximum failed attempts, closing the session.                                  |
+| 1009       | Price grouping is not supported for Level 1 data. Please subscribe without grouping suffix.|
 
 # Websocket Streams
 
