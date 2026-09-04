@@ -234,6 +234,9 @@
             <a href="#185368440e" class="toc-h1 toc-link" data-title="更新日志">更新日志</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-1-0-3-2026-9-4" class="toc-h2 toc-link" data-title="Version 1.0.3（2026年9月4日）">Version 1.0.3（2026年9月4日）</a>
+                  </li>
+                  <li>
                     <a href="#version-1-0-2-2026-5-27-2026-7-1" class="toc-h2 toc-link" data-title="Version 1.0.2（2026年5月27日，这些更改将于 2026 年 7 月 1 日生效）">Version 1.0.2（2026年5月27日，这些更改将于 2026 年 7 月 1 日生效）</a>
                   </li>
                   <li>
@@ -443,7 +446,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='185368440e'>更新日志</h1><h2 id='version-1-0-2-2026-5-27-2026-7-1'>Version 1.0.2（2026年5月27日，这些更改将于 2026 年 7 月 1 日生效）</h2>
+        <h1 id='185368440e'>更新日志</h1><h2 id='version-1-0-3-2026-9-4'>Version 1.0.3（2026年9月4日）</h2>
+<ul>
+<li>修正 OSS API 文档中的笔误与字段类型错误。</li>
+</ul>
+<h2 id='version-1-0-2-2026-5-27-2026-7-1'>Version 1.0.2（2026年5月27日，这些更改将于 2026 年 7 月 1 日生效）</h2>
 <ul>
 <li>更新 <code>订单簿最佳买卖价快照（BBO Snapshot）</code> (#470de25952) 的描述。
 
@@ -1377,7 +1384,7 @@
 </tr>
 <tr>
 <td>depth</td>
-<td>Long</td>
+<td>Integer</td>
 <td>No</td>
 <td>订单簿深度</td>
 </tr>
@@ -6582,63 +6589,63 @@
 <h3 id='05a22d5a79-29'>响应内容</h3><h4 id='5e08dfe292'>订单簿对象</h4>
 <table><thead>
 <tr>
-<th>字段</th>
+<th>名称</th>
 <th>类型</th>
-<th>必填</th>
-<th>说明</th>
+<th>是否必须</th>
+<th>描述</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>topic</td>
 <td>String</td>
-<td>是</td>
+<td>Yes</td>
 <td>WebSocket 主题</td>
 </tr>
 <tr>
 <td>data</td>
-<td>数据对象</td>
-<td>是</td>
+<td>Data Object</td>
+<td>Yes</td>
 <td>详见下方数据对象</td>
 </tr>
 </tbody></table>
 <h4 id='30655043cf-2'>数据对象</h4>
 <table><thead>
 <tr>
-<th>字段</th>
+<th>名称</th>
 <th>类型</th>
-<th>必填</th>
-<th>说明</th>
+<th>是否必须</th>
+<th>描述</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>bids</td>
-<td>报价对象</td>
-<td>是</td>
+<td>Quote Object</td>
+<td>Yes</td>
 <td>最佳买入报价，格式为 <code>[价格, 数量]</code> tuple</td>
 </tr>
 <tr>
 <td>asks</td>
-<td>报价对象</td>
-<td>是</td>
+<td>Quote Object</td>
+<td>Yes</td>
 <td>最佳卖出报价，格式为 <code>[价格, 数量]</code> tuple</td>
 </tr>
 <tr>
 <td>type</td>
 <td>String</td>
-<td>是</td>
+<td>Yes</td>
 <td>固定为 <code>snapshotL1</code></td>
 </tr>
 <tr>
 <td>timestamp</td>
 <td>Long</td>
-<td>是</td>
-<td>快照生成时的时间戳（毫秒）</td>
+<td>Yes</td>
+<td>快照生成时的时间戳</td>
 </tr>
 <tr>
 <td>symbol</td>
 <td>String</td>
-<td>是</td>
-<td>交易对代码</td>
+<td>Yes</td>
+<td>订单簿符号</td>
 </tr>
 </tbody></table>
 <h2 id='bb4b2c51b6'>订单簿增量更新</h2>
@@ -6666,42 +6673,42 @@
   </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"bids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">[</span><span class="w">
-        </span><span class="s2">"59252.5"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"0.06865"</span><span class="w">
+        </span><span class="s2">"122160.1"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"69350"</span><span class="w">
       </span><span class="p">],</span><span class="w">
       </span><span class="p">[</span><span class="w">
-        </span><span class="s2">"59249.0"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"0.24000"</span><span class="w">
+        </span><span class="s2">"122159.9"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"226150"</span><span class="w">
       </span><span class="p">],</span><span class="w">
       </span><span class="p">[</span><span class="w">
-        </span><span class="s2">"59235.5"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"0.16073"</span><span class="w">
+        </span><span class="s2">"122159.5"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"63050"</span><span class="w">
       </span><span class="p">],</span><span class="w">
       </span><span class="p">[</span><span class="w">
-        </span><span class="s2">"59235.0"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"0.26626"</span><span class="w">
+        </span><span class="s2">"122159.3"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"109800"</span><span class="w">
       </span><span class="p">],</span><span class="w">
       </span><span class="p">[</span><span class="w">
-        </span><span class="s2">"59233.0"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"0.50000"</span><span class="w">
+        </span><span class="s2">"122159.2"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"104050"</span><span class="w">
       </span><span class="p">]</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="nl">"asks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">[</span><span class="w">
-        </span><span class="s2">"59292.0"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"0.50000"</span><span class="w">
+        </span><span class="s2">"122133.3"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"1000"</span><span class="w">
       </span><span class="p">],</span><span class="w">
       </span><span class="p">[</span><span class="w">
-        </span><span class="s2">"59285.5"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"0.24000"</span><span class="w">
+        </span><span class="s2">"122124.0"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"343410"</span><span class="w">
       </span><span class="p">],</span><span class="w">
       </span><span class="p">[</span><span class="w">
-        </span><span class="s2">"59285.0"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"0.15598"</span><span class="w">
+        </span><span class="s2">"122123.9"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"78500"</span><span class="w">
       </span><span class="p">],</span><span class="w">
       </span><span class="p">[</span><span class="w">
-        </span><span class="s2">"59278.5"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"0.01472"</span><span class="w">
+        </span><span class="s2">"122123.8"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"98500"</span><span class="w">
       </span><span class="p">]</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="nl">"seqNum"</span><span class="p">:</span><span class="w"> </span><span class="mi">628282</span><span class="p">,</span><span class="w">
@@ -6712,17 +6719,17 @@
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"update:BTC-PERP"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"update:BTC-PERP_0"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"bids"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
     </span><span class="nl">"asks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
       </span><span class="p">[</span><span class="w">
-        </span><span class="s2">"59367.5"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"2.15622"</span><span class="w">
+        </span><span class="s2">"122123.9"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"78500"</span><span class="w">
       </span><span class="p">],</span><span class="w">
       </span><span class="p">[</span><span class="w">
-        </span><span class="s2">"59325.5"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"0"</span><span class="w">
+        </span><span class="s2">"122123.8"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"98500"</span><span class="w">
       </span><span class="p">]</span><span class="w">
     </span><span class="p">],</span><span class="w">
     </span><span class="nl">"seqNum"</span><span class="p">:</span><span class="w"> </span><span class="mi">628283</span><span class="p">,</span><span class="w">
@@ -6851,7 +6858,7 @@
 </tr>
 <tr>
 <td>1009</td>
-<td>一級數據不支援價格分組。請訂閱時不要加入分組後綴。</td>
+<td>一级数据不支持价格分组。请订阅时不要加入分组后缀。</td>
 </tr>
 </tbody></table>
 <h1 id='websocket-3'>Websocket流</h1><h2 id='2a1cad5f9e-3'>端点</h2>

@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-1-0-3-4th-september-2026" class="toc-h2 toc-link" data-title="Version 1.0.3 (4th September 2026)">Version 1.0.3 (4th September 2026)</a>
+                  </li>
+                  <li>
                     <a href="#version-1-0-2-16th-march-2026" class="toc-h2 toc-link" data-title="Version 1.0.2 (16th March 2026)">Version 1.0.2 (16th March 2026)</a>
                   </li>
                   <li>
@@ -395,7 +398,12 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-1-0-2-16th-march-2026'>Version 1.0.2 (16th March 2026)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-1-0-3-4th-september-2026'>Version 1.0.3 (4th September 2026)</h2>
+<ul>
+<li>Fix typos and correct field types in OSS API documentation.</li>
+<li>Add the error response <code>1009</code> in <a href="#orderbook-error-response"><code>Orderbook Error Response</code></a> to indicate that the <code>snapshotL1</code> topic does not support grouping. Clients still sending a grouping suffix (e.g. <code>snapshotL1:BTC-USD_0</code>) will receive this error.</li>
+</ul>
+<h2 id='version-1-0-2-16th-march-2026'>Version 1.0.2 (16th March 2026)</h2>
 <ul>
 <li>In the API <a href="#create-new-order">Create new order</a>
 
@@ -1110,7 +1118,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </thead><tbody>
 <tr>
 <td>symbol</td>
-<td>Double</td>
+<td>String</td>
 <td>Yes</td>
 <td>Market symbol</td>
 </tr>
@@ -1176,7 +1184,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 <td>group</td>
 <td>Integer</td>
 <td>No</td>
-<td>Orderbook grouping. Valid values are: <br/>0-8 where 0 indicates level 0 grouping (eg. for BTC, it will be 0.1)<br/>Level 1 grouping for BTC would be 0.5<br/>Level 1 grouping for BTC would be 1<br/></td>
+<td>Orderbook grouping. Valid values are: <br/>0-8 where 0 indicates level 0 grouping (eg. for BTC, it will be 0.1)<br/>Level 1 grouping for BTC would be 0.5<br/>Level 2 grouping for BTC would be 1<br/></td>
 </tr>
 <tr>
 <td>limit_bids</td>
@@ -1220,7 +1228,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </tr>
 <tr>
 <td>timestamp</td>
-<td>Double</td>
+<td>Long</td>
 <td>Yes</td>
 <td>Timestamp of orderbook</td>
 </tr>
@@ -1322,7 +1330,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </tr>
 <tr>
 <td>timestamp</td>
-<td>Double</td>
+<td>Long</td>
 <td>Yes</td>
 <td>Timestamp of orderbook</td>
 </tr>
@@ -4095,8 +4103,7 @@ Please note that this API is <code>Trading</code> permission required.</p>
     </span><span class="s2">"snapshotL1:BTC-USD"</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-
-</span><span class="p">{</span><span class="w">
+</span></code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"op"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unsubscribe"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"snapshotL1:BTC-USD"</span><span class="w">
@@ -4127,11 +4134,13 @@ Please note that this API is <code>Trading</code> permission required.</p>
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>Subscribe to the Level 1 Orderbook through the endpoint <code>wss://ws.btse.com/ws/oss/spot</code>. The format to subscribe to will be <code>symbol</code>.</p>
+<p>Subscribe to Orderbook BBO snapshots through the <code>snapshotL1</code> topic. The format of topic will be <code>snapshotL1:symbol</code> (eg. <code>snapshotL1:BTC-USD</code>).</p>
 
-<ul>
-<li><code>symbol</code> indicates the market symbol</li>
-</ul>
+<p>Each message is a full snapshot of the current best bid / best ask. The <code>bids</code> and <code>asks</code> arrays each contain a single <code>[price, size]</code> tuple representing the top of book, and the <code>type</code> field is always <code>snapshotL1</code>.</p>
+
+<p>Bids and asks are sent in <code>price</code> and <code>size</code> tuples as strings to preserve precision; clients should parse them with a high-precision type (eg. <code>BigDecimal</code>, <code>decimal.js</code>) before performing arithmetic.</p>
+
+<p>Because every push is a full snapshot, clients can simply overwrite the local copy on each message — there is no sequence number, and no delta merging is required. If the connection drops, re-subscribe to the topic to resume receiving updates.</p>
 <h3 id='response-content-20'>Response Content</h3><h4 id='orderbook-object'>Orderbook Object</h4>
 <table><thead>
 <tr>
@@ -4167,31 +4176,31 @@ Please note that this API is <code>Trading</code> permission required.</p>
 <td>bids</td>
 <td>Quote Object</td>
 <td>Yes</td>
-<td>Bid quotes</td>
+<td>Best bid quote as a <code>[price, size]</code> tuple</td>
 </tr>
 <tr>
 <td>asks</td>
 <td>Quote Object</td>
 <td>Yes</td>
-<td>Asks quotes</td>
-</tr>
-<tr>
-<td>symbol</td>
-<td>String</td>
-<td>Yes</td>
-<td>Market symbol</td>
+<td>Best ask quote as a <code>[price, size]</code> tuple</td>
 </tr>
 <tr>
 <td>type</td>
 <td>String</td>
 <td>Yes</td>
-<td><code>snapshotL1</code> - L1 data refers to the best bid / best ask of a trading pair’s order book.</td>
+<td>Always <code>snapshotL1</code></td>
 </tr>
 <tr>
 <td>timestamp</td>
 <td>Long</td>
 <td>Yes</td>
-<td>Orderbook timestamp</td>
+<td>Timestamp of the snapshot</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>String</td>
+<td>Yes</td>
+<td>Orderbook symbol</td>
 </tr>
 </tbody></table>
 <h2 id='orderbook-incremental-updates'>Orderbook Incremental Updates</h2>
@@ -4269,7 +4278,7 @@ Please note that this API is <code>Trading</code> permission required.</p>
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"update:BTC-USD"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"update:BTC-USD_0"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"bids"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
     </span><span class="nl">"asks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -4290,7 +4299,11 @@ Please note that this API is <code>Trading</code> permission required.</p>
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>Subscribe to Orderbook incremental updates through the endpoint <code>wss://ws.btse.com/ws/oss/spot</code>. The format of topic will be <code>update:symbol_grouping</code> (eg. <code>update:BTC-USD_0</code>). The first response received will be a snapshot of the current orderbook (this is indicated in the <code>type</code> field) and 50 levels will be returned. Incremental updates will be sent in subsequent packets with type <code>delta</code>.</p>
+<p>Subscribe to Orderbook incremental updates through the <code>update</code> topic. The format of topic is <code>update:symbol_grouping</code> (eg. <code>update:BTC-USD_0</code>).</p>
+
+<p>The <code>_grouping</code> suffix represents the granularity of price-level aggregation. Valid values are <code>0</code> to <code>8</code>. If the suffix is omitted (eg. <code>update:BTC-USD</code>), <code>_0</code> is used by default. Different grouping values produce independent topic subscriptions and caches.</p>
+
+<p>The first response received will be a snapshot of the current orderbook (indicated by the <code>type</code> field) with up to 50 levels. Incremental updates will be sent in subsequent packets with type <code>delta</code>.</p>
 
 <p>Bids and asks will be sent in <code>price</code> and <code>size</code> tuples. The size sent will be the new updated size for the price. If a value of <code>0</code> is sent, the price should be removed from the local copy of the orderbook.</p>
 
@@ -4344,13 +4357,13 @@ Please note that this API is <code>Trading</code> permission required.</p>
 <td>seqNum</td>
 <td>Integer</td>
 <td>Yes</td>
-<td>Current sequence Double</td>
+<td>Current sequence number</td>
 </tr>
 <tr>
 <td>prevSeqNum</td>
 <td>Integer</td>
 <td>Yes</td>
-<td>Previous sequence Double</td>
+<td>Previous sequence number</td>
 </tr>
 <tr>
 <td>type</td>
@@ -4401,6 +4414,10 @@ Please note that this API is <code>Trading</code> permission required.</p>
 <tr>
 <td>1008</td>
 <td>Reached maximum failed attempts, closing the session.</td>
+</tr>
+<tr>
+<td>1009</td>
+<td>Price grouping is not supported for Level 1 data. Please subscribe without grouping suffix.</td>
 </tr>
 </tbody></table>
 <h1 id='websocket-streams'>Websocket Streams</h1><h2 id='endpoints-3'>Endpoints</h2>

@@ -234,6 +234,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-1-0-3-4th-september-2026" class="toc-h2 toc-link" data-title="Version 1.0.3 (4th September 2026)">Version 1.0.3 (4th September 2026)</a>
+                  </li>
+                  <li>
                     <a href="#version-1-0-2-27th-may-2026-these-changes-will-take-effect-on-1st-july-2026" class="toc-h2 toc-link" data-title="Version 1.0.2 (27th May 2026, these changes will take effect on 1st July 2026.)">Version 1.0.2 (27th May 2026, these changes will take effect on 1st July 2026.)</a>
                   </li>
                   <li>
@@ -443,7 +446,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='change-log'>Change Log</h1><h2 id='version-1-0-2-27th-may-2026-these-changes-will-take-effect-on-1st-july-2026'>Version 1.0.2 (27th May 2026, these changes will take effect on 1st July 2026.)</h2>
+        <h1 id='change-log'>Change Log</h1><h2 id='version-1-0-3-4th-september-2026'>Version 1.0.3 (4th September 2026)</h2>
+<ul>
+<li>Fix typos and correct field types in OSS API documentation.</li>
+</ul>
+<h2 id='version-1-0-2-27th-may-2026-these-changes-will-take-effect-on-1st-july-2026'>Version 1.0.2 (27th May 2026, these changes will take effect on 1st July 2026.)</h2>
 <ul>
 <li>Update the description in <a href="#orderbook-best-bid--best-ask-bbo-snapshot"><code>Orderbook Best Bid / Best Ask (BBO) Snapshot</code></a>.
 
@@ -1377,7 +1384,7 @@ Additionally, the calculation duration will be reset if the IP address or user d
 </tr>
 <tr>
 <td>depth</td>
-<td>Long</td>
+<td>Integer</td>
 <td>No</td>
 <td>Orderbook depth</td>
 </tr>
@@ -6715,7 +6722,7 @@ Requires <code>Read</code> permission.</p>
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"update:BTC-PERP"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"topic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"update:BTC-PERP_0"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"bids"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
     </span><span class="nl">"asks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -6794,13 +6801,13 @@ Requires <code>Read</code> permission.</p>
 <td>seqNum</td>
 <td>Integer</td>
 <td>Yes</td>
-<td>Current sequence Double</td>
+<td>Current sequence number</td>
 </tr>
 <tr>
 <td>prevSeqNum</td>
 <td>Integer</td>
 <td>Yes</td>
-<td>Previous sequence Double</td>
+<td>Previous sequence number</td>
 </tr>
 <tr>
 <td>type</td>
